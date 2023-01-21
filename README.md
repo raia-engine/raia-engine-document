@@ -1,1 +1,27 @@
-# document
+# RaiaEngine公式ドキュメント
+
+これはRaiaEngineのドキュメントです。
+
+## このドキュメントについて
+
+RaiaEngineに関する包括的な解説を記述することを目的としています。
+
+### RaiaEngineとは
+
+RaiaEngineはクロスプラットフォームで動作するスクリプトベースのゲームエンジンです。スクリプトは既存のエディターで編集ができるため、プログラミング中心の開発に慣れている方におすすめです。
+
+スクリプト言語にはJavaScript(ECMAScript)を採用しています。非常に広く使われているプログラミング言語ですので、学習コストを最小限にすることができます。TypeScriptやCoffeeScriptからトランスコンパイルしたコードにも対応しているため、より堅実に開発を進めることができます。
+
+### 対応するプラットフォーム
+
+Windows
+macOS
+
+### RaiaEngineの技術基盤
+
+スクリプト言語には組み込み可能なECMAScriptエンジンであるDuktapeを採用しています。DukutapeはES5.0/ES5.1に準拠しているので、使い慣れたJavaScriptのコードやTypeScriptからトランスコンパイルしたコードをそのまま使用することができます。
+描画処理にはGoogleの開発したANGLEを採用しており、各プラットフォームに最適なグラフィックAPIが呼び出されます。例えばWindowsであればDirectX、macOSであればMetalAPIが選ばれます。ANGLEはGpenGLES互換レイヤーでもあるため、GpenGLESを利用するウェブやモバイルへの移植も容易になっています。
+RaiaEngineはC言語で記述されており、移植性が高く、拡張が容易です。
+サウンド処理にはOpenALを採用しています。
+
+### 貢献
