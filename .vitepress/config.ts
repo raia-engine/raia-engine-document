@@ -29,14 +29,16 @@ export default defineConfig({
               text: 'Windows編', 
               collapsed: false,
               items: [
-                { text:'Hello World', link:'/tutorial/windows/helloworld'},
-                { text:'図形を描画する', link:'/tutorial/windows/helloworld'},
-                { text:'画像を表示する', link:'/tutorial/windows/helloworld'},
-                { text:'入力を検知する', link:'/tutorial/windows/helloworld'},
+                { text:'Hello World', link:'/guide/tutorial/windows/helloworld'},
+                { text:'図形を描画する', link:'/guide/tutorial/windows/shape'},
+                { text:'画像を表示する', link:'/guide/tutorial/windows/image'},
+                { text:'サーフェスに描画する', link:'/guide/tutorial/windows/surface'},
+                { text:'メインループを使う', link:'/guide/tutorial/windows/mainloop'},
+                { text:'入力を検知する', link:'/guide/tutorial/windows/input'},
               ] 
             },
-            { text: 'macOS編', link: '/tutorial/' },
-            { text: 'Linux編', link: '/tutorial/' }
+            { text: 'macOS編', link: '/tutorial/macos/' },
+            { text: 'Linux編', link: '/tutorial/linux/' }
           ]
         },
       ],
@@ -45,7 +47,6 @@ export default defineConfig({
           text: 'リファレンス',
           items: [
             { text: 'はじめに', link: '/reference/' },
-            { text: 'Runtime API Examples', link: '/api-examples' }
           ]
         }
       ],
@@ -54,7 +55,6 @@ export default defineConfig({
           text: 'プロトタイプ',
           items: [
             { text: 'はじめに', link: '/download/' },
-            { text: '0.1.0.0', link: '/api-examples' }
           ]
         }
       ]

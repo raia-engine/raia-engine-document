@@ -8,11 +8,11 @@ hero:
   tagline: "軽量で拡張性の高いゲームエンジン"
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: ダウンロード
+      link: /download/
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: チュートリアル
+      link: /guide/tutorial/windows/helloworld
 
 features:
   - title: Feature A

@@ -2,6 +2,8 @@
 
 これはRaiaEngineのドキュメントです。
 
+<!--
+
 [[TOC]]
 
 ## このドキュメントについて
@@ -10,11 +12,14 @@ RaiaEngineに関する包括的な解説を記述することを目的として�
 
 ### RaiaEngineの特徴
 
-RaiaEngineはクロスプラットフォームのゲームエンジンです。規模なIDEを必要とせず、既存のエディターで編集することができます。プログラミング中心の開発に慣れている方におすすめです。
+- C言語基盤
+- JavaScriptで記述できる
+- スクリプトベース
+- クロスプラットフォーム
+- 拡張しやすいモジュール
 
-::: info
-aiueo
-:::
+規模なIDEを必要とせず、既存のエディターで編集することができます。プログラミング中心の開発に慣れている方におすすめです。
+
 
 スクリプト言語にはJavaScript(ECMAScript)を採用しています。非常に広く使われているプログラミング言語ですので、学習コストを最小限にすることができます。TypeScriptやCoffeeScriptからトランスコンパイルしたコードにも対応しているため、より堅実に開発を進めることができます。
 
@@ -102,49 +107,7 @@ RaiaEngine本体の開発に興味がありますか。
 * [インストールと実行](guide/setup.md)
 * [チュートリアル](guide/tutorial.md)
 
-#### HelloWorld
 
-コンソールアプリ:
-
-::: code-group
-
-```js [ES5]
-var Raia = require('raia_std');
-var core = new Raia.Core();
-core.print("Hello World");
-```
-
-```js [ES6]
-var {Core} = require('raia_std');
-var core = new Core();
-core.print("Hello World");
-```
-
-:::
-
-ウィンドウアプリ:
-
-::: code-group
-
-```js [ES5]
-var Raia = require('raia_std');
-var window = new Raia.Window("title", 800, 600);
-window.drawString("Hello World");
-window.onUpdate(function(){
-    window.redraw();
-;});
-```
-
-```js [ES6]
-var {Window} = require('raia_std');
-var window = new Window("title", 800, 600);
-window.drawString("Hello World");
-window.onUpdate(()=>{
-    window.redraw();
-;});
-```
-
-:::
 
 ### トピック
 
@@ -165,85 +128,6 @@ window.onUpdate(()=>{
   * [Core](api/raia_core.md)
   * [App](api/raia_app.md)
 
-# RaiaEngineの概要
-
-### コンテキスト
-
-コンテキスト情報の例。常に変化する。
-
-```json
-// Raia.context
-{
-    version: {
-        core: "x.x.x",
-        app: "x.x.x",
-        ...
-    },
-    platform: {
-        os: "macOS",
-    }
-    library: {
-        count: 1,
-        name: [
-            "raia_app",
-        ],
-    }
-    path: {
-        current: "",
-        exe: "",
-        home: "",
-        desktop: "",
-        document: "",
-    },
-    arg: {
-        c: 1,
-        v: [
-            "",
-            ...
-        ],
-    }
-    app: {
-        window: {
-            title: "",
-            width: 1600,
-            height: 900,
-            pixels: Uint8Array.allocPlain(width * height * 3),
-            //
-            count: 1,
-            active: window_id,
-            current: window_id,
-            windows: [
-                {
-                    title: "",
-                    width: 1600,
-                    height: 900,
-                    screen: {
-                        pixels: Uint8Array.allocPlain(width * height * 3),
-                        density: 1,
-                        width: 1600,
-                        height: 900,
-                    },
-                },
-                ...
-            ],
-        },
-        color: {
-            code: "RGB",
-            current: {
-                r: 0,
-                g: 0,
-                b: 0,
-            },
-        },
-        point: {
-            current: {
-                x: 0,
-                y: 0,
-            },
-        }
-    }
-}
-```
 
 ## 二重構造のRaiaEngineAPI
 
@@ -287,3 +171,4 @@ RaiaEngineはC言語とやり取りしやすい形でJavaScriptに渡し、そ�
     - GLFW
     - GLES
   - 
+-->
