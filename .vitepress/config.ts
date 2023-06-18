@@ -9,6 +9,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },
       { text: 'Reference', link: '/reference/'},
+      { text: 'Wiki', link: '/wiki/'},
       { text: 'Download', link: '/download/'}
     ],
     sidebar: {
@@ -49,6 +50,18 @@ export default defineConfig({
             { text: 'はじめに', link: '/reference/' },
           ]
         }
+      ],
+      '/wiki/': [
+        {
+          text: 'Wiki',
+          collapsed: false,
+          items: [
+            { text: '目次', link: '/wiki/' },
+            { text: 'JSONによる接続', link: '/wiki/joint.md'},
+            { text: 'プラグインの作成', link: '/wiki/plugin.md'},
+            { text: 'RAGの文法規則', link: '/wiki/rag.md'},
+          ]
+        },
       ],
       '/download/': [
         {
