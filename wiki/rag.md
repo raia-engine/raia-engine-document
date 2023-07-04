@@ -1,30 +1,32 @@
-# RAGの文法規則
 
 ## 文字コード
 
 - utf-8
 
-## 拡張子
+## スクリプトファイルの拡張子
 
 - `.rag`
 - `.rags`
 
-## 空白のトークン
+# スクリプトの文法
+
+## トークン
+
+### 空白
 
 - `LF`: `0x0A`
 - `CR`: `0x0D`
 - `EOL`: `<LF>`, `<CR>`, `<CR><LF>` のいずれか 
 - `TAB_H`: `0x09`
 - `TAB_V`: `0x0B`
-- `TAB` = `<TAB_H>`, `<TAB_V>` のいずれか
-- `FF` = `0x0C`
-- `SPACE_ASCII`: `0x20`
+- `TAB`: `<TAB_H>`, `<TAB_V>` のいずれか
+- `FF`: `0x0C`
+- `SPACE_ASCII`: `0x20`。行頭に4つ以上連続して存在すると新しいスクリプト行として解釈されます。
 - `SPACE_UTF8_2BYTE`: `0xC2A0`
 - `SPACE_UTF8_3BYTE`: `0xE38080`
-- `SPACE`: `<SPACE_ASCII>`, `<SPACE_UTF8_2BYTE>`, `<SPACE_UTF8_3BYTE>` のいずれか
-- `BLANK`: `<SPACE>`, `<EOL>`, `<TAB>`, `<FF>` のいずれか
+- `BLANK`: `<SPACE_ASCII>`, `<EOL>`, `<TAB>`, `<FF>` のいずれか。文字列や他のトークンの間隔を開ける役割をする。
 
-## 記号のトークン
+### 記号
 
 - `DOT`: `.`
 - `COMMA`: `,`
@@ -41,7 +43,7 @@
 - `HYPHEN`: `-`
 - `ASTERISK`: `*`
 - `SLASH`: `/`
-- `BACK_SLASH`: `0x5C`
+- `BACK_SLASH`: `\`
 - `SEMICOLON`: `;`
 - `COLON`: `:`
 - `DOLLAR`: `$`
@@ -49,7 +51,7 @@
 - `SHARP`: `#`
 - `QUOTE_SINGLE`: `'`
 - `QUOTE_DOUBLE`: `"`
-- `QUOTE_BACK`: `0x60`
+- `QUOTE_BACK`: `` ` ``
 - `UNDERSCORE`: `_`
 - `QUESTION`: `?`
 - `EXCLAMATION`: `!`
@@ -59,149 +61,120 @@
 - `TILDE`: `~`
 - `OR`: `|`
 
-### エスケープ文字のトークン
+### エスケープ文字
 
-- `ESC_DOT`: `<BACK_SLASH><DOT>`
-- `ESC_COMMA`: `<BACK_SLASH><COMMA>`
-- `ESC_EQUAL`: `<BACK_SLASH><EQUAL>`
-- `ESC_SQUARE_L`: `<BACK_SLASH><SQUARE_L>`
-- `ESC_SQUARE_R`: `<BACK_SLASH><SQUARE_R>`
-- `ESC_CURLY_L`: `<BACK_SLASH><CURLY_L>`
-- `ESC_CURLY_R`: `<BACK_SLASH><CURLY_R>`
-- `ESC_ANGLE_L`: `<BACK_SLASH><ANGLE_L>`
-- `ESC_ANGLE_R`: `<BACK_SLASH><ANGLE_R>`
-- `ESC_ROUND_L`: `<BACK_SLASH><ROUND_L>`
-- `ESC_ROUND_R`: `<BACK_SLASH><ROUND_R>`
-- `ESC_PLUS`: `<BACK_SLASH><PLUS>`
-- `ESC_HYPHEN`: `<BACK_SLASH><HYPHEN>`
-- `ESC_ASTERISK`: `<BACK_SLASH><ASTERISK>`
-- `ESC_SLASH`: `<BACK_SLASH><SLASH>`
-- `ESC_BACK_SLASH`: `<BACK_SLASH><BACK_SLASH>`
-- `ESC_SEMICOLON`: `<BACK_SLASH><SEMICOLON>`
-- `ESC_COLON`: `<BACK_SLASH><COLON>`
-- `ESC_DOLLAR`: `<BACK_SLASH><DOLLAR>`
-- `ESC_PERCENT`: `<BACK_SLASH><PERCENT>`
-- `ESC_SHARP`: `<BACK_SLASH><SHARP>`
-- `ESC_QUOTE_SINGLE`: `<BACK_SLASH><QUOTE_SINGLE>`
-- `ESC_QUOTE_DOUBLE`: `<BACK_SLASH><QUOTE_DOUBLE>`
-- `ESC_QUOTE_BACK`: `<BACK_SLASH><QUOTE_BACK>`
-- `ESC_UNDERSCORE`: `<BACK_SLASH><UNDERSCORE>`
-- `ESC_QUESTION`: `<BACK_SLASH><QUESTION>`
-- `ESC_EXCLAMATION`: `<BACK_SLASH><EXCLAMATION>`
-- `ESC_AND`: `<BACK_SLASH><AND>`
-- `ESC_AT`: `<BACK_SLASH><AT>`
-- `ESC_HAT`: `<BACK_SLASH><HAT>`
-- `ESC_TILDE`: `<BACK_SLASH><TILDE>`
-- `ESC_OR`: `<BACK_SLASH><OR>`
+- `ESC_LF`: `\n`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_CR`: `\r`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_TAB`: `\t`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_QUOTE_SINGLE`: `\'`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_QUOTE_DOUBLE`: `\"`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_BACK_SLASH`: `\\`。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
+- `ESC_CHAR`: `<ESC_LF>`, `<ESC_CR>`, `<ESC_TAB>`, `<ESC_QUOTE_SINGLE>`, `<ESC_QUOTE_DOUBLE>`, `<ESC_BACK_SLASH>` のいずれか。文字列か`<NOVEL_MESSAGE_KEYS>`に使用する。それ以外のコンテキストでは使用できない。
 
-### エスケープシーケンスのトークン
+### メッセージ用の記号
 
-- `ESC_TAB`: `<BACK_SLASH>t`
-- `ESC_ENTER`: `<BACK_SLASH>n`
-- `ESC_NULL`: `<BACK_SLASH>0`
+- `MESSAGE_SYMBOL_NON_TOP`: `<ASTERISK>`, `<SEMICOLON>`, `<SHARP>`, `<AT>`, `<HAT>`。`<NOVEL_MESSAGE_KEYS>`に使用する。先頭には使用しない。
+- `MESSAGE_SYMBOL`: `<DOT>`, `<COMMA>`, `<EQUAL>`, `<ROUND_L>`, `<ROUND_R>`, `<PLUS>`, `<HYPHEN>`, `<SLASH>`, `<COLON>`, `<DOLLAR>`, `<PERCENT>`, `<UNDERSCORE>`, `<QUESTION>`, `<EXCLAMATION>`, `<AND>`, `<TILDE>`, `<OR>` のいずれか。`<NOVEL_MESSAGE_KEYS>`に使用する。
 
-- `ESC_CHAR`: `<ESC_DOT>`, `<ESC_COMMA>`, `<ESC_EQUAL>`, `<ESC_SQUARE_L>`, `<ESC_SQUARE_R>`, `<ESC_CURLY_L>`, `<ESC_CURLY_R>`, `<ESC_ANGLE_L>`, `<ESC_ANGLE_R>`, `<ESC_ROUND_L>`, `<ESC_ROUND_R>`, `<ESC_PLUS>`, `<ESC_HYPHEN>`, `<ESC_ASTERISK>`, `<ESC_SLASH>`, `<ESC_BACK_SLASH>`, `<ESC_SEMICOLON>`, `<ESC_COLON>`, `<ESC_DOLLAR>`, `<ESC_PERCENT>`, `<ESC_SHARP>`, `<ESC_QUOTE_SINGLE>`, `<ESC_QUOTE_DOUBLE>`, `<ESC_QUOTE_BACK>`, `<ESC_UNDERSCORE>`, `<ESC_QUESTION>`, `<ESC_EXCLAMATION>`, `<ESC_AND>`, `<ESC_AT>`, `<ESC_HAT>`, `<ESC_TILDE>`, `<ESC_OR>`, `<ESC_TAB>`, `<ESC_ENTER>`, `<ESC_NULL>` のいずれか
+### アルファベット
 
-### シンボル
+- `ALPHABET`: `a-z`、`A-Z` のいずれか。アルファベッドは変数名や関数名などの識別子に使用され、小文字と大文字を区別します。
 
-- `QUOTE`: `<QUOTE_SINGLE>`, `<QUOTE_DOUBLE>`, `<QUOTE_BACK>`のいずれか
-- `SYMBOL_NON_5C_QUOTE`: `<DOT>`, `<COMMA>`, `<EQUAL>`, `<SQUARE_L>`, `<SQUARE_R>`, `<CURLY_L>`, `<CURLY_R>`, `<ANGLE_L>`, `<ANGLE_R>`, `<ROUND_L>`, `<ROUND_R>`, `<PLUS>`, `<HYPHEN>`, `<ASTERISK>`, `<SLASH>`, `<SEMICOLON>`, `<COLON>`, `<DOLLAR>`, `<PERCENT>`, `<SHARP>`, `<UNDERSCORE>`, `<QUESTION>`, `<EXCLAMATION>`, `<AND>`, `<AT>`, `<HAT>`, `<TILDE>`, `<OR>` のいずれか
-- `SYMBOL_NON_5C`: `<SYMBOL_NON_0x5C_QUOTE>`, `<QUOTE>` のいずれか
-- `SYMBOL`: `<SYMBOL_NON_5C>`, `<BACK_SLASH>` のいずれか
+### UTF-8
 
+- `U1`: `0x80`から`0xBF`のいずれか（続くバイト）
+- `U2`: `0xC2`から`0xDF`のいずれか（2バイト文字の最初のバイト）
+- `U3`: `0xE0`、`0xE1`から`0xEC`、`0xEE`、`0xEF`のいずれか（3バイト文字の最初のバイト）
+- `U4`: `0xF0`から`0xF4`のいずれか（4バイト文字の最初のバイト）
+- `UTF8_TWO_BYTE`: `<U2><U1>`（2バイトのUTF-8文字）
+- `UTF8_THREE_BYTE`: `<U3><U1><U1>`（3バイトのUTF-8文字）
+- `UTF8_FOUR_BYTE`: `<U4><U1><U1><U1>`（4バイトのUTF-8文字）
+- `UTF8`: `<UTF8_TWO_BYTE>`, `<UTF8_THREE_BYTE>`, `<UTF8_FOUR_BYTE>` のいずれか
 
-## アルファベット
+### 予約語
 
-- `ALPHABET`: `a`, `b`, `c`, `d`, `e`, `f`, `g`, `h`, `i`, `j`, `k`, `l`, `m`, `n`, `o`, `p`, `q`, `r`, `s`, `t`, `u`, `v`, `w`, `x`, `y`, `z`, `A`, `B`, `C`, `D`, `E`, `F`, `G`, `H`, `I`, `J`, `K`, `L`, `M`, `N`, `O`, `P`, `Q`, `R`, `S`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z` のいずれか
-
-## UTF-8
-
-- `U1`: `0x80`から`0xBF`のいずれか
-- `U2`: `0xC2`から`0xDF`のいずれか
-- `U3`: `0xE0`から`0xEF`のいずれか
-- `U4`: `0xF0`から`0xF4`のいずれか
-- `UTF8`: `<U2><U>`、`<U3><U1><U1>`、`<U4><U1><U1><U1>`のいずれか（UTF-8文字にのみマッチする）
-
-
-## トークン
-
+- `NONE`: `none`
+- `NULL`: `null`
 - `BOOLEAN`: `true`、`false` のいずれか
-- `DIGIT_NON_ZERO`: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9` のいずれか
+- `IF_START`: `if`
+- `IF_END`: `endif`
+- `IGNORE_START`: `ignore`
+- `IGNORE_END`: `endignore`
+- `MACRO_START`: `macro`
+- `MACRO_END`: `endmacro`
+- `SCRIPT_START`: `script`, `iscript` のいずれか
+- `SCRIPT_END`: `endscript`, `endiscript` のいずれか
+- `LINK_START`: `link`
+- `LINK_END`: `endlink`
+- `RETURN`: `return`
+- `STOP`: `stop`, `s`のいずれか
+
+### 数値
+
+- `DIGIT_NON_ZERO`: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9` のいずれか。1から9までの任意の数字を指す。
 - `DIGIT`: `0`, `<DIGIT_NON_ZERO>` のいずれか
 - `DIGITS`: `<DIGIT>`の1つ以上の連続
-- `INTEGER`: `<DIGIT_NON_ZERO><DIGITS>`
-- `FLOAT`: `<DIGIT><DOT><DIGITS>`
-- `HEX_DIGIT`: `<DIGIT>`, `a`, `b`, `c`, `d`, `e`, `f`, `A`, `B`, `C`, `D`, `E`, `F` のいずれか
-- `HEX_DIGITS`: `<HEX_DIGITS>`の1つ以上の連続
-- `HEX_NUMERIAL`: `0x<HEX_DIGITS>`, `0X<HEX_DIGITS>`
+- `INTEGER`: `<DIGIT>` または `<DIGIT_NON_ZERO><DIGITS>`
+- `FLOAT`: `<DIGITS><DOT><DIGITS>`
+- `DIGIT_HEX`: `<DIGIT>`, `a`, `b`, `c`, `d`, `e`, `f`, `A`, `B`, `C`, `D`, `E`, `F` のいずれか
+- `DIGITS_HEX`: `<DIGIT_HEX>`の1つ以上の連続
+- `NUMERAL_HEX`: `0x<DIGITS_HEX>`, `0X<DIGITS_HEX>`
 - `SIGN`: `<PLUS>`, `<HYPHEN>` のいずれか
-- `SIGNED_INTEGER`: `<SIGN><INTEGER>`, `<SING><FLOAT>`
+- `SIGNED_INTEGER`: `<SIGN><INTEGER>`
+- `SIGNED_FLOAT`: `<SIGN><FLOAT>`
 
-## 記述文字列
+### 色
 
-- `KAG_KEYS`: `<ALPHABET>`, `<DIGIT>`, `<UNDERSCORE>`, `<UTF8>` のいずれか
-- `KAG_MESSAGE_KEYS`: `<ALPHABET>`, `<DIGIT>`, `<UTF8>` のいずれか
+- `HEX_COLOR_RRGGBB`: `<SHARP><DIGIT_HEX><DIGIT_HEX><DIGIT_HEX><DIGIT_HEX><DIGIT_HEX><DIGIT_HEX>`
 
-- ASCII_KEY: `[0-9a-zA-Z_]`の正規表現で表される文字。（ASCII記述文字）
-- UTF8_KEY: ASCII_KEY以外のUTF-8文字のマルチバイト文字（UTF8記述文字）
-- KEY: ASCII_KEYあるいはUTF8_KEY（記述文字）
-- KEYS: １つ以上のKEYで構成される文字列（記述文字列）
+## 文法
 
-## ドキュメント全体
+- `RAG_SCRIPT`: `<BLANK_BLOCK>`, `<SCRIPT_STRING_BLOCK>`, `<NOVEL_BLOCK>`,  で構成される
+- `BLANK_BLOCK`: `<BLANK_LINE>` の連続が1つ以上
+- `SCRIPT_STRING_BLOCK`: `<SCRIPT_STRING_LINE>` の連続が1つ以上
+- `NOVEL_BLOCK`: `<NOVEL_LINE>` の連続が1つ以上
+- `BLANK_LINE`: `<BLANK>` で構成される行
 
-- DOCUMENT: ファイルの先頭から末尾まで（ドキュメント）
+- `SCRIPT_STRING_LINE`: `<SPACE_ASCII>`が行頭から連続して4つ以上ある行末までの文字列。
+- `SCRIPT_KEYS`: `<ALPHABET>`, `<DIGIT>`, `<UNDERSCORE>`, `<UTF8>`の1つ以上の連続
 
-## ドキュメントを構成する要素
+- `NOVEL_LINE`: `<SPACE_ASCII>`が存在しないか、行頭から０個から3個が連続してあった場合、その後`<NOVEL_ELEMENTS>`で構成される行
+- `NOVEL_ELEMENTS`: `<NOVEL_ELEMENT>`の連続が1つ以上
+- `NOVEL_ELEMENT`: `<NOVEL_COMMAND>`、`<NOVEL_STRING>`、`<NOVEL_LABEL>`、`<NOVEL_SCRIPT_BLOCK>`、`<NOVEL_MACRO_BLOCK>`、`<NOVEL_LINK_BLOCK>`、`<NOVEL_SUBROUNTINE>`、`<NOVEL_IF_BLOCK>`、`<NOVEL_IGNORE_BLOCK>`、 `<NOVEL_COMMENT    >`、`<NOVEL_MESSAGE>` のいずれか
+- `NOVEL_MESSAGE`: `<NOVEL_MESSAGE_KEYS>`で構成される。`<NOVEL_COMMAND>`、`<NOVEL_LABEL>`、`<NOVEL_COMMENT>`、`<NOVEL_SCRIPT_BLOCK>` に該当しない
+- `NOVEL_COMMENT`: `<NOVEL_HAT_COMMENT>`, `<NOVEL_SEMICOLON_COMMENT>` のいずれか
+- `NOVEL_HAT_COMMENT`: `<HAT>`から行末まで。`<NOVEL_SCRIPT_BLOCK>`と`<NOVEL_STRING>`内を除く
+- `NOVEL_SEMICOLON_COMMENT`: 行頭の`<SEMICOLON>`から行末まで。`<NOVEL_SCRIPT_BLOCK>`と`<NOVEL_STRING>`内を除く
+- `NOVEL_IGNORE_BLOCK`: `<IGNORE_START>`命令から`<IGNORE_END>`命令まで。間にはラベルを挟まないように。
+- `NOVEL_IF_BLOCK`: `<IF_START>`命令から`<IF_END>`命令まで。間にはラベルを挟んではいけない。
+- `NOVEL_SUBROUTINE`: `<NOVEL_LABEL>`から`<NOVEL_SUBROUTINE_END>`まで
+- `NOVEL_SUBROUTINE_END`: `<RETURN>`命令あるいは`<STOP>`命令、またはファイル末尾
+- `NOVEL_LINK_BLOCK`: `<LINK_START>`命令から`<LINK_END>`命令まで
+- `NOVEL_MACRO_ATTRIBUTE_ALL`: `<NOVEL_MACRO_BLOCK>`内の`<NOVEL_COMMAND>`の`<NOVEL_COMMAND_NAME>`の次の`<ASTERISK>`。例: `[macro name=""new_macro][move *][endmacro]`における`*`が該当します。
+- `NOVEL_MACRO_ATTRIBUTE_DEFAULT`: `<NOVEL_MACRO_ATTRIBUTE_VALUE>`の次が`<OR>`であった場合の次の`<NOVEL_KEYS>`。例: `[macro name="new_macro"][move time=%t|2000][endmacro]`における`2000`が該当します。
+- `NOVEL_MACRO_ATTRIBUTE_VALUE`: `<NOVEL_MACRO_BLOCK>`でのみ使用できる`<NOVEL_COMMAND_ATTRIBUTE>`。必ず`%`で始まる。例: `[macro name="new_macro"][move time=%t][endmacro]`における`%t`が該当します
+- `NOVEL_MACRO_BLOCK`: `<MACRO_START>`命令から`<MACRO_END>`命令まで
+- `NOVEL_SCRIPT_BLOCK`: `<SCRIPT_START>`命令から`<SCRIPT_END>`命令に囲まれた文字列
+- `NOVEL_SAVE_NAME`: `<NOVEL_LABEL_NAME>`の次の`<NOVEL_KEYS>`または`<NOVEL_ENTITY>`。ただし`<NOVEL_LABEL_NAME>`と`<KAB_SAVE_NAME>`の間には`|`が必要。例:`*label|save_name`における`save_name`が該当します。
+- `NOVEL_LABEL_NAME`: `<NOVEL_LABEL>`内の最初の`<NOVEL_KEYS>`。ただし、直前の`<NOVEL_LABEL_NAME>`が必要な場合もあります。
+- `NOVEL_LABEL`: `<NOVEL_LABEL_TOP_FILE>`あるいは`<NOVEL_LABEL_NOMAL>`
+- `NOVEL_LABEL_NORMAL`: 行頭が `<ASTERISK>` で始まる行
+- `NOVEL_LABEL_TOP_FILE`: ファイルの最初の行を示すラベル。
+- `NOVEL_STRING`: `<NOVEL_STRING_SINGLE>`、`<NOVEL_STRING_DOUBLE>` のどちらか
+- `NOVEL_STRING_DOUBLE`: `"` で囲まれた文字列。内包する`'`、`\"`は文字列とみなされる。ネストは許可されない。
+- `NOVEL_STRING_SINGLE`: `'` で囲まれた文字列。内包する`"`、`\'`は文字列とみなされる。ネストは許可されない。
+- `NOVEL_COMMAND_ATTRIBUTE_VALUE`: `<NOVEL_COMMAND_ATTRIBUTE>`の等式の右辺。例: `[move time=2000]`における`2000`が該当します。
+- `NOVEL_COMMAND_ATTRIBUTE_NAME`: `<NOVEL_COMMAND_ATTRIBUTE>`の等式の左辺。例: `[move time=2000]`における`time`が該当します。
+- `NOVEL_COMMAND_ATTRIBUTE`: `<NOVEL_COMMAND_NAME>`の後ろに続く`<NOVEL_KEYS><EQUAL><NOVEL_KEYS>`形式の等式。等式中の空白文字は無視されます。例：`[move time=2000]`における`time=2000`が該当します。
+- `NOVEL_COMMAND_NAME`: `<NOVEL_COMMAND>`の最初の`<NOVEL_KEYS>`
+- `NOVEL_COMMAND`: 「x」命令の形式で記述される要素。`<NOVEL_COMMAND_SQUARE_BRACKET>`あるいは`<NOVEL_COMMAND_AT>`である。`[` ``NOVEL_COMMAND_NAME` `...` `]` あるいは`@` `NOVEL_COMMAND_NAME` `...`の形式を取る。
+- `NOVEL_COMMAND_AT`: `<at><NOVEL_COMMAND_NAME>`、あるいは `<at><NOVEL_COMMAND_NAME><NOVEL_COMMAND_ATTRIBUTE>+`
+- `NOVEL_COMMAND_SQUARE_BRACKET`: `<SQUARE_L><NOVEL_COMMAND_NAME><SQUARE_L>`, または`<SQUARE_L><NOVEL_COMMAND_NAME><NOVEL_COMMAND_ATTRIBUTE>+<SQUARE_R>`。ただし`[[`、`\[`にはマッチしない。
+- `NOVEL_ENTITY`: `&f.<NOVEL_KEYS>`, `&sf.<NOVEL_KEYS>`, `&tf.<NOVEL_KEYS>`, `&kag.<NOVEL_KEYS>`のいずれか
+- `NOVEL_MESSAGE_KEYS`: `<ALPHABET>`, `<DIGIT>`, `<UTF8>`, `<ESC_CHAR>`, `<MESSAGE_SYMBOL>`, のいずれか、続いて`<ALPHABET>`, `<DIGIT>`, `<UNDERSCORE>`, `<UTF8>`, `<MESSAGE_SYMBOL>`、`<MESSAGE_SYMBOL_NON_TOP>`の０以上の連続。
+- `NOVEL_KEYS`: `<ALPHABET>`, `<DIGIT>`, `<UNDERSCORE>`, `<UTF8>`, から構成されるキー
 
-- `BLANK_LINE`: 空白文字のみでで構成された行（空行）
-- `INDENT_LINE`: 行頭からスペースが連続して`4`以上がある行。`BLANK_LINE`は除く（インデント行）
-- `NON_INDENT_LINE`: 行頭からスペースが連続して`4`以上ない行。（インデントなし行）
-- `INDENT_BLOCK`: `INDENT_LINE`の１つ以上の連続です。`BLANK_LINE`は無視（インデントブロック）
 
-## KAG
-
-### KAGのトークン
-
-
-
-### KAGの文法
-
-この文書では、例えば`KAG_TAG_NAME`が`x`の`KAG_TAG`を`x`タグと呼ぶ。
-行末の丸括弧は、その要素をこの文書内での呼び方を指す。
-
-- `KAG_TAG_SQUARE_BRACKET`: `[`から`]`まで。ただし`[[`で始まる場合は除く。ネストは許可されない（大括弧タグ）
-- `KAG_TAG_AT`: 行頭の`@`から行末まで。行頭の空白文字は無視すること（@タグ）
-- `KAG_TAG`: `KAG_TAG_SQUARE_BRACKET`または`TAG_AT`（タグ）
-- `KAG_TAG_LINE`: `KAG_TAG`のみで構成される行（タグ行）
-- `KAG_TAG_NAME`: `KAG_TAG`内の最初のKEYS（タグ名）
-- `KAG_TAG_ATTRIBUTE`: `KAG_TAG_NAME`の後から末尾までの`KAG_KEYS = KAG_KEYS`の等式。等式中の空白文字は無視される（タグ属性）
-- `KAG_TAG_ATTRIBUTE_NAME`: `KAG_TAG_ATTRIBUTE`の等式の左辺（属性名）
-- `KAG_TAG_ATTRIBUTE_VALUE`: `KAG_TAG_ATTRIBUTE`の等式の右辺（属性値）
-- `KAG_STRING_SINGLE`: `'` で囲まれた範囲。`'...'`内の`"`は文字列とみなされる。ネストは許可されない。（シングル文字列）
-- `KAG_STRING_DOUBLE`: `"` で囲まれた範囲。`"..."`内の`'`は文字列とみなされる。ネストは許可されない。（ダブル文字列）
-- `KAG_STRING`: `KAG_STRING_SINGLE` または `KAG_STRING_DOUBLE`
-- `KAG_ENTITY`: `&f.`, `&sf.`, `&tf.` `&kag.` + `KAG_KEYS`。セーブ名および文字列中に使用できる。（KAG変数呼び出し）
-- `KAG_LABEL_TOP_FILE`: ファイルの先頭位置。（ファイル先頭ラベル）
-- `KAG_LABEL_NORMAL`: 行頭が `*` で始まる行（行頭ラベル）
-- `KAG_LABEL`: `KAG_LABEL_TOP_FILE`あるいは`KAG_LABEL_NOMAL`（ラベル）
-- `KAG_LABEL_NAME`: `KAG_LABEL`内の最初の`KAG_KEYS`。`KAG_KEYS`よりも`|`が先にあった場合は`KAG_LABEL_NAME`が省略されたとみなされ、`KAG_LABEL_NAME`は直前の`KAG_LABEL_NAME` + `:` + `DIGIT`となる。この`DIGIT`は2から始まり、省略が続く場合、値が1増加した数値になる。（ラベル名）
-- `KAG_SAVE_NAME`: `KAG_LABEL_NAME`の次の`KAG_KEYS`または`KAG_ENTITY`。ただし`KAG_LABEL_NAME`と`KAB_SAVE_NAME`の間には`|`が必要（セーブ名）
-- `KAG_SCRIPT_BLOCK`: `iscript`タグから`endscript`まで
-- `KAG_MACRO_BLOCK`: `macro`タグから`endmacro`タグまで
-- `KAG_MACRO_ATTRIBUTE_VALUE`: `KAG_MACRO_BLOCK`でのみ使用できる`KAG_TAG_ATTRIBUTE`。必ず`%`で始まる（マクロ属性値）
-- `KAG_MACRO_ATTRIBUTE_DEFAULT`:` KAG_MACRO_ATTRIBUTE_VALUE`の次が`|`であった場合の次の`KAG_KEYS`（マクロデフォルト値）
-- `KAG_MACRO_ATTRIBUTE_ALL`: `KAG_MACRO_BLOCK`内の`KAG_TAG`の`KAG_TAG_NAME`の次の`*`（マクロ全属性）
-- `KAG_LINK_BLOCK`: `link`タグから`endlink`タグまで
-- `KAG_SUBROUTINE_END`: `return`タグあるいは`s`タグ、またはファイル末尾（サブルーチン終端）
-- `KAG_SUBROUTINE`: `KAG_LABEL`から`KAG_SUBROUTINE_END`まで（サブルーチン）
-- `KAG_IF_BLOCK`: `if`タグから`endif`タグまで。間にはラベルを挟んではいけない。（ifブロック）
-- `KAG_IGNORE_BLOCK`: `ignore`から`@endignore`まで。間にはラベルを挟まないように。（ignoreブロック）
-- `KAG_COMMENT`: `;`から行末まで。`KAG_SCRIPT_BLOCK`と`KAG_STRING`内の`;`は無視される（コメント）
-- `KAG_MESSAGE`: `KAG_TAG`、`KAG_LABEL`、`KAG_COMMENT`、`KAG_SCRIPT_BLOCK`内以外の`KAG_KEYS`（メッセージ）
-- `KAG_ELEMENT`: `KAG_TAG`、`KAG_STRING`、`KAG_LABEL`、`KAG_SCRIPT_BLOCK`、`KAG_MACRO_BLOCK`、`KAG_LINK_BLOCK`、`KAG_SUBROUNTINE`、`KAG_IF_BLOCK`、`KAG_COMMENT_KAG`、`KAG_MESSAGE`のいずれか（KAGブロックを構成する要素）
-- `KAG_ELEMENTS`: `KAG_ELEMENT`または`KAG_ELEMENTS`と`KAG_ELEMENT`の連続
-- `KAG_LINE`: `KAG_ELEMENS`で構成される行。行頭のスペースがある場合は、必ず4つ未満である。
-- `KAG_BLOCK`: `KAG_LINE`で構成されるブロック。`BLANK_LINE`が入ることは許容される。（KAGブロック）
 
 ## 吉里吉里のKAGと違うところ
 
@@ -214,10 +187,11 @@
 
 ## 拡張記法
 
-- `@script`タグ。
+- `MESSAGE_BLOCK`: `message`命令から`endmessage`命令まで
+- `@script`命令。
 - スクリプトの途中の行末に`\`を挿入ことで、スクリプトを複数行に渡って記述できる
-- 終了タグに`end...`の代わりに`[/if]`を指定できる
-- インデントでタグ記号を省略してスクリプトで記述できる
+- 終了命令に`end...`の代わりに`[/if]`を指定できる
+- インデントで命令記号を省略してスクリプトで記述できる
 - `if {} macro {} ignore {}`が使える。
 - `for` `while` などが使える
 - `iscript`、`endscript`は無視される。
@@ -225,15 +199,16 @@
 - `\{\{script\}\}`でスクリプトを呼び出せる。`@eval`と同等。
 - `[?mruby ?]`
 - キャラ名：行頭+KEYS+`:` + `\n | (...)` でキャラ名の指定ができる。`:`の後にKEYSが来てはいけない。
+- `キャラ名.表情:` で表情を指定できる
 - 表情指定：キャラ名指定ののち`(...)`の間に表情指定などができる
 - ボイス指定：表情指定ののちに`{...}`でボイス形式でアニメーションなどを指定できる
 - キャラ名と同等の記法でメッセージとして`:`を使用したい時は`\:`を用いる。
 - メッセージ行
-- メッセージブロック: メッセージ行の連続、空白行またはタグ、インデントブロック、あるいは末尾まで
+- メッセージブロック: メッセージ行の連続、空白行または命令、インデントブロック、あるいは末尾まで
 - メッセージ内に`$(x)`で表情差分、`${x}`でボイス、`$<x>`で特殊演出、`\{\{script\}\}`でスクリプト
 - メッセージ内に指定がなければ、事前予約された表情、
 - `-` リストでリンクの分岐が作れる（？）
-- `[1]` タグ名の部分が数値だったばあいは予約参照
+- `[1]` 命令名の部分が数値だったばあいは予約参照
 
 ## メモ
 
@@ -243,10 +218,23 @@
     - delete var で変数削除
     - [emb exp="f.var"]で変数の内容を表示
     - [font size="&f.fontsize"] のように& の後に書かれた属性の値の内容を、TJS2 式として実行して、その結果で属性の値を置き換える
-- cond 属性には TJS式 を指定し、この式を評価した結果が真の時のみにそのタグが実行されます
-    - `macro endmacro if else elsif endif ignore endignore iscript endscript` のタグをのぞく
-
+- cond 属性には TJS式 を指定し、この式を評価した結果が真の時のみにその命令が実行されます
+    - `macro endmacro if else elsif endif ignore endignore iscript endscript` の命令をのぞく
 - 音声と表情の同期。
+
+### 演算子
+
+- `GROUPING`: `( ... )`。結合性はなし。
+- `LOGICAL_NOT`: `! ...`。結合性は右から左。
+- `UNARY_NEGATION`: `- ...`。結合性は右から左。
+- `EXPONENTIATION`: `... ** ...`。結合性は右から左。
+- 乗除算余剰演算子 (*, /, %)結合性は左から右。
+- 加減算演算子 (+, -)結合性は左から右。
+- 比較演算子（例： >, <, >=, <=）結合性は左から右。
+- 等価不等価（==, !=）結合性は左から右。
+- 論理AND (&&)結合性は左から右。
+- 論理OR (||)。結合性は左から右。
+- 代入演算子 (=)。結合性は右から左。
 
 ```
 
