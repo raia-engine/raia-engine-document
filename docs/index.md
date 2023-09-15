@@ -16,9 +16,9 @@ hero:
 
 features:
   - title: ABIをフル活用
-    details: JSONを用いてABIにさらに柔軟性を持たせ、異なる言語間でのやりとりを強化します。
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: JSONを用いてABIにさらに柔軟性を持たせ、異なる言語での開発を容易にします。
+  - title: 高速・堅牢・クロスプラットフォーム
+    details: ANGLEやV8など高速なシステムを選択でき、Win/macOS/Linuxで動作する。
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
