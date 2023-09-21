@@ -1,8 +1,38 @@
 # Wiki
 
-開発者メモ
+## 開発者メモ
 
-## macOS App化（シェルスクリプト経由）
+### SteamDeckの開発環境構築
+
+```sh
+sudo steamos-readonl disable
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
+# sudo pacman -S bc
+# sudo pacman -S --overwrite
+sudo pacman -S linux-neptune-headers
+sudo pacman -S glibc
+sudo pacman -S linux-apt-headers
+```
+
+bashrc
+
+```sh
+# ~/.bashrc
+export C_INCLUDE_PATH="/lib/modules/$(uname -r)/build/include":$C_INCLUDE_PATH
+export C_INCLUDE_PATH="/lib/modules/$(uname -r)/build/include/uapi":$C_INCLUDE_PATH
+```
+
+```sh
+sudo pacman -S libx11
+sudo pacman -S xorgproto
+sudo pacman -S glfw
+sudo pacman -S libgl
+# sudo pacman -S mesa
+# sudo pacman -S glu
+```
+
+### macOS App化（シェルスクリプト経由）
 
 - raia_engine.app
   - Contents

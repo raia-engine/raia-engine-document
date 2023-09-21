@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "RaiaEngine"
   text: "Documentation of the RaiaEngine game engine."
-  tagline: 軽量で拡張性の高いゲームエンジン
+  tagline: （準備中）開発資源を最大限に活かすゲームエンジン
   actions:
     - theme: brand
       text: Markdown Examples
