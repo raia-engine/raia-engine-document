@@ -6,7 +6,7 @@ export default defineConfig({
   srcDir: './docs',
   outDir: '../raia-engine.github.io/docs',
   ignoreDeadLinks: true,
-  title: "RaiaEngine",
+  title: "Raia",
   description: "Documentation of the RaiaEngine game engine.",
   themeConfig: {
     nav: [
