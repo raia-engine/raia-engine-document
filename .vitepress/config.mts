@@ -83,6 +83,7 @@ export default defineConfig({
             { text: 'JSONによる接続', link: '/wiki/joint.md'},
             { text: 'プラグインの作成', link: '/wiki/plugin.md'},
             { text: 'RAGの文法規則', link: '/wiki/rag.md'},
+            { text: 'macOSでの開発環境構築', link: '/wiki/configure_macos.md'},
           ]
         },
         {
