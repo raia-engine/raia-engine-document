@@ -8,7 +8,18 @@ export default defineConfig({
   ignoreDeadLinks: true,
   title: "Raia",
   description: "Documentation of the RaiaEngine game engine.",
+  lastUpdated: true,
   themeConfig: {
+    search: {
+      provider: 'local'
+    },
+    editLink: {
+      pattern: 'https://github.com/raia-engine/raia-document/edit/main/docs/:path'
+    },
+    socialLinks: [
+      { icon: 'twitter', link: 'https://twitter.com/dolphilia_' },
+      { icon: 'github', link: 'https://github.com/dolphilia/raia' }
+    ],
     nav: [
       { text: 'ホーム', link: '/' },
       { text: 'ドキュメント', link: '/guide/' },
@@ -79,17 +90,19 @@ export default defineConfig({
           text: 'Wiki',
           collapsed: false,
           items: [
-            { text: '目次', link: '/wiki/' },
+            { text: 'はじめに', link: '/wiki/' },
             { text: 'JSONによる接続', link: '/wiki/joint.md'},
-            { text: 'プラグインの作成', link: '/wiki/plugin.md'},
+            { text: 'Raiaのプラグインを作成する', link: '/wiki/plugin.md'},
             { text: 'RAGの文法規則', link: '/wiki/rag.md'},
-            { text: 'macOSでの開発環境構築', link: '/wiki/configure_macos.md'},
+            { text: 'MacにRaia開発環境を構築する', link: '/wiki/configure_macos.md'},
           ]
         },
         {
           text: '備忘録',
           collapsed: false,
           items: [
+            { text: 'SteamDeckで開発環境を構築', link: '/wiki/steamdeck.md'},
+            { text: 'Macの実行ファイルをアプリ化', link: '/wiki/mac_unix_to_app.md'},
             { text: 'メモ', link: '/wiki/memo' },
           ]
         },
@@ -103,8 +116,5 @@ export default defineConfig({
         }
       ]
     },
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/raia-engine' }
-    ]
   }
 })
