@@ -26,6 +26,7 @@
 
 ::: details Spotlight からアプリケーションを起動する
 Mac では Spotlightからアプリケーションを起動することができます。
+
 - Mac のメニューバーで Spotlight アイコン をクリックするか、⌘ + Space を押します。
 - 検索フィールドにアプリケーションの名前を入力します。今回は「ターミナル」と入力します。
 - Enter を押すか、検索結果のアプリケーション名をクリックして実行します。
@@ -33,7 +34,7 @@ Mac では Spotlightからアプリケーションを起動することができ
 
 ### 作業ディレクトリについて
 
-このドキュメントでは開発環境を構築するディレクトリに `~/Documents` を使用するもの仮定として解説をします。
+このドキュメントでは開発環境を構築するディレクトリに `~/` を使用するもの仮定として解説をします。
 
 自分が普段使用しているディレクトリに置き換えて読み進めてください。
 
@@ -66,6 +67,7 @@ xcode-select --install
 ポップアップウィンドウが表示され、デベロッパーツールをインストールするかどうかを尋ねられます。インストールを続行するための指示に従ってください。
 
 ::: details 詳細な手順
+
 - 「インストール」をクリックします。
 - 「同意する」をクリックします。
   - ソフトウェアのダウンロードとインストールが開始されます（検証環境では10分程度かかりました）
@@ -118,6 +120,14 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 `/UserName/` の箇所を自分のユーザー名に置き換えて実行してください。
 :::
 
+## GCC-13 をインストールする
+
+ompによるGPU処理で使用します。
+
+```sh
+brew install gcc-13
+```
+
 ## 4. Ninjaをインストールする
 
 次のコマンドを実行して、Ninjaをインストールします。
@@ -132,7 +142,7 @@ brew install ninja
 
 ```sh
 # 例:
-cd ~/Documents
+cd ~/
 ```
 
 ### リポジトリをクローンする
@@ -149,7 +159,7 @@ git clone https://github.com/dolphilia/raia-engine.git
 
 ```sh
 # 例:
-cd ~/Documents
+cd ~/raia/third_party
 ```
 
 ### depot_tools をクローンする
@@ -166,7 +176,7 @@ git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
 ```sh
 # 例:
-export PATH=~/Documents/depot_tools:$PATH
+export PATH=~/$PWD/depot_tools:$PATH
 ```
 
 ### ANGLE のソースコードを取得する
@@ -201,21 +211,21 @@ autoninja -C out/Release
 
 ### 生成された共有ライブラリを確認する
 
-以下の共有ライブラリが `~/Documents/angle/out/Release` ディレクトリに生成されていることを確認してください。
+以下の共有ライブラリが `~/raia/third_party/angle/out/Release` ディレクトリに生成されていることを確認してください。
 
 - `libc++_chrome.dylib`
-- `libcrohe_zlib.dylib`
+- `libchrome_zlib.dylib`
 - `libEGL.dylib`
 - `libGLESv2.dylib`
 - `libthird_party_abseil-cpp_absl.dylib`
 
 ### 共有ライブラリを Raia コピーする
 
-先ほどの共有ライブラリを `~/Documents/raia-engine/sdk/macos/arm64/lib` にコピーします。
+先ほどの共有ライブラリを `~/raia/sdk/macos/arm64/lib` にコピーします。
 
 ### ヘッダーファイルを Raia コピーする
 
-`~/Documents/angle/include` 内のすべてのファイルを `~/Documents/raia-engine/sdk/macos/arm64/include` にコピーする。
+`~/raia/third_party/angle/include` 内のすべてのファイルを `~/raia/sdk/macos/arm64/include` にコピーする。
 
 ## 7. V8 をビルドする
 
@@ -244,7 +254,16 @@ V8 のクローンには時間がかかるので、完了まで待ちます。
 cd v8
 ```
 
-### ninja ファイルを生成する
+### V8 のバージョンを指定する
+
+次のコマンドを実行して、正常な動作を確認しているバージョンに設定します。
+
+```sh
+git checkout refs/tags/11.7.115
+gclient sync -D
+```
+
+### V8 の ninja ファイルを生成する
 
 `python3` コマンドを使って ninja ファイルを生成します。
 
@@ -258,7 +277,7 @@ python3 tools/dev/v8gen.py arm64.release
 
 ```sh
 # 例
-vi ~/Documents/v8/v8/out.gn/arm64.release/args.gn
+vi ~/raia/third_party/v8/v8/out.gn/arm64.release/args.gn
 ```
 
 内容を次のように書き換えて保存してください。
@@ -268,7 +287,9 @@ dcheck_always_on = false
 is_component_build = false
 is_debug = false
 target_cpu = "arm64"
+use_custom_libcxx = false
 v8_monolithic = true
+v8_enable_sandbox = false
 v8_use_external_startup_data = false
 v8_enable_pointer_compression = false
 v8_enable_31bit_smis_on_64bit_arch = false
@@ -277,6 +298,7 @@ v8_enable_31bit_smis_on_64bit_arch = false
 ::: details メモ: WindowsでV8をビルドするときのargs.gnの設定
 
 Windows向けの解説記事を書くまで、ここにメモを残しておきます。
+
 ```txt
 is_debug = false
 target_cpu = "x64"
@@ -291,9 +313,10 @@ v8_monolithic = true
 use_custom_libcxx = false #おそらく削除
 v8_enable_pointer_compression = false
 ```
+
 :::
 
-### コンパイルする
+### V8 をコンパイルする
 
 `ninja` コマンドを使用して V8 をコンパイルします。
 
@@ -305,7 +328,7 @@ ninja -C out.gn/arm64.release v8_monolith
 
 ### 生成された静的ライブラリの確認
 
-以下の静的ライブラリが `~/Documents/v8/v8/out.gn/arm64.release/obj` ディレクトリに生成されているのを確認してください。
+以下の静的ライブラリが `~/raia/third_party/v8/v8/out.gn/arm64.release/obj` ディレクトリに生成されているのを確認してください。
 
 - `libv8_monolith.a`
 - `libv8_libbase.a`
@@ -315,8 +338,25 @@ ninja -C out.gn/arm64.release v8_monolith
 
 ### 静的ライブラリを Raia にコピーする
 
-先ほど確認した静的ライブラリを `~/Documents/raia-engine/sdk/macos/arm64/lib` にコピーします。
+先ほど確認した静的ライブラリを `~/raia/sdk/macos/arm64/lib` にコピーします。
 
 ### ヘッダーファイルのコピー
 
-`~/Documents/v8/v8/include` にあるヘッダーファイルを `~/Documents/raia-engine/sdk/macos/arm64/include` にコピーします。
+`~/raia/third_party/v8/v8/include` にあるヘッダーファイルを `~/raia/sdk/macos/arm64/include` にコピーします。
+
+## 8. GLFW をビルドする
+
+### GLFW をクローンする
+
+```sh
+git clone https://github.com/glfw/glfw.git
+```
+
+### GLFW をビルドする
+
+```sh
+mkdir build
+cd build
+cmake ..
+cmake --build  .
+```
