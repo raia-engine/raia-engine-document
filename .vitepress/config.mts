@@ -112,6 +112,7 @@ export default defineConfig({
             { text: 'Macの実行ファイルをアプリ化', link: '/document/mac_unix_to_app.md'},
             { text: 'Raiaのディレクトリ構造', link: '/document/raia_dir_struct.md'},
             { text: 'Raiaのテストについて', link: '/document/raia_test.md'},
+            { text: 'Qtについて', link: '/document/qt.md'},
             { text: 'メモ', link: '/document/memo' },
           ]
         },
