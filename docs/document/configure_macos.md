@@ -372,3 +372,22 @@ cp mruby/build/host/lib/libmruby_core.a ../sdk/macos/arm64/lib
 cp mruby/build/host/lib/libmruby.a ../sdk/macos/arm64/lib
 rsync -av mruby/build/host/include/ ../sdk/macos/arm64/include/
 ```
+
+## libffi をセットアップする
+
+`autoconf`, `automake`, `texinfo` を使用するので `brew` コマンドであらかじめインストールしておくこと。
+
+```sh
+# 必要なツールをインストールしておく
+brew install autoconf
+brew install automake
+brew install texinfo
+git clone https://github.com/libffi/libffi.git
+cd libffi
+./autogen.sh
+./configure --prefix=/usr/local
+make
+# sudo make install
+```
+
+ライブラリは `libffi/aarch64-apple-darwin23.1.0/.libs/` に生成される。
