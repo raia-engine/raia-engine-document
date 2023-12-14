@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "Raia"
-  text: "C, Go, Rust, etc."
-  tagline: その言語の関数を、どの言語でも使えるように。
+  name: "RaiaEngine"
+  text: "WebAPI on Native"
+  tagline: ネイティブアプリを構築するためのWebAPIフレームワーク
   actions:
     - theme: brand
       text: ダウンロード
@@ -13,24 +13,16 @@ hero:
     - theme: alt
       text: 使い方
       link: /guide/
-#  image:
-#    src: /raia-logo.png
-#    alt: Raia
+  # image:
+  #   src: /raia-logo.png
+  #   alt: Raia
 
 features:
-  - title: Raia とは
-    details: オープンソースの資産をプログラミング言語の垣根を超えて、より多くの環境で活用できるようにすることを目指しています。それらの機能のデモストレーションとして独自のゲームエンジンを開発しています。
-  # - icon: 📚
-  #   title: RaiaDoc 翻訳された技術文書
-  #   details: 公式ドキュメントを母語で読めるように、RaiaDocは母語と外国語の垣根を取り払い、わかりやすいドキュメントを提供するプロジェクトです。
-  # - icon: ⚙️
-  #   title: RaiaAPI - 柔軟性もたらす
-  #   details: 素晴らしいライブラリを皆が使えるように、RaiaAPIはライブラリとプログラミング言語の垣根を取り払い、やり取り開発を容易にするために。
-  # - icon: 🔥
-  #   title: RaiaEngine - ゲームエンジン
-  #   details: 強力な機能をANGLEやV8など高速なシステムを選択でき、Win/macOS/Linuxで動作する。
-  # - icon: 🪜
-  #   title: RaiaEditor
-  #   details: ANGLEやV8など高速なシステムを選択でき、Win/macOS/Linuxで動作する。
+  - title: 高い互換性と柔軟性
+    details: RaiaEngineはC/C++で構築されたWebAPIフレームワークで、ANGLE、Skiaなどを活用してWebGLなどのWebAPI機能を提供します。このフレームワークは複数のスクリプトエンジンをサポートしており、GoogleのV8エンジンを選択することで、JavaScriptを使ってネイティブアプリをウェブ開発と同じ感覚で開発できます。
+  - title: 特化した機能と用途
+    details: RaiaEngineはHTMLのレンダリングやDOM構造よりも、HTML5CanvasやWebGLなどのインタラクティブな要素に焦点を当てています。これにより、特にゲームやデジタルアート作品の作成に適していると言えます。
+  - title: クロスプラットフォーム対応
+    details: RaiaEngineはWindows、macOS、Linuxでのネイティブアプリ開発に対応しています。また、JavaScriptを使用した場合、作成したコードをほとんど変更せずにウェブアプリとしても動作させることが可能です。これにより、開発者は様々なプラットフォームでの展開を容易に行えます。
 ---
 
