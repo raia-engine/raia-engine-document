@@ -6,8 +6,8 @@ export default defineConfig({
   srcDir: './docs',
   outDir: '../raia-engine.github.io/docs',
   ignoreDeadLinks: true,
-  title: "Raia",
-  description: "Documentation of the RaiaEngine game engine.",
+  title: "Raia.js",
+  description: "WebAPI-compatible framework for building apps that run in native environments.",
   lastUpdated: true,
   themeConfig: {
     sitemap: {
@@ -20,38 +20,13 @@ export default defineConfig({
       pattern: 'https://github.com/raia-engine/raia-document/edit/main/docs/:path'
     },
     socialLinks: [
-      { icon: 'x', link: 'https://twitter.com/dolphilia_' },
       { icon: 'github', link: 'https://github.com/dolphilia/raia' }
     ],
     nav: [
-      { text: 'ダウンロード', link: '/download/'},
-      { text: '使い方', link: '/usage/' },
+      { text: 'ホーム', link: '/'},
       { text: 'ドキュメント', link: '/document/'},
-      { text: 'API', items: [
-        { text: '目次', link: '/api/'},
-        { text: '標準ライブラリ', items: [
-          { text: 'Draw', link: '/api/std/draw/'},
-          { text: 'File', link: '/api/std/file/'},
-          { text: 'Font', link: '/api/std/font/'},
-        ]},
-        { text: 'スクリプト言語', items: [
-          { text: 'V8', link: '/api/scripting/v8/'},
-          { text: 'Duktape', link: '/api/scripting/duktape/'},
-          { text: 'Lua', link: '/api/scripting/lua/'},
-          { text: 'mruby', link: '/api/scripting/mruby/'},
-        ]},
-        { text: 'バインディング', items: [
-          { text: 'GLFW', link: '/api/binding/glfw/'},
-          { text: 'GLES', link: '/api/binding/gles/'},
-          { text: 'ImGui', link: '/api/binding/imgui/'},
-        ]},
-      ]},
-      { text: '参考資料', items: [
-        { text: '目次', link: '/reference/'},
-        { text: '翻訳', items: [
-          { text: 'はじめに', link: '/reference/'},
-        ]},
-      ]},
+      { text: 'API', link: '/api/'},
+      { text: 'ダウンロード', link: '/download/'},
     ],
     sidebar: {
       '/download/': [
