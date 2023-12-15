@@ -1,4 +1,4 @@
-# RaiaAPIについて
+# Raiaについて
 
 ## RaiaAPIとは
 
