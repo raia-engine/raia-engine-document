@@ -1,52 +1,58 @@
 {
-  "hash": "c080f4ff",
-  "configHash": "494f78ab",
-  "lockfileHash": "57ea9573",
-  "browserHash": "90417e07",
+  "hash": "99a7d129",
+  "configHash": "13f0b817",
+  "lockfileHash": "d84c83d3",
+  "browserHash": "d990df91",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "4c025df1",
+      "fileHash": "7c8eac14",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "267a8d81",
+      "fileHash": "b7222ba1",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "748ed32c",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "57d2a004",
+      "fileHash": "b03082f9",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "808d354a",
+      "fileHash": "12cd26c3",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "3b916e44",
+      "fileHash": "8db7d10e",
       "needsInterop": false
     },
     "@theme/index": {
       "src": "../../../node_modules/vitepress/dist/client/theme-default/index.js",
       "file": "@theme_index.js",
-      "fileHash": "f2a680cd",
+      "fileHash": "79167447",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-XBYK2D3W": {
-      "file": "chunk-XBYK2D3W.js"
+    "chunk-ZKS7ZPS7": {
+      "file": "chunk-ZKS7ZPS7.js"
     },
-    "chunk-DTWPM7ZD": {
-      "file": "chunk-DTWPM7ZD.js"
+    "chunk-XYSSNQS4": {
+      "file": "chunk-XYSSNQS4.js"
     }
   }
 }

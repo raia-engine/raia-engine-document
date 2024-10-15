@@ -3,9 +3,9 @@
 layout: home
 
 hero:
-  name: "Raia.js"
-  text: "WebAPI on Native" #
-  tagline: ネイティブで動作するアプリ/ゲーム/アートを構築するためのWebAPI互換フレームワーク
+  name: "RaiaEngine"
+  text: "WebAPI on Native"
+  tagline: ネイティブで動作するアプリ/ゲーム/アートを構築するためのゲーム開発向けフレームワーク
   actions:
     - theme: brand
       text: はじめに
