@@ -12,38 +12,38 @@ RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJ
 
 |名前|説明|互換性|
 |---|---|---|
-|`_G`|グローバル環境|Lua5.1|
-|`_VERSION`|現在のインタプリタのバージョン|Lua5.1|
+|[`_G`](global/_g.md)|グローバル環境|Lua5.1|
+|[`_VERSION`](global/_version.md)|現在のLuaのバージョン|Lua5.1|
 
 ### 基本関数
 
 |名前|説明|互換性|
 |---|---|---|
 |[`assert`](std/assert.md)|条件が偽の場合、エラーを発生させる|Lua5.1|
-|`collectgarbage`|ガベージコレクタを制御する|Lua5.1|
-|`dofile`|指定されたファイルをLuaスクリプトとして実行する|Lua5.1|
-|`error`|実行中の関数を停止し、エラーメッセージを返す|Lua5.1|
-|`getfenv`|関数やスレッドの環境テーブルを取得する|Lua5.1|
-|`getmetatable`|オブジェクトのメタテーブルを返す|Lua5.1|
-|`ipairs`|配列テーブルを順番にイテレートするためのイテレータ関数|Lua5.1|
-|`load`|文字列や関数からLuaコードを読み込み、チャンクを返す|*Lua5.2*|
-|`loadfile`|ファイルからLuaコードを読み込み、チャンクを返す|*Lua5.2*|
-|`loadstring`|文字列からLuaコードを読み込み、チャンクを返す|Lua5.1|
-|`next`|テーブルの次のキーと値を返し、テーブルをトラバース可能にする|Lua5.1|
-|`pairs`|テーブル全体をトラバースするためのイテレータ関数|Lua5.1|
-|`pcall`|保護されたモードで関数を呼び出す（エラーが発生しても処理を継続させる）|Lua5.1|
-|`print`|標準出力に指定された値を出力する|Lua5.1|
-|`rawequal`|2つの値が等しいかをチェックする（メタメソッドは呼び出されない）|Lua5.1|
-|`rawget`|テーブルから直接値を取得する（メタメソッドは呼び出されない）|Lua5.1|
-|`rawset`|テーブルに直接値を設定する（メタメソッドは呼び出されない）|Lua5.1|
-|`select`|可変長引数の中から特定の引数を返す|Lua5.1|
-|`setfenv`|可変長引数の中から特定の引数を返す|Lua5.1|
-|`setmetatable`|オブジェクトにメタテーブルを設定する|Lua5.1|
-|`tonumber`|指定された値を数値に変換する|Lua5.1|
-|`tostring`|指定された値を文字列に変換する|Lua5.1|
-|`type`|引数のデータ型を文字列で返す|Lua5.1|
-|`unpack`|テーブルの要素を複数の引数として展開する|Lua5.1|
-|`xpcall`|保護されたモードで関数を呼び出す（エラーハンドラを指定できる）|Lua5.1|
+|[`collectgarbage`](std/collectgarbage.md)|ガベージコレクタを制御する|Lua5.1|
+|[`dofile`](std/dofile.md)|指定されたファイルをLuaスクリプトとして実行する|Lua5.1|
+|[`error`](std/error.md)|実行中の関数を停止し、エラーメッセージを返す|Lua5.1|
+|[`getfenv`](std/getfenv.md)|関数やスレッドの環境テーブルを取得する|Lua5.1|
+|[`getmetatable`](std/getmetatable.md)|オブジェクトのメタテーブルを返す|Lua5.1|
+|[`ipairs`](std/ipairs.md)|配列テーブルを順番にイテレートするためのイテレータ関数|Lua5.1|
+|[`load`](std/load.md)|文字列や関数からLuaコードを読み込み、チャンクを返す|*Lua5.2*|
+|[`loadfile`](std/loadfile.md)|ファイルからLuaコードを読み込み、チャンクを返す|*Lua5.2*|
+|[`loadstring`](std/loadstring.md)|文字列からLuaコードを読み込み、チャンクを返す|Lua5.1|
+|[`next`](std/next.md)|テーブルの次のキーと値を返し、テーブルをトラバース可能にする|Lua5.1|
+|[`pairs`](std/pairs.md)|テーブル全体をトラバースするためのイテレータ関数|Lua5.1|
+|[`pcall`](std/pcall.md)|保護されたモードで関数を呼び出す（エラーが発生しても処理を継続させる）|Lua5.1|
+|[`print`](std/print.md)|標準出力に値を出力する|Lua5.1|
+|[`rawequal`](std/rawequal.md)|2つの値が等しいかをチェックする（メタメソッドは呼び出されない）|Lua5.1|
+|[`rawget`](std/rawget.md)|テーブルから直接値を取得する（メタメソッドは呼び出されない）|Lua5.1|
+|[`rawset`](std/rawset.md)|テーブルに直接値を設定する（メタメソッドは呼び出されない）|Lua5.1|
+|[`select`](std/select.md)|可変長引数の中から特定の引数を返す|Lua5.1|
+|[`setfenv`](std/setfenv.md)|関数に新しい環境テーブルを設定する|Lua5.1|
+|[`setmetatable`](std/setmetatable.md)|テーブルにメタテーブルを設定する|Lua5.1|
+|[`tonumber`](std/tonumber.md)|値を数値に変換する|Lua5.1|
+|[`tostring`](std/tostring.md)|値を文字列に変換する|Lua5.1|
+|[`type`](std/type.md)|引数のデータ型を文字列で返す|Lua5.1|
+|[`unpack`](std/unpack.md)|テーブルの要素を複数の引数として展開する|Lua5.1|
+|[`xpcall`](std/xpcall.md)|保護されたモードで関数を呼び出す（エラーハンドラを指定できる）|Lua5.1|
 
 ### コルーチン操作 (`coroutine.*`)
 
