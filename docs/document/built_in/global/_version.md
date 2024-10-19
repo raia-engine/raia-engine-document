@@ -1,4 +1,4 @@
-# `_VERSION`
+# _VERSION
 
 現在のLuaのバージョン
 

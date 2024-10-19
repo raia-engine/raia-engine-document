@@ -2,11 +2,9 @@
 
 RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJITはLua5.1と互換性があり、必要に応じてLua5.2、5.3から機能を追加しています。また、FFIやJIT関係の機能など、LuaJIT独自の機能を追加しています。
 
-## 目次
-
-[[TOC]]
-
 ## Luaと互換性のある関数・変数(Lua5.1〜5.3)
+
+LuaJITで独自の拡張がある関数には、互換性の欄に(*)の表記を追加しています。
 
 ### グローバル変数
 
@@ -19,16 +17,16 @@ RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJ
 
 |名前|説明|互換性|
 |---|---|---|
-|[`assert`](std/assert.md)|条件が偽の場合、エラーを発生させる|Lua5.1|
+|[`assert`](std/assert.md)|条件が偽の場合、エラーを発生させる|*Lua5.3*|
 |[`collectgarbage`](std/collectgarbage.md)|ガベージコレクタを制御する|Lua5.1|
 |[`dofile`](std/dofile.md)|指定されたファイルをLuaスクリプトとして実行する|Lua5.1|
 |[`error`](std/error.md)|実行中の関数を停止し、エラーメッセージを返す|Lua5.1|
 |[`getfenv`](std/getfenv.md)|関数やスレッドの環境テーブルを取得する|Lua5.1|
 |[`getmetatable`](std/getmetatable.md)|オブジェクトのメタテーブルを返す|Lua5.1|
 |[`ipairs`](std/ipairs.md)|配列テーブルを順番にイテレートするためのイテレータ関数|Lua5.1|
-|[`load`](std/load.md)|文字列や関数からLuaコードを読み込み、チャンクを返す|*Lua5.2*|
-|[`loadfile`](std/loadfile.md)|ファイルからLuaコードを読み込み、チャンクを返す|*Lua5.2*|
-|[`loadstring`](std/loadstring.md)|文字列からLuaコードを読み込み、チャンクを返す|Lua5.1|
+|[`load`](std/load.md)|文字列や関数からLuaコードを読み込み、チャンクを返す|*Lua5.2*(*)|
+|[`loadfile`](std/loadfile.md)|ファイルからLuaコードを読み込み、チャンクを返す|*Lua5.2*(*)|
+|[`loadstring`](std/loadstring.md)|文字列からLuaコードを読み込み、チャンクを返す|Lua5.1(*)|
 |[`next`](std/next.md)|テーブルの次のキーと値を返し、テーブルをトラバース可能にする|Lua5.1|
 |[`pairs`](std/pairs.md)|テーブル全体をトラバースするためのイテレータ関数|Lua5.1|
 |[`pcall`](std/pcall.md)|保護されたモードで関数を呼び出す（エラーが発生しても処理を継続させる）|Lua5.1|
@@ -43,171 +41,166 @@ RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJ
 |[`tostring`](std/tostring.md)|値を文字列に変換する|Lua5.1|
 |[`type`](std/type.md)|引数のデータ型を文字列で返す|Lua5.1|
 |[`unpack`](std/unpack.md)|テーブルの要素を複数の引数として展開する|Lua5.1|
-|[`xpcall`](std/xpcall.md)|保護されたモードで関数を呼び出す（エラーハンドラを指定できる）|Lua5.1|
+|[`xpcall`](std/xpcall.md)|保護されたモードで関数を呼び出す（エラーハンドラを指定する）|Lua5.1(*)|
 
 ### コルーチン操作 (`coroutine.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`coroutine.create`|新しいコルーチンを作成する|Lua5.1|
-|`coroutine.resume`|コルーチンを再開する|Lua5.1|
-|`coroutine.running`|実行中のコルーチンを返す|Lua5.1|
-|`coroutine.status`|コルーチンの状態を返す|Lua5.1|
-|`coroutine.wrap`|コルーチンを関数としてラップする|Lua5.1|
-|`coroutine.yield`|コルーチンを一時停止し、再開できるようにする|Lua5.1|
-|`coroutine.isyieldable`|現在の関数が中断可能かどうかを判定する|*Lua5.3*|
+|[`coroutine.create`](coroutine/create.md)|新しいコルーチンを作成する|Lua5.1|
+|[`coroutine.resume`](coroutine/resume.md)|コルーチンを再開する|Lua5.1|
+|[`coroutine.running`](coroutine/running.md)|実行中のコルーチンを返す|Lua5.1|
+|[`coroutine.status`](coroutine/status.md)|コルーチンの状態を返す|Lua5.1|
+|[`coroutine.wrap`](coroutine/wrap.md)|コルーチンを関数としてラップする|Lua5.1|
+|[`coroutine.yield`](coroutine/yield.md)|コルーチンを一時停止し、再開できるようにする|Lua5.1|
+|[`coroutine.isyieldable`](coroutine/isyieldable.md)|現在の関数が中断可能かどうかを判定する|*Lua5.3*|
 
 ### モジュール (`package.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`module`|モジュールを定義する（非推奨）。|Lua5.1|
-|`require`|モジュールをロードして返す|Lua5.1|
-|`package.cpath`|Cライブラリの検索パスを定義する|Lua5.1|
-|`package.loaded`|すでにロードされたモジュールを保持するテーブル|Lua5.1|
-|`package.loaders`|モジュールのロード関数のリスト（非推奨、Lua5.2以降では`searchers`）|Lua5.1|
-|`package.loadlib`|Cライブラリをロードする|Lua5.1,*Lua5.2*|
-|`package.path`|Luaスクリプトの検索パスを定義する|Lua5.1|
-|`package.preload`|モジュールを手動で登録するためのテーブル|Lua5.1|
-|`package.seeall`|モジュールがグローバルな変数にアクセスできるようにする（非推奨）|Lua5.1|
-|`package.searchpath`|指定されたモジュール名をパスで検索する。|*Lua5.2*|
+|[`module`](package/module.md)|モジュールを定義する（非推奨）。|Lua5.1|
+|[`require`](package/require.md)|モジュールをロードして返す|Lua5.1|
+|[`package.cpath`](package/cpath.md)|Cライブラリの検索パスを定義する|Lua5.1|
+|[`package.loaded`](package/loaded.md)|すでにロードされたモジュールを保持するテーブル|Lua5.1|
+|[`package.loaders`](package/loaders.md)|モジュールのロード関数のリスト（非推奨、Lua5.2以降では`searchers`）|Lua5.1|
+|[`package.loadlib`](package/loadlib.md)|Cライブラリをロードする|*Lua5.2*|
+|[`package.path`](package/path.md)|Luaスクリプトの検索パスを定義する|Lua5.1|
+|[`package.preload`](package/preload.md)|モジュールを手動で登録するためのテーブル|Lua5.1|
+|[`package.seeall`](package/seeall.md)|モジュールがグローバルな変数にアクセスできるようにする（非推奨）|Lua5.1|
+|[`package.searchpath`](package/searchpath.md)|指定されたモジュール名をパスで検索する|*Lua5.2*|
 
 ### 文字列操作 (`string.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`string.byte`|指定された位置の文字のバイト値を返す|Lua5.1|
-|`string.char`|バイト値の列を文字列に変換する|Lua5.1|
-|`string.dump`|関数のバイトコードを返す|Lua5.1|
-|`string.find`|文字列内でパターン検索を行う|Lua5.1|
-|`string.format`|フォーマットに従って文字列を生成する|Lua5.1|
-|`string.gmatch`|パターンに一致する部分を順次返すイテレータを生成する|Lua5.1|
-|`string.gsub`|文字列内でパターンに一致する部分を置換する|Lua5.1|
-|`string.len`|文字列の長さを返す|Lua5.1|
-|`string.lower`|文字列をすべて小文字に変換する|Lua5.1|
-|`string.match`|文字列内でパターンに一致する部分を返す|Lua5.1|
-|`string.rep`|文字列を指定回数繰り返し、任意で区切り文字を追加する|*Lua5.2*|
-|`string.reverse`|文字列を逆順にする|Lua5.1|
-|`string.sub`|文字列の部分文字列を返す|Lua5.1|
-|`string.upper`|文字列をすべて大文字に変換する|Lua5.1|
+|[`string.byte`](string/byte.md)|指定された位置の文字のバイト値を返す|Lua5.1|
+|[`string.char`](string/char.md)|バイト値の列を文字列に変換する|Lua5.1|
+|[`string.dump`](string/dump.md)|関数のバイトコードを返す|Lua5.1|
+|[`string.find`](string/find.md)|文字列内でパターン検索を行う|Lua5.1|
+|[`string.format`](string/format.md)|フォーマットに従って文字列を生成する|Lua5.1|
+|[`string.gmatch`](string/gmatch.md)|パターンに一致する部分を順次返すイテレータを生成する|Lua5.1|
+|[`string.gsub`](string/gsub.md)|文字列内でパターンに一致する部分を置換する|Lua5.1|
+|[`string.len`](string/len.md)|文字列の長さを返す|Lua5.1|
+|[`string.lower`](string/lower.md)|文字列をすべて小文字に変換する|Lua5.1|
+|[`string.match`](string/match.md)|文字列内でパターンに一致する部分を返す|Lua5.1|
+|[`string.rep`](string/rep.md)|文字列を指定回数繰り返し、任意で区切り文字を追加する|*Lua5.2*|
+|[`string.reverse`](string/reverse.md)|文字列を逆順にする|Lua5.1|
+|[`string.sub`](string/sub.md)|文字列の部分文字列を返す|Lua5.1|
+|[`string.upper`](string/upper.md)|文字列をすべて大文字に変換する|Lua5.1|
 
 ### テーブル操作 (`table.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`table.concat`|テーブルの要素を連結し、文字列を返す|Lua5.1|
-|`table.insert`|テーブルに要素を挿入する|Lua5.1|
-|`table.maxn`|テーブル内の数値キーの最大値を返す（非推奨）。|Lua5.1|
-|`table.remove`|テーブルから要素を削除する|Lua5.1|
-|`table.sort`|テーブルの要素をソートする|Lua5.1|
-|`table.new`|指定されたサイズで新しいテーブルを作成する|*LuaJIT*|
-|`table.clear`|テーブル内のすべての要素を削除する|*Lua5.2*|
-|`table.move`|テーブルの一部の要素を他の位置に移動する|*Lua5.3*|
+|[`table.concat`](table/concat.md)|テーブルの要素を連結し、文字列を返す|Lua5.1|
+|[`table.insert`](table/insert.md)|テーブルに要素を挿入する|Lua5.1|
+|[`table.maxn`](table/maxn.md)|テーブル内の数値キーの最大値を返す（非推奨）。|Lua5.1|
+|[`table.remove`](table/remove.md)|テーブルから要素を削除する|Lua5.1|
+|[`table.sort`](table/sort.md)|テーブルの要素をソートする|Lua5.1|
+|[`table.new`](table/new.md)|指定されたサイズで新しいテーブルを作成する|*LuaJIT*|
+|[`table.clear`](table/clear.md)|テーブル内のすべての要素を削除する|*Lua5.2*|
+|[`table.move`](table/move.md)|テーブルの一部の要素を他の位置に移動する|*Lua5.3*|
 
 ### 数学関数 (`math.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`math.abs`|絶対値を返す|Lua5.1|
-|`math.acos`|逆余弦を返す|Lua5.1|
-|`math.asin`|逆正弦を返す|Lua5.1|
-|`math.atan`|逆正接を返す|Lua5.1|
-|`math.atan2`|2つの引数の逆正接を返す|Lua5.1|
-|`math.ceil`|指定された数値以上の最小の整数を返す|Lua5.1|
-|`math.cos`|余弦を返す|Lua5.1|
-|`math.cosh`|双曲線余弦を返す|Lua5.1|
-|`math.deg`|ラジアンを度に変換する|Lua5.1|
-|`math.exp`|指定された数のe乗を返す|Lua5.1|
-|`math.floor`|指定された数値以下の最大の整数を返す|Lua5.1|
-|`math.fmod`|商の小数部を返す（余りを返す）|Lua5.1|
-|`math.frexp`|浮動小数点数を仮数部と指数部に分解する|Lua5.1|
-|`math.huge`|無限大を表す定数|Lua5.1|
-|`math.ldexp`|仮数部と指数部から浮動小数点数を構成する|Lua5.1|
-|`math.log`|自然対数を返す|*Lua5.2*|
-|`math.log10`|底10の対数を返す|Lua5.1|
-|`math.max`|引数の中で最大の数を返す|Lua5.1|
-|`math.min`|引数の中で最小の数を返す|Lua5.1|
-|`math.modf`|整数部分と小数部分を分けて返す|Lua5.1|
-|`math.pi`|π（円周率）を表す定数。|Lua5.1|
-|`math.pow`|べき乗を計算する（`^`演算子と同じ）|Lua5.1|
-|`math.rad`|度をラジアンに変換する|Lua5.1|
-|`math.random`|ランダムな数値を返す|Lua5.1|
-|`math.randomseed`|乱数生成器の種を設定する|Lua5.1|
-|`math.sin`|正弦を返す|Lua5.1|
-|`math.sinh`|双曲線正弦を返す|Lua5.1|
-|`math.sqrt`|平方根を返す|Lua5.1|
-|`math.tan`|正接を返す|Lua5.1|
-|`math.tanh`|双曲線正接を返す|Lua5.1|
+|[`math.abs`](math/abs.md)|絶対値を返す|Lua5.1|
+|[`math.acos`](math/acos.md)|逆余弦を返す|Lua5.1|
+|[`math.asin`](math/asin.md)|逆正弦を返す|Lua5.1|
+|[`math.atan`](math/atan.md)|逆正接を返す|Lua5.1|
+|[`math.atan2`](math/atan2.md)|2つの引数の逆正接を返す|Lua5.1|
+|[`math.ceil`](math/ceil.md)|指定された数値以上の最小の整数を返す|Lua5.1|
+|[`math.cos`](math/cos.md)|余弦を返す|Lua5.1|
+|[`math.cosh`](math/cosh.md)|双曲線余弦を返す|Lua5.1|
+|[`math.deg`](math/deg.md)|ラジアンを度に変換する|Lua5.1|
+|[`math.exp`](math/exp.md)|指定された数のe乗を返す|Lua5.1|
+|[`math.floor`](math/floor.md)|指定された数値以下の最大の整数を返す|Lua5.1|
+|[`math.fmod`](math/fmod.md)|商の小数部を返す（余りを返す）|Lua5.1|
+|[`math.frexp`](math/frexp.md)|浮動小数点数を仮数部と指数部に分解する|Lua5.1|
+|[`math.huge`](math/huge.md)|無限大を表す定数|Lua5.1|
+|[`math.ldexp`](math/ldexp.md)|仮数部と指数部から浮動小数点数を構成する|Lua5.1|
+|[`math.log`](math/log.md)|自然対数を返す|*Lua5.2*|
+|[`math.log10`](math/log10.md)|底10の対数を返す|Lua5.1|
+|[`math.max`](math/max.md)|引数の中で最大の数を返す|Lua5.1|
+|[`math.min`](math/min.md)|引数の中で最小の数を返す|Lua5.1|
+|[`math.modf`](math/modf.md)|整数部分と小数部分を分けて返す|Lua5.1|
+|[`math.pi`](math/pi.md)|π（円周率）を表す定数。|Lua5.1|
+|[`math.pow`](math/pow.md)|べき乗を計算する（`^`演算子と同じ）|Lua5.1|
+|[`math.rad`](math/rad.md)|度をラジアンに変換する|Lua5.1|
+|[`math.random`](math/random.md)|ランダムな数値を返す|Lua5.1|
+|[`math.randomseed`](math/randomseed.md)|乱数生成器の種を設定する|Lua5.1|
+|[`math.sin`](math/sin.md)|正弦を返す|Lua5.1|
+|[`math.sinh`](math/sinh.md)|双曲線正弦を返す|Lua5.1|
+|[`math.sqrt`](math/sqrt.md)|平方根を返す|Lua5.1|
+|[`math.tan`](math/tan.md)|正接を返す|Lua5.1|
+|[`math.tanh`](math/tanh.md)|双曲線正接を返す|Lua5.1|
 
 ### 入出力機能 (`io.*` | `file:*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`io.close`|現在の出力ファイルを閉じる|Lua5.1|
-|`io.flush`|書き込みバッファをフラッシュする|Lua5.1|
-|`io.input`|入力ファイルを設定または返す|Lua5.1|
-|`io.lines`|ファイルの各行を返すイテレータを作成する|Lua5.1|
-|`io.open`|ファイルを指定モードで開く|Lua5.1|
-|`io.output`|出力ファイルを設定または返す|Lua5.1|
-|`io.popen`|サブプロセスを開き、その標準入出力にアクセスする|Lua5.1|
-|`io.read`|入力から指定された形式でデータを読み取る|*Lua5.2*|
-|`io.tmpfile`|一時ファイルを作成し開く|Lua5.1|
-|`io.type`|引数がファイルハンドルかどうかを判定する|Lua5.1|
-|`io.write`|出力にデータを書き込む|Lua5.1|
-|`file:close`|ファイルを閉じる|Lua5.1|
-|`file:flush`|書き込みバッファをフラッシュする|Lua5.1|
-|`file:lines`|ファイルの各行を返すイテレータを作成する|Lua5.1|
-|`file:read`|ファイルから指定された形式でデータを読み取る|Lua5.1|
-|`file:seek`|ファイルの読み書き位置を設定または取得する|Lua5.1|
-|`file:setvbuf`|バッファリングモードを設定する|Lua5.1|
-|`file:write`|ファイルにデータを書き込む|Lua5.1|
+|[`io.close`](io/close.md)|現在の出力ファイルを閉じる|Lua5.1|
+|[`io.flush`](io/flush.md)|書き込みバッファをフラッシュする|Lua5.1|
+|[`io.input`](io/input.md)|入力ファイルを設定または返す|Lua5.1|
+|[`io.lines`](io/lines.md)|ファイルの各行を返すイテレータを作成する|Lua5.1|
+|[`io.open`](io/open.md)|ファイルを指定モードで開く|Lua5.1|
+|[`io.output`](io/output.md)|出力ファイルを設定または返す|Lua5.1|
+|[`io.popen`](io/popen.md)|サブプロセスを開き、その標準入出力にアクセスする|Lua5.1|
+|[`io.read`](io/read.md)|入力から指定された形式でデータを読み取る|*Lua5.3*|
+|[`io.tmpfile`](io/tmpfile.md)|一時ファイルを作成し開く|Lua5.1|
+|[`io.type`](io/type.md)|引数がファイルハンドルかどうかを判定する|Lua5.1|
+|[`io.write`](io/write.md)|出力にデータを書き込む|Lua5.1|
+|[`file:close`](io/file_close.md)|ファイルを閉じる|Lua5.1|
+|[`file:flush`](io/file_flush.md)|書き込みバッファをフラッシュする|Lua5.1|
+|[`file:lines`](io/file_lines.md)|ファイルの各行を返すイテレータを作成する|Lua5.1|
+|[`file:read`](io/file_read.md)|ファイルから指定された形式でデータを読み取る|*Lua5.3*|
+|[`file:seek`](io/file_seek.md)|ファイルの読み書き位置を設定または取得する|Lua5.1|
+|[`file:setvbuf`](io/file_setvbuf.md)|バッファリングモードを設定する|Lua5.1|
+|[`file:write`](io/file_write.md)|ファイルにデータを書き込む|Lua5.1|
 
 ### オペレーティングシステムの機能 (`os.*`)
 
 |名前|説明|互換性|
 |---|---|---|
-|`os.clock`|プログラムの実行時間を返す|Lua5.1|
-|`os.date`|現在の日時をフォーマットして返す|Lua5.1|
-|`os.difftime`|2つの時刻の差を秒で返す|Lua5.1|
-|`os.execute`|システムコマンドを実行する|Lua5.1|
-|`os.exit`|プログラムを終了する|*Lua5.2*|
-|`os.getenv`|環境変数の値を取得する|Lua5.1|
-|`os.remove`|ファイルを削除する|Lua5.1|
-|`os.rename`|ファイルの名前を変更する|Lua5.1|
-|`os.setlocale`|ロケール情報を設定する|Lua5.1|
-|`os.time`|現在の時刻をタイムスタンプとして返す|Lua5.1|
-|`os.tmpname`|一時ファイル名を返す|Lua5.1|
+|[`os.clock`](os/clock.md)|プログラムの実行時間を返す|Lua5.1|
+|[`os.date`](os/date.md)|現在の日時をフォーマットして返す|Lua5.1|
+|[`os.difftime`](os/difftime.md)|2つの時刻の差を秒で返す|Lua5.1|
+|[`os.execute`](os/execute.md)|システムコマンドを実行する|Lua5.1|
+|[`os.exit`](os/exit.md)|プログラムを終了する|*Lua5.2*|
+|[`os.getenv`](os/getenv.md)|環境変数の値を取得する|Lua5.1|
+|[`os.remove`](os/remove.md)|ファイルを削除する|Lua5.1|
+|[`os.rename`](os/rename.md)|ファイルの名前を変更する|Lua5.1|
+|[`os.setlocale`](os/setlocale.md)|ロケール情報を設定する|Lua5.1|
+|[`os.time`](os/time.md)|現在の時刻をタイムスタンプとして返す|Lua5.1|
+|[`os.tmpname`](os/tmpname.md)|一時ファイル名を返す|Lua5.1|
 
 ### デバッグ機能
 
 |名前|説明|互換性|
 |---|---|---|
-|`debug.debug`|インタラクティブなデバッガを開始する|Lua5.1|
-|`debug.getfenv`|指定した関数やスレッドの環境テーブルを取得する|Lua5.1|
-|`debug.gethook`|現在設定されているフック関数を返す|Lua5.1|
-|`debug.getinfo`|関数やスレッドに関する情報を返す|Lua5.1|
-|`debug.getlocal`|指定されたレベルの関数のローカル変数を取得する|Lua5.1|
-|`debug.getmetatable`|オブジェクトのメタテーブルを取得する|Lua5.1|
-|`debug.getregistry`|Luaのレジストリテーブルを取得する|Lua5.1|
-|`debug.getupvalue`|指定した関数のアップバリューを取得する|Lua5.1|
-|`debug.setfenv`|関数やスレッドに環境テーブルを設定する|Lua5.1|
-|`debug.sethook`|指定したフック関数を設定する|Lua5.1|
-|`debug.setlocal`|指定した関数のローカル変数の値を設定する|Lua5.1|
-|`debug.setmetatable`|オブジェクトにメタテーブルを設定する|Lua5.1|
-|`debug.setupvalue`|指定した関数のアップバリューに値を設定する|Lua5.1|
-|`debug.traceback`|スタックトレースを返す|Lua5.1|
-|`debug.upvalueid`|指定した関数のアップバリューに固有のIDを返す|*Lua5.2*|
-|`debug.upvaluejoin`|2つの関数のアップバリューを結合する|*Lua5.2*|
+|[`debug.debug`](debug/debug.md)|インタラクティブなデバッガを開始する|Lua5.1|
+|[`debug.getfenv`](debug/getfenv.md)|指定した関数やスレッドの環境テーブルを取得する|Lua5.1|
+|[`debug.gethook`](debug/gethook.md)|現在設定されているフック関数を返す|Lua5.1|
+|[`debug.getinfo`](debug/getinfo.md)|関数やスレッドに関する情報を返す|Lua5.1|
+|[`debug.getlocal`](debug/getlocal.md)|指定されたレベルの関数のローカル変数を取得する|Lua5.1|
+|[`debug.getmetatable`](debug/getmetatable.md)|オブジェクトのメタテーブルを取得する|Lua5.1|
+|[`debug.getregistry`](debug/getregistry.md)|Luaのレジストリテーブルを取得する|Lua5.1|
+|[`debug.getupvalue`](debug/getupvalue.md)|指定した関数のアップバリューを取得する|Lua5.1|
+|[`debug.setfenv`](debug/setfenv.md)|関数やスレッドに環境テーブルを設定する|Lua5.1|
+|[`debug.sethook`](debug/sethook.md)|指定したフック関数を設定する|Lua5.1|
+|[`debug.setlocal`](debug/setlocal.md)|指定した関数のローカル変数の値を設定する|Lua5.1|
+|[`debug.setmetatable`](debug/setmetatable.md)|オブジェクトにメタテーブルを設定する|Lua5.1|
+|[`debug.setupvalue`](debug/setupvalue.md)|指定した関数のアップバリューに値を設定する|Lua5.1|
+|[`debug.traceback`](debug/traceback.md)|スタックトレースを返す|Lua5.1|
+|[`debug.upvalueid`](debug/upvalueid.md)|指定した関数のアップバリューに固有のIDを返す|*Lua5.2*|
+|[`debug.upvaluejoin`](debug/upvaluejoin.md)|2つの関数のアップバリューを結合する|*Lua5.2*|
 
-## LuaJITの関数・変数(LuaJIT2.1)
+## LuaJIT独自の関数・変数(LuaJIT2.1)
 
 ### 変更された標準ライブラリ
 
-- `xpcall(f, err [,args...])` は引数を渡します
-- `load*()` はUTF-8ソースコードを処理します
-- `load*()` にモードパラメータを追加します
-- `tostring()`などはNaNと±Infを正規化します
-- `tonumber()`などは組み込みの文字列から数値への変換を使用します
 - `string.dump(f [,mode])` は移植可能なバイトコードを生成します
 - `math.random()` のための強化されたPRNG
 - `io.*` 関数は64ビットファイルオフセットを扱う
@@ -217,7 +210,6 @@ RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJ
 
 - `string.format()`：`%q`が逆変換可能。`%s`は`__tostring`をチェック。`%a`と`%A`が追加された。
 - 文字列マッチングパターン`%g`が追加された。
-- `loadstring()`は`load()`のエイリアス。
 - `io.lines()`と`file:lines()`は`io.read()`のオプションを処理する。
 - `debug.getinfo()`はオプション"u"に対して`nparams`と`isvararg`を返す。
 - `debug.getlocal()`はレベルではなく関数を受け入れる。
@@ -226,7 +218,6 @@ RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJ
 
 #### Lua5.3から
 
-- `assert()`は任意のタイプのエラーオブジェクトを受け入れます。
 - `io.read()`および`file:read()`は、先頭に*があるかないかにかかわらずフォーマットを受け入れます。
 
 
