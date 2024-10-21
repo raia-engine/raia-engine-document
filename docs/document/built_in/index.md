@@ -1,6 +1,6 @@
 # ビルトイン関数
 
-RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJITはLua5.1と互換性があり、必要に応じてLua5.2、5.3から機能を追加しています。また、FFIやJIT関係の機能など、LuaJIT独自の機能を追加しています。
+RaiaEngineはLuaJITをスクリプト言語として採用しています。LuaJITはLua5.1との互換性を保ちつつ、必要に応じてLua5.2、5.3から機能を追加しています。また、FFIやJIT関係の関数など、LuaJIT独自の機能を追加しています。
 
 ## Luaと互換性のある関数・変数(Lua5.1〜5.3)
 
@@ -76,7 +76,7 @@ LuaJITで独自の拡張がある関数には、互換性の欄に(*)の表記�
 |---|---|---|
 |[`string.byte`](string/byte.md)|指定された位置の文字のバイト値を返す|Lua5.1|
 |[`string.char`](string/char.md)|バイト値の列を文字列に変換する|Lua5.1|
-|[`string.dump`](string/dump.md)|関数のバイトコードを返す|Lua5.1|
+|[`string.dump`](string/dump.md)|関数のバイトコードを返す|Lua5.1(*)|
 |[`string.find`](string/find.md)|文字列内でパターン検索を行う|Lua5.1|
 |[`string.format`](string/format.md)|フォーマットに従って文字列を生成する|Lua5.1|
 |[`string.gmatch`](string/gmatch.md)|パターンに一致する部分を順次返すイテレータを生成する|Lua5.1|
@@ -201,8 +201,6 @@ LuaJITで独自の拡張がある関数には、互換性の欄に(*)の表記�
 
 ### 変更された標準ライブラリ
 
-- `string.dump(f [,mode])` は移植可能なバイトコードを生成します
-- `math.random()` のための強化されたPRNG
 - `io.*` 関数は64ビットファイルオフセットを扱う
 - `debug.*` 関数はメタメソッドを識別する
 

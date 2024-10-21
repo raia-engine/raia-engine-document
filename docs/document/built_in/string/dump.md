@@ -1,7 +1,7 @@
 # string.dump
 
 ```lua
-string.dump (function)
+string.dump(f [,mode])
 ```
 
 ## 説明
@@ -18,9 +18,14 @@ print(dumped)
 
 この例では、関数のバイナリ表現が出力されます。
 
+## LuaJIT独自の拡張
+
+LuaJITの`string.dump`は移植可能なバイトコードを生成できます。`mode`に`"b"`（移植性のあるバイトコード）や`"t"`（ソースコードとしてダンプ）を指定できます。
+
 ## 互換性
 
 - Lua 5.1
+- LuaJIT
 
 ## 関連項目
 
