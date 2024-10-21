@@ -32,5 +32,5 @@ coroutine.resume(co)
 
 ## 関連項目
 
-- `coroutine.yield`
-- `coroutine.resume`
+- [`coroutine.yield`](yield.md)
+- [`coroutine.resume`](resume.md)

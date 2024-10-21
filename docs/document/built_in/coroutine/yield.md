@@ -28,9 +28,9 @@ coroutine.resume(co)  -- 3
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `coroutine.resume`
-- `coroutine.wrap`
+- [`coroutine.resume`](resume.md)
+- [`coroutine.wrap`](wrap.md)

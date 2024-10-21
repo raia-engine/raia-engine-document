@@ -25,5 +25,5 @@ coroutine.resume(co)  -- "Hello from coroutine!" を出力
 
 ## 関連項目
 
-- `coroutine.resume`
-- `coroutine.wrap`
+- [`coroutine.resume`](resume.md)
+- [`coroutine.wrap`](wrap.md)

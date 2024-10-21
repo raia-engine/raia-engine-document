@@ -28,9 +28,9 @@ print(f())  -- 3
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `coroutine.create`
-- `coroutine.resume`
+- [`coroutine.create`](create.md)
+- [`coroutine.resume`](resume.md)

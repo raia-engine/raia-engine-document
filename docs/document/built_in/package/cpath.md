@@ -20,9 +20,9 @@ print(package.cpath)
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `require`
-- `package.path`
+- [`require`](require.md)
+- [`package.path`](path.md)

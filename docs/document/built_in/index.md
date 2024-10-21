@@ -99,7 +99,7 @@ LuaJITで独自の拡張がある関数には、互換性の欄に(*)の表記�
 |[`table.remove`](table/remove.md)|テーブルから要素を削除する|Lua5.1|
 |[`table.sort`](table/sort.md)|テーブルの要素をソートする|Lua5.1|
 |[`table.new`](table/new.md)|指定されたサイズで新しいテーブルを作成する|*LuaJIT*|
-|[`table.clear`](table/clear.md)|テーブル内のすべての要素を削除する|*Lua5.2*|
+|[`table.clear`](table/clear.md)|テーブル内のすべての要素を削除する|*LuaJIT*|
 |[`table.move`](table/move.md)|テーブルの一部の要素を他の位置に移動する|*Lua5.3*|
 
 ### 数学関数 (`math.*`)

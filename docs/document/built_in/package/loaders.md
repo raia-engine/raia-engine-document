@@ -22,9 +22,9 @@ end
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `require`
-- `package.preload`
+- [`require`](require.md)
+- [`package.preload`](preload.md)

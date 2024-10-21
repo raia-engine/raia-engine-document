@@ -27,4 +27,4 @@ coroutine.resume(co)
 
 ## 関連項目
 
-- `coroutine.status`
+- [`coroutine.status`](status.md)

@@ -22,9 +22,9 @@ print(_G.print)  -- グローバルなprint関数が継承されます
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `module`
-- `setmetatable`
+- [`module`](module.md)
+- [`setmetatable`](../std/setmetatable.md)

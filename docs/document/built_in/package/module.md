@@ -21,9 +21,9 @@ print(_NAME)  -- mymodule
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `require`
-- `package.loaded`
+- [`require`](require.md)
+- [`package.loaded`](loaded.md)

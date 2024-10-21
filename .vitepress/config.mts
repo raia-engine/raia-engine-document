@@ -78,10 +78,10 @@ export default defineConfig({
       ],
       '/document/built_in': [
         {
-          text: 'ビルトイン関数',
+          text: 'はじめに',
           collapsed: false,
           items: [
-            { text: 'はじめに', link: '/document/built_in/' },
+            { text: 'ビルトイン関数', link: '/document/built_in/' },
           ]
         },
         {

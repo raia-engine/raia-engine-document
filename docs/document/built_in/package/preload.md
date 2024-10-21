@@ -21,9 +21,9 @@ require("mymodule")
 
 ## 互換性
 
-Lua 5.1
+- Lua 5.1
 
 ## 関連項目
 
-- `require`
-- `package.loaders`
+- [`require`](require.md)
+- [`package.loaders`](loaders.md)

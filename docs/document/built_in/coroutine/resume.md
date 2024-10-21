@@ -27,5 +27,5 @@ coroutine.resume(co, 3, 5)  -- 8 を出力
 
 ## 関連項目
 
-- `coroutine.create`
-- `coroutine.yield`
+- [`coroutine.create`](create.md)
+- [`coroutine.yield`](yield.md)

@@ -21,9 +21,9 @@ f()
 
 ## 互換性
 
-Lua 5.2
+- Lua 5.2
 
 ## 関連項目
 
-- `require`
-- `package.cpath`
+- [`require`](require.md)
+- [`package.cpath`](cpath.md)

@@ -32,5 +32,5 @@ print(coroutine.status(co))  -- "dead"
 
 ## 関連項目
 
-- `coroutine.running`
-- `coroutine.create`
+- [`coroutine.running`](running.md)
+- [`coroutine.create`](create.md)
