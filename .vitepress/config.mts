@@ -285,6 +285,65 @@ export default defineConfig({
             { text: 'debug.upvaluejoin', link: '/document/built_in/debug/upvaluejoin.md'},
           ]
         },
+        {
+          text: 'ビット操作',
+          collapsed: true,
+          items: [
+            { text: 'bit.tobit', link: '/document/built_in/bit/tobit.md'},
+            { text: 'bit.tohex', link: '/document/built_in/bit/tohex.md'},
+            { text: 'bit.bnot', link: '/document/built_in/bit/bnot.md'},
+            { text: 'bit.band', link: '/document/built_in/bit/band.md'},
+            { text: 'bit.bor', link: '/document/built_in/bit/bor.md'},
+            { text: 'bit.bxor', link: '/document/built_in/bit/bxor.md'},
+            { text: 'bit.lshift', link: '/document/built_in/bit/lshift.md'},
+            { text: 'bit.rshift', link: '/document/built_in/bit/rshift.md'},
+            { text: 'bit.arshift', link: '/document/built_in/bit/arshift.md'},
+            { text: 'bit.rol', link: '/document/built_in/bit/rol.md'},
+            { text: 'bit.ror', link: '/document/built_in/bit/ror.md'},
+            { text: 'bit.bswap', link: '/document/built_in/bit/bswap.md'},
+          ]
+        },
+        {
+          text: 'FFI',
+          collapsed: true,
+          items: [
+            { text: 'ffi.os', link: '/document/built_in/ffi/os.md'},
+            { text: 'ffi.arch', link: '/document/built_in/ffi/arch.md'},
+            { text: 'ffi.cdef', link: '/document/built_in/ffi/cdef.md'},
+            { text: 'ffi.C', link: '/document/built_in/ffi/c.md'},
+            { text: 'ffi.load', link: '/document/built_in/ffi/load.md'},
+            { text: 'ffi.new', link: '/document/built_in/ffi/new.md'},
+            { text: 'ctype', link: '/document/built_in/ffi/ctype.md'},
+            { text: 'ffi.typeof', link: '/document/built_in/ffi/typeof.md'},
+            { text: 'ffi.cast', link: '/document/built_in/ffi/cast.md'},
+            { text: 'ffi.metatype', link: '/document/built_in/ffi/metatype.md'},
+            { text: 'ffi.gc', link: '/document/built_in/ffi/gc.md'},
+            { text: 'ffi.sizeof', link: '/document/built_in/ffi/sizeof.md'},
+            { text: 'ffi.alignof', link: '/document/built_in/ffi/alignof.md'},
+            { text: 'ffi.offsetof', link: '/document/built_in/ffi/offsetof.md'},
+            { text: 'ffi.errno', link: '/document/built_in/ffi/errno.md'},
+            { text: 'ffi.string', link: '/document/built_in/ffi/string.md'},
+            { text: 'ffi.copy', link: '/document/built_in/ffi/copy.md'},
+            { text: 'ffi.fill', link: '/document/built_in/ffi/fill.md'},
+            { text: 'ffi.abi', link: '/document/built_in/ffi/abi.md'},
+            { text: 'cb:free', link: '/document/built_in/ffi/cb_free.md'},
+            { text: 'cb:set', link: '/document/built_in/ffi/cb_set.md'},
+          ]
+        },
+        {
+          text: 'JIT',
+          collapsed: true,
+          items: [
+            { text: 'jit.version', link: '/document/built_in/jit/version.md'},
+            { text: 'jit.version_num', link: '/document/built_in/jit/version_num.md'},
+            { text: 'jit.os', link: '/document/built_in/jit/os.md'},
+            { text: 'jit.arch', link: '/document/built_in/jit/arch.md'},
+            { text: 'jit.on', link: '/document/built_in/jit/on.md'},
+            { text: 'jit.off', link: '/document/built_in/jit/off.md'},
+            { text: 'jit.flush', link: '/document/built_in/jit/flush.md'},
+            { text: 'jit.status', link: '/document/built_in/jit/status.md'},
+          ]
+        },
       ],
       '/api/': [
         {

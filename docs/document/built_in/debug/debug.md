@@ -18,9 +18,14 @@ print("After debug")
 
 この例では、`debug.debug` によって対話モードに入った後、再開して「After debug」が表示されます。
 
+## LuaJIT独自の拡張
+
+メタメソッドを識別する。
+
 ## 互換性
 
 - Lua 5.1
+- LuaJIT
 
 ## 関連項目
 

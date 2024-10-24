@@ -19,6 +19,11 @@ print(io.type(file))  -- "closed file"
 
 この例では、ファイルハンドルの状態を判定しています。
 
+## LuaJIT独自の拡張
+
+64ビットファイルオフセットを扱う。
+
 ## 互換性
 
 - Lua 5.1
+- LuaJIT

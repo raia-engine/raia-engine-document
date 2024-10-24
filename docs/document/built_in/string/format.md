@@ -17,6 +17,12 @@ print(s)  -- "Hello Lua, you are 30 years old."
 
 この例では、フォーマットされた文字列を生成します。
 
+## LuaJIT独自の拡張
+
+- `%q`が逆変換可能(Lua5.2から)
+- `%s`は`__tostring`をチェック(Lua5.2から)
+- `%a`と`%A`が追加された。(Lua5.2から)
+
 ## 互換性
 
 - Lua 5.1

@@ -17,6 +17,10 @@ print(s)  -- "Lua is awesome"
 
 この例では、`"great"`を`"awesome"`に置き換えています。
 
+## LuaJIT独自の拡張
+
+- 文字列マッチングパターン`%g`が追加された。(Lua5.2から)
+
 ## 互換性
 
 - Lua 5.1
