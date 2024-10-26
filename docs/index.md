@@ -4,25 +4,25 @@ layout: home
 
 hero:
   name: "RaiaEngine"
-  text: "WebAPI on Native"
-  tagline: ネイティブで動作するアプリ/ゲーム/アートを構築するためのゲーム開発向けフレームワーク
+  text: "準備中"
+  tagline: "準備中"
   actions:
     - theme: brand
-      text: はじめに
+      text: "チュートリアル"
       link: /document/
     - theme: alt
-      text: ダウンロード
+      text: "ダウンロード"
       link: /download/
   # image:
   #   src: /raia-logo.png
   #   alt: Raia
 
 features:
-  - title: WebAPI互換
-    details: Raia.jsは、ネイティブ環境でWebAPIを再現するためのフレームワークです。V8・ANGLE・Skiaなどブラウザで使われているのと同じ技術をベースにしており、高い互換性を有しています。
-  - title: ゲーム開発に特化
-    details: Raia.jsは、WebGLやCanvasなど高度なリアルタイム処理を可能にするWebAPIの再現に焦点を当てています。リアルタイム性が重視されるゲームやアートなどアプリの構築に適しています。
-  - title: クロスプラットフォーム
-    details: Raia.jsは、Webアプリを開発するのと同じ感覚でネイティブアプリを構築できるように工夫されています。そのためウェブを含めた様々なプラットフォームで展開を行なえます。
+  - title: 準備中
+    details: 準備中
+  - title: 準備中
+    details: 準備中
+  - title: 準備中
+    details: 準備中
 ---
 
