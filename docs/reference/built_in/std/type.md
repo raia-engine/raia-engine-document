@@ -8,7 +8,7 @@ type (v)
 
 ## 説明
 
-唯一の引数の型を文字列として返します。この関数の可能な結果は `"nil"`（文字列であり、値`nil`ではありません）、`"number"`、`"string"`、`"boolean"`、`"table"`、`"function"`、`"thread"`、および `"userdata"`です。
+引数 `v` のデータ型を示す文字列を返します。返される可能性のある文字列は、`"nil"`（文字列であって値の `nil` ではありません）、`"number"`、`"string"`、`"boolean"`、`"table"`、`"function"`、`"thread"`、`"userdata"` です。
 
 ## サンプルコード
 

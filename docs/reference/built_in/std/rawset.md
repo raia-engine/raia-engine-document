@@ -8,9 +8,9 @@ rawset (table, index, value)
 
 ## 説明
 
-メタメソッドを呼び出さずに`table[index]`の実際の値を`value`に設定します。`table`はテーブルでなければならず、`index`は`nil`以外の任意の値であり、`value`は任意のLuaの値です。
+テーブル `table` のキー `index` に対して、値 `value` をメタメソッドを呼び出さずに直接設定します。`table` はテーブル型でなければならず、`index` は `nil` 以外の任意の値、`value` は任意の Lua の値を指定できます。
 
-この関数は`table`を返します。
+この関数は、設定後のテーブル `table` を返します。
 
 ## サンプルコード
 

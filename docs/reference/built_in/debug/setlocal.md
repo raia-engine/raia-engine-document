@@ -6,7 +6,7 @@ debug.setlocal ([thread,] level, local, value)
 
 ## 説明
 
-指定したスタックレベル`level`の関数のローカル変数`local`に値`value`を設定します。
+指定したスタックレベル`level`にある関数のローカル変数`local`に値`value`を設定します。
 
 ## サンプルコード
 
