@@ -1,5 +1,7 @@
 # math.frexp
 
+浮動小数点数を仮数部と指数部に分解する
+
 ```lua
 math.frexp (x)
 ```

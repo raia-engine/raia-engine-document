@@ -1,5 +1,7 @@
 # math.modf
 
+整数部分と小数部分を分けて返す
+
 ```lua
 math.modf (x)
 ```

@@ -1,5 +1,7 @@
 # math.log
 
+自然対数を返す
+
 ```lua
 math.log (x [, base])
 ```

@@ -1,5 +1,7 @@
 # string.rep
 
+文字列を指定回数繰り返し、任意で区切り文字を追加する
+
 ```lua
 string.rep (s, n [, sep])
 ```

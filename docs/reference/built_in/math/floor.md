@@ -1,5 +1,7 @@
 # math.floor
 
+指定された数値以下の最大の整数を返す
+
 ```lua
 math.floor (x)
 ```

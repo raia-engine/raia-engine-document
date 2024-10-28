@@ -1,5 +1,7 @@
 # bit.arshift
 
+|数値を右にビットシフトする（符号あり）
+
 ```lua
 bit.arshift (x, n)
 ```

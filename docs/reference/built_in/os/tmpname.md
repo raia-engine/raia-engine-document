@@ -1,5 +1,7 @@
 # os.tmpname
 
+一時ファイル名を返す
+
 ```lua
 os.tmpname ()
 ```

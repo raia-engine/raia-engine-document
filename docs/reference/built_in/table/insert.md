@@ -1,5 +1,7 @@
 # table.insert
 
+テーブルに要素を挿入する
+
 ```lua
 table.insert (table, [pos,] value)
 ```

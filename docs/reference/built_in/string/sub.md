@@ -1,5 +1,7 @@
 # string.sub
 
+文字列の部分文字列を返す
+
 ```lua
 string.sub (s, i [, j])
 ```

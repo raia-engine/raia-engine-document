@@ -1,5 +1,7 @@
 # ffi.sizeof
 
+型やオブジェクトのサイズ（バイト数）を返す
+
 ```lua
 ffi.sizeof(ct [, nelem])
 ```

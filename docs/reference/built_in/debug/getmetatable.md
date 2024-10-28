@@ -1,5 +1,7 @@
 # debug.getmetatable
 
+オブジェクトのメタテーブルを取得する
+
 ```lua
 debug.getmetatable (object)
 ```

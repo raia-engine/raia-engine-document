@@ -1,5 +1,7 @@
 # string.gmatch
 
+パターンに一致する部分を順に返すイテレータを生成する
+
 ```lua
 string.gmatch (s, pattern)
 ```

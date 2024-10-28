@@ -1,5 +1,7 @@
 # ffi.alignof
 
+型のアラインメントを返す
+
 ```lua
 ffi.alignof(ct)
 ```

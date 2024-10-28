@@ -1,5 +1,7 @@
 # bit.tohex
 
+数値を16進数の文字列に変換する
+
 ```lua
 bit.tohex (x [, n])
 ```

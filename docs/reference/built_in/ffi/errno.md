@@ -1,5 +1,7 @@
 # ffi.errno
 
+Cライブラリの`errno`の値を取得または設定する
+
 ```lua
 ffi.errno([newerr])
 ```

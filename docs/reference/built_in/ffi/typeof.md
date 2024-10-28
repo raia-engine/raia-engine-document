@@ -1,5 +1,7 @@
 # ffi.typeof
 
+型を定義し、キャッシュする
+
 ```lua
 ffi.typeof(ct)
 ```

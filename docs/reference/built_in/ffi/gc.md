@@ -1,5 +1,7 @@
 # ffi.gc
 
+ガベージコレクションでメモリを解放するための関数を登録する
+
 ```lua
 ffi.gc(cdata, finalizer)
 ```

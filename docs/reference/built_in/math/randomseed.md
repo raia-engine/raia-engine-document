@@ -1,5 +1,7 @@
 # math.randomseed
 
+乱数生成器の種を設定する
+
 ```lua
 math.randomseed (x)
 ```

@@ -1,5 +1,7 @@
 # debug.getinfo
 
+関数やスレッドに関する情報を返す
+
 ```lua
 debug.getinfo ([thread,] function [, what])
 ```

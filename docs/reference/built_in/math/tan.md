@@ -1,5 +1,7 @@
 # math.tan
 
+タンジェントを返す
+
 ```lua
 math.tan (x)
 ```

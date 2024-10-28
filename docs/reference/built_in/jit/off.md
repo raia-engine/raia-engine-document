@@ -1,5 +1,7 @@
 # jit.off
 
+JITコンパイラを無効にする
+
 ```lua
 jit.off([func|true], [true|false])
 ```

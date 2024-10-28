@@ -1,5 +1,7 @@
 # bit.band
 
+数値同士のビット単位のAND演算を行う
+
 ```lua
 bit.band (x1 [, x2...])
 ```

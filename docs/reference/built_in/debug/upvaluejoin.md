@@ -1,5 +1,7 @@
 # debug.upvaluejoin
 
+2つの関数のアップバリューを結合する
+
 ```lua
 debug.upvaluejoin (f1, n1, f2, n2)
 ```

@@ -1,5 +1,7 @@
 # table.new
 
+指定されたサイズで新しいテーブルを作成する
+
 ```lua
 table.new (narr, nrec)
 ```

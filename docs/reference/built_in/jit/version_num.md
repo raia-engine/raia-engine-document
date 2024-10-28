@@ -1,5 +1,7 @@
 # jit.version_num
 
+LuaJITのバージョン番号を整数で表したもの
+
 ```lua
 jit.version_num
 ```

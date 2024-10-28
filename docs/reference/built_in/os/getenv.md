@@ -1,5 +1,7 @@
 # os.getenv
 
+環境変数の値を取得する
+
 ```lua
 os.getenv (varname)
 ```

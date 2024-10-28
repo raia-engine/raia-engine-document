@@ -1,5 +1,7 @@
 # bit.bxor
 
+数値同士のビット単位のXOR演算を行う
+
 ```lua
 bit.bxor (x1 [, x2...])
 ```

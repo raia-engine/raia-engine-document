@@ -1,5 +1,7 @@
 # string.char
 
+バイト値の列を文字列に変換する
+
 ```lua
 string.char (···)
 ```

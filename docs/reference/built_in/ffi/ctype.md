@@ -1,5 +1,7 @@
 # ctype
 
+`ffi.new`や`ffi.cast`などで使用されるC型を定義する
+
 ```lua
 ctype([nelem], [init...])
 ```

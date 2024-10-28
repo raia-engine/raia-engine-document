@@ -1,5 +1,7 @@
 # os.time
 
+現在の時刻をタイムスタンプとして返す
+
 ```lua
 os.time ([table])
 ```

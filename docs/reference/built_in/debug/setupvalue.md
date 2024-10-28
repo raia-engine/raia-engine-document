@@ -1,5 +1,7 @@
 # debug.setupvalue
 
+指定した関数のアップバリューに値を設定する
+
 ```lua
 debug.setupvalue (func, up, value)
 ```

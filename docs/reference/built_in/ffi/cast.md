@@ -1,5 +1,7 @@
 # ffi.cast
 
+型にCデータをキャストする
+
 ```lua
 ffi.cast(ct, init)
 ```

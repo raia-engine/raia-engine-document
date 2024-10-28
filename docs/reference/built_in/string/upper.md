@@ -1,5 +1,7 @@
 # string.upper
 
+文字列をすべて大文字に変換する
+
 ```lua
 string.upper (s)
 ```

@@ -1,5 +1,7 @@
 # math.cos
 
+コサインを返す
+
 ```lua
 math.cos (x)
 ```

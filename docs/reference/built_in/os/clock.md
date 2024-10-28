@@ -1,5 +1,7 @@
 # os.clock
 
+プログラムの実行時間を返す
+
 ```lua
 os.clock ()
 ```

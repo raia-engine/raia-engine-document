@@ -1,5 +1,7 @@
 # table.maxn
 
+テーブル内の数値キーの最大値を返す
+
 ```lua
 table.maxn (table)
 ```

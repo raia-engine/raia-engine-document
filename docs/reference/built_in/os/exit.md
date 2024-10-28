@@ -1,5 +1,7 @@
 # os.exit
 
+プログラムを終了する
+
 ```lua
 os.exit ([code [, close]])
 ```

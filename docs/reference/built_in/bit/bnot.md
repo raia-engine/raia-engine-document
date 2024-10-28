@@ -1,5 +1,7 @@
 # bit.bnot
 
+数値のビット単位のNOT演算を行う
+
 ```lua
 bit.bnot (x)
 ```

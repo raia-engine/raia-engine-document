@@ -1,5 +1,7 @@
 # math.tanh
 
+ハイパーボリックタンジェントを返す
+
 ```lua
 math.tanh (x)
 ```

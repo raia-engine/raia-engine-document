@@ -1,5 +1,7 @@
 # jit.status
 
+JITコンパイラの現在のステータスを返す
+
 ```lua
 status, ... = jit.status()
 ```

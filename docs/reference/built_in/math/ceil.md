@@ -1,5 +1,7 @@
 # math.ceil
 
+指定された数値以上の最小の整数を返す
+
 ```lua
 math.ceil (x)
 ```

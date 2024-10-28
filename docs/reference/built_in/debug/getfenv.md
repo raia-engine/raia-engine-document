@@ -1,5 +1,7 @@
 # debug.getfenv
 
+指定した関数やスレッドの環境テーブルを取得する
+
 ```lua
 debug.getfenv (o)
 ```

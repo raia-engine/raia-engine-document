@@ -1,5 +1,7 @@
 # table.concat
 
+テーブルの要素を連結し、文字列を返す
+
 ```lua
 table.concat (table [, sep [, i [, j]]])
 ```

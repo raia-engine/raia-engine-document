@@ -1,5 +1,7 @@
 # debug.upvalueid
 
+指定した関数のアップバリューに固有のIDを返す
+
 ```lua
 debug.upvalueid (f, n)
 ```

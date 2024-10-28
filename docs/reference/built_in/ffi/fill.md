@@ -1,5 +1,7 @@
 # ffi.fill
 
+メモリを指定された値で埋める
+
 ```lua
 ffi.fill(dst, len [, c])
 ```

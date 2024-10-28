@@ -1,5 +1,7 @@
 # string.find
 
+文字列内でパターン検索を行う
+
 ```lua
 string.find (s, pattern [, init [, plain]])
 ```

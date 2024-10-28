@@ -1,5 +1,7 @@
 # debug.getupvalue
 
+指定した関数のアップバリューを取得する
+
 ```lua
 debug.getupvalue (func, up)
 ```

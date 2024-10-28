@@ -1,5 +1,7 @@
 # string.match
 
+文字列内でパターンに一致する部分を返す
+
 ```lua
 string.match (s, pattern [, init])
 ```

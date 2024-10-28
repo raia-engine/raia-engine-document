@@ -1,5 +1,7 @@
 # math.random
 
+ランダムな数値を返す
+
 ```lua
 math.random ([m [, n]])
 ```

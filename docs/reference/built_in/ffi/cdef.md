@@ -1,5 +1,7 @@
 # ffi.cdef
 
+C言語の宣言をLuaJITに定義する
+
 ```lua
 ffi.cdef(def)
 ```

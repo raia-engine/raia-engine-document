@@ -1,5 +1,7 @@
 # os.execute
 
+システムコマンドを実行する
+
 ```lua
 os.execute ([command])
 ```

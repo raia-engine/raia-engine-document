@@ -1,5 +1,7 @@
 # debug.sethook
 
+指定したフック関数を設定する
+
 ```lua
 debug.sethook ([thread,] hook, mask [, count])
 ```

@@ -1,5 +1,7 @@
 # ffi.offsetof
 
+C構造体のフィールドのオフセットを返す
+
 ```lua
 ffi.offsetof(ct, field)
 ```

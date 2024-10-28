@@ -1,5 +1,7 @@
 # string.byte
 
+指定された位置の文字のバイト値を返す
+
 ```lua
 string.byte (s [, i [, j]])
 ```

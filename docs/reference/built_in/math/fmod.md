@@ -1,5 +1,7 @@
 # math.fmod
 
+商の小数部を返す（余りを返す）
+
 ```lua
 math.fmod (x, y)
 ```

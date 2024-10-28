@@ -1,5 +1,7 @@
 # string.dump
 
+関数のバイトコードを返す
+
 ```lua
 string.dump(f [,mode])
 ```

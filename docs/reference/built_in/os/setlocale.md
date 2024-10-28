@@ -1,5 +1,7 @@
 # os.setlocale
 
+ロケール情報を設定する
+
 ```lua
 os.setlocale (locale [, category])
 ```

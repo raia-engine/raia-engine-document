@@ -1,5 +1,7 @@
 # os.difftime
 
+2つの時刻の差を秒で返す
+
 ```lua
 os.difftime (t2, t1)
 ```

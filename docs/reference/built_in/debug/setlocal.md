@@ -1,5 +1,7 @@
 # debug.setlocal
 
+指定した関数のローカル変数の値を設定する
+
 ```lua
 debug.setlocal ([thread,] level, local, value)
 ```

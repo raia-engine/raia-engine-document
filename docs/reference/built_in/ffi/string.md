@@ -1,5 +1,7 @@
 # ffi.string
 
+Cの文字列（`char*`）をLuaの文字列に変換する
+
 ```lua
 ffi.string(ptr [, len])
 ```

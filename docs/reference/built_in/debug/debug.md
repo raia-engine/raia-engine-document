@@ -1,5 +1,7 @@
 # debug.debug
 
+簡易デバッガを開始する
+
 ```lua
 debug.debug ()
 ```

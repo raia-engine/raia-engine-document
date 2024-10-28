@@ -1,5 +1,7 @@
 # jit.flush
 
+JITコンパイル済みコードをクリアし、再コンパイルさせる
+
 ```lua
 jit.flush([func|true], [true|false])
 ```

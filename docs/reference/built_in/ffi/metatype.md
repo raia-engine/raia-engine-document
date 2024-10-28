@@ -1,5 +1,7 @@
 # ffi.metatype
 
+Cデータ型にメタテーブルを設定する
+
 ```lua
 ffi.metatype(ct, metatable)
 ```

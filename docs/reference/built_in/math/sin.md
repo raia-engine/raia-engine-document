@@ -1,5 +1,7 @@
 # math.sin
 
+サインを返す
+
 ```lua
 math.sin (x)
 ```

@@ -1,5 +1,7 @@
 # ffi.abi
 
+実行環境に関するABI情報を取得する
+
 ```lua
 ffi.abi(param)
 ```

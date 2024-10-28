@@ -1,5 +1,7 @@
 # string.lower
 
+文字列をすべて小文字に変換する
+
 ```lua
 string.lower (s)
 ```

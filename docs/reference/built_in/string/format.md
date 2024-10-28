@@ -1,5 +1,7 @@
 # string.format
 
+フォーマットに従って文字列を生成する
+
 ```lua
 string.format (formatstring, ···)
 ```

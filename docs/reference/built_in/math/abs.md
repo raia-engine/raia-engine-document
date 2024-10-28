@@ -1,5 +1,7 @@
 # math.abs
 
+絶対値を返す
+
 ```lua
 math.abs (x)
 ```

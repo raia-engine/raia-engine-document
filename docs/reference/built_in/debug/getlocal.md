@@ -1,5 +1,7 @@
 # debug.getlocal
 
+指定されたスタックレベルにある関数のローカル変数を取得する
+
 ```lua
 debug.getlocal ([thread,] level, local)
 ```

@@ -1,5 +1,7 @@
 # debug.traceback
 
+スタックトレースを返す
+
 ```lua
 debug.traceback ([thread,] [message [, level]])
 ```

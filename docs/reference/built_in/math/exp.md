@@ -1,5 +1,7 @@
 # math.exp
 
+指定された数のe乗を返す
+
 ```lua
 math.exp (x)
 ```

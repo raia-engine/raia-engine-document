@@ -1,5 +1,7 @@
 # math.huge
 
+無限大を表す定数
+
 ```lua
 math.huge
 ```

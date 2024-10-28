@@ -1,5 +1,7 @@
 # ffi.new
 
+指定された型の新しいCデータを作成する
+
 ```lua
 ffi.new(ct [, nelem] [, init...])
 ```

@@ -1,5 +1,7 @@
 # os.remove
 
+ファイルを削除する
+
 ```lua
 os.remove (filename)
 ```

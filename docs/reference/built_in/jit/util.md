@@ -1,5 +1,7 @@
 # jit.util.*
 
+JITコンパイラの内部情報やデバッグツールにアクセスするための関数群
+
 ```lua
 jit.util.funcinfo(func [,pc])
 jit.util.funcbc(func, pc)

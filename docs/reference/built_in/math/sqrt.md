@@ -1,5 +1,7 @@
 # math.sqrt
 
+平方根を返す
+
 ```lua
 math.sqrt (x)
 ```

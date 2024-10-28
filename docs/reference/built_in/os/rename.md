@@ -1,5 +1,7 @@
 # os.rename
 
+ファイルの名前を変更する
+
 ```lua
 os.rename (oldname, newname)
 ```

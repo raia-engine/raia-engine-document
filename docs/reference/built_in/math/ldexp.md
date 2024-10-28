@@ -1,5 +1,7 @@
 # math.ldexp
 
+仮数部と指数部から浮動小数点数を構成する
+
 ```lua
 math.ldexp (m, e)
 ```

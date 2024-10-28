@@ -1,5 +1,7 @@
 # debug.getregistry
 
+Luaのレジストリテーブルを取得する
+
 ```lua
 debug.getregistry ()
 ```

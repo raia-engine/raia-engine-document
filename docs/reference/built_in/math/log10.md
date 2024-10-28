@@ -1,5 +1,7 @@
 # math.log10
 
+常用対数を返す
+
 ```lua
 math.log10 (x)
 ```

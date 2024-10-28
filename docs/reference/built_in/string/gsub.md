@@ -1,5 +1,7 @@
 # string.gsub
 
+文字列内でパターンに一致する部分を置換する
+
 ```lua
 string.gsub (s, pattern, repl [, n])
 ```

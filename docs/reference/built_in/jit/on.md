@@ -1,5 +1,7 @@
 # jit.on
 
+JITコンパイラを有効にする
+
 ```lua
 jit.on([func|true], [true|false])
 ```

@@ -1,5 +1,7 @@
 # debug.gethook
 
+現在設定されているフック関数を返す
+
 ```lua
 debug.gethook ([thread])
 ```

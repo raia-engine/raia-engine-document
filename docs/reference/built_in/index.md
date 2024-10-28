@@ -102,7 +102,7 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |---|---|---|
 |[`table.concat`](table/concat.md)|テーブルの要素を連結し、文字列を返す|Lua5.1|
 |[`table.insert`](table/insert.md)|テーブルに要素を挿入する|Lua5.1|
-|[`table.maxn`](table/maxn.md)|テーブル内の数値キーの最大値を返す（非推奨）。|Lua5.1|
+|[`table.maxn`](table/maxn.md)|テーブル内の数値キーの最大値を返す（非推奨）|Lua5.1|
 |[`table.remove`](table/remove.md)|テーブルから要素を削除する|Lua5.1|
 |[`table.sort`](table/sort.md)|テーブルの要素をソートする|Lua5.1|
 |[`table.new`](table/new.md)|指定されたサイズで新しいテーブルを作成する|*LuaJIT*|
@@ -116,20 +116,20 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |名前|説明|互換性|
 |---|---|---|
 |[`math.huge`](math/huge.md)|無限大を表す定数|Lua5.1|
-|[`math.pi`](math/pi.md)|π（円周率）を表す定数。|Lua5.1|
+|[`math.pi`](math/pi.md)|π（円周率）を表す定数|Lua5.1|
 
 ### 関数/メソッド
 
 |名前|説明|互換性|
 |---|---|---|
 |[`math.abs`](math/abs.md)|絶対値を返す|Lua5.1|
-|[`math.acos`](math/acos.md)|逆余弦を返す|Lua5.1|
-|[`math.asin`](math/asin.md)|逆正弦を返す|Lua5.1|
-|[`math.atan`](math/atan.md)|逆正接を返す|Lua5.1|
+|[`math.acos`](math/acos.md)|アークコサインを返す|Lua5.1|
+|[`math.asin`](math/asin.md)|アークサインを返す|Lua5.1|
+|[`math.atan`](math/atan.md)|アークタンジェントを返す|Lua5.1|
 |[`math.atan2`](math/atan2.md)|2つの引数の逆正接を返す|Lua5.1|
 |[`math.ceil`](math/ceil.md)|指定された数値以上の最小の整数を返す|Lua5.1|
-|[`math.cos`](math/cos.md)|余弦を返す|Lua5.1|
-|[`math.cosh`](math/cosh.md)|双曲線余弦を返す|Lua5.1|
+|[`math.cos`](math/cos.md)|コサインを返す|Lua5.1|
+|[`math.cosh`](math/cosh.md)|ハイパーボリックコサインを返す|Lua5.1|
 |[`math.deg`](math/deg.md)|ラジアンを度に変換する|Lua5.1|
 |[`math.exp`](math/exp.md)|指定された数のe乗を返す|Lua5.1|
 |[`math.floor`](math/floor.md)|指定された数値以下の最大の整数を返す|Lua5.1|
@@ -137,7 +137,7 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |[`math.frexp`](math/frexp.md)|浮動小数点数を仮数部と指数部に分解する|Lua5.1|
 |[`math.ldexp`](math/ldexp.md)|仮数部と指数部から浮動小数点数を構成する|Lua5.1|
 |[`math.log`](math/log.md)|自然対数を返す|*Lua5.2*|
-|[`math.log10`](math/log10.md)|底10の対数を返す|Lua5.1|
+|[`math.log10`](math/log10.md)|常用対数を返す|Lua5.1|
 |[`math.max`](math/max.md)|引数の中で最大の数を返す|Lua5.1|
 |[`math.min`](math/min.md)|引数の中で最小の数を返す|Lua5.1|
 |[`math.modf`](math/modf.md)|整数部分と小数部分を分けて返す|Lua5.1|
@@ -145,10 +145,10 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |[`math.rad`](math/rad.md)|度をラジアンに変換する|Lua5.1|
 |[`math.random`](math/random.md)|ランダムな数値を返す|Lua5.1|
 |[`math.randomseed`](math/randomseed.md)|乱数生成器の種を設定する|Lua5.1|
-|[`math.sin`](math/sin.md)|正弦を返す|Lua5.1|
-|[`math.sinh`](math/sinh.md)|双曲線正弦を返す|Lua5.1|
+|[`math.sin`](math/sin.md)|サインを返す|Lua5.1|
+|[`math.sinh`](math/sinh.md)|ハイパーボリックサインを返す|Lua5.1|
 |[`math.sqrt`](math/sqrt.md)|平方根を返す|Lua5.1|
-|[`math.tan`](math/tan.md)|正接を返す|Lua5.1|
+|[`math.tan`](math/tan.md)|タンジェントを返す|Lua5.1|
 |[`math.tanh`](math/tanh.md)|双曲線正接を返す|Lua5.1|
 
 ## 入出力機能 (`io.*` | `file:*`)
@@ -194,11 +194,11 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 
 |名前|説明|互換性|
 |---|---|---|
-|[`debug.debug`](debug/debug.md)|インタラクティブなデバッガを開始する|Lua5.1|
+|[`debug.debug`](debug/debug.md)|簡易デバッガを開始する|Lua5.1|
 |[`debug.getfenv`](debug/getfenv.md)|指定した関数やスレッドの環境テーブルを取得する|Lua5.1|
 |[`debug.gethook`](debug/gethook.md)|現在設定されているフック関数を返す|Lua5.1|
 |[`debug.getinfo`](debug/getinfo.md)|関数やスレッドに関する情報を返す|Lua5.1|
-|[`debug.getlocal`](debug/getlocal.md)|指定されたレベルの関数のローカル変数を取得する|Lua5.1|
+|[`debug.getlocal`](debug/getlocal.md)|指定されたスタックレベルにある関数のローカル変数を取得する|Lua5.1|
 |[`debug.getmetatable`](debug/getmetatable.md)|オブジェクトのメタテーブルを取得する|Lua5.1|
 |[`debug.getregistry`](debug/getregistry.md)|Luaのレジストリテーブルを取得する|Lua5.1|
 |[`debug.getupvalue`](debug/getupvalue.md)|指定した関数のアップバリューを取得する|Lua5.1|
@@ -234,8 +234,8 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 
 |名前|説明|互換性|
 |---|---|---|
-|[`ffi.os`](ffi/os.md)|実行中のオペレーティングシステムの名前を返す|LuaJIT|
-|[`ffi.arch`](ffi/arch.md)|実行中のプロセッサアーキテクチャを返す|LuaJIT|
+|[`ffi.os`](ffi/os.md)|現在のターゲットOSの名前を示す文字列|LuaJIT|
+|[`ffi.arch`](ffi/arch.md)|現在のターゲットアーキテクチャの名前を示す文字列|LuaJIT|
 
 ### 関数/メソッド
 
@@ -246,7 +246,7 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |[`ffi.load`](ffi/load.md)|共有ライブラリをロードし、関数や変数にアクセスする|LuaJIT|
 |[`ffi.new`](ffi/new.md)|指定された型の新しいCデータを作成する|LuaJIT|
 |[`ctype`](ffi/ctype.md)|`ffi.new`や`ffi.cast`などで使用されるC型を定義する|LuaJIT|
-|[`ffi.typeof`](ffi/typeof.md)|型を定義し、キャッシュするための関数|LuaJIT|
+|[`ffi.typeof`](ffi/typeof.md)|型を定義し、キャッシュする|LuaJIT|
 |[`ffi.cast`](ffi/cast.md)|型にCデータをキャストする|LuaJIT|
 |[`ffi.metatype`](ffi/metatype.md)|Cデータ型にメタテーブルを設定する|LuaJIT|
 |[`ffi.gc`](ffi/gc.md)|ガベージコレクションでメモリを解放するための関数を登録する|LuaJIT|
@@ -267,10 +267,10 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 
 |名前|説明|互換性|
 |---|---|---|
-|[`jit.version`](jit/version.md)|JITコンパイラのバージョン文字列|LuaJIT|
-|[`jit.version_num`](jit/version_num.md)|JITコンパイラのバージョン番号|LuaJIT|
-|[`jit.os`](jit/os.md)|オペレーティングシステム|LuaJIT|
-|[`jit.arch`](jit/arch.md)|プロセッサアーキテクチャ|LuaJIT|
+|[`jit.version`](jit/version.md)|LuaJITのバージョンを示す文字列|LuaJIT|
+|[`jit.version_num`](jit/version_num.md)|LuaJITのバージョン番号を整数で表したもの|LuaJIT|
+|[`jit.os`](jit/os.md)|現在のターゲットOSの名前を示す文字列|LuaJIT|
+|[`jit.arch`](jit/arch.md)|現在のターゲットアーキテクチャの名前を示す文字列|LuaJIT|
 
 ### 関数/メソッド
 

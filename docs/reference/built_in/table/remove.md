@@ -1,5 +1,7 @@
 # table.remove
 
+テーブルから要素を削除する
+
 ```lua
 table.remove (table [, pos])
 ```

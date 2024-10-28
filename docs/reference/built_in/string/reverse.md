@@ -1,5 +1,7 @@
 # string.reverse
 
+文字列を逆順にする
+
 ```lua
 string.reverse (s)
 ```

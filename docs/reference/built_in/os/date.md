@@ -1,5 +1,7 @@
 # os.date
 
+現在の日時をフォーマットして返す
+
 ```lua
 os.date ([format [, time]])
 ```

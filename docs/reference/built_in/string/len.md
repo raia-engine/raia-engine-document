@@ -1,5 +1,7 @@
 # string.len
 
+文字列の長さを返す
+
 ```lua
 string.len (s)
 ```

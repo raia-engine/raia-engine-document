@@ -1,5 +1,7 @@
 # math.rad
 
+度をラジアンに変換する
+
 ```lua
 math.rad (x)
 ```

@@ -1,5 +1,7 @@
 # cb:set
 
+コールバック関数を設定する
+
 ```lua
 cb:set(func)
 ```

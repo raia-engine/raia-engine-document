@@ -1,5 +1,7 @@
 # bit.tobit
 
+数値を32ビット整数に変換する
+
 ```lua
 bit.tobit (x)
 ```

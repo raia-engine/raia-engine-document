@@ -1,5 +1,7 @@
 # math.deg
 
+ラジアンを度に変換する
+
 ```lua
 math.deg (x)
 ```

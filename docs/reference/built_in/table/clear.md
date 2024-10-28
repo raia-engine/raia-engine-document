@@ -1,5 +1,7 @@
 # table.clear
 
+テーブル内のすべての要素を削除する
+
 ```lua
 table.clear (table)
 ```

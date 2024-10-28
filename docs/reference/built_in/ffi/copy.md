@@ -1,5 +1,7 @@
 # ffi.copy
 
+メモリ間でデータをコピーする
+
 ```lua
 ffi.copy(dst, src, len)
 ffi.copy(dst, str)

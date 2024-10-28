@@ -1,5 +1,7 @@
 # debug.setfenv
 
+関数やスレッドに環境テーブルを設定する
+
 ```lua
 debug.setfenv (object, table)
 ```

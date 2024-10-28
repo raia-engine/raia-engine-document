@@ -1,5 +1,7 @@
 # ffi.load
 
+共有ライブラリをロードし、関数や変数にアクセスする
+
 ```lua
 ffi.load(name [, global])
 ```

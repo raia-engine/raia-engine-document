@@ -1,5 +1,7 @@
 # jit.version
 
+LuaJITのバージョンを示す文字列
+
 ```lua
 jit.version
 ```

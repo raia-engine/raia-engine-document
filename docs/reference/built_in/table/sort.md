@@ -1,5 +1,7 @@
 # table.sort
 
+テーブルの要素をソートする
+
 ```lua
 table.sort (table [, comp])
 ```

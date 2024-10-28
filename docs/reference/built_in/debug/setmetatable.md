@@ -1,5 +1,7 @@
 # debug.setmetatable
 
+オブジェクトにメタテーブルを設定する
+
 ```lua
 debug.setmetatable (object, table)
 ```

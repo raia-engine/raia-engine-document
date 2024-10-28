@@ -1,5 +1,7 @@
 # table.move
 
+テーブルの一部の要素を他の位置に移動する
+
 ```lua
 table.move (a1, f, e, t [,a2])
 ```
