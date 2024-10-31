@@ -24,16 +24,16 @@ export default defineConfig({
       { text: 'チュートリアル', link: '/tutorial/'},
       { text: 'ドキュメント', link: '/document'},
       { text: 'リファレンス', items: [
-        {text: 'ビルトイン関数', link: '/reference/built_in/'},
+        {text: 'LuaJITライブラリ', link: '/reference/built_in/'},
         
       ]},
       { text: 'リソース', items: [
+        {text: 'GLFW', link: '/resource/glfw/'},
+        {text: 'ImGui', link: '/resource/imgui/'},
         {text: 'Lua', link: '/resource/lua/'},
         {text: 'LuaJIT', link: '/resource/luajit/'},
-        {text: 'GLFW', link: '/resource/glfw/'},
-        {text: 'GLES', link: '/resource/gles/'},
         {text: 'Skia', link: '/resource/skia/'},
-        {text: 'ImGui', link: '/resource/imgui/'},
+        {text: 'Terra', link: '/resource/terra/'},
       ]},
       { text: 'ダウンロード', link: '/download/'},
     ],
@@ -81,7 +81,7 @@ export default defineConfig({
           text: 'はじめに',
           collapsed: false,
           items: [
-            { text: 'ビルトイン関数', link: '/reference/built_in/' },
+            { text: 'LuaJITライブラリ', link: '/reference/built_in/' },
           ]
         },
         {
@@ -507,6 +507,20 @@ export default defineConfig({
             {text: 'skia/gn/skia.gni', link: '/resource/skia/skia_gn_skia_gni.md'},
             {text: 'skia/gn/skia/BUILD.gn', link: '/resource/skia/skia_gn_skia_build_gn.md'},
             {text: 'skia/gn/toolchain/BUILD.gn', link: '/resource/skia/skia_gn_toolchain_build_gn.md'},
+          ]
+        },
+      ],
+      '/resource/terra/': [
+        {
+          text: 'Terra',
+          collapsed: false,
+          items: [
+            {text: 'トップ', link: '/resource/terra/'},
+            {text: 'はじめに', link: '/resource/terra/getting-started.md'},
+            {text: 'API Reference', link: '/resource/terra/api.md'},
+            {text: 'Terra for C++', link: '/resource/terra/terraforcpp.md'},
+            {text: '出版物', link: '/resource/terra/publications.md'},
+            {text: 'コミュニティ', link: '/resource/terra/community.md'},
           ]
         },
       ],
