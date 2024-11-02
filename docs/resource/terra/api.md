@@ -1,119 +1,119 @@
-# Terra API Reference
+# Terra API リファレンス
 
 [[TOC]]
 
-## List
+## リスト
 
-API calls in `terralib` that return arrays will always return a List object, which is a more complete List data type for use inside Lua code.
+`terralib`内のAPIで配列を返すものは、常にListオブジェクトを返します。これは、Luaコード内で使用するためのより完全なリストデータ型です。
 
-The List type is a plain Lua table with additional methods that come from:
+List型は通常のLuaテーブルで、以下の追加メソッドを持っています：
 
-1. all the methods in Lua's 'table' global
-2. a list of higher-order functions based on [SML's (fairly minimal) list type](http://sml-family.org/Basis/list.html).
+1. Luaの`table`グローバルの全メソッド
+2. [SMLのリスト型](http://sml-family.org/Basis/list.html)に基づいた高階関数のリスト
 
-These make it easier to meta-program Terra objects.
+これにより、Terraオブジェクトをメタプログラムで操作しやすくなります。
 
 ```lua
 local List = require("terralist")
 
-List() -- empty list
-List { 1,2,3 } -- 3 element list
+List() -- 空のリスト
+List { 1,2,3 } -- 要素3つのリスト
 ```
 
-Creates a new list, possibly initialized by a table.
+テーブルで初期化された新しいリストを作成します。
 
-List also has the following functions:
+Listには次の関数もあります：
 
 ```lua
--- Lua's string.sub, but for lists
+-- Luaのstring.subに相当、リストの部分取得
 list:sub(i,j)
 
--- reverse list
+-- リストを反転
 list:rev() : List[A]
 
--- app fn to every element
+-- すべての要素に関数fnを適用
 list:app(fn : A -> B) : {}
 
--- apply map to every element resulting in new list
+-- すべての要素にmapを適用し、新しいリストを返す
 list:map(fn : A -> B) : List[B]
 
- -- new list with elements where fn(e) is true
+-- 関数fn(e)が真である要素のみの新しいリスト
 list:filter(fn : A -> boolean) : List[A]
 
--- apply map to every element, resulting in lists which are all concatenated together
+-- すべての要素にmapを適用し、結果のリストを連結
 list:flatmap(fn : A -> List[B]) : List[B]
 
--- find the first element in list satisfying condition
+-- 条件を満たす最初の要素を見つける
 list:find(fn : A -> boolean) : A?
 
--- apply k,v = fn(e) to each element and group the values 'v' into bin of the same 'k'
+-- k,v = fn(e)を各要素に適用し、同じkの値vをグループ化
 list:partition(fn : A -> {K,V}) : Map[ K,List[V] ]
 
--- recurrence fn(a[2],fn(a[1],init)) ...
+-- 再帰的に初期値initとリストの各要素にfnを適用
 list:fold(init : B,fn : {B,A} -> B) -> B
 
--- recurrence fn(a[3],fn(a[2],a[1]))
+-- リストの各要素にfnを再帰的に適用
 list:reduce(fn : {B,A} -> B) -> B
 
--- is any fn(e) true in list
+-- リストのいずれかの要素が条件を満たすか
 list:exists(fn : A -> boolean) : boolean
 
--- are all fn(e) true in list
+-- リストのすべての要素が条件を満たすか
 list:all(fn : A -> boolean) : boolean
 ```
 
-Every function that takes a higher-order function also has an `i` variant that also provides the list index to the function:
+高階関数を取るすべての関数には、関数にリストのインデックスも提供する`i`バリアントもあります：
 
 ```lua
 list:mapi(fn : {int,A} -> B) -> List[B]
 ```
 
-List functions like `map` are higher-order functions that take a function as an argument.
-For each function that is an argument of a high-order List function can be either:
+リスト関数の`map`のようなものは、関数を引数として取る高階関数です。
+高階List関数の引数となる関数には以下のいずれかを指定できます：
 
-1. a real Lua function
-2. a string of an operator "+" (see op table in `src/terralist.lua`)
-3. a string that specifies a field or method to call on the object
+1. Luaの通常の関数
+2. 演算子の文字列（例：`"+"`。`src/terralist.lua`のopテーブルを参照）
+3. オブジェクト上で呼び出すフィールドまたはメソッドを指定する文字列
 
-Example:
+例：
 
 ```lua
 local mylist = List { a,b,c }
-mylist:map("foo") -- selects the fields:  a.foo, b.foo, c.foo, etc.
-                  -- if a.foo is a function it will be treated as a method a:foo()
+mylist:map("foo") -- 各要素に対してフィールドを選択：a.foo, b.foo, c.foo, など
+                  -- a.fooが関数の場合、メソッドa:foo()として扱われる
 ```
 
-Extra arguments to the higher-order function are passed through to these function. Rationale: Lua inline function syntax is verbose, this functionality avoids inline functions in many cases.
+高階関数への追加引数は、これらの関数に渡されます。これは、Luaのインライン関数の記述が冗長であるため、インライン関数を避けるためのものです。
 
 ```lua
 local List = require("terralist")
 List:isclassof(exp)
 ```
 
-True if `exp` is a list.
+`exp`がリストであればtrueを返します。
 
 ```lua
 terralib.israwlist(l)
 ```
 
-Returns true if `l` is a table that has no keys or has a contiguous range of integer keys from `1` to `N` for some `N`, and contains no other keys.
+`l`が連続する整数キー`1`から`N`まで（他のキーなし）のテーブルであればtrueを返します。
 
-## Terra Reflection API
+## Terra リフレクションAPI
 
-Every Terra entity is also a first-class Lua object. These include Terra [Functions](#Functions), Terra [Types](#Types), and Terra [Global Variables](#global_variables). [Quotes](#quotes) are the objects returned by Terra's quotation syntax (backtick and `quote`), representing a fragment of Terra code not yet inside a Terra function.  [Symbols](#symbols) represent a unique name for a variables and are used to define new parameters and locals.
+すべてのTerraエンティティは、ファーストクラスのLuaオブジェクトでもあります。これにはTerraの[関数](#Functions)、[型](#Types)、[グローバル変数](#global_variables)が含まれます。[クォート](#quotes)は、Terraのクォーテーション構文（バッククォートや`quote`）によって返されるオブジェクトで、Terra関数内にはまだ含まれていないコードの断片を表します。[シンボル](#symbols)は変数に固有の名前を与えるもので、新しいパラメータやローカル変数を定義する際に使用されます。
 
-When a Terra function returns a value that cannot be converted into an equivalent Lua object, it turns into a Terra [Value](#values), which is a wrapper that can be accessed from Lua (Internally this is a LuaJIT `"cdata"` object).
+Terra関数がLuaオブジェクトに変換できない値を返す場合、Terraの[値](#values)になります。これはLuaからアクセス可能なラッパーです（内部的にはLuaJITの`"cdata"`オブジェクトです）。
 
-Each object provides a Lua API to manipulate it. For instance, you can disassemble a function (`terrafn:disas()`), or query properties of a type (`typ:isarithmetic()`).
+各オブジェクトには、操作用のLua APIが提供されています。例えば、関数の逆アセンブルを行う`terrafn:disas()`や、型の特性を問い合わせる`typ:isarithmetic()`といったメソッドがあります。
 
-### Generic
+### ジェネリック
 
 ```lua
 tostring(terraobj)
 print(terraobj)
 ```
 
-All Terra objects have a string representation that you can use for debugging.
+すべてのTerraオブジェクトにはデバッグ用の文字列表現が備わっています。
 
 ```lua
 terralib.islist(t)
@@ -127,13 +127,13 @@ terralib.islabel(t)
 terralib.isoverloadedfunction(t)
 ```
 
-Checks that a particular object is a type of Terra class.
+特定のオブジェクトがTerraのクラス型であるかをチェックします。
 
 ```lua
 terralib.type(o)
 ```
 
-Extended version of `type(o)` with the following definition:
+`type(o)`の拡張版で、次のように定義されています：
 
 ```lua
 function terralib.type(t)
@@ -156,21 +156,19 @@ end
 memoized_fn = terralib.memoize(function(a,b,c,...) ... end)
 ```
 
-Memoize the result of a function. The first time a function is call with a particular set of arguments, it calls the function to calculate the return value and caches it. Subsequent calls with the same arguments (using Lua equality) will return that value. Useful for generating templated values, such as `Vector(T)` where the same vector type should be returned everytime for the same `T`.
+関数の結果をメモ化します。ある引数セットで関数が初めて呼び出されると、その引数での戻り値が計算されキャッシュされます。同じ引数での以後の呼び出し（Luaの等価性による）では、そのキャッシュされた値が返されます。テンプレート化された値（例：同じ`T`に対して毎回同じ`Vector(T)`型を返すべき場合）を生成する際に便利です。
 
-### Function
+### 関数
 
-Terra functions are entry-points into Terra code. Functions can be either defined or undefined (`myfunction:isdefined()`). An undefined function has a known type but its implementation has not yet been provided. The definition of a function can be changed via `myfunction:resetdefinition(another_function)` until it is first run.
+Terra関数は、Terraコードのエントリーポイントです。関数は定義済みまたは未定義である可能性があります (`myfunction:isdefined()`)。未定義の関数は型が既知ですが、実装がまだ提供されていません。関数が初めて実行されるまで、`myfunction:resetdefinition(another_function)`を使用して定義を変更できます。
 
-```
-[local] terra myfunctionname :: type_expresion
+```lua
+[local] terra myfunctionname :: type_expression
 [local] terra myfunctionname :: {int,bool} -> {int}
 ```
 
-_Terra function declaration_. It creates a new undefined function and stores it in the Lua variable `myfunctionname`.
-If the optional `local` keyword is used, then `myfunctionname` is first defined as a new local Lua variable.  When used without the `local` keyword, `myfunctionname` can be a table specifier (e.g. `a.b.c`).
-
-<!--- If `mystruct` is a [Struct](#exotypes-structs), then `mystruct:mymethod` is equivalent to using the specifier `mystruct.methods.mymethod`. --->
+_Terra関数の宣言_。新しい未定義の関数を作成し、Lua変数`myfunctionname`に保存します。
+オプションの`local`キーワードを使用する場合、`myfunctionname`は最初に新しいローカルLua変数として定義されます。`local`キーワードを使用しない場合、`myfunctionname`はテーブル指定子（例：`a.b.c`）として使うこともできます。
 
 ```lua
 [local] terra myfunctionname(arg0 : type0,
@@ -180,13 +178,13 @@ If the optional `local` keyword is used, then `myfunctionname` is first defined 
 end
 ```
 
-_Terra function definition_. Defines `myfunctioname` using the body of code specified. If `myfunctioname` already exists and is undefined, then it adds the definition to the existing function declaration. Otherwise it first creates a new function declaration and then adds the definition.
+_Terra関数の定義_。指定されたコード本体を使用して`myfunctionname`を定義します。`myfunctionname`が未定義の場合は既存の関数宣言に定義を追加し、それ以外の場合は新しい関数宣言を作成して定義を追加します。
 
 ```lua
 local func = terralib.externfunction(function_name,function_type)
 ```
 
-Create a Terra function bound to an externally defined function. Example:
+外部で定義された関数にバインドされたTerra関数を作成します。例：
 
 ```lua
 local atoi = terralib.externfunction("atoi",{rawstring} -> {int})
@@ -196,300 +194,299 @@ local atoi = terralib.externfunction("atoi",{rawstring} -> {int})
 myfunction(arg0,...,argN)
 ```
 
-`myfunction` is a Terra function. Invokes `myfunction` from Lua. It is an error to call this on undefined functions. Arguments are translated to Terra using the [rules for translating Lua values to Terra](#converting-lua-values-to-terra-values-of-known-type) and return values are translated by using the [rules for translating Terra values to Lua](#converting-terra-values-to-lua-values).
+`myfunction`はTerra関数です。Luaから`myfunction`を呼び出します。未定義の関数に対して呼び出しを行うとエラーになります。引数は[Lua値からTerraへの変換規則](#converting-lua-values-to-terra-values-of-known-type)を使用してTerraに変換され、戻り値は[Terra値からLuaへの変換規則](#converting-terra-values-to-lua-values)に基づいて変換されます。
 
 ```lua
 local b = func:isdefined()
 ```
 
-`true` if function has a filled in definition. To define a function use `func:adddefinition`,
-`func:resetdefinition` or using function definition syntax `terra func(...) ... end`.
+関数に定義が存在する場合は`true`を返します。関数を定義するには、`func:adddefinition`、`func:resetdefinition`、または関数定義構文`terra func(...) ... end`を使用します。
 
 ```lua
 local b = func:isextern()
 ```
 
-`true` if this function is bound to an external symbol like libc's `printf`. External functions are created either through importing C functions via `terralib.includec`, or by calling `terralib.externfunction`
+この関数が`printf`のような外部シンボルにバインドされている場合は`true`を返します。外部関数は`terralib.includec`でC関数をインポートするか、`terralib.externfunction`を呼び出して作成されます。
 
 ```lua
 func:adddefinition(another_function)
 ```
 
-Sets the definition of `func` to the current definition of `another_function`. `another_function` must be defined and `func` must be undefined. The types of `func` and `another_function` must match.
+`func`の定義を`another_function`の現在の定義に設定します。`another_function`は定義されている必要があり、`func`は未定義でなければなりません。`func`と`another_function`の型は一致している必要があります。
 
 ```lua
 func:resetdefinition(another_function)
 ```
 
-Sets (or resets) the definition of `func` to the current definition of `another_function`. `another_function` must be defined. `func` may or may not be defined. It is an error to call this on a function that has already been compiled.
+`func`の定義を`another_function`の現在の定義に設定（またはリセット）します。`another_function`は定義されている必要があります。`func`は定義済みまたは未定義のどちらでもかまいません。すでにコンパイルされている関数に対してこのメソッドを呼び出すとエラーになります。
 
 ```lua
 func:printstats()
 ```
 
-Prints statistics about how long this function took to compile and JIT. Will cause the function to compile.
+この関数のコンパイルおよびJITにかかった時間などの統計を出力します。このメソッドを呼び出すと、関数がコンパイルされます。
 
 ```lua
 func:disas()
 ```
 
-Disassembles all of the function definitions into x86 assembly and optimized LLVM, and prints them out. Useful for debugging performance. Will cause the function definition to compile.
+すべての関数定義をx86アセンブリや最適化されたLLVM形式に逆アセンブルして出力します。パフォーマンスデバッグに役立ちます。このメソッドを呼び出すと関数がコンパイルされます。
 
 ```lua
 func:printpretty([quote_per_line=true])
 ```
 
-Print out a visual representation of the code in this function. By default, this prints each part of the code that was originally specified on a separate line as a individual lines. If `quote_per_line` is `false`, it will print a more collapsed representation that may be easier to read.
+この関数のコードを視覚的に表現して出力します。デフォルトでは、元のコードの各部分を別の行として表示します。`quote_per_line`を`false`に設定すると、読みやすいようにコードがまとめて表示されます。
 
 ```lua
 r0, ..., rn = myfunction(arg0, ... argN)
 ```
 
-Invokes `myfunction` from Lua. Arguments are converted into the expected Terra types using the [rules](#converting-between-lua-values-and-terra-values) for converting between Terra values and Lua values. Return values are converted back into Lua values using the same rules. Causes the function to be compiled to machine code.
+Luaから`myfunction`を呼び出します。引数は、Terra値とLua値を相互に変換するための[規則](#converting-between-lua-values-and-terra-values)に従って変換され、戻り値も同様にLua値に変換されます。このメソッドの呼び出しにより、関数が機械コードにコンパイルされます。
 
 ```lua
 func:compile()
 ```
 
-Compile the function into machine code. Ensures that every function and global variable needed by the function is also defined.
+関数を機械コードにコンパイルします。この関数が必要とするすべての関数やグローバル変数も定義されていることを確認します。
 
 ```lua
 function_type = func:gettype()
 ```
 
-Return the [type](#types) of the function. `function_type.parameters` is a list of the parameters types. `function_type.returntype` is the return type. If the function returns multiple values, this return type will be a tuple.
+関数の[型](#types)を返します。`function_type.parameters`はパラメータの型リスト、`function_type.returntype`は戻り値の型です。複数の値を返す関数の場合、戻り値の型はタプルになります。
 
 ```lua
 func:getpointer()
 ```
 
-Return the LuaJIT `ctype` object that points to the machine code for this function. Will cause the function to be compiled.
+この関数の機械コードを指すLuaJITの`ctype`オブジェクトを返します。呼び出すと関数がコンパイルされます。
 
 ```lua
 str = func:getname()
 func:setname(str)
 ```
 
-Get or set the pretty name for the function. This is useful when viewing generated code but does not otherwise change the behavior of the function.
+関数の見やすい名前を取得または設定します。生成されたコードを表示する際に役立ちますが、関数の動作には影響しません。
 
 ```lua
 func:setinlined(bool)
 ```
 
-When `true` function when be always inlined. When `false` the function will never be inlined. By default, functions will be inlined at the discretion of LLVM's function inliner.
+`true`の場合、この関数は常にインライン化されます。`false`の場合、インライン化されません。デフォルトではLLVMの関数インライナーの裁量によりインライン化されます。
 
 ```lua
 func:setoptimized(bool)
 ```
 
-All Terra functions are optimized by default (equivalent of Clang `-O3`). Pass `false` to this method to disable optimization (equivalent of Clang `-O0`).
+すべてのTerra関数はデフォルトで最適化されます（Clangの`-O3`に相当）。最適化を無効にするには`false`を渡します（Clangの`-O0`に相当）。
 
 ```lua
 func:setcallingconv(string)
 ```
 
-Set the calling convention of the function. LLVM's default calling convention is used by default. Valid values are the same as can be specified in [LLVM's text-based assembly language](https://llvm.org/docs/LangRef.html#calling-conventions). (Note that, as of the time of writing, the official LLVM documentation is incomplete, particularly for target-specific calling conventions. For additional calling conventions, it may be necessary to consult the [source code directly](https://github.com/llvm/llvm-project/blob/llvmorg-13.0.0/llvm/lib/IR/AsmWriter.cpp#L289-L339).)
+関数の呼び出し規約を設定します。デフォルトではLLVMのデフォルトの呼び出し規約が使用されます。有効な値は、[LLVMのテキストベースのアセンブリ言語](https://llvm.org/docs/LangRef.html#calling-conventions)で指定できるものと同じです（執筆時点では公式のLLVMドキュメントは不完全で、特にターゲット固有の呼び出し規約については[ソースコード](https://github.com/llvm/llvm-project/blob/llvmorg-13.0.0/llvm/lib/IR/AsmWriter.cpp#L289-L339)を直接参照する必要がある場合があります）。
 
-### Types
+### 型 (Types)
 
-Type objects are first-class Lua values that represent the types of Terra objects. Terra's built-in type system closely resembles that of low-level languages like C.  Type constructors (like `&int`) are valid Lua expressions that return Terra type objects.  To support recursive types like linked lists, [structs](#exotypes-structs) can be declared before their members and methods are fully specified. When a struct is declared but not defined, it is _incomplete_ and cannot be used as value. However, pointers to incomplete types can be used as long as no pointer arithmetic is required. A type will become _complete_ when it needs to be fully specified (e.g. we are using it in a compiled function, or we want to allocate a global variable with the type). At this point a full definition for the type must be available.
+型オブジェクトはTerraオブジェクトの型を表す一級のLua値です。Terraの組み込み型システムは、Cのような低レベル言語の型システムに似ています。型コンストラクタ（例：`&int`）は有効なLua式であり、Terraの型オブジェクトを返します。リンクリストのような再帰型をサポートするために、[構造体](#exotypes-structs)はメンバーやメソッドが完全に指定される前に宣言できます。構造体が宣言されただけで定義されていない場合、それは「不完全」とみなされ、値としては使用できません。ただし、ポインタ算術が不要な限り、不完全型へのポインタは使用可能です。型が完全に指定される必要がある場合（例：コンパイルされた関数で使用される、またはその型のグローバル変数を割り当てる場合）に、「完全」となります。この時点で型の完全な定義が必要です。
 
 ```
 int int8 int16 int32 int64
-uint  uint8 uint16 uint32 uint64
+uint uint8 uint16 uint32 uint64
 bool
 float double
 ```
 
-Primitive types.
+基本型（プリミティブ型）。
 
 ```
 &typ
 ```
 
-Constructs a pointer to `typ`.
+`typ`へのポインタを構築します。
 
 ```
 typ[N]
 ```
 
-Constructs an array of `N` instances of type `typ`. `N` must be a positive integer.
+`typ`型のインスタンスを`N`個持つ配列を構築します。`N`は正の整数である必要があります。
 
 ```lua
 vector(typ,N)
 ```
 
-Constructs a vector of `N` instances of type `typ`. `N` must be an integer and `typ` must be a primitive type. These types are abstractions vector instruction sets like [SSE](http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions).
+`typ`型のインスタンスを`N`個持つベクトルを構築します。`N`は整数で、`typ`はプリミティブ型である必要があります。これらの型は[SSE](http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions)のようなベクトル命令セットの抽象化です。
 
 ```lua
 parameters -> returntype
 ```
 
-Constructs a function pointer. Both  `parameters`  and `returns` can be lists of types (e.g. `{int,int}`) or a single type like `int`. If `returntype` is a list, a `tuple` of the values in the list is the type returned from the function.
+関数ポインタを構築します。`parameters`および`returns`は、型のリスト（例：`{int,int}`）または単一の型（例：`int`）で指定できます。複数の値を返す場合、戻り値の型としてタプルが使用されます。
 
-To specify a void return type, use the empty tuple `{}`.
+戻り値の型が`void`の場合は、空のタプル`{}`を使用します。
 
 ```lua
 struct { field0 : type0, ..., fieldN : typeN }
 ```
 
-Constructs a user-defined type, or exotype. Each call to `struct` creates a unique type since we use a [nominative](http://en.wikipedia.org/wiki/Nominative_type_system) type systems. See [Exotypes](#exotypes-structs) for more information.
+ユーザー定義型またはエキソタイプを構築します。各`struct`の呼び出しは独自の型を生成します（[指名型システム](http://en.wikipedia.org/wiki/Nominative_type_system)を使用）。詳細は[エキソタイプ](#exotypes-structs)を参照してください。
 
 ```lua
-tuple(type0,type1,...,typeN)
+tuple(type0, type1, ..., typeN)
 ```
 
-Constructs a tuple, which is a special kind of `struct` that contains the values `type0`... `typeN` as fields `obj._0` .... `obj._N`.  Unlike normal structs, each call to `tuple` with the same arguments will return the same type.
+タプルを構築します。これは`struct`の特別な型で、`type0`...`typeN`の値を`obj._0`...`obj._N`のフィールドとして保持します。通常の構造体と異なり、同じ引数を使った`tuple`の各呼び出しは同じ型を返します。
 
 ```lua
 terralib.types.istype(t)
 ```
 
-True if `t` is a type.
+`t`が型であれば`true`を返します。
 
 ```lua
 type:isprimitive()
 ```
 
-True if `type` is a primitive type (see above).
+`type`がプリミティブ型（上記参照）であれば`true`を返します。
 
 ```lua
 type:isintegral()
 ```
 
-True if `type` is any integer type.
+`type`が整数型であれば`true`を返します。
 
 ```lua
 type:isfloat()
 ```
 
-True if `type` is `float` or `double`.
+`type`が`float`または`double`であれば`true`を返します。
 
 ```lua
 type:isarithmetic()
 ```
 
-True if `type` is integral or float.
+`type`が整数型または浮動小数点型であれば`true`を返します。
 
 ```lua
 type:islogical()
 ```
 
-True if `type` is `bool` (we might eventually supported sized boolean types that are closer to the machine representation of flags in vector instructions).
+`type`が`bool`であれば`true`を返します（将来的に、ベクトル命令内のフラグに近いサイズのブール型をサポートする予定）。
 
 ```lua
 type:canbeord()
 ```
 
-True if the `type` can be used in expressions `or` and `and` (i.e. integral and logical but not float).
+`type`が`or`および`and`演算に使用できる場合（つまり整数型や論理型だが浮動小数点型ではない場合）、`true`を返します。
 
 ```lua
 type:ispointer()
 ```
 
-True if `type` is a pointer. `type.type` is the type pointed to.
+`type`がポインタであれば`true`を返します。`type.type`は指している型です。
 
 ```lua
 type:isarray()
 ```
 
-True if `type` is an array. `type.N` is the length. `type.type` is the element type.
+`type`が配列であれば`true`を返します。`type.N`は長さを、`type.type`は要素の型を表します。
 
 ```lua
 type:isfunction()
 ```
 
-True if `type` is a function (not a function pointer). `type.parameters` is a list of parameter types. `type.returntype` is return type. If a function returns multiple values this type will be a `tuple` of the values.
+`type`が関数（関数ポインタではない）であれば`true`を返します。`type.parameters`はパラメータ型のリスト、`type.returntype`は戻り値の型です。複数の値を返す関数の場合、戻り値の型はその値の`tuple`になります。
 
 ```lua
 type:isstruct()
 ```
 
-True if `type` is a [struct](#exotypes-structs).
+`type`が[構造体](#exotypes-structs)であれば`true`を返します。
 
 ```lua
 type:ispointertostruct()
 ```
 
-True if `type` is a pointer to a struct.
+`type`が構造体へのポインタであれば`true`を返します。
 
 ```lua
 type:ispointertofunction()
 ```
 
-True if `type` is a pointer to a function.
+`type`が関数へのポインタであれば`true`を返します。
 
 ```lua
 type:isaggregate()
 ```
 
-True if `type` is an array or a struct (any type that can hold arbitrary types).
+`type`が配列または構造体であれば`true`を返します（任意の型を保持できる型です）。
 
 ```lua
 type:iscomplete()
 ```
 
-True if the `type` is fully defined and ready to use in code. This is always true for non-aggregate types. For aggregate types, this is true if all types that they contain have been defined. Call type:complete() to force a type to become complete.
+`type`が完全に定義され、コードで使用できる状態であれば`true`を返します。非集約型では常に`true`です。集約型の場合、その内部に含まれるすべての型が定義されていれば`true`となります。`type:complete()`を呼び出すと強制的に型が完全になります。
 
 ```lua
 type:isvector()
 ```
 
-True if the `type` is a vector. `type.N` is the length. `type.type` is the element type.
+`type`がベクトルであれば`true`を返します。`type.N`は長さ、`type.type`は要素の型です。
 
 ```lua
 type:isunit()
 ```
 
-True if the `type` is the empty tuple. The empty tuple is also the return type of functions that return no values.
+`type`が空のタプルであれば`true`を返します。空のタプルは、戻り値を持たない関数の戻り値型としても使用されます。
 
 ```lua
 type:(isprimitive|isintegral|isarithmetic|islogical|canbeord)orvector()
 ```
 
-True if the `type` is a primitive type with the requested property, or if it is a vector of a primitive type with the requested property.
+`type`が指定されたプロパティを持つプリミティブ型である場合、またはそのプリミティブ型を要素とするベクトル型である場合に`true`を返します。
 
 ```lua
 type:complete()
 ```
 
-Forces the type to be complete. For structs, this will calculate the layout of the struct (possibly calling `__getentries` and `__staticinitialize` if defined), and recursively complete any types that this type references.
+型を強制的に完全にします。構造体の場合、構造体のレイアウトを計算し（定義されていれば`__getentries`や`__staticinitialize`を呼び出します）、この型が参照するすべての型を再帰的に完全にします。
 
 ```lua
 type:printpretty()
 ```
 
-Print the type, including its members if it is a struct.
+型を出力し、構造体の場合はそのメンバーも含めて表示します。
 
 ```lua
 terralib.sizeof(terratype)
 ```
 
-Wrapper around `ffi.sizeof`. Completes the `terratype` and returns its size in bytes.
+`ffi.sizeof`のラッパーです。`terratype`を完全にして、そのサイズ（バイト単位）を返します。
 
 ```lua
 terralib.offsetof(terratype,field)
 ```
 
-Wrapper around `ffi.offsetof`. Completes the `terratype` and returns the offset in bytes of `field` inside `terratype`.
+`ffi.offsetof`のラッパーです。`terratype`を完全にして、`terratype`内の`field`のオフセット（バイト単位）を返します。
 
 ```lua
 terralib.types.pointer(typ, [addrspace])
 ```
 
-**Experimental.** Alternative spelling for `&typ` that allows an [LLVM address space](https://llvm.org/docs/LangRef.html#pointer-type) to be specified. Note that the semantics of non-zero address spaces are target-specific.
+**実験的機能**。`&typ`の代替で、[LLVMアドレス空間](https://llvm.org/docs/LangRef.html#pointer-type)を指定することが可能です。非ゼロアドレス空間の意味はターゲット固有です。
 
 
 ### Quotes
 
-Quotes are the Lua objects that get returned by terra quotation operators (backtick and `quote ... in ... end`). They represent a fragment of Terra code (a statement or expression) that has not been placed into a function yet. The escape operators (`[...]` and `escape ... emit ... end`) splice quotes into the surround Terra code. Quotes have a short form for generating just one _expression_ and long form for generating _statements and expressions_.
+Quotes（引用句）は、Terraの引用演算子（バッククォートおよび`quote ... in ... end`）によって返されるLuaオブジェクトです。これは関数にまだ挿入されていないTerraコードの断片（文や式）を表します。エスケープ演算子（`[...]`および`escape ... emit ... end`）を使うと、引用句を周囲のTerraコードに挿入できます。Quotesには、1つの式のみを生成する短い形式と、文や式を生成する長い形式があります。
 
 ```lua
 quotation = `terraexpr
--- `create a quotation
+-- `記号で引用句を作成
 ```
 
-The short form of a quotation. The backtick operator creates a quotation that contains a single terra _expression_. `terraexpr` can be any Terra expression. Any escapes that `terraexpr` contains will be evaluated when the expression is constructed.
+引用句の短い形式です。バッククォート演算子により、1つのTerra式を含む引用句が作成されます。`terraexpr`には任意のTerra式を指定できます。`terraexpr`内にエスケープが含まれる場合、それは式が構築される際に評価されます。
 
 ```lua
 quote
@@ -497,7 +494,7 @@ quote
 end
 ```
 
-The long form of a quotation. The `quote` operator creates a quotation that contains a list of terra _statements_. This quote can appear where an expression or a statement would be legal in Terra code. If it appears in an expression context, its type is the empty tuple.
+引用句の長い形式です。`quote`演算子により、複数のTerra文を含む引用句が作成されます。この引用句は、Terraコード内で式または文が有効な場所に挿入できます。式のコンテキストで使用される場合、その型は空のタプルになります。
 
 ```lua
 quote
@@ -507,7 +504,7 @@ in
 end
 ```
 
-The long `quote` operation can also include an optional `in` statement that creates several expressions. When this `quote` is spliced into Terra code where an expression would normally appear, its value is the tuple constructed by those expressions.
+長い`quote`構文には、いくつかの式を生成する`in`文をオプションで含めることができます。この`quote`がTerraコード内で式として挿入される場合、これらの式から構築されたタプルが値として返されます。
 
 ```lua
 local a = quote
@@ -517,7 +514,7 @@ in
     a + b + b
 end
 terra f()
-    var c : int = [a] -- 'a' has type int.
+    var c : int = [a] -- 'a'はint型
 end
 ```
 
@@ -525,158 +522,155 @@ end
 terralib.isquote(t)
 ```
 
-Returns true if `t` is a quote.
+`t`が引用句であれば`true`を返します。
 
 ```lua
 typ = quoteobj:gettype()
 ```
 
-Return the Terra type of this quotation.
+この引用句のTerra型を返します。
 
 ```lua
 typ = quoteobj:astype()
 ```
 
-Try to interpret this quote as if it were a Terra type object. This is normally used in [macros](#macros) that expect a type as an argument (e.g. `sizeof([&int])`). This function converts the `quote` object to the type (e.g. `&int`).
+この引用句をTerra型オブジェクトとして解釈しようとします。通常、型を引数として受け取る[マクロ](#macros)で使用されます（例：`sizeof([&int])`）。この関数は、`quote`オブジェクトを型に変換します（例：`&int`）。
 
 ```lua
 bool = quoteobj:islvalue()
 ```
 
-`true` if the quote can be used on the left hand size of an assignment (i.e. it is an l-value).
+この引用句が代入の左辺（l-value）として使用可能であれば`true`を返します。
 
 ```lua
 luaval = quoteobj:asvalue()
 ```
 
-Try to interpret this quote as if it were a simple Lua value. This is normally used in [macros](#macros) that expect constants as an argument. Only works for a subset of values (anything that can be a Constant expression). Consider using an escape rather than a macro when you want to pass more complicated data structures to generative code.
+この引用句を単純なLua値として解釈しようとします。通常、定数を引数として受け取る[マクロ](#macros)で使用されます。特定の値のみで動作し、Constant式として利用可能な場合に限られます。生成コードに複雑なデータ構造を渡す場合、マクロよりもエスケープを使用することを検討してください。
 
 ```lua
 quoteobj:printpretty()
 ```
 
-Print out a visual representation of the code in this quote. Because quotes are not type-checked until they are placed into a function, this will print an untyped representation of the function.
-
+この引用句内のコードの視覚表現を出力します。引用句は関数に挿入されるまで型チェックが行われないため、関数の型なしの表現が出力されます。
 
 ### Symbol
 
-Symbols are abstract representations of Terra identifiers. They can be used in Terra code where an identifier is expected, e.g. a variable use, a variable definition, a function argument, a field name, a method name, a label (see also [Escapes](#escapes)). They are similar to the symbols returned by LISP's `gensym` function.
+Symbol（シンボル）は、Terraの識別子の抽象的な表現です。変数の使用、定義、関数の引数、フィールド名、メソッド名、ラベルなど、識別子が期待される場所で使用できます（[エスケープ](#escapes)も参照）。LISPの`gensym`関数で返されるシンボルに似ています。
 
 ```lua
 terralib.issymbol(s)
 ```
 
-True if `s` is a symbol.
+`s`がシンボルであれば`true`を返します。
 
 ```lua
 symbol(typ,[displayname])
 ```
 
-Construct a new symbol. This symbol will be unique from any other symbol. `typ` is the type for the symbol. `displayname` is an optional name that will be printed out in error messages when this symbol is encountered.
+新しいシンボルを構築します。このシンボルは他のシンボルと一意になります。`typ`はシンボルの型で、`displayname`はエラーメッセージで表示される際のオプションの名前です。
 
 ### Values
 
-We provide wrappers around LuaJIT's [FFI API](http://luajit.org/ext_ffi.html) that allow you to allocate and manipulate Terra objects directly from Lua.
+LuaJITの[FFI API](http://luajit.org/ext_ffi.html)のラッパーを提供しており、Luaから直接Terraオブジェクトを割り当てたり操作したりできます。
 
 ```lua
 terralib.typeof(obj)
 ```
 
-Return the Terra type of `obj`. Object must be a LuaJIT `ctype` that was previously allocated using calls into the Terra API, or as the return value of a Terra function.
+`obj`のTerra型を返します。`obj`は、以前にTerra APIを使用して割り当てられたLuaJIT `ctype`である必要があります。または、Terra関数の戻り値として返されるものです。
 
 ```lua
 terralib.new(terratype,[init])
 ```
 
-Wrapper around LuaJIT's `ffi.new`. Allocates a new object with the type `terratype`. `init` is an optional initializer that follows the [rules](#converting-between-lua-values-and-terra-values) for converting between Terra values and Lua values. This object will be garbage collected if it is no longer reachable from Lua.
+LuaJITの`ffi.new`のラッパーです。型`terratype`の新しいオブジェクトを割り当てます。`init`はオプションの初期化子であり、Terra値とLua値の間での[変換ルール](#converting-between-lua-values-and-terra-values)に従います。このオブジェクトはLuaから到達不可能になるとガベージコレクションされます。
 
 ```lua
 terralib.cast(terratype,obj)
 ```
 
-Wrapper around `ffi.cast`. Converts `obj` to `terratype` using the [rules](#converting-between-lua-values-and-terra-values) for converting between Terra values and Lua values.
+`ffi.cast`のラッパーです。`obj`を`terratype`に変換し、Terra値とLua値の間での[変換ルール](#converting-between-lua-values-and-terra-values)に従います。
 
-### Global Variables
+### グローバル変数
 
-Global variables are Terra values that are shared among all Terra functions.
+グローバル変数は、すべてのTerra関数で共有されるTerra値です。
 
 ```lua
 global(type,[init,name,isextern,isconstant,addrspace])
 global(init,[name,isextern,isconstant,addrspace])
 ```
 
-Creates a new global variable of type `type` given the initial value `init`. Either `type` or `init` must be specified. If `type` is not specified we attempt to infer it from `init`. If `init` is not specified the global is left uninitialized. `init` is converted to a Terra value using the normal conversion [rules](#converting-between-lua-values-and-terra-values). If `init` is specified, this [completes](#types) the type.
+型`type`と初期値`init`で新しいグローバル変数を作成します。`type`または`init`のどちらか一方は必須です。`type`が指定されない場合は、`init`から型を推定します。`init`が指定されない場合、グローバル変数は未初期化のままです。`init`は通常の変換[ルール](#converting-between-lua-values-and-terra-values)に従ってTerra値に変換されます。`init`が指定された場合、型は[完了](#types)されます。
 
-`init` can also be a [Quote](#quote), which will be treated as a [constant expression](#constants) used to initialized the global.
-`name` is used as the debugging name for the global.
+`init`には[Quote](#quote)も指定でき、これは[定数式](#constants)として扱われ、グローバル変数の初期化に使用されます。`name`はデバッグ用の名前です。
 
-If `isextern` is true, then this global is bound to an externally defined variable with the name `name`.
+`isextern`が`true`の場合、このグローバル変数は外部で定義された変数`name`にバインドされます。
 
-If `isconstant` is true, then the contents of the global are considered to be constant.
+`isconstant`が`true`の場合、グローバル変数の内容は定数として扱われます。
 
-If `addrspace` is not `nil`, then the global is placed in the corresponding [LLVM address space](https://llvm.org/docs/LangRef.html#pointer-type). Note that the semantics of non-zero address spaces are target-specific.
+`addrspace`が`nil`でない場合、グローバルは対応する[LLVMアドレス空間](https://llvm.org/docs/LangRef.html#pointer-type)に配置されます。非ゼロのアドレス空間の意味はターゲットによって異なるため注意が必要です。
 
 ```lua
 globalvar:getpointer()
 ```
 
-Returns the `ctype` object that is the pointer to this global variable in memory. [Completes](#types) the type.
+メモリ内でこのグローバル変数へのポインタである`ctype`オブジェクトを返します。型を[完了](#types)します。
 
 ```lua
 globalvar:get()
 ```
 
-Gets the value of this global as a LuaJIT `ctype` object. [Completes](#types) the type.
+このグローバル変数の値をLuaJITの`ctype`オブジェクトとして取得します。型を[完了](#types)します。
 
 ```lua
 globalvar:set(v)
 ```
 
-Converts `v` to a Terra values using the normal conversion [rules](#converting-between-lua-values-and-terra-values), and the global variable to this value. [Completes](#types) the type.
-
+`v`を通常の変換[ルール](#converting-between-lua-values-and-terra-values)に従ってTerra値に変換し、グローバル変数に設定します。型を[完了](#types)します。
 
 ```lua
 globalvar:setname(str)
 str = globalvar:getname()
 ```
 
-Set or get the debug name for this global variable. This can help with debugging but does not otherwise change the behavior of the global.
+このグローバル変数のデバッグ名を設定または取得します。これはデバッグに役立ちますが、グローバル変数の動作には影響しません。
 
 ```lua
 typ = globalvar:gettype()
 ```
 
-Get the terra type of the global variable.
+グローバル変数のTerra型を取得します。
 
 ```lua
 globalvar:setinitializer(init)
 ```
 
-Set or change the initializer expression for this global. Only valid before the global is compiled. This can be used to update the value of a globalvar as you add more code to the system. For instance, if you have a global variable storing the vtable for you class, you can add more values to it as you add methods to the class.
+このグローバル変数の初期化式を設定または変更します。グローバル変数がコンパイルされる前にのみ有効です。例えば、クラスのvtableを格納するグローバル変数の場合、クラスにメソッドを追加するたびに値を追加することができます。
 
-### Constant
+### 定数
 
-Terra constants represent constant values used in Terra code. For instance, if you want to create a [lookup table](http://en.wikipedia.org/wiki/Lookup_table) for the `sin` function, you might first use Lua to calculate the values and then create a constant Terra array of floating point numbers to hold the values. Since the compiler knows the array is constant (as opposed to a global variable), it can make more aggressive optimizations.
+Terra定数は、Terraコードで使用される定数値を表します。例えば、`sin`関数の[ルックアップテーブル](http://en.wikipedia.org/wiki/Lookup_table)を作成する場合、まずLuaで値を計算し、これらの値を格納する定数のTerra配列を作成することができます。コンパイラはこの配列が定数であることを認識して、より積極的な最適化を行うことができます。
 
 ```lua
 constant([type],init)
 ```
 
-Create a new constant. `init` is converted to a Terra value using the normal conversion [rules](#converting-between-lua-values-and-terra-values). If the optional [type](#types) is specified, then `init` is converted to that `type` explicitly. [Completes](#types) the type.
+新しい定数を作成します。`init`は通常の変換[ルール](#converting-between-lua-values-and-terra-values)に従ってTerra値に変換されます。オプションの[type](#types)が指定されると、`init`はその型に明示的に変換されます。型を[完了](#types)します。
 
-`init` can also be a Terra [quote](#quotes) object. In this case the quote is treated as a _constant initializer expresssion_:
+`init`にはTerraの[quote](#quotes)オブジェクトも指定可能です。この場合、quoteは_定数初期化式_として扱われます。
 
 ```lua
 local complexobject = constant(`Complex { 3, 4 })
 ```
 
-Constant expressions are a subset of Terra expressions whose values are guaranteed to be constant and correspond roughly to LLVM's concept of a constant expression. They can include things whose values will be constant after compilation but whose value is not known beforehand such as the value of a function pointer:
+定数式は、Terra式のサブセットであり、その値がコンパイル後に確定されるもので、LLVMの定数式の概念におおむね対応します。例えば、関数ポインタの値のように、事前に確定できないものも含まれます。
 
 ```lua
 terra a() end
 terra b() end
 terra c() end
--- array of function pointers to a,b, and c.
+-- a, b, cを含む関数ポインタの配列
 local functionarray = const(`array(a,b,c))
 ```
 
@@ -684,67 +678,69 @@ local functionarray = const(`array(a,b,c))
 terralib.isconstant(obj)
 ```
 
-True if `obj` is a Terra constant.
+`obj`がTerra定数であれば`true`を返します。
 
-### Label
+### ラベル
 
-Labels are abstract code locations that can be used e.g., with the `goto` statement. Like symbols, label values allow programmatic generation of code locations.
+ラベルは、`goto`文などで使用できる抽象的なコード位置です。シンボルのように、ラベルの値を使ってプログラムでコード位置を生成できます。
 
 ```lua
 terralib.islabel(l)
 ```
 
-True if `l` is a label.
+`l`がラベルであれば`true`を返します。
 
 ```lua
 label([displayname])
 ```
 
-Construct a new label. This label will be unique from any other label, even if it has the same `displayname`. `displayname` is an optional name that will be printed out in error messages when this label is encountered.
+新しいラベルを構築します。このラベルは他のラベルと一意で、`displayname`が同じでも異なるラベルとみなされます。`displayname`はエラーメッセージに表示されるオプションの名前です。
 
-### Macro
+### マクロ
 
-Macros allow you to insert custom behavior into the compiler during type-checking. Because they run during compilation, they should be aware of [asynchronous compilation](#asynchronous-compilation) when calling back into the compiler.
+マクロを使用すると、型チェック中にコンパイラにカスタムの動作を挿入できます。コンパイル時に実行されるため、コンパイラに戻る際は[非同期コンパイル](#asynchronous-compilation)を考慮する必要があります。
 
 ```lua
 macro(function(arg0,arg1,...,argN) [...] end)
 ```
 
-Create a new macro. The function will be invoked at compile time for each call in Terra code.  Each argument will be a Terra [quote](#quote) representing the argument. For instance, the call `mymacro(a,b,foo())`), will result in three quotes as arguments to the macro.  The macro must return a single value that will be converted to a Terra object using the compilation-time conversion [rules](#converting-between-lua-values-and-terra-values).
+新しいマクロを作成します。この関数はTerraコード内の各呼び出し時にコンパイル時に呼び出されます。各引数は、マクロに対して引数として渡されるTerraの[quote](#quote)です。例えば、`mymacro(a,b,foo())`の呼び出しは、マクロへの引数として3つのquoteを生成します。マクロは単一の値を返し、その値はコンパイル時の変換[ルール](#converting-between-lua-values-and-terra-values)を使用してTerraオブジェクトに変換されます。
 
 ```lua
 terralib.ismacro(t)
 ```
 
-True if `t` is a macro.
+`t`がマクロであれば`true`を返します。
 
-### Built-in Macros
+### ビルトインマクロ
 
-The following macros are built in to Terra.
+Terraには以下のビルトインマクロが用意されています。
 
 ```lua
 terralib.intrinsic(name, type)
 ```
 
-Returns a Terra function that calls the LLVM intrinsic corresponding to `name`, with the type `type`. For example, LLVM provides the following intrinsic for `sqrt`:
+指定した`name`と`type`に対応するLLVMの組み込み関数を呼び出すTerra関数を返します。たとえば、LLVMは`sqrt`に以下のような組み込み関数を提供しています。
 
-    local sqrt = terralib.intrinsic("llvm.sqrt.f32", float -> float)
+```lua
+local sqrt = terralib.intrinsic("llvm.sqrt.f32", float -> float)
+```
 
-Now `sqrt` can be called, and this should generate efficient code for the target platform.
+これで`sqrt`を呼び出せるようになり、ターゲットプラットフォーム向けに効率的なコードが生成されます。
 
-Please note that the precise sets of available intrinsics depends on the LLVM version and the target platform, and is not under Terra's control.
+なお、使用できる組み込み関数のセットはLLVMのバージョンやターゲットプラットフォームによって異なり、Terra側で制御することはできません。
 
 ```lua
 terralib.attrload(addr, attrs)
 ```
 
-Performs a load on the address `addr` with the attributes `attrs`. The attributes must be a literal table with one or more of the following keys:
+`addr`のアドレスから`attrs`属性付きでデータを読み込みます。`attrs`は以下のキーを含むリテラルテーブルで指定します。
 
-  * `nontemporal` (optional): if `true`, the load is non-temporal.
-  * `align` (optional): specifies the alignment of `addr`.
-  * `isvolatile` (optional): if `true`, the contents of `addr` are considered volatile.
+- `nontemporal`（任意）: `true`の場合、読み込みが非一時的になります。
+- `align`（任意）: `addr`のアライメントを指定します。
+- `isvolatile`（任意）: `true`の場合、`addr`の内容が揮発性であると見なされます。
 
-For example, the following `attrload` returns `123`:
+以下の例では、`attrload`が`123`を返します。
 
 ```lua
 var i = 123
@@ -755,35 +751,35 @@ terralib.attrload(&i, { align = 1 })
 terralib.attrstore(addr, value, attrs)
 ```
 
-Performs a store on the address `addr` with the value `value` and attributes `attrs`. The attributes are the same as for `attrload`, above.
+`addr`のアドレスに`value`の値を`attrs`属性付きで書き込みます。属性の指定方法は`attrload`と同じです。
 
 ```lua
 terralib.fence(attrs)
 ```
 
-**Experimental.** Issues a fence operation. Depending on the attributes specified, prevents reordering of atomic instructions around the fence. The semantics of this operation are determined by [LLVM](https://llvm.org/docs/LangRef.html#fence-instruction).
+**実験的機能**。フェンス操作を発行します。指定した属性によって、フェンスを境にした原子命令の順序変更を防ぎます。この操作の意味は[LLVM](https://llvm.org/docs/LangRef.html#fence-instruction)によって決まります。
 
-The following attributes may be specified (note that the list of allowed attributes is specific to each kind of atomic operation):
+以下の属性が指定可能です（使用できる属性のセットは各原子操作によって異なります）。
 
-  * `syncscope` (optional): an [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints). Note that many of these values are target-specific.
-  * `ordering` (**required**): an [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints).
+- `syncscope`（任意）: [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)を指定します。多くの値はターゲット固有です。
+- `ordering`（必須）: [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)を指定します。
 
 ```lua
 terralib.cmpxchg(addr, cmp, new, attrs)
 ```
 
-**Experimental.** Performs an atomic compare-and-exchange (cmpxchg) operation on the address `addr`. If the value at `addr` is the same as `cmp`, writes the value `new` at the address, otherwise the value at the address is unmodified. Returns a tuple containing the original value at `addr` (regardless of whether the exchange succeeds), as well as a boolean that specifies whether the exchange succeeded or not.
+**実験的機能**。アドレス`addr`での原子比較交換（cmpxchg）操作を実行します。`addr`の値が`cmp`と同じ場合、`new`の値が書き込まれます。違う場合、値は変更されません。`addr`の元の値と交換が成功したかどうかを示すブール値のタプルを返します。
 
-The following attributes may be specified (note that the list of allowed attributes is specific to each kind of atomic operation):
+使用できる属性は次の通りです（原子操作によって使用できる属性が異なります）。
 
-  * `syncscope` (optional): an [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints). Note that many of these values are target-specific.
-  * `success_ordering` (**required**): an [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints) that applies *if the exchange is successful*.
-  * `failure_ordering` (**required**): an [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints) that applies *if the exchange fails*.
-  * `align` (optional): specifies the alignment of `addr`. Note that unlike `attrload`, the value of `align` must be *greater than or equal to* the size of the contents of `addr` ([see here](https://llvm.org/docs/LangRef.html#cmpxchg-instruction)).
-  * `isvolatile` (optional): if `true`, the contents of `addr` are considered volatile.
-  * `isweak` (optional): if `true`, then spurious failure is allowed. The operation may not write even if `cmp` matches `new`.
+- `syncscope`（任意）: [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)。
+- `success_ordering`（必須）: 交換が成功した場合に適用する[LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)。
+- `failure_ordering`（必須）: 交換が失敗した場合に適用するLLVMメモリ順序。
+- `align`（任意）: `addr`のアライメント。`attrload`と異なり、`align`の値は`addr`の内容のサイズ以上でなければなりません（[詳細はこちら](https://llvm.org/docs/LangRef.html#cmpxchg-instruction)）。
+- `isvolatile`（任意）: `true`の場合、`addr`の内容が揮発性であると見なされます。
+- `isweak`（任意）: `true`の場合、偽の失敗を許可します。交換条件が一致しても書き込まれないことがあります。
 
-For example, the in following example code, the first `cmpxchg` fails (assuming a single thread of execution), returning `{1, false}`, while the second succeeds with `{1, true}`. The final value of `i` is `4`.
+以下の例では、最初の`cmpxchg`は失敗し、`{1, false}`を返しますが、2番目は成功し`{1, true}`を返します。最終的な`i`の値は`4`になります。
 
 ```lua
 var i = 1
@@ -795,122 +791,113 @@ terralib.cmpxchg(&i, 1, 4, {success_ordering = "acq_rel", failure_ordering = "mo
 terralib.atomicrmw(op, addr, value, atomicattrs)
 ```
 
-**Experimental.** Performs an atomic read-modify-write (RMW) operation on the address `addr` with the value `value` and operator `op`. The operation is performed atomically. Returns the original value at `addr`.
+**実験的機能**。`addr`のアドレスで`value`値と演算子`op`を使用した原子読み書き操作（RMW）を実行します。操作は原子的に行われます。`addr`の元の値を返します。
 
-The valid operations that can be performed are specified in the [LLVM documentation](https://llvm.org/docs/LangRef.html#atomicrmw-instruction). Note that `fadd` and `fsub` operations require floating-point types; most other operations require integer (or pointer) types. The specific set of available operations may depend on the LLVM version and target platform.
+使用可能な操作は[LLVMのドキュメント](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)に指定されています。`fadd`および`fsub`操作は浮動小数点型を必要とし、ほとんどの操作は整数型またはポインタ型を必要とします。使用できる操作のセットはLLVMのバージョンやターゲットプラットフォームに依存することがあります。
 
-The following attributes may be specified (note that the list of allowed attributes is specific to each kind of atomic operation):
+指定可能な属性は次の通りです（原子操作によって使用できる属性が異なります）。
 
-  * `syncscope` (optional): an [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints). Note that many of these values are target-specific.
-  * `ordering` (**required**): an [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints).
-  * `align` (optional): specifies the alignment of `addr`. Note that unlike `attrload`, the value of `align` must be *greater than or equal to* the size of the contents of `addr` ([see here](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)).
-  * `isvolatile` (optional): if `true`, the contents of `addr` are considered volatile.
+- `syncscope`（任意）: [LLVM syncscope](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)。
+- `ordering`（必須）: [LLVM memory ordering](https://llvm.org/docs/LangRef.html#atomic-memory-ordering-constraints)。
+- `align`（任意）: `addr`のアライメント。`attrload`とは異なり、`align`の値は`addr`の内容のサイズ以上でなければなりません（[詳細はこちら](https://llvm.org/docs/LangRef.html#atomicrmw-instruction)）。
+- `isvolatile`（任意）: `true`の場合、`addr`の内容が揮発性と見なされます。
 
-For example, the following `atomicrmw` writes `21` into `i` and returns `1` (assuming a single thread of execution):
+以下の例では、`atomicrmw`が`i`に`21`を書き込み、元の値`1`を返します（シングルスレッドの場合）。
 
 ```lua
 var i = 1
 terralib.atomicrmw("add", &i, 20, {ordering = "acq_rel"})
 ```
 
-### Exotypes (Structs)
+### Exotypes（構造体）
 
-We refer to Terra's way of creating user-defined aggregate types as exotypes
-because they are defined *external* to Terra itself, using a Lua API.
-The design tries to provide the raw mechanisms for defining the behavior of user-defined types without imposing any language-specific policies. Policy-based class systems such as those found in Java or C++ can then be created as libraries on top of these raw mechanisms. For conciseness and familiarity, we use the keyword `struct` to refer to these types in the language itself.
+Terraでは、ユーザー定義の集約型を「exotype」と呼びます。これは、Lua APIを使ってTerraの外部で定義されるためです。この設計は、ユーザー定義型の振る舞いを定義するための基本的なメカニズムを提供することを目的としており、言語固有のポリシーを強制することはありません。このため、JavaやC++のようなポリシーベースのクラスシステムを、これらのメカニズムを基にライブラリとして作成することができます。簡潔さと親しみやすさのために、これらの型を言語内で「struct」というキーワードで表現します。
 
-We also provide syntax sugar for defining exotypes for the most common cases.
-This section first discuses the Lua API itself, and then shows how the syntax sugar translates into it.
+また、一般的なケースに対しては、exotypeの定義用のシンタックスシュガーも提供しています。このセクションでは、まずLua API自体について説明し、その後、シンタックスシュガーがどのようにAPIに変換されるかを示します。
 
-More information on the rationale for this design is available in our [publications](publications.html).
+この設計の背景については、[公開資料](publications.html)で詳しく説明しています。
 
 ### Lua API
 
-A new user-defined type is created with the following call:
+新しいユーザー定義型は次の呼び出しで作成します。
 
 ```lua
 mystruct = terralib.types.newstruct([displayname])
 ```
 
-`displayname` is an optional name that will be displayed by error messages, but each call to `newstruct` creates a unique type regardless of name (We use a [nominative](http://en.wikipedia.org/wiki/Nominative_type_system) type system. The type can then be used in Terra programs:
+`displayname`はエラーメッセージに表示される任意の名前ですが、`newstruct`を呼び出すたびに名前に関係なくユニークな型が作成されます（Terraでは[指名型システム](http://en.wikipedia.org/wiki/Nominative_type_system)が使用されています）。この型はTerraプログラム内で次のように利用できます。
 
 ```lua
 terra foo()
-    var a : mystruct --instance of mystruct type
+    var a : mystruct -- mystruct型のインスタンス
 end
 ```
 
-The memory layout and behavior of the type when used in Terra programs is defined by setting *property functions* in the types `metamethods` table:
+この型がTerraプログラムで使用される際のメモリレイアウトと動作は、型の`metamethods`テーブルに*プロパティ関数*を設定することで定義されます。
 
 ```lua
 mystruct.metamethods.myproperty = function ...
 ```
 
-When the Terra typechecker needs to know information about the type, it will call the property function in the metamethods table of the type. If a property is not set, it may have a default behavior which is discussed for each property individually.
+Terraの型チェッカーが型に関する情報を知る必要があるとき、型の`metamethods`テーブルにあるプロパティ関数を呼び出します。プロパティが設定されていない場合、デフォルトの動作が適用されます。各プロパティの詳細については個別に説明されます。
 
-The following fields in `metamethods` are supported:
+`metamethods`で設定できるフィールドは以下の通りです。
 
 ```lua
 entries = __getentries(self)
 ```
 
-A _Lua_ function that determines the fields in a struct computationally. The `__getentries` function will be called by the compiler once when it first requires the list of entries in the struct. Since the type is not yet complete during this call, doing anything in this method that requires the type to be complete will result in an error. `entries` is a [List](#list) of field entries. Each field entry is one of:
+構造体内のフィールドを計算によって決定する_Lua_関数です。構造体内のエントリリストが最初に必要になると、コンパイラは`__getentries`関数を1度だけ呼び出します。この呼び出し時点では型がまだ完全でないため、このメソッドで型の完全性が必要な操作を行うとエラーになります。`entries`はフィールドエントリの[List](#list)です。各フィールドエントリは以下のいずれかです：
 
-* A table `{ field = stringorsymbol, type = terratype }`, specifying a named field.
-* A table `{stringorsymbol,terratype}`, also specifying a named field.
-* A [List](#list) of field entries that will be allocated together in a union sharing the same memory.
+- `{ field = stringorsymbol, type = terratype }` 形式のテーブルで、名前付きフィールドを指定します。
+- `{stringorsymbol, terratype}` 形式のテーブルで、名前付きフィールドを指定します。
+- 一連の[List](#list)フィールドエントリで、同じメモリを共有するunionとして割り当てられます。
 
-By default, `__getentries` just returns the `self.entries` table, which is set by the `struct` definition syntax.
+デフォルトでは、`__getentries`は`self.entries`テーブルを返します。これは`struct`定義シンタックスで設定されます。
 
 ```lua
-method = __getmethod(self,methodname)
+method = __getmethod(self, methodname)
 ```
 
-A _Lua_ function looks up a method for a struct when the compiler sees a method invocation `mystruct:mymethod(...)` or a static method lookup `mystruct.mymethod`.  `mymethod` may be either a string or a [symbol](#symbol). This metamethod will be called by the compiler for every static invocation of `methodname` on this type. Since it can be called multiple times for the same `methodname`, any expensive operations should be memoized across calls.
-`method` may be a Terra function, a Lua function, or a [macros](#macro) which will run during typechecking.
+構造体のメソッドを検索する_Lua_関数です。コンパイラが`mystruct:mymethod(...)`のメソッド呼び出しや`mystruct.mymethod`の静的メソッド参照を検出したときに呼び出されます。`mymethod`は文字列または[symbol](#symbol)で指定可能です。このメタメソッドは、この型での`methodname`の静的な呼び出しごとにコンパイラによって呼び出されます。同じ`methodname`に対して複数回呼ばれる可能性があるため、高コストの操作は呼び出しごとにメモ化して使い回すべきです。
 
-Assuming that `__getmethod` returns the value `method`, then in Terra code the expression `myobj:mymethod(arg0,...argN)` turns into `[method](myobj,arg0,...,argN)` if type of `myobj` is `T`.
+`method`には、Terra関数、Lua関数、またはコンパイル時に実行される[マクロ](#macro)を指定できます。
 
-If the type of `myobj` is `&T` then it desugars to `[method](@myobj,arg0,...,argN)`.
-If, when a method is invoked, `myobj` has type `T` but the formal parameter has type `&T` then the argument will be automatically converted to a pointer by taking its address. This _method receiver cast_ allows method calls on objects to modify the object.
+たとえば、`__getmethod`が`method`を返す場合、Terraコード内の式`myobj:mymethod(arg0, ...argN)`は、`myobj`の型が`T`の場合に`[method](myobj, arg0, ..., argN)`に変換されます。
 
-By default, `__getmethod(self,methodname)` will return `self.methods[methodname]`, which is set by the method definition syntax sugar. If the table does not contain the method, then the typechecker will call `__methodmissing` as described below.
+もし`myobj`の型が`&T`の場合は、`[method](@myobj, arg0, ..., argN)`に展開されます。メソッドが呼び出された際に`myobj`の型が`T`であり、形式パラメータの型が`&T`である場合、引数はアドレスを取得してポインタに自動的に変換されます。この「メソッド受信キャスト」により、メソッド呼び出しでオブジェクトを変更可能にします。
+
+デフォルトでは、`__getmethod(self, methodname)`は`self.methods[methodname]`を返し、これはメソッド定義のシンタックスシュガーで設定されます。メソッドテーブルにメソッドが含まれていない場合、型チェッカーは以下で説明する`__methodmissing`を呼び出します。
 
 ```lua
 __staticinitialize(self)
 ```
 
-A _Lua_ function called after the type is complete but before the compiler returns to user-defined code. Since the type is complete, you can now do things that require a complete type such as create vtables, or examine offsets using the `terralib.offsetof`. The static initializers for entries in a struct will run before the static initializer for the struct itself.
+型が完全になった後、コンパイラがユーザー定義コードに戻る前に呼ばれる_Lua_関数です。型が完全であるため、`terralib.offsetof`を使ってオフセットを調べたり、仮想関数テーブル（vtables）を作成したりといった、完全な型を必要とする操作を行うことができます。構造体内のエントリに対する静的初期化子は、構造体自体の静的初期化子よりも先に実行されます。
 
 ```lua
-castedexp = __cast(from,to,exp)
+castedexp = __cast(from, to, exp)
 ```
 
-A _Lua_ function that can define conversions between your type and another type. `from` is the type of `exp`, and `to` is the type that is required.  For type `mystruct`, `__cast` will be called when either `from` or `to` is of type `mystruct` or type `&mystruct`. If there is a valid conversion, then the method should return `castedexp` where `castedexp` is the expression that converts `exp` to `to`. Otherwise, it should report a descriptive error using the `error` function. The Terra compiler will try any applicable `__cast` metamethod until it finds one that works (i.e. does not call `error`).
+型間の変換を定義する_Lua_関数です。`from`は`exp`の型で、`to`は必要な型です。`mystruct`型について、`__cast`は`from`または`to`のどちらかが`mystruct`または`&mystruct`型の場合に呼び出されます。有効な変換がある場合、このメソッドは`castedexp`（`exp`を`to`に変換する式）を返すべきです。変換できない場合は、`error`関数を使って説明的なエラーメッセージを出力する必要があります。Terraコンパイラは、適用可能な`__cast`メタメソッドを見つけるまで試行します（つまり、`error`を呼び出さないものを探します）。
 
 ```lua
-__for(iterable,body)
+__for(iterable, body)
 ```
 
-**Experimental.** A _Lua_ function that generates the loop to iterate
-the specified type. The value of `iterable` will be an expression that
-generates a value of the specified type. The `body` is a Lua function
-that, when called with the loop iterator variable, executes one
-iteration of the loop. **Note that both `iterable` and the argument to
-`body` must be protected from multiple evaluation.** The result of the
-`__for` metamethod must be a quote.
+**実験的機能。** 指定した型を反復処理するためのループを生成する_Lua_関数です。`iterable`の値は指定された型の値を生成する式になります。`body`はループ変数を受け取り、1回のループ処理を実行するLua関数です。**`iterable`と`body`の引数は複数回の評価から保護される必要があります。** `__for`メタメソッドの結果は引用句（quote）でなければなりません。
 
-For example, an implementation of a simple `Range` type might look like:
+例として、単純な`Range`型の実装は以下のようになります：
 
 ```lua
 struct Range {
     a : int
     b : int
 }
-Range.metamethods.__for = function(iter,body)
+Range.metamethods.__for = function(iter, body)
     return quote
         var it = iter
-        for i = it.a,it.b do
+        for i = it.a, it.b do
             [body(i)]
         end
     end
@@ -918,18 +905,18 @@ end
 ```
 
 ```lua
-__methodmissing(mymethod,myobj,arg1,...,argN)
+__methodmissing(mymethod, myobj, arg1, ..., argN)
 ```
 
-When a method is called `myobj:mymethod(arg0,...,argN)` and `__getmethod` is not set, then the macro `__methodmissing` will be called if `mymethod` is not found in the method table of the type. It should return a Terra [quote](#quote) to use in place of the method call.
+メソッドが`myobj:mymethod(arg0, ..., argN)`として呼び出され、`__getmethod`が設定されていない場合、メソッドテーブルに`mymethod`が存在しなければマクロ`__methodmissing`が呼び出されます。このマクロはメソッド呼び出しの代わりに使用されるTerraの[quote](#quote)を返すべきです。
 
 ```lua
-__entrymissing(entryname,myobj)
+__entrymissing(entryname, myobj)
 ```
 
-If `myobj` does not contain the filed `entryname`, then `__entrymissing` will be called whenever the typechecker sees the expression `myobj.entryname`. It must be a macro and should return a Terra [quote](#quote) to use in place of the field.
+`myobj`が`entryname`フィールドを含まない場合、型チェッカーが`myobj.entryname`式を検出すると`__entrymissing`が呼び出されます。これはマクロでなければならず、フィールドの代わりに使用されるTerraの[quote](#quote)を返す必要があります。
 
-Custom operators:
+カスタム演算子：
 
 ```lua
 __sub, __add, __mul, __div, __mod, __lt, __le, __gt, __ge,
@@ -937,21 +924,21 @@ __eq, __ne, __and, __or, __not, __xor, __lshift, __rshift,
 __select, __apply
 ```
 
-Can be either a Terra method, or a macro. These are invoked when the type is used in the corresponding operator. `__apply` is used for function application, and `__select` for `terralib.select`.  In the case of binary operators, at least one of the two arguments will have type `mystruct`. The interface for custom operators hasn't been heavily tested and is subject to change.
+これらはTerraメソッドまたはマクロとして指定できます。指定した型でこれらの演算子が使用されたときに呼び出されます。`__apply`は関数適用に、`__select`は`terralib.select`に使用されます。二項演算子の場合、少なくとも引数の1つが`mystruct`型である必要があります。カスタム演算子のインターフェースは十分なテストが行われておらず、変更される可能性があります。
 
 ```lua
 __typename(self)
 ```
 
-A _Lua_ function that generates a string that names the type. This name will be used in error messages and `tostring`.
+型の名前を生成する_Lua_関数です。この名前はエラーメッセージや`tostring`で使用されます。
 
-#### Syntax Sugar
+#### 構文シュガー
 
 ```lua
 [local] struct mystruct
 ```
 
-_Struct declaration_ If `mystruct` is not already a Terra struct, it creates a new struct by calling `terralib.types.newstruct("mystruct")` and stores it in the Lua variable `mystruct`. If `mystruct` is already a struct, then it does not modify it. If the optional `local` keyword is used, then `mystruct` is first defined as a new local Lua variable.  When used without the `local` keyword, `mystruct` can be a table specifier (e.g. `a.b.c`).
+_構造体の宣言_ `mystruct`がまだTerraの構造体でない場合、`terralib.types.newstruct("mystruct")`を呼び出し、新しい構造体を作成してLua変数`mystruct`に格納します。`mystruct`が既に構造体の場合は、変更は行いません。オプションの`local`キーワードが使用される場合、`mystruct`はまず新しいローカルのLua変数として定義されます。`local`キーワードなしで使用する場合、`mystruct`はテーブルの指定子（例: `a.b.c`）にすることができます。
 
 ```lua
 [local] struct mystruct {
@@ -966,7 +953,7 @@ _Struct declaration_ If `mystruct` is not already a Terra struct, it creates a n
 }
 ```
 
-_Struct definition_. If `mystruct` is not already a Struct, then it creates a new struct with the behavior of struct declarations. It then fills in the `entries` table of the struct with the fields and types specified in the body of the definition. The `union` block can be used to specify that a group of fields should share the same location in memory. If `mystruct` was previously given a definition, then defining it again will result in an error.
+_構造体の定義_ `mystruct`がまだ構造体でない場合、構造体の宣言の動作に従い新しい構造体を作成します。次に、定義の本体で指定されたフィールドと型を使用して構造体の`entries`テーブルを埋めます。`union`ブロックを使用して、一連のフィールドがメモリ内の同じ位置を共有することを指定できます。`mystruct`が以前に定義されている場合、再定義はエラーになります。
 
 ```lua
 terra mystruct:mymethod(arg0 : type0,..., argN : typeN)
@@ -974,12 +961,11 @@ terra mystruct:mymethod(arg0 : type0,..., argN : typeN)
 end
 ```
 
+_メソッド定義_ `mystruct.methods.mymethod`がTerra関数でない場合、それを作成します。その後、メソッド定義を追加します。`&mystruct`型の`self`という仮引数が、仮引数リストの先頭に追加されます。
 
-_Method definition_. If `mystruct.methods.mymethod` is not a Terra function, it creates one. Then it adds the method definition. The formal parameter `self` with type `&mystruct` will be added to beginning of the formal parameter list.
+### オーバーロード関数
 
-### Overloaded Functions
-
-Overloaded functions are separate objects from normal Functions and are created using an API call:
+オーバーロード関数は通常の関数とは別のオブジェクトであり、API呼び出しを使用して作成します。
 
 ```lua
 local addone = terralib.overloadedfunction("addone",
@@ -987,24 +973,23 @@ local addone = terralib.overloadedfunction("addone",
                 terra(a : double) return a + 1 end })
 ```
 
-
-You can also add methods later:
+また、後でメソッドを追加することもできます。
 
 ```lua
 addone:adddefinition(terra(a : float) return a + 1 end)
 ```
 
-Unlike normal functions overloaded functions cannot be called directly from Lua.
+通常の関数とは異なり、オーバーロード関数はLuaから直接呼び出すことはできません。
 
 ```lua
 overloaded_func:getdefinitions()
 ```
 
-Returns the [List](#lists) of definitions for this function.
+この関数の定義の[リスト](#lists)を返します。
 
-### Escapes
+### エスケープ（Escapes）
 
-Escapes are a special construct adapted from [multi-stage programming](http://www.cs.rice.edu/~taha/MSP/) that allow you to use Lua to generate Terra expressions. Escapes are created using the bracket operator and contain a single lua expression (e.g. `[ 4 + 5 ]`) that is evaluated when the surrounding Terra code is _defined_ (note: this is different from [macros](#macros) which run when a function is _compiled_). Escapes are evaluated in the lexical scope of the Terra code. In addition to including the identifiers in the surround Lua scope, this scope will include any identifiers defined in the Terra code. In Lua code these identifiers are represented as [symbols](#symbol). For example, in the following escape:
+エスケープは[マルチステージプログラミング](http://www.cs.rice.edu/~taha/MSP/)から取り入れられた特殊な構文で、Luaを使用してTerraの式を生成できるようにします。エスケープは角括弧（ブラケット）構文を使って作成され、1つのLua式（例: `[ 4 + 5 ]`）を含みます。このLua式は、周囲のTerraコードが_定義_されるときに評価されます（注: これは、関数が_コンパイル_されるときに実行される[マクロ](#macros)とは異なります）。エスケープはTerraコードのレキシカルスコープ内で評価され、周囲のLuaスコープの識別子に加え、Terraコード内で定義された識別子も含まれます。これらの識別子はLuaコード内で[シンボル](#symbol)として表現されます。以下のエスケープ例では、
 
 ```lua
 terra foo(a : int)
@@ -1013,16 +998,17 @@ terra foo(a : int)
 end
 ```
 
-The arguments `a` and `b` to `dosomething` will be [symbols](#symbols) that are references to the variables defined in the Terra code.
+`dosomething`に渡される引数`a`と`b`は、Terraコード内で定義された変数への参照としての[シンボル](#symbols)になります。
 
-We also provide syntax sugar for escapes of identifiers and table selects when they are used in expressions or statements. For instance the Terra expression `ident` is treated as the escape `[ident]`, and the table selection `a.b.c` is treated as the escape `[a.b.c]` when both `a` and `b` are Lua tables.
+また、識別子やテーブル選択のエスケープに対して構文シュガーも提供されています。例えば、Terraの式`ident`はエスケープ`[ident]`として扱われ、テーブルの選択`a.b.c`は、`a`と`b`がLuaテーブルである場合にエスケープ`[a.b.c]`として扱われます。
 
 ```lua
 terra foo()
     return [luaexpr],4
 end
+```
 
-`[luaexpr]` is a single-expression escape. `luaexpr` is a single Lua expression that is evaluated to a Lua value when the function is _defined_. The resulting Lua expression is converted to a Terra object using the compilation-time conversion [rules](#converting-between-lua-values-and-terra-values). If the conversion results in a list of Terra values, it is truncated to a single value.
+`[luaexpr]`は単一式のエスケープです。`luaexpr`は関数が_定義_されるときにLuaの値に評価される単一のLua式です。評価されたLua式は、コンパイル時の変換[ルール](#converting-between-lua-values-and-terra-values)を使用してTerraオブジェクトに変換されます。変換がTerra値のリストを生成した場合、リストは1つの値に切り詰められます。
 
 ```lua
 terra foo()
@@ -1030,7 +1016,7 @@ terra foo()
 end
 ```
 
-`[luaexpr]` is a multiple-expression escape since it occurs as the last expression in a list of expressions. It has the same behavior as a single expression escape, except when the conversion of `luaexpr` results in multiple Terra expressions. In this case, the values are appended to the end of the expression list (in this case, the list of arguments to the call to `bar`).
+`[luaexpr]`は複数式のエスケープであり、式リストの最後の式として発生します。単一式エスケープと同様の動作をしますが、`luaexpr`の変換が複数のTerra式を生成した場合、これらの値は式リストの末尾に追加されます（この場合、`bar`の呼び出しの引数リストに追加されます）。
 
 ```lua
 terra foo()
@@ -1039,7 +1025,7 @@ terra foo()
 end
 ```
 
-`[luaexpr]` is a statement escape. This form has the same behavior as a multiple-expression escape but is also allowed to return [quotes](#quote) of Terra statements. If the conversion from `luaexpr` results in a list of Terra values, then are all inserted into the current block.
+`[luaexpr]`は文のエスケープです。この形式は複数式エスケープと同様の動作をしますが、Terra文の[クオート](#quote)を返すことも可能です。`luaexpr`の変換がTerra値のリストを生成した場合、すべてが現在のブロックに挿入されます。
 
 ```lua
 terra foo([luaexpr] : int)
@@ -1048,252 +1034,242 @@ terra foo([luaexpr] : int)
 end
 ```
 
-Each `[luaexpr]` is an example of a escape of an identifier. `luaexpr` must result in a [symbol](#symbol). For field selectors (`a.[luaexpr]`), methods (`a:[luaexpr]()`) or labels (`goto [luaexpr]`), `luaexpr` can also result in a string. This form allows you to define identifiers programmatically. When a symbol with an explicitly defined type is used to define a variable, then the variable will take the type of the symbol unless the type of the variable is explicitly specified. For instance if we construct a symbol (`foo = symbol(int)`), the `var [foo]` will have type `int`, and `var [foo] : float` will have type `float`.
+各`[luaexpr]`は識別子のエスケープの例です。`luaexpr`は[シンボル](#symbol)を生成する必要があります。フィールド選択子（`a.[luaexpr]`）、メソッド（`a:[luaexpr]()`）またはラベル（`goto [luaexpr]`）に対して、`luaexpr`は文字列も生成できます。この形式は、プログラム的に識別子を定義することを可能にします。シンボルが明示的に定義された型を持つ場合、変数の型が明示的に指定されていない限り、変数はシンボルの型を取ります。たとえば、シンボルを構築する場合（`foo = symbol(int)`）、`var [foo]`は`int`型となり、`var [foo] : float`は`float`型になります。
 
 ```lua
 terra foo(a : int, [luaexpr])
 end
 ```
 
-`[luaexpr]` is an escape of a list of identifiers. In this case, it behaves similarly to an escape of a single identifier, but may also return a list of explicitly typed symbols which will be appended as parameters in the parameter list.
+`[luaexpr]`は識別子リストのエスケープです。この場合、単一識別子のエスケープと同様に動作しますが、明示的に型指定されたシンボルのリストも返すことができ、パラメータリストに追加されます。
 
-## Using C Inside Terra
+## TerraでCを使用する
 
-Terra uses the [Clang](http://clang.llvm.org) frontend to allow Terra code to be backwards compatible with C. The current implementation of this functionality currently supports importing all functions, types, and enums from C header files. It will also import any macros whose definitions are a single number representable in a double such as:
+Terraは[Clang](http://clang.llvm.org)フロントエンドを利用して、TerraコードをCとの後方互換性を持つようにしています。この機能は現在、Cヘッダーファイルから関数、型、およびenumをインポートすることが可能です。また、次のように数値のみのマクロ定義もインポートできます。
 
 ```c
 #define FOO 1
 ```
 
-However, we currently do not support importing global variables or constants. This will be improved in the future.
+ただし、現時点ではグローバル変数や定数のインポートはサポートされていません。これについては将来の改善を予定しています。
 
 ```lua
 table = terralib.includecstring(code,[args,target])
 ```
 
-Import the string `code` as C code. Returns a Lua table mapping the names of included C functions to Terra [function](#function) objects, and names of included C types (e.g. typedefs) to Terra [types](#types). The Lua variable `terralib.includepath` can be used to add additional paths to the header search. It is a semi-colon separated list of directories to search. `args` is an optional list of strings that are flags to Clang (e.g. `includecstring(code,"-I","..")`). `target` is a [target](#targets) object that makes sure the headers are imported correctly for the target desired.
+文字列`code`をCコードとしてインポートします。含まれるC関数の名前をTerraの[関数](#function)オブジェクトに、Cの型（typedefなど）をTerraの[型](#types)に対応するLuaテーブルを返します。Lua変数`terralib.includepath`を使って、追加のヘッダー検索パスを指定できます。これはセミコロンで区切られたディレクトリのリストです。`args`はオプションで、Clangに渡すフラグのリスト（例：`includecstring(code, "-I", "..")`）です。`target`は指定されたターゲット用にヘッダーを正しくインポートするための[ターゲット](#targets)オブジェクトです。
 
 ```lua
 table = terralib.includec(filename,[args,target])
 ```
 
-Similar to `includecstring` except that C code is loaded from `filename`. This uses Clangs default path for header files. `...` allows you to pass additional arguments to Clang (including more directories to search).
+`includecstring`と似ていますが、Cコードが`filename`から読み込まれます。これはClangのデフォルトのヘッダーファイル検索パスを使用します。`...`を使用して、Clangに追加の引数を渡すことができます（さらに検索するディレクトリを含めることも可能です）。
 
 ```lua
 terralib.linklibrary(filename)
 ```
 
-Load the dynamic library in file  `filename`. If header files imported with `includec` contain declarations whose definitions are not linked into the executable in which Terra is run, then it is necessary to dynamically load the definitions with `linklibrary`. This situation arises when using external libraries with the `terra` REPL/driver application.
+ファイル`filename`にある動的ライブラリを読み込みます。`includec`でインポートしたヘッダーファイルに含まれる宣言の定義がTerraが実行されている実行ファイルにリンクされていない場合、`linklibrary`で定義を動的に読み込む必要があります。この状況は、外部ライブラリを`terra`のREPL/ドライバーアプリケーションで使用するときに発生します。
 
 ```lua
 local llvmobj = terralib.linkllvm(filename)
 local sym = llvmobj:extern(functionname,functiontype)
 ```
 
-Link an LLVM bitcode file `filename` with extension `.bc` generated with `clang` or `clang++`:
+LLVMビットコードファイル`filename`を`.bc`拡張子でリンクし、`clang`または`clang++`で生成します：
 
 ```sh
 clang++ -O3 -emit-llvm -c mycode.cpp -o mybitcode.bc
 ```
 
-The code is loaded as bitcode rather than machine code. This allows for more aggressive optimization (such as inlining the function calls) but will take longer to initialize in Terra since it must be compiled to machine code. To extract functions from this bitcode file, call the `llvmobj:extern` method providing the function's name in the bitcode and its Terra-equivalent type (e.g. `int -> int`).
+このコードは機械語ではなくビットコードとして読み込まれるため、より強力な最適化（例：関数呼び出しのインライン化）が可能ですが、機械語にコンパイルするためTerraでの初期化に時間がかかります。このビットコードファイルから関数を抽出するには、関数名とTerra相当の型（例：`int -> int`）を指定して`llvmobj:extern`メソッドを呼び出します。
 
-## Converting between Lua values and Terra values
+## Luaの値とTerraの値の変換
 
-When compiling or invoking Terra code, it is necessary to convert values between Terra and Lua. Internally, we implement this conversion on top of LuaJIT's [foreign-function interface](http://luajit.org/ext_ffi.html), which makes it possible to call C functions and use C values directly from Lua. Since Terra type system is similar to that of C's, we can reuse most of this infrastructure.
+Terraコードをコンパイルまたは実行する際、TerraとLua間で値を変換する必要があります。内部的には、この変換はLuaJITの[外国関数インターフェース（FFI）](http://luajit.org/ext_ffi.html)を基にして実装され、Luaから直接C関数の呼び出しやC値の使用が可能です。Terraの型システムはCに似ているため、このインフラストラクチャをほとんど再利用できます。
 
-#### Converting Lua values to Terra values of known type
+#### 既知の型のLua値をTerra値に変換する
 
-When converting Lua values to Terra, we sometimes know the expected type (e.g. when the type is specified in a `terralib.cast` or `terralib.constant` call). In the case, we follow LuaJIT's [conversion semantics](http://luajit.org/ext_ffi_semantics.html#convert-fromlua), substituting the equivalent C type for each Terra type.
+Lua値をTerraに変換する際、期待される型がわかっている場合（例：`terralib.cast`や`terralib.constant`で型が指定されているとき）は、LuaJITの[変換セマンティクス](http://luajit.org/ext_ffi_semantics.html#convert-fromlua)に従い、各Terra型に相当するC型に変換されます。
 
-#### Converting Lua values to Terra values with unknown type
+#### 型が不明なLua値をTerra値に変換する
 
-When a Lua value is used directly from Terra code through an [escape](#escapes), or a Terra value is create without specifying the type (e.g. `terralib.constant(3)`), then we attempt the infer the type of the object. If successful, then the standard conversion is applied. If the `type(value)` is:
+Lua値が[エスケープ](#escapes)を介してTerraコードから直接使用されたり、型指定なしでTerra値が作成される（例：`terralib.constant(3)`）場合、オブジェクトの型を推定しようとします。成功した場合、通常の変換が適用されます。`type(value)`が次の場合に適用される型は次の通りです：
 
-* `cdata` -- If it was previously allocated from the Terra API, or returned from Terra code, then it is converted into the Terra type equivalent to the `ctype` of the object.
-* `number` -- If `floor(value) == value` and value can fit into an `int` then the type is an `int` otherwise it is `double`.
-* `boolean` -- the type is `bool`.
-* `string` -- converted into a `rawstring` (i.e. a `&int8`). We may eventually add a special string type.
-* otherwise -- the type cannot be inferred. If you know the type of the object, then you use a `terralib.cast` function to specify it.
+* `cdata` -- Terra APIから以前に割り当てられた、またはTerraコードから返されたものであれば、オブジェクトの`ctype`に相当するTerra型に変換されます。
+* `number` -- `floor(value) == value`かつ値が`int`に収まる場合は`int`、そうでなければ`double`型とみなされます。
+* `boolean` -- `bool`型になります。
+* `string` -- `rawstring`（すなわち`&int8`）に変換されます。将来的には特別な文字列型を追加する可能性があります。
+* その他 -- 型を推定できません。オブジェクトの型がわかっている場合は、`terralib.cast`関数を使用して指定することができます。
 
-#### Compile-time conversions
+#### コンパイル時の変換
 
-When a Lua value is used as the result of an [escape](#escapes) operator in a Terra function, additional conversions are allowed:
+Luaの値がTerra関数内の[エスケープ](#escapes)演算子の結果として使用される場合、以下の追加変換が許可されます：
 
-* [Global Variable](#global-variable) -- value becomes a lvalue reference to the global variable in Terra code.
-* [Symbol](#symbol) -- value becomes a lvalue reference to the variable defined using the symbol. If the variable is not in scope, this will become a compile-time error.
-* [Quote](#quote) -- the code defined in the quote will be spliced into the Terra code. If the quote contains only statements, it can only be spliced in where a statement appears.
-* [Constant](#constant) -- the constant is spliced into the Terra code.
-* Lua Function -- If used in a function call, the lua function is `terralib.cast` to the Terra function type that has no return values, and whose parameters are the Terra types of the actual parameters of the function call. If not use in a function call, results in an error.
-* [Macro](#macro) -- If used as a function call, the macro will be run at compile time. The result of the macro will then be convert to Terra using the compile-time conversion rules and spliced in place.
-* [Type](#types) -- If used as an argument to a macro call, it will be passed-through such that calling `arg:astype()` will return the value. If used as a function call (e.g. `[&int](v)`, it acts as an explicit cast to that type.
-* [List](#list) or a rawlist (as classified by `terralib.israwlist`) -- Each member of the list is recursively converted to a Lua value using compile-time conversions (excluding the conversions for Lists). If used as a statement or where multiple expressions can appear, all values of the list are spliced in place. Otherwise, if used where only a single expression can appear, the list is truncated to 1 value.
-* `cdata` aggregates (structs and arrays) -- If a Lua `cdata` aggregate of Terra type `T` is referenced directly in Terra code, the value in Terra code will be an lvalue reference of type `T` to the Lua-allocated memory that holds that aggregate.
-* otherwise -- the value is first converted to a Terra vlue using the standard rules for converting Lua to Terra values with unknown type. The resulting value is then spliced in place as a _constant_.
+* [グローバル変数](#global-variable) — 値がTerraコード内でグローバル変数へのlvalue参照となります。
+* [シンボル](#symbol) — シンボルを使って定義された変数へのlvalue参照になります。変数がスコープ内にない場合、コンパイル時エラーが発生します。
+* [引用](#quote) — 引用内で定義されたコードがTerraコードにスプライスされます。引用がステートメントのみを含む場合、ステートメントの位置にのみスプライス可能です。
+* [定数](#constant) — 定数がTerraコードにスプライスされます。
+* Lua関数 — 関数呼び出しで使用される場合、Lua関数は`terralib.cast`で戻り値のないTerra関数型に変換され、実際のパラメータのTerra型が使用されます。関数呼び出し以外ではエラーとなります。
+* [マクロ](#macro) — 関数呼び出しとして使用される場合、コンパイル時に実行され、結果はコンパイル時変換ルールでTerraに変換され、指定された位置にスプライスされます。
+* [型](#types) — マクロ呼び出しの引数として使用される場合、そのまま渡され、`arg:astype()`呼び出しが値を返します。関数呼び出しとして使用された場合（例：`[&int](v)`）、その型への明示的なキャストとして動作します。
+* [リスト](#list) または`terralib.israwlist`で分類された生リスト — リストの各メンバーはコンパイル時変換を用いて再帰的にLua値に変換されます（リストの変換は除く）。ステートメントや複数の式がある場合、リストのすべての値がスプライスされます。単一の式のみが許可される場合、リストは1つの値に切り詰められます。
+* `cdata` 集合体（構造体や配列） — Lua `cdata`集合体のTerra型`T`がTerraコード内で直接参照される場合、その値はLuaで割り当てられたメモリにある集合体へのlvalue参照となります。
+* その他 — 値はまず標準的なLuaからTerraへの変換ルールでTerra値に変換され、結果の値が_定数_としてスプライスされます。
 
+#### Terra値からLua値への変換
 
-#### Converting Terra values to Lua values
+Terra値をLua値に変換する場合（例えば関数呼び出しの結果から）、LuaJITの[C型からLuaオブジェクトへの変換セマンティクス](http://luajit.org/ext_ffi_semantics.html#convert-tolua)に従います。各Terra型に相当するC型に置き換えられ、`cdata`オブジェクトの場合はTerraの[値API](#values)で利用可能です。
 
-When converting Terra values back into Lua values (e.g. from the results of a function call), we follow LuaJIT's [conversion semantics](http://luajit.org/ext_ffi_semantics.html#convert-tolua) from C types to Lua objects, substituting the equivalent C type for each Terra type. If the result is a `cdata` object, it can be used with the Terra [Value API](#values).
+## Terraコードの読み込み
 
-## Loading Terra Code
-
-These functions allow you to load chunks of mixed Terra-Code code at runtime.
+これらの関数を使って、実行時に混在するTerra-Luaコードのチャンクを読み込むことができます。
 
 ```lua
 terralib.load(readerfn)
 ```
 
-Lua equivalent of C API call `terra_load`. `readerfn` behaves the same as in Lua's `load` function.
+C APIの`terra_load`と同等のLua関数です。`readerfn`はLuaの`load`関数と同じ動作をします。
 
 ```lua
 terralib.loadstring(s)
 ```
 
-Lua equivalent of C API call `terra_loadstring`.
+C APIの`terra_loadstring`と同等のLua関数です。
 
 ```lua
 terralib.loadfile(filename)
 ```
 
-Lua equivalent of C API call `terra_loadfile`.
+C APIの`terra_loadfile`と同等のLua関数です。
 
 ```lua
 require(modulename)
 ```
 
-Load the terra code `modulename`. Terra adds an additional code loader to Lua's `package.loaders` to handle the loading of Terra code as a module. `require` first checks if `modulename` has already been loaded by a previous call to `require`, returning the previously loaded results if available. Otherwise it searches `package.terrapath` for the module. `package.terrapath` is a semi-colon separated list of templates, e.g.:
+Terraコードモジュール`modulename`を読み込みます。Luaの`package.loaders`にTerraコードをモジュールとしてロードするための追加コードローダーが登録されています。`require`はまず、以前に`require`を使ってロードされた`modulename`があるかを確認し、存在する場合はそれを返します。存在しない場合は、`package.terrapath`でモジュールを検索します。`package.terrapath`はセミコロンで区切られたテンプレートリストです。例：
 
 ```lua
 "lib/?.t;./?.t"
 ```
 
-The `modulename` is first converted into a path by replacing any `.` with a directory separator, `/`. Then each template is tried until a file is found. For instance, using the example path, the call `require("foo.bar")` will try to load `lib/foo/bar.t` or `foo/bar.t`. If a file is found, then `require` will return the result of calling `terralib.loadfile` on the file. By default, `package.terrapath` is set to the environment variable `TERRA_PATH`. If `TERRA_PATH` is not set then `package.terrapath` will contain the default path (`./?.t`). The string `;;` in `TERRA_PATH` will be replaced with this default path if it exists.
+`modulename`は、`.`をディレクトリセパレータ`/`に置き換えてパスに変換されます。そして、ファイルが見つかるまで各テンプレートが試されます。例えば、このパスを使用すると、`require("foo.bar")`は`lib/foo/bar.t`または`foo/bar.t`をロードしようとします。ファイルが見つかると、そのファイルに対する`terralib.loadfile`呼び出しの結果が返されます。デフォルトでは、`package.terrapath`は環境変数`TERRA_PATH`に設定されます。`TERRA_PATH`が設定されていない場合、`package.terrapath`にはデフォルトのパス（`./?.t`）が含まれます。`TERRA_PATH`内の`;;`は存在する場合、デフォルトパスに置き換えられます。
 
-Note that normal Lua code is also imported using `require`. There are two search paths `package.path` (env `LUA_PATH`), which will load code as pure Lua, and `package.terrapth` (env: `TERRA_PATH`), which will load code as Lua-Terra code.
+通常のLuaコードも`require`を使ってインポートされることに注意してください。`package.path`（環境変数`LUA_PATH`）は純粋なLuaコードのロードに使用され、`package.terrapath`（環境変数`TERRA_PATH`）はLua-Terraコードのロードに使用されます。
 
-## Compilation API
+## コンパイルAPI
 
-### Saving Terra Code
+### Terraコードの保存
 
 ```lua
 terralib.saveobj(filename [, filetype], functiontable[, arguments, target, optimize])
 ```
 
-Save Terra code to an external representation such as an object file, or executable. `filetype` can be one of `"object"` (an object file `*.o`), `"asm"` (an assembly file `*.s`), `"bitcode"` (LLVM bitcode `*.bc`), `"llvmir"` (LLVM textual IR `*.ll`), or `"executable"` (no extension).
-If `filetype` is missing then it is inferred from the extension. `functiontable` is a table from strings to Terra functions. These functions will be included in the code that is written out with the name given in the table.
-`arguments` is an additional list that can contain flags passed to the linker when `filetype` is `"executable"`. If `filename` is `nil`, then the file will be written in memory and returned as a Lua string.
+Terraコードを外部ファイル形式（オブジェクトファイルや実行ファイルなど）に保存します。`filetype`には、`"object"`（オブジェクトファイル `*.o`）、`"asm"`（アセンブリファイル `*.s`）、`"bitcode"`（LLVMビットコード `*.bc`）、`"llvmir"`（LLVMテキストIR `*.ll`）、または`"executable"`（拡張子なし）のいずれかを指定できます。`filetype`が省略された場合、拡張子から自動的に推測されます。
 
-To cross-compile objects for a different architecture, you can specific a [target](#targets) object, which describes the architecture to compile for. Otherwise `saveobj` will use the native architecture.
+`functiontable`は文字列からTerra関数へのテーブルで、これらの関数が指定された名前で出力されるコードに含まれます。`arguments`はリンク時に渡される追加のフラグリストで、`filetype`が`"executable"`の場合に使用されます。`filename`が`nil`の場合、ファイルはメモリ内に書き込まれ、Lua文字列として返されます。
 
-By default, `saveobj` compiles code with the equivalent of Clang `-O3`. This optimization profile can be customized to either disable optimizations, or to enable additional, potentially unsafe fast-math optimizations. The possible values of `optimize` are:
+別のアーキテクチャ用にオブジェクトをクロスコンパイルする場合は、ターゲットアーキテクチャを説明する[target](#targets)オブジェクトを指定できます。指定がない場合、`saveobj`はネイティブアーキテクチャを使用します。
 
-  * `true` or `false`: Enable or disable optimizations (equivalent of `-O3`). Default is enabled. Does not include any fast-math optimizations.
-  * `{optimize = ..., fastmath = ...}`: A table specifying an optimization profile. The `optimize` key takes boolean values `true` or `false` as described above (default `true` if left unspecified). The possible values for `fastmath` are described below.
+デフォルトでは、`saveobj`はClangの`-O3`相当の最適化でコードをコンパイルします。`optimize`の設定で最適化を無効にしたり、安全でない高速数学の最適化を追加で有効にしたりできます。`optimize`の値は次の通りです：
 
-The `fastmath` key in an optimization profile may take any of the following values:
+* `true` または `false`：最適化を有効/無効にする（`-O3`相当）。デフォルトは有効です。高速数学最適化は含まれません。
+* `{optimize = ..., fastmath = ...}`：最適化プロファイルを指定するテーブル。`optimize`キーは前述の`true`または`false`（指定しない場合はデフォルトで`true`）。`fastmath`の可能な値は以下で説明します。
 
-  * `true` or `false`: Enable or disable all [LLVM fast-math flags](https://llvm.org/docs/LangRef.html#fast-math-flags). Default is `false` if unspecified.
-  * `"flag"`: A string specifying a single fast-math flag enables just that one flag. All other flags are disabled.
-  * `{"flag1", "flag2"}`: A list of strings specifying zero or more fast-math flags enable all of the listed flags. All other flags are disabled.
+`fastmath`キーには以下のいずれかの値を指定できます：
 
-The list of valid LLVM fast-math flags can be seen [here](https://llvm.org/docs/LangRef.html#fast-math-flags). Note that the precise set of available flags may depend on the LLVM version, and is outside of Terra's control.
+* `true` または `false`：すべての[LLVM高速数学フラグ](https://llvm.org/docs/LangRef.html#fast-math-flags)を有効/無効にします（デフォルトは`false`）。
+* `"flag"`：単一の高速数学フラグを指定し、それだけを有効化。他のフラグは無効。
+* `{"flag1", "flag2"}`：複数のフラグをリストとして指定し、リスト内のフラグをすべて有効化。他のフラグは無効。
 
-Examples:
+LLVMの高速数学フラグの一覧は[こちら](https://llvm.org/docs/LangRef.html#fast-math-flags)から確認できます。利用可能なフラグはLLVMのバージョンに依存し、Terraの管理外です。
+
+例：
 
 ```lua
-terralib.saveobj("a.o", {main=main}, nil, nil, false) -- Disable optimizations.
-terralib.saveobj("a.o", {main=main}, nil, nil, {fastmath=true}) -- Enable all fast-math optimizations.
-terralib.saveobj("a.o", {main=main}, nil, nil, {fastmath={"contract", "nnan"}}) -- Enable contract and nnan.
+terralib.saveobj("a.o", {main=main}, nil, nil, false) -- 最適化を無効化。
+terralib.saveobj("a.o", {main=main}, nil, nil, {fastmath=true}) -- 全ての高速数学最適化を有効化。
+terralib.saveobj("a.o", {main=main}, nil, nil, {fastmath={"contract", "nnan"}}) -- contractとnnanを有効化。
 ```
 
-### Targets
+### ターゲット
 
-The functions `terralib.saveobj` and `terralib.includec` take an optional target object, that tells the compiler to compile the code for a different architecture. These targets  can be used for cross-compilation. For example, to use an x86 machine to to compile ARM code for a Raspberry Pi, you can create the following target object:
+`terralib.saveobj`や`terralib.includec`は、コードを異なるアーキテクチャ用にコンパイルするためのターゲットオブジェクトをオプションで受け取ります。これによりクロスコンパイルが可能になります。例えば、x86マシンを使ってRaspberry Pi用にARMコードをコンパイルするには、次のようにターゲットオブジェクトを作成します：
 
 ```lua
 local armtarget = terralib.newtarget {
-    Triple = "armv6-unknown-linux-gnueabi"; -- LLVM target triple
-    CPU = "arm1176jzf-s";,  -- LLVM CPU name,
-    Features = ""; -- LLVM feature string
-    FloatABIHard = true; -- For ARM, use floating point registers
+    Triple = "armv6-unknown-linux-gnueabi"; -- LLVMターゲットトリプル
+    CPU = "arm1176jzf-s";,  -- LLVM CPU名
+    Features = ""; -- LLVMの特徴文字列
+    FloatABIHard = true; -- ARM用に浮動小数点レジスタを使用
 }
 ```
 
-All entries in the table except the `Triple` field are optional. [Documentation](http://clang.llvm.org/docs/CrossCompilation.html) for `clang` includes more information about what these strings should be set to.
+テーブル内の`Triple`フィールド以外のエントリはオプションです。設定する文字列に関する詳細情報は、[clangのドキュメント](http://clang.llvm.org/docs/CrossCompilation.html)で確認できます。
 
-## Debugging
+## デバッグ
 
-Terra provides a few library functions to help debug and performance tune code. Except for `currenttimeinseconds`,
-these debugging facilities are only available on OSX and Linux.
+Terraにはコードのデバッグやパフォーマンスチューニングに役立つライブラリ関数がいくつか用意されています。`currenttimeinseconds`以外のデバッグ機能は、OSXおよびLinuxでのみ使用可能です。
 
 ```lua
 terralib.currenttimeinseconds()
 ```
 
-A Lua function that returns the current time in seconds since some fixed time in the past. Useful for performance tuning Terra code.
+過去のある時点からの経過時間を秒で返すLua関数です。Terraコードのパフォーマンスチューニングに便利です。
 
 ```lua
 terra terralib.traceback(uctx : &opaque)
 ```
 
-A Terra function that can be called from Terra code to print a stack trace. If `uctx` is `nil` then this will print the current stack. `uctx` can also be a pointer to a `ucontext_t` object (see `ucontext.h`) and will print the stack trace for that context.
-By default, the interpreter will print this information when a program segfaults.
+Terraコードから呼び出してスタックトレースを出力するTerra関数です。`uctx`が`nil`の場合は現在のスタックを出力します。`uctx`は`ucontext_t`オブジェクト（`ucontext.h`参照）へのポインタとしても指定でき、そのコンテキストのスタックトレースを表示します。デフォルトでは、プログラムがセグメンテーションフォールトを起こした際にこの情報が出力されます。
 
 ```lua
 terra terralib.backtrace(addresses : &&opaque, naddr : uint64, ip : &opaque, frameaddress : &opaque)
 ```
 
-A low-level interface used to get the return addresses from a machine stack. `addresses` must be a pointer to a buffer that can hold at least `naddr` pointers.
-`ip` should be the address of the current instruction and will be the first entry in `addresses`, while `frameaddress` should be the value of the base pointer.
-`addresses` will be filled with the return addresses on the stack. Requires debugging mode to be enabled (`-g`) for it to work correctly.
+低レベルのインターフェースで、マシンスタックからリターンアドレスを取得します。`addresses`は少なくとも`naddr`ポインタ分の容量があるバッファへのポインタである必要があります。`ip`は現在の命令のアドレスで、最初のエントリとして`addresses`に格納され、`frameaddress`はベースポインタの値にする必要があります。`addresses`にはスタック上のリターンアドレスが格納されます。正しく機能させるにはデバッグモードを有効化（`-g`オプション）する必要があります。
 
 ```lua
 terra terralib.disas(addr : &opaque, nbytes : uint64, ninst : uint64)
 ```
 
-A low-level interface to the disassembler. Print the disassembly of instructions starting at `addr`. Will print `nbytes` of instructions or `ninst` instructions, whichever causes more instructions to be printed.
+低レベルの逆アセンブラインターフェースです。`addr`から始まる命令の逆アセンブルを出力します。`nbytes`バイト分または`ninst`命令分のいずれか多くなる方の命令が出力されます。
 
 ```lua
 terra terralib.lookupsymbol(ip : &opaque, addr : &&opaque, size : &uint64, name : &rawstring, namelength : &uint64) : bool
 ```
 
-Attempts to look up information about a Terra function given a pointer  `ip` to any instruction in the function. Returns `true` if successful,
-filling in `addr` with the start of the function and `size` with the size of the function in bytes. Fills in `name` with a pointer to a fixed-width string of to `namemax` characters holding the function name.
+任意の命令のポインタ`ip`を基に、Terra関数に関する情報を検索しようと試みます。成功すると`true`を返し、`addr`に関数の開始アドレス、`size`に関数のバイト数が格納されます。`name`には関数名を最大`namemax`文字まで固定幅文字列として格納します。
 
 ```lua
 terra terralib.lookupline(fnaddr : &opaque, ip : &opaque, filename : &rawstring, namelength : &uint64, line : &uint64) : bool
 ```
 
-Attempts to look up information about a Terra instruction given a pointer `ip` to the instruction and a pointer `fnaddr` to the start of the function containing it.
-Returns `true` if successful, filling in `line` with line on which the instruction occurred and `filename` with a pointer to a fixed-width string of to `namemax` characters holding the filename.
-Fills up to `namemax` characters of the function's name into `name`.
+命令のポインタ`ip`と、それを含む関数の開始アドレス`fnaddr`を指定して、Terra命令に関する情報を検索しようと試みます。成功すると`true`を返し、`line`に命令がある行番号、`filename`にファイル名が最大`namemax`文字まで格納されます。
 
-## Embedding Terra inside C code
+## Cコード内にTerraを埋め込む
 
-Like Lua, Terra is designed to be embedded into existing code.
-The C API for Terra serves as the entry-point for running Terra-Lua programs.
-In fact, the `terra` executable and REPL are just clients of the C API. The Terra C API extends [Lua's API](http://www.lua.org/manual/5.1/manual.html#3) with a set of Terra-specific functions. A client first creates a `lua_State` object and then calls `terra_init` on it to initialize the Terra extensions. Terra provides equivalents to the `lua_load` set of functions (e.g. `terra_loadfile`), which treat the input as Terra-Lua code.
+Luaと同様に、Terraは既存のコードに埋め込むことを意図して設計されています。TerraのC APIは、Terra-Luaプログラムを実行するためのエントリーポイントとして機能します。実際、`terra`の実行ファイルとREPLは、このC APIのクライアントに過ぎません。TerraのC APIは、[LuaのAPI](http://www.lua.org/manual/5.1/manual.html#3)を拡張しており、Terra固有の関数が追加されています。クライアントはまず`lua_State`オブジェクトを作成し、`terra_init`を呼び出してTerra拡張を初期化します。Terraには、`lua_load`に相当する関数（例：`terra_loadfile`）が用意されており、これらの関数は入力をTerra-Luaコードとして扱います。
 
 ```lua
 int terra_init(lua_State * L);
 ```
 
-Initializes the internal Terra state for the `lua_State` `L`. `L` must be an already initialized `lua_State`.
+`lua_State` `L`の内部Terra状態を初期化します。`L`はすでに初期化された`lua_State`である必要があります。
 
 ```lua
-typedef struct { /* default values are 0 */
-    int verbose; /* Sets verbosity of debugging output.
-                    Valid values are 0 (no debug output)
-                    to 2 (very verbose). */
-    int debug;   /* Turns on debug information in Terra compiler.
-                    Enables base pointers and line number
-                    information in stack traces. */
+typedef struct { /* 初期値は0 */
+    int verbose; /* デバッグ出力の冗長性を設定します。
+                    0（デバッグ出力なし）から2（非常に冗長）までの
+                    値が有効です。 */
+    int debug;   /* Terraコンパイラでデバッグ情報を有効にします。
+                    スタックトレースにベースポインタと行番号情報が
+                    表示されるようになります。 */
 } terra_Options;
 int terra_initwithoptions(lua_State * L, terra_Options * options);
 ```
 
-Initializes the internal Terra state for the `lua_State` `L`. `L` must be an already initialized `lua_State`. `terra_Options` holds additional configuration options.
+`lua_State` `L`の内部Terra状態を初期化します。`L`はすでに初期化された`lua_State`である必要があります。`terra_Options`には追加の設定オプションが含まれます。
 
 ```lua
 int terra_load(lua_State *L,
@@ -1302,13 +1278,13 @@ int terra_load(lua_State *L,
                const char *chunkname);
 ```
 
-Loads a combined Terra-Lua chunk. Terra equivalent of `lua_load`. This function takes the same arguments as `lua_load` and performs identically except it parses the input as a combined Terra-Lua program (i.e. a Lua program that has Terra extensions). Currently there is no binary format for combined Lua-Terra code, so the input must be text.
+TerraとLuaの両方を含むチャンクを読み込みます。これは`lua_load`のTerra版であり、引数や動作は`lua_load`と同じですが、入力をTerra拡張を含むLuaプログラムとして解釈します。現時点では、Lua-Terraコードのバイナリ形式はなく、入力はテキストでなければなりません。
 
 ```lua
 int terra_loadfile(lua_State * L, const char * file);
 ```
 
-Loads the file as a combined Terra-Lua chunk. Terra equivalent of `luaL_loadfile`.
+ファイルをTerra-Luaチャンクとして読み込みます。`luaL_loadfile`のTerra版です。
 
 ```lua
 int terra_loadbuffer(lua_State * L,
@@ -1317,19 +1293,19 @@ int terra_loadbuffer(lua_State * L,
                          const char *name);
 ```
 
-Loads a buffer as a combined Terra-Lua chunk. Terra equivalent of `luaL_loadbuffer`.
+バッファをTerra-Luaチャンクとして読み込みます。`luaL_loadbuffer`のTerra版です。
 
 ```lua
 int terra_loadstring(lua_State *L, const char *s);
 ```
 
-Loads string `s` as a combined Terra-Lua chunk. Terra equivalent of `luaL_loadstring`.
+文字列`s`をTerra-Luaチャンクとして読み込みます。`luaL_loadstring`のTerra版です。
 
 ```lua
 terra_dofile(L, file)
 ```
 
-Loads and runs the file `file`. Equivalent to
+ファイル`file`を読み込み、実行します。以下のコードと同等です。
 
 ```lua
 (terra_loadfile(L, fn) || lua_pcall(L, 0, LUA_MULTRET, 0))
@@ -1339,113 +1315,110 @@ Loads and runs the file `file`. Equivalent to
 terra_dostring(L, s)
 ```
 
-Loads and runs the string `s`. Equivalent to
+文字列`s`を読み込み、実行します。以下のコードと同等です。
 
 ```lua
 (terra_loadstring(L, s) || lua_pcall(L, 0, LUA_MULTRET, 0))
 ```
 
-## Embedding New Languages Inside Lua
+## Luaに埋め込む新しい言語の作成
 
-Language extensions in the Terra system allow you to create custom Lua statements and expressions that you can use to implement your own embedded language. Each language registers a set of entry-point keywords that indicate the start of a statement or expression in your language. If the Terra parser sees one of these keywords at the beginning of a Lua expression or statement, it will switch control of parsing over to your language, where you can  parse the tokens into an abstract syntax tree (AST), or other intermediate representation. After creating the AST, your language then returns a _constructor_ function back to Terra parser. This function will be called during execution when your statement or expression should run.
+Terraシステムの言語拡張により、カスタムLua文や式を作成して独自の埋め込み言語を実装することができます。各言語は、言語内の文や式の開始を示すエントリーポイントキーワードを登録します。TerraパーサがLua式や文の先頭でこれらのキーワードのいずれかを検出すると、パーサの制御がその言語に切り替わり、トークンを抽象構文木（AST）またはその他の中間表現に解析します。ASTを作成した後、言語はTerraパーサに戻り、実行時に文や式を実行するためのコンストラクタ関数を返します。
 
-This guide introduces language extensions with a simple stand-alone example, and shows how to register the extension with Terra. We then expand on this example by showing how it can interact with the Lua environment. The end of the guide documents the language extension interface, and the interface to the lexer in detail.
+このガイドでは、簡単なスタンドアロンの例を用いて言語拡張の基本を紹介し、Terraへの登録方法を示します。その後、この例を拡張してLua環境と相互作用する方法を説明します。ガイドの最後には、言語拡張インターフェースとレキサーインターフェースの詳細な仕様が記載されています。
 
-### A Simple Example
+### 簡単な例
 
-To get started, let's add a simple language extension to Lua that sums up a list of numbers. The syntax will look like `sum 1,2,3 done`, and when run it will sum up the numbers, producing the value `6`. A language extension is defined using a Lua table. Here is the table for our language
-
+まず、Luaに単純な言語拡張を追加し、数値のリストを合計する言語を作成します。この構文は `sum 1,2,3 done` のような形で、実行すると数値を合計して `6` を出力します。言語拡張はLuaのテーブルを使って定義されます。以下がその言語のテーブルです。
 
 ```lua
 local sumlanguage = {
-  name = "sumlanguage"; --name for debugging
-  -- list of keywords that will start our expressions
+  name = "sumlanguage"; -- デバッグ用の名前
+  -- 式の開始トークンとなるキーワードリスト
   entrypoints = {"sum"};
-  keywords = {"done"}; --list of keywords specific to this language
-   --called by Terra parser to enter this language
+  keywords = {"done"}; -- この言語固有のキーワードリスト
+   -- Terraパーサから呼び出されてこの言語に入ります
   expression = function(self,lex)
-    --implementation here
+    -- 実装がここに入ります
   end;
 }
 ```
 
-We list `"sum"` in the `entrypoints` list since we want Terra to hand control over to our language when it encounters this token at the beginning of an expression. We also list `"done"` as a keyword since we are using it to end our expression. When the Terra parser sees the `sum` token it will call the `expression` function passing in an interface to the lexer, `lex`. Here is the implementation:
+ここでは、`entrypoints`リストに `"sum"` を追加しています。これは、このトークンが式の先頭に現れた際にTerraが制御をこの言語に渡すようにするためです。また、式の終わりを示す `"done"` もキーワードとしてリストに追加しています。Terraパーサが`sum`トークンを見つけたときに、`expression`関数が呼び出され、レキサーへのインターフェース `lex` が引数として渡されます。実装は以下の通りです。
 
 ```lua
 expression = function(self,lex)
   local sum = 0
-  lex:expect("sum") --first token should be "sum"
+  lex:expect("sum") -- 最初のトークンは "sum" であるべき
   if not lex:matches("done") then
     repeat
-      --parse a number, return its value
+      -- 数値を解析してその値を返します
       local v = lex:expect(lex.number).value
       sum = sum + v
-    --if there is a comma, consume it and continue
+    -- コンマがあれば、それを消費して続行
     until not lex:nextif(",")
   end
 
   lex:expect("done")
-  --return a function that is run
-  --when this expression would be evaluated by Lua
+  -- この式がLuaで評価されるときに実行される関数を返します
   return function(environment_function)
     return sum
   end
 end
 ```
 
-We use the `lex` object to interact with the tokens. The interface is documented below. Since the statement only allows numeric constants, we can perform the summation during parsing. Finally, we return a _constructor_ function that will be run every time this statement is executed. We can use it in Lua code like so:
+`lex` オブジェクトを使ってトークンと対話しています。このインターフェースは後述します。この文は数値の定数のみを許可しているため、解析中に合計を計算できます。最後に、_コンストラクタ関数_ を返し、この文が実行されるたびにこの関数が呼び出されます。Luaコードでの使用例は以下の通りです。
 
 ```lua
-print(sum 1,2,3 done) -- prints 6
+print(sum 1,2,3 done) -- 6を出力
 ```
 
-The file `tests/lib/sumlanguage.t` contains the code for this example, and `tests/sumlanguage1.t` has an example of its use.
+この例のコードは `tests/lib/sumlanguage.t` にあり、その使用例は `tests/sumlanguage1.t` にあります。
 
-### Loading and Running the Language
+### 言語の読み込みと実行
 
-In order to use our language extension, it needs to be _imported_.
-The language extension mechanism includes an `import` statment to load the language extension:
+言語拡張を使用するためには、それを _インポート_ する必要があります。
+言語拡張の仕組みには、言語拡張をロードするための `import` 文が含まれています。
 
 ```lua
-import "lib/sumlanguage" --active the new parsing rules
+import "lib/sumlanguage" -- 新しいパース規則を有効化
 result = sum 1,2,3 done
 ```
 
-Since `import` statements are evaluated at _parse_ time, the argument must be a string literal.
-The parser will then call `require` on the string literal to load the language extension file.
-The file specified should _return_ the Lua table describing your language:
+`import` 文は _パース時_ に評価されるため、引数は文字列リテラルでなければなりません。パーサはこの文字列リテラルを使って `require` を呼び出し、言語拡張ファイルを読み込みます。
+指定されたファイルは、言語を記述したLuaテーブルを _return_ する必要があります。
 
 ```lua
-local sumlanguage = { ... } --fill in your table
+local sumlanguage = { ... } -- テーブルを記入
 return sumlanguage
 ```
 
-The imported language will be enabled only in the local scope where the import statement occured:
+インポートされた言語は、インポート文が現れたローカルスコープ内でのみ有効です。
 
 ```lua
 do
     import "lib/sumlanguage"
-    result = sum 1,2,3 done --ok, in scope
+    result = sum 1,2,3 done -- OK、スコープ内
     if result == 6 then
-        result = sum 4,5 done -- ok, still in scope
+        result = sum 4,5 done -- OK、まだスコープ内
     end
 end
-result = sum 6,7 done --error! sumlanguage is not in scope
+result = sum 6,7 done -- エラー! sumlanguageはスコープ外
 ```
 
-Multiple languages can be imported in the same scope as long as their `entrypoints` do not overlap.
-If their entrypoints do overlap, the languages can still be imported in the same file as long as the `import` statements occur in different scopes.
+複数の言語を同じスコープにインポートすることも可能ですが、`entrypoints` が重複しない必要があります。
+もし`entrypoints` が重複する場合、`import` 文が異なるスコープで発生すれば同じファイル内でインポートできます。
 
-### Interacting with Lua symbols
+### Luaシンボルとの相互作用
 
-One of the advantages of Terra is that it shares the same lexical scope as Lua, making it easy to parameterize Terra functions. Extension languages can also access Lua's static scope. Let's extend our sum language so that it supports both constant numbers, as well as Lua variables:
+Terraの利点の一つは、Luaと同じレキシカルスコープを共有することにより、Terraの関数を簡単にパラメータ化できる点です。拡張言語もまたLuaの静的スコープにアクセスできます。では、定数の数値だけでなくLuaの変数もサポートするように、sum言語を拡張してみましょう。
 
 ```lua
 local a = 4
-print(sum a,3 done) --prints 7
+print(sum a,3 done) -- 7を出力します
 ```
 
-To do this we need to modify the code in our `expression` function:
+これを行うには、`expression`関数内のコードを修正する必要があります。
 
 ```lua
 expression = function(self,lex)
@@ -1454,12 +1427,12 @@ expression = function(self,lex)
   lex:expect("sum")
   if not lex:matches("done") then
     repeat
-      if lex:matches(lex.name) then --if it is a variable
+      if lex:matches(lex.name) then -- 変数の場合
         local name = lex:next().value
-        --tell the Terra parser
-        --we will access a Lua variable, 'name'
+        -- Terraのパーサーに指示
+        -- Luaの変数 'name' にアクセスすることを伝える
         lex:ref(name)
-        --add its name to the list of variables
+        -- 変数名をリストに追加
         variables:insert(name)
       else
         sum = sum + lex:expect(lex.number).value
@@ -1468,8 +1441,8 @@ expression = function(self,lex)
   end
   lex:expect("done")
   return function(environment_function)
-    --capture the local environment
-    --a table from variable name => value
+    -- ローカル環境をキャプチャ
+    -- 変数名から値へのテーブル
     local env = environment_function()
     local mysum = sum
     for i,v in ipairs(variables) do
@@ -1480,19 +1453,19 @@ expression = function(self,lex)
 end
 ```
 
-Now an expression can be a variable name (`lex.name`). Unlike constants, we don't know the value of this variable at parse time, so we cannot calculate the entire sum before execution. Instead, we save the variable name (`variables:insert(name)`) and tell the Terra parser that will need the value of this variable at runtime (`lex:ref(name)`).  In our _constructor_ we now capture the local lexical environment by calling the `environment_function` parameter, and look up the values of our variables in the environment to compute the sum. It is important to call `lex:ref(name)`. If we had not called it, then this environment table will not contain the variables we need.
+これで、式は変数名（`lex.name`）を含むことができます。定数とは異なり、変数の値は解析時にわからないため、実行前に合計を計算することはできません。代わりに、変数名を保存（`variables:insert(name)`）し、Terraのパーサーに実行時にその変数の値が必要であることを伝えます（`lex:ref(name)`）。_コンストラクタ_では、`environment_function`パラメータを呼び出すことでローカルなレキシカル環境をキャプチャし、その環境内で変数の値を参照して合計を計算します。`lex:ref(name)`を呼び出すことが重要です。もしこれを呼び出さなければ、この環境テーブルには必要な変数が含まれません。
 
-### Recursively Parsing Lua
+### Luaの再帰的な解析
 
-Sometimes in the middle of your language you may want to call back into the Lua parser to parse an entire Lua expression. For instance, Terra types are Lua expressions:
+場合によっては、言語の途中でLuaのパーサーに戻り、Luaの式全体を解析したいことがあります。例えば、Terraの型はLuaの式です。
 
 ```lua
 var a : int = 3
 ```
 
-In this example, `int` is actually a Lua expression.
+この例では、`int`は実際にはLuaの式です。
 
-The method `lex:luaexpr()` will parse a Lua expression. It returns a Lua function that implements the expression. This functions takes the local lexical environment, and returns the value of the expression in that environment. As an example, let's add a concise way of specifying a single argument Lua function, `def(a) exp`, where `a` is a single argument and `exp` is a Lua expression. This is similar to Pythons `lambda` statement. Here is our language extension:
+`lex:luaexpr()`メソッドはLuaの式を解析します。このメソッドは、式を実装するLua関数を返します。この関数はローカルなレキシカル環境を受け取り、その環境での式の値を返します。例として、単一引数のLua関数を簡潔に指定する方法を追加してみましょう。`def(a) exp`のように、ここで`a`は単一の引数、`exp`はLuaの式です。これはPythonの`lambda`ステートメントに似ています。以下にその言語拡張を示します。
 
 ```lua
 {
@@ -1506,13 +1479,12 @@ The method `lex:luaexpr()` will parse a Lua expression. It returns a Lua functio
     lex:expect(")")
     local expfn = lex:luaexpr()
     return function(environment_function)
-      --return our result, a single argument lua function
+      -- 結果を返します。単一引数のlua関数です。
       return function(actual)
         local env = environment_function()
-        --bind the formal argument
-        --to the actual one in our environment
+        -- 仮引数を環境内の実引数にバインド
         env[formal] = actual
-        --evaluate our expression in the environment
+        -- 環境内で式を評価
         return expfn(env)
       end
     end
@@ -1520,259 +1492,256 @@ The method `lex:luaexpr()` will parse a Lua expression. It returns a Lua functio
 }
 ```
 
-The full code for this example can be found in `tests/lib/def.t` and `tests/def1.t`.
+この例の完全なコードは`tests/lib/def.t`および`tests/def1.t`にあります。
 
-### Extending Statements
+### ステートメントの拡張
 
-In addition to extending the syntax of expressions, you can also define new syntax for statements and local variable declarations:
-
-```lua
-terra foo() end -- a new statement
-local terra foo() end -- a new local variable declaration
-```
-
-This is done by specifying the `statement` and `localstatement` functions in your language table. These function behave the same way as the `expression` function, but they can optionally return a list of names that they define. The file `test/lib/def.t` shows how this would work for the `def` constructor to support statements:
+式の構文を拡張するだけでなく、ステートメントやローカル変数の宣言に対しても新しい構文を定義できます。
 
 ```lua
-def foo(a) luaexpr --defines global variable foo
-local def bar(a) luaexpr --defines local variable bar
+terra foo() end -- 新しいステートメント
+local terra foo() end -- 新しいローカル変数の宣言
 ```
 
-### Higher-Level Parsing via Pratt Parsers
+これは、言語テーブルに`statement`および`localstatement`関数を指定することで行います。これらの関数は、`expression`関数と同様に動作しますが、定義する名前のリストをオプションで返すことができます。ファイル`test/lib/def.t`には、この方法を使って`def`コンストラクタでステートメントをサポートする方法が示されています。
 
-Writing a parser that directly uses the lexer interface can be tedious. One simple approach that makes parsing easier (especially for expressions with multiple precedence levels) is Pratt parsing, or top-down precedence parsing (for more information, see http://javascript.crockford.com/tdop/tdop.html). We've provided a library built on top of the Lexer interface to help do this. It can be found, along with documentation of the API in `tests/lib/parsing.t`. An example extension written using this library is found in `tests/lib/pratttest.t` and an example program using it in `tests/pratttest1.t`.
+```lua
+def foo(a) luaexpr -- グローバル変数 foo を定義
+local def bar(a) luaexpr -- ローカル変数 bar を定義
+```
 
-### The Language and Lexer API
+### Prattパーサによる高レベルの解析
 
-This section describes the API for defining languages and interacting with the `lexer` object in detail.
+直接的に字句解析器インターフェースを使ってパーサを書くのは手間がかかります。解析を簡単にするためのシンプルな方法の一つに、Prattパーサ（トップダウンの優先度解析、詳細は[こちら](http://javascript.crockford.com/tdop/tdop.html)）があります。この方法は、特に複数の優先度レベルがある式に対して便利です。Lexerインターフェース上に構築されたライブラリを提供しており、APIのドキュメントと共に`tests/lib/parsing.t`で見つけることができます。このライブラリを使用した拡張の例は`tests/lib/pratttest.t`、およびそれを使用したプログラムの例は`tests/pratttest1.t`にあります。
 
-#### Language Table
+### 言語とLexer API
 
-A language extension is defined by a Lua table containing the following fields.
+このセクションでは、言語を定義し、`lexer`オブジェクトとやり取りするためのAPIについて詳しく説明します。
+
+#### 言語テーブル
+
+言語拡張は、次のフィールドを持つLuaテーブルによって定義されます。
 
 ```lua
 name
 ```
 
-a name for your language used for debugging
+デバッグに使用する言語の名前
 
 ```lua
 entrypoints
 ```
 
-A Lua list specifying the keywords that can begin a term in your language. These keywords must not be a Terra or Lua keyword and cannot overlap with entry-points for other loaded languages (In the future, we may allow you to rename entry-points when you load a language to resolve conflicts). These keywords must be valid Lua identifiers (i.e. they must be alphanumeric and cannot start with a number). In the future, we may expand this to allow arbitrary operators (e.g. `+=`) as well.
+この言語での項を開始できるキーワードを指定するLuaリストです。これらのキーワードは、TerraやLuaのキーワードであってはならず、他の読み込まれた言語のエントリーポイントと重複してはなりません（将来的には、言語を読み込む際にエントリーポイントの名前を変更して競合を解決できるようにする可能性があります）。これらのキーワードは有効なLua識別子でなければなりません（すなわち、英数字で構成され、数字で始まってはなりません）。将来的には任意の演算子（例：`+=`）を許可することを検討しています。
 
 ```lua
 keywords
 ```
 
-A Lua list specifying any additional keywords used in your language. Like entry-points, these also must be valid identifiers. A keyword in Lua or Terra is always considered a keyword in your language, so you do not need to list them here.
+言語内で使用する追加のキーワードを指定するLuaリストです。エントリーポイントと同様に、これらも有効な識別子である必要があります。LuaやTerra内でキーワードとされるものは常にあなたの言語でもキーワードとして扱われるため、ここにリストする必要はありません。
 
 ```lua
 expression
 ```
 
-(Optional) A Lua method `function(self,lexer)` that is called whenever the parser encounters an entry-point keyword at the beginning of a Lua expression. `self` is your language object, and `lexer` is a Lua object used to interact with Terra's lexer to retrieve tokens and report errors. Its API is described below. The `expression` method should return a _constructor_ function `function(environment_function)`. The constructor is called every time the expression is evaluated and should return the value of the expression as it should appear in Lua code.  Its argument, `environment_function`, is a function  that when called, returns the local lexical environment as Lua table from  variable names to values.
+（オプション）Luaの式の先頭にエントリーポイントキーワードが出現した場合に呼び出されるLuaメソッド`function(self,lexer)`です。`self`は言語オブジェクト、`lexer`はトークンの取得やエラーの報告を行うためにTerraの字句解析器とやり取りするためのLuaオブジェクトです。そのAPIについては以下で説明します。この`expression`メソッドは、コンストラクタ関数`function(environment_function)`を返すべきです。このコンストラクタは式が評価されるたびに呼び出され、その式がLuaコード内で現れる際の値を返す必要があります。引数`environment_function`は、呼び出されると変数名から値へのLuaテーブルとしてローカルなレキシカル環境を返す関数です。
 
 ```lua
 statement
 ```
 
-(Optional) A Lua method `function(self,lexer)` called when the parser encounters an entry-point keyword at the beginning of a Lua _statement_. Similar to `expression`, it returns a constructor function. Additionally, it can return a second argument that is a list of assignements that the statement performs to variables. For instance, the value `{ "a", "b", {"c","d"} }` will behave like the Lua statement `a,b,c.d = constructor(...)`
+（オプション）Lua _ステートメント_の先頭にエントリーポイントキーワードが出現した場合に呼び出されるLuaメソッド`function(self,lexer)`です。`expression`と同様にコンストラクタ関数を返します。さらに、変数に対する代入のリストとして二つ目の引数を返すことができます。たとえば、値`{ "a", "b", {"c","d"} }`はLuaステートメント`a,b,c.d = constructor(...)`のように振る舞います。
 
 ```lua
 localstatement
 ```
 
-(Optional) A Lua method `function(self,lexer)` called when the parser encounters an entry-point keyword at the beginning of a `local` statment (e.g. `local terra foo() end`). Similar to `statement` this method can also return a list of names (e.g. `{"a","b"}`). However, in this case, these names will be defined as local variables `local a, b = constructor(...)`
+（オプション）`local`ステートメントの先頭にエントリーポイントキーワードが出現した場合（例：`local terra foo() end`）に呼び出されるLuaメソッド`function(self,lexer)`です。`statement`と同様に、このメソッドも名前のリスト（例：`{"a","b"}`）を返すことができます。この場合、これらの名前はローカル変数として定義され、`local a, b = constructor(...)`のように振る舞います。
 
-#### Tokens
+#### トークン
 
-The methods in the language are given an interface `lexer` to Terra _lexer_, which can be used to examine the stream of _tokens_, and to report errors.  A _token_ is a Lua table with fields:
-
+言語のメソッドには、Terraの_字句解析器_（lexer）へのインターフェースである`lexer`が与えられます。これを使用してトークンのストリームを調べたり、エラーを報告したりできます。_トークン_は以下のフィールドを持つLuaテーブルです。
 
 ```lua
 token.type
 ```
 
-The _token type_. For keywords and operators this is just a string (e.g. `"and"`, or `"+"`). The values `lexer.name`, `lexer.number`, `lexer.string` indicate the token is respectively an identifier (e.g. `myvar`), a number (e.g. 3), or a string (e.g. `"my string"`). The type `lexer.eof` indicates the end of the token stream.
+_トークンの種類_。キーワードや演算子の場合、これは単なる文字列です（例：`"and"`や`"+"`）。`lexer.name`、`lexer.number`、`lexer.string`は、それぞれ識別子（例：`myvar`）、数値（例：3）、文字列（例：`"my string"`）を示します。`lexer.eof`はトークンストリームの終端を示します。
 
 ```lua
 token.value
 ```
 
-For names, strings, and numbers this is the specific value (e.g. `3.3`). Numbers are represented as Lua numbers when they would fit (floating point or 32-bit integers) and '[u]int64_t' cdata types for 64-bit integers.
+名前、文字列、数値の場合、これは具体的な値になります（例：`3.3`）。数値は、Luaの数値として表現される場合（浮動小数点数または32ビット整数）と、64ビット整数では`[u]int64_t`のcdata型として表現されます。
 
 ```lua
 token.valuetype
 ```
 
-For numbers this is the Terra type of the literal parsed. `3` will have type `int`, `3.3` is `double`, `3.f` is `float`, `3ULL` is `uint64`, `3LL` is `int64`, and `3U` is `uint`.
+数値の場合、これは解析されたリテラルのTerra型です。`3`は`int`型、`3.3`は`double`型、`3.f`は`float`型、`3ULL`は`uint64`型、`3LL`は`int64`型、`3U`は`uint`型になります。
 
 ```lua
 token.linenumber
 ```
 
-The linenumber on which this token occurred (not available for lookahead tokens).
+このトークンが出現した行番号です（先読みトークンには利用できません）。
 
 ```lua
 token.offset
 ```
 
-The offset in characters from the beginning of the file where this token occurred (not available for lookahead tokens).
+このトークンが発生したファイルの先頭からの文字数のオフセットです（先読みトークンには利用できません）。
 
 #### Lexer
 
-The `lexer` object provides the following methods fields and methods. The `lexer` itself is only valid during parsing. For instance, it should _not_ be called from the constructor function.
+`lexer`オブジェクトは、以下のフィールドとメソッドを提供します。`lexer`自体は解析中のみ有効であり、たとえばコンストラクタ関数から呼び出すことはできません。
 
 ```lua
 lexer:cur()
 ```
 
-Returns the current _token_. Does not modify the position.
+現在の_トークン_を返します。位置は変更しません。
 
 ```lua
 lexer:lookahead()
 ```
 
-Returns the _token_ following the current token. Does not modify the position. Only 1 token of lookahead is allowed to keep the implementation simple.
+現在のトークンの次の_トークン_を返します。位置は変更しません。実装を簡単にするため、1つのトークンのみ先読みが許可されています。
 
 ```lua
 lexer:matches(tokentype)
 ```
 
-shorthand for `lexer:cur().type == tokentype`
+`lexer:cur().type == tokentype` の短縮形
 
 ```lua
 lexer:lookaheadmatches(tokentype)
 ```
 
-Shorthand for `lexer:lookahead().type == tokentype`
+`lexer:lookahead().type == tokentype` の短縮形
 
 ```lua
 lexer:next()
 ```
 
-Returns the current token, and advances to the next token.
+現在のトークンを返し、次のトークンに進みます。
 
 ```lua
 lexer:nextif(tokentype)
 ```
 
-If `tokentype` matches the `type` of the current token, it returns the token and advances the lexer. Otherwise, it returns `false` and does not advance the lexer. This function is useful when you want to try to parse many alternatives.
+`tokentype`が現在のトークンの`type`と一致する場合、そのトークンを返してlexerを進めます。そうでない場合は`false`を返し、lexerは進みません。多くの代替案を解析したいときに便利です。
 
 ```lua
 lexer:expect(tokentype)
 ```
 
-If `tokentype` matches the type of the current token, it returns the token and advances the lexer. Otherwise, it stops parsing and emits an error. It is useful to use when you know what token should appear.
+`tokentype`が現在のトークンのタイプと一致する場合、そのトークンを返しlexerを進めます。そうでない場合、解析を停止してエラーを発生させます。どのトークンが出現すべきかがわかっている場合に便利です。
 
 ```lua
 lexer:expectmatch(tokentype,openingtokentype,linenumber)
 ```
 
-Same as `expect` but provides better error reporting for matched tokens. For instance, to parse the closing brace `}` of a list you can call `lexer:expectmatch('}','{',lineno)`. It will report a mismatched bracket as well as the opening and closing lines.
+`expect`と同様ですが、マッチしたトークンに対してより良いエラーレポートを提供します。たとえば、リストの閉じカッコ`}`を解析する際に`lexer:expectmatch('}','{',lineno)`を呼び出すと、対応しない括弧や開閉行が報告されます。
 
 ```lua
 lexer.source
 ```
 
-A string containing the filename, or identifier for the stream (useful for future error reporting)
+ファイル名またはストリームの識別子を含む文字列（将来のエラーレポートに便利）
 
 ```lua
 lexer:error(msg)
 ```
 
-Report a parse error and give up. `msg` is a string. Does not return.
+解析エラーを報告して処理を中断します。`msg`は文字列です。返り値はありません。
 
 ```lua
 lexer:errorexpected(msg)
 ```
 
-Report that the string `msg` was expected but did not appear. Does not return.
+`msg`という文字列が予期されていましたが、現れなかったことを報告します。返り値はありません。
 
 ```lua
 lexer:ref(name)
 ```
 
-`name` is a string. Indicates to the Terra parser that your language may refer to the Lua variable `name`. This function must be called for any free identifiers that you are interested in looking up. Otherwise, the identifier may not appear in the lexical environment passed to your _constructor_ functions. It is safe (though less efficient) to call it for identifiers that it may not reference.
+`name`は文字列で、Terraのパーサーに対し、言語がLuaの変数`name`を参照する可能性があることを示します。関心のある自由な識別子について、この関数を必ず呼び出す必要があります。そうしないと、その識別子は_コンストラクタ_関数に渡されるレキシカル環境に現れない可能性があります。参照しない識別子に対して呼び出しても安全ですが、効率が低下します。
 
 ```lua
 lexer:luaexpr()
 ```
 
-Parses a single Lua expression from the token stream. This can be used to switch back into the Lua language for expressions in your language. For instance, Terra uses this to parse its types (which are just Lua expressions): `var a : aluaexpression(4) = 3`. It returns a function `function(lexicalenv)` that takes a table of the current lexical scope (such as the one return from `environment_function` in the constructor) and returns the value of the expression evaluated in that scope. This function is not intended to be used to parse a Lua expression into an AST. Currently, parsing a Lua expression into an AST requires you to writing the parser yourself. In the future we plan to add a library which will let you pick and choose pieces of Lua/Terra's grammar to use in your language.
+トークンストリームから単一のLua式を解析します。これを使用して言語の式に対しLuaの解析に戻ることができます。たとえば、Terraはこれを使用して型を解析します（型は単なるLua式です）：`var a : aluaexpression(4) = 3`。この関数は、`function(lexicalenv)`という関数を返し、現在のレキシカルスコープのテーブル（コンストラクタの`environment_function`から返されるものなど）を受け取り、そのスコープで評価された式の値を返します。この関数は、Lua式をASTに解析するためのものではありません。現在、Lua式をASTに解析するには、自分でパーサーを書く必要があります。将来的には、言語でLua/Terraの文法の一部を選択して使用できるライブラリを追加する予定です。
 
 ```lua
 lexer:luastats()
 ```
 
-Parses a set of Lua statement from the token stream until it reaches an end of block keyword (`end`, `else`, `elseif`, etc.). This can be used to help build domain specific languages that are supersets of Lua without having to reimplement all of the Lua parser.
+トークンストリームから一連のLuaステートメントを解析し、ブロックの終了キーワード（`end`、`else`、`elseif`など）に達するまで処理します。これを利用すると、Luaのすべてのパーサを再実装することなく、Luaを拡張したドメイン固有言語を構築するのに役立ちます。
 
 ```lua
 lexer:terraexpr()
 ```
 
-Parses a single Terra expression from the token stream. This can be used to help build domain specific languages that are supersets of Terra without having to reimplement all of the Terra parser.
+トークンストリームから単一のTerra式を解析します。これを使用すると、Terraを拡張したドメイン固有言語を再実装することなく構築するのに役立ちます。
 
 ```lua
 lexer:terrastats()
 ```
 
-Parses a set of Terra statement from the token stream until it reaches an end of block keyword (`end`, `else`, `elseif`, etc.). This can be used to help build domain specific languages that are supersets of Terra without having to reimplement all of the Terra parser.
+トークンストリームから一連のTerraステートメントを解析し、ブロックの終了キーワード（`end`、`else`、`elseif`など）に達するまで処理します。これを利用して、Terraを拡張したドメイン固有言語を構築するのに役立ちます。
 
-## Intermediate Representations with Abstract Syntax Description Language
+## 中間表現と抽象構文記述言語 (ASDL)
 
-[Abstract Syntax Description Language (ASDL)](https://www.usenix.org/legacy/publications/library/proceedings/dsl97/full_papers/wang/wang.pdf) is a way of describing compiler intermediate representations (IR) and other tree- or graph-based data structures in a concise way. It is similar in many ways to algebraic data types, but offers a consistent cross-language specification. ASDL is used in the Python compiler to describe its grammar, and is also used internally in Terra to represent Terra code.
+[抽象構文記述言語 (ASDL)](https://www.usenix.org/legacy/publications/library/proceedings/dsl97/full_papers/wang/wang.pdf) は、コンパイラの中間表現（IR）やツリーやグラフベースのデータ構造を簡潔に記述する方法です。代数的データ型に似ていますが、一貫したクロス言語仕様を提供します。Pythonのコンパイラではその文法を記述するためにASDLが使用され、Terra内部でもTerraコードを表現するために使用されています。
 
-We provide a Lua library for parsing ASDL specifications that can be used to implement IR and other data-structures that are useful when building domain-specific languages. It allows you to parse ASDL specifications to create a set of Lua classes (actually specially defined meta-tables) for building IR. The library automatically sets up the classes with constructors for building the IR, and additional methods can be added to the classes using standard Lua method definitions.
+ASDL仕様を解析するためのLuaライブラリを提供しており、ドメイン固有言語の構築に役立つIRや他のデータ構造を実装できます。このライブラリを使用すると、ASDL仕様を解析し、IRを構築するためのLuaクラス（実際には特別に定義されたメタテーブル）を作成できます。このライブラリはIRの構築用のコンストラクタ付きでクラスを自動的に設定し、通常のLuaメソッド定義を使って追加メソッドをクラスに追加できます。
 
 ```lua
 local asdl = require 'asdl'
 ```
 
-The ASDL package comes with Terra.
+ASDLパッケージはTerraに付属しています。
 
 ```lua
 context = asdl.NewContext()
 ```
 
-ASDL classes are defined inside a context. Different contexts do not share anything. Each class inside a context must have a unique name.
+ASDLクラスはコンテキスト内で定義されます。異なるコンテキストは何も共有しません。コンテキスト内の各クラスには一意の名前が必要です。
 
-### Creating ASDL Classes
+### ASDLクラスの作成
 
 ```lua
 local Types = asdl.NewContext()
 
 Types:Define [[
 
-   # define a simple record type with two members
+   # 2つのメンバーを持つ単純なレコード型を定義
    Real = (number mantissa, number exp)
-   #       ^~~~ field type         ^~~~~ field name
+   #       ^~~~ フィールド型         ^~~~~ フィールド名
 
-   # define a tagged union (aka a variant, discriminated union, sum type)
-   # with several optional data types.
-   # Here the type Stm has three sub-types
+   # タグ付きユニオン（バリアント、判別付きユニオン、合計型）
+   # をいくつかのオプションのデータ型で定義。
+   # この例では型 Stm は3つのサブタイプを持ちます。
    Stm = Compound(Stm head, Stm next)
        | Assign(string lval, Exp rval)
-   # '*' specifies that a field is a List object
-   # '?' marks a field optional (may be nil as well as the type)
+   # '*' はフィールドがリストオブジェクトであることを指定
+   # '?' はフィールドがオプション（nilまたはその型）であることを指定
        | Print(Exp* args, string? format)
-
-
 
    Exp = Id(string name)
        | Num(number v)
        | Op(Exp lhs, BinOp op, Exp rhs)
 
-   # Omitting () on a tagged union creates a singleton value
+   # タグ付きユニオンで()を省略すると、シングルトン値を作成
    BinOp = Plus | Minus
 ]]
 ```
 
-Types can be Lua primitives returned by `type(v)` (e.g. number table function string boolean), other ASDL types, or checked with arbitrary functions registered with `context:Extern`.
+型はLuaのプリミティブ（`type(v)`が返すnumber、table、function、string、booleanなど）、他のASDL型、または`context:Extern`で登録された任意の関数でチェックされた型が使用できます。
 
-External types can be used by registering a name for the type and a function that returns true for objects of that type:
+外部型を使用するには、その型に対して名前を登録し、その型のオブジェクトに対してtrueを返す関数を指定します。
 
 ```lua
 Types:Extern("File",function(obj)
@@ -1780,7 +1749,7 @@ Types:Extern("File",function(obj)
 end)
 ```
 
-### Using ASDL Classes
+### ASDLクラスの使用
 
 ```lua
 local exp = Types.Num(1)
@@ -1791,21 +1760,21 @@ local List = require 'terralist'
 local p = Types.Print(List {exp})
 ```
 
-Values are created by calling the Class as function. Arguments are checked to be the correct type on construction. Helpful warnings are emitted when the types are wrong.
+値はクラスを関数として呼び出すことで作成されます。引数は構築時に正しい型であるかチェックされ、間違った型の場合には警告が表示されます。
 
-Fields are initialized by the constructor:
+フィールドはコンストラクタによって初期化されます。
 
 ```lua
 print(exp.v) -- 1
 ```
 
-By default classes have a string representation
+デフォルトでクラスには文字列表現があります。
 
 ```lua
 print(assign) -- Assign(lval = x,rval = Num(v = 1))
 ```
 
-And you can check for membership using :isclassof
+メンバーシップを`:isclassof`で確認することができます。
 
 ```lua
 assert(Types.Assign:isclassof(assign))
@@ -1813,27 +1782,27 @@ assert(Types.Stm:isclassof(assign))
 assert(Types.Exp:isclassof(assign) == false)
 ```
 
-Singletons are not classes but values:
+シングルトンはクラスではなく値です。
 
 ```lua
 assert(Types.BinOp:isclassof(Types.Plus))
 ```
 
-Classes are the metatables of their values and have `Class.__index = Class`
+クラスはその値のメタテーブルであり、`Class.__index = Class`を持ちます。
 
 ```lua
 assert(getmetatable(assign) == Types.Assign)
 ```
 
-Tagged unions have a string field .kind that identifies which variant in the union the value is
+タグ付きユニオンには文字列フィールド`.kind`があり、ユニオン内でその値がどのバリアントであるかを識別します。
 
 ```lua
 assert(assign.kind == "Assign")
 ```
 
-### Adding Methods To ASDL Classes
+### ASDLクラスにメソッドを追加
 
-You can define additional methods on the classes to add additional behavior
+クラスに追加のメソッドを定義して、追加の機能を持たせることができます。
 
 ```lua
 function Types.Id:eval(env)
@@ -1857,7 +1826,7 @@ local s = Types.Op(Types.Num(1),Types.Plus,Types.Num(2))
 assert(s:eval({}) == 3)
 ```
 
-You can also define methods on the super classes which will be defined for sub-classes as well:
+また、スーパークラスにメソッドを定義すると、サブクラスにもそのメソッドが定義されます。
 
 ```lua
 function Types.Stm:foo()
@@ -1867,9 +1836,9 @@ end
 assign:foo()
 ```
 
-WARNING: To keep the metatable structure simple, this is not implemented with chained tables. Instead definitions on the superclass also copy their method to the subclass because of this design YOU MUST DEFINE PARENT METHODS BEFORE CHILD METHODS. Otherwise, the parent method will clobber the child.
+注意: メタテーブルの構造を簡単に保つために、これは連鎖テーブルで実装されていません。このデザイン上、スーパークラスでのメソッド定義はサブクラスにもコピーされるため、**親のメソッドは子のメソッドより先に定義しなければなりません**。そうでなければ、親のメソッドが子のメソッドを上書きしてしまいます。
 
-IF YOU NEED TO OVERRIDE AN ALREADY DEFINE METHOD LIKE __tostring SET IT TO NILFIRST IN THE SUPERCLASS:
+**すでに定義済みのメソッド（例えば `__tostring`）をオーバーライドする必要がある場合は、最初にスーパークラスでそれを`nil`に設定してください。**
 
 ```lua
 Types.Stm.__tostring = nil
@@ -1878,9 +1847,9 @@ function Types.Stm:__tostring()
 end
 ```
 
-### Namespaces
+### 名前空間
 
-As an extension to ASDL, you can use the module keyword to define a namespace. This helps when you have many different kinds of Exp and Type in your compiler.
+ASDLの拡張として、名前空間を定義するために`module`キーワードを使用できます。これにより、コンパイラで多くの異なる`Exp`や`Type`を扱う際に役立ちます。
 
 ```lua
 Types:Define [[
@@ -1893,11 +1862,9 @@ Types:Define [[
 local a = Types.Foo.Bar(3)
 ```
 
-### Unique
+### ユニーク
 
-Another extension allows you to mark any concrete type 'unique'. Unique types are
-memoized on construction so that if constructed with the same arguments (under Lua equality), the same Lua
-object is returned again. This works for types containing Lists (*) and Options (?) as well
+もう一つの拡張として、任意の具体型を`unique`としてマークすることができます。`unique`型は構築時にメモ化され、同じ引数（Luaの等価性の範囲内で）で構築された場合は、同じLuaオブジェクトが再び返されます。これは、リスト（`*`）やオプション（`?`）を含む型にも対応しています。
 
 ```lua
 Types:Define [[

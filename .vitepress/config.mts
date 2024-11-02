@@ -517,7 +517,7 @@ export default defineConfig({
           items: [
             {text: 'トップ', link: '/resource/terra/'},
             {text: 'はじめに', link: '/resource/terra/getting-started.md'},
-            {text: 'API Reference', link: '/resource/terra/api.md'},
+            {text: 'APIリファレンス', link: '/resource/terra/api.md'},
             {text: 'Terra for C++', link: '/resource/terra/terraforcpp.md'},
             {text: '出版物', link: '/resource/terra/publications.md'},
             {text: 'コミュニティ', link: '/resource/terra/community.md'},
