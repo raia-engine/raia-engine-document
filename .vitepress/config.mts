@@ -25,7 +25,7 @@ export default defineConfig({
       { text: 'ドキュメント', link: '/document'},
       { text: 'リファレンス', items: [
         {text: 'LuaJITライブラリ', link: '/reference/built_in/'},
-        
+        {text: 'Lua/Cライブラリ', link: '/reference/lua_c/'},
       ]},
       { text: 'リソース', items: [
         {text: 'GLFW', link: '/resource/glfw/'},
@@ -331,6 +331,26 @@ export default defineConfig({
           ]
         },
         {
+          text: '文字列バッファ',
+          collapsed: true,
+          items: [
+            { text: 'buffer.new', link: '/reference/built_in/string_buffer/new.md' },
+            { text: 'buf:reset', link: '/reference/built_in/string_buffer/buf_reset.md' },
+            { text: 'buf:free', link: '/reference/built_in/string_buffer/buf_free.md' },
+            { text: 'buf:put', link: '/reference/built_in/string_buffer/buf_put.md' },
+            { text: 'buf:putf', link: '/reference/built_in/string_buffer/buf_putf.md' },
+            { text: 'buf:putcdata', link: '/reference/built_in/string_buffer/buf_putcdata.md' },
+            { text: 'buf:set', link: '/reference/built_in/string_buffer/buf_set.md' },
+            { text: 'buf:reserve', link: '/reference/built_in/string_buffer/buf_reserve.md' },
+            { text: 'buf:skip', link: '/reference/built_in/string_buffer/buf_skip.md' },
+            { text: 'buf:get', link: '/reference/built_in/string_buffer/buf_get.md' },
+            { text: 'buf:tostring', link: '/reference/built_in/string_buffer/buf_tostring.md' },
+            { text: 'buf:ref', link: '/reference/built_in/string_buffer/buf_ref.md' },
+            { text: 'buffer.encode', link: '/reference/built_in/string_buffer/encode.md' },
+            { text: 'buffer.decode', link: '/reference/built_in/string_buffer/decode.md' },
+          ]
+        },
+        {
           text: 'JIT',
           collapsed: true,
           items: [
@@ -342,6 +362,15 @@ export default defineConfig({
             { text: 'jit.off', link: '/reference/built_in/jit/off.md'},
             { text: 'jit.flush', link: '/reference/built_in/jit/flush.md'},
             { text: 'jit.status', link: '/reference/built_in/jit/status.md'},
+          ]
+        },
+      ],
+      '/reference/lua_c': [
+        {
+          text: 'はじめに',
+          collapsed: false,
+          items: [
+            { text: 'Lua/Cライブラリ', link: '/reference/lua_c/' },
           ]
         },
       ],
@@ -400,10 +429,29 @@ export default defineConfig({
       ],
       '/resource/imgui/': [
         {
-          text: 'ImGui',
+          text: 'はじめに',
           collapsed: false,
           items: [
-            {text: 'はじめに', link: '/resource/imgui/'},
+            {text: 'ImGUI', link: '/resource/imgui/'},
+          ]
+        },
+        {
+          text: 'ドキュメント',
+          collapsed: false,
+          items: [
+            {text: 'バックエンド', link: '/resource/imgui/backends.md'},
+            {text: '更新履歴', link: '/resource/imgui/changelog.md'},
+            {text: '貢献する', link: '/resource/imgui/contributing.md'},
+            {text: 'サンプルコード', link: '/resource/imgui/examples.md'},
+            {text: 'よくある質問', link: '/resource/imgui/faq.md'},
+            {text: 'フォント', link: '/resource/imgui/fonts.md'},
+            {text: 'ToDo', link: '/resource/imgui/todo.md'},
+          ]
+        },
+        {
+          text: 'ヘッダーファイル',
+          collapsed: false,
+          items: [
             {text: 'imgui.h', link: '/resource/imgui/imgui_h.md'},
           ]
         }

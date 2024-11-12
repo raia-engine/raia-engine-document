@@ -261,6 +261,25 @@ LuaJIT独自の拡張がある関数には、互換性の欄に(*)の表記を�
 |[`cb:free`](ffi/cb_free.md)|コールバック関数を解放する|LuaJIT|
 |[`cb:set`](ffi/cb_set.md)|コールバック関数を設定する|LuaJIT|
 
+## 文字列バッファ (`buffer.*`)
+
+|名前|説明|互換性|
+|---|---|---|
+|[`buffer.new`](string_buffer/new.md)|新しいバッファオブジェクトを作成する|LuaJIT|
+|[`buf:reset`](string_buffer/buf_reset.md)|バッファをリセットして、再利用可能にする|LuaJIT|
+|[`buf:free`](string_buffer/buf_free.md)|バッファスペースを解放し、オブジェクトを再利用可能にする|LuaJIT|
+|[`buf:put`](string_buffer/buf_put.md)|データをバッファに追加する|LuaJIT|
+|[`buf:putf`](string_buffer/buf_putf.md)|フォーマットしたデータをバッファに追加する|LuaJIT|
+|[`buf:putcdata`](string_buffer/buf_putcdata.md)|FFI cdataをバッファに追加する|LuaJIT|
+|[`buf:set`](string_buffer/buf_set.md)|指定したデータでバッファをリセットする|LuaJIT|
+|[`buf:reserve`](string_buffer/buf_reserve.md)|指定したサイズの書き込みスペースを予約する|LuaJIT|
+|[`buf:skip`](string_buffer/buf_skip.md)|指定したバイト数をスキップしてバッファデータを消費する|LuaJIT|
+|[`buf:get`](string_buffer/buf_get.md)|バッファからデータを取得して消費する|LuaJIT|
+|[`buf:tostring`](string_buffer/buf_tostring.md)|バッファデータを消費せずに文字列として取得する|LuaJIT|
+|[`buf:ref`](string_buffer/buf_ref.md)|バッファデータを指すポインタと長さを取得する|LuaJIT|
+|[`buffer.encode`](string_buffer/encode.md)|Luaオブジェクトをシリアライズする|LuaJIT|
+|[`buffer.decode`](string_buffer/decode.md)|シリアライズされた文字列をデシリアライズする|LuaJIT|
+
 ## JITライブラリ (`jit.*`)
 
 ### 変数/定数/テーブル
