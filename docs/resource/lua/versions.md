@@ -1,91 +1,85 @@
-Version history
+# Luaのバージョン履歴
 
-5.4 · 5.3 · 5.2 · 5.1 · 5.0 · 4.0 · 3.2 · 3.1 · 3.0 · 2.5 · 2.4 · 2.2 · 2.1 · 1.1 · 1.0
-Here is a chronology of the versions of Lua. The evolution of Lua is documented in a paper presented at HOPL III, the Third ACM SIGPLAN History of Programming Languages Conference, in 2007. The source code and documentation for all releases of Lua is available in the download area.
+## バージョンの概要
 
+Luaの進化の過程は、2007年に開催された第3回ACM SIGPLANプログラミング言語の歴史に関する会議（HOPL III）で発表された論文に記録されています。Luaの全バージョンのソースコードやドキュメントは、ダウンロードエリアで入手可能です。
 
-Numbering scheme
+### バージョン番号のルール
 
-The releases of Lua are numbered x.y.z, where x.y is the version and z is the release.
+Luaのリリースは「x.y.z」の形式で表記され、x.yがバージョン、zがリリース番号を示します。
 
-Different releases of the same version correspond to bug fixes. Different releases of the same version have the same reference manual, the same virtual machine, and are binary compatible (ABI compatible).
+- **同じバージョン内での異なるリリース**：バグ修正が主で、同じリファレンスマニュアルや仮想マシンを共有し、バイナリ互換性（ABI互換性）もあります。
+- **異なるバージョン間**：APIや仮想マシンが変更されるため、LuaやCライブラリを組み込んだアプリケーションは再コンパイルが必要で、ABI互換性もありません。
 
-Different versions are really different. The API is likely to be a little different (but with compatibility switches), and there is no ABI compatibility: applications that embed Lua and C libraries for Lua must be recompiled. The virtual machine is also very likely to be different in a new version: Lua programs that have been precompiled for one version will not load in a different version.
+## 主なバージョン
 
-Lua 5.4
+### Lua 5.4
+- **リリース日**：2020年6月29日
+- **主な特徴**：ガベージコレクションの新しい世代モード、「const」および「to-be-closed」変数の導入。
+- **最新リリース**：Lua 5.4.6（2023年5月14日リリース）
 
-Lua 5.4 was released on 29 Jun 2020. Its main new features are a new generational mode for garbage collection and const and to-be-closed variables.
+### Lua 5.3
+- **リリース日**：2015年1月12日
+- **主な特徴**：整数、ビット演算子、UTF-8ライブラリ、64ビットと32ビットプラットフォームのサポート。
+- **最終リリース**：Lua 5.3.6（2020年9月25日リリース）
 
-The current release is Lua 5.4.6, released on 14 May 2023.
+### Lua 5.2
+- **リリース日**：2011年12月16日
+- **主な特徴**：yieldable pcallとメタメソッド、グローバル変数の新しい字句構造、エフェメロンテーブル、ビット演算の新ライブラリ、軽量C関数、非常用ガベージコレクター、goto文、テーブルのファイナライザー。
+- **最終リリース**：Lua 5.2.4（2015年3月7日リリース）
 
-Lua 5.3
+### Lua 5.1
+- **リリース日**：2006年2月21日
+- **主な特徴**：新しいモジュールシステム、インクリメンタルガベージコレクション、新しい可変引数メカニズム、長い文字列とコメントの新しい構文、モジュラス演算子と長さ演算子、すべての型に対するメタテーブル、luaconf.hによる新しい設定システム、完全な再入可能なパーサー。
+- **最終リリース**：Lua 5.1.5（2012年2月17日リリース）
 
-Lua 5.3 was released on 12 Jan 2015. Its main new features were integers, bitwise operators, a basic utf-8 library, and support for both 64-bit and 32-bit platforms.
+### Lua 5.0
+- **リリース日**：2003年4月11日
+- **主な特徴**：Luaコルーチンによる協調マルチスレッディング、完全なレキシカルスコーピング、タグとタグメソッドの代わりにメタテーブルの導入、ブール値、プロパーテイルコール、弱テーブル、エラーメッセージの改善など。
+- **最終リリース**：Lua 5.0.3（2006年6月26日リリース）
 
-The last release was Lua 5.3.6, released on 25 Sep 2020. There will be no further releases of Lua 5.3.
+## Lua 4.0以前のバージョン
 
-Lua 5.2
+### Lua 4.0
+- **リリース日**：2000年11月6日
+- **主な特徴**：複数の状態、新しいAPI、「for」ステートメント、デバッグ情報を含むフルスピードの実行。
+- **最終リリース**：Lua 4.0.1（2002年7月4日リリース）
 
-Lua 5.2 was released on 16 Dec 2011. Its main new features were yieldable pcall and metamethods, new lexical scheme for globals, ephemeron tables, new library for bitwise operations, light C functions, emergency garbage collector, goto statement, and finalizers for tables.
+### Lua 3.2
+- **リリース日**：1999年7月8日
+- **主な特徴**：デバッグライブラリと新しいテーブル関数。
+- **最終リリース**：Lua 3.2.2（2000年2月22日リリース）
 
-The last release was Lua 5.2.4, released on 07 Mar 2015. There will be no further releases of Lua 5.2.
+### Lua 3.1
+- **リリース日**：1998年7月11日
+- **主な特徴**：無名関数と「upvalues」による関数クロージャーのサポート（Lua 5.0で完全なレキシカルスコーピングが導入され、「upvalues」は廃止されました）。この変更により、Luaに関数型プログラミングの要素が追加されました。また、複数のグローバルコンテキストをサポートしましたが、APIは完全に再入可能ではありませんでした（完全な再入性はLua 4.0で導入）。さらに、コードの大幅な整理が行われ、モジュール間の依存性が減少し、数値の内部表現に倍精度が採用されました。
 
-Lua 5.1
+### Lua 3.0
+- **リリース日**：1997年7月1日
+- **主な特徴**：タグメソッドが導入され、フォールバックの強力な代替手段となりました。Lua 3.0では、Luaライブラリを作成するための補助ライブラリ「auxlib」が導入され、条件付きコンパイルがサポートされました（条件付きコンパイルはLua 4.0で廃止）。
 
-Lua 5.1 was released on 21 Feb 2006. Its main new features were a new module system, incremental garbage collection, new mechanism for varargs, new syntax for long strings and comments, mod and length operators, metatables for all types, new configuration scheme via luaconf.h, and a fully reentrant parser.
+### Lua 2.5
+- **リリース日**：1996年11月19日
+- **主な特徴**：パターンマッチングと可変引数関数が追加されました。
 
-The last release was Lua 5.1.5, released on 17 Feb 2012. There will be no further releases of Lua 5.1.
+### Lua 2.4
+- **リリース日**：1996年5月14日
+- **主な特徴**：外部コンパイラ「luac」の追加、フック付きの拡張デバッグインターフェース、及び「getglobal」フォールバックが追加されました。
 
-Lua 5.0
+### Lua 2.3
+- **リリース状況**：Lua 2.3は正式にはリリースされておらず、ベータ版としてのみ存在していました。
 
-Lua 5.0 was released on 11 Apr 2003. Its main new features were collaborative multithreading via Lua coroutines, full lexical scoping instead of upvalues, and metatables instead of tags and tag methods. Lua 5.0 also introduced booleans, proper tail calls, and weak tables. Other features were better support for packages, new API for loading Lua chunks, new error handling protocol, better error messages, and much more. Lua 5.0 was the first version to be released under the new license.
+### Lua 2.2
+- **リリース日**：1995年11月28日
+- **主な特徴**：長い文字列のサポート、デバッグインターフェース、スタックのトレースバックの改善、関数定義の構文拡張、関数のガベージコレクション、およびパイプのサポートが追加されました。
 
-The last release was Lua 5.0.3, released on 26 Jun 2006. There will be no further releases of Lua 5.0.
+### Lua 2.1
+- **リリース日**：1995年2月7日
+- **主な特徴**：フォールバックによる拡張可能なセマンティクスと、オブジェクト指向プログラミングのサポート。このバージョンは学術誌で紹介され、Lua 2.1以降、Luaは商用利用を含むあらゆる目的で自由に使用可能になりました。
 
-Lua 4.0
+### Lua 1.1
+- **リリース日**：1994年7月8日
+- **主な特徴**：最初の公開リリースとして、強力なデータ記述構造、シンプルな構文、およびバイトコード仮想マシンがすでに備わっていました。このバージョンは学術目的で無料で使用できましたが、商用利用には別途交渉が必要でした（実際には商用利用の契約は行われていません）。
 
-Lua 4.0 was released on 06 Nov 2000. Its main new features were multiples states, a new API, "for" statements, and full speed execution with full debug information. Also, Lua 4.0 no longer had built-in functions: all functions in the standard library are written using the official API.
-
-The last release was Lua 4.0.1, released on 04 Jul 2002. There will be no further releases of Lua 4.0.
-
-Lua 3.2
-
-Lua 3.2 was released on 08 Jul 1999. Its main new features were a debug library and new table functions.
-
-The last release was Lua 3.2.2, released on 22 Feb 2000. There will be no further releases of Lua 3.2.
-
-Lua 3.1
-
-Lua 3.1 was released on 11 Jul 1998. Its main new features were anonymous functions and function closures via "upvalues". (Lua 5.0 brought full lexical scoping and dropped upvalues.) This brought a flavor of functional programming to Lua. There was also support for multiple global contexts; however, the API was not fully reentrant (this had to wait until Lua 4.0). Lua 3.1 also saw a major code re-organization and clean-up, with much reduced module interdependencies. Lua 3.1 also adopted double precision for the internal representation of numbers.
-
-Lua 3.0
-
-Lua 3.0 was released on 01 Jul 1997. Its main new feature was tag methods as a powerful replacement for fallbacks. Lua 3.0 also introduced auxlib, a library for helping writing Lua libraries, and support for conditional compilation (dropped in Lua 4.0).
-
-Lua 2.5
-
-Lua 2.5 was released on 19 Nov 1996. Its main new features were pattern matching and vararg functions.
-
-Lua 2.4
-
-Lua 2.4 was released on 14 May 1996. Its main new features were the external compiler luac, an extended debug interface with hooks, and the "getglobal" fallback.
-
-Lua 2.3
-
-Lua 2.3 was never released publicly; it only existed as a beta version.
-
-Lua 2.2
-
-Lua 2.2 was released on 28 Nov 1995. Its main new features were long strings, the debug interface, better stack tracebacks, extended syntax for function definition, garbage collection of functions, and support for pipes.
-
-Lua 2.1
-
-Lua 2.1 was released on 07 Feb 1995. Its main new features were extensible semantics via fallbacks and support for object-oriented programming. This version was described in a journal paper. Starting with Lua 2.1, Lua became freely available for all purposes, including commercial uses.
-
-Lua 1.1
-
-Lua 1.1 was released on 08 Jul 1994. This was the first public release of Lua and is described in a conference paper. Lua 1.1 already featured powerful data description constructs, simple syntax, and a bytecode virtual machine. Lua 1.1 was freely available for academic purposes; commercial uses had to be negotiated, but none ever were.
-
-Lua 1.0
-
-Lua 1.0 was never released publicly, but it was up and running on 28 Jul 1993, and most probably a couple of months before that.
+### Lua 1.0
+- **リリース状況**：Lua 1.0は一般には公開されておらず、1993年7月28日にはすでに稼働していましたが、実際には数か月前から動いていた可能性があります。

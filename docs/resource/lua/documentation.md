@@ -1,248 +1,375 @@
-# Documentation
+# ドキュメント
 
-## Reference manual
+## リファレンスマニュアル
 
-The official definition of the Lua language is its reference manual, which describes the syntax and the semantics of Lua, the standard libraries, and the C API.
+Lua言語の正式な定義はリファレンスマニュアルであり、Luaの文法や意味論、標準ライブラリ、C APIについて説明しています。
 
-The reference manual for Lua 5.4 is available online in English only.
+Lua 5.4のリファレンスマニュアルは、英語のみでオンラインで利用可能です。
 
-The reference manual for Lua 5.3 is available online in English and Russian.
+Lua 5.3のリファレンスマニュアルは、英語とロシア語でオンラインで利用可能です。
 
-The reference manual for Lua 5.2 is available online in English, Portuguese, and Polish.
+Lua 5.2のリファレンスマニュアルは、英語、ポルトガル語、ポーランド語でオンラインで利用可能です。
 
-The reference manual for Lua 5.1 is available online in English, Portuguese, Spanish, German, and Polish. It is also available as a book in English.
+Lua 5.1のリファレンスマニュアルは、英語、ポルトガル語、スペイン語、ドイツ語、ポーランド語でオンラインで利用可能で、また英語版は書籍としても入手できます。
 
-## Technical documentation
+## 技術ドキュメント
 
-For more technical information, see the Frequently Asked Questions (FAQ) and some old seminar slides. For detailed technical information on specific topics, see our old series of Lua Technical Notes and the wiki at lua-users.org, specially the tutorial. You may also browse the source code.
+より詳しい技術情報については、よくある質問（FAQ）や古いセミナースライドをご覧ください。特定のトピックに関する詳細な技術情報は、古いLua Technical Notesやlua-users.orgのwiki（特にチュートリアル）で提供されています。また、ソースコードの閲覧も可能です。
 
-## Papers
+## 論文
 
-There are many papers and theses related to Lua. Here are the main ones written by the Lua team. See also the LabLua publications.
+Luaに関する多くの論文や学位論文が存在します。以下はLuaチームによって書かれた主なものです。また、LabLuaの出版物も参照してください。
 
-The main academic paper about Lua discusses the philosophy behind its design:
+Luaのデザイン哲学について述べた主要な学術論文：
 
-Lua – an extensible extension language
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Software: Practice & Experience 26 #6 (1996) 635–652. `[doi]`
+- **Lua – 拡張可能な拡張言語**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：Software: Practice & Experience 26 #6 (1996) 635–652. `[doi]`
 
-This paper was awarded the first prize (technological category) in the II Compaq Award for Research and Development in Computer Science in 1997. This award was a joint venture of Compaq Computer in Brazil, the Brazilian Ministry of Science and Technology, and the Brazilian Academy of Sciences.
+  この論文は1997年に第II回Compaq Award for Research and Development in Computer Science（ブラジルのコンパック社、ブラジル科学技術省、ブラジル科学アカデミーの共同主催）で技術部門の最優秀賞を受賞しました。
 
-For an overview of how Lua is designed, see
+Luaのデザインの概要については、以下をご覧ください：
 
-A look at the design of Lua
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Communications of the ACM 61 #11 (2018) 114–123. [doi · video]
-For a short exposition of the API design, see
+- **Luaのデザインを探る**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：Communications of the ACM 61 #11 (2018) 114–123. `[doi · video]`
 
-Passing a language through the eye of a needle
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-ACM Queue 9 #5 (May 2011) 20–29. [doi · acm]
-Communications of the ACM 54 #7 (July 2011) 38–43. [doi · acm]
-It is also available in Portuguese:
+APIデザインの概要については、以下を参照してください：
 
-Passando uma linguagem pelo buraco de uma agulha
-por R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-ACM Queue 9 #5 (May 2011) 20–29.
-For details on the implementation of Lua, see
+- **針の穴を通すような言語設計**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：ACM Queue 9 #5 (2011年5月) 20–29. `[doi · acm]` 
+  Communications of the ACM 54 #7 (2011年7月) 38–43. `[doi · acm]`
 
-The implementation of Lua 5.0
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Journal of Universal Computer Science 11 #7 (2005) 1159–1176. [doi · slides]
-For details on the role of first-class functions in Lua, see
+この論文はポルトガル語でも利用可能です：
 
-First-class functions in an imperative world
-by R. Ierusalimschy,
-Journal of Universal Computer Science 23 #1 (2017) 112–126. [doi · slides]
-For a discussion of coroutines in Lua, see
+- **針の穴を通すような言語設計**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：ACM Queue 9 #5 (2011年5月) 20–29.
 
-Coroutines in Lua
-by A. L. de Moura, N. Rodriguez, R. Ierusalimschy,
-Journal of Universal Computer Science 10 #7 (2004) 910–925. [doi · slides]
-For a complete history of Lua till 2006, see
+Luaの実装に関する詳細については、以下を参照してください：
 
-The evolution of Lua
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Proceedings of ACM HOPL III (2007) 2-1–2-26. [doi · slides]
-For a history of Lua till 2001, see
+- **Lua 5.0の実装**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：Journal of Universal Computer Science 11 #7 (2005) 1159–1176. `[doi · slides]`
 
-The evolution of an extension language: a history of Lua
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Proceedings of V Brazilian Symposium on Programming Languages (2001) B-14–B-28. `[ps]`
-The first paper describing Lua has some historical interest:
+Luaにおけるファーストクラス関数の役割に関する詳細については、以下をご覧ください：
 
-The design and implementation of a language for extending applications
-by L. H. de Figueiredo, R. Ierusalimschy, W. Celes,
-Proceedings of XXI Brazilian Seminar on Software and Hardware (1994) 273–283. `[ps]`
-For an early expository article, see
+- **命令型の世界におけるファーストクラス関数**
+  著：R. Ierusalimschy  
+  掲載：Journal of Universal Computer Science 23 #1 (2017) 112–126. `[doi · slides]`
 
-Lua: an extensible embedded language
-by L. H. de Figueiredo, R. Ierusalimschy, W. Celes,
-Dr. Dobb's Journal 21 #12 (Dec 1996) 26–33. `[ddj]`
-For introductory texts in Portuguese, see
+Luaにおけるコルーチンの議論については、以下をご覧ください：
 
-Uma introdução à programação em Lua
-by R. Ierusalimschy, JAI 2009 (Jul 2009).
+- **Luaにおけるコルーチン**
+  著：A. L. de Moura, N. Rodriguez, R. Ierusalimschy  
+  掲載：Journal of Universal Computer Science 10 #7 (2004) 910–925. `[doi · slides]`
 
-A linguagem Lua e suas aplicações em jogos
-by W. Celes, L. H. Figueiredo, R. Ierusalimschy
-WJogos 2004 (Oct 2004). `[slides]`
+Luaの2006年までの完全な歴史については、以下をご覧ください：
 
-## Books
+- **Luaの進化**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：Proceedings of ACM HOPL III (2007) 2-1–2-26. `[doi · slides]`
 
-Lua books are available at the main online stores and also as e-books at Feisty Duck. When you buy a copy of a book published by Lua.org, you help to support the Lua project.
+2001年までのLuaの歴史については、以下をご覧ください：
 
-### Reference manual
+- **拡張言語の進化：Luaの歴史**
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  掲載：Proceedings of V Brazilian Symposium on Programming Languages (2001) B-14–B-28. `[ps]`
 
-The official definition of the Lua language:
+Luaを初めて紹介した論文も歴史的に興味深いものです：
 
- Lua 5.1 Reference Manual
-by R. Ierusalimschy, L. H. de Figueiredo, W. Celes,
-Lua.org, August 2006
-ISBN 8590379833
+- **アプリケーション拡張のための言語の設計と実装**
+  著：L. H. de Figueiredo, R. Ierusalimschy, W. Celes  
+  掲載：Proceedings of XXI Brazilian Seminar on Software and Hardware (1994) 273–283. `[ps]`
 
-The reference manuals for later versions of Lua are available online.
+初期の解説記事については、以下をご覧ください：
+
+- **Lua：拡張可能な組み込み言語**
+  著：L. H. de Figueiredo, R. Ierusalimschy, W. Celes  
+  掲載：Dr. Dobb's Journal 21 #12 (1996年12月) 26–33. `[ddj]`
+
+ポルトガル語での入門テキストについては、以下をご覧ください：
+
+- **Luaプログラミング入門**
+  著：R. Ierusalimschy  
+  掲載：JAI 2009 (2009年7月)
+
+- ゲームでのLua言語とその応用  
+  著：W. Celes, L. H. de Figueiredo, R. Ierusalimschy  
+  掲載：WJogos 2004 (2004年10月) `[slides]`
+
+## 書籍
+
+Luaの書籍は、主要なオンライン書店で購入可能です。また、Feisty Duckにて電子書籍版も提供されています。Lua.orgが出版する書籍を購入すると、Luaプロジェクトのサポートにも繋がります。
+
+### リファレンスマニュアル
+
+Lua言語の正式な定義書：
+
+- **Lua 5.1 リファレンスマニュアル**  
+  著：R. Ierusalimschy, L. H. de Figueiredo, W. Celes  
+  Lua.org、2006年8月  
+  ISBN: 8590379833
+
+  Luaの最新版に対応するリファレンスマニュアルはオンラインで提供されています。
 
 ### Programming in Lua
 
-A detailed and authoritative introduction to all aspects of Lua programming, by Lua's chief architect:
+Luaの主要設計者による、Luaプログラミングの全側面を網羅した詳細かつ信頼性の高い入門書です。
 
- Programming in Lua
-by R. Ierusalimschy
-Lua.org, fourth edition, August 2016
-ISBN 8590379868
-(also available as an e-book)
+- **Programming in Lua**  
+  著：R. Ierusalimschy  
+  Lua.org、第4版、2016年8月  
+  ISBN: 8590379868  
+  （電子書籍版もあり）
 
-The fourth edition is aimed at Lua 5.3 and marks a complete reorganization of the text. The first edition is available online. It was aimed at Lua 5.0 and is still largely relevant.
+  第4版はLua 5.3に対応しており、内容が完全に再構成されています。初版はオンラインで公開されており、Lua 5.0を対象としていますが、現在も大部分が有用です。
 
-The third edition was aimed at Lua 5.2 and remains quite relevant. It is available in English, Portuguese, and Russian:
+- 第3版はLua 5.2に対応しており、現在も有用です。以下の言語で提供されています。
 
- Programming in Lua
-by Roberto Ierusalimschy
-Lua.org, third edition, January 2013
-ISBN 859037985X
-(also available as e-book)
+  - **Programming in Lua**  
+    著：Roberto Ierusalimschy  
+    Lua.org、第3版、2013年1月  
+    ISBN: 859037985X  
+    （電子書籍版もあり）
 
- Programando em Lua
-por Roberto Ierusalimschy
-LTC, January 2015
-ISBN 9788521626992
+  - **Programando em Lua**  
+    著：Roberto Ierusalimschy  
+    LTC、2015年1月  
+    ISBN: 9788521626992
 
- Programmirovanie na iazyke Lua
-by Roberto Ierusalimschy
-DMK-press, 2014
-ISBN 5940747671
+  - **Programmirovanie na iazyke Lua**  
+    著：Roberto Ierusalimschy  
+    DMK-press、2014年  
+    ISBN: 5940747671
 
-The second edition remains relevant and is available in German, Korean, Chinese, and Japanese:
+- 第2版も有用であり、ドイツ語、韓国語、中国語、日本語で提供されています。
 
- Programmieren mit Lua
-von Roberto Ierusalimschy
-Open Source Press, September 2006
-ISBN 3937514228
+  - **Programmieren mit Lua**  
+    著：Roberto Ierusalimschy  
+    Open Source Press、2006年9月  
+    ISBN: 3937514228
 
- Programming in Lua
-by Roberto Ierusalimschy
-Insight, June 2007
-ISBN 9788991268302
+  - **Programming in Lua**  
+    著：Roberto Ierusalimschy  
+    Insight、2007年6月  
+    ISBN: 9788991268302
 
- Programming in Lua
-by Roberto Ierusalimschy
-Publishing House of Electronic Industry, May 2008
-ISBN 9787121061875
+  - **Programming in Lua**  
+    著：Roberto Ierusalimschy  
+    Publishing House of Electronic Industry、2008年5月  
+    ISBN: 9787121061875
 
- Programming in Lua
-by Roberto Ierusalimschy
-ASCII Media Works, Aug 2009
-ISBN 9784048677974
+  - **Programming in Lua**  
+    著：Roberto Ierusalimschy  
+    ASCII Media Works、2009年8月  
+    ISBN: 9784048677974
 
 ### Lua Programming Gems
 
-A collection of articles recording some of the existing wisdom and practice on how to program well in Lua:
+Luaプログラミングの実践やノウハウをまとめた記事のコレクションです。
 
- Lua Programming Gems
-edited by L. H. de Figueiredo, W. Celes, R. Ierusalimschy, Lua.org, December 2008
-ISBN 9788590379843
-(also available as e-book)
+- **Lua Programming Gems**  
+  編集：L. H. de Figueiredo, W. Celes, R. Ierusalimschy  
+  Lua.org、2008年12月  
+  ISBN: 9788590379843  
+  （電子書籍版もあり）
 
-### Other books
+### その他の書籍
 
-There are also books about Lua written by other authors:
+他の著者によるLuaに関する書籍も数多く存在します。
 
-Integrate Lua with C++
-by Wenhuan Li. Packt Publishing, 2023, ISBN 9781805128618.
-Mastering Roblox Coding
-by Mark Kiepe. Packt Publishing, 2022, ISBN 9781801814041.
-Coding With Roblox Lua in 24 Hours: The Official Roblox Guide
-by Roblox Corporation. Sams Publishing, 2021, ISBN 9780136829423.
-Coding Roblox Games Made Easy: The ultimate guide to creating games with Roblox Studio and Lua programming
-by Zander Brumbaugh. Packt Publishing, 2021, ISBN 9781800561991.
-Initiation à la création de jeux vidéo en Lua avec Löve2D
-by Anthony Cardinale. Éditions D-BookeR, 2020, ISBN 9782822709675.
-Lua Quick Reference (second edition)
-by Mitchell. Triple Quasar Books, 2020, ISBN 9780991237951.
-Developing Games on the Raspberry Pi: App Programming with Lua and LÖVE
-by Seth Kenlon. Apress, 2019, ISBN 9781484241707.
-Lua Programming using Roblox
-by SimTek Game Development. Independently published, 2019, ISBN 9781693427443.
-Introdução à linguagem Lua
-by José Augusto N. G. Manzano. Novatec, 2018, ISBN 9788575226681.
-Lua Quick Start Guide
-by Gabor Szauer, Packt Publishing, 2018, ISBN 9781789343229.
-Creating Solid APIs with Lua
-by Tyler Neylon. O'Reilly Media, 2017, ISBN 9781491986301.
-Le guide de Lua et ses applications - Manuel d'apprentissage (2e édition)
-by Pierre Chapuis, Etiene Dalcol, Cyril Doillon, Sylvain Fabre, Philippe Lhoste, Hisham Muhammad, and Patrick Rapin. Éditions D-BookeR, 2016, ISBN 9782822704076.
-Le guide de Lua et ses applications - Manuel de référence (2e édition)
-by Pierre Chapuis, Cyril Doillon, Sylvain Fabre, Philippe Lhoste, and Patrick Rapin. Éditions D-BookeR, 2016, ISBN 9782822704083.
-Lua Game Development Cookbook
-by Mario Kasuba. Packt Publishing, 2015, ISBN 1849515506.
-ROBLOX Lua: Scripting for Beginners
-by Douglas Snipp. CreateSpace, 2015, ISBN 1508728313.
-Seven More Languages in Seven Weeks: Languages That Are Shaping the Future
-by Bruce Tate, Ian Dees, Frederic Daoud, Jack Moffitt. Pragmatic Bookshelf, 2014, ISBN 1941222153.
-Learning Game AI Programming with Lua
-by David Young. Packt Publishing, 2014, ISBN 1783281332.
-Lua Programming
-by Mark Otaris and others, Wikibooks, 2014.
-Introduction to Programming with Lua and the Corona Game Lab
-by Robert Cook. Cook's Books, 2014. ASIN B00IQGAC8A.
-Create Mobile Games with Corona: Build with Lua on iOS and Android
-by Silvia Domenech. Pragmatic Bookshelf, 2013, ISBN 1937785572.
-CryENGINE Game Programming with C++, C#, and Lua
-by Filip Lundgren and Ruan Pearce. Packt Publishing, 2013, ISBN 1849695903.
-LÖVE for Lua Game Programming
-by Darmie Akinlaja. Packt Publishing, 2013, ISBN 1782161600.
-ComputerCraft: Lua Programming in Minecraft
-by Matthew Monk and Simon Monk. CreateSpace, 2013, ISBN 1481927655.
-Learn Lua for iOS Game Development
-by Jayant Varma. Apress, 2012, ISBN 1430246626.
-Le guide de Lua et ses applications
-by Cyril Doillon, Sylvain Fabre, Philippe Lhoste, and Patrick Rapin. Éditions D-BookeR, 2012, ISBN 9782822700054.
-Lua - Programação de Computadores
-by José Augusto N. G. Manzano. self-published, 2012, ISBN 9788591311576.
-Lua: Einsatz von Lua in Embedded Systems
-by Claus Kühnel and Daniel Zwirner. Skript Verlag Kuehnel, 2012, ISBN 3907857151.
-Basic ROBLOX Lua Programming
-by Brandon John LaRouche. CreateSpace, 2012, ISBN 1475026048.
-Numerical Methods for Nonlinear Engineering Models
-by John R. Hauser. Springer, 2009, ISBN 9781402099199.
-Lua: Einsatz von Lua zur Messwerterfassung
-by Claus Kühnel and Daniel Zwirner. Skript Verlag Kuehnel, 2009, ISBN 3907857127.
-Beginning Lua with World of Warcraft Add-ons
-by Paul Emmerich. Apress, 2009, ISBN 1430223715.
-First Lua Programming, the most popular application development lightweight script!
-by Miki Shimizu. Softbank Creative, 2008, ISBN 4777514137.
-Scripting Language for Game Development and Efficient C/C++ to Implement Embedded Lua
-by Makoto Hamanaka. Softbank Creative, 2008, ISBN 4797348550.
-World of Warcraft Programming
-by James Whitehead II, Bryan McLemore, and Matthew Orlando. Wiley, 2008, ISBN 0470229810.
-Introduction to Lua programming
-by Yutaka Ueno. Softbank Creative, 2007, ISBN 4797342722.
-Beginning Lua Programming
-by Kurt Jung and Aaron Brown. Wrox, 2007, ISBN 0470069171.
-Programming Game AI by Example
-by Mat Buckland. Jones & Bartlett Learning, 2005, ISBN 9781556220784.
-Game Development with Lua
-by Paul Schuytema and Mark Manyen. Charles River Media, 2005, ISBN 1584504048.
-Game Programming with Python, Lua, and Ruby
-by Tom Gutschmidt. Course Technology PTR, 2003, ISBN 1592000770.
+- **Integrate Lua with C++**  
+  著：Wenhuan Li  
+  Packt Publishing、2023年  
+  ISBN: 9781805128618
+
+- **Mastering Roblox Coding**  
+  著：Mark Kiepe  
+  Packt Publishing、2022年  
+  ISBN: 9781801814041
+
+- **Coding With Roblox Lua in 24 Hours: The Official Roblox Guide**  
+  著：Roblox Corporation  
+  Sams Publishing、2021年  
+  ISBN: 9780136829423
+
+- **Coding Roblox Games Made Easy: The ultimate guide to creating games with Roblox Studio and Lua programming**  
+  著：Zander Brumbaugh  
+  Packt Publishing、2021年  
+  ISBN: 9781800561991
+
+- **Initiation à la création de jeux vidéo en Lua avec Löve2D**  
+  著：Anthony Cardinale  
+  Éditions D-BookeR、2020年  
+  ISBN: 9782822709675
+
+- **Lua Quick Reference (第2版)**  
+  著：Mitchell  
+  Triple Quasar Books、2020年  
+  ISBN: 9780991237951
+
+- **Developing Games on the Raspberry Pi: App Programming with Lua and LÖVE**  
+  著：Seth Kenlon  
+  Apress、2019年  
+  ISBN: 9781484241707
+
+- **Lua Programming using Roblox**  
+  著：SimTek Game Development  
+  自主出版、2019年  
+  ISBN: 9781693427443
+
+- **Introdução à linguagem Lua**  
+  著：José Augusto N. G. Manzano  
+  Novatec、2018年  
+  ISBN: 9788575226681
+
+- **Lua Quick Start Guide**  
+  著：Gabor Szauer  
+  Packt Publishing、2018年  
+  ISBN: 9781789343229
+
+- **Creating Solid APIs with Lua**  
+  著：Tyler Neylon  
+  O'Reilly Media、2017年  
+  ISBN: 9781491986301
+
+- **Le guide de Lua et ses applications - Manuel d'apprentissage (第2版)**  
+  著：Pierre Chapuis 他  
+  Éditions D-BookeR、2016年  
+  ISBN: 9782822704076
+
+- **Le guide de Lua et ses applications - Manuel de référence (第2版)**  
+  著：Pierre Chapuis 他  
+  Éditions D-BookeR、2016年  
+  ISBN: 9782822704083
+
+- **Lua Game Development Cookbook**  
+  著：Mario Kasuba  
+  Packt Publishing、2015年  
+  ISBN: 1849515506
+
+- **ROBLOX Lua: Scripting for Beginners**  
+  著：Douglas Snipp  
+  CreateSpace、2015年  
+  ISBN: 1508728313
+
+- **Seven More Languages in Seven Weeks: Languages That Are Shaping the Future**  
+  著：Bruce Tate 他  
+  Pragmatic Bookshelf、2014年  
+  ISBN: 1941222153
+
+- **Learning Game AI Programming with Lua**  
+  著：David Young  
+  Packt Publishing、2014年  
+  ISBN: 1783281332
+
+- **Lua Programming**  
+  著：Mark Otaris 他  
+  Wikibooks、2014年
+
+- **Introduction to Programming with Lua and the Corona Game Lab**  
+  著：Robert Cook  
+  Cook's Books、2014年  
+  ASIN: B00IQGAC8A
+
+- **Create Mobile Games with Corona: Build with Lua on iOS and Android**  
+  著：Silvia Domenech  
+  Pragmatic Bookshelf、2013年  
+  ISBN: 1937785572
+
+- **CryENGINE Game Programming with C++, C#, and Lua**  
+  著：Filip Lundgren, Ruan Pearce  
+  Packt Publishing、2013年  
+  ISBN: 1849695903
+
+- **LÖVE for Lua Game Programming**  
+  著：Darmie Akinlaja  
+  Packt Publishing、2013年  
+  ISBN: 1782161600
+
+- **ComputerCraft: Lua Programming in Minecraft**  
+  著：Matthew Monk, Simon Monk  
+  CreateSpace、2013年  
+  ISBN: 1481927655
+
+- **Learn Lua for iOS Game Development**  
+  著：Jayant Varma  
+  Apress、2012年  
+  ISBN: 1430246626
+
+- **Le guide de Lua et ses applications**  
+  著：Cyril Doillon, Sylvain Fabre, Philippe Lhoste, Patrick Rapin  
+  Éditions D-BookeR、2012年  
+  ISBN: 9782822700054
+
+- **Lua - Programação de Computadores**  
+  著：José Augusto N. G. Manzano  
+  自主出版、2012年  
+  ISBN: 9788591311576
+
+- **Lua: Einsatz von Lua in Embedded Systems**  
+  著：Claus Kühnel, Daniel Zwirner  
+  Skript Verlag Kuehnel、2012年  
+  ISBN: 3907857151
+
+- **Basic ROBLOX Lua Programming**  
+  著：Brandon John LaRouche  
+  CreateSpace、2012年  
+  ISBN: 1475026048
+
+- **Numerical Methods for Nonlinear Engineering Models**  
+  著：John R. Hauser  
+  Springer、2009年  
+  ISBN: 9781402099199
+
+- **Lua: Einsatz von Lua zur Messwerterfassung**  
+  著：Claus Kühnel, Daniel Zwirner  
+  Skript Verlag Kuehnel、2009年  
+  ISBN: 3907857127
+
+- **Beginning Lua with World of Warcraft Add-ons**  
+  著：Paul Emmerich  
+  Apress、2009年  
+  ISBN: 1430223715
+
+- **First Lua Programming, the most popular application development lightweight script!**  
+  著：Miki Shimizu  
+  Softbank Creative、2008年  
+  ISBN: 4777514137
+
+- **Scripting Language for Game Development and Efficient C/C++ to Implement Embedded Lua**  
+  著：Makoto Hamanaka  
+  Softbank Creative、2008年  
+  ISBN: 4797348550
+
+- **World of Warcraft Programming**  
+  著：James Whitehead II, Bryan McLemore, Matthew Orlando  
+  Wiley、2008年  
+  ISBN: 0470229810
+
+- **Introduction to Lua programming**  
+  著：Yutaka Ueno  
+  Softbank Creative、2007年  
+  ISBN: 4797342722
+
+- **Beginning Lua Programming**  
+  著：Kurt Jung, Aaron Brown  
+  Wrox、2007年  
+  ISBN: 0470069171
+
+- **Programming Game AI by Example**  
+  著：Mat Buckland  
+  Jones & Bartlett Learning、2005年  
+  ISBN: 9781556220784
+
+- **Game Development with Lua**  
+  著：Paul Schuytema, Mark Manyen  
+  Charles River Media、2005年  
+  ISBN: 1584504048
+
+- **Game Programming with Python, Lua, and Ruby**  
+  著：Tom Gutschmidt  
+  Course Technology PTR、2003年  
+  ISBN: 1592000770

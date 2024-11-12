@@ -1,38 +1,39 @@
-Reference manuals
+# リファレンスマニュアル
 
-The official definition of the Lua language is its reference manual, which describes the syntax and the semantics of Lua, the standard libraries, and the C API.
+Lua言語の公式な定義はリファレンスマニュアルであり、Luaの文法と意味論、標準ライブラリ、そしてC APIについて記述されています。
 
-For a detailed introduction to the practice of Lua programming, see the book Programming in Lua, also available as an e-book. PiL4
+Luaプログラミングの実践的な詳細については、『Programming in Lua』という書籍をご覧ください。電子書籍としても利用可能です。
 
-Current version
+## 現在のバージョン
 
-The manual for the latest version of Lua is available in English only:
+Luaの最新バージョンのマニュアルは、英語でのみ利用可能です。
 
-5.4: english
+- **5.4**: [英語](https://www.lua.org/manual/5.4/)
 
-Previous versions
+## 過去のバージョン
 
-The manual for Lua 5.3 is available in English and in Russian:
+- **5.3**: [英語](https://www.lua.org/manual/5.3/) · [ロシア語](https://web.archive.org/web/20230415092320/https://lua.org.ru/contents_ru.html)
+- **5.2**: [英語](https://www.lua.org/manual/5.2/) · [ポルトガル語](https://www.lua.org/manual/5.2/pt/) · [ポーランド語](https://lua.org.pl/5.2/)
+- **5.1**: [英語](https://www.lua.org/manual/5.1/) · [ポルトガル語](https://www.lua.org/manual/5.1/pt/) · [スペイン語](https://www.lua.org/manual/5.1/es/) · [ドイツ語](https://www.lua.org/manual/5.1/de) · [ポーランド語](https://lua.org.pl/5.1/)
 
-5.3: english · русский
+この書籍を購入してLuaプロジェクトを支援することもできます。
 
-The manual for Lua 5.2 is available in English, in Portuguese, and in Polish:
+## さらに古いバージョン
 
-5.2: english · português · polski
+さらに古いバージョンのマニュアルは、英語でのみ提供されています。
 
- manual
-The manual for Lua 5.1 is available in several languages:
+- [**5.0**](https://www.lua.org/manual/5.0/)
+- [**4.0**](https://www.lua.org/manual/4.0/)
+- [**3.2**](https://www.lua.org/manual/3.2/)
+- [**3.1**](https://www.lua.org/manual/3.1/)
+- [**3.0**](https://www.lua.org/manual/3.0/)
+- [**2.5**](https://www.lua.org/manual/2.5/)
+- [**2.4**](https://www.lua.org/manual/2.4/)
+- [**2.2**](https://www.lua.org/manual/2.2/)
+- [**2.1**](https://www.lua.org/manual/2.1/)
+- [**1.1**](https://www.lua.org/ftp/refman-1.1.ps.gz)
+- [**1.0**](https://www.lua.org/ftp/refman-1.1.ps.gz)
 
-5.1: english · português · español · deutsch · polski
+これらのマニュアルは、PostScriptおよびPDF形式でも利用可能です。
 
-Buy a copy of this book and help to support the Lua project.
-
-Older versions
-
-The manuals for older versions are available in English only:
-
-5.0 · 4.0 · 3.2 · 3.1 · 3.0 · 2.5 · 2.4 · 2.2 · 2.1 · 1.1 · 1.0
-
-These manuals are also available here in PostScript and PDF.
-
-All reference manuals are freely available under the terms of the Lua license.
+すべてのリファレンスマニュアルは、Luaライセンスの条件の下で自由に利用できます。

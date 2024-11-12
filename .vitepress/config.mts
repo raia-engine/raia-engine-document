@@ -505,7 +505,7 @@ export default defineConfig({
               ]
             },
             {text: 'FAQ', link: '/resource/lua/faq'},
-            {text: 'バージョン', link: '/resource/lua/versions'},
+            {text: 'バージョン履歴', link: '/resource/lua/versions'},
           ]
         },
         {
