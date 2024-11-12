@@ -1,45 +1,43 @@
-Thanks
+# 謝辞
 
-The Lua team is grateful to several individuals, donors, and institutions. We are especially grateful to Tecgraf for its continued support of Lua. We thank everyone at Tecgraf, especially its creator and former director, Marcelo Gattass.
+Luaチームは、多くの個人、寄付者、機関に対して深い感謝の意を表します。特に、Luaを継続的に支援してくれているTecgrafに感謝しています。Tecgrafのすべての皆様、特にその創設者であり元ディレクターのマルセロ・ガタス氏に感謝いたします。
 
-Individuals
+## 個人への感謝
 
-At the risk of omitting several names, we thank the following individuals for supporting Lua along the years by spreading the word about Lua, contributing ideas, suggesting improvements, and helping the community:
+多くの方々の名前を挙げきれない恐れがある中で、Luaの普及、アイデア提供、改善提案、そしてコミュニティ支援を通してLuaを支えてきた以下の方々に感謝の意を表します：
 
-Aaron Brown, Adam Moss, Alan Watson, Alexander Gladysh, Andrew Wilson, André Carregal, André Clinio, André Costa, Antonio Scuri, Asko Kauppi, Benjamin Cabé, Björn Ritzl, Bret Mogilefsky, Brett Kapilik, Cameron Laird, Carlos Cassino, Carlos Henrique Levy, Claudio Terra, Dado Sutter, Daniel Silverstone, David Burgess, David Jeske, David Manura, Diego Nehab, Ed Ferguson, Edgar Toernig, Erik Hougaard, Etiene Dalcol, Evandro Gonçalves, Gustavo Niemeyer, Hans Hagen, Hisham Muhammad, Jan-Pieter Jacobs, Jim Mathies, Jim Whitehead, John Belmonte, John Passaniti, John Rodriguez, John Roll, Jon Erickson, Jon Kleiser, Julio Manuel Fernández-Díaz, Kein-Hong Man, Kévin Kin-foo, Lourival Neto, Marc Balmer, Marco Palladino, Mark Hamburg, Mark Ian Barlow, Matthew Burke, Matthew Cox, Mike Pall, Nick Trout, Noemi Rodriguez, Norman Ramsey, Patrick Donnelly, Paul Merrell, Pavel Striz, Peter Cawley, Philippe Lhoste, Renata Ratton, Renato Borges, Renato Cerqueira, Reuben Thomas, Rici Lake, Rob Kendrick, Ryan Pusztai, Stefan Peters, Stephan Herrmann, Steve Dekorte, Steve Donovan, Sérgio Queiroz de Medeiros, Taco Hoekwater, Thatcher Ulrich, Tomás Gorham, Vera Hardmeier, Vincent Penquerc'h, Wim Couwenberg.
-Thank you!
+Aaron Brown、Adam Moss、Alan Watson、Alexander Gladysh、Andrew Wilson、André Carregal、André Clinio、André Costa、Antonio Scuri、Asko Kauppi、Benjamin Cabé、Björn Ritzl、Bret Mogilefsky、Brett Kapilik、Cameron Laird、Carlos Cassino、Carlos Henrique Levy、Claudio Terra、Dado Sutter、Daniel Silverstone、David Burgess、David Jeske、David Manura、Diego Nehab、Ed Ferguson、Edgar Toernig、Erik Hougaard、Etiene Dalcol、Evandro Gonçalves、Gustavo Niemeyer、Hans Hagen、Hisham Muhammad、Jan-Pieter Jacobs、Jim Mathies、Jim Whitehead、John Belmonte、John Passaniti、John Rodriguez、John Roll、Jon Erickson、Jon Kleiser、Julio Manuel Fernández-Díaz、Kein-Hong Man、Kévin Kin-foo、Lourival Neto、Marc Balmer、Marco Palladino、Mark Hamburg、Mark Ian Barlow、Matthew Burke、Matthew Cox、Mike Pall、Nick Trout、Noemi Rodriguez、Norman Ramsey、Patrick Donnelly、Paul Merrell、Pavel Striz、Peter Cawley、Philippe Lhoste、Renata Ratton、Renato Borges、Renato Cerqueira、Reuben Thomas、Rici Lake、Rob Kendrick、Ryan Pusztai、Stefan Peters、Stephan Herrmann、Steve Dekorte、Steve Donovan、Sérgio Queiroz de Medeiros、Taco Hoekwater、Thatcher Ulrich、Tomás Gorham、Vera Hardmeier、Vincent Penquerc'h、Wim Couwenberg。ありがとうございます！
 
-Donors
+## 寄付者への感謝
 
-We are grateful to the following individuals and companies and several anonymous donors for their generous donations to the Lua project.
+Luaプロジェクトに寛大な寄付をしてくださった以下の方々と企業、また匿名の寄付者の皆様に感謝します。
 
-Doctor Web, Martin Bründl, Pavel Holejsovsky, David Slate, Laptop Computers, Match-IT Limited, Bitvise, Karl Berry, Doug Philips, Real Time Logic, DistroWatch.com, Jim Eberle, Shmuel Zeigerman, Les Newell (SheetCam), Michel Machado, Swoop Software, Taj Khattra, Asen Kovachev, Albert-Jan Brouwer, Kurt Jung, Ashwin Hirschi (Reflexis).
-Thank you!
+Doctor Web、Martin Bründl、Pavel Holejsovsky、David Slate、Laptop Computers、Match-IT Limited、Bitvise、Karl Berry、Doug Philips、Real Time Logic、DistroWatch.com、Jim Eberle、Shmuel Zeigerman、Les Newell（SheetCam）、Michel Machado、Swoop Software、Taj Khattra、Asen Kovachev、Albert-Jan Brouwer、Kurt Jung、Ashwin Hirschi（Reflexis）。ありがとうございます！
 
-Institutions
+## 機関への感謝
 
-We are grateful to the following institutions for currently supporting Lua:
+Luaを現在支援している以下の機関に感謝しています：
 
-Tecgraf	Tecgraf housed the Lua project from its birth in 1993 until 2005.
-LabLua	LabLua houses the Lua project since 2005.
-DI	The Department of Computer Science houses LabLua, where Lua is currently developed.
-PUC-Rio	PUC-Rio is the birthplace of Lua and is the alma mater of the Lua team.
-IMPA	IMPA hosted LuaForge and is home to one third of the Lua team.
-msys	micro systems hosts Lua.org since 2023.
+- **Tecgraf** - 1993年のプロジェクト開始から2005年までLuaを支援。
+- **LabLua** - 2005年から現在までLuaプロジェクトを支援。
+- **情報学部（DI）** - LabLuaを擁する学部であり、現在もLuaの開発を続けています。
+- **PUC-Rio** - Luaが誕生した場所であり、Luaチームの母校です。
+- **IMPA** - LuaForgeのホストを務め、Luaチームの一員が所属しています。
+- **msys micro systems** - 2023年からLua.orgをホスティング。
 
-Other institutions
+## かつてLuaを支援してくれた機関
 
-We are grateful to the following institutions for supporting Lua in the past:
+過去にLuaを支援してくれた以下の機関にも感謝しています：
 
-	Pepperfish hosted Lua.org from 2004 to 2023 and the mailing list from 2010 to 2023.
-CUJO	CUJO AI hosted and sponsored the Lua Workshop 2018.
-	Mashape hosted and sponsored the Lua Workshop 2016 and the Lua Workshop 2017.
-	King hosted and sponsored the Lua Workshop 2015.
-	Mail.Ru hosted and sponsored the Lua Workshop 2014.
-	Verisign hosted and sponsored the Lua Workshop 2012.
-	FINEP sponsored the translation of the reference manual into Portuguese in 2007.
-	Océ hosted and sponsored the Lua Workshop 2006 and was a corporate sponsor.
-	Adobe hosted and sponsored the Lua Workshop 2005 and was a corporate sponsor.
-	CNPq supported several initiatives of the Lua project in 2004 and 2005.
-	Soho One hosted this website from 2001 to 2004.
-	Mandriva Conectiva hosted the mailing list from 2003 to 2010.
+- **Pepperfish** - 2004年から2023年までLua.orgをホスティングし、2010年から2023年までメーリングリストをホスティング。
+- **CUJO AI** - Lua Workshop 2018のホスティングとスポンサー。
+- **Mashape** - Lua Workshop 2016および2017のホスティングとスポンサー。
+- **King** - Lua Workshop 2015のホスティングとスポンサー。
+- **Mail.Ru** - Lua Workshop 2014のホスティングとスポンサー。
+- **Verisign** - Lua Workshop 2012のホスティングとスポンサー。
+- **FINEP** - 2007年にリファレンスマニュアルのポルトガル語翻訳を支援。
+- **Océ** - 2006年のLua Workshopのホスティングとスポンサー、また企業スポンサー。
+- **Adobe** - 2005年のLua Workshopのホスティングとスポンサー、また企業スポンサー。
+- **CNPq** - 2004年と2005年にLuaプロジェクトの様々な取り組みを支援。
+- **Soho One** - 2001年から2004年までウェブサイトをホスティング。
+- **Mandriva Conectiva** - 2003年から2010年までメーリングリストをホスティング。

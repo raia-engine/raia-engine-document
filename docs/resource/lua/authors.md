@@ -1,21 +1,11 @@
-Authors
+# Luaの開発者
 
-The Lua language is designed, implemented, and maintained at PUC-Rio in Brazil since 1993 by the team below:
+Lua言語は、1993年からブラジルのPUC-Rioで以下のチームによって設計・実装され、メンテナンスされています。
 
-Roberto Ierusalimschy
-Professor in the Department of Computer Science at PUC-Rio.
-Head of LabLua.
-Waldemar Celes
-Professor in the Department of Computer Science at PUC-Rio.
-Director of Tecgraf.
-Luiz Henrique de Figueiredo
-Researcher at IMPA. Former consultant at Tecgraf.
-Lua team
-Waldemar, Roberto, Luiz · photo by Ernani d'Almeida (2011)
+- **ロベルト・イエルサリムスキー**: PUC-Rioのコンピュータサイエンス学部の教授であり、LabLuaの責任者です。
+- **ワルデマール・セレス**: PUC-Rioのコンピュータサイエンス学部の教授であり、Tecgrafのディレクターを務めています。
+- **ルイス・エンリケ・デ・フィゲイレド**: IMPAの研究員で、かつてはTecgrafのコンサルタントを務めていました。
 
-The Lua team is available for outside consulting on Lua matters.
+LuaチームはLuaに関するコンサルティング業務も行っています。チームへの最良の連絡方法は電子メールです。
 
-The best way to contact the Lua team is by email.
-
-The Lua team is grateful to several individuals and institutions that have supported Lua.
-
+Luaチームは、Luaの発展を支援してくれた多くの個人や機関に感謝しています。

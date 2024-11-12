@@ -1,20 +1,20 @@
-# Download
+# ダウンロード
 
-## Source
+## ソースコード
 
-Lua is free software distributed in source code. It may be used for any purpose, including commercial purposes, at absolutely no cost.
+Luaは無料のソフトウェアで、ソースコードで配布されています。商業目的を含むあらゆる目的で、完全に無料で使用可能です。
 
-All versions are available for download. The current version is Lua 5.4 and its current release is Lua 5.4.6.
+すべてのバージョンがダウンロード可能です。現在のバージョンはLua 5.4で、最新リリースはLua 5.4.6です。
 
-## Tools
+## ツール
 
-The main repository of Lua modules is LuaRocks. See also Awesome Lua. Pre-compiled Lua libraries and executables are available at LuaBinaries. The lua-users wiki lists many user-contributed addons for Lua.
+Luaモジュールの主なリポジトリはLuaRocksです。また、Awesome Luaも参照してください。事前コンパイル済みのLuaライブラリと実行ファイルはLuaBinariesで入手可能です。lua-users wikiには、ユーザーが提供した多くの追加機能が掲載されています。
 
-## Building
+## ビルド
 
-Lua is implemented in pure ANSI C and compiles unmodified in all platforms that have an ANSI C compiler. Lua also compiles cleanly as C++.
+Luaは純粋なANSI Cで実装されており、ANSI Cコンパイラがあるすべてのプラットフォームで変更なしでコンパイルできます。また、LuaはC++としてもクリーンにコンパイルされます。
 
-Lua is very easy to build and install. There are detailed instructions in the package but here is a simple terminal session that downloads the current release of Lua and builds it in Linux:
+Luaは非常に簡単にビルドおよびインストールできます。パッケージには詳細な手順が含まれていますが、Linuxで最新リリースのLuaをダウンロードし、ビルドするための簡単なターミナルコマンド例を以下に示します：
 
 ```sh
 curl -L -R -O https://www.lua.org/ftp/lua-5.4.6.tar.gz
@@ -23,16 +23,16 @@ cd lua-5.4.6
 make all test
 ```
 
-If you have trouble building Lua, read the FAQ.
+ビルドに問題がある場合は、FAQを参照してください。
 
-If you don't have the time or the inclination to compile Lua yourself, get a binary or try the live demo.
+Luaを自分でコンパイルする時間や余裕がない場合は、バイナリを取得するかライブデモを試してみてください。
 
-## Giving credit
+## クレジット表記
 
-If you use Lua, please give us credit, according to our license. A nice way to give us further credit is to include a Lua logo and a link to our site in a web page for your product.
+Luaを使用する際には、ライセンスに従ってLuaにクレジットを付与してください。さらに感謝の意を示す方法として、製品のウェブページにLuaのロゴと当サイトへのリンクを掲載することも歓迎します。
 
-## Supporting Lua
+## Luaプロジェクトの支援
 
-You can help to support the Lua project by buying a book published by Lua.org and by making a donation.
+Lua.orgから出版された本を購入することで、Luaプロジェクトを支援できます。また、寄付を通じても支援可能です。
 
-You can also help to spread the word about Lua by buying Lua products at Zazzle.
+さらに、ZazzleでLua関連商品の購入を通じてLuaの認知を広めることもできます。

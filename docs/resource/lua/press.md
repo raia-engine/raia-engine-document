@@ -1,541 +1,614 @@
-Press clippings
+# Luaに関するプレス記事
 
-Here are some articles about Lua that have appeared in the press. See also some user quotes.
+ここでは、報道機関に掲載された Lua に関する記事をいくつか紹介します。[ユーザーの引用](quotes.md)も参照してください。
 
-O Globo, 13 Sep 2022
-Folha de São Paulo, 04 Mar 2022
-O Globo, 10 Apr 2021
-Folha de São Paulo, 21 Mar 2021
-The Hosting Blog, 08 Jun 2017
-Linux Magazine, 26 May 2016
-O Globo, 07 Jul 2015
-Canaltech, 09 Oct 2014
-O Globo, 23 Jul 2013
-Foreign Affairs, 21 Apr 2013
-Wired, 19 Mar 2013
-SFGATE, 30 Aug 2012
-Game Developers Magazine, 13 Jan 2012
-RTC Magazine, Dec 2011
-O Globo, 26 Nov 2011
-Veja, 31 Aug 2011
-ITPRO, 24 May 2010
-Computerworld, 11 Sep 2008
-Dr. Dobb's, 8 Jan 2008
-IEEE Software, Sep 2007
-Revista Pesquisa FAPESP, Sep 2007
-Linux Journal, 01 Jun 2007
-Agência CT, 30 May 2007
-Revista PROGRAMAR, May 2007
-Universia, 24 May 2007
-O Globo, 22 May 2007
-SD Times, 15 Oct 2006
-Jornal da PUC, 17 Aug 2006
-ONLamp, 16 Feb 2006
-Inovação Unicamp, 11 Aug 2005
-Linux Magazine, Sep 2004
-Linux Magazine, Aug 2004
-O Globo, 19 Jul 2004
-Unix Review, May 2004
-Jornal do Brasil, 19 Apr 2004
-Le Journal du Net, 06 Apr 2004
-Jornal do Brasil, 08 Sep 2002
-Unix Review, May 2002
-Developers' Magazine, Mar 2001
-Veja Rio, 19 Feb 2001
-Exame, 13 Dec 2000
-C Magazine, Dec 2000
-Globo.com, 16 Nov 2000
-Hipermidia, 11 and 16 Nov 2000
-Jornal da PUC, Nov 2000
-ISTOÉ Dinheiro, 25 Oct 2000
-O Globo, 16 Oct 2000
-O Globo, 02 Oct 2000
-Jornal do Commercio, 01 Oct 2000
-Archive, Oct 2000
-Gazeta Mercantil, 29 Sep 2000
-Adventurer Paradise, 20 Aug 2000
-SunWorld, Aug 1998
-Informática Exame, Nov 1997
+- IT Forum, 25 May 2024
+- O Globo, 13 Sep 2022
+- Folha de São Paulo, 04 Mar 2022
+- O Globo, 10 Apr 2021
+- Folha de São Paulo, 21 Mar 2021
+- The Hosting Blog, 08 Jun 2017
+- Linux Magazine, 26 May 2016
+- O Globo, 07 Jul 2015
+- Canaltech, 09 Oct 2014
+- O Globo, 23 Jul 2013
+- Foreign Affairs, 21 Apr 2013
+- Wired, 19 Mar 2013
+- SFGATE, 30 Aug 2012
+- Game Developers Magazine, 13 Jan 2012
+- RTC Magazine, Dec 2011
+- O Globo, 26 Nov 2011
+- Veja, 31 Aug 2011
+- ITPRO, 24 May 2010
+- Computerworld, 11 Sep 2008
+- Dr. Dobb's, 8 Jan 2008
+- IEEE Software, Sep 2007
+- Revista Pesquisa FAPESP, Sep 2007
+- Linux Journal, 01 Jun 2007
+- Agência CT, 30 May 2007
+- Revista PROGRAMAR, May 2007
+- Universia, 24 May 2007
+- O Globo, 22 May 2007
+- SD Times, 15 Oct 2006
+- Jornal da PUC, 17 Aug 2006
+- ONLamp, 16 Feb 2006
+- Inovação Unicamp, 11 Aug 2005
+- Linux Magazine, Sep 2004
+- Linux Magazine, Aug 2004
+- O Globo, 19 Jul 2004
+- Unix Review, May 2004
+- Jornal do Brasil, 19 Apr 2004
+- Le Journal du Net, 06 Apr 2004
+- Jornal do Brasil, 08 Sep 2002
+- Unix Review, May 2002
+- Developers' Magazine, Mar 2001
+- Veja Rio, 19 Feb 2001
+- Exame, 13 Dec 2000
+- C Magazine, Dec 2000
+- Globo.com, 16 Nov 2000
+- Hipermidia, 11 and 16 Nov 2000
+- Jornal da PUC, Nov 2000
+- ISTOÉ Dinheiro, 25 Oct 2000
+- O Globo, 16 Oct 2000
+- O Globo, 02 Oct 2000
+- Jornal do Commercio, 01 Oct 2000
+- Archive, Oct 2000
+- Gazeta Mercantil, 29 Sep 2000
+- Adventurer Paradise, 20 Aug 2000
+- SunWorld, Aug 1998
+- Informática Exame, Nov 1997
 
-Linguagem Lua, criada no Brasil, tem primeiro livro em português sobre programação
+## Lua言語、初のポルトガル語版プログラミング書籍が出版
 
-Ao longo dos últimos 12 anos, obra já vinha sendo publicada em seis outros idiomas
+12年間にわたり他の6か国語で出版されてきたLuaの書籍が、ついに今月、ポルトガル語で初めて出版されました。この書籍『Programando em Lua』は、PUC-Rio（リオ・デ・ジャネイロ・カトリック大学）科学技術センター（CTC）情報学部のロベルト・イエルサリムスキー教授によって執筆されました。
 
+以前は、この本は英語、ドイツ語、韓国語、日本語、中国語、ロシア語でのみ販売されていました。
 
-Depois de 12 anos sendo publicado em diversos idiomas, finalmente foi lançada este mês a primeira versão em português do livro "Programando em Lua", do Prof. Roberto Ierusalimschy, do Departamento de Informática do CTC/PUC-Rio.
+Luaは、世界的に有名なプログラミング言語で、複雑なソフトウェアやPCゲーム（「Angry Birds」や「World of Warcraft」など）、Adobe Photoshop Lightroom、Wikipediaのサイトなどに使用されています。
 
-Anteriormente, a obra era vendida apenas em outros idiomas — inglês, alemão, coreano, japonês, chinês e russo.
+22年前、イエルサリムスキー教授は、ルイス・エンリケ・デ・フィゲイレド氏とワルデマール・セレス氏と共にLuaを開発しました。彼らはPUC-Rioの情報学部およびグラフィックコミュニケーションテクノロジーグループ（TeCGraf）に所属し、Luaの開発とユーザーの新しい要望に対応してきました。
 
-Lua é uma linguagem de programação famosa mundialmente e utilizada em softwares complexos e em jogos para computador, como "Angry Birds" e "World of Warcraft", além de programas como o Adobe Photoshop Lightroom e no site da Wikipedia.
+Luaはオープンソースのソフトウェアで、自由に利用できるMITライセンスで配布されており、商業利用を含むいかなる目的にも無料で利用可能です。ダウンロードしてすぐに使い始めることができます。
 
-Há 22 anos, Ierusalimschy, em parceria com Luiz Henrique de Figueiredo e Waldemar Celes — vinculados ao Departamento de Informática e ao Grupo de Tecnologia em Comunicação Gráfica (Tecgraf) da PUC-Rio — criou Lua e, desde então, vem desenvolvendo a linguagem de programação e atendendo às novas demandas dos usuários.
+Luaは、先進国以外で開発された唯一の影響力のあるプログラミング言語です。
 
-Lua é software livre de código aberto, uma linguagem distribuída sob uma licença muito liberal — a conhecida licença MIT. Lua pode ser usada para quaisquer propósitos, incluindo comerciais, sem qualquer custo ou burocracia. Basta fazer um download e usá-la.
+Luaのプロジェクトと進化は、2007年にHOPL III（ACMが主催するプログラミング言語の歴史に関する会議）で発表されました。この会議は15年ごとに開催され、毎回わずかな言語のみが紹介されます。LuaがHOPL IIIに選ばれたことは、その世界的な影響力の重要な証です。
 
-Trata-se da única linguagem de programação de impacto desenvolvida fora do primeiro mundo.
+Luaの詳細はこちら。
 
-O projeto e a evolução de Lua foram apresentados em 2007 na HOPL III, a 3a Conferência da ACM (Association for Computer Machinery) sobre a História das Linguagens de Programação. Essa conferência ocorre a cada 15 anos (a primeira foi em 1978 e a segunda em 1993) e somente poucas linguagens são apresentadas a cada vez. A escolha de Lua para a HOPL III foi um importante reconhecimento do seu impacto mundial.
-
-Mais informações sobre Lua aqui.
-
+::: info
 Reprint from O Globo, 07 Jul 2015. Copyright © 2015 O Globo. Todos os direitos reservados.
+:::
 
-Lua ganha prêmio
+## Luaが賞を受賞
 
-Professor Ierusalimschy, da PUC-Rio, é homeageado na ocasião
+PUC-Rioのイエルサリムスキー教授が栄誉を受ける
 
-Durante a 33ª edição do Congresso da Sociedade Brasileira da Computação, que acontece de 23 a 26 de julho, em Maceió (AL), o Prof. Roberto Ierusalimschy, do Departamento de Informática da PUC-Rio, será agraciado com o Prêmio Mérito Científico.
+7月23日から26日にマセイオ（アラゴアス州）で開催された第33回ブラジルコンピュータ協会（SBC）総会において、PUC-Rioの情報学部教授ロベルト・イエルサリムスキー氏が「科学功労賞」を受賞しました。
 
-Há 20 anos, Ierusalimschy, em parceria com Luiz Henrique de Figueiredo e Waldemar Celes, foi um dos criadores da linguagem de programação Lua, famosa mundialmente e utilizada em softwares complexos e jogos para computador, como Angry Birds e World of Warcraft, além de programas como o Adobe Photoshop Lightroom.
+イエルサリムスキー教授は、20年前にルイス・エンリケ・デ・フィゲイレド氏、ワルデマール・セレス氏と共に、プログラミング言語Luaを開発しました。Luaは、世界中で広く利用され、複雑なソフトウェアや「Angry Birds」「World of Warcraft」などのPCゲーム、さらにはAdobe Photoshop Lightroomといったプログラムでも使用されています。
 
-O professor, através de seus artigos e sua atuação em instituições de ponta brasileiras e estrangeiras, contribuiu de forma decisiva para a consolidação e expansão da linguagem no mercado.
+教授は論文の執筆や国内外の先端機関での活動を通じ、Luaの市場での確立と普及に大きく貢献しました。
 
-Segundo a Wikipédia, Lua foi criada em 1993 pelos três supracitados acadêmicos, membros do Computer Graphics Technology Group na PUC-Rio, a Pontifícia Universidade Católica do Rio de Janeiro, no Brasil. Versões da Lua antes da versão 5.0 foram liberadas sob uma licença similar à licença BSD. A partir da versão 5.0, Lua foi licenciada sob a licença MIT.
+Wikipediaによると、Luaは1993年にこれら3名の学者によって、ブラジルのリオデジャネイロ・カトリック大学（PUC-Rio）のComputer Graphics Technology Groupで開発されました。バージョン5.0以前のLuaはBSDライセンスに類似したライセンスで配布されており、バージョン5.0以降はMITライセンスで配布されています。
 
-Alguns dos parentes mais próximos de Lua são o Icon, por sua concepção, e Python, por sua facilidade de utilização por não-programadores. Em um artigo publicado no Dr. Dobb's Journal, os criadores de Lua também afirmam que Lisp e Scheme foram uma grande influência na decisão de desenvolver a tabela como a principal estrutura de dados de Lua. Lua tem sido usada em várias aplicações, tanto comerciais como não-comerciais.
+Luaの特徴は、Iconの設計思想に近く、また非プログラマーにも使いやすいPythonに似ていることです。Dr. Dobb's Journalに掲載された記事によれば、Luaの開発者たちは、データ構造としてテーブルを中心に据える際にLispやSchemeの影響も受けたと述べています。Luaは、商業・非商業の両方でさまざまなアプリケーションに使用されています。
 
-O primeiro projeto utilizando a linguagem em jogos foi em 1997 quando a LucasArts a utilizou como linguagem de script no jogo Grim Fandango.
+Luaがゲームに初めて使用されたのは1997年で、LucasArtsが「Grim Fandango」のスクリプト言語としてLuaを採用しました。
 
+::: info
 Reprint from O Globo, 23 Jul 2013. Copyright © 2013 O Globo. Todos os direitos reservados.
+:::
 
-From Brazil to Wikipedia
 
-The Surprising Journey of a Programming Language from Rio
+## ブラジルからウィキペディアへ
 
-By Yuri Takhteyev
+リオ発のプログラミング言語が辿った意外な旅路
 
-Last month, the San Francisco-based Wikimedia Foundation, which maintains Wikipedia, announced that it was changing the way some of the site's more complex pages are configured. Prior to this, these pages were built using Wikipedia's own homegrown template language. Over time, however, the system proved too limiting — for example, editors had to come up with nearly a page of code just to determine the length of a piece of text. By 2011, the foundation's engineers had started looking for a better solution. One of the options was embedding the popular JavaScript language, used in most web browsers. The engineers looked especially closely at the version of JavaScript developed by Google, the Internet behemoth based in nearby Mountain View, in the heart of Silicon Valley. But they eventually looked farther afield, settling on Lua, a programming language developed by a trio of researchers in Rio de Janeiro, Brazil.
+執筆者: ユーリ・タフテエフ
 
-How did a programming language from the global South manage to make it into one of the world's most popular web sites? Lua's story, as it turns out, tells a lot about the globalization of software development and the difficulties faced by innovators in developing countries.
+先月、ウィキペディアを運営するサンフランシスコ拠点のウィキメディア財団は、サイトの一部の複雑なページ設定方法を変更すると発表しました。それまで、これらのページはウィキペディア独自のテンプレート言語で作られていましたが、このシステムは徐々に限界を露呈し、たとえばテキストの長さを計算するだけで膨大なコードが必要でした。2011年には、財団のエンジニアたちはより良い解決策を模索し始め、その候補の一つとしてJavaScriptを検討しましたが、最終的にLuaというリオデジャネイロで開発されたプログラミング言語を採用することに決めたのです。
 
-I first heard of Lua eight years ago, when I traveled to Rio de Janeiro to interview software engineers for a research project that was recently published as a book, Coding Places. While in Rio, I met "Rodrigo" (who has asked to remain anonymous), who worked on a free and open-source web platform. He surprised me by telling me that the project was based on a new programming language, Lua, developed by a small team at Pontifícia Universidade Católica do Rio de Janeiro (PUC-Rio), where Rodrigo had been a student.
+このように、グローバル・サウス（南半球）の国で生まれたプログラミング言語が、世界的に人気のあるウェブサイトで採用されるまでには、特別な背景があります。Luaの成功物語は、ソフトウェア開発のグローバル化と、発展途上国でイノベーションを生み出す際に直面する課題を示しています。
 
-I knew that PUC-Rio's computer science program was considered one of Brazil's best, and I was intrigued by the engineer's reliance on local innovation. Even so, the project sounded futile. The world of software is dominated by network effects: The more people use a piece of software, the more valuable it becomes. This is particularly true for programming languages. For engineers, going with widely used languages means access to more jobs that require knowledge of those languages and more ready-built modules in that language to repurpose. For employers, using a popular language makes it possible to hire from a larger pool of engineers. Consequently, although countless programming languages have been developed, only a handful have been widely adopted. And nearly all of those originate from major U.S.-based corporations or research centers. None that I knew at the time came from a developing country.
+私は8年前にリオデジャネイロで「コーディング・プレイス」という研究プロジェクトの一環としてソフトウェア技術者たちとインタビューを行い、そのとき初めてLuaについて知りました。リオで出会った「ロドリゴ」（匿名希望）は、自由かつオープンソースのウェブプラットフォームで働いており、彼はそのプロジェクトがLuaという新しいプログラミング言語を基盤にしていると教えてくれました。この言語は、ロドリゴが学んだカトリック大学（PUC-Rio）で開発されたものでした。
 
-Against this background, Lua's chances seemed slim. So I decided to spend my time studying how local engineers applied technologies developed abroad — a situation that seemed more common in Brazil and in the developing world at large. Just to be sure, of course, I did ask a few of my Brazilian interviewees what they thought of Lua. Most had never heard of it. Those who had, knew it was something that "the guys" at PUC-Rio were working on, but conveyed little confidence that it would succeed.
+当時、PUC-Rioのコンピューターサイエンスプログラムはブラジルでも評価の高いものでしたが、ローカルなイノベーションに頼っていることに驚きました。
 
-My opinion of Lua changed a year later, when, back in California, I read an article about the language on a popular site for technical news. Lua, it appeared, had a small but dedicated following outside Brazil. It was being used in numerous products, most notably in the World of Warcraft, a wildly popular online game in which players could employ Lua to customize the game's user interface. I started thinking that I had perhaps missed something on my previous visit to Brazil.
+それでも、そのプロジェクトは無謀な試みだと思えました。ソフトウェアの世界では、ネットワーク効果が支配的です。つまり、ソフトウェアを使う人が多ければ多いほど、その価値が高まるという特性です。これは特にプログラミング言語に当てはまります。エンジニアにとって、よく使われている言語を選ぶことは、その言語に関する知識を必要とする職に就く機会が増えることを意味し、既存のモジュールも豊富に活用できるようになります。企業にとっても、広く使われている言語を採用することで、採用できるエンジニアの範囲が広がります。したがって、無数のプログラミング言語が開発されてきましたが、広く採用されているのはほんの一握りで、そのほとんどは米国の大手企業や研究機関から生まれたものです。当時、発展途上国から生まれた言語は私の知る限りではありませんでした。
 
-I decided that I would devote a return trip to Brazil to exploring the Lua ecosystem by spending a few months working with Rodrigo on his project inside a small company in Rio. I planned to interview Lua's authors and contributors, attend Lua programmer meet-ups and other events, and find other companies using the language. The first task was relatively easy. The second two, surprisingly, were not. There just weren't any Lua events to attend, and I could find only one other company in Rio using the language. To observe Lua being used, I probably should have stayed in San Francisco. As it turned out, the language's success abroad and its relative lack thereof at home were closely related.
+このような背景のもとでは、Luaが成功する可能性は低いと感じました。そのため、ブラジルや発展途上国でよく見られる状況として、現地のエンジニアが海外で開発された技術をどのように応用しているかを研究することに専念しました。念のため、数人のブラジル人インタビュー対象者にLuaについてどう思うか尋ねてみましたが、ほとんどはその存在を知りませんでした。「PUC-Rioの人たちが何かやっているらしい」という程度の認識でしたが、成功を確信している様子はありませんでした。
 
-Software projects do not exist in a vacuum. They are usually embedded in a web of relationships, tied to other projects, people, and organizations. A project born in the right place — say, on the campus of a major corporation in the heart of Silicon Valley — can rely on such ties to rise to global prominence. JavaScript, for example, was developed in the 1990s for use in Netscape Navigator, then the world's most popular web browser. This early start made JavaScript into one of the world's most popular programming languages, despite many engineers' concerns about its poor design.
+ところが、翌年カリフォルニアに戻ったときに、人気のある技術系ニュースサイトでLuaに関する記事を読み、その考えは一変しました。Luaには小規模ながら献身的な支持者がブラジル国外にも存在し、さまざまな製品で使用されていたのです。その中で特に注目されたのが、人気のオンラインゲーム「ワールド・オブ・ウォークラフト」でした。このゲームでは、プレイヤーがLuaを使ってユーザーインターフェースをカスタマイズできる機能が提供されていたのです。この時初めて、私は前回のブラジル訪問で見逃していた何かがあるのではないかと感じました。
 
-A project born in a place like Rio de Janeiro must approach its early ties more cautiously. To have a chance of success elsewhere, it must first become mobile by dislodging itself from its original context. The history of Lua was a story of such dislodging. The language was originally developed in the early 1990s as part of its authors' work at Tecgraf, a PUC-Rio consulting venture that offered services to Petrobras, Brazil's biggest oil producer. Being embedded in software destined for Petrobras was perhaps the best local starting point for Lua, as the oil company is known for its commitment to innovation. But to have a shot at global success, Lua had to disentangle itself from its early national alliances and look for friends elsewhere.
+Luaのエコシステムを探るため、再度ブラジルを訪れることにし、リオの小さな会社で数ヶ月間ロドリゴのプロジェクトに取り組むことを計画しました。Luaの開発者や貢献者へのインタビューや、Luaプログラマーのミートアップやイベントへの参加、さらに他の企業での使用例の発見も目指しました。最初のインタビューは比較的簡単に行えましたが、他のイベントや企業の発見は驚くほど難しかったのです。リオでLuaのイベントに参加する機会はほとんどなく、Luaを使っている企業も一つ見つかるだけでした。むしろ、Luaが使用されている場面を観察するにはサンフランシスコに留まっていた方が良かったかもしれません。この状況から、Luaの国外での成功と、国内での認知不足には深い関係があることが分かりました。
 
-Take the decision of the language's creators to write Lua's documentation (the instructions on how to use Lua) in English. Wikimedia Foundation's engineers note Lua's excellent documentation as one of the reasons for choosing it over Google's version of JavaScript. Yet the situation is quite different for potential users of Lua in Brazil. The most popular book on Lua programming, written by one of Lua's authors, a professor at PUC-Rio, is not available in Portuguese. In fact, prior to 2007, the language had no Portuguese documentation at all, requiring Brazilian users to have strong English skills. Prioritizing Portuguese documentation would have made life a lot easier for them. It would also have greatly reduced Lua's chances of being adopted by projects such as Wikipedia.
+ソフトウェアプロジェクトは孤立して存在するものではなく、多くの場合、他のプロジェクトや人、組織と密接に関係しています。適切な場所、たとえばシリコンバレーの大企業のキャンパスで生まれたプロジェクトは、このようなつながりに頼り、世界的な知名度を得ることができます。たとえばJavaScriptは、1990年代に当時最も人気のあったウェブブラウザ、Netscape Navigator向けに開発されました。この初期の成功がJavaScriptを世界で最も普及したプログラミング言語の一つにしたのです。
 
-Lua's international success was facilitated by Lua's increasing ability to fill a particular niche. Lua is especially useful for providing end users with an easy way to program the behavior of a software product without getting too far into its innards. The number of projects around the world needing such functionality is quite significant. Their number, however, is quite small in Rio, where most software projects involve building web applications, a task for which Lua was poorly suited. Rodrigo's company was seeking to mend this — his project ultimately aimed to extend Lua to web development. Until he succeeded, though, Lua was a better fit for foreign projects.
+一方、リオデジャネイロのような場所で生まれたプロジェクトは、初期の段階でのつながりに慎重になる必要があります。
 
-Cutting local ties is not enough, however. Global ties must be formed and exercised. For Lua, its team's integration into the international world of academic computer science provided an early start. In 1996, the team published a paper about Lua in a U.S. journal read widely by American software developers, including videogame engineers at LucasArts, who decided to integrate Lua into one their games. Thanks to LucasArts programmers, Lua soon had friends in the right places. In 1998, LucasArts engineers advocated for Lua at the Games Developer's Conference, the world's largest game development event, in San Jose, California. Quite soon, other companies were decided to incorporate the language into their products as well.
+成功を目指すには、最初に生まれた場所から離れて「移動性」を獲得しなければなりません。Luaの歴史は、こうした移動の物語です。Luaは1990年代初頭、テックグラフというPUC-Rioのコンサルティング部門がペトロブラス（ブラジルの大手石油会社）向けに提供するソフトウェア開発の一環として作られました。ペトロブラスは革新に対して積極的な企業であり、地元でLuaを始めるには良い出発点でした。しかし、世界で成功するには、早期の国内の結びつきから自らを切り離し、新たな友人を海外に見つけなければなりませんでした。
 
-Lua's relative isolation in its early life turned into an unexpected strength. JavaScript, although widely used, is often condemned as an "ugly" language. Such ugliness is the flip side of its popularity: The language bears battle scars of the so-called browser wars of the late 1990s, when Netscape and Microsoft fought for browser market share. Yet fixing JavaScript's problems would be nearly impossible due to its ubiquity and would have required somehow correcting the myriad web browsers and websites that rely on older versions of JavaScript. Lua, in contrast, could turn its back on its past several times. In fact, seeing no commercial prospects for Lua early on, the team had decided to make the language free. It has since focused on elegance and usability.
+たとえば、Luaの開発者たちは、言語のドキュメント（使用方法の説明書）を英語で書くことを決めました。ウィキメディア財団のエンジニアたちは、LuaをGoogle製のJavaScript版ではなく採用する理由として、この優れたドキュメントを挙げています。しかし、ブラジル国内のLua利用者にとっては状況は異なります。最も人気のあるLuaプログラミングの書籍は、PUC-Rioの教授であるLuaの開発者が執筆したものですが、ポルトガル語ではなく英語でしか入手できません。実際、2007年以前はポルトガル語のドキュメントが存在せず、ブラジル人の利用者は英語力が求められました。ポルトガル語のドキュメントを優先していれば、彼らにとってはるかに使いやすいものとなったでしょうが、それではウィキペディアのようなプロジェクトへの採用のチャンスは大きく減っていたかもしれません。
 
-Lua's strategy helped the language attain global success. This success, however, has brought few direct benefits to Rio de Janeiro and Brazil. Rodrigo's project for adapting Lua to web development has, for the most part, become dormant. Rodrigo himself has moved back to working with JavaScript. Still, the phrase "developed in Brazil" is now heard quite a bit more often software circles in California. Who knows what opportunities the future will bring?
+Luaの国際的な成功は、ある特定のニッチを満たす能力が増したことに支えられました。Luaは、ソフトウェア製品の動作を簡単にプログラムする手段をエンドユーザーに提供するために特に役立ちます。世界中にこのような機能を必要とするプロジェクトは数多く存在しますが、リオではその数は比較的少なく、地元の多くのプロジェクトはWebアプリケーションの構築に関連するものでした。Web開発に向けてLuaを拡張しようとしたロドリゴのプロジェクトはその状況に対応しようとしたものでしたが、Luaがブラジル国内で使用されるにはまだ他の国のプロジェクトに適していると言えました。
 
-Could Lua's team have made the language more useful for Brazil by focusing on local applications and embedding it tightly into a local innovation system? There are many reasons to think that this strategy would not have been successful. Although talk of local innovation is a staple of technology policy, few engineers in Rio express any interest in locally grown solutions. Whether this is a matter of prejudice or pragmatism, Brazilian engineers tend to look outward, seeking to solve their problems using the same technology used by their peers around the world. They will look at Lua when it becomes globally established. As a longtime supporter of Lua told me, "Lua had to succeed abroad to gain acceptance at home."
+地元のつながりを断ち切るだけでは不十分で、世界的なつながりも形成して活用しなければなりませんでした。Luaにとっての最初のステップは、国際的な学術界におけるコンピューターサイエンスの世界に入り込むことでした。1996年、Luaチームは米国の雑誌にLuaについての記事を発表し、これが米国のソフトウェア開発者、特にLucasArtsのビデオゲームエンジニアたちの目に留まりました。LucasArtsのプログラマーのおかげで、Luaはすぐに影響力のある関係者とつながることができました。1998年には、Luaの利点を広めようと、LucasArtsのエンジニアがカリフォルニア州サンノゼで開催される世界最大のゲーム開発イベント「ゲーム・デベロッパーズ・カンファレンス」でLuaを紹介しました。その後、他の企業も自社製品にLuaを採用するようになったのです。
 
-Lua's story offers no silver bullet for the technologists in the global South. For them, global success requires shedding local ties and, should all go well, returning home triumphant. It is a treacherous road. The global deck is stacked against them: They live in the wrong places, speak the wrong languages, and are saddled with the wrong institutions. But the alternative strategy of focusing on innovation highly tailored to local contexts is no solution either. In a world dominated by network effects, local users will choose global solutions. This means innovation at the periphery remains difficult. With enough people trying, there will hopefully be more Luas in the years to come, arriving from places like Brazil, China, and Russia. The largest share of benefits of such projects, however, might still accrue in places like San Francisco.
+Luaの初期の孤立は意外にも強みとなりました。JavaScriptは広く使われているものの、多くの開発者から「醜い」と批判されることがあります。その醜さは、その普及の裏返しともいえます。JavaScriptは1990年代後半、NetscapeとMicrosoftがブラウザのシェア争いをしていた「ブラウザ戦争」の影響を色濃く受けています。そのため、JavaScriptの問題を解決するには、古いバージョンに依存する無数のブラウザやウェブサイトを何らかの形で修正する必要があり、ほぼ不可能です。しかし、Luaは初期に商業的な見通しがほとんどなかったため、チームはLuaを無料で提供することに決めました。その結果、商業的な制約から自由になり、エレガントで使いやすい設計を追求できるようになったのです。
 
+Luaの戦略は、言語を世界的に成功させる助けとなりました。しかし、この成功はリオデジャネイロやブラジルにはほとんど直接的な恩恵をもたらしていません。
+
+ロドリゴのLuaをWeb開発に適応させるプロジェクトも、ほとんど休止状態になってしまいました。ロドリゴ自身も再びJavaScriptに戻って仕事をしています。しかし、現在では「ブラジルで開発された」というフレーズがカリフォルニアのソフトウェア業界でも聞かれるようになり、未来にどんなチャンスが待っているかは分かりません。
+
+Luaのチームが、地元の応用に焦点を当て、ブラジルに特化したイノベーションシステムにLuaを組み込むことで、言語をより有用にできたでしょうか？おそらく成功にはつながらなかったと考えられます。現地でのイノベーション推進は政策的には重要視されていても、リオのエンジニアたちは現地で生まれたソリューションにほとんど関心を示していません。これは偏見か実利的な理由かは不明ですが、ブラジルのエンジニアは世界の仲間が使っている技術で問題を解決したいと考える傾向があります。Luaが世界的に認められたときに初めて、彼らもLuaに目を向けるでしょう。あるLua支持者は、「Luaは国外で成功して初めて国内で受け入れられた」と述べていました。
+
+Luaの物語は、南半球の技術者にとって簡単な解決策を示すものではありません。グローバルな成功を収めるためには、地元のつながりを断ち切り、うまくいけば故郷へ凱旋することになります。しかし、それは険しい道です。彼らは「不利な環境」にあるのです。住む場所も、話す言葉も、背負っている制度も、世界の主流とは異なるのです。しかし、地域に特化したイノベーションに集中するという戦略も解決策にはなりません。ネットワーク効果が支配する世界では、地元のユーザーはグローバルなソリューションを選ぶ傾向にあります。こうした状況下で、周辺地域からのイノベーションは依然として難しいものです。しかし、十分な人数が試み続けることで、今後もブラジル、中国、ロシアといった国々から新たなLuaのような成功が生まれるかもしれません。しかし、その恩恵の多くはサンフランシスコのような場所に集まる可能性が高いでしょう。
+
+::: info
 Reprint from Foreign Affairs, 21 Apr 2013. Copyright © 2013 Foreign Affairs. All rights reserved.
+:::
 
-Front Line Awards 2011 — Programming tool: Lua
+# Luaの成功と活躍
 
-Lua has become an extremely popular programming language, so much so that it's achieved a critical mass of developers in the game industry, meaning Lua skills are transferable from company to company. That's partly due to its speed and the ease with which developers can embed Lua into a game engine. Lua is also highly extensible—it's simple to expand its functionality with libraries either written in Lua, or as extensions in other languages. And it's relatively small and simple, both in terms of the source files, and the resultant code and run-time memory usage.
+## フロントラインアワード2011 - プログラミングツール部門：Lua
 
-Cruzadas
+Luaは非常に人気のあるプログラミング言語となり、特にゲーム業界では多くの開発者に支持されています。そのため、Luaのスキルは企業間で移行可能なものとなっています。この人気の理由の一部には、Luaが高速で、ゲームエンジンに簡単に組み込める点が挙げられます。また、Luaは非常に拡張性が高く、Lua自体や他の言語で書かれたライブラリを通じて機能を簡単に拡張できます。さらに、ソースファイル、生成されるコード、実行時のメモリ使用量が比較的小さく、シンプルである点もLuaの魅力です。
 
+## クロスワード
 
-Linguagem de programação usada em jogos em em simulação, 3 letras...
+ゲームやシミュレーションで使われるプログラミング言語、3文字…
 
-Programming language used in games and simulation, 3 letters...
-
+::: info
 Reprint from O Globo, 26 Nov 2011. Copyright © 2011 O Globo. Todos os direitos reservados.
+:::
 
-Programar não é brincadeira
+## プログラミングは遊びではない
 
+ワールド・オブ・ウォークラフトという史上最も人気のあるゲームのひとつには、ブラジルの技術が活かされています。このゲームの開発元である米国のBlizzard社は、PUC-Rioの研究者ロベルト・イエルサレムスキー、ルイス・エンリケ・デ・フィゲレード、ワルデマー・セレスによって開発されたLuaプログラミング言語を採用しています。Luaは1994年に発表され、ゲーム開発企業だけでなく、Adobe、Sony、Microsoft、Cisco、Verizon、Disney、Bombardier、Intel、LucasArts、NASA、Olivetti、Philipsなどの大企業にも採用されています。
 
-Tem dedo brasileiro no World of Warcraft, um dos games mais populares da história, com 11 milhões de seguidores. A empresa americana Blizzard, dona da marca, utiliza a linguagem de programação Lua, desenvolvida pelos pesquisadores da PUC-Rio Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes. Lançada em 1994, Lua é um fenômeno, adotada mundialmente não apenas por empresas desenvolvedoras de jogos eletrônicos, mas por gigantes como Adobe, Sony, Microsoft, Cisco. Verizon, Disney, Bombardier, Intel, LucasArts, Nasa, Olivetti e Philips. Seu sucesso se sustenta em quatro pilares: a portabilidade, ou seja, pode rodar em diferentes computadores, sistemas operacionais, robôs e celulares; a facilidade de integração com outros aplicativos: o pequeno tamanho; e a eficiência e a rapidez, itens cruciais para a criação de brincadeiras em tempos de internet. "Lua também é uma linguagem simples, fácil de aprender e usar, e isso é fundamental porque quem vai escrever programas em Lua nem sempre é programador profissional", afirma Waldemar Celes, que, com os colegas, chegou a essa linguagem tentando resolver uma demanda surgida de um de seus clientes, a Petrobras.
+Luaの成功は4つの特徴に支えられています。まず、ポータビリティ（異なるコンピュータ、OS、ロボット、携帯電話でも動作する）。次に、他のアプリケーションとの統合のしやすさ。さらに、小さなサイズ。そして、インターネット時代において重要な効率性と高速性です。「Luaはシンプルで学びやすく、使いやすい言語で、プログラマーでない人がLuaでプログラムを書く際にも非常に便利です」と、開発者の一人であるワルデマー・セレス氏は述べています。彼と同僚は、顧客のひとつであるペトロブラスからの要望に応えるために、この言語を開発しました。
 
+::: info
 Reprint from Veja, Ano 44 Nº 2232, 31 Aug 2011. Copyright © 2011 Editora Abril. Todos os direitos reservados.
+:::
 
-Could your next IT project come from Brazil?
+## 次のITプロジェクトはブラジルから？
 
-Over the last few years Brazil has been quietly turning itself into something of an IT powerhouse. [...] Certainly the list of research centres is a roll call for the technology industry: Microsoft, Google — which has both its operations and engineering centres for Latin America there — IBM, Cisco, Lenovo, Sun, Intel, SAP, Motorola, Accenture and even India's Tata sit beside home-grown success stories like the Lua scripting language and ERP supplier TOTUS.
+近年、ブラジルはIT分野での大国へと静かに成長しています。[…] MicrosoftやGoogle（ラテンアメリカ向けの運営・エンジニアリング拠点）、IBM、Cisco、Lenovo、Sun、Intel、SAP、Motorola、アクセンチュア、さらにはインドのTataまでもがブラジルに研究センターを設置し、Luaスクリプト言語やERPプロバイダーであるTOTUSなどの現地成功例と並んで名を連ねています。
 
-TOTUS is the big name in Brazilian IT. [...] Modulo is another success story [...] But Brazil's most popular technology export is Lua — the scripting language developed at the University of Rio and that's free software distributed under a licence that says "you are free to use Lua for any purpose at no cost without having to ask us."
+TOTUSはブラジルIT界の大物ですが、ブラジルの最も有名な技術輸出品はLuaでしょう。このスクリプト言語はリオの大学で開発され、ライセンス上「Luaはどんな目的にも無償で使用可能で、許可を求める必要はない」とされているフリーソフトウェアです。
 
-Lua is a fast, simple and powerful scripting language that's become the standard for games. World of Warcraft is written in Lua, as are Baldur's Gate, The Sims, FarCry, Escape from Monkey Island and many others. Adobe turned to Lua to create Lightroom.
+Luaは高速でシンプル、かつ強力なスクリプト言語であり、ゲーム業界の標準となっています。Luaで書かれた作品には、ワールド・オブ・ウォークラフトのほか、バルダーズ・ゲート、ザ・シムズ、ファークライ、モンキーアイランドからの脱出などがあります。また、AdobeはLightroomの開発にもLuaを採用しました。
 
-Lua is one of the reasons why [Brazilian Science and Technology Minister Sergio] Rezende can call Brazil "one of the three key IT centres in the world".
+Luaは、ブラジルの科学技術大臣セルジオ・ヘゼンデが同国を「世界の3大ITセンターの1つ」と呼ぶ理由のひとつでもあります。
 
+::: info
 Reprint from ITPRO, 24 May 2010. Copyright © 2010 ITPRO. All rights reserved.
+:::
 
-Questão de Linguagem
+# Lua言語の認知度向上
 
+## 言語に関する話題
 
-Quem também está ganhando bastante reconhecimento é a linguagem Lua, que nasceu aqui na PUC-Rio. No próximo dia 9, o professor Roberto Ierusalimschy, da equipe de criação da Lua, estará em San Diego. Participa de um fechado grupo de palestrantes da terceira conferência da Association for Computing Machinery sobre a história das linguagens de programação.Essa conferência só ocorre a cada 15 anos, reunindo especialistas nas linguagens mais importantes do mercado. É uma deferência importante.
+認知度が高まっているのは、Lua言語も同様です。この言語はここPUC-Rioで誕生しました。次の9日には、Luaの開発チームの一員であるロベルト・イエルサレムスキー教授がサンディエゴを訪れます。彼は、プログラミング言語の歴史について話し合う、第三回Association for Computing Machineryカンファレンスの限られた講演者の一人です。このカンファレンスは15年ごとに開催され、市場で最も重要な言語の専門家が集まる非常に名誉ある場です。
 
+::: info
 Reprint from O Globo, 22 May 2007. [Caderno: Economia, Coluna: Conexão Global, Página: 19] Copyright © 2007 O Globo. Todos os direitos reservados.
+:::
 
-Para quem precisa do mundo da Lua
+## Luaの世界へようこそ
 
-Linguagem de programação brasileira, livre, ganha compêndio em inglês
+### ブラジル発のフリーなプログラミング言語が英語で書籍化
 
+ブラジルはLuaへの支配力をさらに強化しました。ここで指す「Lua」は衛星ではなく、テックグラフ（PUC-RJとペトロブラスの共同プロジェクトであるコンピュータグラフィックス技術グループ）から生まれたプログラミング言語のことです。この言語は、ロベルト・イエルサレムスキー教授、ワルデマー・セレス、ルイス・エンリケ・デ・フィゲレードによって開発され、柔軟性が高く、CやC++とスムーズに連携できるため、石油の探索からゲームのスクリプトまで幅広く利用されています。数ヶ月前には、ロベルト教授による「Programming in Lua」という書籍が出版されました。
 
-O Brasil ampliou seu domínio sobre a Lua. Não o satélite, mas a linguagem de programação Lua, que surgiu no Tecgraf (Grupo de Tecnologia em Computação Gráfica, parceria da PUC-RJ com a Petrobras). Criada pelo professor Roberto Ierusalimschy junto com Waldemar Celes e Luiz Henrique de Figueiredo, a linguagem, flexível, com interface tranqüilamente combinável com C e C++ e pronta para 1.001 utilildades, desde comandos de prospecção de petróleo até scripting de jogos, ganhou faz alguns meses o livro Programming in Lua, de Roberto.
+この書籍は著者自身によって英語で執筆され、リオでのサイン会も開催されましたが、すでに1000部以上（主に国外で）販売されています。Luaは完全に無料かつオープンで、Microsoftの主催で最近のゲーム開発者会議でディスカッションの対象にもなったほど、海外で大きな評価を得ています。
 
-Escrito em inglês pelo autor, o volume teve uma noite de autógrafos tardia no Rio há pouco, e já ultrapassou a marca de mil exemplares vendidos (a maioria lá fora, onde a linguagem — totalmente livre e aberta — tem grande prestígio e foi até alvo de mesa-redonda da Microsoft na última Conferência Mundial de Desenvolvedores de Games).
+「この本を書いた目的は、Luaの普及とドキュメントの補完でした」と、ロベルト教授は電話で語っています。「Lua公式サイト（[www.lua.org](http://www.lua.org)）には、パッケージに含まれるマニュアルがあるのですが、具体的な使用例や、Luaを使う際の問題解決方法が不足していました。」
 
-— Minha idéia ao escrever o livro era divulgar mais e complementar a documentação sobre a Lua — contou-nos Roberto, por telefone. — O site www.lua.org tem um manual que vem junto com o pacote da linguagem, mas faltavam exemplos de uso e de como resolver determinados problemas ao trabalhar com Lua.
+興味深いことに、書籍執筆の過程で、ロベルト教授自身が言語の一部を見直すことになりました。序文には次のように記されています。「本の執筆を進める中で、ある章で行き詰まることがありました。（…）使い方を説明しようとすると、その使いやすさや難しさに気づくことがあります。」この本を書き始めた1998年時点ではLuaのバージョンは3.1でしたが、完成時には5.0に達していました。
 
-O interessante é que, no processo de escrever o livro, o próprio Roberto foi reformulando trechos da linguagem. No prefácio, ele escreve: "À medida que eu trabalhava no livro, de repente empacava num capítulo. (...) É quando você tenta explicar como se usa algo que acaba percebendo quão fácil é usá-lo (ou não)." Não por acaso, quando o professor começou o livro, em 1998, a linguagem Lua ainda estava na versão 3.1 e, ao terminá-lo, ela chegara à marca 5.0.
+「このバージョンでは、コルーチン、つまり協調型マルチスレッドの概念が刷新されました（複数の命令列が同時に実行されているように見えますが、実際は動的に制御を切り替えています）」とロベルト教授は説明しています。「これにより、プログラムはより軽量で実装が簡単になり、移植性が向上しました。また、より大規模なソフトウェア構築ができるようにパッケージシステムも改善されました。」
 
-— Esta versão recauchutou o conceito de co-rotina, ou multithreading cooperativo [ em que várias linhas de comando parecem estar sendo executadas ao mesmo tempo, mas na verdade se passa dinamicamente o controle para um ou outro comando ] — explica Roberto. — Isso torna o programa mais leve e fácil de implementar. Em suma, aumenta sua portabilidade. Também foi melhorado o sistema de construção de pacotes, para fazer softwares maiores.
+つまり、Luaの世界での作業はもう神秘的なものではありません。書籍の詳細や購入に関する情報はロベルト教授に直接（[www.lua.org/authors.html](http://www.lua.org/authors.html)で連絡先を参照）問い合わせるか、Amazonで約24ドルで購入することが可能です。
 
-Ou seja: viver no mundo da Lua já não tem mistérios. Maiores informações sobre o livro podem ser obtidas com o próprio Roberto (veja contatos dele e da turma em www.lua.org/authors.html). Ele também pode ser comprado na Amazon por cerca de US$ 24.
-
+::: info
 Reprint from O Globo, Ano LXXX Nº 24519, 19 Jul 2004. Copyright © 2004 O Globo. Todos os direitos reservados.
+:::
 
-Brilho lunar
+## 月の輝き — Luaの多彩な活躍
 
-Linguagem de programação criada na PUC-Rio é usada em ônibus espacial, processador, UTI e na criação do melhor da diversão eletrônica
+PUC-Rioで開発されたプログラミング言語「Lua」は、宇宙探査機、プロセッサー、集中治療室（UTI）、そして最新のエンターテインメントの世界で利用されています。
 
+今月初め、インターネット専門誌で「Far Cry」が「近年で最も革命的なゲーム」として取り上げられました。しかし、Luaというブラジル生まれのスクリプト言語がその開発に使われていることはあまり知られていません。この言語はゲーム以外にも携帯電話や宇宙船、プロセッサの開発などにも利用されています。Luaは1993年にPUC-Rioのグラフィックコンピューティング研究所TeCGrafで、ロベルト・イエルサリムスキー氏、ワルデマール・セレス氏、ルイス・エンリケ・デ・フィゲイレド氏によって開発され、現在も彼らがメンテナンスを担当しています。
 
-No começo do mês, o caderno Internet apresentou a análise de Far cry, considerado o jogo mais revolucionário dos últimos anos. O que poucos sabem é que, em volta do seu mérito orbita Lua, linguagem de script brasileira. Ela é usada no game e em outros sucessos do entretenimento eletrônico, além de estar presente em celulares, espaçonaves e no desenvolvimento de processadores. Lua, atualmente na versão 5.0.2, foi criada em 1993 pelos professores Roberto Ierusalimschy, Waldemar Celes e Luiz Henrique de Figueiredo no laboratório de computação gráfica da PUC-Rio, Tecgraf. A manutenção do software continua sob responsabilidade da equipe.
+Luaは、CやC++といった重い言語を補完する「サテライト（衛星）」的な存在で、映画やドラマの脚本のように、プログラムに対して何を行うかを指示する役割を担っています。Luaの開発は3人の教授が中心となって進められ、MITライセンスのもと提供されており、ソースコードの修正や独自バージョンの作成も自由です。ただし、使用にあたっては著作権表記が必要です。
 
-Como o nome indica, Lua é um satélite de linguagens mais pesadas, como C e C++. Ela pode ser comparada com o texto de um roteiro de cinema, novela, filme. O programador de Lua determina ações para o que foi criado antes conta Ierusalimschy, PhD em Ciência da Computação.
+ゲーム業界でもLuaの採用が進んでおり、「Far Cry」では武器やグラフィック、サウンドの設定、また敵のAI行動をLuaで制御しています。Luaの知名度が上がったのは、1998年の「Grim Fandango」の成功以降で、その年、Game Developers ConferenceでLucasArtsのLuaプログラマーがLuaの利点を発表しました。また、「Escape from Monkey Island」では物語の一部として「Lua Bar」が登場することで、この言語を不朽の存在としています。
 
-Ele, Celes e de Figueiredo centralizam o desenvolvimento do software. Lua é regida pela licença MIT, do Instituto de Tecnologia de Massachusetts. Ela permite alterações do código-fonte em outras versões da linguagem, sem a necessidade da sua abertura. A única condição para o seu uso é a menção do copyright dos três criadores e da PUC-Rio.
+Luaの人気が本格的に確立されたのは2004年のGDCです。Microsoft Game Studiosのジョン・バーンズ氏とデビッド・アイコーン氏が、大学の3人の開発者たちが知らないところで「ゲーム業界におけるLua」というラウンドテーブルを開催しました。これは、Luaが独自に成長し、企業でも広く使われるようになった証でもあります。
 
-A licença dá liberdade às empresas para lançar qualquer programa que use Lua sem mostrar o código ou aplicá-la em projetos internos explica Ierusalimschy. A linguagem foi adotada pela indústria de games. Em Far cry, ela é usada para configurar o uso de armas, gráficos e sons durante o jogo, além do comportamento da excepcional inteligência artificial dos adversários. Mas foi com Grim fandango, lançado em 1998, que Lua se popularizou.
+Luaを使用する企業は、Microsoft、Rockstar Games（「Grand Theft Auto」）、BioWare（「Baldur's Gate」）、People Can Fly（「Painkiller」）などが挙げられ、PC、Xbox、PlayStation 2などさまざまなプラットフォームで採用されています。
 
-No mesmo ano, o programador de Lua da Lucas Arts, que desenvolveu o jogo, divulgou as suas vantagens durante a Game Developers Conference, encontro anual e o maior dos profissionais do entretenimento eletrônico.
+### NASA、Intel、IncorもLuaを採用
 
-Além da menção do uso da linguagem, a empresa imortalizou o software da PUC em um dos títulos de maior sucesso. Em Escape from monkey island, lançado em 2000, o personagem principal, e o jogador, visitam o Lua Bar como parte do enredo da aventura.
+Luaの活躍はゲームにとどまりません。ブラジルのHands社は、携帯端末向けのコンテンツブラウザでLuaを使用しており、さらにサンパウロの心臓病研究所（Incor）では集中治療室（UTI）監視システムにLuaを利用しています。IntelもLuaをプロセッサ開発に活用していますが、詳細は企業秘密とされています。
 
-Mas foi no GDG 2004 que a popularidade de Lua se afirmou. Jon Burns e David Eichorn, da Microsoft Game Studios, promoveram a mesa-redonda Lua na indústria dos games, sem o conhecimento do trio de criadores da universidade carioca.
+また、2003年1月まではLuaが宇宙探査にも使われていました。スペースシャトルの打ち上げ準備中の危険ガス濃度を監視するためにLuaが使用されていたのです。
 
-Foi uma ótima surpresa e mostrou que o software já caminha sozinho celebra Ierusalimschy.
+Luaの普及により、Luaプログラマーの求人も増えています。業界の求人サイト「Gamasutra.com」では、Luaの求人も頻繁に掲載されています。
 
-A Microsoft é uma das grandes usuárias de Lua, mas a lista continua. Além da empresa de Bill Gates, a Rockstar Games (Grand theft auto), BioWare (Baldur's gate) e People Can Fly (do recente Painkiller) também adotaram a linguagem em seus projetos, seja para PC, XBox ou Playstation 2.
+アメリカのMicrosoftで新製品開発に携わるカート・カーペンター氏もLuaのユーザーで、次のように述べています。
 
-Nasa, Intel e Incor empregam Lua
+> 「Luaは学習が容易な言語なので、Luaだけでなく、CやC++などの他の言語も習得することをお勧めします」
 
-Embora os games sejam a face mais brilhante de Lua, a linguagem é explorada em uma série de aplicações. A brasileira Hands, que desenvolve um navegador de conteúdo para micros de bolso, é um exemplo. Outra, ainda mais radical, é empregada pelo Instituto do Coração, em São Paulo, que usa a linguagem no sistema de monitoração das UTIs na internet. Lua também participa da criação do processador do computador.
+彼はまた、Luaの学びやすさを評価しており、「Luaのドキュメントは20ページほどで、非常にエレガントです」と述べています。
 
-— Temos alguns funcionários da Intel na lista de discussão de Lua, que já conta com mais de 700 assinantes. Eles a usam para desenvolver processadores, mas a empresa guarda os detalhes a sete chaves — conta Ierusalimschy.
+Luaに関する学習は簡単ですが、正式な教育コースは少ないのが現状です。PUC-Rioでは選択科目としてLuaを提供していますが、広く学べるコースはありません。
 
-Mas, até janeiro de 2003, Lua era uma das integrantes do maior empreendimento da humanidade — a exploração espacial. A linguagem era usada no controle dos níveis de concentração de gases perigosos na preparação para o lançamento do ônibus espacial.
+> 「学習の一助となるのが、私たちの著書『Programming in Lua』です」とイエルサリムスキー教授は説明します。この本は英語版が国外でのみ販売されており、ブラジル国内での出版や販売はまだ行われていません。
 
-O uso extenso de Lua abre espaço para a especialização na linguagem pelos profissionais e oferta de emprego no Brasil e no exterior.
+Luaに興味がある人は、ユーザーコミュニティが運営する「Lua-users」というサイトで、チュートリアルやマニュアル、さまざまなプラットフォーム向けのLuaバージョンを入手することができます。
 
-— Encontro com freqüência anúncios de trabalho para programadores de Lua no Gamasutra.com — afirma o professor. A página é referência para a indústria.
-
-O americano Curt Carpenter, 35 anos, trabalha na linha Novos Produtos Para o Consumidor da Microsoft, e também é um usuário de Lua. Ele confirma a oferta de empregos mas avisa:
-
-— Ela é de aprendizagem simples e por isso não aconselho uma especialização em Lua sem conhecer outras linguagens como C ou C++.
-
-O programador afirma que a facilidade de aprendizado é uma vantagem.
-
-— A documentação de Lua cabe em 20 páginas. Ela é muito elegante. Em cada nova versão, o trio de administradores aperfeiçoa as características existentes e inclui novas na medida ideal.
-
-Se trabalhar com Lua pode ser um objetivo a perseguir, aprender a linguagem ainda é um desafio. Embora ela seja simples, não há uma estrutura didática formal. A PUC-Rio oferece uma matéria eletiva, mas não há um curso que atenda a um grupo maior de interessados.
-
-— A melhor dica é o livro Programming with Lua — lançado por nós, da equipe — explica Ierusalimschy.
-
-A obra é mais um exemplo de como a linguagem está difundida no exterior. Em inglês, ele é distribuído apenas fora do Brasil e encontrado em livrarias virtuais. Segundo os coordenadores de Lua, nenhuma empresa nacional do setor se interessou pela edição, publicação, distribuição ou venda locais.
-
-Mesmo sem o livro, os interessados podem acessar o Lua-users, um site criado pelo trio acadêmicos mas mantido pelos usuários do software. A página apresenta tutoriais, manuais, versões de Lua para vários computadores e, principalmente, congrega os esforços individuais de empresas e programadores em uma fonte coletiva de conhecimento.
-
+::: info
 Reprint from Jornal do Brasil, 19 Apr 2004. Copyright © 2004 Jornal do Brasil. Todos os direitos reservados.
+:::
 
-Le langage Lua commence à percer
+# Lua言語について
 
-Plus de 10 années après sa version 1.0, le langage de script Lua parvient à la version 5.02 et afficher une robustesse et une conception qui lui valent d'être comparé à Python en terme de "langage à connaître". Par son poids (60 Ko pour le "coeur", 140 ko pour l'ensemble de la machine virtuelle), sa portabilité (systèmes embarqués, PalmOS...), sa facilité d'intégration à C/C++, Java, C# ou Fortran et le fait qu'il est Open Source, c'est devenu l'un des langages de scripts les plus populaires de le monde des jeux vidéos. A découvrir.
+Lua言語が注目を集め始めています。
 
+バージョン1.0から10年以上を経て、スクリプト言語Luaは現在バージョン5.02に到達し、その堅牢性と設計の良さにより、Pythonと並んで「知っておくべき言語」として比較されるようになっています。その軽量さ（「コア」は60KB、仮想マシン全体は140KB）、優れた移植性（組み込みシステム、PalmOSなどへの対応）、C/C++、Java、C#、Fortranへの統合のしやすさ、さらにオープンソースであることがLuaの大きな特長です。これにより、Luaはゲーム業界で最も人気のあるスクリプト言語の一つとなりました。ぜひその魅力を発見してください。
+
+::: info
 Reprint from Le Journal du Net - Actualité Développeurs, 06 Apr 2004. Copyright © 2004 JDN développeurs. Tous droits réservés.
+:::
 
-Linguagem da PUC ganha apoio da Microsoft
+# PUCのプログラミング言語「Lua」がマイクロソフトの支援を受ける
 
-Lua ficou famosa depois de ser usada em dois jogos da LucasArts
+**LuaはLucasArtsの2つのゲームで使用されたことで有名に**
 
-Primeiro, o homem foi à Lua e, agora, é ela quem conquista o homem. Mas não se trata do satélite, e sim de uma linguagem de programação brasileira criada em 1993, batizada de Lua. Desenvolvida no Grupo de Tecnologia em Computação Gráfica (TeCGraf), parceria da PUC-Rio com a Petrobrás, o sistema precisou entrar no mercado norte-americano para provar suas qualidades e conseguir o merecido reconhecimento brasileiro.
+最初に人類が月（Lua）に到達し、今度はLuaが人々を魅了しています。しかし、ここでいうLuaは衛星ではなく、1993年にブラジルで開発されたプログラミング言語です。この「Lua」は、PUCリオデジャネイロ大学と石油企業Petrobrásの協力によって設立されたグラフィックス技術グループ（TeCGraf）で開発されました。その優れた性能が証明され、正当な評価を受けるためにアメリカ市場に進出する必要がありました。
 
-Para completar, a iniciativa carioca conseguiu uma importante parceria através do programa Academic Alliance, lançado pela Microsoft. Para fazer a adaptação da Lua para a plataforma .Net, a gigante do software vai destinar US$ 15 mil à universidade. O projeto, com duração de uma ano, prevê ainda o acesso gratuito a ferramentas de desenvolvimento da Microsoft durante o período. Neste prazo, a universidade poderá não só conhecer melhor os produtos da empresa, mas também de contribuir em novos projetos. A Microsoft pretende estabelecer um contato contínuo com instituições de ensino e pesquisa na área e a PUC, que com a Lua, foi a primeira instituição da América Latina escolhida para integrar o projeto.
+さらに、このブラジル発のイニシアチブは、マイクロソフトの「Academic Alliance」プログラムを通じて重要なパートナーシップを築きました。Luaを.NETプラットフォームに適応させるため、マイクロソフトは大学に1万5千ドルを提供します。このプロジェクトは1年間を予定しており、その間、マイクロソフトの開発ツールが無料で提供されます。この期間を通じて、大学は同社の製品をより深く理解するだけでなく、新しいプロジェクトにも貢献することが期待されています。マイクロソフトは、教育機関や研究機関との継続的な関係を築くことを目指しており、Luaを開発したPUCは、ラテンアメリカでこのプロジェクトに参加する初めての機関です。
 
-O objetivo inicial da Lua era contornar uma deficiência de comandos verificada por geólogos da Petrobrás quando precisavam confrontar informações colhidas nos poços de petróleo. Mas ficou conhecida mundialmente por ter sido utilizada na confecção de dois dos mais famosos jogos do estúdio LucasArts: Grim fandango e Fuga da ilha dos macacos. A linguagem é responsável pela parte mais criativa do game — o roteiro com flexibilidade. Até o final do ano, a versão 5.0 da Lua, desenvolvida pelos professores Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes, estará pronta.
+Luaの最初の目的は、Petrobrásの地質学者が油井で収集した情報を解析する際に生じるコマンドの不足を補うことでした。しかし、その後、LucasArtsの有名な2つのゲーム「Grim Fandango」と「モンキーアイランドの脱出」で使用されたことで世界的に知られるようになりました。Luaはゲームの脚本部分を柔軟に対応する役割を担っています。年末までには、Roberto Ierusalimschy教授、Luiz Henrique de Figueiredo教授、Waldemar Celes教授によって開発されたLuaのバージョン5.0が完成予定です。
 
-Apesar do nome, a Lua não tem nada do outro mundo e também, não é uma sigla. "A equipe do professor Roberto Ierusalimschy estava desenvolvendo uma outra linguagem chamada Simple Object Language (SOL), mas não chegou a terminar. Então, resolvemos fazer uma mais simples. Se a SOL era mais complexa, por que não a mais simples se chamar 'Lua'", explica o professor Renato Cerqueira, do Departamento de Informática da PUC.
+Luaという名前は、他の世界から来たものでもなければ、略称でもありません。「Roberto Ierusalimschy教授のチームは、もともと『Simple Object Language（SOL）』という別の言語を開発していましたが、完成しませんでした。そこで、よりシンプルな言語を作ることにしたのです。もしSOLが複雑だったなら、もっとシンプルなものを『Lua』と呼んでも良いのではないかと考えました」と、PUCの情報学部のRenato Cerqueira教授は説明しています。
 
-O diferencial da linguagem é justamente sua flexibilidade e simplicidade. A Lua é constituida de uma biblioteca escrita em C e compilável para qualquer plataforma compatível com os padrões Windows, Solaris, Linux, Macintosh, PlayStation, XBox, Palm, entre outras. Pode ser usada desde estilo funcional, até como linguagem de script. "A Lua também tem sido bastante usada para construção de sites com páginas dinâmicas, como o .asp e .php", conta o professor Cerqueira.
+Luaの強みはその柔軟性と簡潔さにあります。LuaはCで記述されたライブラリで構成され、Windows、Solaris、Linux、Macintosh、PlayStation、Xbox、Palmなどのさまざまなプラットフォームに対応しています。Luaは関数型スタイルとしても、スクリプト言語としても利用可能です。「Luaは、動的なWebページを作成するためのスクリプト言語として、.aspや.phpのように使われることも増えています」とCerqueira教授は述べています。
 
-Qualquer pessoa, inclusive roteiristas, designers e profissionais de arte, consegue usar a linguagem, fazendo com que fosse utilizada para a programação de games. "Queríamos permitir aplicações mais configuráveis e fáceis de operar por diferentes usuários", conta Cerqueira. E eles conseguiram. No entanto, os criadores da Lua não ganharam nada por isso. Só reconhecimento.
+Luaのもう一つの特徴は、誰でも簡単に使える点です。そのため、ゲーム開発においても、脚本家、デザイナー、アーティストなどが利用できるようになりました。「私たちは、多様なユーザーが簡単に操作できるアプリケーションを提供したいと考えていました」とCerqueira教授は語ります。そして、彼らはその目標を達成しました。しかし、Luaの開発者たちは金銭的な利益を得たわけではなく、名声を得ただけです。
 
-Quem quiser baixar o sistema, pode fazê-lo de graça pela internet. Os pesquisadores da PUC-Rio não têm controle do número de downloads que já foram feitos devido a grande quantidade de espelhos em ação. Ierusalimschy, um dos pais da Lua, estima que, de 1996 a 2000, foram feitos mais de dez mil downloads. Isso sem contar com os espelhos do Japão, Dinamarca, Alemanha, Grécia, Estados Unidos e Brasil. "Nosso site recebe cerca de 500 visitas por dia, e temos cerca de dois mil downloads por mês. E não pode ser esquecido que revistas de informática do Japão, França e EUA já disponibilizaram a linguagem", conta Ierusalimschy. A equipe apenas pede que o crédito seja dado onde a Lua for usada.
+Luaは誰でも無料でダウンロードでき、PUC-Rioの研究者たちはダウンロード数を把握していませんが、ミラーサイトが多く存在するためです。Luaの生みの親であるIerusalimschy教授によると、1996年から2000年までに1万回以上ダウンロードされたと推定されています。また、日本、デンマーク、ドイツ、ギリシャ、アメリカ、ブラジルにもミラーサイトがあります。「私たちのサイトには毎日500回のアクセスがあり、月に約2,000回のダウンロードが行われています。また、日本、フランス、アメリカのIT雑誌でもLuaが紹介されています」とIerusalimschy教授は述べています。チームはLuaが使用される際にはクレジットを付与するようにお願いしています。
 
+::: info
 Reprint from Jornal do Brasil, 08 Sep 2002. Copyright © 2002 Jornal do Brasil. Todos os direitos reservados.
+:::
 
-Geração games
+## ゲーム世代
 
-Cariocas conquistam espaço no seleto time de criadores de jogos para computador
+**カリオカ（リオ・デ・ジャネイロ出身者）が、コンピュータゲーム開発者のエリートチームに参加**
 
-[...] Não será a única vez que uma criação 100% carioca ganha o maravilhoso mundo dos games. Uma turma da PUC criou algo ainda mais complexo. Roberto Ierusalimschy, Waldemar Celes e Luiz Henrique de Figueiredo trabalham no Tecgraf, o laboratório de computação gráfica da universidade. Os três desenvolveram a linguagem Lua. Não, não é nada do outro mundo. Pelo contrário. Lua, neste caso, é uma linguagem mais simples para a criação de programas. "Qualquer pessoa, inclusive roteiristas, designers e profissionais de arte, consegue usar. Isso fez com que fosse utilizada para a programação de games", explica Ierusalimschy. A linguagem Lua ganhou o mundo e um dos primeiros a usá-la foi a Lucas Arts, a empresa de entretenimento do diretor e produtor de cinema George Lucas, o criador da série Guerra nas Estrelas. "A linguagem Lua foi utilizada nos jogos Grim Fandango e Fuga da Ilha dos Macacos, que se tornaram muito populares." Os criadores de Lua não ganharam nada por isso. Só prestígio. "Nós colocamos a linguagem de graça na internet porque todas as outras linguagens também são de graça", explica Waldemar Celes.
+完全にカリオカによって作られた作品が、ゲームの素晴らしい世界で注目されるのはこれが初めてではありません。リオ・デ・ジャネイロのカトリック大学（PUC）の学生チームが、さらに複雑なものを創り出しました。ロベルト・イエルサリムシ、ワルデマール・セレス、ルイス・エンリケ・デ・フィゲレードの3人は、大学のコンピュータグラフィックス研究所「テクグラフ（Tecgraf）」で活動しています。彼らは一緒に「Lua」というプログラミング言語を開発しました。
 
-Eles não têm idéia de quantas pessoas fazem uso da linguagem Lua, mas hoje existem sites que a reproduzem nos Estados Unidos, no Japão, na Dinamarca e na Alemanha. Desses sites, os usuários também podem baixar o programa. Qualquer um consegue usar. A única exigência é que coloquem nos créditos "copyright do Tecgraf, PUC/Rio de Janeiro". [...]
+Luaとは、一見すると普通の言語のようですが、実際にはプログラム作成を簡単にするための言語です。「この言語はシンプルで、脚本家やデザイナー、アートのプロフェッショナルなど、誰でも使えるのが特徴です。これがゲーム開発で広く使われる理由です」とイエルサリムシ氏は説明しています。Luaは世界中に広がり、その最初のユーザーの一人は、映画『スター・ウォーズ』シリーズで有名な映画監督兼プロデューサーのジョージ・ルーカスが設立したエンターテインメント会社「ルーカス・アーツ」でした。「Luaは『Grim Fandango』や『逃げ出したモンキー島』などのゲームに使用され、非常に人気を博しました。」とはいえ、Luaの開発者たちはその対価を受け取っていません。ただし、名声だけは手に入れました。「Luaはインターネット上で無料公開しました。他のプログラミング言語も無料だったからです」とセレス氏は語ります。
 
+開発者たちは、実際にどれだけの人がLuaを利用しているのかを把握していませんが、今日、Luaを配布するサイトは米国、日本、デンマーク、ドイツなどにも存在します。これらのサイトからも、ユーザーはLuaを自由にダウンロードできます。使用の唯一の条件は、「Tecgraf、PUC/リオデジャネイロの著作権」の記載をクレジットに含めることです。
+
+::: info
 Reprint from Veja Rio, Ano 11 Nº 7, 19 Feb 2001. Copyright © 2001 Editora Abril. Todos os direitos reservados.
+:::
 
-No mundo do Lua
+## Luaの世界
 
-De graça, até injeção nos lucros
+### 無料、それは利益にもなる
 
-Caro prof. Ierusalimschy, Parabéns pela criação do programa Lua. Aproveitando o ensejo, avisamos que estamos usando sua linguagem na LucasArts. As palavras não foram exatamente essas. Mas era mais ou menos isso que dizia um e-mail recebido pelo professor Roberto Ierusalimschy, da PUC-Rio. Na mensagem, Bret Mogilevsky, então programador-chefe da LucasArts Entertainment — empresa de produção de jogos para computador de George Lucas, criador do filme Guerras nas Estrelas —, parabenizava Ierusalimschy pelo Lua, uma linguagem de programação que ele e mais dois especialistas em computadores desenvolveram no início dos anos 90 no Rio de Janeiro.
+**イエルサリムシ教授へ**  
+Luaの開発、おめでとうございます。ところで、我々は御社の言語をLucasArtsで使わせてもらっています。
 
-A LucasArts, dizia Mogilevsky, estava usando o Lua para desenvolver jogos de computador. Melhor: Mogilevsky estava encantado com o programa. Thank you very much. Valeu, mesmo!
+上記の内容は実際のメールの文面そのものではありませんが、おおよそこんな内容のメールが、リオデジャネイロ・カトリック大学（PUC-Rio）のロベルト・イエルサリムシ教授に届きました。このメッセージの送り主は、ジョージ・ルーカスの映画「スター・ウォーズ」シリーズで有名な、コンピュータゲーム制作会社LucasArtsの当時の主任プログラマー、ブレット・モギレフスキー氏でした。彼はLuaの開発を称賛し、この言語がLucasArtsでゲーム開発に使われていることを伝えました。
 
-Opa! Valeu? Mais ou menos. O Lua — assim como o Linux e outros programas chamados software livres — é distribuído gratuitamente na Web.
+LucasArtsはLuaを使ってコンピュータゲームを開発しており、モギレフスキー氏もLuaの性能に感銘を受けていました。「Thank you very much. Valeu, mesmo!」（本当にありがとう）
 
-Os criadores do programa só perceberam o sucesso do Lua no exterior depois de receber as primeiras mensagens de agradecimento. Aí, Ierusalimschy começou a pesquisar o alcance do programa no mundo. Descobriu que, hoje, mais de 30 empresas e instituições do gabarito de Xerox, Microsoft e da agência espacial americana (NASA) usam o programa para fins tão diferentes como construção de websites ou pesquisas sobre inteligência artificial.
+### Luaの成功とその広がり
 
-O Lua é, por exemplo, uma das linguagens usadas no AXAF (Advanced X-ray Astrophysics Facility), o terceiro dos grandes observatórios espaciais lançados no espaço pela NASA, com a tarefa de simular em imagens os sinais recebidos do espaço. O Lua é também um dos componentes do cérebro do Crazy Ivan, o robô que ganhou o concurso de inteligência artificial da RoboCup 2000, concurso de robôs realizado na Dinamarca. A lógica contida no Ivan, segundo os fabricantes do robô, foi desenvolvida usando o Lua. O fato é que o programa se alastrou na rede. Uma lista de discussão sobre ele, na Internet, já tem 400 nomes cadastrados. Destes, apenas 100 são brasileiros. "Estamos nos espalhando", afirma Ierusalimschy.
+LuaはLinuxなど他のフリーソフトウェア同様、ウェブで無料配布されています。Luaの開発者たちは、海外から感謝のメッセージを受け取るまで、この言語がどれほどの成功を収めているかを実感していませんでした。そこでイエルサリムシ氏は、Luaの国際的な普及状況を調査し、現在、XeroxやMicrosoft、NASA（アメリカ航空宇宙局）など、30社以上の企業や機関がLuaを使用していることを発見しました。用途も多岐にわたり、ウェブサイトの構築から人工知能の研究まで幅広く活用されています。
 
-A popularidade do Lua, segundo seu criador, tem dois motivos. Trata-se, em primeiro lugar, de um programa muito fácil de usar, mesmo em sistemas complexos, como os das empresas de grande porte. Segundo, o Lua se adapta igualmente a um supercomputador ou a um palmtop.
+例えば、LuaはNASAの宇宙望遠鏡「AXAF（先進X線天文施設）」の制御にも使われています。Luaはまた、デンマークで開催されたRoboCup 2000（ロボットの人工知能コンテスト）で優勝したロボット「Crazy Ivan」のプログラムにも組み込まれています。IvanのロジックはLuaで開発されており、そのおかげで優勝に至りました。
 
-Essa flexibilidade tem motivo. Por causa da lei das licitações, durante anos a Petrobras comprou computadores de todo tipo e qualidade. O Lua foi criado, a pedido da estatal, para se adaptar a todos eles.
+Luaに関するインターネットのメーリングリストにはすでに400人以上が登録していますが、そのうち100人のみがブラジル人です。「我々は確実に広がっています」とイエルサリムシ氏は語っています。
 
-Com tanto sucesso, por que o professor e sua equipe não ficam milionários? "Todo mundo pergunta por que não estamos ricos", diz Ierusalimschy, que vive hoje como há cinco anos. A resposta é que na Web é assim mesmo. Se fosse pago, o Lua não seria o sucesso que é hoje. É o fato de ser grátis que permite colaborações no desenvolvimento do programa. Os grandes concorrentes do Lua também são gratuitos. "Uma coisa é inventar algo para a Web, outra bem diferente é ganhar dinheiro com isso", diz o professor.
+### Luaの人気の秘密
 
-As recompensas, neste caso, são de outro tipo. Os criadores do Lua gozam hoje de fama internacional e de reconhecimento no Brasil (o que ajuda sua carreira acadêmica). Além disso, os usuários do Lua costumam fazer homenagens prosaicas. Um dos bares que aparece no jogo Escape from Monkey Island IV (fuga da ilha dos macacos), da LucasArts, é o Lua's Bar, em homenagem à linguagem. Além disso, há os e-mails de agradecimento e elogio, que, se contassem a história como ela é, deveriam conter mensagens assim: "Estamos fazendo montanhas de dinheiro com a ajuda do seu programa, que é de graça. Brigadão, hein!"
+Luaがここまで普及した理由は2つあります。第一に、大規模なシステムでも簡単に使用できることです。第二に、Luaはスパコンからパームトップまで、あらゆるコンピュータに対応する柔軟性を持っていることです。
 
+この柔軟性には理由があります。国営石油会社Petrobrasが多様なコンピュータを購入する必要があり、その多様な機器に対応するためにLuaが開発されました。
+
+### 富を得ることはなかったが…
+
+Luaの成功にもかかわらず、イエルサリムシ教授とチームは裕福になることはありませんでした。「なぜ我々がリッチでないのか、よく聞かれますが、ウェブではこうしたものです」とイエルサリムシ氏は言います。有料にすれば、Luaは今日のような成功を収めていなかったでしょう。無料であることで、共同開発が進み、Luaの発展が促進されたのです。
+
+### Luaへの賞賛と敬意
+
+Luaの開発者たちは、国際的な名声とブラジル国内での評価を手に入れ、学術的なキャリアにも良い影響を与えています。さらに、Luaに対するユニークな敬意の表れとして、LucasArtsのゲーム『Escape from Monkey Island IV』には「Lua’s Bar」というバーが登場し、Luaへのオマージュとして設定されています。Luaに対する感謝のメールも絶えません。もし正直に言うなら、メールにはこう書かれているべきでしょう：「あなたの無料プログラムで、我々は大儲けしています。ありがとう！」
+
+::: info
 Reprint from Exame, edição 729 Ano 34 Nº 25, 13 Dez 2000. Copyright © 2000 Editora Abril. Todos os direitos reservados.
+:::
 
-Linguagem criada na PUC-RJ conquista o Vale do Silício
+## PUC-RJで生まれたプログラミング言語がシリコンバレーで注目を集める
 
-Durante três anos, entre as paredes do Departamento de Informática da PUC-Rio, os cariocas Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes criaram uma linguagem de programação que acabou se tornando o "xodó" dos desenvolvedores de games.
+### Lua言語の誕生
 
-A Lua, como ela foi batizada, chamou inclusive a atenção da LucasArts. empresa especializada em produção de games, cujo dono é o premiado diretor de cinema George Lucas, que já produziu uma série de jogos a partir da combinação da nova linguagem com a C++. O mais recente é o Grim Fandango.
+リオ・デ・ジャネイロのカトリック大学（PUC-Rio）の情報学部の中で3年間、カリオカ（リオ・デ・ジャネイロ出身者）であるロベルト・イエルサリムシ、ルイス・エンリケ・デ・フィゲレード、ワルデマール・セレスの3人が協力し、後にゲーム開発者の間で「お気に入り」となるプログラミング言語を作り上げました。その名も「Lua」です。
 
-Além de dar uma mãozinha na empresa de George Lucas, a Lua ajudou a criar um software que simulava as imagens geradas por um telescópio lançado pela NASA em 1998. No Instituto do Coração em São Paulo, o Incor, o servidor do sistema que monitora pacientes da UTI via Web é escrito em Lua.
+Luaは、ゲーム制作会社であるLucasArtsの関心も引きました。この会社のオーナーは、映画『スター・ウォーズ』で知られるジョージ・ルーカスで、彼はLuaとC++を組み合わせたゲームをいくつか制作しています。その代表作が『Grim Fandango』です。
 
-Cerca de mil empresas de tecnologia já utilizam a linguagem
+Luaはジョージ・ルーカスの会社に役立つだけでなく、1998年にNASAが打ち上げた望遠鏡による画像をシミュレーションするソフトウェアの開発にも用いられました。また、サンパウロの心臓研究所「インコール（Incor）」では、集中治療室の患者をウェブ上で監視するシステムのサーバーがLuaで書かれています。
 
-A Lua não é apenas a "queridinha" dos programadores de games. Cerca de mil empresas de tecnologia, incluindo algumas do Vale do Silício, na Califórnia, já se renderam a ela.
+### 約1000社がLuaを利用
 
-Em São Francisco, a Yindo, uma companhia emergente que atua em programação de aplicações, está desenvolvendo um programa com a Lua. "Na Califórnia, Lua é um nome tão forte que a Yindo propôs que associássemos nossos nomes à linguagem. Disseram que, além de oferecer um diferencial tecnológico, ela já está oferecendo um diferencial também mercadológico", afirma Roberto Ierusalimschy, um dos criadores.
+Luaはゲームプログラマーの「お気に入り」にとどまらず、シリコンバレーを含む世界中の約1000社の技術企業に採用されています。
 
-'Lua' é gratuita e pode ser baixada na Web
+サンフランシスコにある新興企業「Yindo」では、Luaを使ったアプリケーションプログラムの開発が進行中です。「カリフォルニアではLuaの名前が非常に強力で、Yindo社は自社名をLuaに関連付ける提案をしてきました。Luaは技術的な差別化だけでなく、マーケティング的な価値も提供していると言われています」と、開発者のひとりであるロベルト・イエルサリムシ氏は述べています。
 
-A linguagem Lua está disponível de graça na Internet desde 1996. Os pesquisadores da PUC-Rio não têm controle do número de downloads que já foram feitos devido à quantidade de espelhos (sites que pegam o software "emprestado" e o tornam disponível para download) em ação.
+### Luaは無料でウェブ上からダウンロード可能
 
-Roberto Ierusalimschy estima que, de 1996 a 2000, foram feitos mais de dez mil downloads, levando-se em consideração os espelhos do Japão, Dinamarca, Alemanha, Grécia, Estados Unidos e Brasil. Isso sem contar os espelhos que eles não conhecem.
+Luaは1996年からインターネット上で無料で提供されています。PUC-Rioの研究者たちは、多くのミラーサイト（ソフトウェアを「貸し出し」、ダウンロード可能にするサイト）が存在するため、ダウンロード数を正確には把握していませんが、ロベルト・イエルサリムシ氏の推定では、1996年から2000年の間に日本、デンマーク、ドイツ、ギリシャ、アメリカ、ブラジルのミラーを通じて1万回以上のダウンロードが行われています。これには、彼らの知らないミラーサイトも含まれている可能性があります。
 
-A distribuição gratuita da Lua foi uma opção dos pesquisadores, que não pensam em transformar a linguagem em uma fonte de renda. "No começo, em 1996, a linguagem seria de graça para o meio acadêmico e cobraríamos um valor para uso comercial. Mas depois pensamos bem e vimos que não existe uma barreira entre o acadêmico e o comercial. Alguns projetos em desenvolvimento já são pensados para uso comercial", revela Roberto.
+Luaの無料配布は研究者たちによる選択でした。当初は学術目的に限って無料にし、商業利用には料金を設定する予定でしたが、最終的には商業と学術の区別が難しいと判断し、無料で公開することに決めました。「最初は学術用には無料で、商業用には料金を取るつもりでした。しかし、学術と商業の間に明確な境界は存在しないと気付きました。いくつかのプロジェクトは商業利用を念頭に置いて開発されています」とロベルト氏は語っています。
 
+::: info
 Reprint from Globo.com - Info & Tech, 16 Nov 2000. Copyright © 2000 Globo.com. Todos os direitos reservados.
+:::
 
-Linguagem de programação brasileira alcança o Vale do Silício e conquista até o diretor de Guerra nas Estrelas, George Lucas.
+## ブラジル発のプログラミング言語がシリコンバレーとスター・ウォーズの監督ジョージ・ルーカスを魅了
 
-Três pesquisadores da Pontifícia Universidade Católica do Rio de Janeiro, a PUC-Rio, trabalharam durante três anos no projeto Lua, e criaram uma linguagem de programação que recebe o mesmo nome do projeto. O software nacional tem algumas semelhanças com a linguagem Java e está sendo distribuído de graça pela Internet. O grupo de pesquisadores estima que já tenham tido mais de dez mil cópias da linguagem. A Lua está sendo tão bem aceita que os criadores Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes acabaram de ser contratados por uma empresa da Califórnia, que está desenvolvendo um programa com a linguagem brasileira. Ouça aqui a entrevista sobre a Lua com Roberto Ierusalimschy.
+### Lua言語の誕生とその成功
 
-Três pesquisadores brasileiros criaram uma linguagem de programação que conquistou George Lucas e o Vale do Silício
+リオデジャネイロ・カトリック大学（PUC-Rio）の情報学部で、ロベルト・イエルサリムシ、ルイス・エンリケ・デ・フィゲレード、ワルデマール・セレスの3人の研究者が3年間かけて「Lua」というプログラミング言語を開発しました。このブラジル製のソフトウェアは、Javaといくつかの類似点を持ち、インターネット上で無料配布されています。研究者たちは、すでに1万以上のダウンロードがあったと推定しています。
 
-Durante três anos, entre as paredes do Departamento de Informática da PUC-Rio, os cariocas Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes criaram uma linguagem de programação que acabou se tornando o "xodó" dos desenvolvedores de games. A Lua, como foi batizada a linguagem, chamou inclusive a atenção da Lucas Arts, empresa especializada em produção de games, cujo dono é o premiado diretor de cinema George Lucas, que já produziu uma série de jogos, a partir da combinação da nova linguagem com a C++. O mais recente é o Grim Fandango.
+Luaはゲーム開発者に愛され、特にジョージ・ルーカスが所有するゲーム制作会社LucasArtsの関心を引きました。LucasArtsは、LuaとC++を組み合わせたゲームをいくつか制作しており、その中で代表作が『Grim Fandango』です。
 
-Além de dar uma mãozinha na empresa de George Lucas, a Lua ajudou a criar um software que simulava as imagens geradas por um telescópio lançado pela Nasa em 1998. No Instituto do Coração em São Paulo, o Incor, o servidor do sistema que monitora pacientes da UTI via web é escrito em Lua. A linguagem foi usada também na criação da interface da CPC 4400, uma placa de switch para rede Ethernet.
+Luaはジョージ・ルーカスの企業で活躍するだけでなく、1998年にNASAが打ち上げた望遠鏡の画像シミュレーションソフトウェアの開発にも用いられました。また、サンパウロにある心臓研究所Incorでは、集中治療室（ICU）の患者モニタリングシステムのサーバーがLuaで構築されています。この言語は、CPC 4400というEthernetネットワーク用のスイッチボードのインターフェースの作成にも使われました。
 
-"A Lua foi projetada para ser usada junto com as linguagens C ou C++, por isso é tão usada em games. Ela prioriza a eficiência do programador em detrimento da eficiência da máquina. A C e a C++ agem ao contrário, razão pela qual podemos dizer que há um equilíbrio com a combinação dos dois. Na Java existe um recurso chamado métodos nativos que permite à linguagem interagir com a C, mas isso evita que se use o "pure" Java, que é melhor de programar do que a C, mas é menos eficiente", explica Roberto Ierusalimschy.
+### Luaの特徴と技術的な優位性
 
-Linguagem já conquistou o Vale do Silício
+「LuaはCまたはC++と併用することを前提に設計されており、そのためゲーム開発でよく使われます。Luaはプログラマーの効率を優先し、マシン効率を犠牲にしています。CやC++はその逆で、両者を組み合わせることでバランスが取れています」とイエルサリムシ氏は説明しています。Javaには「ネイティブメソッド」があり、Cと連携できますが、これによりJavaの純粋なプログラミングが制約されます。JavaはCよりもプログラミングしやすいものの、効率面では劣ることもあります。
 
-A Lua, linguagem de programação desenvolvida no Departamento de Informática da PUC-Rio, pelos cariocas Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes, não é apenas a "queridinha" dos programadores de games. Cerca de mil empresas de tecnologia, incluindo algumas do Vale do Silício, já se renderam à nova linguagem. Em São Francisco, Califórnia, a Yindo, uma companhia emergente que atua em programação de aplicações, está desenvolvendo um programa com a linguagem criada por esses pesquisadores brasileiros da PUC-Rio. "Na Califórnia, a Lua é um nome tão forte que a Yindo propôs que associássemos nossos nomes à linguagem. Disseram que, além de oferecer um diferencial tecnológico, ela já está oferecendo um diferencial também mercadológico", afirma Roberto.
+### Luaの普及と無料配布
 
-A linguagem Lua está disponível de graça na internet desde 1996. Os pesquisadores não têm controle do número de downloads que já foi feito, pois, segundo Roberto Ierusalimschy, existem muitos espelhos (sites que pegam o software "emprestado" e o tornam disponível para download) em ação. Roberto estima que, de 1996 a 2000, "foram feitos mais de dez mil downloads, levando-se em consideração os espelhos do Japão, Dinamarca, Alemanha, Grécia, Estados Unidos e Brasil. Isso sem contar os espelhos que não conhecemos, mas que provavelmente repetem essa prática".
+Luaは1996年からインターネットで無料で提供されており、特にゲームプログラマーに愛されるだけでなく、シリコンバレーの多くの企業にも採用されています。サンフランシスコにある新興企業Yindoは、Luaを使ったアプリケーション開発を進めており、「Luaはカリフォルニアで強いブランドであり、技術的な優位性に加え、マーケティング的な価値も提供している」とイエルサリムシ氏は述べています。
 
-A distribuição gratuita do Lua foi uma opção dos pesquisadores, que não pensam em transformar a linguagem em uma fonte de renda. "No começo, em 1996, a linguagem seria de graça para o meio acadêmico e cobrado um valor para uso comercial. Mas depois pensamos bem e vimos que não existe uma barreira entre o acadêmico e o comercial. Alguns projetos em desenvolvimento já são pensados para uso comercial", revela Roberto.
+研究者たちは、Luaのダウンロード数を正確に把握していません。ロベルト・イエルサリムシ氏によれば、多くのミラーサイト（ソフトウェアを再配布するサイト）が存在しているため、ダウンロード数の管理は難しいとのことです。彼の推定では、1996年から2000年の間に日本、デンマーク、ドイツ、ギリシャ、アメリカ、ブラジルなどのミラーを通じて1万回以上のダウンロードが行われたとされています。
 
+### Luaの無料配布に込められた思い
+
+Luaの無料配布は研究者たちの選択であり、収益を得ることは考えていませんでした。当初は学術利用には無料、商業利用には料金を課す計画でしたが、「学術と商業の間に明確な境界は存在しない」と気付き、無料で公開することに決めたとイエルサリムシ氏は語ります。「いくつかの開発プロジェクトは商業利用を見据えているため、この方針が最善でした」と述べています。
+
+:::
 Reprint from Hipermidia, 11 e 16 Nov 2000. Copyright © 2000 Hipermidia. Todos os direitos reservados.
+:::
 
-Linguagem de programação faz a viagem de volta
+## プログラミング言語Lua、逆輸入の旅
 
-Desenvolvida na PUC para o Grupo de Tecnologia em Computação Gráfica (TeCGraf), a Linguagem de Programação Lua já viajou o mundo. Segundo o professor Roberto Ierusalimschy, um dos criadores juntamente com Waldemar Celes e Luiz Henrique de Figueiredo, consultores do TeCGraf, a Linguagem Lua se beneficia do fato de ter se tornado conhecida após ser testada por geólogos da Petrobras. Depois do sucesso internacional, a Lua chega ao Brasil.
+### テクグラフ（TeCGraf）で開発されたLua言語が世界を巡り、再びブラジルへ
 
-Linguagem Lua enfim conquista brasileiros
+リオデジャネイロ・カトリック大学（PUC-Rio）のコンピュータグラフィックス技術グループ（TeCGraf）で開発されたプログラミング言語Luaは、世界中を旅して再びブラジルに戻ってきました。開発者の一人であるロベルト・イエルサリムシ教授によると、Luaは、まずPetrobrasの地質学者たちによるテストを経て成功を収め、その後国際的な注目を集めました。
 
-O homem precisou ir à Lua para provar que poderia conquistar o espaço. Da mesma forma, a linguagem de programação Lua, desenvolvida no Grupo de Tecnologia em Computação Gráfica (TeCGraf), parceria da PUC-Rio com a Petrobras, teve que entrar no mercado americano para provar suas qualidades e conseguir o merecido reconhecimento aqui no Brasil.
+### Lua言語、ついにブラジル国内で認知される
 
-O professor Roberto Ierusalimschy, do Departamento de Informática da PUC, e os consultores do TeCGraf, Waldemar Celes e Luiz Henrique de Figueiredo, criaram a linguagem em 1993. O objetivo inicial era contornar uma deficiência de comandos verificada por geólogos da Petrobras quando precisavam confrontar informações colhidas nos poços de petróleo.
+人類が月（Lua）に到達したように、Luaプログラミング言語も、アメリカ市場に進出することでその実力が証明され、ブラジル国内でも正当な評価を得ることができました。
 
-— A nossa linguagem está em um processo constante de criação e aprimoramento. Já fizemos novas versões e acrescentamos coisas diferentes. Ela não é um produto final, mas para ser usada na construção de outras coisas. Lua sacrifica eficiência em troca da flexibilidade, e é mais fácil de ser trabalhada, explica o professor Roberto Ierusalimschy.
+PUC-Rio情報学部のロベルト・イエルサリムシ教授とTeCGrafのコンサルタントであるワルデマール・セレス、ルイス・エンリケ・デ・フィゲレードの3人は、1993年にLuaを開発しました。当初の目的は、Petrobrasの地質学者が石油採掘井で得たデータを比較する際に必要なコマンド不足を解決することでした。
 
-Segundo ele, a linguagem de programação se tornou realmente conhecida nos Estados Unidos em 1996, quando saiu um artigo na revista especializada americana Dr. Dobbs. Um ano depois, um executivo da LucasArts enviou um e-mail dizendo que usou Lua para montar os jogos Grim Fandango e Escape from Monkey Island IV. Era o reconhecimento chegando.
+「我々の言語は絶えず改良を重ねており、新しいバージョンや機能が追加されています。Luaは完成品ではなく、他のものを構築するためのツールです。Luaは効率を犠牲にする代わりに柔軟性を重視しており、使いやすさも特徴です」とイエルサリムシ教授は説明しています。
 
-Hoje, Lua tem vários campos de aplicação diferentes. O mais recente é o de uma empresa americana que a está usando em um switch ethernet, uma placa onde ficam todos os fios de rede para fazer conexão externa e também a conexão entre esses fios. Além disso, a linguagem também serve como ferramenta para designers.
+この言語は、1996年にアメリカの専門誌「Dr. Dobbs」に紹介されたことで本格的に知られるようになりました。その翌年、LucasArtsのエグゼクティブから、Luaがゲーム『Grim Fandango』や『Escape from Monkey Island IV』の開発に使用されたとのメールが届き、国際的な評価を獲得しました。
 
-Quando Lua se espalhou para o mundo, em 96, tinha a vantagem de já ter sido testada durante três anos no TeCGraf, tanto em termos de qualidade, quanto de utilidade. Isso foi muito importante porque foi dando um retorno dos usuários no sentido de ir aprimorando algumas falhas, ressaltou Roberto.
+### Luaの多様な活用分野
 
-Segundo o professor, uma das razões para o fato de a linguagem ter conquistado primeiro os Estados Unidos são as características do mercado americano. "Lá, devido à enorme competição, para uma empresa dar certo, ela deve apresentar um diferencial tecnológico. Lua está funcionando como um", finaliza.
+現在、Luaはさまざまな分野で活用されています。最新の例として、アメリカのある企業がイーサネットスイッチ（ネットワーク接続用のボード）にLuaを使用しています。さらに、Luaはデザイナーのツールとしても役立っています。
 
+Luaが世界に広がった1996年当時、TeCGrafで3年間のテストが行われており、その品質と有用性が証明されていたことが大きな利点でした。これによりユーザーからのフィードバックを通じて、いくつかの欠点を改善することができたと、ロベルト教授は述べています。
+
+アメリカで先にLuaが普及した理由について、教授は「アメリカ市場では競争が激しく、企業が成功するには技術的な差別化が必要です。Luaはその差別化を提供しているのです」と締めくくっています。
+
+::: info
 Reprint from Jornal da PUC, Ano XII Nº 102, Nov 2000. Copyright © 2000 PUC-Rio. Todos os direitos reservados.
+:::
 
-A conquista do lua
+## Luaの快挙
 
-Software nacional faz sucesso nos EUA
+### ブラジル発ソフトウェアが米国で成功を収める
 
-Uma lua brasileira conquistou George Lucas, diretor do filme Guerra nas Estrelas e dono da produtora LucasArts Entertainment. E está brilhando também em outras mil empresas de tecnologia, inclusive no Vale do Silício. Eles conheceram a Lua, uma linguagem de programação desenvolvida por três pesquisadores da PUC do Rio, na Internet e viraram fãs. A fama do software nacional — similar à linguagem Java, desenvolvida pela gigante americana Sun Mycrosystems — espalhou-se e começa a render frutos para seus criadores, os cariocas Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes. Eles acabam de ser contratados como consultores pela Yindo, companhia emergente da Califórnia. 'A empresa está desenvolvendo um programa com nossa linguagem', afirma Ierusalimschy. Fossem americanos, já poderiam ser apontados como candidatos a milionários. Como brasileiros, entretanto, sonham com conquistas menores, como faturar dando palestras. A venda do software não rende um tostão, já que ele é distribuído de graça pela Internet. Mas o seu sucesso permite que os pesquisadores já imaginem até arrumar um comprador para a marca Lua. 'Quando mais a linguagem for conhecida, maior será o valor', diz Ierusalimschy.
+ブラジル生まれのLuaは、『スター・ウォーズ』の監督であり、ゲーム制作会社LucasArts Entertainmentのオーナーでもあるジョージ・ルーカスを魅了しました。そして、このプログラミング言語はシリコンバレーを含む1000社以上の技術企業にも輝きを放っています。彼らはインターネットでこの「Lua」に出会い、すぐにファンになりました。
 
+この国産ソフトウェアは、米国の大手Sun Microsystemsが開発したJavaに似た性質を持ち、その評判は広がり、ついに開発者であるロベルト・イエルサリムシ、ルイス・エンリケ・デ・フィゲレード、ワルデマール・セレスに実を結び始めました。彼らは最近、カリフォルニアの新興企業「Yindo」にコンサルタントとして雇われ、同社はLuaを使用したプログラムを開発しています。
+
+「もし彼らがアメリカ人なら、すでに億万長者候補として注目されていたでしょう。しかし、ブラジル人である彼らは、講演活動などの小さな成功を目指しています」と述べられています。このソフトウェアはインターネットで無料配布されているため、販売自体からの収益はありませんが、その成功によって「Lua」というブランドを将来売却できる可能性も考えられ始めています。「言語が広く知られるほど、価値が高まるでしょう」とイエルサリムシ氏は述べています。
+
+::: info
 Reprint from ISTOÉ Dinheiro, Nº 165, 25 Out 2000. Copyright © 2000 Editora Três. Todos os direitos reservados.
+:::
 
-'Nossa linguagem é totalmente livre e flexível'
+## Lua言語：完全に自由で柔軟な言語
 
-Criador da linguagem Lua, usada como ferramenta por geólogos e até designers, explica seu funcionamento
+Luaは、地質学者やデザイナーに至るまで幅広く活用されるプログラミング言語です。その開発者であるロベルト・イエルサリムシ教授が、Luaの成り立ちとその機能について説明します。
 
+### Luaの名前の由来
 
-Os americanos chegaram lá, mas nós somos os donos da Lua. Sério. É só conferir com Roberto Ierusalimschy — um dos criadores da linguagem de programação Lua, surgida no TeCGraf (Grupo de Tecnologia em Computação Gráfica, parceria da PUC-Rio com a Petrobras). Roberto, engenheiro de sistemas com pós-doutorado na Universidade de Waterloo, no Canadá, professor associado do departamento de informática da PUC-Rio e consultor do TeCGraf, criou a linguagem junto com os companheiros Waldemar Celes e Luiz Henrique de Figueiredo e a viu correr mundo. Ele nos revelou a trajetória do software em seu escritório, sob os auspícios do logotipo "lunar" da linguagem.
+**質問：なぜLuaと名付けられたのですか？**
 
-O GLOBO: Por que o nome LUA? É algum acrônimo?
-ROBERTO IERUSALIMSCHY: Quando a criamos, em 1993, planejávamos uma linguagem maior, chamada SOL (Simple Object Language), mas depois desistimos dela e pensamos em reduzi-la. Aí, alguém sugeriu: já que vocês vão fazer algo menor do que o Sol... E veio o nome Lua.
+**ロベルト・イエルサリムシ：**  
+私たちがこの言語を作ったのは1993年ですが、当初は「SOL（Simple Object Language）」というより大きな言語を計画していました。しかし、後にそのアイデアを縮小し、より小さな言語にすることにしました。そこで、チームメンバーの一人が「太陽（Sol）より小さいから月（Lua）にしてはどうか」と提案し、Luaという名前が生まれました。
 
-Como ela funciona?
-ROBERTO: A idéia básica é ser uma linguagem que sacrifica um pouco eficiência de execução (não é tão eficiente como, por exemplo, C e C++, mais pesadas) em troca de flexibilidade. Lua é mais fácil de programar, você não tem que se preocupar com certas coisas. Mas seu maior diferencial é ter uma interface muito fácil com C e C++. Então, a idéia central é uma mistura: fazer partes do seu programa em C e partes em Lua, de modo que, onde você precisa de mais eficiência da máquina, usa o C; e onde precisa de mais flexibilidade para experimentação, usa Lua. Ela permite um equilíbrio melhor entre essas duas coisas, além de ser mais fácil de modificar. Pode-se, por exemplo, mexer na instalação sem ter que recompilá-lo... E também é uma linguagem com total portabilidade. Roda desde Windows a Unix e Linux, passando por sistemas como BeOS, OS/2, Amiga, e mesmo em PlayStation e supercomputadores Cray.
+### Luaの機能について
 
-Quais são suas maiores aplicações práticas?
-ROBERTO: Há uma que citamos muito, até porque foi aquela para a qual desenvolvemos Lua. A Petrobras, parceira do TeCGraf, precisava traçar um perfil de poço de petróleo. Na prospecção, a broca desce com várias sondas, e os geólogos acompanham o processo. As sondas vão colhendo informações à medida que o poço é perfurado. Essas informações, então, são plotadas numa tela de computador — temperatura, condutividade do material naquela profundidade, resistência, pressão. Há vários programas que apresentam isso na tela. E existe um monte de fatores complexos de configuração que o geólogo quer ver. Às vezes, ele quer ver uma coluna do lado da outra, às vezes quer verificar outro tipo de informação, mudar cor ou escala, mudar o grid, etc. E isso é muito complicado de fazer trabalhando apenas numa interface gráfica, porque nela sempre fica faltando alguma coisa. Então, quando o geólogo precisava de mais comandos, ligava para nós, e tínhamos de gerar um novo programa e mandar para a plataforma. Desenvolvemos Lua para pôr fim a esse problema. Com ela, alguém que tenha alguma formação técnica pode fazer ele mesmo essa configuração. A linguagem é suficientemente simples para a pessoa mexer e adaptar às suas necessidades. Assim, o programa tem uma parte em C, que cria a parte gráfica, etc., e a parte em Lua, que diz para a parte em C como pôr as coisas, em que ordem, e assim por diante.
+**質問：Luaはどのように機能するのですか？**
 
-E como a linguagem foi migrando para outras aplicações? Essa versão criada para a Petrobras foi apenas o começo, certo?
-ROBERTO: Sim. Depois, em 1994, pusemos essa versão inicial de Lua na Internet, com acesso público. E o próprio pessoal do TeCGraf começou a usá-la em outras aplicações — programas de coleta de dados, análise de peças... Aos poucos, fomos percebendo que era possível ter uma única linguagem que já trouxesse em si os mecanismos de adaptação. Que já fosse feita para ser adaptada. Com esses novos usos do TeCGraf, conseguimos ir uniformizando a linguagem. Até que chegou um momento em que, ao surgir uma nova possibilidade de utilização, dizíamos: pegue Lua e encaixe no que você quer fazer.
+**ロベルト：**  
+Luaは実行効率を多少犠牲にしてでも柔軟性を重視する言語です。例えば、CやC++のような効率の高い言語と比べると実行速度は劣りますが、その分、プログラミングが簡単で、細かなことに気を使わずに済みます。Luaの大きな特徴は、CやC++と簡単に連携できる点にあります。プログラムの一部をCで、別の部分をLuaで書き、必要な部分に応じて効率や柔軟性を使い分けることができるのです。このため、効率を求める部分にはC、柔軟性が求められる部分にはLuaを使用するというバランスが可能です。また、Luaは非常に移植性が高く、Windows、Unix、LinuxからBeOSやPlayStationなど様々な環境で動作します。
 
-Como foi essa história do artigo internacional que começou a popularizar a linguagem?
-ROBERTO: Em 96, saiu um artigo na revista "Dr. Dobbs", especializada em programação. Na época, estávamos lançando a versão 2.5, com várias novidades, facilidades para tratamento de streaming, etc. E aí a coisa explodiu. Muita gente mandou e-mails, a gente via os logs do pessoal pegando via ftp (e eram 40, 50 pessoas pegando num dia só), e começou o boca-a-boca sobre a linguagem, em listas de discussão, newsgroups... Um programador da LucasArts foi um dos primeiros a pegar.
+### Luaの実用例
 
-Foi quem acabou usando Lua nos games "Escape from Monkey Island IV" e "Grim Fandango"?
-ROBERTO: Exato. Seu nome é Bret Mogilevsky. Ele pegou Lua via ftp e mandou-nos um e-mail dizendo: "aí, a linguagem é muito boa, gostei..." Nem nos tocamos na época. Algum tempo depois, Mogilevsky escreveu de novo, dizendo que tinha usado Lua no "Grim Fandango".
+**質問：Luaの実際の利用例は何ですか？**
 
-E como ela funciona dentro de um game como esses? Qual o seu papel?
-ROBERTO: A linguagem C faz toda a parte de renderização (a parte gráfica, pesada, que inclui criar todos os detalhes da animação, sombras, e assim por diante). Já o script do jogo — o que o personagem faz, como reage a determinada conjuntura — é todo comandado por Lua. O designer do roteiro de jogo não trabalha em C, e sim programa em Lua. Como o geólogo da Petrobras, ele não é um programador profissional, mas um especialista em criar games que usa Lua como ferramenta. No caso, o Bret é o programador oficial do jogo. O que ele fez? Botou Lua dentro do sistema, acoplando-a às partes mais pesadas, em C, e a ofereceu aos designers.
+**ロベルト：**  
+Luaはもともとペトロブラスの依頼で開発されました。油井のプロファイルを描くために使用されるソフトウェアを作る必要がありました。油井掘削の際、地質学者がデータを収集し、そのデータを画面にプロットしていくのですが、彼らが使いたい設定が毎回異なるため、新しいプログラムを開発しなければなりませんでした。Luaはその問題を解決するために作られ、技術的な知識を持つ人が簡単にカスタマイズできるよう設計されました。
 
-A linguagem é de código aberto? Sendo assim, ela segue a GPL (General Public License, que regula a utilização da maioria dos softwares livres)?
-ROBERTO: Sim, ela é open source. Mas não é baseada na GPL, porque a GPL, você sabe, é aquela licença "virótica" (risos): é livre, mas só pode ser usada segundo seus parâmetros. A nossa, não. É totalmente livre e você pode usar como quiser. Pode empacotar, vender. O copyright é nosso, mas só exigimos o crédito. Inicialmente, em 94, a liberamos só para pesquisa, mas não deu certo. É que nossa concorrência — TCL, Perl, por exemplo — é livre.
+### Luaの普及と進化
 
-Vocês estão lançando o beta da versão 4 de Lua. Quais as diferenças em relação às versões anteriores?
-ROBERTO: A versão 4 é mais eficiente que as anteriores (demos uma "faxina" no código, melhoramos os algoritmos) e "reentrante", ou seja, num mesmo sistema ou programa, você pode ter vários ambientes Lua totalmente independentes rodando. O usuário pode abrir várias janelas, cada uma com seu interpretador e respectivas variáveis e comandos. A versão final sai em cerca de um mês.
+初期バージョンのLuaは、1994年にインターネットで公開され、他のアプリケーションでも使用され始めました。その後、Dr. Dobbs Magazineでの紹介記事をきっかけに世界中で広く利用されるようになり、LucasArts社のゲーム開発にも取り入れられました。
 
-Por causa de Lua, vocês foram convidados pela empresa americana Yindo para serem consultores de um projeto de software. Dê os detalhes dessa história.
-ROBERTO: A Yindo está desenvolvendo um plug-in baseado em Lua, e somos consultores apenas da parte do projeto relacionada à linguagem. A coisa toda surgiu em julho passado, quando fui ao Silicon Valley, visitar uma amiga que mora em Cupertino. Antes, mandei um e-mail para a lista de discussão sobre Lua, avisando que estaria por lá, à disposição de quem quisesse conversar sobre o tema. Aí, a Palm me chamou para fazer uma palestra sobre Lua (há várias pessoas usando a linguagem em ferramentas de desenvolvimento de software no Palm OS), e esse pessoal da Yindo me convidou para uma conversa em São Francisco. E eles me disseram: "O que queremos são os nomes de vocês no projeto. Porque Lua já é suficientemente conhecida aqui para que esses nomes sejam um diferencial e dêem mais peso ao projeto." Eles estão, agora, na pior fase do projeto, que é arranjar o investidor inicial, e acreditam que citar o uso de Lua e o nosso apoio é um diferencial tecnológico.
+**質問：Luaはゲーム開発でどのように使われるのですか？**
 
-E em que consiste o projeto da Yindo?
-ROBERTO: Eles querem fazer um concorrente para o Flash, cujo maior problema é a linguagem meio complicada. O que a Yindo propõe é utilizar Lua para programar esse tipo de ferramenta, e valer-se do OpenGL como padrão gráfico. É um plug-in gráfico, com elementos 3D, que supostamente permite interatividade maior, por exemplo, em games. O usuário carregaria o plug-in deles, com um programa em Lua descrevendo o game, e jogaria em seu micro. Já existe um demo na rede, rodando em <www.yindo.com>. (PS: O nome deste plug-in também é Yindo.)
+**ロベルト：**  
+ゲームでは、C言語がレンダリング（グラフィックやアニメーションの処理）を担当し、Luaがゲームのスクリプト、つまりキャラクターの動作や反応を制御します。Luaの柔軟な構造が、ゲームデザイナーにとって使いやすいスクリプト言語として非常に適しているのです。
 
-Criando uma ponte com a Web
+### オープンソースとしてのLua
 
-A linguagem Lua tem vários "derivados". O principal deles é o CGILua, que trabalha com aplicações Internet. Um dos principais usuários de CGILua no Brasil é a Fábrica Digital, que escreveu sua ferramenta de edição Web, o Publique!, todo em Lua e usa a linguagem derivada para conectá-lo à Grande Rede. Quem explica o funcionamento do CGILua é André Carregal, responsável pela parte de desenvolvimento de software na empresa:
+**質問：Luaはオープンソースですか？**
 
-— O CGILua é um programa escrito em C onde você embute trechos escritos em Lua. E o executável do CGILua faz toda a comunicação desse trecho Lua com o protocolo http da Internet. Ou seja, ele faz o papel do CGI. — diz.
+**ロベルト：**  
+はい、Luaはオープンソースですが、GPL（General Public License）に基づいたものではありません。Luaは完全に自由で、どのように使っても構いません。商用利用も可能で、私たちはただクレジットを要求するだけです。
 
-E qual é a vantagem de usar CGILua? Segundo André, é o controle que se ganha sobre o ciclo de desenvolvimento do software, pois Lua é considerada uma linguagem mais indicada para fazer coisas complicadas do que o Perl, por exemplo.
+### 最新バージョンと今後の展望
 
-— O Perl é uma linguagem muito fácil para montar páginas — ressalva. — Mas se você quer montar um conjunto de páginas que interagem, como o Publique!, Lua é mais indicada. Ela foi pensada para sistemas que são configuráveis, que têm interações maiores. E permite, dentro do ciclo de um produto, o desenvolvimento de sistemas, sua documentação, a formatação das páginas... Tudo em grupos separados.
+Luaは年々進化を続け、より効率的かつ柔軟なバージョンが開発されています。現在のベータ版では、複数のLua環境が同時に動作することが可能になっています。
 
-Segundo ele, Lua, com seus arquivos de configuração, possibilita que, ao mesmo tempo em que se cria a funcionalidade das páginas, elas estejam sendo diagramadas na produção, e os textos, elaborados por um redator — tudo ao mesmo tempo.
+### Luaとインターネットアプリケーション
 
-— Não é um ambiente onde o desenvolvimento é feito em série, e sim em paralelo. A flexibilidade de Lua me permite pegar um arquivo de configuração, digamos, de texto e colocar o site todo em inglês apenas mexendo naquele arquivo. Não preciso nem reprogramar nada.
+Luaにはいくつかの「派生形」がありますが、その中でも主要なものはCGILuaという、インターネットアプリケーション用の拡張です。このCGILuaは、Web開発において柔軟なスクリプト処理を提供し、複雑なWebアプリケーションを容易に構築することができます。
 
-No site do TeCGraf, há uma página dedicada a Lua, com vários links (para listas de discussão, páginas de ftp, projetos baseados no software) e um manual introdutório em *.pdf sobre a linguagem. E já existe um curso sobre CGILua, na Penguin House, em Niterói, a cargo de Tomás Guisasola Gorham, que (como André) fez mestrado na PUC-Rio, e trabalha com Lua desde 95, tendo desenvolvido bibliotecas de aplicações baseadas na linguagem.
+**CGILuaの概要と利点**
 
+CGILuaは、C言語で書かれたプログラムで、Luaスクリプトを埋め込むことでインターネット上でのやり取りを可能にしています。例えば、HTTPプロトコルと連携してLuaスクリプトをWebサーバーで実行することで、CGI（Common Gateway Interface）として機能します。これにより、Luaを使って動的なWebページを生成することができます。
+
+CGILuaを使用する利点の一つは、ソフトウェア開発の進行管理がしやすくなる点です。一般にPerlはWebページの生成に適した言語とされていますが、よりインタラクティブで複雑なページ群を構築したい場合、Luaが適しているとされています。
+
+CGILuaは、特に大規模なWebアプリケーションの開発において、異なるチームが並行して開発を進められる柔軟な環境を提供します。例えば、設定ファイルを使用することで、複数の機能を同時に開発できるため、テキストの翻訳やページレイアウトの変更が容易に行えます。これは、英語や他言語への対応も、設定ファイルだけを修正するだけで可能であり、再プログラムの必要がないというメリットがあります。
+
+### Luaの今後の展望
+
+Luaは現在、テクグラフ（TeCGraf）のWebサイトで紹介され、さまざまなリンク（ディスカッションリスト、FTPページ、Luaベースのプロジェクトなど）と共にダウンロード可能です。また、Luaとその派生を利用したインターネットアプリケーションの開発に関するコースも提供されています。例えば、CGILuaに関する講座がニテロイのPenguin Houseで開かれており、多くのエンジニアや開発者がLuaに精通するための学びを提供しています。
+
+Luaは、単なるプログラミング言語にとどまらず、その柔軟性と適応性により、さまざまな産業において利用が拡大しています。Luaが提供する自由な開発環境は、今後も多くの分野で新しいアプリケーションの創出に寄与し続けることでしょう。
+
+::: info
 Reprint from O Globo, Ano LXXVI Nº 24519, 16 Out 2000. Copyright © 2000 O Globo. Todos os direitos reservados.
+:::
 
-Medalha de ouro!
+## Luaが金メダルを獲得！
 
-A LucasArts, empresa que lançou jogos das séries "Indiana Jones" e "Guerra nas estrelas", está usando linguagem de programação desenvolvida no Brasil. Dois de seus jogos mais famosos, "Grim Fandango" e "Escape from Monkey Island IV", usaram a linguagem Lua, desenvolvida pelo departamento de informática da PUC do Rio. Os autores e pesquisadores Roberto Ierusalimschy, Waldemar Celes e Luiz Henrique de Figueiredo lançam, esta semana, a versão [4.0] beta do programa e informam: ele é distribuído gratuitamente. Em <www.lua.org>.
+有名な「インディ・ジョーンズ」や「スター・ウォーズ」シリーズのゲームをリリースしたLucasArts社が、ブラジルで開発されたプログラミング言語を使用しています。LucasArtsの人気ゲーム「Grim Fandango」や「Escape from Monkey Island IV」には、リオデジャネイロ・カトリック大学（PUC-Rio）の情報学部で開発されたLua言語が採用されています。
 
+Luaの開発者であるロベルト・イエルサリムシ、ワルデマール・セレス、ルイス・エンリケ・デ・フィゲイレドの3氏は、今週Luaのバージョン4.0ベータ版をリリースしました。Luaは無料で配布されており、www.lua.org で入手可能です。
+
+::: info
 Reprint from O Globo, Ano LXXVI Nº 24505, 02 Out 2000. Copyright © 2000 O Globo. Todos os direitos reservados.
+:::
 
-Uma linguagem de sucesso
+## Lua: 成功したプログラミング言語
 
-Sistema criado por equipe da PUC-RJ auxilia vários tipos de negócios
+## PUC-Rioチームによって開発され、多様なビジネスを支えるシステム
 
-Apesar de conhecida e utilizada por programadores de todo o mundo, muito pouco se sabe, no Brasil, sobre o potencial da linguagem de programação Lua, desenvolvida pelo Departamento de Informática da Pontifícia Universidade Católica (PUC-Rio). Com uma versão mais rápida (Lua 4.0 Beta), o objetivo dos criadores foi incorporá-la à outras linguagens, consideradas mais "pesadas" por especialistas. Lua tem várias utilidades, desde a construção de sites até o apoio organizacional de projetos de escavações de petróleo.
+Luaは世界中のプログラマーに知られ、利用されているにもかかわらず、その潜在能力についてはブラジル国内ではあまり知られていません。Luaはリオデジャネイロ・カトリック大学（PUC-Rio）の情報学部で開発され、現在は高速化したバージョン（Lua 4.0 Beta）が登場しています。この新バージョンの目的は、専門家から「重い」と見なされる他の言語に組み込むことにあります。Luaの用途は幅広く、ウェブサイトの構築から石油掘削プロジェクトの支援に至るまで、多様な分野で活用されています。
 
-A linguagem de programação Lua surgiu em 1993, com a necessidade interna do Departamento de Informática de realizar tarefas difíceis na área da Informática. O primeiro projeto foi realizado numa parceria entre o Departamento de Informática da PUC e a Petrobras. O apoio de que a Petróleo Brasileiro S/A precisava estava numa das operações mais delicadas da empresa: as escavações.
+### Luaの誕生
 
-— Com essa nova linguagem, a Petrobras pôde estabelecer um roteiro — pelo computador — detalhado de como seriam conduzidas as escavações. A empresa passou a economizar tempo e conseguiu organizar mais os detalhes específicos das escavações, como temperatura certa da água e local de atuação das escavadeiras — disse o professor Roberto Ierusalimschy, associado do Departamento de Informática da PUC- Rio.
+Luaは1993年に誕生しました。情報学部内で複雑な情報処理を行う必要があったため、独自に開発されたものです。最初のプロジェクトはPUC-Rioの情報学部とPetrobras（ブラジル石油公社）の協力により進められました。LuaはPetrobrasが最も繊細な業務の1つである掘削プロジェクトを効率化するために使用されました。
 
-Histórico
+> 「Luaのおかげで、Petrobrasは掘削の手順をコンピュータ上で詳細に管理することができ、時間を節約するとともに、掘削の具体的な詳細（例えば水温や掘削機の配置）を効率的に組織化できるようになりました。」とPUC-Rio情報学部のロベルト・イエルサリムシ教授は述べています。
 
-Depois do projeto inicial, surgiram vários outros envolvendo a nova linguagem de programação, como o desenvolvimento, em 1994, de um sistema de intranet (sistema fechado de Internet numa empresa) no Departamento de Informática da PUC-Rio. O professor Ierusalimschy disse, empolgado, que "o projeto começou numa época em que a Internet não era nem comentada no país. Dois anos depois, o sistema foi estendido para todos os estudantes do campus".
+### Luaの発展
 
-A principal diferença em trabalhar com Lua é que esta pode ser integrada a outros programas. Só para se ter uma idéia da importância dada à linguagem no exterior, Lua foi utilizada pelos programadores da LucasArts Entertainment na confecção de dois jogos famosos no mercado: "Grim Fandango" e "Escape from Monkey Island".
+最初のプロジェクトが成功を収めた後、1994年にはPUC-Rio情報学部内でイントラネットシステムの開発が行われました。当時、インターネットは国内でほとんど知られていなかったため、これは革新的な試みでした。このシステムは2年後にキャンパス全体の学生が利用できるように拡張されました。
 
-Outra prova do conceito que Lua tem no exterior foi a proposta de emprego da empresa americana Yindo feita aos pesquisadores e criadores de Lua. A Yindo deseja desenvolver um produto para concorrer com o Flash, programa de animação da Macromedia, e quer integrar a linguagem Lua para atrair os chamados "Angel Investors" (investidores "anjos", aptos a investir em outras empresas).
+Luaの特長は、他のプログラムと簡単に統合できる点です。例えば、LucasArts Entertainment社は有名なゲーム「Grim Fandango」や「Escape from Monkey Island」の制作にLuaを使用しました。このようにLuaは国外でも評価されており、アメリカの企業YindoがLuaの開発者に仕事を持ちかけたこともあります。
 
-— O interesse de outras empresas em Lua ocorre porque essa linguagem de programação ocupa pouco espaço no HD do computador, é mais rápida entre as chamadas linguagens de extensão — que é uma sub-divisão da linguagem de programação — e é mais fácil de interagir com outros programas. No caso da Yindo, os donos da empresa consideram que o uso de Lua em seus programas seria o diferencial tecnológico necessário para atrair investidores — disse Ierusalimschy.
+> 「他の企業がLuaに関心を持つ理由は、Luaがコンピュータのハードディスク上での容量をほとんど消費せず、他の拡張言語と比較して高速であり、他のプログラムと簡単に連携できるためです。」とイエルサリムシ教授は説明しています。
 
-Mercado brasileiro
+### Luaの国内利用
 
-Mas não é só no exterior que Lua conquistou os profissionais de Informática. A empresa Fábrica Digital, criada em 1988, vem utilizando Lua desde então para projetos internos. Algumas utilidades dessa linguagem para a Fábrica Digital são uma melhor geração de páginas HTML (linguagem básica de Internet) e o uso de configuração de produtos na "Rede".
+Luaは国外だけでなく、ブラジル国内でも認められています。1988年に設立されたFábrica Digitalは内部プロジェクトにLuaを活用しています。Luaにより、HTMLページの生成効率が向上し、ネットワーク上での製品設定も容易になりました。
 
-A Fábrica Digital foi uma das primeiras empresas a fazer parte do Projeto Gênesis — a incubadora de empresas da PUC-Rio — e hoje já tem independência no mercado. O objetivo principal é fazer com que mesmo o usuário inexperiente consiga desfrutar do potencial máximo da tecnologia da intenet de uma maneira descomplicada, rápida e a um custo acessível.
+Fábrica Digitalは、PUC-Rioのインキュベータープロジェクト「プロジェクト・ジェネシス」の一環として設立され、現在では市場で独立しています。この会社の目標は、初心者ユーザーであってもインターネット技術の可能性を最大限に引き出し、シンプルで迅速、かつ低コストで利用できるようにすることです。
 
-— Com a utilização de Lua, a Fábrica Digital pôde aumentar de forma significativa a produtividade da equipe de desenvolvimento e produção de páginas HTML. A facilidade de programação e os recursos de configuração da linguagem permitiram o desenvolvimento de produtos extremamente flexíveis — disse André Carregal, gerente de desenvolvimento da Fábrica Digital.
+> 「Luaを使用することで、HTMLページの生成と開発チームの生産性を大幅に向上させることができました。」とFábrica Digitalの開発責任者であるアンドレ・カレガル氏は述べています。
 
-Os resultados da opinião de Carregal são justificados devido ao reconhecimento que a empresa conquistou junto ao governo. Os projetos da Fábrica Digital receberam aprovação governamental.
+## Luaの動作原理
 
-Mais: conquistaram verbas de vários programas, como o de Apoio ao Desenvolvimento Científico e Tecnológico (PADCT/Finep) e o Programa de Capacitação de Recursos Humanos para Atividades Estratégicas (RHAE/CNPQ), ambos vinculados ao Ministério da Ciência e Tecnologia.
+Luaプログラミング言語は、より重いとされる他の言語（例えばCやC++）のアプリケーションを拡張・簡素化する目的で設計されました。技術的に言えば、Luaは他の言語と容易に「連携」できます。実際には、イントラネットシステムの構築、ウェブサイトの制作、さらにはゲームの開発など、多岐にわたる分野で利用されています。
 
-Como Lua funciona
+ゲーム開発のケースでは、Luaはスクリプトとして使用され、キャラクターの動きや会話の進行を制御します。Luaは他のプログラミング言語に対し、アニメーションやサウンドの演出指示を出す監督のような役割を果たしています。
 
-A linguagem de programação Lua foi criada com a intenção de estender e facilitar as aplicações de outras linguagens mais pesadas (C ou C++). Num termo mais técnico, Lua "interage" com facilidade à essas outras linguagens. Na prática, é usada — entre outras aplicações — na criação de sistemas de Intranet, construção de sites e jogos eletrônicos.
+> たとえば、動きを実行するのがC++だとすれば、その動きがどうあるべきかを指示するのがLuaです。
 
-No caso desses jogos — um dos muitos campos onde Lua tem sido utilizada com sucesso -, essa linguagem atua como um script, determinando a execução dos movimentos dos personagens, bem como os diálogos dos mesmos. Lua "dita" às outras linguagens de programação o que deve ser feito em termos de animação ou som, como se fosse uma diretora.
+## サポート情報
 
-Seguindo esse raciocínio, quem executa o movimento é, por exemplo, C++, mas quem determina qual o movimento a ser executado é a linguagem de programação Lua.
+現在、Luaの使用に関する議論は、数百人の参加者がいるディスカッショングループで活発に行われています。また、検索サイトの情報技術セクションでもLuaは広く取り上げられています。Luaプログラミング言語についてさらに知りたい方は、PUC-Rioの情報学部に問い合わせるか、インターネットを通じて情報を得ることができます。
 
-Serviço
-
-Atualmente, os usos de Lua são temas de grupos de discussão com centenas de participantes e a linguagem já é item das seções de informática em vários sites de busca. Quem quiser mais informações sobre essa linguagem de programação, pode entrar em contato com o Departamento de Informática da PUC-Rio ou pela Internet.
-
+::: info
 Reprint from Jornal do Commercio, Ano CLXXIV Nº 302, 01 Out 2000. Copyright © 2000 Jornal do Commercio. Todos os direitos reservados.
+:::
 
-Sistema criado na PUC é usado por empresa do Vale do Silício
+# PUCで開発されたシステムがシリコンバレーで活用される
 
-O Vale do Silício, berço da informática mundial, está importando tecnologia produzida nos laboratórios da PUC-Rio. A Yindo — empresa emergente fundada pelo ex-programador chefe da e-groups, Steve Dekorte — utilizará a linguagem de programação Lua, desenvolvida pelo TeCGraf, centro de tecnologia gráfica ligado ao departamento de informática da universidade.
+世界の情報技術の中心地であるシリコンバレーが、PUC-Rio（リオ・デ・ジャネイロ・カトリック大学）で生み出された技術を取り入れています。元e-groupsの主任プログラマーであるスティーブ・デコーテが設立した新興企業「Yindo」が、同大学の情報学部に所属するTeCGraf（テクノロジー・グラフィックス・センター）で開発されたプログラミング言語「Lua」を活用します。
 
-Com base nesse sistema, conta Roberto Ierusalimschy, um dos criadores de Lua, a Yindo produzirá um software para competir com o Flash, da Macromedia. 'A universidade dá consultoria para a Yindo, que está desenvolvendo o sistema, tendo, inclusive, uma versão demo (para demonstração) à disposição no site (www.yindo.com)', conta Roberto. Criada em 1993 com o intuito de facilitar as aplicações usadas por outras linguagens mais complexas, Lua já foi empregada, por exemplo, na concepção de diversos programas da intranet (rede interna) da Petrobras.
+このシステムを基にして、Luaの共同開発者の1人であるロベルト・イエルサリムスキー氏によると、YindoはMacromediaのFlashと競合するソフトウェアを開発する予定です。「Yindo社はこのシステムを開発中で、大学がその開発をコンサルティングしています。また、デモ版もサイト（www.yindo.com）で公開されています」とロベルト氏は語ります。Luaは、より複雑な言語で使用されるアプリケーションを簡単にする目的で1993年に開発され、Petrobrasのイントラネットなど、さまざまなプログラムに使用されています。
 
-Por ser mais dinâmica do que outras linguagens do gênero, Lua foi utilizada pelos programadores da LucasArts Entertainment na confecção de dois jogos: o Grim Fandango e o Escape from Monkey Island IV. Esta semana está sendo lançada a versão [4.0] Beta, com uma vantagem adicional: a velocidade.
+Luaは他の同様の言語に比べて動的な特性を持っているため、LucasArts Entertainmentのプログラマーはこの言語を使用して、ゲーム『Grim Fandango』および『Escape from Monkey Island IV』を制作しました。今週、速度を強化した4.0 Betaバージョンがリリースされました。
 
-Outra utilização da linguagem, que já foi tema de dez teses de mestrado e quatro de doutorado, é na construção de websites.
+この言語は、10件の修士論文と4件の博士論文のテーマにもなっており、ウェブサイトの構築にも利用されています。
 
-Considerada uma concorrente da linguagem Java, a CGILua, como é chamada esta aplicação, foi empregada, por exemplo, na concepção das páginas da Xerox brasileira e do projeto Portinari.
+LuaはJavaの競合として見なされており、「CGILua」という名前でこのアプリケーションが提供されています。ブラジルのゼロックスのウェブサイトやPortinariプロジェクトのページの設計にも使用されました。
 
-Embora seja muito conhecida no meio dos programadores, a linguagem ainda é pouco difundida comercialmente, admite o professor.
+教授は、プログラマーの間では非常に知られているものの、商業的な普及はまだ進んでいないと認めています。
 
-A partir de 1996, quando a revista especializada em informática Dr. Dobbs publicou artigo sobre Lua, lembra o acadêmico, vem havendo maior interesse pelo sistema. 'Logo no ano seguinte, Lua recebeu o prêmio Compaq na categoria desenvolvimento', comenta Roberto, acrescentando que o sistema pode ser obtido gratuitamente pelo site www.lua.org.
+Luaへの関心は、1996年にコンピュータ専門誌『Dr. Dobbs』がLuaに関する記事を掲載したころから高まってきたと、ロベルト氏は振り返ります。「その翌年、LuaはCompaqの開発部門で賞を受賞しました」と彼は語り、システムが公式サイト（www.lua.org）から無料で入手可能であることを付け加えます。
 
-O TeCGraf, cuja principal parceira é a Petrobras, recebe cerca de R$ 4 milhões anualmente da empresa estatal de petróleo e outros apoiadores como CNPq, Cepel, Finep e ANP. Integrante do Centro Técnico-Científico da PUC (CTC) e ligado ao departamento de informática, o laboratório já desenvolveu — em parceria com outros centros de pesquisa — uma série de produtos voltados para as operações navais da Petrobras, como MeshGenerator (modelos de plataformas e navios).
+TeCGrafは、Petrobrasを主要なパートナーとして年間約400万レアルの支援を受けており、他にもCNPq、Cepel、Finep、ANPといった支援団体があります。
 
-No CTC, que integra dez departamentos da universidade, incluindo os de ciências materiais e metalurgia, 85% dos recursos oriundos de projetos patrocinados ou feitos em parceria são reinvestidos na infra-estrutura e formação de docentes e pesquisadores da universidade.
+TeCGrafは、PUCの科学技術センター（CTC）に所属し、情報学部に関連するラボで、他の研究センターと協力して、Petrobrasの海上業務向けにいくつかの製品を開発してきました。その一例がMeshGeneratorで、これはプラットフォームや船舶のモデルを構築するためのものです。
 
+PUCのCTCには、材料科学や冶金を含む10の学科があり、プロジェクトのスポンサーシップや共同開発から得られる資金の85%が、大学のインフラ整備や教員・研究者の育成に再投資されています。
+
+::: info
 Reprint from Gazeta Mercantil, Ano III Nº 674, 29 Set 2000. Copyright © 2000 Gazeta Mercantil. Todos os direitos reservados.
+:::
 
-O Brasil e os Adventures
+## ブラジルとアドベンチャーゲーム
 
-"Qual a ligação do Brasil com os jogos no estilo adventure?" As respostas para esta pergunta seriam das mais variadas. Alguns simplesmente diriam "Nenhuma", enquanto outros (os mais pessimistas) diriam "Nenhuma, não temos capacidade pra isso". Pois todos estão enganados. Sem a nossa ajuda, ou melhor, sem a ajuda de programadores brasileiros; jogos como Baldur's Gate, MDK2, Grim Fandango e Escape from Monkey Island — sim, eu disse Grim Fandango e Escape from Monkey Island — não sairiam do papel. Lua é o nome da linguagem produzida na PUC do Rio de Janeiro por três brasileiros, com última versão datada de Julho do ano passado, e que está sendo amplamente utilizada em projetos nacionais e internacionais. É totalmente gratuita, tanto para uso comercial ou pessoal. Tanto em Grim Fandango como em Escape from Monkey Island, a LucasArts está usando uma versão modificada da linguagem Lua para fazer a interface de script. Apesar de não ser obrigatório, a empresa notificou os autores da utilização da linguagem, e gostou tanto, que Bret Mogilefsky, um funcionário da LucasArts, enviou o seguinte comentário sobre a linguagem:
+「ブラジルとアドベンチャーゲームの関係は？」という質問に対して、多くの答えがあるでしょう。一部の人は単純に「何もない」と答え、悲観的な人は「何もない、私たちにはその能力がない」と言うかもしれません。しかし、実際にはどちらも間違っています。ブラジル、正確にはブラジルのプログラマーたちの協力がなければ、『Baldur's Gate』『MDK2』『Grim Fandango』『Escape from Monkey Island』といったゲームは誕生しなかったのです。そう、あの『Grim Fandango』や『Escape from Monkey Island』も含まれています。
 
-"Depois de ler o artigo no Dr. Dobbs sobre a Lua, eu fiquei muito interessado em experimentar a linguagem ... e ela superou todas as minhas expectativas! Sua elegância e simplicidade me deixaram muito surpreso! Parabéns por desenvolverem uma linguagem tão bem pensada."
-— Bret Mogilefsky, LucasArts
-Você pode encontrar as mais diversas informações (inclusive em português) no site oficial da Lua. E nós, aqui da ADVP, gostaríamos de dar nosso humilde parabéns àquelas pessoas que produziram essa linguagem, direta ou indiretamente! Continuem sempre assim!!!
+これらのゲームに欠かせない言語「Lua」は、リオデジャネイロのPUC（カトリック大学）で3人のブラジル人によって開発されました。最新バージョンは昨年7月にリリースされ、現在、国内外のプロジェクトで広く利用されています。Luaは、商業利用も個人利用も完全に無料で提供されています。
 
+LucasArtsは『Grim Fandango』や『Escape from Monkey Island』で、Luaを改良したスクリプトインターフェースを使用しています。通知義務はなかったものの、同社はこの言語の使用を開発者に通知し、その使い勝手の良さに感銘を受けました。LucasArtsのスタッフであるブレット・モギレフスキー氏は、Luaについて次のようにコメントしています。
+
+> 「Dr. Dobbsの記事を読んでLuaに興味を持ち、試してみたところ…期待を上回る結果が得られました！そのエレガントさとシンプルさには驚かされました。こんなに練り上げられた言語を開発してくださり、ありがとうございます。」  
+> — ブレット・モギレフスキー、LucasArts
+
+Luaの公式サイトでは、ポルトガル語を含むさまざまな情報が得られます。私たちADVPも、この素晴らしい言語を開発した方々に心からの祝福を送りたいと思います。これからもどうか、その姿勢を貫いてください！
+
+::: info
 Reprint from Adventurer Paradise, 20 Aug 2000.
+:::
 
-Cabeças premiadas nas universidades
 
+## 大学での優れた研究者が受賞
 
-Nos laboratórios de computação das universidades brasileiras dois temas têm atraído a atenção dos pesquisadores: a Internet e a forma de armazenar dados. Isso é o que demonstram os trabalhos vencedores da segunda edição do Prêmio Compaq de Estímulo à Pesquisa e Desenvolvimento em Informática, que tem o apoio da INFORMÁTICA EXAME.
+ブラジルの大学のコンピュータ研究室では、インターネットとデータの保存方法という2つのテーマが研究者たちの注目を集めています。これは、INFORMÁTICA EXAMEの後援で実施された第2回「Compaq情報技術研究開発奨励賞」の受賞作品によって明らかになりました。
 
-O primeiro lugar na categoria de pesquisa científica ficou com um grupo de estudantes orientados pelo professor de Computação Nivio Ziviani, da Universidade Federal de Minas Gerais. O grupo, formado pelos pesquisadores Eduardo Barbosa e Ricard Baeza-Yates, criou um algoritmo para armazenar e recuperar arquivos em bancos de dados com maior rapidez. "O volume de informações aumentou depois da disseminação da Internet, e criamos um software para guardar dados em memórias de acesso mais veloz", explica Ziviani, professor titular do Departamento de Ciência da Computação da UFMG. Outras informações sobre o projeto estão no seguinte endereço: www.dcc.ufmg.br/~nivio.
+科学研究部門の第1位には、ミナスジェライス連邦大学（UFMG）のコンピュータ学教授ニヴィオ・ジヴィアニ氏の指導のもと活動する学生グループが選ばれました。このグループは、エドゥアルド・バルボーザ氏とリカルド・バエザ＝イエーツ氏によって構成され、データベース内のファイルをより高速に保存・検索するためのアルゴリズムを開発しました。「インターネットの普及に伴い、情報量が増加してきました。そのため、高速なメモリにデータを保存できるソフトウェアを開発しました」と、UFMGのコンピュータ科学部教授であるジヴィアニ氏は説明します。プロジェクトに関する詳細は[こちら](http://www.dcc.ufmg.br/~nivio)から確認できます。
 
-Na categoria de tecnologia aplicada, os vencedores foram os criadores de uma linguagem de programação chamada Lua. A linguagem foi desenvolvida em 1994 no laboratório TeCGraf da PUC do Rio de Janeiro, onde a faculdade carioca entra em contato com o mundo real das necessidades das empresas. Os premiados foram Roberto Ierusalimschy, Luiz Henrique de Figueiredo e Waldemar Celes. Lua é uma linguagem que não exige dos programadores um longo trabalho de pesquisa antes de iniciar a produção de um software. "Criamos uma forma de programar sem fazer estudos prévios. Basta usar o software e ir experimentando até chegar ao protótipo", diz Ierusalimschy, professor associado do Departamento de Informática da PUC carioca. Conheça melhor Lua no site www.inf.puc-rio.br/~roberto/lua.html.
+応用技術部門での受賞者は、プログラミング言語「Lua」の開発者たちです。この言語は1994年にリオデジャネイロのPUC（カトリック大学）にあるTeCGrafラボで開発され、大学が企業の実務ニーズと接点を持つ機会となっています。受賞者は、ロベルト・イエルサリムスキー氏、ルイス・エンリケ・デ・フィゲイレド氏、ワルデマール・セレス氏の3名です。Luaは、プログラマーがソフトウェア開発に着手する前に長時間の研究を必要としない言語です。「私たちは、事前の研究を行わずにプログラムできる方法を作りました。ソフトウェアを使って試行錯誤を繰り返しながら、プロトタイプを完成させることができます」と、PUCリオの情報学部准教授であるイエルサリムスキー氏は述べています。Luaについての詳細は[こちら](http://www.inf.puc-rio.br/~roberto/lua.html)で確認できます。
 
-Cada grupo dividirá entre si 20.000 reais e um total idêntico em equipamentos de informática.
+各グループには、賞金として20,000レアルと、同額分の情報技術機器が授与されました。
 
+::: info
 Reprint from Informática Exame, Ano 12 Nº 140, Nov 1997. Copyright © 1997 Editora Abril. Todos os direitos reservados.
+:::

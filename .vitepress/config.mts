@@ -458,54 +458,54 @@ export default defineConfig({
       ],
       '/resource/lua/': [
         {
-          text: 'Lua',
+          text: 'はじめに',
           collapsed: false,
           items: [
-            {text: 'はじめに', link: '/resource/lua/'},
-            {text: 'contact', link: '/resource/lua/contact'},
+            {text: 'Luaについて', link: '/resource/lua/'},
+            {text: 'お問い合わせ', link: '/resource/lua/contact'},
           ]
         },
         {
-          text: 'about',
+          text: 'Luaの紹介',
           collapsed: false,
           items: [
-            {text: 'news', link: '/resource/lua/news'},
-            {text: 'showcase', link: '/resource/lua/showcase'},
-            {text: 'uses', link: '/resource/lua/uses'},
-            {text: 'quotes', link: '/resource/lua/quotes'},
-            {text: 'press', link: '/resource/lua/press'},
-            {text: 'authors', link: '/resource/lua/authors'},
-            {text: 'thanks', link: '/resource/lua/thanks'},
+            {text: 'ニュース', link: '/resource/lua/news'},
+            {text: 'ショーケース', link: '/resource/lua/showcase'},
+            {text: '活用事例', link: '/resource/lua/uses'},
+            {text: '引用集', link: '/resource/lua/quotes'},
+            {text: 'プレス記事', link: '/resource/lua/press'},
+            {text: '開発者', link: '/resource/lua/authors'},
+            {text: '謝辞', link: '/resource/lua/thanks'},
           ]
         },
         {
-          text: 'download',
+          text: 'ダウンロード',
           collapsed: false,
           items: [
-            {text: 'download', link: '/resource/lua/download'},
-            {text: 'license', link: '/resource/lua/license'},
-            {text: 'live demo', link: '/resource/lua/demo'},
+            {text: 'ダウンロード', link: '/resource/lua/download'},
+            {text: 'ライセンス', link: '/resource/lua/license'},
+            {text: 'デモ', link: '/resource/lua/demo'},
           ]
         },
         {
           text: 'ドキュメント',
           collapsed: false,
           items: [
-            {text: 'documentation', link: '/resource/lua/documentation'},
-            {text: 'getting started', link: '/resource/lua/getting_started'},
+            {text: 'ドキュメント', link: '/resource/lua/documentation'},
+            {text: 'はじめに', link: '/resource/lua/getting_started'},
             {
-              text: 'reference manual',
+              text: 'リファレンス',
               collapsed: false,
               items: [
-                {text:'reference manual', link:'/resource/lua/reference_manual'},
-                {text:'5.4 manual', link:'/resource/lua/5.4_manual'},
-                {text:'5.3 manual', link:'/resource/lua/5.3_manual'},
-                {text:'5.2 manual', link:'/resource/lua/5.2_manual'},
-                {text:'5.1 manual', link:'/resource/lua/5.1_manual'},
+                {text:'リファレンス', link:'/resource/lua/reference_manual'},
+                {text:'5.4 マニュアル', link:'/resource/lua/5.4_manual'},
+                {text:'5.3 マニュアル', link:'/resource/lua/5.3_manual'},
+                {text:'5.2 マニュアル', link:'/resource/lua/5.2_manual'},
+                {text:'5.1 マニュアル', link:'/resource/lua/5.1_manual'},
               ]
             },
-            {text: 'faq', link: '/resource/lua/faq'},
-            {text: 'versions', link: '/resource/lua/versions'},
+            {text: 'FAQ', link: '/resource/lua/faq'},
+            {text: 'バージョン', link: '/resource/lua/versions'},
           ]
         },
         {

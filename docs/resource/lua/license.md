@@ -1,18 +1,19 @@
-License
+# ライセンス
 
-Lua is free software distributed under the terms of the MIT license reproduced here. Lua may be used for any purpose, including commercial purposes, at absolutely no cost. No paperwork, no royalties, no GNU-like "copyleft" restrictions, either. Just download it and use it.
+Luaは、以下に示すMITライセンスの条件に基づいて配布されている無料のソフトウェアです。Luaは商業目的を含むあらゆる目的で、完全に無料で使用可能です。手続きや使用料は必要なく、GNUライセンスのような「コピーレフト」制限もありません。ダウンロードして、そのままご利用いただけます。
 
-Lua is certified Open Source software.  [osi certified] Its license is simple and liberal and is compatible with GPL. Lua is not in the public domain and PUC-Rio keeps its copyright.
+Luaは認証済みのオープンソースソフトウェアです。シンプルで自由度の高いライセンスを持ち、GPLとの互換性もあります。Luaはパブリックドメインではなく、著作権はPUC-Rioが保持しています。
 
-The spirit of the Lua license is that you are free to use Lua for any purpose at no cost without having to ask us. The only requirement is that if you do use Lua, then you should give us credit by including the copyright notice somewhere in your product or its documentation. A nice, but optional, way to give us further credit is to include a Lua logo and a link to our site in a web page for your product.
+Luaライセンスの精神は、使用許可を求めることなく、無料であらゆる目的にLuaを自由に使用できるというものです。唯一の要件として、Luaを使用する際には著作権表示を製品またはそのドキュメントのどこかに含めてください。さらに感謝を示したい場合には、製品のウェブページにLuaのロゴと当サイトへのリンクを掲載していただけると嬉しいです（これは任意です）。
 
-The Lua language is entirely designed, implemented, and maintained by a team at PUC-Rio in Brazil. The implementation is not derived from licensed software.
+Lua言語は、ブラジルのPUC-Rioにあるチームによって完全に設計、実装、維持管理されています。実装は他のライセンスソフトウェアを元にしたものではありません。
 
-Before Lua 5.0, Lua used its own license, which was very close to the zlib license and others, but not quite the same. Check the source distribution for the exact license text for each version before Lua 5.0. Nevertheless, if you wish to use those old versions, you may hereby assume that they have all been re-licensed under the MIT license as described above.
+Lua 5.0以前は、zlibライセンスに近い独自のライセンスが使用されていましたが、完全に同じではありませんでした。Lua 5.0以前のバージョンについては、各バージョンのソース配布に記載されたライセンステキストを参照してください。ただし、これらの旧バージョンについても、上記のとおりMITライセンスのもとで再ライセンスされたと見なしていただいて構いません。
 
-Copyright © 1994–2023 Lua.org, PUC-Rio.
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Copyright © 1994–2023 Lua.org, PUC-Rio.  
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+本ソフトウェアおよび関連ドキュメントファイル（以下「ソフトウェア」）の複製を取得したすべての人に、以下の条件のもとでソフトウェアを無制限に取り扱うことが許可されます。これには、使用、複製、改変、結合、公開、配布、サブライセンス、およびソフトウェアのコピーの販売、およびソフトウェアを提供された人に同様の権利を許可する権利が含まれますが、これに限定されません。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+上記の著作権表示と本許諾表示は、ソフトウェアのすべてのコピーまたは主要部分に含めるものとします。
+
+本ソフトウェアは「現状のまま」提供され、商品性、特定目的への適合性および非侵害に関する保証を含むがそれに限定されない、明示または黙示の保証はありません。著作者または著作権者は、本ソフトウェアに関連して、または本ソフトウェアの使用や他の取り扱いに起因または関連するいかなるクレーム、損害、またはその他の責任についても、一切の責任を負いません。

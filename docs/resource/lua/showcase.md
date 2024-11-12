@@ -1,6 +1,29 @@
-Lua is used in many products and projects around the world. Here are some highlights. A different selection is shown every day.
+# Lua ショーケース
 
-World of Warcraft	LuaTeX	Wikipedia	LÖVE
-Players of World of Warcraft use Lua to customize the game interface.	LuaTeX, the engine behind most modern installations of TeX, uses Lua as its embedded scripting language.	Wikipedia uses Lua as its template scripting language. Read the announcement.	LÖVE is a free framework for making 2D games in Lua.
-Grim Fandango	Solar2D	Angry Birds	Nmap
-"Grim Fandango was the first game that shows Lua could not only be used to make a good game, but that it could be used to make some of the best games ever." (cited here; see also this)	Solar2D is a free Lua based game engine with focus on ease of iterations and usage. It is a fork of the well established and widely used Corona SDK game engine.	The widely popular game Angry Birds is mostly written in Lua. See a talk by Jaakko Lisalo at the Game Design Expo 2011.	Nmap, a popular tool for network discovery and security auditing, is scriptable with Lua.
+Luaは、世界中の多くの製品やプロジェクトで使用されています。ここでは、その代表的な例をいくつか紹介します。毎日異なる選択が表示されます。
+
+### 代表的なプロジェクトと製品
+
+- **World of Warcraft**  
+  World of Warcraftのプレイヤーは、Luaを使用してゲームのインターフェースをカスタマイズしています。
+
+- **LuaTeX**  
+  ほとんどの最新のTeXインストールで使用されているLuaTeXエンジンは、組み込みのスクリプト言語としてLuaを使用しています。
+
+- **Wikipedia**  
+  Wikipediaでは、テンプレートスクリプト言語としてLuaが使用されています。詳細については発表文を参照してください。
+
+- **LÖVE**  
+  LÖVEは、Luaで2Dゲームを作成するための無料のフレームワークです。
+
+- **Grim Fandango**  
+  「Grim Fandango」は、Luaが単に良いゲームを作るためだけでなく、最高のゲームを作るためにも使用できることを示した最初のゲームです。（引用元と関連情報を参照）
+
+- **Solar2D**  
+  Solar2Dは、Luaベースの無料ゲームエンジンで、反復作業や使いやすさに重点を置いています。広く使用されているCorona SDKゲームエンジンから派生したものです。
+
+- **Angry Birds**  
+  世界的に人気のあるゲーム「Angry Birds」の大部分はLuaで記述されています。2011年のGame Design ExpoでのJaakko Lisaloの講演をご覧ください。
+
+- **Nmap**  
+  Nmapは、ネットワークの探索やセキュリティ監査に利用される人気のツールで、Luaでスクリプト作成が可能です。

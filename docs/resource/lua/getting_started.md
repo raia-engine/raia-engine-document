@@ -1,64 +1,67 @@
-# Getting started
+# はじめに
 
-## Welcome!
+## ようこそ！
 
-Lua is a powerful and fast programming language that is easy to learn and use and to embed into your application.
+Luaはパワフルかつ高速で、学習・使用が簡単で、アプリケーションに埋め込みやすいプログラミング言語です。
 
-Lua is designed to be a lightweight embeddable scripting language. It is used for all sorts of applications, from games to web applications and image processing.
+Luaは軽量で埋め込み可能なスクリプト言語として設計されており、ゲームからWebアプリケーション、画像処理まで、さまざまな用途で利用されています。
 
-See the about page for a detailed description of Lua and some reasons why you should choose Lua.
+Luaについての詳細と、Luaを選ぶべき理由については[概要ページ](index.md)をご覧ください。
 
-See what Lua programs look and feel like in the live demo.
+[ライブデモ](demo.md)でLuaプログラムの実際の動作を体験してみましょう。
 
-## Learning
+## 学習
 
-A good place to start learning Lua is the book Programming in Lua, available in paperback and as an e-book. The first edition is freely available online. See also course notes based on this book.
+Luaの学習を始めるのに適した書籍は『Programming in Lua』です。これは紙版および電子書籍で入手可能で、第1版はオンラインで無料公開されています。この書籍に基づいた講義ノートも参考になります。
 
-The official definition of the Lua language is given in the reference manual.
+Lua言語の公式定義は[リファレンスマニュアル](reference_manual.md)に記載されています。
 
-See the documentation page and the wiki for more.
+その他の資料については[ドキュメントページ](documentation.md)や[wiki](http://lua-users.org/wiki/LuaDirectory)をご覧ください。
 
-## Getting help
+## ヘルプを求める
 
-Our community is friendly and will most probably help you if you need. Just visit the mailing list, the chat room, and stackoverflow.
+Luaコミュニティは親しみやすく、助けが必要なときにはサポートしてくれるでしょう。メーリングリスト、チャットルーム、Stack Overflowを訪れてみてください。
 
-If you need help in Portuguese, join the Lua BR mailing list and visit pt.stackoverflow.
+ポルトガル語でのサポートが必要な場合は、Lua BRのメーリングリストや[pt.stackoverflow](https://pt.stackoverflow.com/questions/tagged/lua)をご利用ください。
 
-See also the FAQ, the community-maintained wiki and LuaFaq, and the much longer uFAQ.
+その他、[FAQ](faq.md)、コミュニティが運営するwiki、LuaFaq、およびより詳しいuFAQもご覧ください。
 
-## Tools
+## ツール
 
-If you need to complement the standard Lua libraries to handle more complex tasks, visit LuaRocks, the main repository of Lua modules. See also Awesome Lua, a curated list of quality Lua packages and resources. The lua-users wiki lists many user-contributed addons for Lua.
+標準のLuaライブラリだけでは対処できない複雑なタスクがある場合は、Luaモジュールの主要なリポジトリである[LuaRocks](https://luarocks.org/)を訪れてみてください。また、厳選された高品質のLuaパッケージとリソースのリストである[Awesome Lua](https://github.com/LewisJEllis/awesome-lua)も役立ちます。[lua-users wiki](http://lua-users.org/wiki/LuaAddons)には、多くのユーザー提供のアドオンが掲載されています。
 
-## Supporting
+## Luaプロジェクトの支援
 
-You can help to support the Lua project by buying a book published by Lua.org and by making a donation.
+Lua.orgから出版されている書籍を購入することで、Luaプロジェクトを支援できます。また、寄付を通じても支援可能です。
 
-You can also help to spread the word about Lua by buying Lua products at Zazzle.
+さらに、ZazzleでLua関連商品を購入し、Luaの認知を広めることもできます。
 
-## Installing
+## インストール
 
-Use the live demo to play with Lua if you don't want to install anything on your computer.
+Luaをインストールせずに試してみたい場合は、[ライブデモ](demo.md)を使用してください。
 
-To run Lua programs on your computer, you'll need a standalone Lua interpreter and perhaps some additional Lua libraries. Pre-compiled Lua libraries and executables are available at LuaBinaries. Use your favorite text editor to write your Lua programs. Make sure to save your programs as plain text. If you want an IDE, try ZeroBrane Studio.
+コンピュータ上でLuaプログラムを実行するには、Luaインタプリタと追加のLuaライブラリが必要です。事前コンパイルされたLuaライブラリと実行ファイルは[LuaBinaries](https://luabinaries.sourceforge.net/)で入手可能です。お好みのテキストエディタでLuaプログラムを書き、プレーンテキストとして保存してください。IDEが必要な場合は[ZeroBrane Studio](https://studio.zerobrane.com/)を試してみてください。
 
-If you use Linux or macOS, Lua is either already installed on your system or there is a Lua package for it. Make sure you get the latest release of Lua (currently 5.4.6).
+LinuxまたはmacOSを使用している場合、システムにLuaがすでにインストールされているか、Luaパッケージを利用できる可能性があります。最新リリース（現在は5.4.6）をインストールすることをお勧めします。
 
-Lua is also quite easy to build from source, as explained below.
+Luaはソースからのビルドも非常に簡単で、以下にその手順を示します。
 
-### Building from source
+### ソースからのビルド
 
-Lua is very easy to build and install. Just download it and follow the instructions in the package.
+Luaは簡単にビルドおよびインストールできます。ダウンロード後、パッケージの指示に従ってください。
 
-Here is a simple terminal session that downloads the current release of Lua and builds it in a Linux system:
+Linuxシステムで最新のLuaリリースをダウンロードしてビルドするための簡単なターミナルコマンドは次のとおりです：
 
+```sh
 curl -L -R -O https://www.lua.org/ftp/lua-5.4.6.tar.gz
 tar zxf lua-5.4.6.tar.gz
 cd lua-5.4.6
 make all test
-If you don't have curl, try wget.
-If you use Windows and want to build Lua from source, there are detailed instructions in the wiki.
+```
 
-### Embedding
+curlがない場合は、wgetを試してください。  
+WindowsでLuaをソースからビルドする方法については、wikiに詳細な手順があります。
 
-To embed Lua into your C or C++ program, you'll need the Lua headers to compile your program and a Lua library to link with it. If you're getting a ready-made Lua package for your platform, you'll probably need the development package as well. Otherwise, just download Lua and add its source directory to your project.
+### 組み込み
+
+LuaをCまたはC++プログラムに組み込むには、プログラムをコンパイルするためのLuaヘッダーと、リンクするためのLuaライブラリが必要です。Luaの既製パッケージを使用する場合は、開発用パッケージも必要になることがあります。それ以外の場合は、Luaをダウンロードし、そのソースディレクトリをプロジェクトに追加してください。

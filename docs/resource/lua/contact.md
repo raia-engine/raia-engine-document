@@ -1,21 +1,25 @@
-Contact
+# お問い合わせ
 
-Email
+## メール
 
-Please send all Lua questions, suggestions, and bug reports to the mailing list: you will certainly get faster and better answers, and your message will be archived for further reference.
+Luaに関するご質問、ご提案、バグ報告はすべてメーリングリストにお送りください。迅速かつ適切な回答を得られる可能性が高く、メッセージがアーカイブに保存されるため、将来の参考にもなります。
 
-For matters that require our personal attention, send email to team at lua.org.
+個別の対応が必要な場合は、`team at lua.org` にメールをお送りください。
 
-For all matters concerning this website, send email to webmaster at lua.org.
+当ウェブサイトに関するお問い合わせは、`webmaster at lua.org` にメールをお送りください。
 
-Mail
+## 郵送
 
+```
 LabLua
 Departamento de Informática, PUC-Rio
 Rua Marquês de São Vicente, 225
 22451-900 Rio de Janeiro, RJ, Brazil
+```
 
-Fax
+## FAX
 
-+55 21 3527-1530
-attn. Roberto Ierusalimschy
+```
++55 21 3527-1530  
+宛先: Roberto Ierusalimschy
+```

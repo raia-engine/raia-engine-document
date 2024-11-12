@@ -1,658 +1,910 @@
-Here is a summary of the main events around and about Lua. `[RSS]`
-Check also the announcements in the mailing list, the recent changes in the site, and our RSS feeds.
+# ニュース
 
-2024
+ここでは、Luaに関する主な出来事を要約しています。メーリングリストでの発表や、サイトの最近の変更、およびRSSフィードもご確認ください。
 
-02 Mar 2024
-lua-users.org is back online.
-01 Jan 2024
-Happy New Year!
-2023
+## 2024年
 
-20 Dec 2023
-lua.org moved to a new host in Switzerland, courtesy of Marc Balmer.
-11 Dec 2023
-Mailing list moved to Google Groups.
-01 Dec 2023
-Building a Programming Language course with Roberto. Read the announcement.
-17 Oct 2023
-Lua Workshop 2023 held in Rio de Janeiro to commemorate 30 years of Lua.
-18 Aug 2023
-Building a Programming Language course with Roberto. Read the announcement.
-14 May 2023
-Lua 5.4.6 released. This is a bug-fix release. See the diffs.
-29 Apr 2023
-Lua 5.4.5 released. This is a bug-fix release. See the diffs.
-17 Mar 2023
-Building a Programming Language course with Roberto. Read the announcement.
-01 Jan 2023 
-We commemorate 30 years of Lua in 2023.
-2022
+- **2024年3月2日**  
+  lua-users.org が再びオンラインになりました。
 
-19 Oct 2022
-Lua Programming Gems is now freely available.
-10 Oct 2022
-Lua Workshop 2022 held at Freiburg.
-13 Sep 2022 
-Lua receives the Pedro Ernesto Medal, the highest decoration given by the city of Rio de Janeiro.
-02 Jul 2022
-Building a Programming Language course with Roberto. Read the announcement.
-26 Jan 2022
-Lua 5.4.4 released. This is a bug-fix release. See the diffs.
-2021
+- **2024年1月1日**  
+  新年あけましておめでとうございます！
 
-09 Aug 2021 
-Roberto talks about Lua at the SIGGRAPH 2021 Retrospective.
-16 Jul 2021
-Video about Lua and Roblox published by TV PUC-Rio.
-29 Mar 2021
-Lua 5.4.3 released. This is a bug-fix release. See the diffs.
-15 Jan 2021
-"Lua, a misunderstood language", a blog post by Andre Alves Garzia.
-2020
+## 2023年
 
-03 Dec 2020
-Lua 5.4.2 released. This is a bug-fix release. See the diffs.
-29 Oct 2020
-Roberto talks live about Lua. See the announcement. (in Portuguese)
-09 Oct 2020
-Lua 5.4.1 released. This is a bug-fix release. See the diffs.
-25 Sep 2020
-Lua 5.3.6 released. This is a bug-fix release. See the diffs.
-29 Jun 2020
-Lua 5.4.0 released. Check out its features.
-10 Jun 2020
-Lua Workshop 2021 to be held in Freiburg, Germany. (postponed to 2022)
-06 Feb 2020
-Lua Workshop 2020 to be held in Freiburg, Germany. Read the announcement. (postponed to 2021)
-2019
+- **2023年12月20日**  
+  lua.org がスイスの新しいホストに移転しました（Marc Balmerの協力による）。
 
-16 Oct 2019
-Lua 5.4.0 (beta) released. 
-13 Jun 2019
-Lua 5.4.0 (alpha) released.
-03 Mar 2019
-Lua in Moscow Conference 2019 held in Moscow.
-2018
+- **2023年12月11日**  
+  メーリングリストがGoogle Groupsに移行されました。
 
-26 Oct 2018 
-"A look at the design of Lua" published in Communications of the ACM. Watch the video.
-06–07 Sep 2018
-Lua Workshop 2018 held in Kaunas, Lithuania.
-20–22 Jul 2018 
-TUG 2018 held in Rio de Janeiro. The Lua team are special guests.
-10 Jul 2018
-Lua 5.3.5 released. This is a bug-fix release. See the diffs.
-07 Jul 2018
-Lua Workshop 2018 to be held in Kaunas, Lithuania, cortesy of CUJO.
-18 Jun 2018
-Lua 5.4.0 (work2) released.
-13 Mar 2018
-Lua 5.4.0 (work1) released.
-01 Jan 2018 
-We commemorate 25 years of Lua in 2018.
-2017
+- **2023年12月1日**  
+  「プログラミング言語を構築する」コースがRobertoと共に始まりました。詳細はこちら。
 
-16–17 Oct 2017
-Lua Workshop 2017 held in San Francisco.
-16 Aug 2017
-Roberto participates in Seminário Inovanças at the Museum of Tomorrow in Rio.
-24 Jul 2017
-Lua Workshop 2017 to be held in San Francisco, CA, courtesy of Kong.
-05 Jul 2017
-Added showcase page.
-20 Jun 2017
-Roberto gives a keynote at Curry On 2017. Watch the video.
-03 Jun 2017 
-LuaConf 2017 held in Rio de Janeiro.
-25 Apr 2017
-Fourth edition of Programming in Lua available as e-book.
-25 Apr 2017 
-Lua features in the "Inovanças – Creations Brazilian style" exhibition at the Museum of Tomorrow in Rio.
-Watch the welcome video and read the catalog. Watch the video about Lua.
-23 Mar 2017
-Roberto will give a keynote at Curry On 2017 in June.
-05 Mar 2017 
-Lua in Moscow Conference 2017 held in Moscow.
-20 Feb 2017
-Mailing list turns 20. Read the announcement.
-30 Jan 2017
-Lua 5.3.4 released. This is a bug-fix release. See the diffs.
-08 Jan 2017
-LuaConf 2017 to be held in June. Read the announcement.
-2016
+- **2023年10月17日**  
+  Luaの30周年を記念して、リオデジャネイロでLuaワークショップ2023が開催されました。
 
-13–14 Oct 2016
-Lua Workshop 2016 held in San Francisco.
-01 Aug 2016 
-Fourth edition of Programming in Lua published.
-09 Jul 2016
-LuaConf 2016 held in Rio de Janeiro. See some photos.
-06 Jun 2016
-Lua 5.3.3 released. This is a bug-fix release. See the diffs.
-06 May 2016
-Get 20% off when you buy Programando em Lua through lua.org
-15 Mar 2016
-lua.org now accepts https connections, courtesy of Pepperfish.
-09 Mar 2016 
-LuaConf 2016 to be held in Rio de Janeiro, courtesy of Etiene Dalcol and Evandro Gonçalves.
-04 Feb 2016
-Lua Workshop 2016 to be held in San Francisco, CA, courtesy of Mashape.
-2015
+- **2023年8月18日**  
+  「プログラミング言語を構築する」コースがRobertoと共に始まりました。詳細はこちら。
 
-30 Nov 2015
-Lua 5.3.2 released. This is a bug-fix release. See the diffs.
-15–16 Oct 2015
-Lua Workshop 2015 held in Stockholm.
-26 Jun 2015 
-Programando em Lua published. It's a Portuguese translation of the third edition of Programming in Lua.
-17 Jun 2015
-Lua 5.3.1 released. This is a bug-fix release. See the diffs.
-09 Apr 2015
-Lua Workshop 2015 to be held in Stockholm, Sweden, courtesy of King.
-07 Mar 2015
-Lua 5.2.4 released. This is a bug-fix release. See the diffs.
-12 Jan 2015
-Lua 5.3.0 released. Check out its features.
-2014
+- **2023年5月14日**  
+  Lua 5.4.6 がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-11 Dec 2014
-Lua 5.3.0 entered final release-candidate cycle.
-23 Oct 2014
-Lua 5.3.0 (beta) released.
-13–14 Sep 2014 
-Lua Workshop 2014 held in Moscow.
-31 Jul 2014
-Lua 5.3.0 (alpha) released.
-19 Jun 2014
-Lua 5.3.0 (work3) released.
-15 Apr 2014
-Lua Workshop 2014 to be held in Moscow, Russia, courtesy of Alexander Gladysh.
-21 Mar 2014
-Lua 5.3.0 (work2) released.
-28 Jan 2014
-Reference manual available in Portuguese.
-2013
+- **2023年4月29日**  
+  Lua 5.4.5 がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-07 Dec 2013
-Lua 5.2.3 released. This is a bug-fix release.
-23–24 Nov 2013
-Lua Workshop 2013 held in Toulouse.
-02 Oct 2013 
-CBSoft 2013 celebrates 20 years of Lua. See the slides.
-28 Jul 2013
-We commemorate 20 years of the first version of Lua today. Read the announcement.
-23 Jul 2013 
-Roberto receives the Scientific Merit Award of the Brazilian Computer Society for his work on Lua.
-22 Jul 2003
-Added page on getting started with Lua.
-12 Jul 2013
-Lua Workshop 2013 to be held in Toulouse, France, courtesy of Benjamin Cabé and Kévin Kin-foo.
-06 Jul 2013
-Lua 5.3.0 (work1) released.
-15 May 2013
-Roberto gives an invited talk at WWW 2013. See the slides.
-14 May 2013 
-Third edition of Programming in Lua available as e-book.
-27 Mar 2013
-Lua 5.2.2 released. This is a bug-fix release.
-03 Jan 2013
-Third edition of Programming in Lua published.
-2012
+- **2023年3月17日**  
+  「プログラミング言語を構築する」コースがRobertoと共に始まりました。詳細はこちら。
 
-10 Dec 2012
-Donations to the Lua project via PayPal are again available.
-29–30 Nov 2012
-Lua Workshop 2012 held at Verisign.
-02–08 Sep 2012
-Roberto gives a course on Real Scripting with Lua at the LASER Summer School on Innovative Languages for Software Engineering.
-14 Jun 2012
-Lua 5.2.1 released. This is a bug-fix release.
-21 May 2012
-Lua Workshop 2012 to be held at Verisign, courtesy of John Rodriguez.
-04 May 2012
-LuaJIT gets a dedicated mailing list. Read the announcement.
-17 Apr 2012
-Lua store opens at Fibers. Use Lua, wear Lua! (no longer active)
-02 Apr 2012
-Started plans for the Lua Workshop 2012.
-20 Feb 2012
-Mailing list turns 15. Read the announcement.
-17 Feb 2012
-Lua 5.1.5 released. This is a bug-fix release.
-30 Jan 2012
-Wikipedia chooses Lua as its new template language. Read the announcement.
-13 Jan 2012 
-Lua wins the Front Line Award 2011 from Game Developers Magazine in the category Programming Tools.
-09 Jan 2012
-Roberto visits Stanford University for three months on a Tinker Professorship.
-2011
+- **2023年1月1日**  
+  2023年、Luaは30周年を迎えます。
 
-16 Dec 2011
-Lua 5.2.0 released. Check out its features.
-23 Oct 2011
-Codea launched, an app to create games and simulations using Lua on the iPad. (formerly known as Codify)
-08–09 Sep 2011
-Lua Workshop 2011 held in Switzerland.
-13 Jul 2011
-Lua 5.2 (beta) released.
-06 Jun 2011
-Lua enters the top 10 languages of the TIOBE Programming Community Index.
-12 May 2011 
-"Passing a language through the eye of a needle" published in ACM Queue. Later also published in Communications of the ACM.
-26 Apr 2011
-Lua Workshop 2011 to be held in Switzerland, courtesy of Marc Balmer.
-03 Apr 2011
-Lua approaches the top 10 languages of the TIOBE Programming Community Index.
-15 Mar 2011
-Reference manual available in German.
-12 Feb 2011
-Started plans for the Lua Workshop 2011.
-2010
+## 2022年
 
-23 Nov 2010
-Lua 5.2 (alpha) released.
-30 Oct 2010
-Lua 5.2 (work5) released.
-01 Oct 2010
-SocialMediaPress joins our corporate sponsorship program. (no longer active)
-28 Aug 2010
-Mailing list has a new home at Pepperfish.
-19 Aug 2010
-Short scheduled maintenance at lua.org. Mirror site at PUC-Rio activated during downtime.
-31 Jul 2010
-Lua 5.2 (work4) released.
-18 May 2010
-Lua 5.2 (work3) released.
-10 May 2010
-The Czechoslovak TeX Users Group joins our corporate sponsorship program. (no longer active)
-23 Mar 2010
-Lua Programming Gems available as e-book.
-10 Mar 2010
-Roberto talks at the Stanford EE Computer Systems Colloquium on the design of Lua. Watch the video. See the slides.
-09 Mar 2010
-Tutorial on Lua scripting in game production given at GDC 2010. See the slides.
-01 Mar 2010
-Adobe joins our corporate sponsorship program. (no longer active)
-20 Jan 2010
-Lua forums relocated to LuaHUB, courtesy of Stefan Peters and Brett Kapilik. (no longer exists)
-18 Jan 2010
-Second edition of Programming in Lua available as e-book. (now the third edition)
-13 Jan 2010
-Lua 5.2 (work2) released.
-08 Jan 2010
-Lua 5.2 (work1) released.
-2009
+- **2022年10月19日**  
+  「Lua Programming Gems」が無料で公開されました。
 
-17 Dec 2009
-A full-day tutorial on Lua scripting in game production will be given at GDC 2010.
-28 Oct 2009
-Lua store opens at Zazzle. Use Lua, wear Lua!
-06–07 Oct 2009
-Lua Workshop 2009 held in Rio de Janeiro.
-21 Aug 2009
-Roberto gives an introductory Lua course at SBLP 2009.
-12 Aug 2009
-Created Lua BR, a versão brasileira da lista de Lua.
-LatinoWare 2009 promotes an Ecological Games Contest in which entries using Lua will get a bonus.
-20–21 Jul 2009
-Roberto gives an introductory Lua course at JAI 2009.
-23 Jun 2009
-Ansca announces the Corona SDK for writing native iPhone applications in Lua. Read the announcement.
-08 Jun 2009
-Google introduces the Android Scripting Environment with support for Lua.
-28 May 2009
-Lua Workshop 2009 to be held in Rio de Janeiro.
-18 May 2009
-The book Concepts of Programming Languages includes sections on Lua and a brief interview with Roberto.
-15 Apr 2009
-Short scheduled maintenance at lua.org. Mirror site at PUC-Rio activated during downtime.
-27 Mar 2009 
-Interview with the Lua team to appear in the book Masterminds of Programming.
-12 Jan 2009
-Reference manual available in Hungarian. (no longer exists)
-2008
+- **2022年10月10日**  
+  Luaワークショップ2022がフライブルクで開催されました。
 
-01 Dec 2008 
-Lua Programming Gems published. Read the announcement.
-19 Sep 2008
-Roberto talks about Lua at PyConBrasil 2008. See the slides.
-11 Sep 2008
-Roberto interviewed for Computerworld's The A-Z of Programming Languages.
-22 Aug 2008
-Lua 5.1.4 released. This is a bug-fix release.
-14–15 Jul 2008
-Lua Workshop 2008 held at George Washington University in Washington, D.C..
-01 Jul 2008
-TYPO3 (AOE media) joins our corporate sponsorship program. (no longer active)
-06 Jun 2008
-Announced corporate sponsorship program: Océ is our first corporate sponsor. (no longer active)
-30 May 2008
-Roberto talks about Lua at JAOO 2008, in Brisbane and Sydney.
-13 May 2008
-Chinese translation of Programming in Lua published.
-07 May 2008
-Patch for Lua 5.1.3 released. (superseded by Lua 5.1.4)
-13 Mar 2008
-Reference manual available in Russian. (no longer exists)
-21 Feb 2008
-Live Lua demo available.
-25 Jan 2008
-Lua 5.1.3 released. This is a bug-fix release.
-24 Jan 2008
-"Introductory Lua programming" by Yutaka Ueno published (in Japanese).
-2007
+- **2022年9月13日**  
+  Luaがリオデジャネイロ市から最高の栄誉「Pedro Ernestoメダル」を授与されました。
 
-20 Dec 2007
-Launched campaign to Write "Lua" Right!
-18 Dec 2007
-Reference manual available in Spanish.
-09 Dec 2007
-Lua Workshop 2008 to be held at George Washington University in Washington, D.C., courtesy of Matthew Burke. Read the preliminary announcement.
-10 Sep 2007
-Reference manual available in Portuguese.
-28 Aug 2007
-Article on LuaView appears in LabVIEW World (in Italian).
-23 Aug 2007
-Article "Traveling light, the Lua way" by Ashwin Hirschi appears in IEEE Software. Read a review.
-05 Aug 2007
-Lua climbs to position 15 in the TIOBE Programming Community Index.
-17 Jul 2007
-Workshop on LuaTeX held at TUG 2007. Watch the videos of the talks.
-08 Jul 2007
-Lua climbs to position 18 in the TIOBE Programming Community Index.
-25 Jun 2007
-Korean translation of Programming in Lua published.
-09 Jun 2007 
-Paper on the evolution of Lua presented at the Third ACM SIGPLAN History of Programming Languages Conference (HOPL III), a part of FCRC 2007. See the slides and the video.
-09 May 2007
-Article on Lua to appear in Linux Journal.
-28–29 Apr 2007
-Scheduled maintenance at lua.org. Mirror site at PUC-Rio activated during downtime.
-02 Apr 2007
-Lua 5.1.2 released. This is a bug-fix release.
-06 Mar 2007
-Lua climbs to position 25 in the TIOBE Programming Community Index.
-20 Feb 2007
-Mailing list turns 10. Read the announcement.
-01 Feb 2007
-43 abstracts selected for Lua Programming Gems.
-2006
+- **2022年7月2日**  
+  「プログラミング言語を構築する」コースがRobertoと共に始まりました。詳細はこちら。
 
-24 Nov 2006
-Released call for contributions to Lua Programming Gems.
-06 Oct 2006
-German translation of Programming in Lua published.
-05 Oct 2006
-Lua entered the top 50 in the TIOBE Programming Community Index.
-04–05 Sep 2006
-Lua Workshop 2006 held at Océ. See photos and videos.
-17 Aug 2006
-Reference manual available as a book. Buy a copy and help to support the Lua project.
-06 Jul 2006
-Created official page for the Lua Workshop 2006.
-30 Jun 2006
-A poll at GameDev.net shows Lua as the favorite embeddable scripting language.
-26 Jun 2006
-Lua 5.0.3 released. This is a bug-fix release.
-09 Jun 2006
-Lua 5.1.1 released. This is a bug-fix release.
-03 Jun 2006
-Lua elected for DistroWatch May 2006 donation.
-23 Mar 2006 
-Second edition of Programming in Lua published.
-21 Feb 2006
-Lua 5.1 released. Check out its features.
-15 Feb 2006
-Lua Workshop 2006 to be held at the Océ R&D site in Venlo (NL), courtesy of Wim Couwenberg. Read the announcement.
-23 Jan 2006
-Some audio recordings from the Lua Workshop 2005 available, courtesy of Shannon Bailey. Read the original announcement (but note that the URL has changed).
-2005
+- **2022年1月26日**  
+  Lua 5.4.4 がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-18 Nov 2005
-Lua 5.1 (beta) released.
-16 Nov 2005
-Started plans for the Lua Workshop 2006. Read the announcement.
-04 Nov 2005
-Lua In Games Roundtable to be held in GDC 2006.
-29 Sep 2005
-Game Development with Lua published.
-09 Sep 2005
-Lua 5.1 (alpha) released.
-01 Sep 2005
-Paper on the evolution of Lua submitted to ACM HOPL III.
-11 Aug 2005
-Roberto presents a Lua case study at Computação & Mercado 2005.
-03 Aug 2005
-Mailing list reaches 1000 subscribers, another all-time record.
-27–28 Jul 2005
-Lua Workshop 2005 held at Adobe. Slides for most of the talks are available. Also some photos.
-20 Jun 2005
-Roberto talks about Lua at the Politecnico di Milano. The audio is available (also here).
-20 Jun 2005
-First Lua certification exam announced. (no longer exists)
-23 May 2005
-Paper on the implementation of Lua 5.0 presented at the IX Brazilian Symposium on Programming Languages.
-18 May 2005
-Lua 5.1 (work6) released.
-16 Mar 2005
-Roberto talks about Lua at the 1a Semana de Software Livre da PUC-Rio.
-04 Mar 2005
-Lua 5.1 (work5) released.
-03 Mar 2005
-Lua Workshop 2005 to be held at Adobe, courtesy of Mark Hamburg. Read the announcement.
-23 Feb 2005
-Paper on the implementation of Lua 5.0 submitted to IX Brazilian Symposium on Programming Languages.
-22 Jan 2005
-New Lua forum in Portuguese. (no longer exists)
-11 Jan 2005
-Mailing list reaches 800 subscribers, an all-time record.
-2004
+## 2021年
 
-30 Dec 2004
-Lua 5.1 (work4) released.
-06 Dec 2004
-Lua 5.1 (work3) released.
-27 Nov 2004
-Why Lua is not BASIC by Gavin Wraith appears in Frobnicate 22 (autumn 2004 issue).
-21 Oct 2004
-Tutorial on Lua given at WJogos 2004. Read the notes and the slides (in Portuguese).
-04 Oct 2004
-lua.org hosted by Pepperfish, courtesy of Daniel Silverstone.
-20 Sep 2004
-Lua 5.1 (work2) released.
-01 Sep 2004
-Lua 5.1 (work1) released.
-23 Jul 2004
-Article on Lua to appear in Linux Magazine.
-05 Jul 2004
-The book Programming in Lua is online.
-Lua web forums recreated at Icy North Technologies, courtesy of Brett Kapilik. (moved to LuaHUB)
-23 Jun 2004
-LuaForge opens. Read the announcement.
-01 May 2004 
-LabLua founded.
-28 Apr 2004
-Added page for receiving donations to help support Lua.
-24 Mar 2004
-Roundtable about Lua in the gaming industry held at Game Developers Conference 2004. Read the report.
-23 Mar 2004
-Lua 5.1 (work0) released.
-17 Mar 2004
-Lua 5.0.2 released. This is a bug-fix release.
-2003
+- **2021年8月9日**  
+  RobertoがSIGGRAPH 2021でLuaについて講演しました。
 
-15 Dec 2003 
-The book Programming in Lua by Roberto Ierusalimschy is published.
-27 Nov 2003
-Added page listing individuals and institutions that have supported Lua.
-25 Nov 2003
-Lua 5.0.1 released. This is a bug-fix release.
-08 Nov 2003
-Roberto gives a talk about the innards of Lua at Lightweight Languages 2003. See the slides.
-29 Sep 2003
-A poll at GameDev.net shows Lua as the most popular language for game scripting.
-16 Jun 2003
-Added page listing all known bugs in Lua since Lua 4.0.
-07 Jun 2003
-Roberto gives an invited talk on Lua at the IV Forum Internacional Software Livre. See the slides.
-19 May 2003
-Mirror of mailing list at Yahoo! Groups closed down.
-14 May 2003
-Mailing list has a new home, courtesy of Conectiva and Gustavo Niemeyer. (moved to lists.lua.org)
-06 May 2003
-Added a version history page listing the main features in each version.
-11 Apr 2003
-Lua 5.0 released. Check out its features.
-10 Mar 2003
-Yet another web interface for the mailing list archive, courtesy of David Jeske. (no longer active)
-11 Feb 2003
-Added page listing recent changes in the site and an RSS feed.
-05 Feb 2003
-Lua web forums created at Icy North Technologies, courtesy of Brett Kapilik. (moved to LuaHUB)
-14 Jan 2003
-The Year in Scripting Languages released. It contains a review of what happened to Lua in 2002.
-2002
+- **2021年7月16日**  
+  LuaとRobloxについてのビデオがTV PUC-Rioにより公開されました。
 
-17 Dec 2002
-Lua 5.0 (beta) released.
-29 Aug 2002
-Started page with papers and theses on Lua.
-22 Aug 2002
-Added pages with web traffic statistics and mailing list traffic statistics. (web traffic statistics no longer available)
-15 Aug 2002
-Lua 5.0 (alpha) released. Check out the commemorative logo.
-18 Jul 2002
-Source code available for browsing.
-10 Jul 2002
-Newsgroup interface to the mailing list available at Gmane. (no longer active)
-04 Jul 2002
-Lua 4.0.1 released. This is a bug-fix release.
-25 May 2002
-New web interface for the mailing list archive, courtesy of John Belmonte.
-21 May 2002 
-Future versions of Lua will be released under the MIT license. See the new license page.
-Lua is certified Open Source software. Its license is simple and liberal and is compatible with GPL.
-Lua is not in the public domain and PUC-Rio keeps its copyright.
-13 Mar 2002
-Updated mirrors page: mirrors at Waterloo, Universität Trier, and freesoftware.com no longer exist.
-21 Feb 2002
-Added search page.
-19 Feb 2002
-Lua Library Design Workshop held at Harvard University.
-30 Jan 2002
-New mirror in Denmark, courtesy of SunSITE.dk. (no longer active)
-28 Jan 2002
-Moved links page to lua-users.org/wiki/LuaLinks.
-14 Jan 2002
-Moved tools page to .
-07 Jan 2002
-Added user survey to help us know our community better. Please take a few minutes to answer it.
-2001
+- **2021年3月29日**  
+  Lua 5.4.3がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-03 Dec 2001
-Lua IRC channel #lua created at Open Projects Network (now freenode).
-20 Aug 2001 
-lua-users.org, a meeting place for Lua users, is online, courtesy of John Belmonte.
-25 Jul 2001
-Lua 4.1 (alpha) released. (removed; the next version will be 5.0)
-29 May 2001
-Lua store opens at CafePress. Use Lua, wear Lua! (no longer exists)
-24 May 2001
-Roberto gives an invited talk on the history of Lua at the V Brazilian Symposium on Programming Languages.
-08 May 2001
-New mirror in Russia, courtesy of the Chernogolovka Science Center. (no longer active)
-19 Mar 2001
-lua.org is online, courtesy of Jim Mathies and Soho One.
-2000
+- **2021年1月15日**  
+  「Lua, a misunderstood language（誤解されがちな言語Lua）」というブログ記事がAndre Alves Garziaにより公開されました。
 
-06 Nov 2000
-Lua 4.0 released. Check out its features.
-23 Oct 2000
-Added press releases in English and Portuguese. (no longer available)
-03 Oct 2000
-Added page with press clippings.
-21 Sep 2000
-Lua 4.0 (beta) released.
-23 Aug 2000
-Mailing list is back.
-20 Aug 2000
-Article on Lua appeared in the Adventurer Paradise (in Portuguese). (no longer exists)
-24 Apr 2000
-Lua 4.0 (alpha) released.
-19 Apr 2000
-New mirror in Denmark, courtesy of uCore Technology. (no longer active)
-29 Mar 2000
-New mirror in Japan, courtesy of the University of Aizu. (no longer active)
-Added page listing all mirror sites.
-15 Mar 2000
-Mirror in the US moved to ftp://ftp.freesoftware.com/pub/languages/lua/. (no longer exists)
-22 Feb 2000
-Lua 3.2.2 released. This is a bug-fix release.
-16 Feb 2000
-Launched Lua Technical Notes. (no longer active)
-01 Feb 2000
-Lua 3.2 included in Dr. Dobb's Alternative Programming Languages Release 3 CD-ROM.
-1999
+## 2020年
 
-20 Dec 1999
-Added page with user quotes.
-25 Nov 1999
-Lua 3.2.1 released. This is a bug-fix release.
-09 Nov 1999
-Added summary page in Portuguese.
-08 Jul 1999
-Lua 3.2 released. Check out its features.
-26 Apr 1999
-Lua 3.2 (beta) released.
-18 Mar 1999
-Mailing list archive available at eGroups.com. (no longer exists)
-18 Feb 1999
-New mirror in Germany, courtesy of GWDG. (no longer active)
-18 Feb 1999
-New mirror in the US, courtesy of cdrom.com. (no longer exists)
-1998
+- **2020年12月3日**  
+  Lua 5.4.2がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-15 Sep 1998
-Mailing list archive available at ftp sites. (no longer active)
-11 Jul 1998 
-Lua 3.1 released. Check out its features. Introduced a new official logo.
-1997
+- **2020年10月29日**  
+  RobertoがLuaについてライブ講演を行いました（ポルトガル語）。
 
-06 Nov 1997
-Launched new web site. Read the announcement.
-05 Nov 1997 
-Journal paper on Lua awarded the first prize (technological category) in the II Compaq Award for Research and Development in Computer Science. This award is a joint venture of Compaq Computer in Brazil, the Brazilian Ministry of Science and Technology, and the Brazilian Academy of Sciences.
-01 Jul 1997
-Lua 3.0 released. Check out its features.
-20 Feb 1997
-Created mailing list.
-1996
+- **2020年10月9日**  
+  Lua 5.4.1がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-01 Dec 1996 
-Article on Lua published in Dr. Dobb's Journal.
-19 Nov 1996
-Lua 2.5 released. Check out its features.
-01 Jun 1996
-Paper on Lua published in Software: Practice & Experience.
-14 May 1996 
-Lua 2.4 released. Check out its features.
-1995
+- **2020年9月25日**  
+  Lua 5.3.6がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
 
-28 Nov 1995
-Lua 2.2 released. Check out its features.
-07 Feb 1995
-Lua 2.1 released. Check out its features.
-Created home page.
-1994
+- **2020年6月29日**  
+  Lua 5.4.0がリリースされました。新機能はこちらをご覧ください。
 
-01 Aug 1994
-First paper describing Lua presented at the XXI Brazilian Seminar on Software and Hardware.
-08 Jul 1994
-Lua 1.1 released. This is the first public release of Lua. Check out its features.
-1993
+- **2020年6月10日**  
+  Luaワークショップ2021がドイツのフライブルクで開催予定です（2022年に延期）。
 
-29 Oct 1993
-First public talk about Lua given at the VII Brazilian Symposium on Software Engineering.
-28 Jul 1993
-Lua 1.0 was up and running. This is the earliest implementation of Lua that we have found to date.
+- **2020年2月6日**  
+  Luaワークショップ2020がドイツのフライブルクで開催予定です（2021年に延期）。
+
+## 2019年
+
+- **2019年10月16日**  
+  Lua 5.4.0（ベータ版）がリリースされました。
+
+- **2019年6月13日**  
+  Lua 5.4.0（アルファ版）がリリースされました。
+
+- **2019年3月3日**  
+  Lua in Moscow Conference 2019がモスクワで開催されました。
+
+## 2018年
+
+- **2018年10月26日**  
+  「A look at the design of Lua」がACMのCommunicationsに掲載されました。ビデオをご覧ください。
+
+- **2018年9月6日〜7日**  
+  Luaワークショップ2018がリトアニアのカウナスで開催されました。
+
+- **2018年7月20日〜22日**  
+  TUG 2018がリオデジャネイロで開催され、Luaチームが特別ゲストとして招待されました。
+
+- **2018年7月10日**  
+  Lua 5.3.5がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
+
+- **2018年7月7日**  
+  Luaワークショップ2018がリトアニアのカウナスで開催される予定です（CUJOの協賛による）。
+
+- **2018年6月18日**  
+  Lua 5.4.0（work2）がリリースされました。
+
+- **2018年3月13日**  
+  Lua 5.4.0（work1）がリリースされました。
+
+- **2018年1月1日**  
+  2018年、Luaは25周年を迎えます。
+
+## 2017年
+
+- **2017年10月16日〜17日**  
+  Luaワークショップ2017がサンフランシスコで開催されました。
+
+- **2017年8月16日**  
+  Robertoが「Inovanças」セミナーにて講演（リオの明日博物館にて）。
+
+- **2017年7月24日**  
+  Luaワークショップ2017がサンフランシスコで開催予定です（Kongの協賛による）。
+
+- **2017年7月5日**  
+  ショーケースページが追加されました。
+
+- **2017年6月20日**  
+  RobertoがCurry On 2017で基調講演を行いました。ビデオをご覧ください。
+
+- **2017年6月3日**  
+  LuaConf 2017がリオデジャネイロで開催されました。
+
+- **2017年4月25日**  
+  「Programming in Lua」第4版が電子書籍として公開されました。
+
+## 2016年
+
+- **2016年10月13日〜14日**  
+  Luaワークショップ2016がサンフランシスコで開催されました。
+
+- **2016年8月1日**  
+  「Programming in Lua」第4版が出版されました。
+
+- **2016年7月9日**  
+  LuaConf 2016がリオデジャネイロで開催されました。一部の写真をご覧ください。
+
+- **2016年6月6日**  
+  Lua 5.3.3がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
+
+- **2016年5月6日**  
+  「Programando em Lua」が20%割引で購入可能（lua.org経由）。
+
+- **2016年3月15日**  
+  lua.orgがPepperfishの協力によりHTTPS接続をサポートしました。
+
+- **2016年2月9日**  
+  LuaConf 2016がリオデジャネイロで開催されます（Etiene DalcolとEvandro Gonçalvesの協力による）。
+
+- **2016年2月4日**  
+  Luaワークショップ2016がサンフランシスコで開催されます（Mashapeの協力による）。
+
+## 2015年
+
+- **2015年11月30日**  
+  Lua 5.3.2がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
+
+- **2015年10月15日〜16日**  
+  Luaワークショップ2015がストックホルムで開催されました。
+
+- **2015年6月26日**  
+  「Programando em Lua」が出版されました。これは「Programming in Lua」第3版のポルトガル語翻訳版です。
+
+- **2015年6月17日**  
+  Lua 5.3.1がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
+
+- **2015年4月9日**  
+  Luaワークショップ2015がスウェーデンのストックホルムで開催されます（Kingの協力による）。
+
+- **2015年3月7日**  
+  Lua 5.2.4がリリースされました。このリリースはバグ修正版です。差分はこちらをご覧ください。
+
+- **2015年1月12日**  
+  Lua 5.3.0がリリースされました。新機能についてはこちらをご覧ください。
+
+## 2014年
+
+- **2014年12月11日**  
+  Lua 5.3.0が最終リリース候補サイクルに入りました。
+
+- **2014年10月23日**  
+  Lua 5.3.0（ベータ版）がリリースされました。
+
+- **2014年9月13日〜14日**  
+  Luaワークショップ2014がモスクワで開催されました。
+
+- **2014年7月31日**  
+  Lua 5.3.0（アルファ版）がリリースされました。
+
+- **2014年6月19日**  
+  Lua 5.3.0（work3）がリリースされました。
+
+- **2014年4月15日**  
+  Luaワークショップ2014がロシアのモスクワで開催されます（Alexander Gladyshの協力による）。
+
+- **2014年3月21日**  
+  Lua 5.3.0（work2）がリリースされました。
+
+- **2014年1月28日**  
+  参照マニュアルがポルトガル語で利用可能になりました。
+
+## 2013年
+
+- **2013年12月7日**  
+  Lua 5.2.3がリリースされました。このリリースはバグ修正版です。
+
+- **2013年11月23日〜24日**  
+  Luaワークショップ2013がトゥールーズで開催されました。
+
+- **2013年10月2日**  
+  CBSoft 2013でLuaの20周年が祝われました。スライドをご覧ください。
+
+- **2013年7月28日**  
+  Luaの初期バージョン公開から20周年を迎えました。詳細はこちらをご覧ください。
+
+- **2013年7月23日**  
+  RobertoがLuaの功績によりブラジル計算機学会から科学功績賞を受賞しました。
+
+- **2013年5月15日**  
+  RobertoがWWW 2013で招待講演を行いました。スライドはこちらをご覧ください。
+
+- **2013年5月14日**  
+  「Programming in Lua」第3版が電子書籍として公開されました。
+
+## 2012年
+
+- **2012年12月10日**  
+  PayPalを通じたLuaプロジェクトへの寄付が再び利用可能になりました。
+
+- **2012年11月29日〜30日**  
+  Luaワークショップ2012がVerisignで開催されました。
+
+- **2012年9月2日〜8日**  
+  RobertoがLASERサマースクールで「Real Scripting with Lua」の講義を行いました。
+
+- **2012年6月14日**  
+  Lua 5.2.1がリリースされました。このリリースはバグ修正版です。
+
+- **2012年5月21日**  
+  Luaワークショップ2012がVerisignで開催予定です（John Rodriguezの協力による）。
+
+- **2012年5月4日**  
+  LuaJIT専用のメーリングリストが開設されました。詳細はこちらをご覧ください。
+
+- **2012年4月17日**  
+  LuaのストアがFibersでオープンしました（現在は利用できません）。
+
+- **2012年4月2日**  
+  Luaワークショップ2012の計画が始まりました。
+
+- **2012年2月20日**  
+  メーリングリストが15周年を迎えました。詳細はこちらをご覧ください。
+
+- **2012年2月17日**  
+  Lua 5.1.5がリリースされました。このリリースはバグ修正版です。
+
+- **2012年1月30日**  
+  WikipediaがLuaを新しいテンプレート言語として採用しました。詳細はこちらをご覧ください。
+
+- **2012年1月13日**  
+  LuaがGame Developers MagazineのFront Line Award 2011（プログラミングツール部門）を受賞しました。
+
+- **2012年1月9日**  
+  Robertoがティンカー教授職としてスタンフォード大学に3か月間滞在しました。
+
+## 2011年
+
+- **2011年12月16日**  
+  Lua 5.2.0がリリースされました。新機能はこちらをご覧ください。
+
+- **2011年10月23日**  
+  Luaを使用したゲーム作成アプリ「Codea」がiPad向けにリリースされました（以前はCodifyとして知られていました）。
+
+- **2011年9月8日〜9日**  
+  Luaワークショップ2011がスイスで開催されました。
+
+- **2011年7月13日**  
+  Lua 5.2（ベータ版）がリリースされました。
+
+- **2011年6月6日**  
+  LuaがTIOBEプログラミングコミュニティインデックスでトップ10入りを果たしました。
+
+- **2011年5月12日**  
+  ACM Queueに「Passing a language through the eye of a needle」が掲載されました。
+
+- **2011年4月26日**  
+  Luaワークショップ2011がスイスで開催予定です（Marc Balmerの協力による）。
+
+- **2011年4月3日**  
+  LuaがTIOBEプログラミングコミュニティインデックスでトップ10に迫っています。
+
+- **2011年3月15日**  
+  参照マニュアルがドイツ語で利用可能になりました。
+
+- **2011年2月12日**  
+  Luaワークショップ2011の計画が始まりました。
+
+## 2010年
+
+- **2010年11月23日**  
+  Lua 5.2（アルファ版）がリリースされました。
+
+- **2010年10月30日**  
+  Lua 5.2（work5）がリリースされました。
+
+- **2010年10月1日**  
+  SocialMediaPressがコーポレートスポンサーシッププログラムに参加しました（現在は活動していません）。
+
+- **2010年8月28日**  
+  メーリングリストがPepperfishに移転されました。
+
+- **2010年8月19日**  
+  lua.orgが短期間のメンテナンスを行い、その間はPUC-Rioのミラーサイトが稼働しました。
+
+- **2010年7月31日**  
+  Lua 5.2（work4）がリリースされました。
+
+- **2010年5月18日**  
+  Lua 5.2（work3）がリリースされました。
+
+- **2010年5月10日**  
+  チェコスロバキアTeXユーザーグループがコーポレートスポンサーシッププログラムに参加しました（現在は活動していません）。
+
+- **2010年3月23日**  
+  「Lua Programming Gems」が電子書籍として公開されました。
+
+- **2010年3月10日**  
+  Robertoがスタンフォード大学のEEコンピューターシステムコロキウムでLuaの設計について講演を行いました。
+
+- **2010年3月9日**  
+  GDC 2010でゲーム制作におけるLuaスクリプトのチュートリアルが行われました。スライドはこちら。
+
+- **2010年3月1日**  
+  Adobeがコーポレートスポンサーシッププログラムに参加しました（現在は活動していません）。
+
+- **2010年1月20日**  
+  LuaフォーラムがLuaHUBに移転されました（現在は存在していません）。
+
+- **2010年1月18日**  
+  「Programming in Lua」第2版が電子書籍として公開されました（現在は第3版が利用可能）。
+
+- **2010年1月13日**  
+  Lua 5.2（work2）がリリースされました。
+
+- **2010年1月8日**  
+  Lua 5.2（work1）がリリースされました。
+
+## 2009年
+
+- **2009年12月17日**  
+  GDC 2010でゲーム制作におけるLuaスクリプトの1日チュートリアルが開催されます。
+
+- **2009年10月28日**  
+  LuaのストアがZazzleにオープンしました（「Luaを使って、Luaを身に付けよう！」）。
+
+- **2009年10月6日〜7日**  
+  Luaワークショップ2009がリオデジャネイロで開催されました。
+
+- **2009年8月21日**  
+  RobertoがSBLP 2009でLuaの入門コースを行いました。
+
+- **2009年8月12日**  
+  Lua BR（Luaのブラジル版メーリングリスト）が作成されました。LatinoWare 2009ではエコロジーゲームコンテストが開催され、Luaを使用したエントリーにはボーナスポイントが与えられました。
+
+- **2009年7月20日〜21日**  
+  RobertoがJAI 2009でLuaの入門コースを行いました。
+
+- **2009年6月23日**  
+  AnscaがLuaを使用したiPhone向けのCorona SDKを発表しました。詳細はこちらをご覧ください。
+
+- **2009年6月8日**  
+  GoogleがLua対応のAndroidスクリプト環境を発表しました。
+
+- **2009年5月28日**  
+  Luaワークショップ2009がリオデジャネイロで開催予定です。
+
+- **2009年5月18日**  
+  「Concepts of Programming Languages」という書籍にLuaに関するセクションが含まれ、Robertoへのインタビューも掲載されています。
+
+- **2009年4月15日**  
+  lua.orgが短期間のメンテナンスを実施しました。メンテナンス中はPUC-Rioのミラーサイトが稼働しました。
+
+- **2009年3月27日**  
+  Luaチームへのインタビューが「Masterminds of Programming」という書籍に掲載されます。
+
+- **2009年1月12日**  
+  参照マニュアルがハンガリー語で利用可能になりました（現在は利用できません）。
+
+## 2008年
+
+- **2008年12月1日**  
+  「Lua Programming Gems」が出版されました。詳細はこちらをご覧ください。
+
+- **2008年9月19日**  
+  RobertoがPyConBrasil 2008でLuaについて講演しました。スライドはこちらをご覧ください。
+
+- **2008年9月11日**  
+  RobertoがComputerworldの「The A-Z of Programming Languages」インタビューシリーズに登場しました。
+
+- **2008年8月22日**  
+  Lua 5.1.4がリリースされました。このリリースはバグ修正版です。
+
+- **2008年7月14日〜15日**  
+  Luaワークショップ2008がワシントンD.C.のジョージ・ワシントン大学で開催されました。
+
+- **2008年7月1日**  
+  TYPO3（AOEメディア）がコーポレートスポンサーシッププログラムに参加しました（現在は活動していません）。
+
+- **2008年6月6日**  
+  Luaプロジェクトのコーポレートスポンサーシッププログラムが発表されました。Océが最初のスポンサーです（現在は活動していません）。
+
+- **2008年5月30日**  
+  RobertoがJAOO 2008でLuaについて講演を行いました（ブリスベンとシドニーで開催）。
+
+- **2008年5月13日**  
+  「Programming in Lua」の中国語翻訳版が出版されました。
+
+- **2008年5月7日**  
+  Lua 5.1.3用のパッチがリリースされました（後にLua 5.1.4で上書きされています）。
+
+- **2008年3月13日**  
+  参照マニュアルがロシア語で利用可能になりました（現在は利用できません）。
+
+- **2008年2月21日**  
+  Luaのライブデモが公開されました。
+
+- **2008年1月25日**  
+  Lua 5.1.3がリリースされました。このリリースはバグ修正版です。
+
+- **2008年1月24日**  
+  Yutaka Uenoによる「Introductory Lua programming（Luaプログラミング入門）」が日本語で公開されました。
+
+## 2007年
+
+- **2007年12月20日**  
+  「Lua」という名前の正しい書き方を推進するキャンペーンが開始されました。
+
+- **2007年12月18日**  
+  参照マニュアルがスペイン語で利用可能になりました。
+
+- **2007年12月9日**  
+  Luaワークショップ2008がワシントンD.C.のジョージ・ワシントン大学で開催予定です（Matthew Burkeの協力による）。予備発表はこちら。
+
+- **2007年9月10日**  
+  参照マニュアルがポルトガル語で利用可能になりました。
+
+- **2007年8月28日**  
+  LuaViewに関する記事がLabVIEW World（イタリア語）に掲載されました。
+
+- **2007年8月23日**  
+  Ashwin Hirschiによる「Traveling light, the Lua way」という記事がIEEE Softwareに掲載されました。レビューをご覧ください。
+
+- **2007年8月5日**  
+  LuaがTIOBEプログラミングコミュニティインデックスで15位にランクインしました。
+
+- **2007年7月17日**  
+  TUG 2007でLuaTeXのワークショップが開催されました。講演ビデオはこちらをご覧ください。
+
+- **2007年7月8日**  
+  LuaがTIOBEプログラミングコミュニティインデックスで18位にランクインしました。
+
+- **2007年6月25日**  
+  「Programming in Lua」の韓国語翻訳版が出版されました。
+
+- **2007年6月9日**  
+  Luaの進化に関する論文が第3回ACM SIGPLANプログラミング言語の歴史会議（HOPL III）で発表されました。スライドとビデオはこちら。
+
+- **2007年5月9日**  
+  Linux JournalにLuaに関する記事が掲載される予定です。
+
+- **2007年4月28日〜29日**  
+  lua.orgが定期メンテナンスを実施しました。メンテナンス中はPUC-Rioのミラーサイトが稼働しました。
+
+- **2007年4月2日**  
+  Lua 5.1.2がリリースされました。このリリースはバグ修正版です。
+
+- **2007年3月6日**  
+  LuaがTIOBEプログラミングコミュニティインデックスで25位にランクインしました。
+
+- **2007年2月20日**  
+  メーリングリストが10周年を迎えました。詳細はこちらをご覧ください。
+
+- **2007年2月1日**  
+  「Lua Programming Gems」に掲載予定の43件の要約が選定されました。
+
+## 2006年
+
+- **2006年11月24日**  
+  「Lua Programming Gems」の寄稿募集が開始されました。
+
+- **2006年10月6日**  
+  「Programming in Lua」のドイツ語翻訳版が出版されました。
+
+- **2006年10月5日**  
+  LuaがTIOBEプログラミングコミュニティインデックスでトップ50に入りました。
+
+- **2006年9月4日〜5日**  
+  Luaワークショップ2006がOcéで開催されました。写真とビデオはこちら。
+
+- **2006年8月17日**  
+  参照マニュアルが書籍として出版されました。購入するとLuaプロジェクトを支援することができます。
+
+- **2006年7月6日**  
+  Luaワークショップ2006の公式ページが作成されました。
+
+- **2006年6月30日**  
+  GameDev.netの投票でLuaが最も人気のある組み込みスクリプト言語に選ばれました。
+
+- **2006年6月26日**  
+  Lua 5.0.3がリリースされました。このリリースはバグ修正版です。
+
+- **2006年6月9日**  
+  Lua 5.1.1がリリースされました。このリリースはバグ修正版です。
+
+- **2006年6月3日**  
+  DistroWatchの5月の寄付先にLuaが選ばれました。
+
+- **2006年3月23日**  
+  「Programming in Lua」第2版が出版されました。
+
+- **2006年2月21日**  
+  Lua 5.1がリリースされました。新機能はこちらをご覧ください。
+
+- **2006年2月15日**  
+  Luaワークショップ2006がオランダのVenloにあるOcéのR&Dサイトで開催予定です（Wim Couwenbergの協力による）。発表はこちら。
+
+- **2006年1月23日**  
+  Luaワークショップ2005の一部の音声録音が公開されました（Shannon Baileyの協力による）。元の発表はこちら（URLは変更されています）。
+
+## 2005年
+
+- **2005年11月18日**  
+  Lua 5.1（ベータ版）がリリースされました。
+
+- **2005年11月16日**  
+  Luaワークショップ2006の計画が開始されました。発表はこちらをご覧ください。
+
+- **2005年11月4日**  
+  GDC 2006で「Lua In Games」ラウンドテーブルが開催される予定です。
+
+- **2005年9月29日**  
+  「Game Development with Lua」が出版されました。
+
+- **2005年9月9日**  
+  Lua 5.1（アルファ版）がリリースされました。
+
+- **2005年9月1日**  
+  Luaの進化に関する論文がACM HOPL IIIに提出されました。
+
+- **2005年8月11日**  
+  Robertoが「Computação & Mercado 2005」でLuaのケーススタディを発表しました。
+
+- **2005年8月3日**  
+  メーリングリストの登録者数が1000人に達し、過去最高を記録しました。
+
+- **2005年7月27日〜28日**  
+  Luaワークショップ2005がAdobeで開催されました。多くの講演のスライドと写真が利用可能です。
+
+- **2005年6月20日**  
+  Robertoがミラノ工科大学でLuaについて講演を行いました。音声はこちらで利用可能です。
+
+- **2005年6月20日**  
+  最初のLua認定試験が発表されました（現在は存在していません）。
+
+- **2005年5月23日**  
+  Lua 5.0の実装に関する論文が第9回ブラジルプログラミング言語シンポジウムで発表されました。
+
+- **2005年5月18日**  
+  Lua 5.1（work6）がリリースされました。
+
+- **2005年3月16日**  
+  RobertoがPUC-Rioの「第1回自由ソフトウェアイベント」でLuaについて講演しました。
+
+- **2005年3月4日**  
+  Lua 5.1（work5）がリリースされました。
+
+- **2005年3月3日**  
+  Luaワークショップ2005がAdobeで開催される予定です（Mark Hamburgの協力による）。発表はこちら。
+
+- **2005年2月23日**  
+  Lua 5.0の実装に関する論文が第9回ブラジルプログラミング言語シンポジウムに提出されました。
+
+- **2005年1月22日**  
+  ポルトガル語の新しいLuaフォーラムが開設されました（現在は存在していません）。
+
+- **2005年1月11日**  
+  メーリングリストの登録者数が800人に達し、過去最高を記録しました。
+
+## 2004年
+
+- **2004年12月30日**  
+  Lua 5.1（work4）がリリースされました。
+
+- **2004年12月6日**  
+  Lua 5.1（work3）がリリースされました。
+
+- **2004年11月27日**  
+  Gavin Wraithによる「Why Lua is not BASIC」という記事がFrobnicate 22（秋号）に掲載されました。
+
+- **2004年10月21日**  
+  WJogos 2004でLuaに関するチュートリアルが開催されました。ノートとスライド（ポルトガル語）はこちらからご覧いただけます。
+
+- **2004年10月4日**  
+  lua.orgがPepperfishの協力によりホストされています（Daniel Silverstoneの協力による）。
+
+- **2004年9月20日**  
+  Lua 5.1（work2）がリリースされました。
+
+- **2004年9月1日**  
+  Lua 5.1（work1）がリリースされました。
+
+- **2004年7月23日**  
+  Linux MagazineにLuaに関する記事が掲載される予定です。
+
+- **2004年7月5日**  
+  「Programming in Lua」がオンラインで公開されました。LuaのウェブフォーラムがIcy North Technologiesにより再作成されました（LuaHUBに移行されました）。
+
+- **2004年6月23日**  
+  LuaForgeが開設されました。詳細はこちらをご覧ください。
+
+- **2004年5月1日**  
+  LabLuaが設立されました。
+
+- **2004年4月28日**  
+  Luaプロジェクトを支援するための寄付ページが追加されました。
+
+- **2004年3月24日**  
+  ゲーム開発会議2004でLuaに関するラウンドテーブルが開催されました。報告書はこちらをご覧ください。
+
+- **2004年3月23日**  
+  Lua 5.1（work0）がリリースされました。
+
+- **2004年3月17日**  
+  Lua 5.0.2がリリースされました。このリリースはバグ修正版です。
+
+## 2003年
+
+- **2003年12月15日**  
+  Roberto Ierusalimschyによる「Programming in Lua」が出版されました。
+
+- **2003年11月27日**  
+  Luaを支援する個人および団体のリストページが追加されました。
+
+- **2003年11月25日**  
+  Lua 5.0.1がリリースされました。このリリースはバグ修正版です。
+
+- **2003年11月8日**  
+  RobertoがLightweight Languages 2003でLuaの内部について講演しました。スライドはこちら。
+
+- **2003年9月29日**  
+  GameDev.netのアンケートで、Luaがゲームスクリプトの最も人気のある言語として選ばれました。
+
+- **2003年6月16日**  
+  Lua 4.0以降の既知のバグをリストするページが追加されました。
+
+- **2003年6月7日**  
+  Robertoが第4回国際自由ソフトウェアフォーラムでLuaについて招待講演を行いました。スライドはこちら。
+
+- **2003年5月19日**  
+  メーリングリストのYahoo! Groupsミラーが終了しました。
+
+- **2003年5月14日**  
+  メーリングリストが新しいホームに移転しました（ConectivaおよびGustavo Niemeyerの協力による）。
+
+- **2003年5月6日**  
+  各バージョンの主要な機能をリストしたバージョン履歴ページが追加されました。
+
+- **2003年4月11日**  
+  Lua 5.0がリリースされました。新機能はこちらをご覧ください。
+
+- **2003年3月10日**  
+  メーリングリストアーカイブのウェブインターフェースが追加されました（David Jeskeの協力による）。
+
+- **2003年2月11日**  
+  サイトの最近の変更とRSSフィードをリストするページが追加されました。
+
+- **2003年2月5日**  
+  Icy North TechnologiesによりLuaウェブフォーラムが作成されました（LuaHUBに移行されました）。
+
+- **2003年1月14日**  
+  「The Year in Scripting Languages」が発行されました。2002年のLuaの出来事をレビューしています。
+
+## 2002年
+
+- **2002年12月17日**  
+  Lua 5.0（ベータ版）がリリースされました。
+
+- **2002年8月29日**  
+  Luaに関する論文や学位論文のページが作成されました。
+
+- **2002年8月22日**  
+  Webトラフィックとメーリングリストのトラフィック統計ページが追加されました（Webトラフィックの統計は現在利用できません）。
+
+- **2002年8月15日**  
+  Lua 5.0（アルファ版）がリリースされ、記念ロゴも公開されました。
+
+- **2002年7月18日**  
+  Luaのソースコードが閲覧可能になりました。
+
+- **2002年7月10日**  
+  メーリングリストのニューズグループインターフェースがGmaneで利用可能になりました（現在は利用できません）。
+
+- **2002年7月4日**  
+  Lua 4.0.1がリリースされました。このリリースはバグ修正版です。
+
+- **2002年5月25日**  
+  メーリングリストアーカイブの新しいウェブインターフェースがJohn Belmonteによって提供されました。
+
+- **2002年5月21日**  
+  Luaの将来のバージョンがMITライセンスでリリースされることが発表されました。新しいライセンスページも参照してください。Luaはオープンソースソフトウェアとして認定されており、そのライセンスはシンプルで自由度が高く、GPLとも互換性があります。
+
+- **2002年3月13日**  
+  ミラーページが更新され、Waterloo、Universität Trier、freesoftware.comのミラーが廃止されました。
+
+- **2002年2月21日**  
+  検索ページが追加されました。
+
+- **2002年2月19日**  
+  Lua Library Design Workshopがハーバード大学で開催されました。
+
+- **2002年1月30日**  
+  デンマークのSunSITE.dkに新しいミラーが追加されました（現在は利用できません）。
+
+- **2002年1月28日**  
+  リンクページがlua-users.org/wiki/LuaLinksに移動されました。
+
+- **2002年1月14日**  
+  ツールページが移動されました。
+
+- **2002年1月7日**  
+  コミュニティをよりよく理解するためのユーザーアンケートが追加されました。数分かけてご回答ください。
+
+## 2001年
+
+- **2001年12月3日**  
+  LuaのIRCチャンネル#luaがOpen Projects Network（現在のfreenode）に作成されました。
+
+- **2001年8月20日**  
+  Luaユーザーの交流の場としてlua-users.orgがオンラインになりました（John Belmonteの協力による）。
+
+- **2001年7月25日**  
+  Lua 4.1（アルファ版）がリリースされました（その後削除され、次のバージョンは5.0となりました）。
+
+- **2001年5月29日**  
+  CafePressにLuaストアがオープンしました（現在は利用できません）。
+
+- **2001年5月24日**  
+  Robertoが第5回ブラジルプログラミング言語シンポジウムでLuaの歴史について招待講演を行いました。
+
+- **2001年5月8日**  
+  旧ソビエト科学センターの協力でロシアに新しいミラーが追加されました（現在は利用できません）。
+
+- **2001年3月19日**  
+  lua.orgがJim MathiesとSoho Oneの協力でオンラインになりました。
+
+## 2000年
+
+- **2000年11月6日**  
+  Lua 4.0がリリースされました。新機能はこちらをご覧ください。
+
+- **2000年10月23日**  
+  Luaに関する英語とポルトガル語のプレスリリースが追加されました（現在は利用できません）。
+
+- **2000年10月3日**  
+  記事クリッピングページが追加されました。
+
+- **2000年9月21日**  
+  Lua 4.0（ベータ版）がリリースされました。
+
+- **2000年8月23日**  
+  メーリングリストが再開されました。
+
+- **2000年8月20日**  
+  Luaに関する記事が「Adventurer Paradise」に掲載されました（ポルトガル語、現在は存在していません）。
+
+- **2000年4月24日**  
+  Lua 4.0（アルファ版）がリリースされました。
+
+- **2000年4月19日**  
+  uCore Technologyの協力でデンマークに新しいミラーが追加されました（現在は利用できません）。
+
+- **2000年3月29日**  
+  日本の会津大学の協力で新しいミラーが追加されました（現在は利用できません）。すべてのミラーサイトのリストが追加されました。
+
+- **2000年3月15日**  
+  アメリカのミラーがftp://ftp.freesoftware.com/pub/languages/lua/に移動されました（現在は存在しません）。
+
+- **2000年2月22日**  
+  Lua 3.2.2がリリースされました。このリリースはバグ修正版です。
+
+- **2000年2月16日**  
+  Lua Technical Notesが公開されました（現在は存在しません）。
+
+- **2000年2月1日**  
+  Lua 3.2がDr. Dobb's Alternative Programming Languages Release 3 CD-ROMに収録されました。
+
+## 1999年
+
+- **1999年12月20日**  
+  ユーザーのコメントをまとめたページが追加されました。
+
+- **1999年11月25日**  
+  Lua 3.2.1がリリースされました。このリリースはバグ修正版です。
+
+- **1999年11月9日**  
+  ポルトガル語のサマリーページが追加されました。
+
+- **1999年7月8日**  
+  Lua 3.2がリリースされました。新機能はこちらをご覧ください。
+
+- **1999年4月26日**  
+  Lua 3.2（ベータ版）がリリースされました。
+
+- **1999年3月18日**  
+  メーリングリストアーカイブがeGroups.comに利用可能になりました（現在は存在しません）。
+
+- **1999年2月18日**  
+  ドイツのGWDGと米国のcdrom.comの協力で新しいミラーが追加されました（どちらも現在は利用できません）。
+
+## 1998年
+
+- **1998年9月15日**  
+  メーリングリストのアーカイブがFTPサイトで利用可能になりました（現在は利用できません）。
+
+- **1998年7月11日**  
+  Lua 3.1がリリースされました。新機能はこちらをご覧ください。また、新しい公式ロゴが導入されました。
+
+## 1997年
+
+- **1997年11月6日**  
+  Luaの新しいウェブサイトが開設されました。発表はこちらをご覧ください。
+
+- **1997年11月5日**  
+  Luaに関する学術論文が第2回コンパックコンピュータ賞（技術カテゴリ）で最優秀賞を受賞しました。この賞は、ブラジルのコンパック、科学技術省、ブラジル科学アカデミーの共同事業です。
+
+- **1997年7月1日**  
+  Lua 3.0がリリースされました。新機能はこちらをご覧ください。
+
+- **1997年2月20日**  
+  Luaのメーリングリストが作成されました。
+
+## 1996年
+
+- **1996年12月1日**  
+  Dr. Dobb's JournalにLuaに関する記事が掲載されました。
+
+- **1996年11月19日**  
+  Lua 2.5がリリースされました。新機能はこちらをご覧ください。
+
+- **1996年6月1日**  
+  「Software: Practice & Experience」誌にLuaに関する論文が掲載されました。
+
+- **1996年5月14日**  
+  Lua 2.4がリリースされました。新機能はこちらをご覧ください。
+
+## 1995年
+
+- **1995年11月28日**  
+  Lua 2.2がリリースされました。新機能はこちらをご覧ください。
+
+- **1995年2月7日**  
+  Lua 2.1がリリースされました。新機能はこちらをご覧ください。
+
+- **1995年**  
+  Luaのホームページが作成されました。
+
+## 1994年
+
+- **1994年8月1日**  
+  Luaについて初めての論文が、第21回ブラジル・ソフトウェアおよびハードウェアセミナーで発表されました。
+
+- **1994年7月8日**  
+  Lua 1.1がリリースされました。これはLuaの初の一般公開リリースです。新機能はこちらをご覧ください。
+
+## 1993年
+
+- **1993年10月29日**  
+  Luaに関する初の公開講演が、第7回ブラジル・ソフトウェア工学シンポジウムで行われました。
+
+- **1993年7月28日**  
+  Lua 1.0が稼働しました。これがLuaの最も古い実装です。
