@@ -1,44 +1,44 @@
-# Community
+# コミュニティ
 
-## Meeting places
+## 交流の場
 
-There are several places you can go to meet other people that use Lua. A good starting point is lua-users.org, a collaborative meeting place built for and by Lua users.
+Luaユーザーと交流するための場所がいくつかあります。最初に訪れると良いのが、Luaユーザーのために作られた協力的なコミュニティ lua-users.org です。
 
-One of the focal points of the Lua community is our mailing list, which is very active and friendly; it has many subscribers from all over the world, including several Lua experts and the Lua team.
+Luaコミュニティの中心的な場所の一つは、活発でフレンドリーなメーリングリストです。このリストには世界中から多くの購読者が参加しており、Luaの専門家やLuaチームのメンバーも含まれています。
 
-Other meeting places are stackoverflow, the chat room, Twitter, Mastodon, a Telegram group, and a Discord room. For discussions in Portuguese, join the Lua BR mailing list and visit pt.stackoverflow.
+他の交流の場としては、Stack Overflow、チャットルーム、Twitter、Mastodon、Telegramグループ、Discordルームなどがあります。ポルトガル語でのディスカッションには、「Lua BRメーリングリスト」に参加し、「pt.stackoverflow」も訪れてください。
 
-If you want to meet in person, join a user group, find a user group near you, attend a Lua Workshop or a LuaConf.
+オフラインで会いたい場合は、ユーザーグループに参加したり、近くのユーザーグループを探したり、LuaワークショップやLuaConfに参加するのも良いでしょう。
 
-## Contributing
+## コミュニティへの貢献
 
-You can contribute to the community in several ways: answer questions about Lua (in the mailing list, in stackoverflow, and elsewhere), collaborate in the lua-users wiki, answer our survey, add a Lua logo to your web page, tell us about third-party sites related to Lua and papers and theses about Lua, and write tools and libraries for Lua and add them to LuaRocks.
+コミュニティに貢献する方法はいくつかあります。メーリングリストやStack OverflowなどでLuaに関する質問に回答したり、「lua-users wiki」に協力したり、アンケートに回答したり、ウェブページにLuaのロゴを追加したり、Luaに関連するサードパーティサイトや論文、学位論文を紹介することができます。また、Lua向けのツールやライブラリを作成し、それを「LuaRocks」に追加することも歓迎されます。
 
-## Supporting Lua
+## Luaプロジェクトのサポート
 
-You can help to support the Lua project by buying a book published by Lua.org and by making a donation.
+Luaプロジェクトをサポートする方法として、Lua.orgが出版している書籍を購入したり、寄付を行うことが挙げられます。
 
-You can help to spread the word about Lua by buying Lua products at Zazzle.
+また、ZazzleでLuaの製品を購入してLuaの認知度を広めることもできます。
 
-## Workshop
+## ワークショップ
 
-The main goal of the Lua workshop is to allow the Lua community to get together and meet in person and talk about the Lua language, its uses, and its implementation. Another goal is to help spread the word about Lua to industry and academia, taking advantage of the location of the workshop when possible.
+Luaワークショップの主な目的は、Luaコミュニティが集まり、Lua言語、その利用法、実装について直接話し合える場を提供することです。また、ワークショップの開催地を活用して、業界や学術界にLuaの認知度を広めることも目指しています。
 
-If you'd like to organize a Lua workshop, please post a proposal in the mailing list.
+もしLuaワークショップを開催したい場合は、メーリングリストに提案を投稿してください。
 
-### Past workshops
+### 過去のワークショップ
 
-- 2023 – Rio de Janeiro, Brazil
-- 2022 – Freiburg, Germany
-- 2018 – Kaunas, Lithuania
-- 2017 – San Francisco, California
-- 2016 – San Francisco, California
-- 2015 – Stockholm, Sweden
-- 2014 – Moscow, Russia
-- 2013 – Toulouse, France
-- 2012 – Reston, Virginia
-- 2011 – Frick, Switzerland
-- 2009 – Rio de Janeiro, Brazil
-- 2008 – Washington, D.C.
-- 2006 – Venlo, The Netherlands
-- 2005 – San Jose, California
+- 2023年 - ブラジル、リオデジャネイロ
+- 2022年 - ドイツ、フライブルク
+- 2018年 - リトアニア、カウナス
+- 2017年 - アメリカ、サンフランシスコ
+- 2016年 - アメリカ、サンフランシスコ
+- 2015年 - スウェーデン、ストックホルム
+- 2014年 - ロシア、モスクワ
+- 2013年 - フランス、トゥールーズ
+- 2012年 - アメリカ、レストン
+- 2011年 - スイス、フリック
+- 2009年 - ブラジル、リオデジャネイロ
+- 2008年 - アメリカ、ワシントンD.C.
+- 2006年 - オランダ、フェンロ
+- 2005年 - アメリカ、サンノゼ

@@ -509,10 +509,10 @@ export default defineConfig({
           ]
         },
         {
-          text: 'community',
+          text: 'コミュニティ',
           collapsed: false,
           items: [
-              {text: 'community', link: '/resource/lua/community'},
+              {text: 'コミュニティ', link: '/resource/lua/community'},
           ]
         },
       ],
