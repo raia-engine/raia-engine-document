@@ -1,80 +1,83 @@
-# Contributing Guidelines
+# 貢献ガイドライン
 
-## Index
+## 目次
 
-- [Getting Started & General Advice](#getting-started--general-advice)
-- [Issues vs Discussions](#issues-vs-discussions)
-- [How to open an Issue](#how-to-open-an-issue)
-- [How to open a Pull Request](#how-to-open-a-pull-request)
-- [Copyright / Contributor License Agreement](#copyright--contributor-license-agreement)
+- [はじめにと一般的なアドバイス](#はじめにと一般的なアドバイス)
+- [Issues（課題）とDiscussions（議論）の違い](#issues課題とdiscussions議論の違い)
+- [Issueを作成する方法](#issueを作成する方法)
+- [プルリクエストを作成する方法](#プルリクエストを作成する方法)
+- [著作権 / 貢献者ライセンス契約](#著作権--貢献者ライセンス契約)
 
-## Getting Started & General Advice
+## はじめにと一般的なアドバイス
 
-- Article: [How To Ask Good Questions](https://bit.ly/3nwRnx1).
-- Please browse the [Wiki](https://github.com/ocornut/imgui/wiki) to find code snippets, links and other resources (e.g. [Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started), [Useful extensions](https://github.com/ocornut/imgui/wiki/Useful-Extensions)).
-- Please read [Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started) if your question relates to setting up Dear ImGui.
-- Please read [docs/FAQ.md](https://github.com/ocornut/imgui/blob/master/docs/FAQ.md).
-- Please read [docs/FONTS.md](https://github.com/ocornut/imgui/blob/master/docs/FONTS.md) if your question relates to fonts or text.
-- Please run `ImGui::ShowDemoWindow()` to explore the demo and its sources.
-- Please use the search function of your IDE to search for symbols and comments related to your situation.
-- Please use the search function of GitHub to look for similar topics (always include 'Closed' issues/pr in your search).
-- You may [browse issues by Labels](https://github.com/ocornut/imgui/labels).
-- Please use a web search engine to look for similar issues.
-- If you get a crash or assert, use a debugger to locate the line triggering it and read the comments around.
-- Please don't be a [Help Vampire](https://slash7.com/2006/12/22/vampires/).
+- 記事: [良い質問の仕方](https://bit.ly/3nwRnx1) を読んでください。
+- [Wiki](https://github.com/ocornut/imgui/wiki) を参照して、コードスニペット、リンク、その他のリソース（例: [Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started)、[Useful Extensions](https://github.com/ocornut/imgui/wiki/Useful-Extensions)）を見つけてください。
+- Dear ImGui のセットアップに関する質問がある場合は、[Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started) を読んでください。
+- [docs/FAQ.md](https://github.com/ocornut/imgui/blob/master/docs/FAQ.md) を読んでください。
+- フォントやテキストに関する質問がある場合は、[docs/FONTS.md](https://github.com/ocornut/imgui/blob/master/docs/FONTS.md) を読んでください。
+- デモを試すには `ImGui::ShowDemoWindow()` を実行して、デモとそのソースコードを確認してください。
+- IDE の検索機能を使い、関連するシンボルやコメントを探してください。
+- GitHub の検索機能を使って、似たようなトピックを探してください（「Closed」ステータスのIssueやPRも含めて検索してください）。
+- [ラベル別にIssueを閲覧](https://github.com/ocornut/imgui/labels) できます。
+- ウェブ検索エンジンを利用して、似た問題を探してください。
+- クラッシュやアサーションエラーが発生した場合は、デバッガーを使用して問題を引き起こしている行を特定し、その周辺のコメントを確認してください。
+- [Help Vampire](https://slash7.com/2006/12/22/vampires/) にならないようにしましょう。
 
-## 'Issues' vs 'Discussions'
+## Issues（課題）とDiscussions（議論）の違い
 
-We are happy to use 'Issues' for many type of open-ended questions. We are encouraging 'Issues' becoming an enormous, centralized and cross-referenced database of Dear ImGui contents.
+私たちは、多くの種類のオープンエンドな質問に対して 'Issues' を利用することを歓迎します。また、'Issues' を Dear ImGui の内容に関する膨大で中央集約的、かつ相互参照可能なデータベースにすることを目指しています。
 
-Only if you:
-- Cannot BUILD or LINK examples.
-- Cannot BUILD, or LINK, or RUN Dear ImGui in your application or custom engine.
-- Cannot LOAD a font.
+以下の場合にのみ、[Discussions フォーラム](https://github.com/ocornut/imgui/discussions) を利用してください:
+- サンプルのビルドやリンクができない。
+- Dear ImGui をあなたのアプリケーションやカスタムエンジンでビルド、リンク、または実行できない。
+- フォントをロードできない。
 
-Then please [use the Discussions forums](https://github.com/ocornut/imgui/discussions) instead of opening an issue.
+Dear ImGui があなたのアプリケーションで正常に表示され、以前にDear ImGuiを使用したことがある場合は、Issueを作成できます。どのような形式の議論も、新しいIssueとして歓迎します。
 
-If Dear ImGui is successfully showing in your app and you have used Dear ImGui before, you can open an Issue. Any form of discussions is welcome as a new issue. 
+## Issueを作成する方法
 
-## How to open an issue
+Issueトラッカーを使用して、バグ報告、機能リクエスト、提案を送信できます。また、ヘルプやアドバイスを求めることも可能です。しかし、**以下のガイドラインを注意深く読んでください。これらを無視したIssueは閉じられる可能性があります。さらに、これらのガイドラインを無視するユーザーはブロックされることがあります。**
 
-You may use the Issue Tracker to submit bug reports, feature requests or suggestions. You may ask for help or advice as well. But **PLEASE CAREFULLY READ THIS WALL OF TEXT. ISSUES IGNORING THOSE GUIDELINES MAY BE CLOSED. USERS IGNORING THOSE GUIDELINES MIGHT BE BLOCKED.**
+リクエスト内容を可能な限り明確にしてください。このガイドラインに従わないために、不完全または曖昧なリクエストが多発しています。そのため、必要な情報が欠けているIssueは早期に閉じられることがあります。また、極端に自己中心的、不適切、または怠惰なリクエストはBANの対象となる可能性があります。
 
-Please do your best to clarify your request. The amount of incomplete or ambiguous requests due to people not following those guidelines is often overwhelming. Issues created without the requested information may be closed prematurely. Exceptionally entitled, impolite, or lazy requests may lead to bans.
+**オープンソースソフトウェアは、メンテナーが費やせるエネルギー量によって存続が決まります。私たちは非常に多くの作業を抱えています。この注意力経済において、怠惰なリクエストや些細な問題が、私たちの注意を奪い、より重要な作業から遠ざけています。**
 
-**PLEASE UNDERSTAND THAT OPEN-SOURCE SOFTWARE LIVES OR DIES BY THE AMOUNT OF ENERGY MAINTAINERS CAN SPARE. WE HAVE LOTS OF STUFF TO DO. THIS IS AN ATTENTION ECONOMY AND MANY LAZY OR MINOR ISSUES ARE HOGGING OUR ATTENTION AND DRAINING ENERGY, TAKING US AWAY FROM MORE IMPORTANT WORK.**
+以下は、上記のステップを分かりやすく翻訳した日本語Markdownドキュメントです。
 
-Steps:
+ステップ:
 
-- Article: [How To Ask Good Questions](https://bit.ly/3nwRnx1).
-- **PLEASE DO FILL THE REQUESTED NEW ISSUE TEMPLATE.** Including Dear ImGui version number, branch name, platform/renderer back-ends (imgui_impl_XXX files), operating system.
-- **Try to be explicit with your GOALS, your EXPECTATIONS and what you have tried**.  Be mindful of [The XY Problem](http://xyproblem.info/). What you have in mind or in your code is not obvious to other people. People frequently discuss problems and suggest incorrect solutions without first clarifying their goals. When requesting a new feature, please describe the usage context (how you intend to use it, why you need it, etc.). If you tried something and it failed, show us what you tried.
-- **Please INCLUDE CODE. Provide a Minimal, Complete, and Verifiable Example ([MCVE](https://stackoverflow.com/help/mcve)) to demonstrate your problem**. An ideal submission includes a small piece of code that anyone can paste into one of the examples applications (examples/../main.cpp) or demo (imgui_demo.cpp) to understand and reproduce it. **Narrowing your problem to its shortest and purest form is the easiest way to understand it, explain it and fix it**. Please test your shortened code to ensure it exhibits the problem. **Often while creating the MCVE you will solve the problem!** Many questions that are missing a standalone verifiable example are missing the actual cause of their issue in the description, which ends up wasting everyone's time.
-- **Attach screenshots (or GIF/video) to clarify the context**. They often convey useful information that is omitted by the description. You can drag pictures/files in the message edit box. Avoid using 3rd party image hosting services, prefer the long-term longevity of GitHub attachments (you can drag pictures into your post). On Windows, you can use [ScreenToGif](https://www.screentogif.com/) to easily capture .gif files.
-- **If you are discussing an assert or a crash, please provide a debugger callstack**. Never state "it crashes" without additional information. If you don't know how to use a debugger and retrieve a callstack, learning about it will be useful.
-- **Please make sure that your project has asserts enabled.** Calls to IM_ASSERT() are scattered in the code to help catch common issues. When an assert is triggered read the comments around it. By default IM_ASSERT() calls the standard assert() function. To verify that your asserts are enabled, add the line `IM_ASSERT(false);` in your main() function. Your application should display an error message and abort. If your application doesn't report an error, your asserts are disabled. 
-- Please state if you have made substantial modifications to your copy of Dear ImGui or the back-end.
-- If you are not calling Dear ImGui directly from C++, please provide information about your Language and the wrapper/binding you are using.
-- Be mindful that messages are being sent to the mailbox of "Watching" users. Try to proofread your messages before sending them. Edits are not seen by those users unless they browse the site.
+- 記事: [良い質問の仕方](https://bit.ly/3nwRnx1) を参照してください。
+- **必ず新しいIssueテンプレートを正確に記入してください**。Dear ImGuiのバージョン番号、ブランチ名、プラットフォーム/レンダラのバックエンド（imgui_impl_XXXファイル）、および使用しているオペレーティングシステムを含めてください。
+- **あなたの目標、期待、および試したことを明確に記述してください**。[XY問題](http://xyproblem.info/) に注意してください。他人には、あなたが考えていることやコードの内容はわかりません。目標を明確にしないまま議論が進むと、誤った解決策が提案されることがあります。新しい機能をリクエストする場合は、使用コンテキスト（どのように使いたいのか、なぜ必要なのかなど）を説明してください。試したことが失敗した場合は、その内容も示してください。
+- **コードを必ず含めてください。問題を示す最小限で完全かつ検証可能な例 ([MCVE](https://stackoverflow.com/help/mcve)) を提供してください**。理想的な投稿は、誰でもサンプルアプリケーション（例: examples/../main.cpp）やデモ（imgui_demo.cpp）に貼り付けて、問題を理解して再現できる小さなコード片を含んでいます。**問題を簡潔で純粋な形に絞り込むことが、理解、説明、および修正の最も簡単な方法です**。短縮したコードが問題を示すことを確認してください。**MCVEを作成する過程で問題が解決することがよくあります！** 独立した検証可能な例が欠けている質問では、問題の実際の原因が説明に含まれておらず、結果的に無駄な時間が費やされることが多いです。
+- **スクリーンショット（またはGIF/ビデオ）を添付してコンテキストを明確にしてください**。これにより、説明で省略されがちな有用な情報が伝わります。編集ボックスに画像やファイルをドラッグして添付できます。サードパーティの画像ホスティングサービスを使用せず、GitHubの添付ファイルの長期的な保存性を優先してください（画像を投稿にドラッグできます）。Windowsでは、[ScreenToGif](https://www.screentogif.com/) を使用して簡単にGIFファイルをキャプチャできます。
+- **アサーションやクラッシュについて議論する場合、デバッガのコールスタックを提供してください**。「クラッシュしました」とだけ述べるのは避けてください。デバッガを使ってコールスタックを取得する方法を知らない場合は、これを学ぶことが役立ちます。
+- **プロジェクトでアサーションが有効になっていることを確認してください**。コード内にはIM_ASSERT()を使用して一般的な問題を検出する箇所が多数あります。アサーションがトリガーされた場合、その周辺のコメントを読んでください。デフォルトでは、IM_ASSERT() は標準のassert()関数を呼び出します。アサーションが有効であることを確認するには、`IM_ASSERT(false);` をmain()関数に追加してください。この行がエラーメッセージを表示し、アプリケーションが中断するはずです。エラーが報告されない場合は、アサーションが無効になっています。
+- Dear ImGuiやバックエンドに大幅な変更を加えた場合、その内容を記述してください。
+- C++以外の言語からDear ImGuiを呼び出している場合は、使用している言語とラッパー/バインディングについての情報を提供してください。
+- "Watching" ユーザーのメールボックスにメッセージが送信されることを意識してください。送信する前にメッセージを校正しましょう。編集内容はこれらのユーザーに通知されませんので注意してください。
 
-**Some unfortunate words of warning**
-- If you are involved in cheating schemes (e.g. DLL injection) for competitive online multiplayer games, please don't post here. We won't answer and you will be blocked. It doesn't matter if your question relates to said project. We've had too many of you and need to protect our time and sanity.
-- Due to frequent abuse of this service from the aforementioned users, if your GitHub account is anonymous and was created five minutes ago please understand that your post will receive more scrutiny and incomplete questions will be harshly dismissed.
+**注意事項**
 
-If you have been using Dear ImGui for a while or have been using C/C++ for several years or have demonstrated good behavior here, it is ok to not fulfill every item to the letter. Those are guidelines and experienced users or members of the community will know which information is useful in a given context.
+- チート（例: DLL注入）を目的としたオンライン対戦型マルチプレイヤーゲームのプロジェクトに関与している場合、この場で投稿しないでください。そのような投稿には対応せず、アカウントをブロックします。質問がそのプロジェクトに関係していない場合でも同様です。このようなユーザーが多すぎるため、私たちの時間と労力を守る必要があります。
+- 上記に関連して、匿名のGitHubアカウントが作成されて間もない場合、投稿内容はより厳しく審査されます。不完全な質問は厳しく却下される可能性があります。
 
-## How to open a Pull Request
+Dear ImGuiを長期間使用している場合、またはC/C++を数年間使用している場合、あるいはこれまでの行動が良好である場合、すべての項目を完全に満たす必要はありません。これらはあくまでガイドラインであり、経験豊富なユーザーやコミュニティのメンバーは、状況に応じてどの情報が有用かを理解しています。
 
-- **Please understand that by submitting a PR you are also submitting a request for the maintainer to review your code and then take over its maintenance.** PR should be crafted both in the interest of the end-users and also to ease the maintainer into understanding and accepting it. 
-- Many PRs are useful to demonstrate a need and a possible solution but aren't adequate for merging (causing other issues, not seeing other aspects of the big picture, etc.). In doubt, don't hesitate to push a PR because that is always the first step toward pointing toward a problem, and finding the mergeable solution! Even if a PR stays unmerged for a long time, its presence can be useful for other users and helps toward finding a general solution.
-- **When adding a feature,** please describe the usage context (how you intend to use it, why you need it, etc.). Be mindful of [The XY Problem](http://xyproblem.info/). 
-- **When fixing a warning or compilation problem,** please post the compiler log and specify the compiler version and platform you are using.
-- **Attach screenshots (or GIF/video) to clarify the context and demonstrate the feature at a glance.** You can drag pictures/files in the message edit box. Prefer the long-term longevity of GitHub attachments over 3rd party hosting (you can drag pictures into your post).
-- **Make sure your code follows the coding style already used in the codebase:** 4 spaces indentations (no tabs), `local_variable`, `FunctionName()`, `MemberName`, `// Text Comment`, `//CodeComment();`, C-style casts, etc.. We don't use modern C++ idioms and tend to use only a minimum of C++11 features. The applications under examples/ are generally less consistent because they sometimes try to mimic the coding style often adopted by a certain ecosystem (e.g. DirectX-related code tend to use the style of their sample). 
-- **Make sure you create a branch dedicated to the pull request**. In Git, 1 PR is associated to 1 branch. If you keep pushing to the same branch after you submitted the PR, your new commits will appear in the PR (we can still cherry-pick individual commits).
+以下は提供された内容を分かりやすく翻訳した日本語Markdown文書です。
 
-## Copyright / Contributor License Agreement
+## プルリクエストの作成方法
 
-Any code you submit will become part of the repository and be distributed under the [Dear ImGui license](https://github.com/ocornut/imgui/blob/master/LICENSE.txt). By submitting code to the project you agree that the code is your work and that you can give it to the project.
+- **プルリクエスト（PR）を送信するということは、メンテナーにコードのレビューを依頼し、さらにそのメンテナンスを引き受けてもらうことを意味します。** プルリクエストは、エンドユーザーの利益になるだけでなく、メンテナーが内容を理解し受け入れやすい形にする必要があります。
+- 多くのプルリクエストは、ニーズと解決策を示す上で有用ですが、マージには適さない場合があります（他の問題を引き起こす、大局的な観点が欠けているなど）。迷った場合でも、問題を指摘しマージ可能な解決策を見つける第一歩としてプルリクエストを提出してください。長期間マージされないプルリクエストであっても、その存在が他のユーザーにとって有用であり、一般的な解決策を見つける助けとなります。
+- **新しい機能を追加する場合は、** 使用する状況（どのように使用するのか、なぜ必要なのかなど）を説明してください。[XY問題](http://xyproblem.info/) に注意してください。
+- **警告やコンパイルの問題を修正する場合は、** コンパイラのログを投稿し、使用しているコンパイラのバージョンとプラットフォームを明記してください。
+- **スクリーンショット（またはGIF/ビデオ）を添付して、コンテキストを明確にし、機能を一目で示してください。** メッセージ編集ボックスに画像やファイルをドラッグして添付できます。サードパーティのホスティングサービスではなく、GitHubの添付ファイルの長期的な保存性を優先してください。
+- **コードが既存のコードベースのコーディングスタイルに従っていることを確認してください：** インデントは4スペース（タブ不可）、`local_variable`、`FunctionName()`、`MemberName`、`// テキストコメント`、`//CodeComment();`、Cスタイルキャストなどを使用します。Dear ImGuiでは、モダンなC++のイディオムは使用せず、C++11の機能も最小限に留めています。`examples/`以下のアプリケーションは、一部のエコシステムのスタイル（例: DirectX関連のコード）を模倣しているため、スタイルが一貫していない場合があります。
+- **プルリクエスト専用のブランチを作成してください。** Gitでは、1つのプルリクエストは1つのブランチに関連付けられます。プルリクエストを送信した後で同じブランチに変更をプッシュし続けると、新しいコミットがプルリクエストに追加されます（個別のコミットを選択して取り込むことは可能です）。
 
-You also agree by submitting your code that you grant all transferrable rights to the code to the project maintainer, including for example re-licensing the code, modifying the code, and distributing it in source or binary forms. Specifically, this includes a requirement that you assign copyright to the project maintainer. For this reason, do not modify any copyright statements in files in any PRs.
+## 著作権 / 貢献者ライセンス契約
+
+あなたが送信したコードはリポジトリの一部となり、[Dear ImGuiのライセンス](https://github.com/ocornut/imgui/blob/master/LICENSE.txt)の下で配布されます。コードをプロジェクトに送信することで、そのコードがあなた自身の作品であり、プロジェクトに提供できることを保証するものとします。
+
+さらに、コードを送信することにより、そのコードに関するすべての譲渡可能な権利をプロジェクトのメンテナーに付与することに同意したものとみなされます。これには、例えばコードの再ライセンス、修正、ソースまたはバイナリ形式での配布などが含まれます。具体的には、著作権をプロジェクトのメンテナーに譲渡することが求められます。このため、プルリクエスト内のファイルで著作権に関する記述を変更しないでください。

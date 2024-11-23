@@ -1,275 +1,180 @@
-## Dear ImGui: Examples
+# Dear ImGui: Examples
 
-**The [examples/](https://github.com/ocornut/imgui/blob/master/examples) folder example applications (standalone, ready-to-build) for variety of
-platforms and graphics APIs.** They all use standard backends from the [backends/](https://github.com/ocornut/imgui/blob/master/backends) folder (see [BACKENDS.md](https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md)).
+**[examples/](https://github.com/ocornut/imgui/blob/master/examples) フォルダには、さまざまなプラットフォームやグラフィックスAPI向けのスタンドアロンでビルド可能なサンプルアプリケーションが含まれています。** これらはすべて、[backends/](https://github.com/ocornut/imgui/blob/master/backends) フォルダ内の標準的なバックエンドを使用しています（詳細は [BACKENDS.md](https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md) を参照してください）。
 
-The purpose of Examples is to showcase integration with backends, let you try Dear ImGui, and guide you toward
-integrating Dear ImGui in your own application/game/engine.
-**Once Dear ImGui is setup and running, run and refer to `ImGui::ShowDemoWindow()` in imgui_demo.cpp for usage of the end-user API.**
+サンプルの目的は、バックエンドとの統合方法を示し、Dear ImGuiを試し、自分のアプリケーションやゲーム、エンジンへの統合を進めるためのガイドを提供することです。  
+**Dear ImGuiのセットアップと動作が完了したら、`ImGui::ShowDemoWindow()`（imgui_demo.cpp内）を実行し、エンドユーザー向けAPIの使用方法を確認してください。**
 
-You can find Windows binaries for some of those example applications at:
-  https://www.dearimgui.com/binaries
+一部のサンプルアプリケーションのWindows用バイナリは以下で入手できます：  
+[https://www.dearimgui.com/binaries](https://www.dearimgui.com/binaries)
 
+## 初めてのセットアップ
 
-### Getting Started
-
-Integration in a typical existing application, should take <20 lines when using standard backends.
+標準的なバックエンドを使用すれば、既存のアプリケーションに統合するのに20行未満で済みます。
 
 ```cpp
-At initialization:
-  call ImGui::CreateContext()
-  call ImGui_ImplXXXX_Init() for each backend.
+初期化時:
+  ImGui::CreateContext() を呼び出します。
+  各バックエンドに対して ImGui_ImplXXXX_Init() を呼び出します。
 
-At the beginning of your frame:
-  call ImGui_ImplXXXX_NewFrame() for each backend.
-  call ImGui::NewFrame()
+フレームの開始時:
+  各バックエンドに対して ImGui_ImplXXXX_NewFrame() を呼び出します。
+  ImGui::NewFrame() を呼び出します。
 
-At the end of your frame:
-  call ImGui::Render()
-  call ImGui_ImplXXXX_RenderDrawData() for your Renderer backend.
+フレームの終了時:
+  ImGui::Render() を呼び出します。
+  レンダラーバックエンドに対して ImGui_ImplXXXX_RenderDrawData() を呼び出します。
 
-At shutdown:
-  call ImGui_ImplXXXX_Shutdown() for each backend.
-  call ImGui::DestroyContext()
+終了時:
+  各バックエンドに対して ImGui_ImplXXXX_Shutdown() を呼び出します。
+  ImGui::DestroyContext() を呼び出します。
 ```
 
-Main resource:
-- Read **[Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started) wiki guide** for detailed examples of how to integrate Dear ImGui in an existing application.
+### 主なリソース
+- **[Getting Started](https://github.com/ocornut/imgui/wiki/Getting-Started)** Wikiガイドを読んで、既存のアプリケーションにDear ImGuiを統合する詳細な例を確認してください。
+
+### 追加リソース
+- FAQ: [https://www.dearimgui.com/faq](https://www.dearimgui.com/faq) を参照してください。
+- imgui.cpp の "PROGRAMMER GUIDE" セクションを読んでください。
+- 各ファイルの冒頭にあるコメントや説明を読んでください。
+
+### 注意
+提供されたバックエンドを使用する場合、`backends/imgui_impl_xxxx(.cpp, .h)` ファイルをプロジェクトに追加し、そのまま使用できます。各 `imgui_impl_xxxx.cpp` ファイルには個別の変更履歴が含まれているため、後で更新する際に変更内容を把握しやすくなります。
+
+## サンプルアプリケーション
+
+- **[example_allegro5/](https://github.com/ocornut/imgui/blob/master/examples/example_allegro5/)**  
+  Allegro 5 の例  
+  **構成：** `main.cpp` + `imgui_impl_allegro5.cpp`
+
+- **[example_android_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_android_opengl3/)**  
+  Android + OpenGL3 (ES) の例  
+  **構成：** `main.cpp` + `imgui_impl_android.cpp` + `imgui_impl_opengl3.cpp`
+
+- **[example_apple_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_metal/)**  
+  macOS & iOS + Metal の例  
+  **構成：** `main.m` + `imgui_impl_osx.mm` + `imgui_impl_metal.mm`  
+  ※この例はXcode 9以降の「クロスプラットフォーム」ゲームテンプレートに基づいています。  
+  **注意：** `imgui_impl_osx.mm` は他のバックエンドほど機能が充実していません。WindowsやLinuxもサポートするGLFWやSDLのバックエンドを使用する方が良い場合があります。
+
+- **[example_apple_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_apple_opengl2/)**  
+  macOS + OpenGL2 の例  
+  **構成：** `main.mm` + `imgui_impl_osx.mm` + `imgui_impl_opengl2.cpp`  
+  **注意：** 他のバックエンドと比較すると機能が制限されています。GLFWやSDLを検討してください。
+
+- **[example_glfw_wgpu/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_wgpu/)**  
+  GLFW + WebGPU の例（Emscripten（Web）やDawn（デスクトップ）をサポート）  
+  **構成：** `main.cpp` + `imgui_impl_glfw.cpp` + `imgui_impl_wgpu.cpp`  
+  **注記：** `example_glfw_opengl3` や `example_sdl2_opengl3` の例もEmscriptenをサポートしています。
+
+- **[example_glfw_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_metal/)**  
+  GLFW（Mac）+ Metal の例  
+  **構成：** `main.mm` + `imgui_impl_glfw.cpp` + `imgui_impl_metal.mm`
+
+- **[example_glfw_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl2/)**  
+  GLFW + OpenGL2 の例（旧式、固定パイプライン）。  
+  **構成：** `main.cpp` + `imgui_impl_glfw.cpp` + `imgui_impl_opengl2.cpp`  
+  **注意：モダンなOpenGLやWebGL（シェーダー、VBO、VAOなど）を使用している場合、このコードは使用しないでください。**  
+  このコードは主にDear ImGuiの統合方法を学ぶための短い参考例として提供されています。ただし、GL3+コンテキストやモダンなOpenGL呼び出しを使用している場合、このレンダラーを使うと問題が発生しやすく、GL属性を初期状態に戻す必要があり、GPUドライバが混乱する可能性があります。評価：★1、おすすめしません。
+
+- **[example_glfw_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/)**  
+  GLFW（Win32、Mac、Linux）+ OpenGL3+/ES2/ES3 の例（モダン、プログラマブルパイプライン）。  
+  **構成：** `main.cpp` + `imgui_impl_glfw.cpp` + `imgui_impl_opengl3.cpp`  
+  モダンなOpenGL呼び出しとカスタムシェーダーを使用します。  
+  この例はEmscriptenでビルドし、WebGLをターゲットにすることをサポートしています。  
+  **モダンなOpenGLやWebGLを使用している場合は、この例を使用してください。**
+
+- **[example_glfw_vulkan/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_vulkan/)**  
+  GLFW（Win32、Mac、Linux）+ Vulkan の例。  
+  **構成：** `main.cpp` + `imgui_impl_glfw.cpp` + `imgui_impl_vulkan.cpp`  
+  この例はVulkanの特性により、コードが非常に長く、手間がかかります。`main.cpp`では例外的に `imgui_impl_vulkan.h/cpp` からヘルパー関数を使用しています。
+
+- **[example_glut_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_glut_opengl2/)**  
+  GLUT（例：Linux/WindowsのFreeGLUT、macOSのGLUTフレームワーク）+ OpenGL2 の例。  
+  **構成：** `main.cpp` + `imgui_impl_glut.cpp` + `imgui_impl_opengl2.cpp`  
+  **注意：** GLUT/FreeGLUTはほぼ廃止されているため、GLFWやSDLの使用を推奨します。
+
+- **[example_null/](https://github.com/ocornut/imgui/blob/master/examples/example_null/)**  
+  Nullの例。imguiをコンパイルしてリンクし、コンテキストを作成し、入力やグラフィック出力なしでヘッドレスで実行します。  
+  **構成：** `main.cpp`  
+  この例は、できるだけ多くの設定でコアimguiファイルのコンパイルを迅速にテストするために使用されます。このアプリケーションはウィンドウやグラフィックコンテキストを作成しないため、グラフィック出力はありません。
+
+- **[example_sdl2_directx11/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_directx11/)**  
+  SDL2 + DirectX11 の例（Windows専用）。  
+  **構成：** `main.cpp` + `imgui_impl_sdl2.cpp` + `imgui_impl_dx11.cpp`  
+  この例はDirectXとSDL2の使用方法を示します。
+
+- **[example_sdl2_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_metal/)**  
+  SDL2 + Metal の例（Mac専用）。  
+  **構成：** `main.mm` + `imgui_impl_sdl2.cpp` + `imgui_impl_metal.mm`
+
+- **[example_sdl2_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_opengl2/)**  
+  SDL2（Win32、Mac、Linuxなど）+ OpenGL の例（旧式、固定パイプライン）。  
+  **構成：** `main.cpp` + `imgui_impl_sdl2.cpp` + `imgui_impl_opengl2.cpp`  
+  **注意：モダンなOpenGLやWebGLを使用している場合、このコードは使用しないでください。**  
+  このコードは主にDear ImGuiの統合方法を学ぶための短い参考例として提供されています。ただし、GL3+コンテキストやモダンなOpenGL呼び出しを使用している場合、このレンダラーは問題を引き起こしやすく、GL属性を初期状態に戻す必要があり、GPUドライバが混乱する可能性があります。評価：★1、おすすめしません。
+
+- **[example_sdl2_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_opengl3/)**  
+  SDL2（Win32、Mac、Linuxなど）+ OpenGL3+/ES2/ES3 の例。  
+  **構成：** `main.cpp` + `imgui_impl_sdl2.cpp` + `imgui_impl_opengl3.cpp`  
+  モダンなOpenGL呼び出しとカスタムシェーダーを使用します。  
+  この例はEmscriptenでビルドし、WebGLをターゲットにすることをサポートしています。  
+  **モダンなOpenGLやWebGLを使用している場合は、この例を使用してください。**
+
+- **[example_sdl2_sdlrenderer2/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_sdlrenderer2/)**  
+  SDL2（Win32、Mac、Linuxなど）+ SDL_Rendererを使用した例（SDL2のほとんどのグラフィックスバックエンドをサポート）。  
+  **構成：** `main.cpp` + `imgui_impl_sdl2.cpp` + `imgui_impl_sdlrenderer.cpp`  
+  **要件：** SDL 2.0.18以降（2021年11月リリース）
+
+- **[example_sdl2_vulkan/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_vulkan/)**  
+  SDL2（Win32、Mac、Linuxなど）+ Vulkanの例。  
+  **構成：** `main.cpp` + `imgui_impl_sdl2.cpp` + `imgui_impl_vulkan.cpp`  
+  Vulkanを使用するため、コードが非常に長く手間がかかります。`main.cpp`では例外的に `imgui_impl_vulkan.h/cpp` のヘルパー関数を使用しています。
+
+- **[example_win32_directx9/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx9/)**  
+  DirectX9の例（Windows専用）。  
+  **構成：** `main.cpp` + `imgui_impl_win32.cpp` + `imgui_impl_dx9.cpp`
 
-Additional resources:
-- Read FAQ at https://www.dearimgui.com/faq
-- Read 'PROGRAMMER GUIDE' section in imgui.cpp.
-- Read the comments and instruction at the top of each file.
+- **[example_win32_directx10/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx10/)**  
+  DirectX10の例（Windows専用）。  
+  **構成：** `main.cpp` + `imgui_impl_win32.cpp` + `imgui_impl_dx10.cpp`
 
-If you are using any of the backends provided here, you can add the backends/imgui_impl_xxxx(.cpp,.h)
-files to your project and use as-in. Each imgui_impl_xxxx.cpp file comes with its own individual
-Changelog, so if you want to update them later it will be easier to catch up with what changed.
+- **[example_win32_directx11/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx11/)**  
+  DirectX11の例（Windows専用）。  
+  **構成：** `main.cpp` + `imgui_impl_win32.cpp` + `imgui_impl_dx11.cpp`
 
+- **[example_win32_directx12/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx12/)**  
+  DirectX12の例（Windows専用）。  
+  **構成：** `main.cpp` + `imgui_impl_win32.cpp` + `imgui_impl_dx12.cpp`  
+  DirectX12を使用するため、コードが非常に長く手間がかかります。
 
-### Examples Applications
+- **[example_win32_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_opengl3/)**  
+  Windowsネイティブ + OpenGL3（モダンなプログラマブルパイプライン）の例。  
+  **構成：** `main.cpp` + `imgui_impl_win32.cpp` + `imgui_impl_opengl3.cpp`
 
-[example_allegro5/](https://github.com/ocornut/imgui/blob/master/examples/example_allegro5/) 
 
-Allegro 5 example. 
+## その他
 
-= main.cpp + imgui_impl_allegro5.cpp
+### ビルドについて
 
-[example_android_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_android_opengl3/) 
+外部ライブラリを使用して移植性の高いビルドファイルを作成・維持するのは、現在でも手間がかかります。そのため、以下の形式で提供しています：
+- Linux/OSX向けのMakefile
+- Visual Studio 2008以降向けのバッチファイル
+- Visual Studio 2012以降向けの`.sln`プロジェクトファイル
+- Appleプラットフォーム向けのXcodeプロジェクトファイル  
 
-Android + OpenGL3 (ES) example. 
+これらがあなたの環境で動作しない場合はお知らせください！また、`imgui_impl_xxx.cpp/.h`ファイルを自分のコードベースにインポートするか、コマンドラインコンパイラで直接コンパイルすることもできます。
 
-= main.cpp + imgui_impl_android.cpp + imgui_impl_opengl3.cpp
+CMakeを使用して例をビルドおよびリンクする方法については、以下を参照してください：
+- [Pull Request #1713](https://github.com/ocornut/imgui/pull/1713)
+- [Pull Request #3027](https://github.com/ocornut/imgui/pull/3027)
 
-[example_apple_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_metal/) 
+### マウスカーソルの遅延について
 
-OSX & iOS + Metal example. 
+Dear ImGuiはほとんどの動作において特別な遅延を追加していません。たとえば、`NewFrame()`の前に渡された最後の`io.AddMousePosEvent()`の値に基づいて、`EndFrame()`または`Render()`時点でウィンドウが正しい位置に移動します。60FPSで動作していれば快適な使用感が得られるはずです。
 
-= main.m + imgui_impl_osx.mm + imgui_impl_metal.mm 
+ただし、OSのマウスカーソルは特定のハードウェアアクセラレート経路で描画されるため、通常のグラフィックスAPI（Dear ImGuiウィンドウを含む）で描画されるコンテンツよりスムーズに感じられる場合があります。この違いにより、特に感覚が敏感なユーザーには違和感を与える可能性があります。
 
-It is based on the "cross-platform" game template provided with Xcode as of Xcode 9.
-(NB: imgui_impl_osx.mm is currently not as feature complete as other platforms backends.
-You may prefer to use the GLFW Or SDL backends, which will also support Windows and Linux.)
+この違いを視覚化するため、`io.MouseDrawCursor`フラグを有効にしてDear ImGuiが通常のグラフィックスAPIを使用してカーソルを描画するようにすることを検討してください。ただし、60FPSでのカーソル描画は遅く感じられるため、常時有効にすることはおすすめしません。インタラクティブなドラッグ操作中のみにソフトウェアレンダリングカーソルを切り替えるのが良いかもしれません。
 
-[example_apple_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_apple_opengl2/) 
-
-OSX + OpenGL2 example. 
-
-= main.mm + imgui_impl_osx.mm + imgui_impl_opengl2.cpp 
-
-(NB: imgui_impl_osx.mm is currently not as feature complete as other platforms backends.
- You may prefer to use the GLFW Or SDL backends, which will also support Windows and Linux.)
-
-[example_glfw_wgpu/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_wgpu/) 
-
-GLFW + WebGPU example. Supports Emscripten (web) or Dawn (desktop) 
-
-= main.cpp + imgui_impl_glfw.cpp + imgui_impl_wgpu.cpp
-Note that the 'example_glfw_opengl3' and 'example_sdl2_opengl3' examples also supports Emscripten!
-
-[example_glfw_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_metal/) 
-
-GLFW (Mac) + Metal example. 
-
-= main.mm + imgui_impl_glfw.cpp + imgui_impl_metal.mm
-
-[example_glfw_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl2/) 
-
-GLFW + OpenGL2 example (legacy, fixed pipeline). 
-
-= main.cpp + imgui_impl_glfw.cpp + imgui_impl_opengl2.cpp 
-
-**DO NOT USE THIS IF YOUR CODE/ENGINE IS USING MODERN GL or WEBGL (SHADERS, VBO, VAO, etc.)** 
-
-This code is mostly provided as a reference to learn about Dear ImGui integration, because it is shorter.
-If your code is using GL3+ context or any semi modern GL calls, using this renderer is likely to
-make things more complicated, will require your code to reset many GL attributes to their initial
-state, and might confuse your GPU driver. One star, not recommended.
-
-[example_glfw_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_opengl3/) 
-
-GLFW (Win32, Mac, Linux) + OpenGL3+/ES2/ES3 example (modern, programmable pipeline). 
-
-= main.cpp + imgui_impl_glfw.cpp + imgui_impl_opengl3.cpp 
-
-This uses more modern GL calls and custom shaders.
-
-This support building with Emscripten and targeting WebGL.
-
-Prefer using that if you are using modern GL or WebGL in your application.
-
-[example_glfw_vulkan/](https://github.com/ocornut/imgui/blob/master/examples/example_glfw_vulkan/) 
-
-GLFW (Win32, Mac, Linux) + Vulkan example. 
-
-= main.cpp + imgui_impl_glfw.cpp + imgui_impl_vulkan.cpp 
-
-This is quite long and tedious, because: Vulkan.
-For this example, the main.cpp file exceptionally use helpers function from imgui_impl_vulkan.h/cpp.
-
-[example_glut_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_glut_opengl2/) 
-
-GLUT (e.g., FreeGLUT on Linux/Windows, GLUT framework on OSX) + OpenGL2 example. 
-
-= main.cpp + imgui_impl_glut.cpp + imgui_impl_opengl2.cpp 
-
-Note that GLUT/FreeGLUT is largely obsolete software, prefer using GLFW or SDL.
-
-[example_null/](https://github.com/ocornut/imgui/blob/master/examples/example_null/) 
-
-Null example, compile and link imgui, create context, run headless with no inputs and no graphics output. 
-
-= main.cpp 
-
-This is used to quickly test compilation of core imgui files in as many setups as possible.
-Because this application doesn't create a window nor a graphic context, there's no graphics output.
-
-[example_sdl2_directx11/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_directx11/) 
-
-SDL2 + DirectX11 example, Windows only. 
-
-= main.cpp + imgui_impl_sdl2.cpp + imgui_impl_dx11.cpp 
-
-This to demonstrate usage of DirectX with SDL2.
-
-[example_sdl2_metal/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_metal/) 
-
-SDL2 + Metal example, Mac only. 
-
-= main.mm + imgui_impl_sdl2.cpp + imgui_impl_metal.mm
-
-[example_sdl2_opengl2/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_opengl2/) 
-
-SDL2 (Win32, Mac, Linux etc.) + OpenGL example (legacy, fixed pipeline). 
-
-= main.cpp + imgui_impl_sdl2.cpp + imgui_impl_opengl2.cpp 
-
-**DO NOT USE OPENGL2 CODE IF YOUR CODE/ENGINE IS USING GL OR WEBGL (SHADERS, VBO, VAO, etc.)** 
-
-This code is mostly provided as a reference to learn about Dear ImGui integration, because it is shorter.
-If your code is using GL3+ context or any semi modern GL calls, using this renderer is likely to
-make things more complicated, will require your code to reset many GL attributes to their initial
-state, and might confuse your GPU driver. One star, not recommended.
-
-[example_sdl2_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_opengl3/) 
-
-SDL2 (Win32, Mac, Linux, etc.) + OpenGL3+/ES2/ES3 example. 
-
-= main.cpp + imgui_impl_sdl2.cpp + imgui_impl_opengl3.cpp 
-
-This uses more modern GL calls and custom shaders. 
-
-This support building with Emscripten and targeting WebGL.
-
-Prefer using that if you are using modern GL or WebGL in your application.
-
-[example_sdl2_sdlrenderer2/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_sdlrenderer2/) 
-
-SDL2 (Win32, Mac, Linux, etc.) + SDL_Renderer for SDL2 (most graphics backends are supported underneath) 
-
-= main.cpp + imgui_impl_sdl2.cpp + imgui_impl_sdlrenderer.cpp 
-
-This requires SDL 2.0.18+ (released November 2021) 
-
-
-[example_sdl2_vulkan/](https://github.com/ocornut/imgui/blob/master/examples/example_sdl2_vulkan/) 
-
-SDL2 (Win32, Mac, Linux, etc.) + Vulkan example. 
-
-= main.cpp + imgui_impl_sdl2.cpp + imgui_impl_vulkan.cpp 
-
-This is quite long and tedious, because: Vulkan. 
-
-For this example, the main.cpp file exceptionally use helpers function from imgui_impl_vulkan.h/cpp.
-
-[example_win32_directx9/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx9/) 
-
-DirectX9 example, Windows only. 
-
-= main.cpp + imgui_impl_win32.cpp + imgui_impl_dx9.cpp
-
-[example_win32_directx10/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx10/) 
-
-DirectX10 example, Windows only. 
-
-= main.cpp + imgui_impl_win32.cpp + imgui_impl_dx10.cpp
-
-[example_win32_directx11/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx11/) 
-
-DirectX11 example, Windows only. 
-
-= main.cpp + imgui_impl_win32.cpp + imgui_impl_dx11.cpp
-
-[example_win32_directx12/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_directx12/) 
-
-DirectX12 example, Windows only. 
-
-= main.cpp + imgui_impl_win32.cpp + imgui_impl_dx12.cpp 
-
-This is quite long and tedious, because: DirectX12.
-
-[example_win32_opengl3/](https://github.com/ocornut/imgui/blob/master/examples/example_win32_opengl3/) 
-
-Raw Windows + OpenGL3 + example (modern, programmable pipeline) 
-
-= main.cpp + imgui_impl_win32.cpp + imgui_impl_opengl3.cpp 
-
-
-
-### Miscellaneous
-
-**Building**
-
-Unfortunately nowadays it is still tedious to create and maintain portable build files using external
-libraries (the kind we're using here to create a window and render 3D triangles) without relying on
-third party software and build systems. For most examples here we choose to provide:
- - Makefiles for Linux/OSX
- - Batch files for Visual Studio 2008+
- - A .sln project file for Visual Studio 2012+
- - Xcode project files for the Apple examples
-Please let us know if they don't work with your setup!
-You can probably just import the imgui_impl_xxx.cpp/.h files into your own codebase or compile those
-directly with a command-line compiler.
-
-If you are interested in using Cmake to build and links examples, see:
-  https://github.com/ocornut/imgui/pull/1713 and https://github.com/ocornut/imgui/pull/3027
-
-**About mouse cursor latency**
-
-Dear ImGui has no particular extra lag for most behaviors,
-e.g. the last value passed to 'io.AddMousePosEvent()' before NewFrame() will result in windows being moved
-to the right spot at the time of EndFrame()/Render(). At 60 FPS your experience should be pleasant.
-
-However, consider that OS mouse cursors are typically drawn through a very specific hardware accelerated
-path and will feel smoother than the majority of contents rendered via regular graphics API (including,
-but not limited to Dear ImGui windows). Because UI rendering and interaction happens on the same plane
-as the mouse, that disconnect may be jarring to particularly sensitive users.
-You may experiment with enabling the io.MouseDrawCursor flag to request Dear ImGui to draw a mouse cursor
-using the regular graphics API, to help you visualize the difference between a "hardware" cursor and a
-regularly rendered software cursor.
-However, rendering a mouse cursor at 60 FPS will feel sluggish so you likely won't want to enable that at
-all times. It might be beneficial for the user experience to switch to a software rendered cursor _only_
-when an interactive drag is in progress.
-
-Note that some setup or GPU drivers are likely to be causing extra display lag depending on their settings.
-If you feel that dragging windows feels laggy and you are not sure what the cause is: try to build a simple
-drawing a flat 2D shape directly under the mouse cursor!
+GPUドライバや設定により、追加の表示遅延が発生する場合があります。ウィンドウのドラッグが遅れて感じられる場合、その原因がわからない場合は、マウスカーソルの直下に単純な2D図形を描画するテストを試してみてください。

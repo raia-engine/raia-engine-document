@@ -1,72 +1,74 @@
-# Terra-Lua Equivalents for C/C++ Programmers
+# C/C++プログラマー向けのTerra-Lua対応表
 
-The semantics of Terra are very close to C/C++, but because of its close integration with Lua, the same things might be written a different way. This quick reference sheet shows C++ snippets with equivalent Lua-Terra snippets to make it easier to learn how to program in Terra. A third column shows how to meta-program constructs when applicable.
+TerraのセマンティクスはC/C++に非常に近いですが、Luaとの密接な統合のために、同じ内容でも異なる方法で記述される場合があります。このクイックリファレンスシートでは、C++のコードスニペットと、それに相当するLua-Terraのスニペットを並べて表示し、Terraでのプログラミング方法を学びやすくしています。必要に応じて、メタプログラミングの構文も第3の列で示します。
 
-Content based on <a href="http://www.pa.msu.edu/~duxbury/courses/phy480/Cpp_refcard.pdf">C++ Quick Reference</a> Add a pull request want an additional example that isn't shown here.
+この内容は、[C++クイックリファレンス](https://web.archive.org/web/20170304111933/http://www.pa.msu.edu/~duxbury/courses/phy480/Cpp_refcard.pdf)に基づいています。他に追加したい例があれば、Pull Requestを送ってください。
 
-## Contexts
+[[TOC]]
+
+## 文脈
 
 ::: code-group
 
 ```cpp [C++]
-// function/global declaration context:
+// 関数/グローバル宣言の文脈:
 typedef int MyInt;
 MyInt x;
 
 int f() {
-    // C++ code context:
+    // C++コードの文脈:
     MyInt bar = x + 1;
-//  ~~~~~ C++ type context
+//  ~~~~~ C++型の文脈
 
     return bar;
 }
 
 struct S {
-    // struct definition context:
+    // 構造体定義の文脈:
     int a;
- // ~~~ type context
+ // ~~~ 型の文脈
     float b;
 };
 ```
 
 ```lua [Lua/Terra]
--- Lua context (any Lua code here)
-MyInt = int -- assignment to Lua variable 'MyInt'
+-- Lua文脈 (ここでは任意のLuaコードが書ける)
+MyInt = int -- Lua変数 'MyInt' への代入
 x = global(MyInt)
 
 terra f()
-    -- Terra context
+    -- Terra文脈
     var bar : MyInt = x + 1
-    --        ~~~~~ _Lua_ context, any Lua can go here,
-    --  but it needs to evaluate to a Terra type
+    --        ~~~~~ _Lua_ 文脈, ここでは任意のLuaコードが記述可能
+    -- ただし、それがTerra型として評価される必要がある
     return bar
 end
 
 struct S {
     a : int
-    --  ~~~ _Lua_ context, evaluates to a Terra type
+    --  ~~~ _Lua_ 文脈, Terra型として評価される
     b : float
 }
 
--- Meta-programming Lua-Terra creates additional places
--- where the context changes.
+-- メタプログラミングによるLua-Terraは、
+-- 追加で文脈が変わる箇所を作り出します。
 
 function g() return `4+5 end
---                  ~~~~ Terra context, a quote creates a 
---                       Terra expression from Lua
+--                  ~~~~ Terra文脈, クォートは
+--                       LuaからTerra式を生成する
 
 terra h()
     var baz = [ g() ]
-    --        ~~~~~~~ Lua context, an escape breaks
-    --  into Lua and evaluates to a Terra expression
+    --        ~~~~~~~ Lua文脈, エスケープは
+    --  Luaに入り、Terra式として評価される
 end
 ```
 
-:::
+::: 
 
-## Preprocessor
+## プリプロセッサ
 
-### Using multiple files
+### 複数ファイルの使用
 
 ::: code-group
 
@@ -80,8 +82,8 @@ void f() {
 
 ```lua [Lua/Terra]
 local myfile = require("myfile")
--- use Lua's require to load another Lua file
--- Terra functions can be stored in a table myfiles
+-- Luaのrequireを使って他のLuaファイルを読み込む
+-- Terra関数はテーブルmyfileに格納できる
 terra f()
     myfile.myfunction()
 end
@@ -89,7 +91,7 @@ end
 
 :::
 
-### Using C functions
+### C関数の使用
 
 ::: code-group
 
@@ -104,10 +106,10 @@ int main() {
 ```lua [Lua/Terra]
 local C = terralib.includecstring [[
     #include<stdio.h>
-    #include<malloc.h
+    #include<malloc.h>
 ]]
--- can also use terralib.includec("stdio.h") for single file
--- C is a table of functions (C.printf) and types (C.FILE)
+-- 単一のファイルには terralib.includec("stdio.h") を使用可能
+-- Cは関数 (例: C.printf) や型 (例: C.FILE) を格納するテーブル
 ...
 terra hello()
     C.printf("hello, world\n")
@@ -116,7 +118,7 @@ end
 
 :::
 
-### Preprocessor Macro Equivalents
+### プリプロセッサマクロの等価
 
 ::: code-group
 
@@ -126,13 +128,13 @@ end
 
 ```lua [Lua/Terra]
 local X = `3+3
--- Lua variables can hold values that get substituted into Terra functions
--- the quotation (`) creates a Terra expression directly from Lua
+-- Lua変数はTerra関数内で置き換え可能な値を保持できる
+-- クォート (`) によりLuaから直接Terra式を生成
 ```
 
 :::
 
-### Macro functions
+### マクロ関数
 
 ::: code-group
 
@@ -148,12 +150,12 @@ end)
 
 :::
 
-### Conditional Compilation
+### 条件付きコンパイル
 
 ::: code-group
 
 ```cpp [C++]
-// Use #ifdef to control how functions are defined
+// #ifdef を使用して関数の定義を制御
 #ifdef __WIN32
     char * getOS() { return "Windows"; }
 #else
@@ -162,7 +164,7 @@ end)
 ```
 
 ```lua [Lua/Terra]
--- use Lua to control how a Terra function is defined
+-- Luaを使用してTerra関数の定義を制御
 if terralib.os == "Windows" then
     terra getOS() return "Windows" end
 else
@@ -172,7 +174,7 @@ end
 
 :::
 
-## Literals
+## リテラル
 
 ::: code-group
 
@@ -183,24 +185,24 @@ end
 "strings\n"
 'a'
 "hello" "world"
-true, false // booleans
+true, false // ブーリアン
 ```
 
 ```lua [Lua/Terra]
 255, 0377, 0xff
-2147483647LL, 0x7fffffffULL -- these match LuaJIT literals for long numbers
+2147483647LL, 0x7fffffffULL -- long数値のリテラルはLuaJITに準拠
 123.0, 1.23e2 
-"strings\n" or 'strings\n' or [[strings\n]] -- match Lua strings
-("a")[0] -- no built in literal for char, so index a string (or make a function that )
-[ "hello".."world" ] -- escape to Lua and concat the strings there
+"strings\n" または 'strings\n' または [[strings\n]] -- Lua文字列に対応
+("a")[0] -- char用の組み込みリテラルはないので、文字列をインデックス化する（または関数を作成）
+[ "hello".."world" ] -- Luaにエスケープして文字列を連結
 true, false
 ```
 
 :::
 
-## Declarations and Type Constructors
+## 宣言と型コンストラクタ
 
-### Declaring variables
+### 変数の宣言
 
 ::: code-group
 
@@ -237,7 +239,7 @@ end
 
 :::
 
-### Sizing integer types
+### 整数型のサイズ指定
 
 ::: code-group
 
@@ -251,7 +253,7 @@ var s : int16, l : int64
 
 :::
 
-### Non-integer primitive types
+### 非整数の基本型
 
 ::: code-group
 
@@ -263,71 +265,69 @@ bool b;
 
 ```lua [Lua/Terra]
 var c : int8 = ('a')[0] 
-var f :float, d : double 
+var f : float, d : double 
 var b : bool
 ```
 
 :::
 
-### Multiple Declarations
+### 複数宣言
 
 ::: code-group
 
 ```cpp [C++]
-int a = 1,b = 2,c = 3;
+int a = 1, b = 2, c = 3;
 ```
 
 ```lua [Lua/Terra]
-var a : int,b : int,c : int = 1,2,3
+var a : int, b : int, c : int = 1, 2, 3
 ```
 
 :::
 
-### Arrays
+### 配列
 
 ::: code-group
 
 ```cpp [C++]
 int a[10];
-int a[]={0,1,2};
-float a[]={0,1,2};
-int a[2][3]={ {1,2,3},{4,5,6} }; 
+int a[] = {0, 1, 2};
+float a[] = {0, 1, 2};
+int a[2][3] = { {1, 2, 3}, {4, 5, 6} }; 
 ```
 
 ```lua [Lua/Terra]
 var a : int[10];
-var a : int[3] = array(0,1,2)
--- 'array' is an expression
--- not an initializer like C++
-var a = arrayof([float],0,1,2) 
--- use arrayof to specify a type different
--- from the expressions used to initialize it
-var a : (int[3])[2] = array(array(1,2,3),array(4,5,6)); 
+var a : int[3] = array(0, 1, 2)
+-- 'array' は式であり、
+-- C++のような初期化子ではない
+var a = arrayof([float], 0, 1, 2) 
+-- arrayofを使用して、初期化に使用する式とは異なる型を指定
+var a : (int[3])[2] = array(array(1, 2, 3), array(4, 5, 6)); 
 ```
 
 :::
 
-### Pointers
+### ポインタ
 
 ::: code-group
 
 ```cpp [C++]
 int* p; 
-char * s ="hello";
+char * s = "hello";
 void* p = NULL;
 ```
 
 ```lua [Lua/Terra]
 var p : &int 
--- read & as 'address of', so &int is an 'address of int'
+-- '&' は「アドレス」を意味し、&int は「int型のアドレス」
 var s : rawstring = "hello" 
--- rawstring == &int8 
+-- rawstring は &int8 と等価
 var p : &opaque = nil
--- opaque replaces void in pointers
+-- opaque はポインタ内のvoidを置き換える
 ```
 
 :::
-
 
 ::: code-group
 
@@ -338,14 +338,14 @@ r.x
 
 ```lua [Lua/Terra]
 var r : &Vec3 = &v
--- references do not exist
+-- 参照 (references) は存在しない
 r.x
--- instead '.' works like -> on pointers
+-- '.' はポインタの '->' と同じように機能
 ```
 
 :::
 
-### Typedefs
+### タイプ定義 (typedef)
 
 ::: code-group
 
@@ -355,8 +355,8 @@ typedef String char*;
 
 ```lua [Lua/Terra]
 local String = &int8 
--- typedefs are just assignments in Lua
--- because Terra types are Lua values
+-- typedefはLuaでは単なる代入
+-- Terra型はLua値であるため
 ```
 
 :::
@@ -371,33 +371,33 @@ const int c = 3;
 
 ```lua [Lua/Terra]
 var c = 3
--- const doesn't exist for variables
+-- constは変数に対して存在しない
 ```
 
 :::
 
-### Enum
+### 列挙型 (Enum)
 
 ::: code-group
 
 ```cpp [C++]
-enum weekend {SAT,SUN};
+enum weekend {SAT, SUN};
 weekend f() {
-    return SAT
+    return SAT;
 }
 ```
 
 ```lua [Lua/Terra]
--- doesn't exist, replicate it with meta-programming
+-- Terraには列挙型が存在しないため、メタプログラミングで再現
 local function Enum(...)
     local t = { type = int }
-    for i,name in ipairs({...}) do
-         -- make 0-based to match C++
+    for i, name in ipairs({...}) do
+        -- C++に合わせて0ベースに設定
         t[name] = i - 1
     end
     return t
 end
-weekend = Enum("SAT","SUN")
+weekend = Enum("SAT", "SUN")
 terra f() : weekend.type
     return weekend.SAT
 end
@@ -405,46 +405,44 @@ end
 
 :::
 
-## Globals
+## グローバル変数
 
 ::: code-group
 
 ```cpp [C++]
 int x = 3;
 const int x = 3;
-int x[] = { 3,4, 5};
-const int x[] = { 3,4,5};
+int x[] = { 3, 4, 5 };
+const int x[] = { 3, 4, 5 };
 void f() {
 }
-
 ```
 
 ```lua [Lua/Terra]
--- Lua functions construct
--- Terra constants
+-- Lua関数はTerra定数を構築する
 x = global(int)
-x = constant(int,3)
-x = global(int,`array(3,4,5))
-x = constant(int,`array(3,4,5))
+x = constant(int, 3)
+x = global(int, `array(3, 4, 5))
+x = constant(int, `array(3, 4, 5))
 terra f()
 end
 ```
 
 ```lua [Meta-programmed]
--- you can create tables of constants
+-- 定数のテーブルを作成可能
 sin_values = {}
 N = 32
-for i = 1,N do
+for i = 1, N do
     sin_values[i] = 
-        math.sin( 2 * math.pi * (i-1)/N))
+        math.sin(2 * math.pi * (i - 1) / N)
 end
--- constant table of sin values embedded in code
-sin_table = constant(`arrayof(float,sin_values))
+-- 定数テーブルをコード内に埋め込み
+sin_table = constant(`arrayof(float, sin_values))
 ```
 
 :::
 
-## Storage Classes
+## 記憶クラス (Storage Classes)
 
 ::: code-group
 
@@ -463,8 +461,7 @@ extern int w;
 ```
 
 ```lua [Lua/Terra]
--- exposed/private symbols are specified 
--- by the 'saveobj' call
+-- 'saveobj' コールで公開/非公開シンボルを指定
 x = global(int)
 y = global(int)
 
@@ -474,14 +471,12 @@ end
 terra f()
     return g()
 end
--- only x and f are exposed as symbols
--- but y and g will be included internally 
--- since they are used
+-- x と f のみがシンボルとして公開される
+-- ただし y と g は内部的に含まれる（使用されているため）
 terralib.saveobj("out.o", { x = x, f = f}) 
 ```
 
 :::
-
 
 ::: code-group
 
@@ -493,22 +488,22 @@ void f() {
 ```
 
 ```lua [Lua/Terra]
--- no direct 'static' equivalent
--- for function variables
--- but you can control the
--- lexical scope of globals
--- using Lua 'do' and 'end'
+-- 関数内変数の'direct static' 相当は存在しない
+-- ただし Lua の 'do' と 'end' を使用して
+-- グローバルの字句スコープを制御可能
 do
-    local z = global(int,0)
+    local z = global(int, 0)
     terra f()
         return z
     end
 end
 ```
 
-## Statements
 
-### Assignments
+
+## 文 (Statements)
+
+### 代入
 
 ::: code-group
 
@@ -519,12 +514,12 @@ x += y;
 
 ```lua [Lua/Terra]
 x = y
-x = x + y -- no += like Lua
+x = x + y -- Luaでは '+=’ のような演算子は存在しない
 ```
 
 :::
 
-### Declarations
+### 宣言
 
 ::: code-group
 
@@ -538,7 +533,7 @@ var x : int
 
 :::
 
-### Semi-Colons
+### セミコロン
 
 ::: code-group
 
@@ -547,13 +542,13 @@ x = y; y = z;
 ```
 
 ```lua [Lua/Terra]
--- Optional for clarity
+-- 明確にするためにオプションで使用可能
 x = y; y = z;
 ```
 
 :::
 
-### Blocks
+### ブロック
 
 ::: code-group
 
@@ -592,7 +587,7 @@ end
 
 :::
 
-### Conditionals
+### 条件分岐
 
 ::: code-group
 
@@ -610,7 +605,7 @@ else <statements> end
 
 :::
 
-### Loops
+### ループ
 
 ::: code-group
 
@@ -627,7 +622,6 @@ end
 ```
 
 :::
-
 
 ::: code-group
 
@@ -647,25 +641,22 @@ end
 
 :::
 
-
 ::: code-group
 
 ```cpp [C++]
 for(int i = 0; i < 100; i++) {
     <statements>
 }
-
 ```
 
 ```lua [Lua/Terra]
-for i = 0,100 do 
-    -- note [0,100) bounds
+for i = 0, 100 do 
+    -- 注意: [0, 100) の範囲
     <statements>
 end 
 ```
 
 :::
-
 
 ::: code-group
 
@@ -683,17 +674,18 @@ until ~b
 
 :::
 
-### Switch
+
+
+### スイッチ (Switch)
 
 ::: code-group
 
 ```cpp [C++]
 switch(x) {
     case X1: a;
-    case X2 : b;
+    case X2: b;
     default: c;
 }
-
 ```
 
 ```lua [Lua/Terra]
@@ -707,7 +699,9 @@ end
 
 :::
 
-### Control Flow
+
+
+### 制御構造 (Control Flow)
 
 ::: code-group
 
@@ -719,13 +713,15 @@ return;
 ```lua [Lua/Terra]
 break
 return
--- note: break/return must
--- end the block
+-- 注意: break/return は
+-- ブロックの終端である必要がある
 ```
 
 :::
 
-### Exceptions
+
+
+### 例外 (Exceptions)
 
 ::: code-group
 
@@ -734,14 +730,16 @@ try { x; }
 ```
 
 ```lua [Lua/Terra]
--- no exceptions, avoiding complexity    
+-- Terraでは例外はサポートされていないため、複雑さを回避
 ```
 
 :::
 
-## Functions
 
-### Defining functions
+
+## 関数
+
+### 関数の定義
 
 ::: code-group
 
@@ -753,22 +751,22 @@ int f(int x, int y) {
 
 ```lua [Lua/Terra]
 terra f(x : int, y : int): int 
-    -- :int return is optional
-    -- for non-recursive functions
+    -- :int 戻り値の型は任意
+    -- 再帰しない関数では省略可能
     return x + y 
 end
 ```
 
 ```lua [Meta-programmed]
-local args = {symbol(int),symbol(int)}
+local args = {symbol(int), symbol(int)}
 terra f([args])
     var s = 0
     escape
-      for _,a in ipairs(args) do
-        emit quote
-          s = s + a
+        for _, a in ipairs(args) do
+            emit quote
+                s = s + a
+            end
         end
-      end
     end
     return s
 end
@@ -780,17 +778,19 @@ end
 
 ```cpp [C++]
 void f() {
-} // no returns
+} // 戻り値なし
 ```
 
 ```lua [Lua/Terra]
-terra f() : {} -- empty tuple means void
+terra f() : {} -- 空のタプルはvoidを意味する
 end
 ```
 
 :::
 
-### Declaring functions
+
+
+### 関数の宣言
 
 ::: code-group
 
@@ -800,16 +800,16 @@ void g();
 ```
 
 ```lua [Lua/Terra]
-terra f :: {int,int} -> int
---         ~~~~~~~~~~~~~~~~ function type
+terra f :: {int, int} -> int
+--         ~~~~~~~~~~~~~~~~ 関数の型
 terra g :: {} -> {}
-           ~~    ~~ empty tuple for void/no-args
+           ~~    ~~ 空のタプルはvoid/引数なしを意味
 ```
 
 ```lua [Meta-programmed]
-local args = {int,int}
+local args = {int, int}
 local ret = int
-local type = args -> reg
+local type = args -> ret
 local void = {} -> {}
 terra f :: type
 terra g :: void
@@ -817,7 +817,8 @@ terra g :: void
 
 :::
 
-### Inlining
+
+### インライン化 (Inlining)
 
 ::: code-group
 
@@ -828,12 +829,14 @@ inline void f();
 ```lua [Lua/Terra]
 f :: {} -> {}
 f:setinlined(true) 
--- actually equivalent to __alwaysinline__
+-- 実際には __alwaysinline__ と同等
 ```
 
 :::
 
-### Operators
+
+
+### 演算子 (Operators)
 
 ::: code-group
 
@@ -847,12 +850,14 @@ T operator+(T x, T y) {
 struct T {}
 terra T.metamethods.__add(x : T, y : T)
 end 
--- always associated with a lhs type
--- 'T'
+-- 常に左辺型 'T' に関連付けられる
 ```
+
 :::
 
-### Overloading
+
+
+### オーバーロード (Overloading)
 
 ::: code-group
 
@@ -868,19 +873,24 @@ float max(float a, float b) {
 ```lua [Lua/Terra]
 max = terralib.overloadedfunction("max" { 
     terra(a : int, b : int) 
-        return terralib.select( a > b, a, b)
+        return terralib.select(a > b, a, b)
     end,
     terra(a : float, b : float) 
-        return terralib.select( a > b, a, b)
+        return terralib.select(a > b, a, b)
     end
 })
 ```
 
-## Expressions
 
-Basically same semantics as C++: From the Quick Reference "Operators are grouped by precedence, highest first. Unary operators and assignment evaluate right to left. Allothers are left to right. Precedence does not affect order of evaluation, which is undefined. There are no run time checks for arrays out of bounds, invalid pointers, etc. "
 
-### Working with namespaces
+## 式 (Expressions)
+
+C++と基本的に同じ意味論:  
+クイックリファレンスより「演算子は優先順位でグループ化され、最高優先順位から始まる。単項演算子と代入は右から左、その他は左から右に評価される。優先順位は評価の順序に影響を与えない（未定義）。配列の範囲外、無効なポインタなどのランタイムチェックは存在しない。」
+
+
+
+### 名前空間の操作
 
 ::: code-group
 
@@ -900,14 +910,15 @@ N.f = terra() end
 terra g()
     N.f()
 end
--- when N is just a Lua table
--- N.f is replaced with the value
--- N["f"] in the terra code
+-- N は単なる Lua テーブル
+-- Terraコード内では N.f は N["f"] に置き換えられる
 ```
 
 :::
 
-### Pointers and members
+
+
+### ポインタとメンバー
 
 ::: code-group
 
@@ -917,7 +928,6 @@ end
 t.x
 
 p->x
-
 ```
 
 ```lua [Lua/Terra]
@@ -925,37 +935,39 @@ p->x
 @p
 t.x
 
-p.x -- '.' works like ->
+p.x -- '.' は '->' のように動作
 ```
 
 ```lua [Meta-programmed]
 &[<luaexp>]
 @[<luaexp>]
 t.[("xyz"):sub(1,1)]
---~~~~~~~~~~~~~~~~~ any lua exp resulting in a string
+--~~~~~~~~~~~~~~~~~ 任意のLua式 (文字列を結果とする)
 p.["x"]
---~~~~~ same here
+--~~~~~ 同様
 ```
 
 :::
 
-### Array index and function calls
+
+
+### 配列のインデックスと関数呼び出し
 
 ::: code-group
 
 ```cpp [C++]
 void g(int* a, int i, T t) {
     a[i]
-    f(x,y)
-    t(x,y)
+    f(x, y)
+    t(x, y)
 }
 ```
 
 ```lua [Lua/Terra]
 terra g(a : &int, i : int, t : T)
     a[i]
-    f(a,i)
-    t(a,i)
+    f(a, i)
+    t(a, i)
 end
 ```
 
@@ -964,35 +976,39 @@ local
 terra g(a : &int, i : int, t : T)
     a[i]
     escape
-      local args = { a, i }
-      emit quote
-        f([args])
-        t([args])
-      end
+        local args = { a, i }
+        emit quote
+            f([args])
+            t([args])
+        end
     end
 end
 ```
 
 :::
 
-### Updates
+
+
+### 更新操作 (Updates)
 
 ::: code-group
 
 ```cpp [C++]
-x++,++x
-x--,--x
+x++, ++x
+x--, --x
 ```
 
 ```lua [Lua/Terra]
--- Do not exist
--- use statements
+-- 存在しない
+-- ステートメントを使用
 x = x + 1
 ```
 
 :::
 
-### RTTI
+
+
+### ランタイム型情報 (RTTI)
 
 ::: code-group
 
@@ -1002,21 +1018,23 @@ dynamic_cast<T>(x)
 ```
 
 ```lua [Lua/Terra]
--- no build-in equivalents, you can build your own:
+-- 組み込みの相当機能はなし、自作可能
 local nextid = 0
 local function addtypeid(T)
-    T.entries:insert(1,{"_typeid",int})
+    T.entries:insert(1, { "_typeid", int })
     T.metamethods._typeid = nextid
     terra T:init()
         self._typeid = nextid
     end
     nextid = nextid + 1
 end
+
 terra typeid(v : &opaque)
-    -- extract first member
+    -- 最初のメンバーを抽出
     var typeid = @[&int](v)
     return typeid
 end
+
 local function dynamic_cast(T)
     local tid = T.metamethods._typeid
     return terra(v : &opaque)
@@ -1028,6 +1046,7 @@ local function dynamic_cast(T)
     end
 end
 dynamic_cast = terralib.memoize(dynamic_cast)
+
 struct A { 
     a : int
 }
@@ -1036,7 +1055,9 @@ struct B {
 }
 addtypeid(A)
 addtypeid(B)
+
 C = terralib.includec("stdio.h")
+
 terra f(v : &opaque)
     var a = [dynamic_cast(A)](v)
     var b = [dynamic_cast(B)](v)
@@ -1046,6 +1067,7 @@ terra f(v : &opaque)
         C.printf("B\n")
     end
 end
+
 terra g()
     var a : A
     var b : B
@@ -1058,7 +1080,9 @@ end
 
 :::
 
-### Casts
+
+
+### キャスト (Casts)
 
 ::: code-group
 
@@ -1070,13 +1094,13 @@ end
 ```lua [Lua/Terra]
 [T](x)
 [&T](x)
--- you are applying the 
--- Terra type 'T' like a function.
--- Because type constructors like '&T'
--- are Lua expressions, you need to use
--- an escape '[T]' in general
-</code></pre></div>
-<div class="highlighter-rouge" style="margin: 0; display: inline-block;"><small>Meta-programmed</small><pre class="highlight"><code>local PT = &int
+-- Terra型 'T' を関数のように適用している
+-- '&T' のような型コンストラクタはLua式であるため
+-- 一般的にエスケープ '[T]' を使用する必要がある
+```
+
+```lua [Meta-programmed]
+local PT = &int
 terra f(a : &opaque) : PT
     return PT(a)
 end
@@ -1084,7 +1108,9 @@ end
 
 :::
 
-### Sizeof
+
+
+### サイズ取得 (Sizeof)
 
 ::: code-group
 
@@ -1100,7 +1126,9 @@ sizeof([(`t):gettype()])
 
 :::
 
-### Allocation
+
+
+### メモリ確保 (Allocation)
 
 ::: code-group
 
@@ -1114,13 +1142,13 @@ new T //malloc, use a std.t metatype, or build your own
 
 :::
 
-### Arithmetic
+### 算術演算子 (Arithmetic)
 
 ::: code-group
 
 ```cpp [C++]
 -x
-+x //DNE
++x //存在しない
 x * y
 x / y
 x % y
@@ -1130,24 +1158,26 @@ x - y
 
 ```lua [Lua/Terra]
 -x
-x -- no '+' prefix
+x -- '+' のプレフィックスはない
 x * y
 x / y
 x % y
-x + y -- also pointers
-x - y -- also pointers
+x + y -- ポインタにも対応
+x - y -- ポインタにも対応
 ```
 
 ```lua [Meta-programmed]
 local plus = "+"
 terra two()
-    return operator(plus,1,2)
+    return operator(plus, 1, 2)
 end
 ```
 
 :::
 
-### Comparisons
+
+
+### 比較演算子 (Comparisons)
 
 ::: code-group
 
@@ -1171,7 +1201,9 @@ x ~= y
 
 :::
 
-### Logical and Bitwise Operators
+
+
+### 論理およびビット演算子 (Logical and Bitwise Operators)
 
 ::: code-group
 
@@ -1180,11 +1212,10 @@ x ~= y
 ```
 
 ```lua [Lua/Terra]
-not x -- bitwise for integers
+not x -- 整数のビット単位反転
 ```
 
 :::
-
 
 ::: code-group
 
@@ -1193,11 +1224,10 @@ not x -- bitwise for integers
 ```
 
 ```lua [Lua/Terra]
-not b -- logical for booleans
+not b -- ブール値の論理否定
 ```
 
 :::
-
 
 ::: code-group
 
@@ -1212,7 +1242,6 @@ x >> y
 ```
 
 :::
-
 
 ::: code-group
 
@@ -1222,12 +1251,11 @@ x || y
 ```
 
 ```lua [Lua/Terra]
-b and d -- logical 'and' for booleans
-b or d -- short circuits
+b and d -- ブール値の論理 'and'
+b or d -- 短絡評価 (short circuits)
 ```
 
 :::
-
 
 ::: code-group
 
@@ -1237,12 +1265,11 @@ x | y
 ```
 
 ```lua [Lua/Terra]
-x and y -- bitwise 'and' for integers
-x or y  -- _no_ short circuit
+x and y -- 整数のビット単位 'and'
+x or y  -- 短絡評価なし
 ```
 
 :::
-
 
 ::: code-group
 
@@ -1256,7 +1283,9 @@ x ^ y
 
 :::
 
-### Other Stuff
+
+
+### その他 (Other Stuff)
 
 ::: code-group
 
@@ -1265,32 +1294,32 @@ x ? y : z
 ```
 
 ```lua [Lua/Terra]
-terralib.select(x,y,z) -- _no_ short circuit
+terralib.select(x, y, z) -- 短絡評価なし
 ```
 
 :::
 
-
 ::: code-group
 
 ```cpp [C++]
-throw x; // no exceptions, consider using longjmp,setjmp
-
+throw x; // 例外はない。longjmp, setjmpの使用を検討
 ```
 
 ```lua [Lua/Terra]
--- no exceptions
--- consider longjmp, setjmp
+-- 例外はなし
+-- longjmp, setjmp の使用を検討
 ```
 
 :::
 
-### Templates
+
+
+### テンプレート (Templates)
 
 ::: code-group
 
 ```cpp [C++]
-// Overload f for all types
+// 全ての型に対して f をオーバーロード
 template <class T> 
 T f(T t) {
 }
@@ -1301,7 +1330,7 @@ function f(T)
     return terra(t : T) : T
     end
 end
--- only generate one function per unique 'T'
+-- ユニークな 'T' ごとに1つの関数のみ生成
 f = terralib.memoize(f)
 ```
 
@@ -1310,7 +1339,7 @@ f = terralib.memoize(f)
 ::: code-group
 
 ```cpp [C++]
-// Class with type parameter T
+// 型パラメータ T を持つクラス
 template <class T> 
 class X { 
   T myt;
@@ -1330,7 +1359,7 @@ function X(T)
     end
     return X
 end
--- only generate one struct per unique 'T'
+-- ユニークな 'T' ごとに1つの構造体のみ生成
 X = terralib.memoize(X)
 ```
 
@@ -1339,7 +1368,7 @@ X = terralib.memoize(X)
 ::: code-group
 
 ```cpp [C++]
-// An object of type "X of int"
+// "int型のX" オブジェクト
 X<int> x;
 ```
 
@@ -1349,7 +1378,8 @@ var x : X(int)
 
 :::
 
-### Namespaces
+
+### 名前空間 (Namespaces)
 
 ::: code-group
 
@@ -1358,11 +1388,13 @@ namespace N {class T {};}
 ```
 
 ```lua [Lua/Terra]
-N = {} -- lua table
+N = {} -- Luaテーブル
 struct N.T {}
 
-</code></pre></div>
-<div class="highlighter-rouge" style="margin: 0; display: inline-block;"><small>Meta-programmed</small><pre class="highlight"><code>N = {}
+```
+
+```lua [Meta-programmed]
+N = {}
 local struct mystruct {}
 N["T"] = mystruct
 ```
@@ -1372,19 +1404,19 @@ N["T"] = mystruct
 ::: code-group
 
 ```cpp [C++]
-// Use name T in namespace N
+// 名前空間N内のTを使用
 N::T t;
 ```
 
 ```lua [Lua/Terra]
--- access T in the table N
+-- テーブルN内のTにアクセス
 var t : N.T
 ```
 
 ```lua [Meta-programmed]
 local key = "T"
 terra f()
-    var t :  N[key]
+    var t : N[key]
 end
 ```
 
@@ -1409,15 +1441,17 @@ using namespace N;
 ```
 
 ```lua [Lua/Terra]
--- merge N with global environment
-for name,value in pairs(N) do
+-- グローバル環境にNをマージ
+for name, value in pairs(N) do
     _G[name] = value
 end
 ```
 
 :::
 
-### C Library Usage
+
+
+### Cライブラリの使用
 
 ::: code-group
 
@@ -1443,12 +1477,14 @@ int * a = (int*)malloc(10*sizeof(int))
 ```
 
 ```lua [Lua/Terra]
-var a = [&int](malloc(10*sizeof(int)))
+var a = [&int](malloc(10 * sizeof(int)))
 ```
 
 :::
 
-### Offline Compiler Usage
+
+
+### オフラインコンパイラの使用
 
 ::: code-group
 
@@ -1464,7 +1500,7 @@ terra main()
 end
 terralib.saveobj("main.o", 
     { main = main })
---   ~~~~~~~~~~~~~~~ table of exported functions
+--   ~~~~~~~~~~~~~~~ エクスポートされる関数のテーブル
 ```
 
 :::
@@ -1477,9 +1513,9 @@ $ cc -o main -lfoo main.cpp
 
 ```lua [Lua/Terra]
 terralib.saveobj("main",
-    { main = main}, {"-lfoo"})
+    { main = main }, {"-lfoo"})
 --                  ~~~~~~~~~
---                  extra linker args
+--                  追加のリンカ引数
 ```
 
 :::
@@ -1487,7 +1523,7 @@ terralib.saveobj("main",
 ::: code-group
 
 ```cpp [C++]
-$ cc -shared  -o libmain.so main.cpp
+$ cc -shared -o libmain.so main.cpp
 ```
 
 ```lua [Lua/Terra]
@@ -1497,7 +1533,9 @@ terralib.saveobj("libmain.so",
 
 :::
 
-### C Libraries
+
+
+### Cライブラリ
 
 ::: code-group
 
@@ -1511,16 +1549,17 @@ $ cc -I mylibinclude main.cpp libmylib.so -o main -
 ```
 
 ```lua [Lua/Terra]
-terralib.includepath = "mylibinclude;"..terralib.includepath
+terralib.includepath = "mylibinclude;" .. terralib.includepath
 C = terralib.includec("mylib.h")
 terralib.linklibrary("libmylib.so")
-terra main ()
+terra main()
     C.mylib_myfunction()
 end
--- or, for offline use:
-terralib.saveobj("main",{main = main},
+-- またはオフライン用:
+terralib.saveobj("main", { main = main },
     {"libmylib.so"})
---  ~~~~~~~~~~~~~~~ extra linker args
+--  ~~~~~~~~~~~~~~~ 追加のリンカ引数
 ```
 
 :::
+

@@ -62,7 +62,7 @@
 | [lua_isyieldable](lua_isyieldable.md) | イールド可能か確認する | Lua5.3 |
 | [lua_lessthan](lua_lessthan.md) | 値が小さいか確認する | Lua5.1 |
 | [lua_load](lua_load.md) | チャンクを読み込む | Lua5.1 |
-| [lua_loadx](lua_loadx.md) | チャンクを追加の設定で読み込む | Lua5.2 |
+| [lua_loadx](lua_loadx.md) | チャンクを追加の設定で読み込む | LuaJIT |
 | [lua_newstate](lua_newstate.md) | 新しいLuaステートを作成する | Lua5.1 |
 | [lua_newtable](lua_newtable.md) | 新しいテーブルを作成する | Lua5.1 |
 | [lua_newthread](lua_newthread.md) | 新しいスレッドを作成する | Lua5.1 |
@@ -168,7 +168,7 @@
 | [luaL_optnumber](luaL_optnumber.md) | オプション数値を取得する | Lua5.1 |
 | [luaL_optstring](luaL_optstring.md) | オプション文字列を取得する | Lua5.1 |
 | [luaL_prepbuffer](luaL_prepbuffer.md) | バッファを準備する | Lua5.1 |
-| [luaL_pushmodule](luaL_pushmodule.md) | モジュールをプッシュする | Lua5.2 |
+| [luaL_pushmodule](luaL_pushmodule.md) | モジュールをプッシュする | LuaJIT |
 | [luaL_pushresult](luaL_pushresult.md) | バッファの結果をプッシュする | Lua5.1 |
 | [luaL_ref](luaL_ref.md) | リファレンスを取得する | Lua5.1 |
 | [luaL_register](luaL_register.md) | ライブラリを登録する | Lua5.1 |
