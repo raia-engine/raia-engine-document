@@ -3,7 +3,7 @@
 [[TOC]]
 
 ### 1. 著作権表示とライセンス情報
-```gn
+```
 # Copyright 2019 Google LLC.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
@@ -11,7 +11,7 @@
 この部分はファイルの著作権がGoogle LLCにあり、BSDスタイルのライセンスに従うことを示しています。
 
 ### 2. `is_skia_standalone` の定義
-```gn
+```
 if (!defined(is_skia_standalone)) {
   is_skia_standalone = false
 }
@@ -19,13 +19,13 @@ if (!defined(is_skia_standalone)) {
 `is_skia_standalone` が未定義の場合、デフォルトで `false` に設定します。
 
 ### 3. `is_skia_dev_build` の定義
-```gn
+```
 is_skia_dev_build = is_skia_standalone && !is_official_build
 ```
 `is_skia_standalone` が `true` で `is_official_build` が `false` の場合、`is_skia_dev_build` を `true` に設定します。これは開発ビルドかどうかを示します。
 
 ### 4. `declare_args` の定義
-```gn
+```
 declare_args() {
   skia_android_serial = ""
   skia_compile_modules = false
@@ -338,7 +338,7 @@ declare_args() {
 - **説明**: zlib（圧縮ライブラリ）を使用するかどうかを指定します。
 
 ### iOSビルド特定の設定
-```gn
+```
 if (is_ios) {
   skia_ios_identity = ".*Google.*"
   skia_ios_profile = "Google Development"
@@ -351,7 +351,7 @@ if (is_ios) {
 - **説明**: Rustターゲットをビルドするかどうかを指定します。
 
 ### `skia_enable_ganesh` の定義
-```gn
+```
 declare_args() {
   skia_enable_ganesh = skia_enable_gpu
 }
@@ -359,7 +359,7 @@ declare_args() {
 - **説明**: `skia_enable_ganesh` は、 `skia_enable_gpu` の値をそのまま使用して設定されます。GaneshはSkiaのGPUレンダリングエンジンです。GPUサポートが有効であれば、Ganeshも有効になります。
 
 ### `skia_enable_sksl_tracing` の定義
-```gn
+```
 declare_args() {
   skia_enable_sksl_tracing = is_skia_dev_build && !skia_enable_optimize_size
 }
@@ -367,7 +367,7 @@ declare_args() {
 - **説明**: `skia_enable_sksl_tracing` は、Skiaが開発ビルドであり、かつサイズ最適化が有効でない場合に `true` になります。SKSLトレース機能はシェーダーのデバッグに役立ちます。
 
 ### `skia_gl_standard` と `skia_use_vulkan` の設定
-```gn
+```
 declare_args() {
   if (is_mac) {
     skia_gl_standard = "gl"
@@ -400,7 +400,7 @@ declare_args() {
   - `skia_use_libfuzzer_defaults` は常に `true` に設定され、libFuzzerのデフォルト設定を使用します。
 
 ### `skia_enable_skunicode` の定義
-```gn
+```
 declare_args() {
   skia_enable_skunicode = skia_use_icu || skia_use_client_icu ||
                           skia_use_libgrapheme || skia_use_icu4x
@@ -409,7 +409,7 @@ declare_args() {
 - **説明**: `skia_enable_skunicode` は、いずれかのUnicode処理ライブラリ（ICU、Client ICU、libgrapheme、ICU4X）が有効である場合に `true` になります。Unicodeサポートを有効にする設定です。
 
 ### `skia_use_angle` と `skia_gl_standard` のチェック
-```gn
+```
 if (skia_use_angle && skia_gl_standard != "gles") {
   skia_gl_standard = ""
 }
@@ -417,7 +417,7 @@ if (skia_use_angle && skia_gl_standard != "gles") {
 - **説明**: `skia_use_angle` が有効であり、かつ `skia_gl_standard` が `"gles"` でない場合、`skia_gl_standard` を空文字列に設定します。これはANGLE（Almost Native Graphics Layer Engine）を使用する場合の設定です。
 
 ### `skia_pdf_subset_harfbuzz` の定義
-```gn
+```
 declare_args() {
   skia_pdf_subset_harfbuzz = skia_use_harfbuzz
 }
@@ -425,121 +425,121 @@ declare_args() {
 - **説明**: `skia_pdf_subset_harfbuzz` は、`skia_use_harfbuzz` の値をそのまま使用して設定されます。これはPDFサブセットでHarfBuzz（テキストシェーピングエンジン）を使用するかどうかを指定します。
 
 ### `skia_enable_fontmgr_android`
-```gn
+```
 skia_enable_fontmgr_android = skia_use_expat && skia_use_freetype
 ```
 - **説明**: Android用のフォントマネージャを有効にするかどうかを設定します。`skia_use_expat` と `skia_use_freetype` が有効な場合に `true` になります。
 
 ### `skia_enable_fontmgr_custom_directory`
-```gn
+```
 skia_enable_fontmgr_custom_directory = skia_use_freetype && !is_fuchsia && !is_wasm
 ```
 - **説明**: カスタムディレクトリのフォントマネージャを有効にするかどうかを設定します。`skia_use_freetype` が有効で、かつ `fuchsia` や `wasm` でない場合に `true` になります。
 
 ### `skia_enable_fontmgr_custom_embedded`
-```gn
+```
 skia_enable_fontmgr_custom_embedded = skia_use_freetype && !is_fuchsia
 ```
 - **説明**: 埋め込み用のカスタムフォントマネージャを有効にするかどうかを設定します。`skia_use_freetype` が有効で、かつ `fuchsia` でない場合に `true` になります。
 
 ### `skia_enable_fontmgr_custom_empty`
-```gn
+```
 skia_enable_fontmgr_custom_empty = skia_use_freetype && !is_wasm
 ```
 - **説明**: 空のカスタムフォントマネージャを有効にするかどうかを設定します。`skia_use_freetype` が有効で、かつ `wasm` でない場合に `true` になります。
 
 ### `skia_enable_fontmgr_fontconfig`
-```gn
+```
 skia_enable_fontmgr_fontconfig = skia_use_freetype && skia_use_fontconfig
 ```
 - **説明**: Fontconfigを使用するフォントマネージャを有効にするかどうかを設定します。`skia_use_freetype` と `skia_use_fontconfig` が有効な場合に `true` になります。
 
 ### `skia_enable_fontmgr_win_gdi`
-```gn
+```
 skia_enable_fontmgr_win_gdi = is_win && !skia_enable_winuwp
 ```
 - **説明**: Windows GDIを使用するフォントマネージャを有効にするかどうかを設定します。`is_win` が `true` で、かつ `skia_enable_winuwp` が `false` の場合に `true` になります。
 
 ### `skia_enable_fontmgr_FontConfigInterface`
-```gn
+```
 skia_enable_fontmgr_FontConfigInterface = skia_use_freetype && skia_use_fontconfig
 ```
 - **説明**: FontConfigインターフェースを使用するフォントマネージャを有効にするかどうかを設定します。`skia_use_freetype` と `skia_use_fontconfig` が有効な場合に `true` になります。
 
 ### `skia_enable_spirv_validation`
-```gn
+```
 skia_enable_spirv_validation = is_skia_dev_build && is_debug && !skia_use_dawn
 ```
 - **説明**: SPIR-Vのバリデーションを有効にするかどうかを設定します。`is_skia_dev_build` と `is_debug` が `true` で、かつ `skia_use_dawn` が `false` の場合に `true` になります。
 
 ### `skia_use_dng_sdk`
-```gn
+```
 skia_use_dng_sdk = !is_fuchsia && !is_wasm && skia_use_libjpeg_turbo_decode && skia_use_zlib
 ```
 - **説明**: DNG SDKを使用するかどうかを設定します。`is_fuchsia` と `is_wasm` が `false` で、`skia_use_libjpeg_turbo_decode` と `skia_use_zlib` が有効な場合に `true` になります。
 
 ### `skia_use_sfntly`
-```gn
+```
 skia_use_sfntly = skia_use_icu
 ```
 - **説明**: SFNTlyライブラリを使用するかどうかを設定します。`skia_use_icu` が有効な場合に `true` になります。
 
 ### `skia_enable_vulkan_debug_layers`
-```gn
+```
 skia_enable_vulkan_debug_layers = skia_enable_gpu_debug_layers
 ```
 - **説明**: Vulkanのデバッグレイヤーを有効にするかどうかを設定します。`skia_enable_gpu_debug_layers` が有効な場合に `true` になります。
 
 ### `skia_enable_direct3d_debug_layer`
-```gn
+```
 skia_enable_direct3d_debug_layer = skia_enable_gpu_debug_layers
 ```
 - **説明**: Direct3Dのデバッグレイヤーを有効にするかどうかを設定します。`skia_enable_gpu_debug_layers` が有効な場合に `true` になります。
 
 ### `skia_enable_metal_debug_info`
-```gn
+```
 skia_enable_metal_debug_info = skia_enable_gpu_debug_layers
 ```
 - **説明**: Metalのデバッグ情報を有効にするかどうかを設定します。`skia_enable_gpu_debug_layers` が有効な場合に `true` になります。
 
 ### `skia_use_vma`
-```gn
+```
 skia_use_vma = skia_use_vulkan
 ```
 - **説明**: Vulkan Memory Allocator（VMA）を使用するかどうかを設定します。`skia_use_vulkan` が有効な場合に `true` になります。
 
 ### `skia_vulkan_memory_allocator_dir`
-```gn
+```
 skia_vulkan_memory_allocator_dir = "//third_party/externals/vulkanmemoryallocator"
 ```
 - **説明**: Vulkan Memory Allocatorのディレクトリを指定します。
 
 ### `skia_build_for_debugger`
-```gn
+```
 skia_build_for_debugger = false
 ```
 - **説明**: デバッガー用にビルドするかどうかを設定します。デフォルトは `false` です。
 
 ### `skia_icu_bidi_third_party_dir`
-```gn
+```
 skia_icu_bidi_third_party_dir = "//third_party/icu_bidi"
 ```
 - **説明**: ICU BiDi（双方向テキスト処理）のサードパーティディレクトリを指定します。
 
 ### `skia_libgrapheme_third_party_dir`
-```gn
+```
 skia_libgrapheme_third_party_dir = "//third_party/libgrapheme"
 ```
 - **説明**: libgrapheme（グラフェメ処理ライブラリ）のサードパーティディレクトリを指定します。
 
 ### `assert` 文による制約の確認
-```gn
+```
 assert(!skia_use_dawn || skia_enable_graphite)  # Dawn is Graphite-only
 ```
 - **説明**: `skia_use_dawn` が `true` の場合、`skia_enable_graphite` も `true` でなければならないという制約を確認しています。これは、Dawn（WebGPUの実装）がGraphite専用であるためです。
 
 ### ツールの有効化条件
-```gn
+```
 # Our tools require static linking (they use non-exported symbols), and the Ganesh backend.
 skia_enable_tools =
     skia_enable_tools && !is_component_build && skia_enable_ganesh
@@ -547,7 +547,7 @@ skia_enable_tools =
 - **説明**: Skiaのツールを有効にする条件として、静的リンク（非エクスポートシンボルを使用）とGaneshバックエンドの使用が必要であることを指定しています。具体的には、`skia_enable_tools` が `true` であり、`is_component_build` が `false` であり、`skia_enable_ganesh` が `true` である必要があります。
 
 ### サイズ最適化の制約
-```gn
+```
 if (skia_enable_optimize_size) {
   assert(
       !is_debug,
@@ -557,14 +557,14 @@ if (skia_enable_optimize_size) {
 - **説明**: サイズ最適化（`skia_enable_optimize_size`）が有効な場合、デバッグモード（`is_debug`）が無効でなければならないことを確認しています。デバッグモードでサイズ最適化を有効にしたい場合は、追加のフラグ（`-DSK_ENABLE_OPTIMIZE_SIZE`）を指定する必要があることを示しています。
 
 ### Perfettoの排他性の確認
-```gn
+```
 # Current Perfetto integrations are mutually exclusive
 assert(!skia_use_perfetto || !skia_android_framework_use_perfetto)
 ```
 - **説明**: 現在のPerfetto（トレースツール）の統合は相互に排他的であるため、`skia_use_perfetto` と `skia_android_framework_use_perfetto` の両方が `true` になることは許可されません。
 
 ### `skia_target` テンプレートの定義
-```gn
+```
 template("skia_target") {
   target(invoker._skia_target_type, target_name) {
     # set_defaults(invoker._skia_target_type) might not exist or set configs
@@ -592,7 +592,7 @@ template("skia_target") {
   - `invoker` からすべての変数（`configs` を除く）を現在のスコープに転送し、既存の `configs` に追加します。
 
 ### `skia_executable` テンプレート
-```gn
+```
 template("skia_executable") {
   skia_target(target_name) {
     assert(!defined(configs), "No set_defaults(skia_target)")
@@ -608,7 +608,7 @@ template("skia_executable") {
   - `invoker` からすべての変数を現在のスコープに転送します。
 
 ### `skia_source_set` テンプレート
-```gn
+```
 template("skia_source_set") {
   skia_target(target_name) {
     assert(!defined(configs), "No set_defaults(skia_target)")
@@ -621,7 +621,7 @@ template("skia_source_set") {
   - `_skia_target_type` を `"source_set"` に設定する点を除き、`skia_executable` テンプレートと同様のロジックを持ちます。
 
 ### `skia_static_library` テンプレート
-```gn
+```
 template("skia_static_library") {
   skia_target(target_name) {
     assert(!defined(configs), "No set_defaults(skia_target)")
@@ -634,7 +634,7 @@ template("skia_static_library") {
   - `_skia_target_type` を `"static_library"` に設定する点を除き、他のテンプレートと同様のロジックを持ちます。
 
 ### `skia_shared_library` テンプレート
-```gn
+```
 template("skia_shared_library") {
   skia_target(target_name) {
     assert(!defined(configs), "No set_defaults(skia_target)")
@@ -647,7 +647,7 @@ template("skia_shared_library") {
   - `_skia_target_type` を `"shared_library"` に設定する点を除き、他のテンプレートと同様のロジックを持ちます。
 
 ### `skia_component` テンプレート
-```gn
+```
 template("skia_component") {
   skia_target(target_name) {
     assert(!defined(configs), "No set_defaults(skia_target)")

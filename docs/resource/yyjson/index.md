@@ -1,5 +1,9 @@
 # はじめに
 
+::: info
+このページおよび同じカテゴリーにあるすべてのページは[yysonの公式サイト](https://ibireme.github.io/yyjson/doc/doxygen/html/)や[Githubリポジトリ](https://github.com/ibireme/yyjson)のドキュメント等を翻訳したものです。
+:::
+
 ANSI Cで書かれた高性能なJSONライブラリです。
 
 # 特徴

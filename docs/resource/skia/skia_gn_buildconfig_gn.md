@@ -3,7 +3,7 @@
 [[TOC]]
 
 ### 著作権とライセンス
-```gn
+```
 # Copyright 2016 Google Inc.
 #
 # Use of this source code is governed by a BSD-style license that can be
@@ -12,7 +12,7 @@
 - **説明**: この部分はファイルの著作権が2016年のGoogle Inc.にあり、BSDスタイルのライセンスに従うことを示しています。
 
 ### グローバルフラグの定義
-```gn
+```
 is_skia_standalone = true
 
 # It's best to keep the names and defaults of is_foo flags consistent with Chrome.
@@ -22,7 +22,7 @@ is_skia_standalone = true
   - フラグ名とデフォルト値をChromeと一致させることを推奨しています。
 
 ### ビルド引数の宣言（第一部）
-```gn
+```
 declare_args() {
   is_official_build = false
   is_component_build = false
@@ -75,7 +75,7 @@ declare_args() {
   - `show_includes`: コンパイル時にインクルードツリーを表示するかどうかを示すフラグ。デフォルトは `false`。
 
 ### ビルド引数の宣言（第二部）
-```gn
+```
 declare_args() {
   is_debug = !is_official_build
 
@@ -88,13 +88,13 @@ declare_args() {
   - `is_trivial_abi`: Trivial ABIを使用するかどうかを示すフラグ。`is_official_build` が `false` の場合に `true` になります。この設定はSkiaのABIに影響を与え、Skiaとその依存関係で一貫して設定する必要があります。
 
 ### デバッグビルドと公式ビルドの矛盾チェック
-```gn
+```
 assert(!(is_debug && is_official_build))
 ```
 - **説明**: デバッグビルドと公式ビルドが同時に設定されていないことを確認します。両方が同時に `true` になることは許容されません。
 
 ### WebAssemblyターゲットの設定
-```gn
+```
 if (target_cpu == "wasm") {
   target_os = "wasm"
 }
@@ -102,7 +102,7 @@ if (target_cpu == "wasm") {
 - **説明**: `target_cpu` が `"wasm"` の場合、`target_os` を `"wasm"` に設定します。
 
 ### プラットフォームの検出
-```gn
+```
 if (target_os == "") {
   target_os = host_os
   if (ndk != "") {
@@ -119,7 +119,7 @@ if (current_os == "") {
   - `current_os` が空の場合、`current_os` を `target_os` に設定します。
 
 ### プラットフォームのフラグ設定
-```gn
+```
 is_android = current_os == "android"
 is_fuchsia = current_os == "fuchsia"
 is_ios = current_os == "ios" || current_os == "tvos"
@@ -140,7 +140,7 @@ is_win = current_os == "win"
   - `is_win`: `current_os` が `"win"` の場合に `true`。
 
 ### ChromeOSおよびAppleプラットフォームの設定
-```gn
+```
 # This is just to make the Dawn build files happy. Skia itself uses target_os = "linux"
 # for ChromeOS, so this variable will not affect Skia proper.
 is_chromeos = false
@@ -153,7 +153,7 @@ is_apple = is_mac || is_ios
   - `is_apple`: `is_mac` または `is_ios` が `true` の場合に `true`。これはANGLEのビルドファイルのために存在します。
 
 ### ターゲットCPUの設定
-```gn
+```
 if (target_cpu == "") {
   target_cpu = host_cpu
   if (is_android || is_ios) {
@@ -174,7 +174,7 @@ if (current_cpu == "") {
   - `current_cpu` が空の場合、`current_cpu` を `target_cpu` に設定します。
 
 ### Clangコンパイラの判定
-```gn
+```
 is_clang = is_android || is_ios || is_mac || is_fuchsia || is_wasm ||
            (cc == "clang" && cxx == "clang++") || clang_win != ""
 if (!is_clang && !is_win) {
@@ -194,7 +194,7 @@ if (!is_clang && !is_win) {
   - これらの条件に当てはまらず、かつ `is_win` でもない場合、スクリプト `is_clang.py` を実行して `cc` と `cxx` を引数に渡し、Clangコンパイラであるかを判定します。
 
 ### Android NDKの設定
-```gn
+```
 if (is_android) {
   ndk_host = ""
   ndk_target = ""
@@ -231,7 +231,7 @@ if (is_android) {
     - `x86`: `"i686-linux-android"`
 
 ### Windows用MSVCコンパイラの検出
-```gn
+```
 if (target_os == "win") {
   # By default we look for 2017 (Enterprise, Pro, and Community), then 2015. If MSVC is installed in a
   # non-default location, you can set win_vc to inform us where it is.
@@ -250,13 +250,13 @@ if (target_os == "win") {
   - `win_vc` が空でないことを確認するために `assert` を使用し、空の場合はエラーメッセージを出力します。
 
 ### Windowsプラットフォームの設定
-```gn
+```
 if (target_os == "win") {
 ```
 - **説明**: この部分は、ターゲットOSがWindowsである場合にのみ実行される設定を含んでいます。
 
 ### Visual Studioツールチェインのバージョン設定
-```gn
+```
   if (win_toolchain_version == "") {
     win_toolchain_version = exec_script("//gn/highest_version_dir.py",
                                         [
@@ -272,7 +272,7 @@ if (target_os == "win") {
   - 結果を `trim string` 形式で返し、`win_toolchain_version` に設定します。
 
 ### Windows SDKのバージョン設定
-```gn
+```
   if (win_sdk_version == "") {
     win_sdk_version = exec_script("//gn/highest_version_dir.py",
                                   [
@@ -288,7 +288,7 @@ if (target_os == "win") {
   - 結果を `trim string` 形式で返し、`win_sdk_version` に設定します。
 
 ### Clang for Windowsのバージョン設定
-```gn
+```
   if (clang_win != "" && clang_win_version == "") {
     clang_win_version = exec_script("//gn/highest_version_dir.py",
                                     [
@@ -309,7 +309,7 @@ if (target_os == "win") {
 - `highest_version_dir.py` スクリプトは、指定されたディレクトリ内で最も高いバージョン番号を持つサブディレクトリを検索し、その名前を返すように設計されています。
 
 ### コンポーネントの定義
-```gn
+```
 # A component is either a static or a shared library.
 template("component") {
   _component_mode = "static_library"
@@ -329,7 +329,7 @@ template("component") {
   - **ターゲットの定義**: `_component_mode` に基づいてターゲットを定義し、`invoker` からすべての変数を引き継ぎます。
 
 ### デフォルトコンフィグの定義
-```gn
+```
 # Default configs
 default_configs = [
   "//gn/skia:default",
@@ -362,7 +362,7 @@ default_configs += [ "//gn/skia:extra_flags" ]
   - **共通コンフィグ**: `"//gn/skia:extra_flags"`
 
 ### ターゲットごとのデフォルト設定
-```gn
+```
 set_defaults("executable") {
   configs = [ "//gn/skia:executable" ] + default_configs
 }
@@ -400,7 +400,7 @@ set_defaults("component") {
     - `is_component_build` が `false` の場合、`complete_static_lib` を `true` に設定。
 
 ### Skiaのデフォルトコンフィグ設定
-```gn
+```
 skia_target_default_configs = []
 if (!is_official_build) {
   skia_target_default_configs += [ "//gn/skia:warnings" ]
@@ -411,7 +411,7 @@ if (!is_official_build) {
   - `is_official_build` が `false` の場合、デフォルトの警告設定 `//gn/skia:warnings` を追加します。
 
 ### Skiaのヘッダ用デフォルトコンフィグ設定
-```gn
+```
 skia_header_target_default_configs = []
 if (!is_official_build) {
   skia_header_target_default_configs +=
@@ -423,7 +423,7 @@ if (!is_official_build) {
   - `is_official_build` が `false` の場合、公開ヘッダ用の警告設定 `//gn/skia:warnings_for_public_headers` を追加します。
 
 ### ツールチェインの設定
-```gn
+```
 if (is_win) {
   # Windows tool chain
   set_default_toolchain("//gn/toolchain:msvc")

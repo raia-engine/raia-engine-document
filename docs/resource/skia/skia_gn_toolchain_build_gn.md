@@ -3,7 +3,7 @@
 [[TOC]]
 
 ### WASMおよびFuchsia用の設定ファイルのインポート
-```gn
+```
 if (is_wasm) {
   import("wasm.gni")
 }
@@ -16,7 +16,7 @@ if (is_fuchsia) {
   - `is_fuchsia` が `true` の場合、`//build/fuchsia/sdk.gni` ファイルをインポートします。
 
 ### コンパイラとリンカの設定
-```gn
+```
 declare_args() {
   host_ar = ar
   host_cc = cc
@@ -26,7 +26,7 @@ declare_args() {
   - `host_ar`, `host_cc`, `host_cxx` をそれぞれ `ar`, `cc`, `cxx` で初期化します。これはホスト環境で使用するツールの設定です。
 
 ### Android用の設定
-```gn
+```
   if (is_android) {
     _prefix = "$ndk/toolchains/llvm/prebuilt/$ndk_host/bin"
     if (host_os == "win") {
@@ -46,7 +46,7 @@ declare_args() {
   - `host_os` がWindowsの場合とそれ以外の場合で、それぞれ `target_ar`, `target_cc`, `target_cxx` のパスとコマンドを設定します。
 
 ### Fuchsia用の設定
-```gn
+```
   } else if (is_fuchsia && using_fuchsia_sdk) {
     target_ar = rebase_path("$fuchsia_toolchain_path/bin/llvm-ar")
     target_cc = rebase_path("$fuchsia_toolchain_path/bin/clang")
@@ -62,7 +62,7 @@ declare_args() {
   - `link` にリンカのパスを設定します。
 
 ### デフォルトの設定
-```gn
+```
   } else {
     target_ar = ar
     target_cc = cc
@@ -76,7 +76,7 @@ declare_args() {
   - `cc_wrapper` は空文字列に設定します。
 
 ### dsymutilプールの深さ設定
-```gn
+```
   # dsymutil seems to kill the machine when too many processes are run in
   # parallel, so we need to use a pool to limit the concurrency when passing
   # large -j to Ninja (e.g. Goma build). Unfortunately this is also one of the
@@ -89,7 +89,7 @@ declare_args() {
   - `dlsymutil_pool_depth` を `num_cpus.py` スクリプトの実行結果（CPUの数）に設定します。
 
 ### リンクプールの深さ設定
-```gn
+```
   # Too many linkers running at once causes issues for some builders. Allow
   # such builders to limit the number of concurrent link steps.
   # link_pool_depth < 0 means no pool, 0 means cpu count, > 0 sets pool size.
@@ -102,7 +102,7 @@ declare_args() {
   - デフォルト値として `-1` を設定します。
 
 ### リンク設定の宣言
-```gn
+```
 declare_args() {
   host_link = host_cxx
   target_link = target_cxx
@@ -112,7 +112,7 @@ declare_args() {
   - `host_link` と `target_link` をそれぞれ `host_cxx` と `target_cxx` に設定します。これにより、ホストとターゲットのリンクに使用するデフォルトのリンクコマンドが決まります。
 
 ### シェルコマンドの設定
-```gn
+```
 # For 'shell' see https://ninja-build.org/manual.html#ref_rule_command
 if (host_os == "win") {
   shell = "cmd.exe /c "
@@ -131,7 +131,7 @@ if (host_os == "win") {
     - `stamp` を `touch` に設定します。これは、ファイルのタイムスタンプを更新する標準的なUNIXコマンドです。
 
 ### プール設定
-```gn
+```
 if (current_toolchain == default_toolchain) {
   pool("dsymutil_pool") {
     depth = dlsymutil_pool_depth
@@ -162,7 +162,7 @@ if (current_toolchain == default_toolchain) {
 3. **プール設定**: 並列ビルド時のコマンド実行数を制限するために、`dsymutil` と `link` のプールを設定します。
 
 ### MSVCツールチェインのテンプレート
-```gn
+```
 template("msvc_toolchain") {
   toolchain(target_name) {
     toolchain_target_cpu = invoker.cpu
@@ -179,7 +179,7 @@ template("msvc_toolchain") {
   - `bin` は、MSVCツールのバイナリが存在するディレクトリパスです。
 
 ### 環境設定のスクリプト
-```gn
+```
     env_setup = ""
     if (toolchain_target_cpu == "x86") {
       env_setup = "$shell $win_sdk/bin/SetEnv.cmd /x86 && "
@@ -193,7 +193,7 @@ template("msvc_toolchain") {
   - `arm64` 用のビルドでは、必要なDLLを含むディレクトリをパスに追加します。
 
 ### Clangを使用する場合の設定
-```gn
+```
     cl_m32_flag = ""
 
     if (clang_win != "") {
@@ -222,7 +222,7 @@ template("msvc_toolchain") {
   - Clangが使用されない場合、MSVCの標準ツール (`cl.exe`, `lib.exe`, `link.exe`) を使用します。
 
 ### アセンブリツールの設定
-```gn
+```
     tool("asm") {
       _ml = "ml"
       if (toolchain_target_cpu == "x64") {
@@ -245,7 +245,7 @@ template("msvc_toolchain") {
   - `description` は、ビルドログに出力されるコマンドの説明です。
 
 ### C言語コンパイラの設定 (`cc`)
-```gn
+```
 tool("cc") {
   precompiled_header_type = "msvc"
   pdbname = "{{target_out_dir}}/{{label_name}}_c.pdb"
@@ -272,7 +272,7 @@ tool("cc") {
   - **説明**: `description` にコンパイルタスクの説明を設定。
 
 ### C++コンパイラの設定 (`cxx`)
-```gn
+```
 tool("cxx") {
   precompiled_header_type = "msvc"
   pdbname = "{{target_out_dir}}/{{label_name}}_c.pdb"
@@ -292,7 +292,7 @@ tool("cxx") {
 前の回答に含まれていた部分ですので省略しますが、`tool("asm")` ブロックでアセンブラツールの設定を行っています。
 
 ### アーカイブツールの設定 (`alink`)
-```gn
+```
 tool("alink") {
   rspfile = "{{output}}.rsp"
 
@@ -327,7 +327,7 @@ tool("alink") {
   - **プール設定**: `link_pool_depth` が0以上の場合、`link_pool` を使用してリンクタスクの同時実行数を制限。
 
 ### 共有ライブラリのリンク設定 (`solink`)
-```gn
+```
 tool("solink") {
   dllname = "{{output_dir}}/{{target_output_name}}{{output_extension}}"
   libname = "${dllname}.lib"
@@ -378,7 +378,7 @@ tool("solink") {
   - **pool**: `link_pool_depth` が0以上の場合にリンクプールを設定。
 
 ### 実行ファイルのリンク設定 (`link`)
-```gn
+```
 tool("link") {
   exename = "{{root_out_dir}}/{{target_output_name}}{{output_extension}}"
   pdbname = "$exename.pdb"
@@ -410,7 +410,7 @@ tool("link") {
   - **pool**: `link_pool_depth` が0以上の場合にリンクプールを設定。
 
 ### スタンプツールの設定 (`stamp`)
-```gn
+```
 tool("stamp") {
   command = "$stamp {{output}}"
   description = "stamp {{output}}"
@@ -421,7 +421,7 @@ tool("stamp") {
   - **description**: スタンプタスクの説明。
 
 ### コピーツールの設定 (`copy`)
-```gn
+```
 tool("copy") {
   cp_py = rebase_path("../cp.py")
   command = "$shell python3 \"$cp_py\" {{source}} {{output}}"
@@ -434,7 +434,7 @@ tool("copy") {
   - **description**: コピータスクの説明。
 
 ### ツールチェインの引数設定
-```gn
+```
 toolchain_args = {
   current_cpu = invoker.cpu
   current_os = invoker.os
@@ -446,7 +446,7 @@ toolchain_args = {
 ### MSVCツールチェインの設定
 
 #### MSVCツールチェインの宣言
-```gn
+```
 msvc_toolchain("msvc") {
   cpu = current_cpu
   os = current_os
@@ -457,7 +457,7 @@ msvc_toolchain("msvc") {
   - `os` は `current_os` に設定されます。
 
 #### MSVCホストツールチェインの宣言
-```gn
+```
 msvc_toolchain("msvc_host") {
   cpu = host_cpu
   os = host_os
@@ -470,7 +470,7 @@ msvc_toolchain("msvc_host") {
 ### GCCライクなツールチェインの設定
 
 #### GCCライクなツールチェインのテンプレート
-```gn
+```
 template("gcc_like_toolchain") {
   toolchain(target_name) {
     ar = invoker.ar
@@ -486,7 +486,7 @@ template("gcc_like_toolchain") {
   - `lib_dir_switch` はライブラリディレクトリ指定用のスイッチを `"-L"` に設定します。
 
 #### Cコンパイラの設定
-```gn
+```
     tool("cc") {
       depfile = "{{output}}.d"
       command = "$cc_wrapper $cc -MD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} -c {{source}} -o {{output}}"
@@ -503,7 +503,7 @@ template("gcc_like_toolchain") {
   - `description` にはコンパイルタスクの説明を設定します。
 
 #### C++コンパイラの設定
-```gn
+```
     tool("cxx") {
       depfile = "{{output}}.d"
       command = "$cc_wrapper $cxx -MD -MF $depfile {{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} -c {{source}} -o {{output}}"
@@ -516,7 +516,7 @@ template("gcc_like_toolchain") {
   - `cc` ツールとほぼ同じ設定ですが、`cxx` コンパイラを使用し、`{{cflags_cc}}` を追加しています。
 
 #### Objective-Cコンパイラの設定
-```gn
+```
     tool("objc") {
       depfile = "{{output}}.d"
       command = "$cc_wrapper $cc -MD -MF $depfile {{defines}} {{include_dirs}} {{framework_dirs}} {{cflags}} {{cflags_objc}} -c {{source}} -o {{output}}"
@@ -530,7 +530,7 @@ template("gcc_like_toolchain") {
   - `{{cflags_objc}}` を追加しています。
 
 #### Objective-C++コンパイラの設定
-```gn
+```
     tool("objcxx") {
       depfile = "{{output}}.d"
       command = "$cc_wrapper $cxx -MD -MF $depfile {{defines}} {{include_dirs}} {{framework_dirs}} {{cflags}} {{cflags_objcc}} -c {{source}} -o {{output}}"
@@ -543,7 +543,7 @@ template("gcc_like_toolchain") {
   - `objc` ツールと同様ですが、`cxx` コンパイラを使用し、`{{cflags_objcc}}` を追加しています。
 
 #### アセンブラの設定
-```gn
+```
     tool("asm") {
       depfile = "{{output}}.d"
       command = "$cc_wrapper $cc -MD -MF $depfile {{defines}} {{include_dirs}} {{asmflags}} -c {{source}} -o {{output}}"
@@ -557,7 +557,7 @@ template("gcc_like_toolchain") {
   - `{{asmflags}}` を追加しています。
 
 ### MacおよびiOS用の設定
-```gn
+```
 if (is_mac || is_ios) {
   not_needed([ "ar" ])  # We use libtool instead.
 }
@@ -566,7 +566,7 @@ if (is_mac || is_ios) {
   - MacおよびiOSでは、`ar` ツールが必要ないため、`libtool` を使用します。
 
 ### 静的ライブラリのリンク設定 (`alink`)
-```gn
+```
 tool("alink") {
   if (is_mac || is_ios) {
     command = "libtool -static -o {{output}} -no_warning_for_no_symbols {{inputs}}"
@@ -600,7 +600,7 @@ tool("alink") {
     - `link_pool_depth` が0以上の場合、リンクプールを設定。
 
 ### 共有ライブラリのリンク設定 (`solink`)
-```gn
+```
 tool("solink") {
   soname = "{{target_output_name}}{{output_extension}}"
 
@@ -653,7 +653,7 @@ tool("solink") {
     - `link_pool_depth` が0以上の場合、リンクプールを設定。
 
 ### 実行ファイルのリンク設定 (`link`)
-```gn
+```
 tool("link") {
   exe_name = "{{root_out_dir}}/{{target_output_name}}{{output_extension}}"
   rspfile = "$exe_name.rsp"
@@ -685,7 +685,7 @@ tool("link") {
   - **pool**: `link_pool_depth` が0以上の場合、リンクプールを設定。
 
 ### スタンプツールの設定 (`stamp`)
-```gn
+```
 tool("stamp") {
   command = "$stamp {{output}}"
   description = "stamp {{output}}"
@@ -696,7 +696,7 @@ tool("stamp") {
   - **description**: スタンプタスクの説明。
 
 ### コピーツールの設定 (`copy`)
-```gn
+```
 tool("copy") {
   cp_py = rebase_path("../cp.py")
   command = "python3 \"$cp_py\" {{source}} {{output}}"
@@ -709,7 +709,7 @@ tool("copy") {
   - **description**: コピータスクの説明。
 
 ### バンドルデータのコピーツールの設定 (`copy_bundle_data`)
-```gn
+```
 tool("copy_bundle_data") {
   cp_py = rebase_path("../cp.py")
   command = "python3 \"$cp_py\" {{source}} {{output}}"
@@ -722,7 +722,7 @@ tool("copy_bundle_data") {
   - **description**: バンドルデータのコピータスクの説明。
 
 ### Xcodeアセットのコンパイルツールの設定 (`compile_xcassets`)
-```gn
+```
 tool("compile_xcassets") {
   command = "true"
   description = "compile_xcassets {{output}}"
@@ -733,7 +733,7 @@ tool("compile_xcassets") {
   - **description**: Xcodeアセットのコンパイルタスクの説明。
 
 ### ツールチェインの引数設定
-```gn
+```
 toolchain_args = {
   current_cpu = invoker.cpu
   current_os = invoker.os
@@ -743,7 +743,7 @@ toolchain_args = {
   - **toolchain_args**: 現在のCPUとOSの情報を設定します。`invoker.cpu` と `invoker.os` を使用します。
 
 ### 標準的なGCCライクツールチェインの設定
-```gn
+```
 gcc_like_toolchain("gcc_like") {
   cpu = current_cpu
   os = current_os
@@ -759,7 +759,7 @@ gcc_like_toolchain("gcc_like") {
   - `ar`、`cc`、`cxx`、`link` は、それぞれターゲット環境用のアーカイブ、Cコンパイラ、C++コンパイラ、リンカのパスを設定します。
 
 ### ホスト環境用GCCライクツールチェインの設定
-```gn
+```
 gcc_like_toolchain("gcc_like_host") {
   cpu = host_cpu
   os = host_os
@@ -775,7 +775,7 @@ gcc_like_toolchain("gcc_like_host") {
   - `ar`、`cc`、`cxx`、`link` は、それぞれホスト環境用のアーカイブ、Cコンパイラ、C++コンパイラ、リンカのパスを設定します。
 
 ### WebAssembly（WASM）用ツールチェインの設定
-```gn
+```
 if (is_wasm) {
   gcc_like_toolchain("wasm") {
     cpu = "wasm"

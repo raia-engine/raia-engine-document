@@ -1,5 +1,9 @@
 # libffi
 
+::: info
+このページおよび同じカテゴリーにあるすべてのページは[libffiの公式サイト](https://sourceware.org/libffi/)や[Githubリポジトリ](https://github.com/libffi/libffi)のドキュメント等を翻訳したものです。
+:::
+
 ポータブルな外部関数インターフェイスライブラリ
 
 libffi-3.4.4は2022年10月23日にリリースされた。githubからダウンロードしてください。: https://github.com/libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz.

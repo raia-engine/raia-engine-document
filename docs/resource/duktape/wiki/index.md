@@ -1,7 +1,5 @@
 # ((o)) Duktape Wiki
 
-[原文](https://wiki.duktape.org/home)
-
 Duktapeの公式Wikiへようこそ!
 
 ## ドキュメンテーション

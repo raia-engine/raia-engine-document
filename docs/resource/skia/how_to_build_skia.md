@@ -136,7 +136,7 @@ CIPD にアクセスできる場合は、次のようにしてこれらをすべ
 
 これらのファイルが配置されたら、次のような GN 引数を生成します:
 
-```gn
+```
 # ARM
 cc= "/opt/clang/bin/clang"
 cxx = "/opt/clang/bin/clang++"
@@ -175,7 +175,7 @@ skia_use_egl = true
 
 # x86_64
 
-```gn
+```
 cc= "/opt/clang/bin/clang"
 cxx = "/opt/clang/bin/clang++"
 extra_cflags=[

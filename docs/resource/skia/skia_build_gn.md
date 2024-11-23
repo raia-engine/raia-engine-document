@@ -3,7 +3,7 @@
 [[TOC]]
 
 ### 著作権情報とライセンス
-```gn
+```
 # Copyright 2016 Google Inc.
 #
 # Use of this source code is governed by a BSD-style license that can be
@@ -12,7 +12,7 @@
 このコードブロックは、ファイルの著作権情報とライセンスの情報を示しています。
 
 ### インポートセクション
-```gn
+```
 import("gn/flutter_defines.gni")
 import("gn/fuchsia_defines.gni")
 import("gn/shared_sources.gni")
@@ -22,7 +22,7 @@ import("gn/toolchain/wasm.gni")
 必要な定義や設定ファイルをインポートします。
 
 ### Fuchsia SDKのインポート
-```gn
+```
 if (is_fuchsia) {
   import("//build/fuchsia/sdk.gni")
   import("build/fuchsia/fuchsia_download_sdk.gni")
@@ -31,7 +31,7 @@ if (is_fuchsia) {
 Fuchsiaプラットフォーム向けのSDKをインポートします。
 
 ### Dawnライブラリのインポート
-```gn
+```
 if (skia_use_dawn) {
   import("//third_party/externals/dawn/scripts/dawn_features.gni")
 }
@@ -39,7 +39,7 @@ if (skia_use_dawn) {
 Dawnライブラリを使用する場合、その定義をインポートします。
 
 ### カスタム設定のインポート
-```gn
+```
 if (defined(skia_settings)) {
   import(skia_settings)
 }
@@ -47,13 +47,13 @@ if (defined(skia_settings)) {
 カスタム設定が定義されている場合、それをインポートします。
 
 ### iOS設定のインポート
-```gn
+```
 import("gn/ios.gni")
 ```
 iOS向けの設定をインポートします。
 
 ### Skia Public APIの設定
-```gn
+```
 config("skia_public") {
   include_dirs = [ "." ]
 
@@ -121,7 +121,7 @@ config("skia_public") {
 SkiaのパブリックAPIに関連する設定を定義します。様々なプラットフォームや機能に応じてコンパイルオプションや定義を追加しています。
 
 ### Skia Private APIの設定
-```gn
+```
 config("skia_private") {
   visibility = [ "./*" ]
 
@@ -165,7 +165,7 @@ config("skia_private") {
 Skiaの内部APIに関連する設定を定義します。開発ビルドや特定の機能に応じた定義を追加しています。
 
 ### Skiaライブラリの設定
-```gn
+```
 config("skia_library") {
   visibility = [ "./*" ]
   defines = [ "SKIA_IMPLEMENTATION=1" ]
@@ -174,7 +174,7 @@ config("skia_library") {
 Skiaライブラリに関連する設定を定義します。
 
 ### Skiaライブラリの設定をまとめたリスト
-```gn
+```
 skia_library_configs = [
   ":skia_public",
   ":skia_private",
@@ -184,7 +184,7 @@ skia_library_configs = [
 Skiaライブラリの設定を一つのリストにまとめています。
 
 ### CPU特化のSkiaコード用テンプレート
-```gn
+```
 template("opts") {
   if (invoker.enabled) {
     skia_source_set(target_name) {
@@ -214,13 +214,13 @@ CPU特化のSkiaコードをビルドするためのテンプレートを定義�
 
 ### プラットフォームの確認と最適化オプションの設定
 
-```gn
+```
 is_x86 = current_cpu == "x64" || current_cpu == "x86"
 ```
 `is_x86`変数は、現在のCPUアーキテクチャがx64またはx86であるかどうかを確認しています。
 
 ### Haswell向けの最適化設定
-```gn
+```
 opts("hsw") {
   enabled = is_x86
   sources = skia_opts.hsw_sources
@@ -234,7 +234,7 @@ opts("hsw") {
 このブロックは、Haswellアーキテクチャ向けの最適化設定を定義しています。x86アーキテクチャの場合、有効化されます。Windowsプラットフォームでは`/arch:AVX2`、それ以外のプラットフォームでは`-march=haswell`フラグを使用します。
 
 ### Skylake向けの最適化設定
-```gn
+```
 opts("skx") {
   enabled = is_x86
   sources = skia_opts.skx_sources
@@ -248,7 +248,7 @@ opts("skx") {
 このブロックは、Skylakeアーキテクチャ向けの最適化設定を定義しています。x86アーキテクチャの場合、有効化されます。Windowsプラットフォームでは`/arch:AVX512`、それ以外のプラットフォームでは`-march=skylake-avx512`フラグを使用します。
 
 ### オプション機能のテンプレート
-```gn
+```
 template("optional") {
   if (invoker.enabled) {
     config(target_name + "_public") {
@@ -344,7 +344,7 @@ template("optional") {
 このテンプレートは、Skiaのオプション機能を定義するためのものです。`enabled`が有効である場合、公開設定やソースセットを定義し、テスト用のソースセットも設定します。`enabled`が無効である場合、空のターゲットを作成し、必要な変数を転送します。
 
 ### Androidユーティリティのオプション設定
-```gn
+```
 optional("android_utils") {
   enabled = skia_enable_android_utils
 
@@ -364,7 +364,7 @@ optional("android_utils") {
 
 
 ### Android用フォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_android") {
   enabled = skia_enable_fontmgr_android
 
@@ -385,7 +385,7 @@ optional("fontmgr_android") {
 このオプションは、Android用のフォントマネージャーを有効化します。必要な依存関係として、FreeTypeとexpatライブラリが指定されています。関連するヘッダーファイルやソースファイルが定義され、テスト用のソースファイルも含まれています。
 
 ### カスタムフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_custom") {
   enabled =
       skia_enable_fontmgr_custom_directory ||
@@ -399,7 +399,7 @@ optional("fontmgr_custom") {
 このオプションは、カスタムフォントマネージャーを有効化します。ディレクトリ、埋め込み、空のいずれかのカスタムフォントマネージャーが有効な場合に適用されます。依存関係としてFreeTypeライブラリが指定されています。
 
 ### カスタムディレクトリフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_custom_directory") {
   enabled = skia_enable_fontmgr_custom_directory
   public_defines = [ "SK_FONTMGR_FREETYPE_DIRECTORY_AVAILABLE" ]
@@ -414,7 +414,7 @@ optional("fontmgr_custom_directory") {
 このオプションは、カスタムディレクトリフォントマネージャーを有効化します。関連するヘッダーファイルとソースファイルが定義されています。
 
 ### カスタム埋め込みフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_custom_embedded") {
   enabled = skia_enable_fontmgr_custom_embedded
   public_defines = [ "SK_FONTMGR_FREETYPE_EMBEDDED_AVAILABLE" ]
@@ -428,7 +428,7 @@ optional("fontmgr_custom_embedded") {
 このオプションは、カスタム埋め込みフォントマネージャーを有効化します。関連するソースファイルが定義されています。
 
 ### カスタム空フォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_custom_empty") {
   enabled = skia_enable_fontmgr_custom_empty
   public_defines = [ "SK_FONTMGR_FREETYPE_EMPTY_AVAILABLE" ]
@@ -443,7 +443,7 @@ optional("fontmgr_custom_empty") {
 このオプションは、カスタム空フォントマネージャーを有効化します。関連するヘッダーファイルとソースファイルが定義されています。
 
 ### Fontconfigフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_fontconfig") {
   enabled = skia_enable_fontmgr_fontconfig
   public_defines = [ "SK_FONTMGR_FONTCONFIG_AVAILABLE" ]
@@ -458,7 +458,7 @@ optional("fontmgr_fontconfig") {
 このオプションは、Fontconfigフォントマネージャーを有効化します。Fontconfigライブラリに依存しており、関連するヘッダーファイル、ソースファイル、テストファイルが定義されています。
 
 ### FontConfigInterfaceフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_FontConfigInterface") {
   enabled = skia_enable_fontmgr_FontConfigInterface
 
@@ -483,7 +483,7 @@ optional("fontmgr_FontConfigInterface") {
 このオプションは、FontConfigInterfaceフォントマネージャーを有効化します。Fontconfigライブラリに依存しており、関連するヘッダーファイル、ソースファイル、テストファイルが定義されています。
 
 ### Fuchsia用フォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_fuchsia") {
   enabled = skia_enable_fontmgr_fuchsia
   public_defines = [ "SK_FONTMGR_FUCHSIA_AVAILABLE" ]
@@ -501,7 +501,7 @@ optional("fontmgr_fuchsia") {
 このオプションは、Fuchsia用のフォントマネージャーを有効化します。Fuchsia SDKに依存しており、関連するヘッダーファイルとソースファイルが定義されています。
 
 ### Mac用CoreTextフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_mac_ct") {
   enabled = skia_use_fonthost_mac
 
@@ -544,7 +544,7 @@ optional("fontmgr_mac_ct") {
 このSkiaのBUILD.gnファイルのコードは、Windows用のフォントマネージャー機能や、SKSL（Skia Shading Language）関連の設定を定義しています。以下に、このコードの日本語での解説を行います。
 
 ### Windows用フォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_win") {
   enabled = skia_enable_fontmgr_win
 
@@ -579,7 +579,7 @@ optional("fontmgr_win") {
 このオプションは、Windows用のフォントマネージャーを有効化します。`skia_enable_fontmgr_win`が有効である場合に適用されます。DirectWriteを使用するための定義が追加され、関連するヘッダーファイルとソースファイルが指定されています。また、`skia_dwritecore_sdk`が指定されている場合、追加のインクルードディレクトリやコンパイルフラグが設定されます。
 
 ### Windows用GDIフォントマネージャーのオプション設定
-```gn
+```
 optional("fontmgr_win_gdi") {
   enabled = skia_enable_fontmgr_win_gdi
   public_defines = [ "SK_FONTMGR_GDI_AVAILABLE" ]
@@ -591,7 +591,7 @@ optional("fontmgr_win_gdi") {
 このオプションは、Windows用のGDIフォントマネージャーを有効化します。`skia_enable_fontmgr_win_gdi`が有効である場合に適用され、GDI関連のヘッダーファイル、ソースファイル、ライブラリが指定されています。
 
 ### SKSL（Skia Shading Language）のlexファイルを生成する設定
-```gn
+```
 if (skia_lex) {
   skia_executable("sksllex") {
     sources = [
@@ -641,7 +641,7 @@ if (skia_lex) {
 このブロックは、`skia_lex`が有効な場合、SKSLのlexファイルを生成するための設定を行います。`sksllex`という実行可能ファイルを生成し、`run_sksllex.py`スクリプトを実行してlexファイルを生成します。生成されたヘッダーファイルの出力先も指定されています。
 
 ### SKSLモジュールのコピー設定
-```gn
+```
 if (skia_compile_modules || skia_compile_sksl_tests) {
   copy("sksl_modules") {
     sources = [

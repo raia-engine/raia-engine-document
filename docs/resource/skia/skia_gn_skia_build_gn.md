@@ -3,7 +3,7 @@
 [[TOC]]
 
 ### 著作権表示とライセンス情報
-```gn
+```
 # Copyright 2016 Google Inc.
 #
 # Use of this source code is governed by a BSD-style license that can be
@@ -12,7 +12,7 @@
 - **説明**: この部分はファイルの著作権が2016年のGoogle Inc.にあり、BSDスタイルのライセンスに従うことを示しています。
 
 ### プラットフォーム固有の設定のインポート
-```gn
+```
 if (is_fuchsia) {
   import("//build/fuchsia/sdk.gni")
 }
@@ -25,13 +25,13 @@ if (is_wasm) {
   - `is_wasm` が `true` の場合、WebAssembly（Wasm）用の設定を含む `wasm.gni` ファイルをインポートします。
 
 ### 共通設定のインポート
-```gn
+```
 import("../skia.gni")
 ```
 - **説明**: Skiaプロジェクトの共通設定を含む `skia.gni` ファイルをインポートします。
 
 ### ビルド引数の宣言
-```gn
+```
 declare_args() {
   extra_asmflags = []
   extra_cflags = []
@@ -55,7 +55,7 @@ declare_args() {
   - `xcode_sysroot`: Xcodeのシステムルートを指定する文字列。
 
 ### iOSおよびtvOS用のシステムルート設定
-```gn
+```
 if (is_ios && xcode_sysroot == "") {
   if (is_tvos) {
     sdk = "appletvos"
@@ -79,7 +79,7 @@ if (is_ios && xcode_sysroot == "") {
   - `xcode_sysroot` を設定するために、指定された `sdk` を引数としてPythonスクリプト `find_xcode_sysroot.py` を実行します。
 
 ### macOS用のシステムルート設定
-```gn
+```
 if (is_mac && host_os == "mac" && xcode_sysroot == "") {
   xcode_sysroot =
       exec_script("../find_xcode_sysroot.py", [ "macosx" ], "trim string")
@@ -90,7 +90,7 @@ if (is_mac && host_os == "mac" && xcode_sysroot == "") {
   - これを行うために、`"macosx"` を引数としてPythonスクリプト `find_xcode_sysroot.py` を実行します。
 
 ### `config("default")` ブロック
-```gn
+```
 config("default") {
   asmflags = []
   cflags = []
@@ -112,7 +112,7 @@ config("default") {
   - `libs`: リンクするライブラリ
 
 ### Windowsプラットフォームでの特定の設定
-```gn
+```
   # Disable warnings about unknown attributes.
   # (These unknown attribute warnings are on by default, so we don't make
   # disabling them part of :warnings, as some targets remove :warnings.)
@@ -133,7 +133,7 @@ config("default") {
     - `-Wno-attributes`: 属性に関する警告を無効にするフラグ
 
 ### Clangコンパイラでの特定の設定
-```gn
+```
   if (is_clang && !is_win) {
     # In Clang 14, this default was changed. We turn this off to (hopefully) make our
     # GMs more consistent in the transition.
@@ -144,13 +144,13 @@ config("default") {
   - `-ffp-contract=off`: 浮動小数点数の収縮（contract）を無効にするフラグ
 
 ### FuchsiaプラットフォームとFuchsia SDKの使用
-```gn
+```
 if (is_fuchsia && using_fuchsia_sdk) {
 ```
 - **説明**: `is_fuchsia` が `true` であり、かつ `using_fuchsia_sdk` が `true` の場合に、以下の設定を適用します。これは、Fuchsiaプラットフォーム用のビルド設定を行う条件を確認しています。
 
 ### リンカフラグとコンパイルフラグの設定
-```gn
+```
 ldflags += [
   "-v",
   "--sysroot=" + rebase_path("$fuchsia_sdk_path/arch/$current_cpu/sysroot"),
@@ -166,7 +166,7 @@ cflags += [ "--sysroot=" +
     - `--sysroot=`: 同様にシステムルートディレクトリを指定します。
 
 ### ターゲットCPUに基づく設定
-```gn
+```
 if (current_cpu == "x64") {
   current_cpu = "--target=x86_64-${current_os}"
 } else if (current_cpu == "arm64") {
@@ -182,7 +182,7 @@ if (current_cpu == "x64") {
   - それ以外の場合: 未知のターゲットCPUであるため、エラーメッセージを表示し、アサーションエラーを発生させます。
 
 ### 追加のフラグの設定
-```gn
+```
 ldflags += [ target_triple ]
 cflags += [ target_triple ]
 asmflags += [ target_triple ]
@@ -196,7 +196,7 @@ asmflags += [ target_triple ]
 4. 設定された `target_triple` を `ldflags`、`cflags`、`asmflags` に追加。
 
 ### Windowsプラットフォーム向けの設定
-```gn
+```
 if (is_win) {
   if (is_clang && current_cpu == "arm64") {
     cflags += [ "--target=arm64-windows" ]
@@ -227,7 +227,7 @@ if (is_win) {
       - `NOMINMAX`: `min` と `max` マクロの定義を無効にします。
 
 ### Windows向けのインクルードディレクトリの設定
-```gn
+```
   _include_dirs = [
     "$win_vc/Tools/MSVC/$win_toolchain_version/include",
     "$win_sdk/Include/$win_sdk_version/shared",
@@ -253,7 +253,7 @@ if (is_win) {
   - Clangでない場合、`include_dirs` に `_include_dirs` を設定します。
 
 ### Windows向けのライブラリディレクトリの設定
-```gn
+```
   lib_dirs = [
     "$win_sdk/Lib/$win_sdk_version/ucrt/$current_cpu",
     "$win_sdk/Lib/$win_sdk_version/um/$current_cpu",
@@ -263,7 +263,7 @@ if (is_win) {
 - **説明**: Windows SDKおよびMSVCのライブラリディレクトリを設定します。
 
 ### その他のプラットフォーム向けの設定
-```gn
+```
 } else {
   cflags += [
     "-fstrict-aliasing",
@@ -287,7 +287,7 @@ if (is_win) {
       - `-fvisibility-inlines-hidden`: インライン関数のデフォルト可視性を隠します。
 
 ### ARMアーキテクチャ向けの設定
-```gn
+```
 if (current_cpu == "arm") {
   cflags += [
     "-march=armv7-a",
@@ -302,7 +302,7 @@ if (current_cpu == "arm") {
   - `-mthumb`: Thumb命令セットを使用します。
 
 ### x86アーキテクチャ向けの設定（Windows以外）
-```gn
+```
 else if (current_cpu == "x86" && !is_win) {
   asmflags += [ "-m32" ]
   cflags += [
@@ -324,7 +324,7 @@ else if (current_cpu == "x86" && !is_win) {
     - `-m32`: 32ビットモードでリンクします。
 
 ### カスタムメモリアロケータの設定
-```gn
+```
 if (malloc != "" && !is_win) {
   cflags += [
     "-fno-builtin-malloc",
@@ -345,7 +345,7 @@ if (malloc != "" && !is_win) {
     - `malloc` ライブラリをリンクします。
 
 ### Android向けの設定
-```gn
+```
 if (is_android) {
   cflags += [ "--sysroot=$ndk/toolchains/llvm/prebuilt/$ndk_host/sysroot" ]
   ldflags += [ "-static-libstdc++" ]
@@ -358,7 +358,7 @@ if (is_android) {
     - `-static-libstdc++`: 静的にリンクされたlibstdc++を使用します。
 
 ### インクルードの表示設定
-```gn
+```
 if (show_includes) {
   assert(is_clang, "show_includes requires clang to build.")
   if (is_win) {
@@ -383,13 +383,13 @@ if (show_includes) {
     - `-fshow-skipped-includes`: スキップされたインクルードファイルを表示します。
 
 ### iOSプラットフォーム向けの設定
-```gn
+```
 if (is_ios) {
 ```
 - **説明**: `is_ios` が `true` の場合に以下の設定を行います。これはiOSプラットフォーム向けのビルド設定を行うための条件です。
 
 ### CPUアーキテクチャごとのフラグ設定
-```gn
+```
   if (current_cpu == "arm") {
     _arch_flags = [
       "-arch",
@@ -427,7 +427,7 @@ if (is_ios) {
   - その他: `"-arch", current_cpu`
 
 ### アセンブリ、コンパイル、およびリンクフラグの設定
-```gn
+```
   asmflags += [
                 "-isysroot",
                 xcode_sysroot,
@@ -465,7 +465,7 @@ if (is_ios) {
     - `objc`: Objective-Cランタイムライブラリを追加します。
 
 ### iOSの最小ターゲットバージョンの設定
-```gn
+```
   if (ios_min_target != "") {
     cflags += [ "-miphoneos-version-min=$ios_min_target" ]
     asmflags += [ "-miphoneos-version-min=$ios_min_target" ]
@@ -481,7 +481,7 @@ if (is_ios) {
     - `-miphoneos-version-min=$ios_min_target`: 最小iOSバージョンを指定します。
 
 ### Linuxプラットフォーム向けの設定
-```gn
+```
 if (is_linux) {
   libs += [ "pthread" ]
 }
@@ -489,13 +489,13 @@ if (is_linux) {
 - **説明**: `is_linux` が `true` の場合、リンクするライブラリに `pthread` を追加します。これはPOSIXスレッドライブラリであり、マルチスレッドプログラムの作成に使用されます。
 
 ### macOSプラットフォーム向けの設定
-```gn
+```
 if (is_mac) {
 ```
 - **説明**: `is_mac` が `true` の場合に以下の設定を行います。これはmacOSプラットフォーム向けのビルド設定を行うための条件です。
 
 ### Xcodeシステムルートの設定
-```gn
+```
   if (xcode_sysroot != "") {
     asmflags += [
       "-isysroot",
@@ -520,13 +520,13 @@ if (is_mac) {
     - `-isysroot`, `xcode_sysroot`
 
 ### リンカ警告の無効化
-```gn
+```
   ldflags += [ "-Wl,-w" ]
 ```
 - **説明**: リンカ警告を無効にします。これにより、リンク時の警告メッセージが表示されなくなります。
 
 ### ARM64とx86_64向けのターゲット設定
-```gn
+```
   if (current_cpu == "arm64") {
     asmflags += [
       "-target",
@@ -572,7 +572,7 @@ if (is_mac) {
       - `-target`, `x86_64-apple-macos10.13`
 
 ### WebAssembly (WASM) の設定
-```gn
+```
 if (is_wasm) {
   cflags += [ "--sysroot=$skia_emsdk_dir/upstream/emscripten/cache/sysroot" ]
   ldflags += [ "--sysroot=$skia_emsdk_dir/upstream/emscripten/cache/sysroot" ]
@@ -585,7 +585,7 @@ if (is_wasm) {
     - `--sysroot=$skia_emsdk_dir/upstream/emscripten/cache/sysroot`
 
 ### サニタイザーの設定
-```gn
+```
 # sanitize only applies to the default toolchain (usually the target).
 if (current_toolchain != default_toolchain) {
   sanitize = ""
@@ -630,7 +630,7 @@ if (current_toolchain != default_toolchain) {
 :::
 
 ### Windows環境でのアドレスサニタイザー設定
-```gn
+```
 if (is_win && !is_clang && sanitize == "ASAN") {
   sanitizers = "address"
   cflags += [ "/fsanitize=$sanitizers" ]
@@ -644,7 +644,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
     - `sanitize` が空でなく、`"MSVC"` でない場合に以下の設定を行います。
 
 ### サニタイザーの設定と特定のサニタイザーの処理
-```gn
+```
   sanitizers = sanitize
 
   if (sanitize == "ASAN") {
@@ -671,7 +671,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
     - `MSAN`: `memory`
 
 ### サニタイザーフラグの設定と抑制ファイルの指定
-```gn
+```
   _suppressions = rebase_path("../../tools/xsan.supp")
 
   cflags += [
@@ -688,7 +688,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
     - `-fsanitize-blacklist=$_suppressions`: 指定された抑制ファイルを使用します。
 
 ### Windows環境での追加設定
-```gn
+```
   if (is_win) {
     cflags += [
       "/GF-",
@@ -711,7 +711,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
     - `ldflags` に `-fsanitize=$sanitizers` を追加します。
 
 ### Linux環境での追加設定
-```gn
+```
   if (is_linux) {
     cflags_cc += [ "-stdlib=libc++" ]
     ldflags += [ "-stdlib=libc++" ]
@@ -720,7 +720,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
 - **説明**: `is_linux` が `true` の場合、C++標準ライブラリとして `libc++` を使用するフラグを追加します。
 
 ### メモリサニタイザーの追加設定
-```gn
+```
   if (sanitizers == "memory") {
     cflags += [ "-fsanitize-memory-track-origins" ]
   }
@@ -728,7 +728,7 @@ if (is_win && !is_clang && sanitize == "ASAN") {
 - **説明**: `sanitizers` が `memory` の場合、`-fsanitize-memory-track-origins` を追加します。
 
 ### 安全スタックの追加設定
-```gn
+```
   if (sanitizers == "safe-stack") {
     cflags_cc += [ "-fno-aligned-allocation" ]
   }
@@ -736,13 +736,13 @@ if (is_win && !is_clang && sanitize == "ASAN") {
 - **説明**: `sanitizers` が `safe-stack` の場合、`-fno-aligned-allocation` を追加します。
 
 ### Objective-C++用のフラグ設定
-```gn
+```
 cflags_objcc += cflags_cc
 ```
 - **説明**: `cflags_cc` のフラグを `cflags_objcc` に追加します。これはObjective-C++のビルド設定をC++の設定と一致させるためです。
 
 ### ポインタオーバーフローの回復設定
-```gn
+```
 # See skia:9731.
 config("recover_pointer_overflow") {
   if (sanitize == "ASAN" && !(is_win && !is_clang)) {
@@ -760,7 +760,7 @@ config("recover_pointer_overflow") {
     - このフラグは、アドレスサニタイザー（ASAN）がポインタオーバーフローを検出した場合にリカバリを行うことを指示します。
 
 ### 例外無効化設定
-```gn
+```
 config("no_exceptions") {
   # Exceptions are disabled by default on Windows.  (Use /EHsc to enable them.)
   if (!is_win) {
@@ -780,7 +780,7 @@ config("no_exceptions") {
     - Windows環境では例外がデフォルトで無効になっているため、特に設定する必要はありません。例外を有効にするには、`/EHsc` フラグを使用します。
 
 ### 基本設定
-```gn
+```
 config("warnings") {
   cflags = []
   cflags_cc = []
@@ -790,7 +790,7 @@ config("warnings") {
 - **説明**: `warnings` という名前の設定を定義します。ここでは、C、C++、Objective-C、およびObjective-C++の各種フラグ（`cflags`、`cflags_cc`、`cflags_objc`、`cflags_objcc`）を初期化しています。
 
 ### 警告をエラーとして扱う設定
-```gn
+```
   if (werror) {
     if (is_win) {
       cflags += [ "/WX" ]
@@ -804,7 +804,7 @@ config("warnings") {
   - **その他のプラットフォーム**: `cflags` に `-Werror` を追加します。
 
 ### Windowsプラットフォーム向けの警告設定
-```gn
+```
   if (is_win) {
     cflags += [
       "/W3",  # Turn on lots of warnings.
@@ -839,7 +839,7 @@ config("warnings") {
   - **Clangを使用している場合**: `-Wno-unused-parameter` を追加します。
 
 ### 非Windowsプラットフォーム向けの警告設定
-```gn
+```
   } else {
     cflags += [
       "-Wall",
@@ -874,7 +874,7 @@ config("warnings") {
     - `-Wno-noexcept-type`: `noexcept` 修飾子に関する警告を無効にします。
 
 ### Clang用の基本フラグ設定
-```gn
+```
 if (is_clang) {
   cflags += [
     "-fcolor-diagnostics",
@@ -895,7 +895,7 @@ if (is_clang) {
     - `-Wno-weak-template-vtables`: Clang 14で非推奨となり、Clang 15で削除された警告を無効にします。古いClangバージョンでまだ発生する可能性があるため、明示的に無効にします。
 
 ### 特定のプラットフォームでのフラグ設定
-```gn
+```
   # See https://crbug.com/1042470: This flag prevents implicit conversions among vector types.
   # This also gives behavior closer to GCC's default. However:
   #   - clang-cl doesn't recognize the flag
@@ -913,7 +913,7 @@ if (is_clang) {
   - WindowsでもAppleでもない場合に `-fno-lax-vector-conversions` を追加します。
 
 ### 特定のCPUとプラットフォームでのアライメント警告の無効化
-```gn
+```
   if (current_cpu == "arm" && is_ios) {
     # Clang seems to think new/malloc will only be 4-byte aligned on 32-bit iOS.
     # We're pretty sure it's actually 8-byte alignment.
@@ -934,7 +934,7 @@ if (is_clang) {
     - この警告を無効にするため `-Wno-over-aligned` を追加します。
 
 ### 非移植的なインクルードパスに関する警告の無効化
-```gn
+```
   # Shouldn't be necessary for local builds. With distributed Windows builds, files may lose
   # their case during copy, causing case-sensitivity mismatch on remote machines.
   cflags += [
@@ -950,7 +950,7 @@ if (is_clang) {
     - `-Wno-nonportable-system-include-path`
 
 ### 全体の警告フラグ設定
-```gn
+```
 # TODO: These would all be really great warnings to turn on.
 cflags += [
   "-Wno-cast-align",
@@ -1013,7 +1013,7 @@ cflags += [
   - `-Wno-cast-function-type-strict`: 関数型のキャストに関する厳密な警告を無効にします。WASMでのランタイム問題を回避するため。
 
 ### C++特有の警告フラグ設定
-```gn
+```
 cflags_cc += [
   "-Wno-abstract-vbase-init",
   "-Wno-weak-vtables",
@@ -1024,7 +1024,7 @@ cflags_cc += [
   - `-Wno-weak-vtables`: 弱い仮想テーブルに関する警告を無効にします。
 
 ### 全体の警告フラグ設定
-```gn
+```
 # We are unlikely to want to fix these.
 cflags += [
   "-Wno-covered-switch-default",
@@ -1065,7 +1065,7 @@ cflags += [
   - `-Wno-range-loop-analysis`: 範囲ベースのループ解析に関する警告を無効にします（Clang 12またはXCode 12以降で再度有効にする予定）。
 
 ### C++特有の警告フラグ設定
-```gn
+```
 cflags_cc += [
   "-Wno-c++98-compat",
   "-Wno-c++98-compat-pedantic",
@@ -1078,7 +1078,7 @@ cflags_cc += [
   - `-Wno-undefined-func-template`: 未定義の関数テンプレートに関する警告を無効にします。
 
 ### Objective-C特有の警告フラグ設定
-```gn
+```
 cflags_objc += [
   "-Wno-direct-ivar-access",
   "-Wno-objc-interface-ivars",
@@ -1089,7 +1089,7 @@ cflags_objc += [
   - `-Wno-objc-interface-ivars`: Objective-Cインターフェースのインスタンス変数に関する警告を無効にします。
 
 ### Objective-C++特有の警告フラグ設定
-```gn
+```
 cflags_objcc += [
   "-Wno-direct-ivar-access",
   "-Wno-objcc-interface-ivars",
@@ -1100,7 +1100,7 @@ cflags_objcc += [
   - `-Wno-objcc-interface-ivars`: Objective-C++インターフェースのインスタンス変数に関する警告を無効にします。
 
 ### range-loop-analysisに関する警告フラグの設定
-```gn
+```
 # Wno-range-loop-analysis turns off the whole group, but this warning was later split into
 # range-loop-construct and range-loop-bind-reference. We want the former but not the latter.
 # Created from clang/include/clang/Basic/DiagnosticGroups.td
@@ -1111,7 +1111,7 @@ cflags += [ "-Wrange-loop-construct" ]
   - `-Wrange-loop-construct` フラグは範囲ベースのループの構造に関する警告を有効にしますが、`range-loop-bind-reference` に関する警告は無効のままにします。
 
 ### deprecatedに関する警告フラグの設定
-```gn
+```
 # Wno-deprecated turns off the whole group, but also has its own warnings like
 # out-of-line definition of constexpr static data member is redundant in C++17 and is deprecated [-Werror,-Wdeprecated]
 # but we would like others. Created from clang/include/clang/Basic/DiagnosticGroups.td
@@ -1159,7 +1159,7 @@ cflags += [
     - `-Wc++98-compat-extra-semi`: C++98互換の追加セミコロンに関する警告。
 
 ### GCCコンパイラ用の警告設定
-```gn
+```
 # !is_clang is a proxy for gcc.
 if (!is_clang && !is_win) {
   cflags += [
@@ -1174,13 +1174,13 @@ if (!is_clang && !is_win) {
     - `-Wno-unreachable-code`: 古いGCCで偽陽性を引き起こす未達コードに関する警告を無効にします。この警告は最新のGCCでは完全に削除されています。
 
 ### Objective-C++用のフラグ設定
-```gn
+```
 cflags_objcc += cflags_cc
 ```
 - **説明**: `cflags_cc` のフラグを `cflags_objcc` に追加します。これはObjective-C++のビルド設定をC++の設定と一致させるためです。
 
 ### 公開ヘッダ用の警告設定
-```gn
+```
 config("warnings_for_public_headers") {
   if (is_clang) {
     cflags = [
@@ -1200,7 +1200,7 @@ config("warnings_for_public_headers") {
     - `-Wshorten-64-to-32`: 64ビットから32ビットへの縮小変換に関する警告を有効にします。
 
 ### 追加フラグの設定
-```gn
+```
 config("extra_flags") {
   # extra_flags only applies to the default toolchain (usually the target).
   if (current_toolchain == default_toolchain) {
@@ -1223,7 +1223,7 @@ config("extra_flags") {
     - `ldflags`: `extra_ldflags`
 
 ### デバッグシンボルの設定
-```gn
+```
 config("debug_symbols") {
   # It's annoying to wait for full debug symbols to push over
   # to Android devices.  -gline-tables-only is a lot slimmer.
@@ -1266,7 +1266,7 @@ config("debug_symbols") {
       - `-gdwarf-4`: デバッグ情報の形式としてDWARFバージョン4を使用します（古いバージョンのaddr2lineとの互換性を保つため）。
 
 ### RTTI（ランタイム型情報）の無効化設定
-```gn
+```
 config("no_rtti") {
   if (sanitize != "ASAN") {  # -fsanitize=vptr requires RTTI
     if (is_win) {
@@ -1355,7 +1355,7 @@ RTTIは、実行時にオブジェクトの型情報を取得し、安全にキ�
 :::
 
 ### 最適化設定
-```gn
+```
 config("optimize") {
   ldflags = []
   if (is_win) {
@@ -1422,7 +1422,7 @@ config("optimize") {
       - `ldflags`: `-Wl,--gc-sections`（ガベージコレクションセクション）
 
 ### NDEBUGの設定
-```gn
+```
 config("NDEBUG") {
   defines = [ "NDEBUG" ]
 }
@@ -1432,7 +1432,7 @@ config("NDEBUG") {
   - `defines` に `NDEBUG` を追加します。これにより、デバッグ用のアサートを無効にします。
 
 ### Trivial ABIの設定
-```gn
+```
 config("trivial_abi") {
   if (is_clang) {
     defines = [ "SK_TRIVIAL_ABI=[[clang::trivial_abi]]" ]
@@ -1445,7 +1445,7 @@ config("trivial_abi") {
   - `defines` に `SK_TRIVIAL_ABI=[[clang::trivial_abi]]` を追加します。これにより、Clangの `trivial_abi` 属性を使用して、特定のABI（アプリケーションバイナリインターフェース）を指定します。
 
 ### 実行可能ファイルのリンカフラグ設定
-```gn
+```
 config("executable") {
   if (is_android) {
     ldflags = [

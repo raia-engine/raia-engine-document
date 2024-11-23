@@ -29,13 +29,16 @@ export default defineConfig({
       ]},
       { text: 'リソース', items: [
         {text: 'cosmopolitan', link: '/resource/cosmopolitan/'},
+        {text: 'Dart', link: '/resource/dart/'},
         {text: 'duktape', link: '/resource/duktape/'},
         {text: 'GLFW', link: '/resource/glfw/'},
         {text: 'ImGui', link: '/resource/imgui/'},
         {text: 'libffi', link: '/resource/libffi/'},
         {text: 'Lua', link: '/resource/lua/'},
         {text: 'LuaJIT', link: '/resource/luajit/'},
+        {text: 'Meson', link: '/resource/meson/'},
         {text: 'miniaudio', link: '/resource/miniaudio/'},
+        {text: 'Ninja', link: '/resource/ninja/'},
         {text: 'Skia', link: '/resource/skia/'},
         {text: 'stb', link: '/resource/stb/'},
         {text: 'Terra', link: '/resource/terra/'},
@@ -570,8 +573,7 @@ export default defineConfig({
               text: 'はじめに',
               collapsed: false,
               items: [
-                  {text: 'cosmopolitan', link: '/resource/cosmopolitan/'},
-                  {text: '概要', link: '/resource/cosmopolitan/top'},
+                  {text: 'Cosmopolitan', link: '/resource/cosmopolitan/'},
                   {text: 'ツールチェイン', link: '/resource/cosmopolitan/toolchain'},
               ]
           },
@@ -583,6 +585,116 @@ export default defineConfig({
               ]
           }
       ],
+      '/resource/dart/': [
+                {
+                    text: 'ホーム',
+                    collapsed: false,
+                    items: [
+                        {text: 'はじめに', link: '/resource/dart/'},
+                        {text: 'チュートリアル', link: '/resource/dart/tutorials'},
+                    ]
+                },
+                // {
+                //     text: 'コードラボ',
+                //     collapsed: false,
+                //     items: [
+                //         {text: '準備中', link: '/resource/dart/codelab/'},
+                //     ]
+                // },
+                {
+                    text: '言語',
+                    collapsed: false,
+                    items: [
+                        {text: 'はじめに', link: '/resource/dart/language/'},
+                        {
+                            text: '構文の基本',
+                            collapsed: false,
+                            items: [
+                                {text: '変数', link: '/resource/dart/language/syntax_basics/variables'},
+                                {text: '演算子', link: '/resource/dart/language/syntax_basics/operators'},
+                                {text: 'コメント', link: '/resource/dart/language/syntax_basics/comments'},
+                                {text: 'メタデータ', link: '/resource/dart/language/syntax_basics/metadata'},
+                                {text: 'ライブラリとインポート', link: '/resource/dart/language/syntax_basics/libraries_and_imports'},
+                                {text: 'キーワード', link: '/resource/dart/language/syntax_basics/keywords'},
+                            ]
+                        },
+                        {
+                            text: '型',
+                            collapsed: false,
+                            items: [
+                                {text: '組み込み型', link: '/resource/dart/language/types/built-in_types'},
+                                {text: 'レコード', link: '/resource/dart/language/types/records'},
+                                {text: 'コレクション', link: '/resource/dart/language/types/collections'},
+                                {text: 'ジェネリクス', link: '/resource/dart/language/types/generics'},
+                                {text: '型定義', link: '/resource/dart/language/types/typedefs'},
+                                {text: '型システム', link: '/resource/dart/language/types/type_system'},
+                            ]
+                        },
+                        {
+                            text: 'パターン',
+                            collapsed: false,
+                            items: [
+                                {text: '概要と使い方', link: '/resource/dart/language/patterns/overview_and_usage'},
+                                {text: 'パターンタイプ', link: '/resource/dart/language/patterns/pattern_types'},
+                            ]
+                        },
+                        {text: '関数', link: '/resource/dart/language/functions'},
+                        {
+                            text: 'フロー制御',
+                            collapsed: false,
+                            items: [
+                                {text: '繰り返し', link: '/resource/dart/language/control_flow/loops'},
+                                {text: '分岐', link: '/resource/dart/language/control_flow/branches'},
+                            ]
+                        },
+                        {text: 'エラーハンドリング', link: '/resource/dart/language/error_handling'},
+                        {
+                            text: 'クラスとオブジェクト',
+                            collapsed: false,
+                            items: [
+                                {text: 'クラス', link: '/resource/dart/language/classes_and_objects/classes'},
+                                {text: 'コンストラクタ', link: '/resource/dart/language/classes_and_objects/constructors'},
+                                {text: 'メソッド', link: '/resource/dart/language/classes_and_objects/methods'},
+                                {text: 'クラスの継承', link: '/resource/dart/language/classes_and_objects/extend_a_class'},
+                                {text: 'ミックスイン', link: '/resource/dart/language/classes_and_objects/mixins'},
+                                {text: '列挙', link: '/resource/dart/language/classes_and_objects/enums'},
+                                {text: '拡張メソッド', link: '/resource/dart/language/classes_and_objects/extension_methods'},
+                                {text: '拡張型', link: '/resource/dart/language/classes_and_objects/extension_types'},
+                                {text: '呼び出し可能なオブジェクト', link: '/resource/dart/language/classes_and_objects/callable_objects'},
+                            ]
+                        },
+                        {
+                            text: 'クラス修飾子',
+                            collapsed: false,
+                            items: [
+                                {text: '概要と使い方', link: '/resource/dart/language/class_modifiers/overview_and_usage'},
+                                {text: 'APIメンテナのためのクラス修飾子', link: '/resource/dart/language/class_modifiers/class_modifiers_for_api_maintainers'},
+                                {text: 'リファレンス', link: '/resource/dart/language/class_modifiers/reference'},
+                            ]
+                        },
+                        {
+                            text: '並行性',
+                            collapsed: false,
+                            items: [
+                                {text: '概要', link: '/resource/dart/language/concurrency/overview'},
+                                {text: '非同期サポート', link: '/resource/dart/language/concurrency/asynchronous_support'},
+                                {text: 'アイソレート', link: '/resource/dart/language/concurrency/isolates'},
+                            ]
+                        },
+                        {
+                            text: 'Null安全',
+                            collapsed: false,
+                            items: [
+                                {text: '健全なNull安全', link: '/resource/dart/language/null_safety/sound_null_safety'},
+                                {text: 'Null安全への移行', link: '/resource/dart/language/null_safety/migrating_to_null_safety'},
+                                {text: 'Null安全を理解する', link: '/resource/dart/language/null_safety/understanding_null_safety'},
+                                {text: '不健全なNull安全', link: '/resource/dart/language/null_safety/unsound_null_safety'},
+                                {text: 'FAQ', link: '/resource/dart/language/null_safety/faq'},
+                            ]
+                        },
+                    ]
+                },
+            ],
       '/resource/duktape/': [
                 {
                     text: 'Duktape',
@@ -1267,6 +1379,20 @@ export default defineConfig({
           ]
         },
       ],
+      '/resource/meson/': [
+        {
+          text: 'Meson',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/meson/'},
+            {text: '初心者ガイド', link: '/resource/meson/simplestart.md'},
+            {text: 'インストール', link: '/resource/meson/getting_meson.md'},
+            {text: 'クイックスタート', link: '/resource/meson/quick_guide.md'},
+            {text: 'チュートリアル', link: '/resource/meson/tutorial.md'},
+            {text: 'SDLチュートリアル', link: '/resource/meson/guitutorial.md'},
+          ]
+        },
+      ],
       '/resource/miniaudio/': [
         {
           text: 'miniaudio',
@@ -1274,7 +1400,22 @@ export default defineConfig({
           items: [
             {text: 'はじめに', link: '/resource/miniaudio/'},
             {text: 'マニュアル', link: '/resource/miniaudio/programming_manual.md'},
-            {text: 'サンプル', link: '/resource/miniaudio/example.md'},
+            // {text: 'サンプル', link: '/resource/miniaudio/example.md'},
+          ]
+        },
+      ],
+      '/resource/ninja/': [
+        {
+          text: 'Ninja',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/ninja/'},
+            {text: 'イントロダクション', link: '/resource/ninja/introduction.md'},
+            {text: 'Ninjaを使用する', link: '/resource/ninja/using_ninja_for_your_project.md'},
+            {text: 'Ninjaファイルを作成する', link: '/resource/ninja/writing_your_own_ninja_files.md'},
+            {text: '詳細', link: '/resource/ninja/more_details.md'},
+            {text: 'リファレンス', link: '/resource/ninja/ninja_file_reference.md'},
+            {text: '動的従属性', link: '/resource/ninja/dynamic_dependencies.md'},
           ]
         },
       ],

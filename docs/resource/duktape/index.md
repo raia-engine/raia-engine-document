@@ -1,6 +1,8 @@
-# Duktapeの概要 日本語訳 {#top}
+# Duktape {#top}
 
-[原文](https://duktape.org/index.html)
+::: info
+このページおよび同じカテゴリーにあるすべてのページは[Duktapeの公式サイト](https://duktape.org)や[Githubリポジトリ](https://github.com/svaarala/duktape)のドキュメント等を翻訳したものです。
+:::
 
 Duktapeは移植性とコンパクトなフットプリントに重点を置いた、組み込み可能なJavascriptエンジンです。
 

@@ -1,6 +1,4 @@
-# Duktapeプログラマーズ・ガイド 日本語訳
-
-[原文](https://duktape.org/guide.html)
+# Duktapeプログラマーズ・ガイド
 
 ---
 
