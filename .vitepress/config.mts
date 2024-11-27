@@ -28,8 +28,12 @@ export default defineConfig({
         {text: 'Lua/Cライブラリ', link: '/reference/lua_c/'},
       ]},
       { text: 'リソース', items: [
+        {text: '開発ガイドライン', link: '/resource/dev_guideline/'},
+        {text: 'ANGLE', link: '/resource/angle/'},
+        {text: 'ANTLR', link: '/resource/antlr/'},
         {text: 'cosmopolitan', link: '/resource/cosmopolitan/'},
         {text: 'Dart', link: '/resource/dart/'},
+        {text: 'Discord', link: '/resource/discord/'},
         {text: 'duktape', link: '/resource/duktape/'},
         {text: 'GLFW', link: '/resource/glfw/'},
         {text: 'ImGui', link: '/resource/imgui/'},
@@ -38,11 +42,16 @@ export default defineConfig({
         {text: 'LuaJIT', link: '/resource/luajit/'},
         {text: 'Meson', link: '/resource/meson/'},
         {text: 'miniaudio', link: '/resource/miniaudio/'},
+        {text: 'Natural Docs', link: '/resource/natural-docs/'},
         {text: 'Ninja', link: '/resource/ninja/'},
+        {text: 'Nuklear', link: '/resource/nuklear/'},
+        {text: 'PEG.js', link: '/resource/pegjs/'},
         {text: 'Skia', link: '/resource/skia/'},
+        {text: 'sokol', link: '/resource/sokol/'},
         {text: 'stb', link: '/resource/stb/'},
         {text: 'Terra', link: '/resource/terra/'},
         {text: 'uthash', link: '/resource/uthash/'},
+        {text: 'VitePress', link: '/resource/vitepress/'},
         {text: 'yyjson', link: '/resource/yyjson/'},
       ]},
       { text: 'ダウンロード', link: '/download/'},
@@ -568,6 +577,77 @@ export default defineConfig({
           ]
         },
       ],
+      '/resource/dev_guideline/': [
+        {
+          text: 'はじめに',
+          collapsed: false,
+          items: [
+            {text: '開発ガイドライン', link: '/resource/dev_guideline/'},
+          ]
+        },
+        {
+          text: 'C言語',
+          collapsed: false,
+          items: [
+            {text: 'Cスタイル', link: '/resource/dev_guideline/c/c_style.md'},
+          ]
+        },
+        {
+          text: 'JavaScript',
+          collapsed: false,
+          items: [
+            {text: '50のルール', link: '/resource/dev_guideline/javascript/50_javascript_best_practice.md'},
+            {text: 'Clean Code', link: '/resource/dev_guideline/javascript/clean_code_javascript.md'},
+            {text: 'W3C', link: '/resource/dev_guideline/javascript/javascript_best_practices.md'},
+          ]
+        },
+        {
+          text: 'Lua',
+          collapsed: false,
+          items: [
+            {text: 'Luaスタイルガイド', link: '/resource/dev_guideline/lua/lua_style_guide.md'},
+          ]
+        },
+      ],
+      '/resource/angle/': [
+        {
+          text: 'ANGLE',
+          collapsed: false,
+          items: [
+            {text: '概要', link: '/resource/angle/'},
+            {text: '開発', link: '/resource/angle/angle_development'},
+          ]
+        },
+        {
+          text: 'MetalAngle',
+          collapsed: false,
+          items: [
+            {text: '概要', link: '/resource/angle/metal_angle'},
+            {text: '開発', link: '/resource/angle/metal_andle_development'},
+          ]
+        }
+      ],
+      '/resource/antlr/': [
+        {
+          text: 'ANTLR',
+          collapsed: false,
+          items: [
+              {text: 'はじめに', link: '/resource/antlr/'},
+          ]
+        },
+        {
+          text: 'ドキュメント',
+          collapsed: false,
+          items: [
+            {text: 'C++', link: '/resource/antlr/cpp-target'},
+            {text: 'Go', link: '/resource/antlr/go-target'},
+            {text: 'Java', link: '/resource/antlr/java-target'},
+            {text: 'JavaScript', link: '/resource/antlr/javascript-target'},
+            {text: 'Python', link: '/resource/antlr/python-target'},
+            {text: 'Typescript', link: '/resource/antlr/typescript-target'},
+          ]
+        }
+      ],
       '/resource/cosmopolitan/': [
           {
               text: 'はじめに',
@@ -694,7 +774,17 @@ export default defineConfig({
                         },
                     ]
                 },
-            ],
+      ],
+      '/resource/discord/': [
+        {
+          text: 'はじめに',
+          collapsed: false,
+          items: [
+              {text: 'Discord', link: '/resource/discord/'},
+              {text: 'ガイドライン', link: '/resource/discord/guidelines.md'},
+          ]
+        },
+      ],
       '/resource/duktape/': [
                 {
                     text: 'Duktape',
@@ -1404,6 +1494,19 @@ export default defineConfig({
           ]
         },
       ],
+      '/resource/natural-docs/': [
+        {
+          text: 'Natural Docs',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/natural-docs/'},
+            {text: 'セットアップ', link: '/resource/natural-docs/getting_started/getting_set_up.md'},
+            {text: 'コードの文書化', link: '/resource/natural-docs/getting_started/documenting_you_code.md'},
+            {text: 'ドキュメントの作成', link: '/resource/natural-docs/getting_started/building_the_documentation.md'},
+            {text: 'カスタマイズ', link: '/resource/natural-docs/getting_started/further_customization.md'},
+          ]
+        },
+      ],
       '/resource/ninja/': [
         {
           text: 'Ninja',
@@ -1416,6 +1519,26 @@ export default defineConfig({
             {text: '詳細', link: '/resource/ninja/more_details.md'},
             {text: 'リファレンス', link: '/resource/ninja/ninja_file_reference.md'},
             {text: '動的従属性', link: '/resource/ninja/dynamic_dependencies.md'},
+          ]
+        },
+      ],
+      '/resource/nuklear/': [
+        {
+          text: 'Nuklear',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/nuklear/'},
+            {text: 'ドキュメント', link: '/resource/nuklear/doc'},
+          ]
+        },
+      ],
+      '/resource/pegjs/': [
+        {
+          text: 'PEG.js',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/pegjs/'},
+            {text: 'ドキュメント', link: '/resource/pegjs/documentation'},
           ]
         },
       ],
@@ -1444,6 +1567,44 @@ export default defineConfig({
             {text: 'skia/gn/skia.gni', link: '/resource/skia/skia_gn_skia_gni.md'},
             {text: 'skia/gn/skia/BUILD.gn', link: '/resource/skia/skia_gn_skia_build_gn.md'},
             {text: 'skia/gn/toolchain/BUILD.gn', link: '/resource/skia/skia_gn_toolchain_build_gn.md'},
+          ]
+        },
+      ],
+      '/resource/sokol/': [
+        {
+          text: 'Sokol',
+          collapsed: false,
+          items: [
+            {text: 'はじめに', link: '/resource/sokol/'},
+          ]
+        },
+        {
+          text: 'コアライブラリ',
+          collapsed: false,
+          items: [
+            {text: 'gfx', link: '/resource/sokol/gfx.md'},
+            {text: 'app', link: '/resource/sokol/app.md'},
+            {text: 'time', link: '/resource/sokol/time.md'},
+            {text: 'audio', link: '/resource/sokol/audio.md'},
+            {text: 'fetch', link: '/resource/sokol/fetch.md'},
+            {text: 'args', link: '/resource/sokol/args.md'},
+            {text: 'glue', link: '/resource/sokol/glue.md'},
+          ]
+        },
+        {
+          text: 'ユーティリティ',
+          collapsed: false,
+          items: [
+            {text: 'imgui', link: '/resource/sokol/imgui.md'},
+            {text: 'nuklear', link: '/resource/sokol/nuklear.md'},
+            {text: 'gl', link: '/resource/sokol/gl.md'},
+            {text: 'fontstash', link: '/resource/sokol/fontstash.md'},
+            {text: 'gfx_imgui', link: '/resource/sokol/gfx_imgui.md'},
+            {text: 'debugtext', link: '/resource/sokol/debugtext.md'},
+            {text: 'memtrack', link: '/resource/sokol/memtrack.md'},
+            {text: 'shape', link: '/resource/sokol/shape.md'},
+            {text: 'color', link: '/resource/sokol/color.md'},
+            {text: 'spine', link: '/resource/sokol/spine.md'},
           ]
         },
       ],
@@ -1499,6 +1660,83 @@ export default defineConfig({
             {text: 'utstack', link: '/resource/uthash/utstack.md'},
             {text: 'utstring', link: '/resource/uthash/utstring.md'},
           ]
+        },
+      ],
+      '/resource/vitepress/': [
+        { text: "VitePress", link: "/resource/vitepress/" },
+        {
+          text: "Guide",
+          collapsed: false,
+          items: [
+            {
+              text: "イントロダクション",
+              collapsed: false,
+              items: [
+                { text: "VitePressとは？", link: "/resource/vitepress/guide/what-is-vitepress.md" },
+                { text: "クイックスタート", link: "/resource/vitepress/guide/getting-started.md" },
+                { text: "ルーティング", link: "/resource/vitepress/guide/routing.md" },
+                { text: "デプロイ", link: "/resource/vitepress/guide/deploy.md" },
+              ],
+            },
+            {
+              text: "Writing",
+              collapsed: false,
+              items: [
+                { text: "Markdown拡張機能", link: "/resource/vitepress/guide/markdown.md" },
+                { text: "Asset Handling", link: "/resource/vitepress/guide/asset-handling.md" },
+                { text: "Frontmatter", link: "/resource/vitepress/guide/frontmatter.md" },
+                { text: "Using Vue in Markdown", link: "/resource/vitepress/guide/using-vue.md" },
+                { text: "Internationalization", link: "/resource/vitepress/guide/i18n.md" },
+              ],
+            },
+            {
+              text: "Customization",
+              collapsed: false,
+              items: [
+                { text: "Using a Custom Theme", link: "/resource/vitepress/guide/custom-theme.md" },
+                { text: "Extending the Default Theme", link: "/resource/vitepress/guide/extending-default-theme.md" },
+                { text: "Build-Time Data Loading", link: "/resource/vitepress/guide/data-loading.md" },
+                { text: "SSR Compatibility", link: "/resource/vitepress/guide/ssr-compat.md" },
+                { text: "Connecting to a CMS", link: "/resource/vitepress/guide/cms.md" },
+              ],
+            },
+            {
+              text: "Experimental",
+              collapsed: false,
+              items: [
+                { text: "MPA Mode", link: "/resource/vitepress/guide/mpa-mode.md" },
+                { text: "Sitemap Generation", link: "/resource/vitepress/guide/sitemap-generation.md" },
+              ],
+            },
+          ],
+        },
+        {
+          text: "Reference",
+          collapsed: false,
+          items: [
+            { text: "Site Config", link: "/resource/vitepress/reference/site-config.md" },
+            { text: "Frontmatter Config", link: "/resource/vitepress/reference/frontmatter-config.md" },
+            { text: "Runtime API", link: "/resource/vitepress/reference/runtime-api.md" },
+            { text: "CLI", link: "/resource/vitepress/reference/cli.md" },
+            {
+              text: "Default Theme",
+              items: [
+                { text: "Overview", link: "/resource/vitepress/reference/default-theme-config.md" },
+                { text: "Nav", link: "/resource/vitepress/reference/default-theme-nav.md" },
+                { text: "Sidebar", link: "/resource/vitepress/reference/default-theme-sidebar.md" },
+                { text: "Home Page", link: "/resource/vitepress/reference/default-theme-home-page.md" },
+                { text: "Footer", link: "/resource/vitepress/reference/default-theme-footer.md" },
+                { text: "Layout", link: "/resource/vitepress/reference/default-theme-layout.md" },
+                { text: "Badge", link: "/resource/vitepress/reference/default-theme-badge.md" },
+                { text: "Team Page", link: "/resource/vitepress/reference/default-theme-team-page.md" },
+                { text: "Prev / Next Links", link: "/resource/vitepress/reference/default-theme-prev-next-links.md" },
+                { text: "Edit Link", link: "/resource/vitepress/reference/default-theme-edit-link.md" },
+                { text: "Last Updated Timestamp", link: "/resource/vitepress/reference/default-theme-last-updated.md" },
+                { text: "Search", link: "/resource/vitepress/reference/default-theme-search.md" },
+                { text: "Carbon Ads", link: "/resource/vitepress/reference/default-theme-carbon-ads.md" },
+              ],
+            },
+          ],
         },
       ],
       '/resource/yyjson/': [
