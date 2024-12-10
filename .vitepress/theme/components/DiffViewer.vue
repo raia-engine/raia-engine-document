@@ -2,7 +2,7 @@
     <div class="diff-wrapper">
       <h1>テキスト差分比較ツール</h1>
       <div class="description">
-        <p>2つのテキストファイルの差分を表示します。このページのURL末尾に付与された <code>?source=...&amp;target=...</code> を元に比較します。
+        <p>2つのテキストファイルの差分を表示します。このページのURL末尾に付与された <code>?source=...&amp;target=...</code> を元に比較します。<a href="https://raia.app/tools/diff-viewer/?source=https://raw.githubusercontent.com/dolphilia/raia/058257c39f3ce926a5b6b080b2ae2e3b10a8428c/README.md&target=https://raw.githubusercontent.com/dolphilia/raia/75b8e0020b0159f32a2888a19304056b7d5ac8e9/README.md">サンプルを開く。</a>
         </p>
       </div>
       <!--
