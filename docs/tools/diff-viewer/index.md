@@ -1,6 +1,10 @@
-# ドキュメント差分比較ページ
-
-下記コンポーネントで2つのRAWファイルURLを入力し、差分を表示することができます。  
-URLに `?source=...&target=...` をつけて直接アクセスすると、ページ読み込み時に比較が行われます。
+---
+title: Docs with VitePress
+layout: page
+sidebar: false
+---
+<script setup>
+import DiffViewer from '../../../.vitepress/theme/components/DiffViewer.vue'
+</script>
 
 <DiffViewer />

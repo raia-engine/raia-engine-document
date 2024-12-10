@@ -1,43 +1,67 @@
 {
-  "hash": "67caa7e1",
-  "configHash": "0e9cbc26",
-  "lockfileHash": "9e5818ed",
-  "browserHash": "50365af9",
+  "hash": "03893ef8",
+  "configHash": "f9688a27",
+  "lockfileHash": "e99025e3",
+  "browserHash": "cb7ff9aa",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "7b7f150e",
+      "fileHash": "ce57b5b2",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "152cc389",
+      "fileHash": "b2aa6eab",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "8c9a58f3",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../node_modules/@vueuse/integrations/useFocusTrap.mjs",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "00fdf42d",
+      "fileHash": "de89f161",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "09a92274",
+      "fileHash": "af763fa6",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "a99c0bee",
+      "fileHash": "6cab21d4",
+      "needsInterop": false
+    },
+    "diff": {
+      "src": "../../../node_modules/diff/lib/index.mjs",
+      "file": "diff.js",
+      "fileHash": "fd56e79a",
+      "needsInterop": false
+    },
+    "diff2html": {
+      "src": "../../../node_modules/diff2html/lib-esm/diff2html.js",
+      "file": "diff2html.js",
+      "fileHash": "a38493c9",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-DTWPM7ZD": {
-      "file": "chunk-DTWPM7ZD.js"
+    "chunk-A7UTJUSY": {
+      "file": "chunk-A7UTJUSY.js"
+    },
+    "chunk-VJWGEPT5": {
+      "file": "chunk-VJWGEPT5.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
     }
   }
 }

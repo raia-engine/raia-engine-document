@@ -7,7 +7,7 @@ export default defineConfig({
   outDir: '../raia-engine.github.io/docs',
   ignoreDeadLinks: true,
   title: "RaiaEngine",
-  description: "WebAPI-compatible framework for building apps that run in native environments.",
+  description: "",
   lastUpdated: true,
   themeConfig: {
     search: {
@@ -22,7 +22,7 @@ export default defineConfig({
     nav: [
       { text: 'ホーム', link: '/'},
       { text: 'チュートリアル', link: '/tutorial/'},
-      { text: 'ドキュメント', link: '/document'},
+      { text: 'ドキュメント', link: '/document/'},
       { text: 'リファレンス', items: [
         {text: 'LuaJITライブラリ', link: '/reference/built_in/'},
         {text: 'Lua/Cライブラリ', link: '/reference/lua_c/'},
@@ -56,12 +56,27 @@ export default defineConfig({
         {text: 'yyjson', link: '/resource/yyjson/'},
       ]},
       { text: 'ツール', items: [
-        {text: 'Xアンケート計算', link: '/tools/calc-enquete/'},
-        {text: 'ドキュメント差分表示', link: '/tools/diff-viewer/'},
+        {text: 'テキスト差分比較ツール', link: '/tools/diff-viewer/'},
       ]},
       { text: 'ダウンロード', link: '/download/'},
     ],
     sidebar: {
+      '/tutorial/': [
+        {
+          text: 'はじめに',
+          items: [
+            { text: 'チュートリアル', link: '/tutorial/' },
+          ]
+        }
+      ],
+      '/document/': [
+        {
+          text: 'はじめに',
+          items: [
+            { text: 'ダウンロード', link: '/document/' },
+          ]
+        }
+      ],
       '/tools/calc-enquete': [
         {
           text: 'はじめに',
@@ -80,9 +95,9 @@ export default defineConfig({
       ],
       '/download/': [
         {
-          text: 'ダウンロード',
+          text: 'はじめに',
           items: [
-            { text: 'はじめに', link: '/download/' },
+            { text: 'ダウンロード', link: '/download/' },
           ]
         }
       ],
