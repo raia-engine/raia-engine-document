@@ -26,6 +26,7 @@ export default defineConfig({
       { text: 'リファレンス', items: [
         {text: 'LuaJITライブラリ', link: '/reference/built_in/'},
         {text: 'Lua/Cライブラリ', link: '/reference/lua_c/'},
+        {text: 'Terra/Luaライブラリ', link: '/reference/terra_lua/'},
       ]},
       { text: 'リソース', items: [
         {text: '開発ガイドライン', link: '/resource/dev_guideline/'},
@@ -54,9 +55,29 @@ export default defineConfig({
         {text: 'VitePress', link: '/resource/vitepress/'},
         {text: 'yyjson', link: '/resource/yyjson/'},
       ]},
+      { text: 'ツール', items: [
+        {text: 'Xアンケート計算', link: '/tools/calc-enquete/'},
+        {text: 'ドキュメント差分表示', link: '/tools/diff-viewer/'},
+      ]},
       { text: 'ダウンロード', link: '/download/'},
     ],
     sidebar: {
+      '/tools/calc-enquete': [
+        {
+          text: 'はじめに',
+          items: [
+            { text: 'Xアンケート計算', link: '/tools/calc-enquete/' },
+          ]
+        }
+      ],
+      '/tools/diff-viewer': [
+        {
+          text: 'はじめに',
+          items: [
+            { text: 'ドキュメント差分表示', link: '/tools/diff-viewer/' },
+          ]
+        }
+      ],
       '/download/': [
         {
           text: 'ダウンロード',
@@ -574,6 +595,15 @@ export default defineConfig({
             { text:'luaL_unref', link: '/reference/lua_c/luaL_unref.md'},
             { text:'luaL_where', link: '/reference/lua_c/luaL_where.md'},
             { text:'luaJIT_setmode', link: '/reference/lua_c/luaJIT_setmode.md'},
+          ]
+        },
+      ],
+      '/reference/terra_lua': [
+        {
+          text: 'はじめに',
+          collapsed: false,
+          items: [
+            { text: 'Terra/Luaライブラリ', link: '/reference/terra_lua/' },
           ]
         },
       ],
