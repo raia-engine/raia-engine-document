@@ -2,7 +2,7 @@
     <div class="diff-wrapper">
       <h1>テキスト差分比較ツール</h1>
       <div class="description">
-        <p>2つのテキストファイルの差分を表示します。このページのURL末尾に付与された <code>?source=...&amp;target=...</code> を元に比較します。</p>
+        <p>オンライン上にある2つのファイルの差分を表示します。このページのURL末尾に付与された <code>?source=...&amp;target=...</code> を元に比較します。URLはCORSに対応している必要があります。</p>
       </div>
 
       <div class="form-container">

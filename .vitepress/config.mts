@@ -50,6 +50,7 @@ export default defineConfig({
         {text: 'Skia', link: '/resource/skia/'},
         {text: 'sokol', link: '/resource/sokol/'},
         {text: 'stb', link: '/resource/stb/'},
+        {text: 'Swift', link: '/resource/swift/'},
         {text: 'Terra', link: '/resource/terra/'},
         {text: 'uthash', link: '/resource/uthash/'},
         {text: 'VitePress', link: '/resource/vitepress/'},
@@ -1669,6 +1670,82 @@ export default defineConfig({
           items: [
             {text: 'stb_image.h', link: '/resource/stb/stb_image_h.md'},
             {text: 'stb_truetype.h', link: '/resource/stb/stb_truetype_h.md'},
+          ]
+        },
+      ],
+      '/resource/swift/': [
+        {
+          text: 'はじめに',
+          collapsed: false,
+          items: [
+            {text: 'Swift(6)', link: '/resource/swift/'},
+          ]
+        },
+        {
+          text: 'Welcome to Swift',
+          collapsed: false,
+          items: [
+            {text: 'About Swift', link: '/resource/swift/aboutswift.md'},
+            {text: 'Version Compatibility', link: '/resource/swift/compatibility.md'},
+            {text: 'A Swift Tour', link: '/resource/swift/guidedtour.md'},
+          ]
+        },
+        {
+          text: 'Language Guide',
+          collapsed: false,
+          items: [
+            {text: 'The Basics', link: '/resource/swift/thebasics.md'},
+            {text: 'Basic Operators', link: '/resource/swift/basicoperators.md'},
+            {text: 'Strings and Characters', link: '/resource/swift/stringsandcharacters.md'},
+            {text: 'Collection Types', link: '/resource/swift/collectiontypes.md'},
+            {text: 'Control Flow', link: '/resource/swift/controlflow.md'},
+            {text: 'Functions', link: '/resource/swift/functions.md'},
+            {text: 'Closures', link: '/resource/swift/closures.md'},
+            {text: 'Enumerations', link: '/resource/swift/enumerations.md'},
+            {text: 'Structures and Classes', link: '/resource/swift/classesandstructures.md'},
+            {text: 'Properties', link: '/resource/swift/properties.md'},
+            {text: 'Methods', link: '/resource/swift/methods.md'},
+            {text: 'Subscripts', link: '/resource/swift/subscripts.md'},
+            {text: 'Inheritance', link: '/resource/swift/inheritance.md'},
+            {text: 'Initialization', link: '/resource/swift/initialization.md'},
+            {text: 'Deinitialization', link: '/resource/swift/deinitialization.md'},
+            {text: 'Optional Chaining', link: '/resource/swift/optionalchaining.md'},
+            {text: 'Error Handling', link: '/resource/swift/errorhandling.md'},
+            {text: 'Concurrency', link: '/resource/swift/concurrency.md'},
+            {text: 'Macros', link: '/resource/swift/macros.md'},
+            {text: 'Type Casting', link: '/resource/swift/typecasting.md'},
+            {text: 'Nested Types', link: '/resource/swift/nestedtypes.md'},
+            {text: 'Extensions', link: '/resource/swift/extensions.md'},
+            {text: 'Protocols', link: '/resource/swift/protocols.md'},
+            {text: 'Generics', link: '/resource/swift/generics.md'},
+            {text: 'Opaque and Boxed Protocol Types', link: '/resource/swift/opaquetypes.md'},
+            {text: 'Automatic Reference Counting', link: '/resource/swift/automaticreferencecounting.md'},
+            {text: 'Memory Safety', link: '/resource/swift/memorysafety.md'},
+            {text: 'Access Control', link: '/resource/swift/accesscontrol.md'},
+            {text: 'Advanced Operators', link: '/resource/swift/advancedoperators.md'},
+          ]
+        },
+        {
+          text: 'Language Reference',
+          collapsed: false,
+          items: [
+            {text: 'About the Language Reference', link: '/resource/swift/aboutthelanguagereference.md'},
+            {text: 'Lexical Structure', link: '/resource/swift/lexicalstructure.md'},
+            {text: 'Types', link: '/resource/swift/types.md'},
+            {text: 'Expressions', link: '/resource/swift/expressions.md'},
+            {text: 'Statements', link: '/resource/swift/statements.md'},
+            {text: 'Declarations', link: '/resource/swift/declarations.md'},
+            {text: 'Attributes', link: '/resource/swift/attributes.md'},
+            {text: 'Patterns', link: '/resource/swift/patterns.md'},
+            {text: 'Generic Parameters and Arguments', link: '/resource/swift/genericparametersandarguments.md'},
+            {text: 'Summary of the Grammar', link: '/resource/swift/summaryofthegrammar.md'},
+          ]
+        },
+        {
+          text: 'Revision History',
+          collapsed: false,
+          items: [
+            {text: 'Document Revision History', link: '/resource/swift/revisionhistory.md'},
           ]
         },
       ],
