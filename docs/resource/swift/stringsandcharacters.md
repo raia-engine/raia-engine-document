@@ -1,34 +1,34 @@
-# Strings and Characters
+# 文字列と文字
 
-Store and manipulate text.
+テキストを保存し、操作します。
 
-A string is a series of characters, such as "hello, world" or "albatross". Swift strings are represented by the String type. The contents of a String can be accessed in various ways, including as a collection of Character values.
+文字列とは、一連の文字のことです。例えば "hello, world" や "albatross" が該当します。Swift の文字列は `String` 型で表されます。`String` の内容は、`Character` 値のコレクションとしてアクセスするなど、さまざまな方法で操作できます。
 
-Swift’s String and Character types provide a fast, Unicode-compliant way to work with text in your code. The syntax for string creation and manipulation is lightweight and readable, with a string literal syntax that’s similar to C. String concatenation is as simple as combining two strings with the + operator, and string mutability is managed by choosing between a constant or a variable, just like any other value in Swift. You can also use strings to insert constants, variables, literals, and expressions into longer strings, in a process known as string interpolation. This makes it easy to create custom string values for display, storage, and printing.
+Swift の `String` 型と `Character` 型は、コード内でのテキスト操作を高速かつ Unicode 準拠で行う方法を提供します。文字列の作成や操作のための構文は軽量で読みやすく、C に似た文字列リテラル構文を持っています。文字列の連結は、2 つの文字列を `+` 演算子で結合するだけで簡単に行え、文字列の可変性は他の値と同様に、定数または変数を選択することで管理されます。また、文字列補間を使用して、定数、変数、リテラル、式を長い文字列に挿入することができます。これにより、表示、保存、印刷のためのカスタム文字列値を簡単に作成できます。
 
-Despite this simplicity of syntax, Swift’s String type is a fast, modern string implementation. Every string is composed of encoding-independent Unicode characters, and provides support for accessing those characters in various Unicode representations.
+このように構文がシンプルであるにもかかわらず、Swift の `String` 型は高速でモダンな文字列実装を提供します。すべての文字列は、エンコーディングに依存しない Unicode 文字で構成され、さまざまな Unicode 表現でその文字にアクセスすることができます。
 
 ::: info Note
-Swift’s String type is bridged with Foundation’s NSString class. Foundation also extends String to expose methods defined by NSString. This means, if you import Foundation, you can access those NSString methods on String without casting.
+Swift の `String` 型は、Foundation の `NSString` クラスとブリッジされています。Foundation は `String` を拡張し、`NSString` によって定義されたメソッドを公開します。そのため、Foundation をインポートすれば、キャストなしで `String` 上でこれらの `NSString` メソッドにアクセスできます。
 
-For more information about using String with Foundation and Cocoa, see Bridging Between String and NSString.
+`String` と Foundation や Cocoa の連携について詳しくは、「Bridging Between String and NSString」を参照してください。
 :::
 
-## String Literals
+## 文字列リテラル
 
-You can include predefined String values within your code as string literals. A string literal is a sequence of characters surrounded by double quotation marks (").
+コード内で事前定義された `String` 値を文字列リテラルとして含めることができます。文字列リテラルは、二重引用符（"）で囲まれた一連の文字です。
 
-Use a string literal as an initial value for a constant or variable:
+文字列リテラルを定数や変数の初期値として使用できます。
 
 ```swift
 let someString = "Some string literal value"
 ```
 
-Note that Swift infers a type of String for the someString constant because it’s initialized with a string literal value.
+`someString` 定数は文字列リテラル値で初期化されているため、Swift はその型を自動的に `String` と推論します。
 
-### Multiline String Literals
+### 複数行文字列リテラル
 
-If you need a string that spans several lines, use a multiline string literal — a sequence of characters surrounded by three double quotation marks:
+複数行にまたがる文字列が必要な場合は、複数行文字列リテラルを使用します。これは、三重の二重引用符（"""）で囲まれた一連の文字です。
 
 ```swift
 let quotation = """
@@ -40,7 +40,7 @@ till you come to the end; then stop."
 """
 ```
 
-A multiline string literal includes all of the lines between its opening and closing quotation marks. The string begins on the first line after the opening quotation marks (""") and ends on the line before the closing quotation marks, which means that neither of the strings below start or end with a line break:
+複数行文字列リテラルには、開始および終了の引用符（"""）の間にあるすべての行が含まれます。文字列は、開始引用符（"""）の直後の行から始まり、終了引用符の直前の行で終わります。そのため、以下の文字列はどちらも改行で始まったり終わったりしません。
 
 ```swift
 let singleLineString = "These are the same."
@@ -49,7 +49,7 @@ These are the same.
 """
 ```
 
-When your source code includes a line break inside of a multiline string literal, that line break also appears in the string’s value. If you want to use line breaks to make your source code easier to read, but you don’t want the line breaks to be part of the string’s value, write a backslash (\) at the end of those lines:
+ソースコードに複数行文字列リテラル内の改行が含まれる場合、その改行は文字列の値にも反映されます。ソースコードを読みやすくするために改行を含めたいが、その改行を文字列の値に含めたくない場合は、それらの行末にバックスラッシュ（\）を記述します。
 
 ```swift
 let softWrappedQuotation = """
@@ -61,7 +61,7 @@ till you come to the end; then stop."
 """
 ```
 
-To make a multiline string literal that begins or ends with a line feed, write a blank line as the first or last line. For example:
+文字列リテラルを改行で開始または終了させたい場合は、最初または最後の行を空行にします。例えば：
 
 ```swift
 let lineBreaks = """
@@ -72,19 +72,18 @@ It also ends with a line break.
 """
 ```
 
-A multiline string can be indented to match the surrounding code. The whitespace before the closing quotation marks (""") tells Swift what whitespace to ignore before all of the other lines. However, if you write whitespace at the beginning of a line in addition to what’s before the closing quotation marks, that whitespace is included.
+複数行文字列は、周囲のコードに合わせてインデントすることができます。終了引用符（"""）の前の空白が、他のすべての行の先頭で無視される空白を Swift に指示します。ただし、終了引用符の前以外に行の先頭に空白を記述すると、その空白は文字列に含まれます。
 
-In the example above, even though the entire multiline string literal is indented, the first and last lines in the string don’t begin with any whitespace. The middle line has more indentation than the closing quotation marks, so it starts with that extra four-space indentation.
+上記の例では、複数行文字列リテラル全体がインデントされていますが、文字列内の最初と最後の行は空白で始まっていません。中間の行には、終了引用符よりも多いインデントがあるため、その余分な 4 スペースのインデントが含まれています。
 
-### Special Characters in String Literals
+### 文字列リテラルの特殊文字
 
-String literals can include the following special characters:
+文字列リテラルには、以下の特殊文字を含めることができます：
 
-- The escaped special characters `\0` (null character), `\\` (backslash), `\t` (horizontal tab), `\n` (line feed), `\r` (carriage return), `\"` (double quotation mark) and `\'` (single quotation mark)
+- エスケープされた特殊文字: `\0`（ヌル文字）、`\\`（バックスラッシュ）、`\t`（水平タブ）、`\n`（改行）、`\r`（復帰）、`\"`（二重引用符）、`\'`（単一引用符）
+- 任意の Unicode スカラー値: `\u{n}` と記述され、n は 1〜8 桁の16進数（Unicode については、以下の「Unicode」で説明）
 
-An arbitrary Unicode scalar value, written as `\u{n}`, where n is a 1–8 digit hexadecimal number (Unicode is discussed in Unicode below)
-
-The code below shows four examples of these special characters. The wiseWords constant contains two escaped double quotation marks. The dollarSign, blackHeart, and sparklingHeart constants demonstrate the Unicode scalar format:
+以下のコードは、これらの特殊文字の4つの例を示しています。`wiseWords` 定数には 2 つのエスケープされた二重引用符が含まれています。`dollarSign`、`blackHeart`、`sparklingHeart` の定数は、Unicode スカラー形式を示しています。
 
 ```swift
 let wiseWords = "\"Imagination is more important than knowledge\" - Einstein"
@@ -94,7 +93,7 @@ let blackHeart = "\u{2665}"      // ♥,  Unicode scalar U+2665
 let sparklingHeart = "\u{1F496}" // 💖, Unicode scalar U+1F496
 ```
 
-Because multiline string literals use three double quotation marks instead of just one, you can include a double quotation mark (") inside of a multiline string literal without escaping it. To include the text """ in a multiline string, escape at least one of the quotation marks. For example:
+複数行文字列リテラルでは、二重引用符を1つだけでなく3つ使用するため、複数行文字列リテラル内に二重引用符（"）をエスケープせずに含めることができます。`"""` を文字列内に含める場合は、少なくとも1つの引用符をエスケープする必要があります。例えば：
 
 ```swift
 let threeDoubleQuotationMarks = """
@@ -103,13 +102,13 @@ Escaping all three quotation marks \"\"\"
 """
 ```
 
-### Extended String Delimiters
+### 拡張文字列デリミタ
 
-You can place a string literal within extended delimiters to include special characters in a string without invoking their effect. You place your string within quotation marks (`"`) and surround that with number signs (`#`). For example, printing the string literal `#"Line 1\nLine 2"#` prints the line feed escape sequence (`\n`) rather than printing the string across two lines.
+拡張デリミタを使用して文字列リテラルを囲むことで、特殊文字をその効果を発動させずに文字列内に含めることができます。文字列を二重引用符（`"`）で囲み、その外側を数記号（`#`）で囲みます。例えば、文字列リテラル `#"Line 1\nLine 2"#` を出力すると、改行エスケープシーケンス（`\n`）がそのまま出力され、文字列が2行に分かれません。
 
-If you need the special effects of a character in a string literal, match the number of number signs within the string following the escape character (`\`). For example, if your string is `#"Line 1\nLine 2"#` and you want to break the line, you can use `#"Line 1\#nLine 2"#` instead. Similarly, `###"Line1\###nLine2"###` also breaks the line.
+文字列リテラル内の特殊文字の効果を必要とする場合は、エスケープ文字（`\`）の後にデリミタ内の数記号の数を一致させます。例えば、`#"Line 1\nLine 2"#` を改行したい場合は、`#"Line 1\#nLine 2"#` を使用します。同様に、`###"Line1\###nLine2"###` も改行します。
 
-String literals created using extended delimiters can also be multiline string literals. You can use extended delimiters to include the text `"""` in a multiline string, overriding the default behavior that ends the literal. For example:
+拡張デリミタで作成された文字列リテラルは、複数行文字列リテラルにもできます。デリミタを使用して、デフォルトではリテラルを終了する `"""` を文字列内に含めることができます。例えば：
 
 ```swift
 let threeMoreDoubleQuotationMarks = #"""
@@ -117,54 +116,54 @@ Here are three more double quotes: """
 """#
 ```
 
-## Initializing an Empty String
+## 空の文字列の初期化
 
-To create an empty String value as the starting point for building a longer string, either assign an empty string literal to a variable or initialize a new String instance with initializer syntax:
+長い文字列を作成する出発点として、空の `String` 値を作成するには、空の文字列リテラルを変数に割り当てるか、初期化子構文を使用して新しい `String` インスタンスを初期化します。
 
 ```swift
-var emptyString = ""               // empty string literal
-var anotherEmptyString = String()  // initializer syntax
-// these two strings are both empty, and are equivalent to each other
+var emptyString = ""               // 空の文字列リテラル
+var anotherEmptyString = String()  // 初期化子構文
+// これらの文字列はどちらも空であり、互いに等価です。
 ```
 
-Find out whether a String value is empty by checking its Boolean isEmpty property:
+`String` 値が空であるかどうかは、その Boolean 型の `isEmpty` プロパティを確認することで調べることができます：
 
 ```swift
 if emptyString.isEmpty {
     print("Nothing to see here")
 }
-// Prints "Nothing to see here"
+// "Nothing to see here" と表示されます
 ```
 
-## String Mutability
+## 変更可能な文字列
 
-You indicate whether a particular String can be modified (or mutated) by assigning it to a variable (in which case it can be modified), or to a constant (in which case it can’t be modified):
+特定の `String` を変更可能（または変更不可）にするかどうかを示すには、それを変数に割り当てるか（この場合、変更可能）、または定数に割り当てます（この場合、変更不可）：
 
 ```swift
 var variableString = "Horse"
 variableString += " and carriage"
-// variableString is now "Horse and carriage"
+// variableString は現在 "Horse and carriage"
 
 let constantString = "Highlander"
 constantString += " and another Highlander"
-// this reports a compile-time error - a constant string cannot be modified
+// これはコンパイル時エラーを報告します - 定数文字列は変更できません
 ```
 
 ::: info Note
-This approach is different from string mutation in Objective-C and Cocoa, where you choose between two classes (NSString and NSMutableString) to indicate whether a string can be mutated.
+このアプローチは、Objective-C や Cocoa の文字列変更とは異なります。Objective-C では、文字列が変更可能かどうかを示すために、`NSString` と `NSMutableString` の 2 つのクラスから選択します。
 :::
 
-## Strings Are Value Types
+## 文字列は値型
 
-Swift’s String type is a value type. If you create a new String value, that String value is copied when it’s passed to a function or method, or when it’s assigned to a constant or variable. In each case, a new copy of the existing String value is created, and the new copy is passed or assigned, not the original version. Value types are described in Structures and Enumerations Are Value Types.
+Swift の `String` 型は値型です。新しい `String` 値を作成すると、その `String` 値は関数またはメソッドに渡されたり、定数や変数に割り当てられるときにコピーされます。いずれの場合も、既存の `String` 値の新しいコピーが作成され、新しいコピーが渡されるか割り当てられ、元のバージョンは渡されません。値型については「Structures and Enumerations Are Value Types」で説明されています。
 
-Swift’s copy-by-default String behavior ensures that when a function or method passes you a String value, it’s clear that you own that exact String value, regardless of where it came from. You can be confident that the string you are passed won’t be modified unless you modify it yourself.
+Swift のデフォルトでのコピーによる文字列処理の動作により、関数やメソッドから渡される `String` 値がどこから来たものであっても、それが自分のものであると確信できます。そのため、自分が変更しない限り、渡された文字列が変更されることはありません。
 
-Behind the scenes, Swift’s compiler optimizes string usage so that actual copying takes place only when absolutely necessary. This means you always get great performance when working with strings as value types.
+内部的には、Swift のコンパイラは文字列の使用を最適化し、実際のコピーは絶対に必要な場合にのみ行われます。このため、値型として文字列を操作しても常に高いパフォーマンスを得られます。
 
-## Working with Characters
+## 単一文字を扱う
 
-You can access the individual Character values for a String by iterating over the string with a for-in loop:
+文字列の個々の `Character` 値には、`for-in` ループで文字列を反復処理することでアクセスできます：
 
 ```swift
 for character in "Dog!🐶" {
@@ -177,55 +176,55 @@ for character in "Dog!🐶" {
 // 🐶
 ```
 
-The for-in loop is described in For-In Loops.
+`for-in` ループについては、「For-In Loops」で説明されています。
 
-Alternatively, you can create a stand-alone Character constant or variable from a single-character string literal by providing a Character type annotation:
+また、単一文字の文字列リテラルから `Character` 型注釈を付けることで、独立した `Character` 定数や変数を作成することもできます：
 
 ```swift
 let exclamationMark: Character = "!"
 ```
 
-String values can be constructed by passing an array of Character values as an argument to its initializer:
+文字列値は、`Character` 値の配列を引数として初期化することで構築できます：
 
 ```swift
 let catCharacters: [Character] = ["C", "a", "t", "!", "🐱"]
 let catString = String(catCharacters)
 print(catString)
-// Prints "Cat!🐱"
+// "Cat!🐱" と表示されます
 ```
 
-## Concatenating Strings and Characters
+## 文字列と文字の連結
 
-String values can be added together (or concatenated) with the addition operator (+) to create a new String value:
+文字列値は加算演算子（`+`）を使用して結合（コンキャテネーション）し、新しい文字列値を作成できます：
 
 ```swift
 let string1 = "hello"
 let string2 = " there"
 var welcome = string1 + string2
-// welcome now equals "hello there"
+// welcome は "hello there" になります
 ```
 
-You can also append a String value to an existing String variable with the addition assignment operator (+=):
+加算代入演算子（`+=`）を使用して、既存の文字列変数に文字列値を追加することもできます：
 
 ```swift
 var instruction = "look over"
 instruction += string2
-// instruction now equals "look over there"
+// instruction は "look over there" になります
 ```
 
-You can append a Character value to a String variable with the String type’s append() method:
+`String` 型の `append()` メソッドを使用して、`Character` 値を文字列変数に追加することもできます：
 
 ```swift
 let exclamationMark: Character = "!"
 welcome.append(exclamationMark)
-// welcome now equals "hello there!"
+// welcome は "hello there!" になります
 ```
 
 ::: info Note
-You can’t append a String or Character to an existing Character variable, because a Character value must contain a single character only.
+`String` または `Character` を既存の `Character` 変数に追加することはできません。`Character` 値は単一の文字のみを含む必要があるためです。
 :::
 
-If you’re using multiline string literals to build up the lines of a longer string, you want every line in the string to end with a line break, including the last line. For example:
+複数行文字列リテラルを使用して長い文字列の行を構築する場合、文字列内の各行、特に最後の行が改行で終わるようにすることをお勧めします。例えば：
 
 ```swift
 let badStart = """
@@ -236,10 +235,9 @@ let end = """
     three
     """
 print(badStart + end)
-// Prints two lines:
+// 2行の文字列を出力：
 // one
 // twothree
-
 
 let goodStart = """
     one
@@ -247,138 +245,139 @@ let goodStart = """
 
     """
 print(goodStart + end)
-// Prints three lines:
+// 3行の文字列を出力：
 // one
 // two
 // three
 ```
 
-In the code above, concatenating badStart with end produces a two-line string, which isn’t the desired result. Because the last line of badStart doesn’t end with a line break, that line gets combined with the first line of end. In contrast, both lines of goodStart end with a line break, so when it’s combined with end the result has three lines, as expected.
+上記のコードでは、`badStart` と `end` を連結すると、最後の行が改行で終わらないため、望ましくない結果になります。一方、`goodStart` の各行が改行で終わるため、期待通りの結果が得られます。
 
-## String Interpolation
+## 文字列補間
 
-String interpolation is a way to construct a new String value from a mix of constants, variables, literals, and expressions by including their values inside a string literal. You can use string interpolation in both single-line and multiline string literals. Each item that you insert into the string literal is wrapped in a pair of parentheses, prefixed by a backslash (`\`):
+文字列補間を使用すると、定数、変数、リテラル、および式の値を文字列リテラルに含めることで、新しい `String` 値を構築できます。文字列補間は、単一行および複数行文字列リテラルの両方で使用できます。補間される各項目は、バックスラッシュ（`\`）を前置した括弧（`()`）で囲まれます：
 
 ```swift
 let multiplier = 3
 let message = "\(multiplier) times 2.5 is \(Double(multiplier) * 2.5)"
-// message is "3 times 2.5 is 7.5"
+// message は "3 times 2.5 is 7.5" になります
 ```
 
-In the example above, the value of multiplier is inserted into a string literal as `\(multiplier)`. This placeholder is replaced with the actual value of multiplier when the string interpolation is evaluated to create an actual string.
+上記の例では、`multiplier` の値が文字列リテラル内に `\(multiplier)` として挿入されています。このプレースホルダーは、文字列補間が評価されて実際の文字列が作成される際に、`multiplier` の実際の値に置き換えられます。
 
-The value of multiplier is also part of a larger expression later in the string. This expression calculates the value of Double(multiplier) * 2.5 and inserts the result (7.5) into the string. In this case, the expression is written as `\(Double(multiplier) * 2.5)` when it’s included inside the string literal.
+また、`multiplier` の値は文字列内でより大きな式の一部としても使用されています。この式は `Double(multiplier) * 2.5` の値を計算し、その結果（7.5）を文字列に挿入します。この場合、式は文字列リテラル内で `\(Double(multiplier) * 2.5)` として記述されています。
 
-You can use extended string delimiters to create strings containing characters that would otherwise be treated as a string interpolation. For example:
+拡張デリミタを使用して、文字列補間として解釈される文字を含む文字列を作成することができます。例えば：
 
 ```swift
 print(#"Write an interpolated string in Swift using \(multiplier)."#)
-// Prints "Write an interpolated string in Swift using \(multiplier)."
+// "Write an interpolated string in Swift using \(multiplier)." と表示されます
 ```
 
-To use string interpolation inside a string that uses extended delimiters, match the number of number signs after the backslash to the number of number signs at the beginning and end of the string. For example:
+拡張デリミタを使用する文字列内で文字列補間を使用する場合、バックスラッシュ後の数記号の数を文字列の開始および終了で使用された数記号の数と一致させます。例えば：
 
 ```swift
 print(#"6 times 7 is \#(6 * 7)."#)
-// Prints "6 times 7 is 42."
+// "6 times 7 is 42." と表示されます
 ```
 
 ::: info Note
-The expressions you write inside parentheses within an interpolated string can’t contain an unescaped backslash (`\`), a carriage return, or a line feed. However, they can contain other string literals.
+補間された文字列内で括弧内に記述する式には、エスケープされていないバックスラッシュ（`\`）、復帰（キャリッジリターン）、または改行を含めることはできません。ただし、他の文字列リテラルを含めることは可能です。
 :::
+
 
 ## Unicode
 
-Unicode is an international standard for encoding, representing, and processing text in different writing systems. It enables you to represent almost any character from any language in a standardized form, and to read and write those characters to and from an external source such as a text file or web page. Swift’s String and Character types are fully Unicode-compliant, as described in this section.
+Unicode は、異なる文字体系でテキストをエンコード、表現、および処理するための国際標準です。これにより、ほぼすべての言語の文字を標準化された形式で表現し、テキストファイルやウェブページなどの外部ソースからその文字を読み書きすることができます。このセクションで説明するように、Swift の `String` 型と `Character` 型は完全に Unicode 準拠です。
 
-### Unicode Scalar Values
+### Unicodeのスカラー値
 
-Behind the scenes, Swift’s native String type is built from Unicode scalar values. A Unicode scalar value is a unique 21-bit number for a character or modifier, such as U+0061 for LATIN SMALL LETTER A ("a"), or U+1F425 for FRONT-FACING BABY CHICK ("🐥").
+Swift のネイティブな `String` 型は、内部的には Unicode スカラー値で構築されています。Unicode スカラー値は、文字や修飾子のための一意の 21 ビットの番号で、例えば、LATIN SMALL LETTER A ("a") の場合は U+0061、FRONT-FACING BABY CHICK ("🐥") の場合は U+1F425 です。
 
-Note that not all 21-bit Unicode scalar values are assigned to a character — some scalars are reserved for future assignment or for use in UTF-16 encoding. Scalar values that have been assigned to a character typically also have a name, such as LATIN SMALL LETTER A and FRONT-FACING BABY CHICK in the examples above.
+すべての 21 ビットの Unicode スカラー値が文字に割り当てられているわけではないことに注意してください。一部のスカラー値は将来の割り当てや UTF-16 エンコーディングでの使用のために予約されています。文字に割り当てられたスカラー値には、通常名前も付けられています。例として、LATIN SMALL LETTER A や FRONT-FACING BABY CHICK などです。
 
-### Extended Grapheme Clusters
+### 拡張書記素クラスタ
 
-Every instance of Swift’s Character type represents a single extended grapheme cluster. An extended grapheme cluster is a sequence of one or more Unicode scalars that (when combined) produce a single human-readable character.
+Swift の `Character` 型の各インスタンスは、1 つの拡張書記素クラスタを表します。拡張書記素クラスタは、1 つまたは複数の Unicode スカラーのシーケンスで、これらを組み合わせることで単一の人間が読める文字が生成されます。
 
-Here’s an example. The letter é can be represented as the single Unicode scalar é (LATIN SMALL LETTER E WITH ACUTE, or U+00E9). However, the same letter can also be represented as a pair of scalars — a standard letter e (LATIN SMALL LETTER E, or U+0065), followed by the COMBINING ACUTE ACCENT scalar (U+0301). The COMBINING ACUTE ACCENT scalar is graphically applied to the scalar that precedes it, turning an e into an é when it’s rendered by a Unicode-aware text-rendering system.
+例えば、文字 é は、単一の Unicode スカラー é（LATIN SMALL LETTER E WITH ACUTE, U+00E9）として表現できます。しかし、同じ文字は標準の文字 e（LATIN SMALL LETTER E, U+0065）と、続く COMBINING ACUTE ACCENT スカラー（U+0301）のペアとしても表現できます。COMBINING ACUTE ACCENT スカラーは、それに先行するスカラーに対してグラフィカルに適用され、Unicode に対応したテキストレンダリングシステムによって e が é に変換されます。
 
-In both cases, the letter é is represented as a single Swift Character value that represents an extended grapheme cluster. In the first case, the cluster contains a single scalar; in the second case, it’s a cluster of two scalars:
+どちらの場合も、文字 é は拡張書記素クラスタを表す単一の Swift `Character` 値として表現されます。最初のケースではクラスタは 1 つのスカラーを含み、2 番目のケースでは 2 つのスカラーのクラスタです：
 
 ```swift
 let eAcute: Character = "\u{E9}"                         // é
-let combinedEAcute: Character = "\u{65}\u{301}"          // e followed by ́
-// eAcute is é, combinedEAcute is é
+let combinedEAcute: Character = "\u{65}\u{301}"          // e の後に ́
+// eAcute は é、combinedEAcute も é
 ```
 
-Extended grapheme clusters are a flexible way to represent many complex script characters as a single Character value. For example, Hangul syllables from the Korean alphabet can be represented as either a precomposed or decomposed sequence. Both of these representations qualify as a single Character value in Swift:
+拡張書記素クラスタは、複雑なスクリプト文字を単一の `Character` 値として表現する柔軟な方法を提供します。例えば、韓国語アルファベットのハングル音節は、事前結合されたシーケンスまたは分解されたシーケンスとして表現できます。これらのどちらも Swift では単一の `Character` 値として扱われます：
 
 ```swift
 let precomposed: Character = "\u{D55C}"                  // 한
 let decomposed: Character = "\u{1112}\u{1161}\u{11AB}"   // ᄒ, ᅡ, ᆫ
-// precomposed is 한, decomposed is 한
+// precomposed は 한、decomposed も 한
 ```
 
-Extended grapheme clusters enable scalars for enclosing marks (such as COMBINING ENCLOSING CIRCLE, or U+20DD) to enclose other Unicode scalars as part of a single Character value:
+拡張書記素クラスタにより、囲み記号（例えば、COMBINING ENCLOSING CIRCLE, U+20DD）のスカラーを他の Unicode スカラーで囲むことができ、これらを単一の `Character` 値として扱うことができます：
 
 ```swift
 let enclosedEAcute: Character = "\u{E9}\u{20DD}"
-// enclosedEAcute is é⃝
+// enclosedEAcute は é⃝
 ```
 
-Unicode scalars for regional indicator symbols can be combined in pairs to make a single Character value, such as this combination of REGIONAL INDICATOR SYMBOL LETTER U (U+1F1FA) and REGIONAL INDICATOR SYMBOL LETTER S (U+1F1F8):
+地域表示記号のスカラーはペアで結合して単一の `Character` 値を作成できます。例えば、REGIONAL INDICATOR SYMBOL LETTER U (U+1F1FA) と REGIONAL INDICATOR SYMBOL LETTER S (U+1F1F8) の組み合わせです：
 
 ```swift
 let regionalIndicatorForUS: Character = "\u{1F1FA}\u{1F1F8}"
-// regionalIndicatorForUS is 🇺🇸
+// regionalIndicatorForUS は 🇺🇸
 ```
 
-## Counting Characters
+## 文字のカウント
 
-To retrieve a count of the Character values in a string, use the count property of the string:
+文字列内の `Character` 値の数を取得するには、文字列の `count` プロパティを使用します：
 
 ```swift
 let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
 print("unusualMenagerie has \(unusualMenagerie.count) characters")
-// Prints "unusualMenagerie has 40 characters"
+// "unusualMenagerie has 40 characters" と表示されます
 ```
 
-Note that Swift’s use of extended grapheme clusters for Character values means that string concatenation and modification may not always affect a string’s character count.
+Swift が `Character` 値に拡張書記素クラスタを使用しているため、文字列の結合や変更が常に文字列の文字数に影響するとは限りません。
 
-For example, if you initialize a new string with the four-character word cafe, and then append a COMBINING ACUTE ACCENT (U+0301) to the end of the string, the resulting string will still have a character count of 4, with a fourth character of é, not e:
+例えば、4文字の単語 `cafe` を新しい文字列として初期化し、その末尾に COMBINING ACUTE ACCENT (U+0301) を追加した場合、結果の文字列は依然として 4 文字の長さを持ち、4 番目の文字は `e` ではなく `é` になります：
 
 ```swift
 var word = "cafe"
 print("the number of characters in \(word) is \(word.count)")
-// Prints "the number of characters in cafe is 4"
+// "the number of characters in cafe is 4" と表示されます
 
 word += "\u{301}"    // COMBINING ACUTE ACCENT, U+0301
 
 print("the number of characters in \(word) is \(word.count)")
-// Prints "the number of characters in café is 4"
+// "the number of characters in café is 4" と表示されます
 ```
 
 ::: info Note
-Extended grapheme clusters can be composed of multiple Unicode scalars. This means that different characters — and different representations of the same character — can require different amounts of memory to store. Because of this, characters in Swift don’t each take up the same amount of memory within a string’s representation. As a result, the number of characters in a string can’t be calculated without iterating through the string to determine its extended grapheme cluster boundaries. If you are working with particularly long string values, be aware that the count property must iterate over the Unicode scalars in the entire string in order to determine the characters for that string.
+拡張書記素クラスタは複数の Unicode スカラーで構成されることがあります。このため、異なる文字や同じ文字の異なる表現は、保存するのに異なる量のメモリを必要とする場合があります。そのため、Swift の文字は文字列の表現内で同じ量のメモリを占有するとは限りません。この結果、文字列内の文字数は、拡張書記素クラスタの境界を判断するために文字列全体を反復処理しなければ計算できません。特に長い文字列を扱う場合、`count` プロパティは文字列全体の Unicode スカラーを反復処理する必要があることを意識してください。
 
-The count of the characters returned by the count property isn’t always the same as the length property of an NSString that contains the same characters. The length of an NSString is based on the number of 16-bit code units within the string’s UTF-16 representation and not the number of Unicode extended grapheme clusters within the string.
+`count` プロパティによって返される文字数は、同じ文字を含む `NSString` の `length` プロパティと必ずしも一致しません。`NSString` の長さは、文字列の UTF-16 表現内の 16 ビットコードユニットの数に基づいており、文字列内の Unicode 拡張書記素クラスタの数に基づいているわけではありません。
 :::
 
-## Accessing and Modifying a String
+## 文字列へのアクセスと変更
 
-You access and modify a string through its methods and properties, or by using subscript syntax.
+文字列へのアクセスや変更は、そのメソッドやプロパティを使用するか、添字構文を使用して行います。
 
-### String Indices
+### 文字列インデックス
 
-Each String value has an associated index type, String.Index, which corresponds to the position of each Character in the string.
+各 `String` 値には関連付けられたインデックスタイプ `String.Index` があり、これは文字列内の各 `Character` の位置に対応しています。
 
-As mentioned above, different characters can require different amounts of memory to store, so in order to determine which Character is at a particular position, you must iterate over each Unicode scalar from the start or end of that String. For this reason, Swift strings can’t be indexed by integer values.
+前述のように、異なる文字が保存するために必要なメモリ量は異なる場合があります。そのため、特定の位置にある `Character` を判断するには、文字列の先頭または末尾から各 Unicode スカラーを反復処理する必要があります。この理由から、Swift の文字列は整数値でインデックス化することができません。
 
-Use the startIndex property to access the position of the first Character of a String. The endIndex property is the position after the last character in a String. As a result, the endIndex property isn’t a valid argument to a string’s subscript. If a String is empty, startIndex and endIndex are equal.
+最初の `Character` の位置にアクセスするには、`startIndex` プロパティを使用します。最後の文字の後の位置には `endIndex` プロパティを使用します。そのため、`endIndex` プロパティは文字列の添字の有効な引数ではありません。文字列が空の場合、`startIndex` と `endIndex` は等しくなります。
 
-You access the indices before and after a given index using the index(before:) and index(after:) methods of String. To access an index farther away from the given index, you can use the index(_:offsetBy:) method instead of calling one of these methods multiple times.
+指定されたインデックスの前後のインデックスには、`index(before:)` および `index(after:)` メソッドを使用してアクセスします。指定されたインデックスからさらに離れたインデックスにアクセスするには、これらのメソッドを複数回呼び出す代わりに、`index(_:offsetBy:)` メソッドを使用します。
 
-You can use subscript syntax to access the Character at a particular String index.
+添字構文を使用して、特定の文字列インデックスにある `Character` にアクセスできます：
 
 ```swift
 let greeting = "Guten Tag!"
@@ -393,83 +392,84 @@ greeting[index]
 // a
 ```
 
-Attempting to access an index outside of a string’s range or a Character at an index outside of a string’s range will trigger a runtime error.
+文字列の範囲外のインデックスにアクセスしたり、範囲外のインデックスにある `Character` にアクセスしようとすると、ランタイムエラーが発生します：
 
 ```swift
-greeting[greeting.endIndex] // Error
-greeting.index(after: greeting.endIndex) // Error
+greeting[greeting.endIndex] // エラー
+greeting.index(after: greeting.endIndex) // エラー
 ```
 
-Use the indices property to access all of the indices of individual characters in a string.
+`indices` プロパティを使用して、文字列内の各文字のインデックスにアクセスできます：
 
 ```swift
 for index in greeting.indices {
     print("\(greeting[index]) ", terminator: "")
 }
-// Prints "G u t e n   T a g ! "
+// "G u t e n   T a g ! " と表示されます
 ```
 
 ::: info Note
-You can use the startIndex and endIndex properties and the index(before:), index(after:), and index(_:offsetBy:) methods on any type that conforms to the Collection protocol. This includes String, as shown here, as well as collection types such as Array, Dictionary, and Set.
+`startIndex` および `endIndex` プロパティ、ならびに `index(before:)`、`index(after:)`、`index(_:offsetBy:)` メソッドは、`Collection` プロトコルに準拠する任意の型で使用できます。ここで示した `String` に加えて、`Array`、`Dictionary`、`Set` などのコレクション型も含まれます。
 :::
 
-### Inserting and Removing
 
-To insert a single character into a string at a specified index, use the insert(_:at:) method, and to insert the contents of another string at a specified index, use the insert(contentsOf:at:) method.
+### 挿入と取り外し
+
+特定の位置に文字を挿入するには、`insert(_:at:)` メソッドを使用します。また、別の文字列の内容を特定の位置に挿入するには、`insert(contentsOf:at:)` メソッドを使用します。
 
 ```swift
 var welcome = "hello"
 welcome.insert("!", at: welcome.endIndex)
-// welcome now equals "hello!"
+// welcome は "hello!" になります
 
 welcome.insert(contentsOf: " there", at: welcome.index(before: welcome.endIndex))
-// welcome now equals "hello there!"
+// welcome は "hello there!" になります
 ```
 
-To remove a single character from a string at a specified index, use the remove(at:) method, and to remove a substring at a specified range, use the removeSubrange(_:) method:
+特定の位置から文字を削除するには、`remove(at:)` メソッドを使用します。また、特定の範囲から部分文字列を削除するには、`removeSubrange(_:)` メソッドを使用します：
 
 ```swift
 welcome.remove(at: welcome.index(before: welcome.endIndex))
-// welcome now equals "hello there"
+// welcome は "hello there" になります
 
 let range = welcome.index(welcome.endIndex, offsetBy: -6)..<welcome.endIndex
 welcome.removeSubrange(range)
-// welcome now equals "hello"
+// welcome は "hello" になります
 ```
 
 ::: info Note
-You can use the `insert(_:at:)`, `insert(contentsOf:at:)`, `remove(at:)`, and `removeSubrange(_:)` methods on any type that conforms to the RangeReplaceableCollection protocol. This includes String, as shown here, as well as collection types such as Array, Dictionary, and Set.
+`insert(_:at:)`、`insert(contentsOf:at:)`、`remove(at:)`、および `removeSubrange(_:)` メソッドは、`RangeReplaceableCollection` プロトコルに準拠する任意の型で使用できます。ここで示した `String` のほか、`Array`、`Dictionary`、`Set` などのコレクション型にも適用されます。
 :::
 
-## Substrings
+## 部分文字列
 
-When you get a substring from a string — for example, using a subscript or a method like prefix(_:) — the result is an instance of Substring, not another string. Substrings in Swift have most of the same methods as strings, which means you can work with substrings the same way you work with strings. However, unlike strings, you use substrings for only a short amount of time while performing actions on a string. When you’re ready to store the result for a longer time, you convert the substring to an instance of String. For example:
+文字列から部分文字列を取得した場合（例えば、添字や `prefix(_:)` メソッドを使用）、結果は別の文字列ではなく `Substring` のインスタンスとなります。Swift の部分文字列は文字列とほぼ同じメソッドを持ち、文字列と同じように操作できます。ただし、文字列とは異なり、部分文字列は文字列操作中の一時的な使用に適しています。結果を長期的に保存する場合は、部分文字列を `String` のインスタンスに変換します。例えば：
 
 ```swift
 let greeting = "Hello, world!"
 let index = greeting.firstIndex(of: ",") ?? greeting.endIndex
 let beginning = greeting[..<index]
-// beginning is "Hello"
+// beginning は "Hello"
 
-// Convert the result to a String for long-term storage.
+// 結果を長期保存するために String に変換します
 let newString = String(beginning)
 ```
 
-Like strings, each substring has a region of memory where the characters that make up the substring are stored. The difference between strings and substrings is that, as a performance optimization, a substring can reuse part of the memory that’s used to store the original string, or part of the memory that’s used to store another substring. (Strings have a similar optimization, but if two strings share memory, they’re equal.) This performance optimization means you don’t have to pay the performance cost of copying memory until you modify either the string or substring. As mentioned above, substrings aren’t suitable for long-term storage — because they reuse the storage of the original string, the entire original string must be kept in memory as long as any of its substrings are being used.
+文字列と同様に、各部分文字列には、部分文字列を構成する文字が保存されるメモリ領域があります。文字列と部分文字列の違いは、パフォーマンス最適化のために、部分文字列が元の文字列または他の部分文字列のメモリの一部を再利用できる点です（文字列にも同様の最適化がありますが、2 つの文字列がメモリを共有している場合、それらは等価です）。この最適化により、文字列または部分文字列を変更するまで、メモリコピーのコストを支払う必要がありません。ただし、部分文字列は長期保存には適していません。元の文字列を再利用しているため、部分文字列が使用されている間は元の文字列全体をメモリに保持しておく必要があります。
 
-In the example above, greeting is a string, which means it has a region of memory where the characters that make up the string are stored. Because beginning is a substring of greeting, it reuses the memory that greeting uses. In contrast, newString is a string — when it’s created from the substring, it has its own storage. The figure below shows these relationships:
+上記の例では、`greeting` は文字列であり、文字列を構成する文字が保存されるメモリ領域を持っています。`beginning` は `greeting` の部分文字列であるため、`greeting` が使用するメモリを再利用します。一方、`newString` は部分文字列から作成された文字列であり、独自のメモリ領域を持っています。
 
 ::: info Note
-Both String and Substring conform to the StringProtocol protocol, which means it’s often convenient for string-manipulation functions to accept a StringProtocol value. You can call such functions with either a String or Substring value.
+`String` と `Substring` は両方とも `StringProtocol` プロトコルに準拠しているため、文字列操作関数が `StringProtocol` 値を受け入れる場合、`String` または `Substring` のいずれかを使用してこれらの関数を呼び出すことができます。
 :::
 
-## Comparing Strings
+## 文字列の比較
 
-Swift provides three ways to compare textual values: string and character equality, prefix equality, and suffix equality.
+Swift では、テキスト値を比較する方法が 3 つ提供されています：文字列および文字の等価性、接頭辞の等価性、接尾辞の等価性。
 
-### String and Character Equality
+### 文字列と文字の等価性
 
-String and character equality is checked with the “equal to” operator (==) and the “not equal to” operator (!=), as described in Comparison Operators:
+文字列および文字の等価性は、比較演算子「等しい（`==`）」および「等しくない（`!=`）」を使用して確認します（比較演算子については「Comparison Operators」を参照）。
 
 ```swift
 let quotation = "We're a lot alike, you and I."
@@ -477,48 +477,47 @@ let sameQuotation = "We're a lot alike, you and I."
 if quotation == sameQuotation {
     print("These two strings are considered equal")
 }
-// Prints "These two strings are considered equal"
+// "These two strings are considered equal" と表示されます
 ```
 
-Two String values (or two Character values) are considered equal if their extended grapheme clusters are canonically equivalent. Extended grapheme clusters are canonically equivalent if they have the same linguistic meaning and appearance, even if they’re composed from different Unicode scalars behind the scenes.
+2 つの `String` 値（または 2 つの `Character` 値）は、それらの拡張書記素クラスタが正準等価である場合、等しいと見なされます。拡張書記素クラスタが正準等価であるとは、内部的に異なる Unicode スカラーで構成されていても、同じ言語的意味と外観を持つ場合を指します。
 
-For example, LATIN SMALL LETTER E WITH ACUTE (U+00E9) is canonically equivalent to LATIN SMALL LETTER E (U+0065) followed by COMBINING ACUTE ACCENT (U+0301). Both of these extended grapheme clusters are valid ways to represent the character é, and so they’re considered to be canonically equivalent:
+例えば、LATIN SMALL LETTER E WITH ACUTE (U+00E9) は、LATIN SMALL LETTER E (U+0065) と COMBINING ACUTE ACCENT (U+0301) の組み合わせと正準等価です。これらのどちらも文字 é を表現する有効な方法であり、正準等価と見なされます：
 
 ```swift
-// "Voulez-vous un café?" using LATIN SMALL LETTER E WITH ACUTE
+// LATIN SMALL LETTER E WITH ACUTE を使用した "Voulez-vous un café?"
 let eAcuteQuestion = "Voulez-vous un caf\u{E9}?"
 
-// "Voulez-vous un café?" using LATIN SMALL LETTER E and COMBINING ACUTE ACCENT
+// LATIN SMALL LETTER E と COMBINING ACUTE ACCENT を使用した "Voulez-vous un café?"
 let combinedEAcuteQuestion = "Voulez-vous un caf\u{65}\u{301}?"
 
 if eAcuteQuestion == combinedEAcuteQuestion {
     print("These two strings are considered equal")
 }
-// Prints "These two strings are considered equal"
+// "These two strings are considered equal" と表示されます
 ```
 
-Conversely, LATIN CAPITAL LETTER A (U+0041, or "A"), as used in English, is not equivalent to CYRILLIC CAPITAL LETTER A (U+0410, or "А"), as used in Russian. The characters are visually similar, but don’t have the same linguistic meaning:
+一方、LATIN CAPITAL LETTER A (U+0041, "A") は英語で使用されるもので、CYRILLIC CAPITAL LETTER A (U+0410, "А") はロシア語で使用されます。これらの文字は見た目は似ていますが、言語的意味が異なるため、等価ではありません：
 
 ```swift
 let latinCapitalLetterA: Character = "\u{41}"
-
 let cyrillicCapitalLetterA: Character = "\u{0410}"
 
 if latinCapitalLetterA != cyrillicCapitalLetterA {
     print("These two characters aren't equivalent.")
 }
-// Prints "These two characters aren't equivalent."
+// "These two characters aren't equivalent." と表示されます
 ```
 
 ::: info Note
-String and character comparisons in Swift aren’t locale-sensitive.
+Swift における文字列および文字の比較は、ロケールに依存しません。
 :::
 
-### Prefix and Suffix Equality
+### 接頭辞と接尾辞の均等性
 
-To check whether a string has a particular string prefix or suffix, call the string’s `hasPrefix(_:)` and `hasSuffix(_:)` methods, both of which take a single argument of type String and return a Boolean value.
+文字列が特定の接頭辞または接尾辞を持つかどうかを確認するには、`hasPrefix(_:)` および `hasSuffix(_:)` メソッドを使用します。これらのメソッドは、`String` 型の引数を 1 つ取り、Boolean 値を返します。
 
-The examples below consider an array of strings representing the scene locations from the first two acts of Shakespeare’s Romeo and Juliet:
+以下の例は、シェイクスピアの『ロミオとジュリエット』の最初の 2 幕のシーン場所を表す文字列の配列を示しています：
 
 ```swift
 let romeoAndJuliet = [
@@ -536,7 +535,7 @@ let romeoAndJuliet = [
 ]
 ```
 
-You can use the `hasPrefix(_:)` method with the romeoAndJuliet array to count the number of scenes in Act 1 of the play:
+`hasPrefix(_:)` メソッドを使用して、配列内の第 1 幕のシーン数を数えます：
 
 ```swift
 var act1SceneCount = 0
@@ -546,10 +545,10 @@ for scene in romeoAndJuliet {
     }
 }
 print("There are \(act1SceneCount) scenes in Act 1")
-// Prints "There are 5 scenes in Act 1"
+// "There are 5 scenes in Act 1" と表示されます
 ```
 
-Similarly, use the `hasSuffix(_:)` method to count the number of scenes that take place in or around Capulet’s mansion and Friar Lawrence’s cell:
+同様に、`hasSuffix(_:)` メソッドを使用して、キャピュレットの館および修道士ロレンスの部屋で行われるシーン数を数えます：
 
 ```swift
 var mansionCount = 0
@@ -562,92 +561,90 @@ for scene in romeoAndJuliet {
     }
 }
 print("\(mansionCount) mansion scenes; \(cellCount) cell scenes")
-// Prints "6 mansion scenes; 2 cell scenes"
+// "6 mansion scenes; 2 cell scenes" と表示されます
 ```
 
 ::: info Note
-The `hasPrefix(_:)` and `hasSuffix(_:)` methods perform a character-by-character canonical equivalence comparison between the extended grapheme clusters in each string, as described in String and Character Equality.
+`hasPrefix(_:)` および `hasSuffix(_:)` メソッドは、各文字列内の拡張書記素クラスタを文字ごとに正準等価性比較を行います（詳細は「String and Character Equality」を参照）。
 :::
 
-## Unicode Representations of Strings
 
-When a Unicode string is written to a text file or some other storage, the Unicode scalars in that string are encoded in one of several Unicode-defined encoding forms. Each form encodes the string in small chunks known as code units. These include the UTF-8 encoding form (which encodes a string as 8-bit code units), the UTF-16 encoding form (which encodes a string as 16-bit code units), and the UTF-32 encoding form (which encodes a string as 32-bit code units).
+## 文字列のUnicode表現
 
-Swift provides several different ways to access Unicode representations of strings. You can iterate over the string with a for-in statement, to access its individual Character values as Unicode extended grapheme clusters. This process is described in Working with Characters.
+Unicode 文字列がテキストファイルやその他のストレージに書き込まれる際、その文字列内の Unicode スカラー値は、いくつかの Unicode 定義のエンコーディング形式のいずれかでエンコードされます。各形式は、文字列を「コードユニット」と呼ばれる小さなチャンクにエンコードします。これには以下が含まれます：
 
-Alternatively, access a String value in one of three other Unicode-compliant representations:
+- UTF-8 エンコーディング形式（文字列を 8 ビットのコードユニットとしてエンコード）
+- UTF-16 エンコーディング形式（文字列を 16 ビットのコードユニットとしてエンコード）
+- UTF-32 エンコーディング形式（文字列を 32 ビットのコードユニットとしてエンコード）
 
-- A collection of UTF-8 code units (accessed with the string’s utf8 property)
-- A collection of UTF-16 code units (accessed with the string’s utf16 property)
-- A collection of 21-bit Unicode scalar values, equivalent to the string’s UTF-32 encoding form (accessed with the string’s unicodeScalars property)
+Swift は、文字列の Unicode 表現にアクセスするためのいくつかの方法を提供しています。文字列を `for-in` 文で反復処理して、Unicode 拡張書記素クラスタとしてその個々の `Character` 値にアクセスできます（詳細は「Working with Characters」を参照）。
 
-Each example below shows a different representation of the following string, which is made up of the characters D, o, g, ‼ (DOUBLE EXCLAMATION MARK, or Unicode scalar U+203C), and the 🐶 character (DOG FACE, or Unicode scalar U+1F436):
+また、文字列値に以下の 3 つの Unicode 準拠の表現でアクセスすることもできます：
+
+- UTF-8 コードユニットのコレクション（文字列の `utf8` プロパティでアクセス）
+- UTF-16 コードユニットのコレクション（文字列の `utf16` プロパティでアクセス）
+- 21 ビットの Unicode スカラー値のコレクション（文字列の UTF-32 エンコーディング形式に相当、`unicodeScalars` プロパティでアクセス）
+
+以下は、それぞれ異なる表現を示す例です。この例では、文字列は D、o、g、‼（DOUBLE EXCLAMATION MARK, U+203C）、および 🐶（DOG FACE, U+1F436）の文字で構成されています：
 
 ```swift
 let dogString = "Dog‼🐶"
 ```
 
-### UTF-8 Representation
+### UTF-8 表現
 
-You can access a UTF-8 representation of a String by iterating over its utf8 property. This property is of type String.UTF8View, which is a collection of unsigned 8-bit (UInt8) values, one for each byte in the string’s UTF-8 representation:
+`utf8` プロパティを反復処理して、文字列の UTF-8 表現にアクセスできます。このプロパティは `String.UTF8View` 型で、文字列の UTF-8 表現内のバイトごとに符号なし 8 ビット（`UInt8`）値のコレクションです：
 
 ```swift
 for codeUnit in dogString.utf8 {
     print("\(codeUnit) ", terminator: "")
 }
 print("")
-// Prints "68 111 103 226 128 188 240 159 144 182 "
+// 出力: "68 111 103 226 128 188 240 159 144 182"
 ```
 
-In the example above, the first three decimal codeUnit values (68, 111, 103) represent the characters D, o, and g, whose UTF-8 representation is the same as their ASCII representation. The next three decimal codeUnit values (226, 128, 188) are a three-byte UTF-8 representation of the DOUBLE EXCLAMATION MARK character. The last four codeUnit values (240, 159, 144, 182) are a four-byte UTF-8 representation of the DOG FACE character.
+最初の 3 つの値（68, 111, 103）は、D、o、g の UTF-8 表現を表します。次の 3 つの値（226, 128, 188）は、‼ の 3 バイトの UTF-8 表現です。最後の 4 つの値（240, 159, 144, 182）は、🐶 の 4 バイトの UTF-8 表現です。
 
-### UTF-16 Representation
+### UTF-16 表現
 
-You can access a UTF-16 representation of a String by iterating over its utf16 property. This property is of type String.UTF16View, which is a collection of unsigned 16-bit (UInt16) values, one for each 16-bit code unit in the string’s UTF-16 representation:
+`utf16` プロパティを反復処理して、文字列の UTF-16 表現にアクセスできます。このプロパティは `String.UTF16View` 型で、文字列の UTF-16 表現内の各 16 ビットコードユニットに符号なし 16 ビット（`UInt16`）値を持つコレクションです：
 
 ```swift
 for codeUnit in dogString.utf16 {
     print("\(codeUnit) ", terminator: "")
 }
 print("")
-// Prints "68 111 103 8252 55357 56374 "
+// 出力: "68 111 103 8252 55357 56374"
 ```
 
-Again, the first three codeUnit values (68, 111, 103) represent the characters D, o, and g, whose UTF-16 code units have the same values as in the string’s UTF-8 representation (because these Unicode scalars represent ASCII characters).
+最初の 3 つの値（68, 111, 103）は D、o、g の UTF-16 表現です。4 番目の値（8252）は‼ の Unicode スカラー U+203C の 16 進値を 10 進数に変換したものです。5 番目と 6 番目の値（55357, 56374）は、🐶 の UTF-16 サロゲートペア表現です。
 
-The fourth codeUnit value (8252) is a decimal equivalent of the hexadecimal value 203C, which represents the Unicode scalar U+203C for the DOUBLE EXCLAMATION MARK character. This character can be represented as a single code unit in UTF-16.
+### Unicode のスカラー表現
 
-The fifth and sixth codeUnit values (55357 and 56374) are a UTF-16 surrogate pair representation of the DOG FACE character. These values are a high-surrogate value of U+D83D (decimal value 55357) and a low-surrogate value of U+DC36 (decimal value 56374).
+`unicodeScalars` プロパティを反復処理して、文字列の Unicode スカラー表現にアクセスできます。このプロパティは `UnicodeScalarView` 型で、各値は `UnicodeScalar` 型です。
 
-### Unicode Scalar Representation
-
-You can access a Unicode scalar representation of a String value by iterating over its unicodeScalars property. This property is of type UnicodeScalarView, which is a collection of values of type UnicodeScalar.
-
-Each UnicodeScalar has a value property that returns the scalar’s 21-bit value, represented within a UInt32 value:
+`UnicodeScalar` の `value` プロパティを使用すると、スカラーの 21 ビット値が `UInt32` 値として返されます：
 
 ```swift
 for scalar in dogString.unicodeScalars {
     print("\(scalar.value) ", terminator: "")
 }
 print("")
-// Prints "68 111 103 8252 128054 "
+// 出力: "68 111 103 8252 128054"
 ```
 
-The value properties for the first three UnicodeScalar values (68, 111, 103) once again represent the characters D, o, and g.
-
-The fourth codeUnit value (8252) is again a decimal equivalent of the hexadecimal value 203C, which represents the Unicode scalar U+203C for the DOUBLE EXCLAMATION MARK character.
-
-The value property of the fifth and final UnicodeScalar, 128054, is a decimal equivalent of the hexadecimal value 1F436, which represents the Unicode scalar U+1F436 for the DOG FACE character.
-
-As an alternative to querying their value properties, each UnicodeScalar value can also be used to construct a new String value, such as with string interpolation:
+または、各スカラー値を文字列として表示することもできます：
 
 ```swift
 for scalar in dogString.unicodeScalars {
     print("\(scalar) ")
 }
+// 出力:
 // D
 // o
 // g
 // ‼
 // 🐶
 ```
+
+この方法で、スカラー値を新しい文字列値として構築することが可能です。
