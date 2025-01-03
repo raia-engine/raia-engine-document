@@ -1,145 +1,145 @@
-# Expressions
+# 式
 
-Access, modify, and assign values. In Swift, there are four kinds of expressions: prefix expressions, infix expressions, primary expressions, and postfix expressions. Evaluating an expression returns a value, causes a side effect, or both.
+値にアクセス、変更、および割り当てを行います。Swiftには、前置式、中置式、主式、および後置式の4種類の式があります。式を評価すると、値が返されるか、副作用が発生するか、その両方が発生します。
 
-Prefix and infix expressions let you apply operators to smaller expressions. Primary expressions are conceptually the simplest kind of expression, and they provide a way to access values. Postfix expressions, like prefix and infix expressions, let you build up more complex expressions using postfixes such as function calls and member access. Each kind of expression is described in detail in the sections below.
+前置式と中置式を使用すると、小さな式に演算子を適用できます。主式は概念的に最も単純な種類の式であり、値にアクセスする方法を提供します。後置式は、前置式や中置式と同様に、関数呼び出しやメンバーアクセスなどの後置を使用して、より複雑な式を構築できます。各種類の式については、以下のセクションで詳しく説明します。
 
-## Grammar of an expression
+## 式の文法
 
 ```
 expression → try-operator? await-operator? prefix-expression infix-expressions?
 ```
 
-## Prefix Expressions
+## 前置式
 
-Prefix expressions combine an optional prefix operator with an expression. Prefix operators take one argument, the expression that follows them.
+前置式は、オプションの前置演算子と式を組み合わせたものです。前置演算子は、後に続く式を1つの引数として取ります。
 
-For information about the behavior of these operators, see Basic Operators and Advanced Operators. For information about the operators provided by the Swift standard library, see Operator Declarations.
+これらの演算子の動作については、基本演算子と高度な演算子を参照してください。Swift標準ライブラリで提供される演算子については、演算子宣言を参照してください。
 
-### Grammar of a prefix expression
+### 前置式の文法
 
 ```
 prefix-expression → prefix-operator? postfix-expression
 prefix-expression → in-out-expression
 ```
 
-### In-Out Expression
+### インアウト式
 
-An in-out expression marks a variable that’s being passed as an in-out argument to a function call expression.
+インアウト式は、関数呼び出し式にインアウト引数として渡される変数をマークします。
 
 ```
 &<#expression#>
 ```
 
-For more information about in-out parameters and to see an example, see In-Out Parameters. In-out expressions are also used when providing a non-pointer argument in a context where a pointer is needed, as described in Implicit Conversion to a Pointer Type.
+インアウトパラメータとその例については、インアウトパラメータを参照してください。インアウト式は、ポインタが必要なコンテキストで非ポインタ引数を提供する場合にも使用されます。詳細は、ポインタ型への暗黙の変換を参照してください。
 
-#### Grammar of an in-out expression
+#### インアウト式の文法
 
 ```
 in-out-expression → & primary-expression
 ```
 
-### Try Operator
+### トライ演算子
 
-A try expression consists of the try operator followed by an expression that can throw an error. It has the following form:
+トライ式は、トライ演算子の後にエラーをスローする可能性のある式が続く形式です。次の形式を持ちます：
 
 ```
 try <#expression#>
 ```
 
-The value of a try expression is the value of the expression.
+トライ式の値は、その式の値です。
 
-An optional-try expression consists of the try? operator followed by an expression that can throw an error. It has the following form:
+オプショントライ式は、try? 演算子の後にエラーをスローする可能性のある式が続く形式です。次の形式を持ちます：
 
 ```
 try? <#expression#>
 ```
 
-If the expression doesn’t throw an error, the value of the optional-try expression is an optional containing the value of the expression. Otherwise, the value of the optional-try expression is nil.
+式がエラーをスローしない場合、オプショントライ式の値はその式の値を含むオプションです。そうでない場合、オプショントライ式の値はnilです。
 
-A forced-try expression consists of the try! operator followed by an expression that can throw an error. It has the following form:
+強制トライ式は、try! 演算子の後にエラーをスローする可能性のある式が続く形式です。次の形式を持ちます：
 
 ```
 try! <#expression#>
 ```
 
-The value of a forced-try expression is the value of the expression. If the expression throws an error, a runtime error is produced.
+強制トライ式の値は、その式の値です。式がエラーをスローすると、ランタイムエラーが発生します。
 
-When the expression on the left-hand side of an infix operator is marked with try, try?, or try!, that operator applies to the whole infix expression. That said, you can use parentheses to be explicit about the scope of the operator’s application.
+中置演算子の左側の式がtry、try?、またはtry!でマークされている場合、その演算子は中置式全体に適用されます。ただし、括弧を使用して演算子の適用範囲を明示的にすることができます。
 
 ```swift
-// try applies to both function calls
+// tryは両方の関数呼び出しに適用されます
 sum = try someThrowingFunction() + anotherThrowingFunction()
 
-// try applies to both function calls
+// tryは両方の関数呼び出しに適用されます
 sum = try (someThrowingFunction() + anotherThrowingFunction())
 
-// Error: try applies only to the first function call
+// エラー: tryは最初の関数呼び出しにのみ適用されます
 sum = (try someThrowingFunction()) + anotherThrowingFunction()
 ```
 
-A try expression can’t appear on the right-hand side of an infix operator, unless the infix operator is the assignment operator or the try expression is enclosed in parentheses.
+トライ式は、中置演算子の右側に現れることはできません。ただし、中置演算子が代入演算子である場合や、トライ式が括弧で囲まれている場合は例外です。
 
-If an expression includes both the try and await operator, the try operator must appear first.
+式にtry演算子とawait演算子の両方が含まれている場合、try演算子は最初に現れなければなりません。
 
-For more information and to see examples of how to use try, try?, and try!, see Error Handling.
+try、try?、およびtry!の使用方法と例については、エラーハンドリングを参照してください。
 
-#### Grammar of a try expression
+#### トライ式の文法
 
 ```
 try-operator → try | try ? | try !
 ```
 
-### Await Operator
+### アウェイト演算子
 
-An await expression consists of the await operator followed by an expression that uses the result of an asynchronous operation. It has the following form:
+アウェイト式は、アウェイト演算子の後に非同期操作の結果を使用する式が続く形式です。次の形式を持ちます：
 
 ```
 await <#expression#>
 ```
 
-The value of an await expression is the value of the expression.
+アウェイト式の値は、その式の値です。
 
-An expression marked with await is called a potential suspension point. Execution of an asynchronous function can be suspended at each expression that’s marked with await. In addition, execution of concurrent code is never suspended at any other point. This means code between potential suspension points can safely update state that requires temporarily breaking invariants, provided that it completes the update before the next potential suspension point.
+アウェイトでマークされた式は、潜在的な中断点と呼ばれます。非同期関数の実行は、アウェイトでマークされた各式で中断される可能性があります。さらに、並行コードの実行は他のどの点でも中断されることはありません。これは、潜在的な中断点の間のコードが、一時的に不変条件を破る必要がある状態を安全に更新できることを意味します。ただし、次の潜在的な中断点の前に更新を完了する必要があります。
 
-An await expression can appear only within an asynchronous context, such as the trailing closure passed to the `async(priority:operation:)` function. It can’t appear in the body of a defer statement, or in an autoclosure of synchronous function type.
+アウェイト式は、`async(priority:operation:)`関数に渡されるトレーリングクロージャなど、非同期コンテキスト内でのみ現れることができます。defer文の本体や、同期関数型の自動クロージャ内には現れることはできません。
 
-When the expression on the left-hand side of an infix operator is marked with the await operator, that operator applies to the whole infix expression. That said, you can use parentheses to be explicit about the scope of the operator’s application.
+中置演算子の左側の式がアウェイト演算子でマークされている場合、その演算子は中置式全体に適用されます。ただし、括弧を使用して演算子の適用範囲を明示的にすることができます。
 
 ```swift
-// await applies to both function calls
+// awaitは両方の関数呼び出しに適用されます
 sum = await someAsyncFunction() + anotherAsyncFunction()
 
-// await applies to both function calls
+// awaitは両方の関数呼び出しに適用されます
 sum = await (someAsyncFunction() + anotherAsyncFunction())
 
-// Error: await applies only to the first function call
+// エラー: awaitは最初の関数呼び出しにのみ適用されます
 sum = (await someAsyncFunction()) + anotherAsyncFunction()
 ```
 
-An await expression can’t appear on the right-hand side of an infix operator, unless the infix operator is the assignment operator or the await expression is enclosed in parentheses.
+アウェイト式は、中置演算子の右側に現れることはできません。ただし、中置演算子が代入演算子である場合や、アウェイト式が括弧で囲まれている場合は例外です。
 
-If an expression includes both the await and try operator, the try operator must appear first.
+式にアウェイト演算子とtry演算子の両方が含まれている場合、try演算子は最初に現れなければなりません。
 
-#### Grammar of an await expression
+#### アウェイト式の文法
 
 ```
 await-operator → await
 ```
 
-## Infix Expressions
+## 中置表現
 
-Infix expressions combine an infix binary operator with the expression that it takes as its left- and right-hand arguments. It has the following form:
+中置表現は、中置二項演算子と、それが左辺および右辺の引数として取る式を組み合わせたものです。次の形式を持ちます：
 
 ```
 <#left-hand argument#> <#operator#> <#right-hand argument#>
 ```
 
-For information about the behavior of these operators, see Basic Operators and Advanced Operators. For information about the operators provided by the Swift standard library, see Operator Declarations.
+これらの演算子の動作については、基本演算子と高度な演算子を参照してください。Swift標準ライブラリが提供する演算子については、演算子宣言を参照してください。
 
-> **Note**: At parse time, an expression made up of infix operators is represented as a flat list. This list is transformed into a tree by applying operator precedence. For example, the expression `2 + 3 * 5` is initially understood as a flat list of five items, `2`, `+`, `3`, `*`, and `5`. This process transforms it into the tree `(2 + (3 * 5))`.
+> **注**: 解析時には、中置演算子で構成された式はフラットなリストとして表現されます。このリストは演算子の優先順位を適用することでツリーに変換されます。例えば、式 `2 + 3 * 5` は最初は5つの項目、`2`、`+`、`3`、`*`、および `5` のフラットなリストとして理解されます。このプロセスはそれをツリー `(2 + (3 * 5))` に変換します。
 
-### Grammar of an infix expression
+### 中置表現の文法
 
 ```
 infix-expression → infix-operator prefix-expression
@@ -149,50 +149,50 @@ infix-expression → type-casting-operator
 infix-expressions → infix-expression infix-expressions?
 ```
 
-### Assignment Operator
+### 代入演算子
 
-The assignment operator sets a new value for a given expression. It has the following form:
+代入演算子は、指定された式に新しい値を設定します。次の形式を持ちます：
 
 ```
 <#expression#> = <#value#>
 ```
 
-The value of the expression is set to the value obtained by evaluating the value. If the expression is a tuple, the value must be a tuple with the same number of elements. (Nested tuples are allowed.) Assignment is performed from each part of the value to the corresponding part of the expression. For example:
+式の値は、値を評価して得られた値に設定されます。式がタプルの場合、値も同じ数の要素を持つタプルでなければなりません（ネストされたタプルも許可されます）。代入は、値の各部分から式の対応する部分に対して行われます。例えば：
 
 ```swift
 (a, _, (b, c)) = ("test", 9.45, (12, 3))
-// a is "test", b is 12, c is 3, and 9.45 is ignored
+// a は "test"、b は 12、c は 3 で、9.45 は無視されます
 ```
 
-The assignment operator doesn’t return any value.
+代入演算子は値を返しません。
 
-#### Grammar of an assignment operator
+#### 代入演算子の文法
 
 ```
 assignment-operator → =
 ```
 
-### Ternary Conditional Operator
+### 三項条件演算子
 
-The ternary conditional operator evaluates to one of two given values based on the value of a condition. It has the following form:
+三項条件演算子は、条件の値に基づいて2つの指定された値のいずれかを評価します。次の形式を持ちます：
 
 ```
 <#condition#> ? <#expression used if true#> : <#expression used if false#>
 ```
 
-If the condition evaluates to true, the conditional operator evaluates the first expression and returns its value. Otherwise, it evaluates the second expression and returns its value. The unused expression isn’t evaluated.
+条件がtrueと評価される場合、条件演算子は最初の式を評価し、その値を返します。それ以外の場合、2番目の式を評価し、その値を返します。使用されない式は評価されません。
 
-For an example that uses the ternary conditional operator, see Ternary Conditional Operator.
+三項条件演算子を使用した例については、三項条件演算子を参照してください。
 
-#### Grammar of a conditional operator
+#### 条件演算子の文法
 
 ```
 conditional-operator → ? expression :
 ```
 
-### Type-Casting Operators
+### 型キャスト演算子
 
-There are four type-casting operators: the `is` operator, the `as` operator, the `as?` operator, and the `as!` operator. They have the following form:
+型キャスト演算子には4つの種類があります：`is` 演算子、`as` 演算子、`as?` 演算子、および `as!` 演算子です。次の形式を持ちます：
 
 ```
 <#expression#> is <#type#>
@@ -201,34 +201,34 @@ There are four type-casting operators: the `is` operator, the `as` operator, the
 <#expression#> as! <#type#>
 ```
 
-The `is` operator checks at runtime whether the expression can be cast to the specified type. It returns true if the expression can be cast to the specified type; otherwise, it returns false.
+`is` 演算子は、式が指定された型にキャストできるかどうかをランタイムでチェックします。式が指定された型にキャストできる場合はtrueを返し、それ以外の場合はfalseを返します。
 
-The `as` operator performs a cast when it’s known at compile time that the cast always succeeds, such as upcasting or bridging. Upcasting lets you use an expression as an instance of its type’s supertype, without using an intermediate variable. The following approaches are equivalent:
+`as` 演算子は、キャストが常に成功することがコンパイル時にわかっている場合にキャストを実行します。例えば、アップキャストやブリッジングです。アップキャストでは、中間変数を使用せずに式をその型のスーパータイプのインスタンスとして使用できます。次のアプローチは同等です：
 
 ```swift
-func f(_ any: Any) { print("Function for Any") }
-func f(_ int: Int) { print("Function for Int") }
+func f(_ any: Any) { print("Any用の関数") }
+func f(_ int: Int) { print("Int用の関数") }
 let x = 10
 f(x)
-// Prints "Function for Int"
+// "Int用の関数" を出力
 
 let y: Any = x
 f(y)
-// Prints "Function for Any"
+// "Any用の関数" を出力
 
 f(x as Any)
-// Prints "Function for Any"
+// "Any用の関数" を出力
 ```
 
-Bridging lets you use an expression of a Swift standard library type such as `String` as its corresponding Foundation type such as `NSString` without needing to create a new instance. For more information on bridging, see Working with Foundation Types.
+ブリッジングでは、`String` のようなSwift標準ライブラリの型の式を、新しいインスタンスを作成せずに対応するFoundation型（例えば `NSString`）として使用できます。ブリッジングの詳細については、Foundation型の操作を参照してください。
 
-The `as?` operator performs a conditional cast of the expression to the specified type. The `as?` operator returns an optional of the specified type. At runtime, if the cast succeeds, the value of expression is wrapped in an optional and returned; otherwise, the value returned is nil. If casting to the specified type is guaranteed to fail or is guaranteed to succeed, a compile-time error is raised.
+`as?` 演算子は、式を指定された型に条件付きでキャストします。`as?` 演算子は、指定された型のオプショナルを返します。ランタイムでキャストが成功した場合、式の値はオプショナルにラップされて返されます。それ以外の場合、返される値はnilです。指定された型へのキャストが失敗することが保証されている場合、または成功することが保証されている場合、コンパイル時エラーが発生します。
 
-The `as!` operator performs a forced cast of the expression to the specified type. The `as!` operator returns a value of the specified type, not an optional type. If the cast fails, a runtime error is raised. The behavior of `x as! T` is the same as the behavior of `(x as? T)!`.
+`as!` 演算子は、式を指定された型に強制的にキャストします。`as!` 演算子は、オプショナル型ではなく指定された型の値を返します。キャストが失敗した場合、ランタイムエラーが発生します。`x as! T` の動作は `(x as? T)!` の動作と同じです。
 
-For more information about type casting and to see examples that use the type-casting operators, see Type Casting.
+型キャストの詳細および型キャスト演算子を使用した例については、型キャストを参照してください。
 
-#### Grammar of a type-casting operator
+#### 型キャスト演算子の文法
 
 ```
 type-casting-operator → is type
@@ -237,11 +237,11 @@ type-casting-operator → as ? type
 type-casting-operator → as ! type
 ```
 
-## Primary Expressions
+## プライマリ式
 
-Primary expressions are the most basic kind of expression. They can be used as expressions on their own, and they can be combined with other tokens to make prefix expressions, infix expressions, and postfix expressions.
+プライマリ式は最も基本的な種類の式です。それ自体で式として使用でき、他のトークンと組み合わせて前置式、中置式、後置式を作成することができます。
 
-### Grammar of a primary expression
+### プライマリ式の文法
 
 ```
 primary-expression → identifier generic-argument-clause?
@@ -260,41 +260,41 @@ primary-expression → selector-expression
 primary-expression → key-path-string-expression
 ```
 
-### Literal Expression
+### リテラル式
 
-A literal expression consists of either an ordinary literal (such as a string or a number), an array or dictionary literal, or a playground literal.
+リテラル式は、通常のリテラル（文字列や数値など）、配列リテラル、辞書リテラル、またはプレイグラウンドリテラルのいずれかで構成されます。
 
-> **Note**: Prior to Swift 5.9, the following special literals were recognized: `#column`, `#dsohandle`, `#fileID`, `#filePath`, `#file`, `#function`, and `#line`. These are now implemented as macros in the Swift standard library: `column()`, `dsohandle()`, `fileID()`, `filePath()`, `file()`, `function()`, and `line()`.
+> **注**: Swift 5.9以前では、次の特殊リテラルが認識されていました: `#column`, `#dsohandle`, `#fileID`, `#filePath`, `#file`, `#function`, および `#line`。これらは現在、Swift標準ライブラリのマクロとして実装されています: `column()`, `dsohandle()`, `fileID()`, `filePath()`, `file()`, `function()`, および `line()`。
 
-An array literal is an ordered collection of values. It has the following form:
+配列リテラルは値の順序付きコレクションです。次の形式を持ちます:
 
 ```
 [<#value 1#>, <#value 2#>, <#...#>]
 ```
 
-The last expression in the array can be followed by an optional comma. The value of an array literal has type `[T]`, where `T` is the type of the expressions inside it. If there are expressions of multiple types, `T` is their closest common supertype. Empty array literals are written using an empty pair of square brackets and can be used to create an empty array of a specified type.
+配列の最後の式にはオプションのカンマを付けることができます。配列リテラルの値は `[T]` 型であり、`T` はその中の式の型です。複数の型の式がある場合、`T` はそれらの最も近い共通のスーパータイプです。空の配列リテラルは空の角括弧のペアを使用して書かれ、指定された型の空の配列を作成するために使用できます。
 
 ```swift
 var emptyArray: [Double] = []
 ```
 
-A dictionary literal is an unordered collection of key-value pairs. It has the following form:
+辞書リテラルはキーと値のペアの順序なしコレクションです。次の形式を持ちます:
 
 ```
 [<#key 1#>: <#value 1#>, <#key 2#>: <#value 2#>, <#...#>]
 ```
 
-The last expression in the dictionary can be followed by an optional comma. The value of a dictionary literal has type `[Key: Value]`, where `Key` is the type of its key expressions and `Value` is the type of its value expressions. If there are expressions of multiple types, `Key` and `Value` are the closest common supertype for their respective values. An empty dictionary literal is written as a colon inside a pair of brackets (`[:]`) to distinguish it from an empty array literal. You can use an empty dictionary literal to create an empty dictionary literal of specified key and value types.
+辞書の最後の式にはオプションのカンマを付けることができます。辞書リテラルの値は `[Key: Value]` 型であり、`Key` はキー式の型、`Value` は値式の型です。複数の型の式がある場合、`Key` と `Value` はそれぞれの値の最も近い共通のスーパータイプです。空の辞書リテラルは角括弧の中にコロンを入れて書かれ、空の配列リテラルと区別されます。指定されたキーと値の型の空の辞書リテラルを作成するために使用できます。
 
 ```swift
 var emptyDictionary: [String: Double] = [:]
 ```
 
-A playground literal is used by Xcode to create an interactive representation of a color, file, or image within the program editor. Playground literals in plain text outside of Xcode are represented using a special literal syntax.
+プレイグラウンドリテラルは、Xcodeによってプログラムエディタ内で色、ファイル、または画像のインタラクティブな表現を作成するために使用されます。Xcodeの外部でプレイグラウンドリテラルは特別なリテラル構文を使用して表されます。
 
-For information on using playground literals in Xcode, see Add a color, file, or image literal in Xcode Help.
+Xcodeでプレイグラウンドリテラルを使用する方法については、Xcodeヘルプの「色、ファイル、または画像リテラルを追加する」を参照してください。
 
-#### Grammar of a literal expression
+#### リテラル式の文法
 
 ```
 literal-expression → literal
@@ -310,9 +310,9 @@ playground-literal → #fileLiteral ( resourceName : expression )
 playground-literal → #imageLiteral ( resourceName : expression )
 ```
 
-### Self Expression
+### self式
 
-The self expression is an explicit reference to the current type or instance of the type in which it occurs. It has the following forms:
+self式は、現在の型またはその型のインスタンスへの明示的な参照です。次の形式を持ちます:
 
 ```
 self
@@ -322,9 +322,9 @@ self(<#initializer arguments#>)
 self.init(<#initializer arguments#>)
 ```
 
-In an initializer, subscript, or instance method, `self` refers to the current instance of the type in which it occurs. In a type method, `self` refers to the current type in which it occurs.
+イニシャライザ、サブスクリプト、またはインスタンスメソッド内では、`self` はその型の現在のインスタンスを指します。型メソッド内では、`self` はその型自体を指します。
 
-The self expression is used to specify scope when accessing members, providing disambiguation when there’s another variable of the same name in scope, such as a function parameter. For example:
+self式は、メンバーにアクセスする際のスコープを指定し、スコープ内に同じ名前の別の変数がある場合に曖昧さを解消するために使用されます。例えば:
 
 ```swift
 class SomeClass {
@@ -335,7 +335,7 @@ class SomeClass {
 }
 ```
 
-In a mutating method of a value type, you can assign a new instance of that value type to `self`. For example:
+値型のミューテイティングメソッド内では、その値型の新しいインスタンスを `self` に割り当てることができます。例えば:
 
 ```swift
 struct Point {
@@ -346,7 +346,7 @@ struct Point {
 }
 ```
 
-#### Grammar of a self expression
+#### self式の文法
 
 ```
 self-expression → self | self-method-expression | self-subscript-expression | self-initializer-expression
@@ -355,9 +355,9 @@ self-subscript-expression → self [ function-call-argument-list ]
 self-initializer-expression → self . init
 ```
 
-### Superclass Expression
+### スーパークラス式
 
-A superclass expression lets a class interact with its superclass. It has one of the following forms:
+スーパークラス式は、クラスがそのスーパークラスと対話するために使用されます。次の形式のいずれかを持ちます:
 
 ```
 super.<#member name#>
@@ -365,11 +365,11 @@ super[<#subscript index#>]
 super.init(<#initializer arguments#>)
 ```
 
-The first form is used to access a member of the superclass. The second form is used to access the superclass’s subscript implementation. The third form is used to access an initializer of the superclass.
+最初の形式はスーパークラスのメンバーにアクセスするために使用されます。2番目の形式はスーパークラスのサブスクリプト実装にアクセスするために使用されます。3番目の形式はスーパークラスのイニシャライザにアクセスするために使用されます。
 
-Subclasses can use a superclass expression in their implementation of members, subscripting, and initializers to make use of the implementation in their superclass.
+サブクラスは、メンバー、サブスクリプト、およびイニシャライザの実装にスーパークラス式を使用して、スーパークラスの実装を利用することができます。
 
-#### Grammar of a superclass expression
+#### スーパークラス式の文法
 
 ```
 superclass-expression → superclass-method-expression | superclass-subscript-expression | superclass-initializer-expression
@@ -378,54 +378,55 @@ superclass-subscript-expression → super [ function-call-argument-list ]
 superclass-initializer-expression → super . init
 ```
 
-### Conditional Expression
+### 条件式
 
-A conditional expression evaluates to one of several given values based on the value of a condition. It has one the following forms:
+条件式は、条件の値に基づいて与えられた複数の値のうちの1つを評価します。次の形式のいずれかを持ちます:
 
 ```swift
-if <#condition 1#> {
-   <#expression used if condition 1 is true#>
-} else if <#condition 2#> {
-   <#expression used if condition 2 is true#>
+if <#条件 1#> {
+   <#条件 1 が真の場合に使用される式#>
+} else if <#条件 2#> {
+   <#条件 2 が真の場合に使用される式#>
 } else {
-   <#expression used if both conditions are false#>
+   <#両方の条件が偽の場合に使用される式#>
 }
 
-switch <#expression#> {
-case <#pattern 1#>:
-    <#expression 1#>
-case <#pattern 2#> where <#condition#>:
-    <#expression 2#>
+switch <#式#> {
+case <#パターン 1#>:
+    <#式 1#>
+case <#パターン 2#> where <#条件#>:
+    <#式 2#>
 default:
-    <#expression 3#>
+    <#式 3#>
 }
 ```
 
-A conditional expression has the same behavior and syntax as an if statement or a switch statement, except for the differences that the paragraphs below describe.
+条件式は、以下の段落で説明する違いを除いて、if文またはswitch文と同じ動作と構文を持ちます。
 
-A conditional expression appears only in the following contexts:
-- As the value assigned to a variable.
-- As the initial value in a variable or constant declaration.
-- As the error thrown by a throw expression.
-- As the value returned by a function, closure, or property getter.
-- As the value inside a branch of a conditional expression.
+条件式は次のコンテキストでのみ現れます:
 
-The branches of a conditional expression are exhaustive, ensuring that the expression always produces a value regardless of the condition. This means each if branch needs a corresponding else branch.
+- 変数に割り当てられる値として。
+- 変数または定数の宣言時の初期値として。
+- throw式によってスローされるエラーとして。
+- 関数、クロージャ、またはプロパティゲッターによって返される値として。
+- 条件式の分岐内の値として。
 
-Each branch contains either a single expression, which is used as the value for the conditional expression when that branch’s conditional is true, a throw statement, or a call to a function that never returns.
+条件式の分岐は網羅的であり、条件に関係なく常に値を生成することを保証します。これは、各if分岐に対応するelse分岐が必要であることを意味します。
 
-Each branch must produce a value of the same type. Because type checking of each branch is independent, you sometimes need to specify the value’s type explicitly, like when branches include different kinds of literals, or when a branch’s value is nil. When you need to provide this information, add a type annotation to the variable that the result is assigned to, or add an `as` cast to the branches’ values.
+各分岐には、分岐の条件が真である場合に条件式の値として使用される単一の式、throw文、または決して戻らない関数の呼び出しのいずれかが含まれます。
+
+各分岐は同じ型の値を生成する必要があります。各分岐の型チェックは独立しているため、リテラルの種類が異なる場合や分岐の値がnilである場合など、値の型を明示的に指定する必要があることがあります。この情報を提供する必要がある場合は、結果が割り当てられる変数に型注釈を追加するか、分岐の値に`as`キャストを追加します。
 
 ```swift
 let number: Double = if someCondition { 10 } else { 12.34 }
 let number = if someCondition { 10 as Double } else { 12.34 }
 ```
 
-Inside a result builder, conditional expressions can appear only as the initial value of a variable or constant. This behavior means when you write if or switch in a result builder — outside of a variable or constant declaration — that code is understood as a branch statement and one of the result builder’s methods transforms that code.
+結果ビルダー内では、条件式は変数または定数の初期値としてのみ現れます。この動作は、結果ビルダー内でifまたはswitchを書いた場合、そのコードが分岐文として理解され、そのコードを変換する結果ビルダーのメソッドの1つがあることを意味します。
 
-Don’t put a conditional expression in a try expression, even if one of the branches of a conditional expression is throwing.
+条件式の分岐の1つがスローされる場合でも、try式に条件式を入れないでください。
 
-#### Grammar of a conditional expression
+#### 条件式の文法
 
 ```
 conditional-expression → if-expression | switch-expression
@@ -438,34 +439,34 @@ switch-expression-case → case-label statement
 switch-expression-case → default-label statement
 ```
 
-### Closure Expression
+### クロージャ式
 
-A closure expression creates a closure, also known as a lambda or an anonymous function in other programming languages. Like a function declaration, a closure contains statements, and it captures constants and variables from its enclosing scope. It has the following form:
+クロージャ式は、他のプログラミング言語でラムダまたは無名関数としても知られるクロージャを作成します。関数宣言と同様に、クロージャには文が含まれ、囲むスコープから定数や変数をキャプチャします。次の形式を持ちます:
 
 ```
-{ (<#parameters#>) -> <#return type#> in
-   <#statements#>
+{ (<#パラメータ#>) -> <#戻り値の型#> in
+   <#文#>
 }
 ```
 
-The parameters have the same form as the parameters in a function declaration, as described in Function Declaration.
+パラメータは、関数宣言のパラメータと同じ形式を持ちます。詳細は関数宣言を参照してください。
 
-Writing throws or async in a closure expression explicitly marks a closure as throwing or asynchronous.
+クロージャ式にthrowsまたはasyncを記述すると、クロージャがスローまたは非同期であることが明示的に示されます。
 
 ```
-{ (<#parameters#>) async throws -> <#return type#> in
-   <#statements#>
+{ (<#パラメータ#>) async throws -> <#戻り値の型#> in
+   <#文#>
 }
 ```
 
-If the body of a closure includes a throws statement or a try expression that isn’t nested inside of a do statement with exhaustive error handling, the closure is understood to be throwing. If a throwing closure throws errors of only a single type, the closure is understood as throwing that error type; otherwise, it’s understood as throwing any Error. Likewise, if the body includes an await expression, it’s understood to be asynchronous.
+クロージャの本体にthrows文やdo文内にネストされていないtry式が含まれている場合、クロージャはスローされると理解されます。スローされるクロージャが単一の型のエラーのみをスローする場合、クロージャはそのエラー型をスローすると理解されます。それ以外の場合、任意のエラーをスローすると理解されます。同様に、本体にawait式が含まれている場合、それは非同期であると理解されます。
 
-There are several special forms that allow closures to be written more concisely:
-- A closure can omit the types of its parameters, its return type, or both. If you omit the parameter names and both types, omit the in keyword before the statements. If the omitted types can’t be inferred, a compile-time error is raised.
-- A closure may omit names for its parameters. Its parameters are then implicitly named $ followed by their position: $0, $1, $2, and so on.
-- A closure that consists of only a single expression is understood to return the value of that expression. The contents of this expression are also considered when performing type inference on the surrounding expression.
+クロージャをより簡潔に記述するためのいくつかの特別な形式があります:
+- クロージャは、そのパラメータの型、戻り値の型、またはその両方を省略できます。パラメータ名と両方の型を省略する場合、文の前にinキーワードを省略します。省略された型が推論できない場合、コンパイル時エラーが発生します。
+- クロージャはパラメータの名前を省略することができます。その場合、パラメータは位置に応じて$0、$1、$2などと暗黙的に名前が付けられます。
+- 単一の式のみで構成されるクロージャは、その式の値を返すと理解されます。この式の内容は、周囲の式の型推論を行う際にも考慮されます。
 
-The following closure expressions are equivalent:
+次のクロージャ式は同等です:
 
 ```swift
 myFunction { (x: Int, y: Int) -> Int in
@@ -481,19 +482,19 @@ myFunction { return $0 + $1 }
 myFunction { $0 + $1 }
 ```
 
-For information about passing a closure as an argument to a function, see Function Call Expression.
+クロージャを関数の引数として渡す方法については、関数呼び出し式を参照してください。
 
-Closure expressions can be used without being stored in a variable or constant, such as when you immediately use a closure as part of a function call. The closure expressions passed to myFunction in code above are examples of this kind of immediate use. As a result, whether a closure expression is escaping or nonescaping depends on the surrounding context of the expression. A closure expression is nonescaping if it’s called immediately or passed as a nonescaping function argument. Otherwise, the closure expression is escaping.
+クロージャ式は、変数や定数に格納されずに使用されることがあります。例えば、関数呼び出しの一部としてクロージャをすぐに使用する場合です。上記のコードでmyFunctionに渡されるクロージャ式は、この種の即時使用の例です。その結果、クロージャ式がエスケープするかどうかは、式の周囲のコンテキストによって決まります。クロージャ式が即座に呼び出されるか、非エスケープ関数の引数として渡される場合、クロージャ式は非エスケープとされます。それ以外の場合、クロージャ式はエスケープとされます。
 
-For more information about escaping closures, see Escaping Closures.
+エスケープクロージャについての詳細は、エスケープクロージャを参照してください。
 
-### Capture Lists
+### キャプチャリスト
 
-By default, a closure expression captures constants and variables from its surrounding scope with strong references to those values. You can use a capture list to explicitly control how values are captured in a closure.
+デフォルトでは、クロージャ式はその周囲のスコープから定数や変数を強参照でキャプチャします。キャプチャリストを使用して、クロージャ内で値がどのようにキャプチャされるかを明示的に制御できます。
 
-A capture list is written as a comma-separated list of expressions surrounded by square brackets, before the list of parameters. If you use a capture list, you must also use the in keyword, even if you omit the parameter names, parameter types, and return type.
+キャプチャリストは、パラメータリストの前に角括弧で囲まれたカンマ区切りの式のリストとして記述されます。キャプチャリストを使用する場合、パラメータ名、パラメータ型、戻り値の型を省略した場合でも、in キーワードを使用する必要があります。
 
-The entries in the capture list are initialized when the closure is created. For each entry in the capture list, a constant is initialized to the value of the constant or variable that has the same name in the surrounding scope. For example in the code below, a is included in the capture list but b is not, which gives them different behavior.
+キャプチャリストのエントリは、クロージャが作成されるときに初期化されます。キャプチャリストの各エントリについて、定数は周囲のスコープで同じ名前を持つ定数または変数の値に初期化されます。例えば、以下のコードでは、a はキャプチャリストに含まれていますが、b は含まれていないため、それぞれ異なる動作をします。
 
 ```swift
 var a = 0
@@ -505,12 +506,12 @@ let closure = { [a] in
 a = 10
 b = 10
 closure()
-// Prints "0 10"
+// "0 10" と出力されます
 ```
 
-There are two different things named a, the variable in the surrounding scope and the constant in the closure’s scope, but only one variable named b. The a in the inner scope is initialized with the value of the a in the outer scope when the closure is created, but their values aren’t connected in any special way. This means that a change to the value of a in the outer scope doesn’t affect the value of a in the inner scope, nor does a change to a inside the closure affect the value of a outside the closure. In contrast, there’s only one variable named b — the b in the outer scope — so changes from inside or outside the closure are visible in both places.
+ここでは、周囲のスコープにある変数 a とクロージャのスコープにある定数 a の2つの異なるものがありますが、変数 b は1つだけです。内側のスコープにある a は、クロージャが作成されたときに外側のスコープにある a の値で初期化されますが、それらの値は特別な方法で接続されていません。つまり、外側のスコープにある a の値の変更は、内側のスコープにある a の値に影響を与えず、逆もまた同様です。対照的に、b という名前の変数は1つだけであり、クロージャの内外での変更は両方の場所で確認できます。
 
-This distinction isn’t visible when the captured variable’s type has reference semantics. For example, there are two things named x in the code below, a variable in the outer scope and a constant in the inner scope, but they both refer to the same object because of reference semantics.
+キャプチャされた変数の型が参照セマンティクスを持つ場合、この区別は見えません。例えば、以下のコードでは、外側のスコープにある変数 x と内側のスコープにある定数 x の2つの異なるものがありますが、参照セマンティクスのため、両方とも同じオブジェクトを参照します。
 
 ```swift
 class SimpleClass {
@@ -525,28 +526,28 @@ let closure = { [x] in
 x.value = 10
 y.value = 10
 closure()
-// Prints "10 10"
+// "10 10" と出力されます
 ```
 
-If the type of the expression’s value is a class, you can mark the expression in a capture list with weak or unowned to capture a weak or unowned reference to the expression’s value.
+式の値の型がクラスである場合、キャプチャリスト内の式を weak または unowned でマークして、その式の値を弱参照または非所有参照でキャプチャできます。
 
 ```swift
-myFunction { print(self.title) }                    // implicit strong capture
-myFunction { [self] in print(self.title) }          // explicit strong capture
-myFunction { [weak self] in print(self!.title) }    // weak capture
-myFunction { [unowned self] in print(self.title) }  // unowned capture
+myFunction { print(self.title) }                    // 暗黙の強参照キャプチャ
+myFunction { [self] in print(self.title) }          // 明示的な強参照キャプチャ
+myFunction { [weak self] in print(self!.title) }    // 弱参照キャプチャ
+myFunction { [unowned self] in print(self.title) }  // 非所有参照キャプチャ
 ```
 
-You can also bind an arbitrary expression to a named value in a capture list. The expression is evaluated when the closure is created, and the value is captured with the specified strength. For example:
+キャプチャリスト内で任意の式を名前付きの値にバインドすることもできます。式はクロージャが作成されるときに評価され、指定された強度で値がキャプチャされます。例えば：
 
 ```swift
-// Weak capture of "self.parent" as "parent"
+// "self.parent" を "parent" として弱参照キャプチャ
 myFunction { [weak parent = self.parent] in print(parent!.title) }
 ```
 
-For more information and examples of closure expressions, see Closure Expressions. For more information and examples of capture lists, see Resolving Strong Reference Cycles for Closures.
+クロージャ式の詳細と例については、クロージャ式を参照してください。キャプチャリストの詳細と例については、クロージャの強参照サイクルの解決を参照してください。
 
-#### Grammar of a closure expression
+#### クロージャ式の文法
 
 ```
 closure-expression → { attributes? closure-signature? statements? }
@@ -565,28 +566,28 @@ capture-list-item → capture-specifier? self-expression
 capture-specifier → weak | unowned | unowned(safe) | unowned(unsafe)
 ```
 
-### Implicit Member Expression
+### 暗黙のメンバー式
 
-An implicit member expression is an abbreviated way to access a member of a type, such as an enumeration case or a type method, in a context where type inference can determine the implied type. It has the following form:
+暗黙のメンバー式は、型推論が暗黙の型を決定できるコンテキストで、型のメンバー（列挙ケースや型メソッドなど）にアクセスするための省略形です。次の形式を持ちます：
 
 ```
 .<#member name#>
 ```
 
-For example:
+例えば：
 
 ```swift
 var x = MyEnumeration.someValue
 x = .anotherValue
 ```
 
-If the inferred type is an optional, you can also use a member of the non-optional type in an implicit member expression.
+推論された型がオプショナルの場合、暗黙のメンバー式で非オプショナル型のメンバーを使用することもできます。
 
 ```swift
 var someOptional: MyEnumeration? = .someValue
 ```
 
-Implicit member expressions can be followed by a postfix operator or other postfix syntax listed in Postfix Expressions. This is called a chained implicit member expression. Although it’s common for all of the chained postfix expressions to have the same type, the only requirement is that the whole chained implicit member expression needs to be convertible to the type implied by its context. Specifically, if the implied type is an optional you can use a value of the non-optional type, and if the implied type is a class type you can use a value of one of its subclasses. For example:
+暗黙のメンバー式の後には、後置演算子や後置構文（後置式に記載されているもの）を続けることができます。これを連鎖暗黙のメンバー式と呼びます。連鎖する後置式がすべて同じ型を持つことが一般的ですが、唯一の要件は、連鎖暗黙のメンバー式全体がそのコンテキストによって暗黙的に示される型に変換可能である必要があることです。具体的には、暗黙の型がオプショナルである場合、非オプショナル型の値を使用でき、暗黙の型がクラス型である場合、そのサブクラスの値を使用できます。例えば：
 
 ```swift
 class SomeClass {
@@ -604,40 +605,40 @@ let y: SomeClass? = .shared
 let z: SomeClass = .sharedSubclass
 ```
 
-In the code above, the type of x matches the type implied by its context exactly, the type of y is convertible from SomeClass to SomeClass?, and the type of z is convertible from SomeSubclass to SomeClass.
+上記のコードでは、x の型はそのコンテキストによって暗黙的に示される型と正確に一致し、y の型は SomeClass から SomeClass? に変換可能であり、z の型は SomeSubclass から SomeClass に変換可能です。
 
-#### Grammar of an implicit member expression
+#### 暗黙のメンバー式の文法
 
 ```
 implicit-member-expression → . identifier
 implicit-member-expression → . identifier . postfix-expression
 ```
 
-### Parenthesized Expression
+### 括弧付き式
 
-A parenthesized expression consists of an expression surrounded by parentheses. You can use parentheses to specify the precedence of operations by explicitly grouping expressions. Grouping parentheses don’t change an expression’s type — for example, the type of (1) is simply Int.
+括弧付き式は、括弧で囲まれた式で構成されます。括弧を使用して、明示的に式をグループ化することで演算の優先順位を指定できます。グループ化括弧は式の型を変更しません。例えば、(1) の型は単に Int です。
 
-#### Grammar of a parenthesized expression
+#### 括弧付き式の文法
 
 ```
 parenthesized-expression → ( expression )
 ```
 
-### Tuple Expression
+### タプル式
 
-A tuple expression consists of a comma-separated list of expressions surrounded by parentheses. Each expression can have an optional identifier before it, separated by a colon (:). It has the following form:
+タプル式は、括弧で囲まれたカンマ区切りの式のリストで構成されます。各式には、オプションで識別子を付けることができ、コロン (:) で区切られます。次の形式を持ちます：
 
 ```
 (<#identifier 1#>: <#expression 1#>, <#identifier 2#>: <#expression 2#>, <#...#>)
 ```
 
-Each identifier in a tuple expression must be unique within the scope of the tuple expression. In a nested tuple expression, identifiers at the same level of nesting must be unique. For example, (a: 10, a: 20) is invalid because the label a appears twice at the same level. However, (a: 10, b: (a: 1, x: 2)) is valid — although a appears twice, it appears once in the outer tuple and once in the inner tuple.
+タプル式内の各識別子は、そのタプル式のスコープ内で一意でなければなりません。ネストされたタプル式では、同じレベルのネストで識別子が一意である必要があります。例えば、(a: 10, a: 20) は無効です。なぜなら、ラベル a が同じレベルで2回現れるからです。しかし、(a: 10, b: (a: 1, x: 2)) は有効です。a は2回現れますが、外側のタプルと内側のタプルでそれぞれ1回ずつ現れます。
 
-A tuple expression can contain zero expressions, or it can contain two or more expressions. A single expression inside parentheses is a parenthesized expression.
+タプル式には、0個の式を含めることも、2つ以上の式を含めることもできます。括弧内の単一の式は括弧付き式です。
 
-> **Note**: Both an empty tuple expression and an empty tuple type are written () in Swift. Because Void is a type alias for (), you can use it to write an empty tuple type. However, like all type aliases, Void is always a type — you can’t use it to write an empty tuple expression.
+> **注**: 空のタプル式と空のタプル型はどちらも Swift では () と書かれます。Void は () の型エイリアスであるため、空のタプル型を記述するために使用できます。しかし、すべての型エイリアスと同様に、Void は常に型であり、空のタプル式を記述するために使用することはできません。
 
-#### Grammar of a tuple expression
+#### タプル式の文法
 
 ```
 tuple-expression → ( ) | ( tuple-element , tuple-element-list )
@@ -645,85 +646,87 @@ tuple-element-list → tuple-element | tuple-element , tuple-element-list
 tuple-element → expression | identifier : expression
 ```
 
-### Wildcard Expression
+### ワイルドカード式
 
-A wildcard expression is used to explicitly ignore a value during an assignment. For example, in the following assignment 10 is assigned to x and 20 is ignored:
+ワイルドカード式は、代入中に値を明示的に無視するために使用されます。例えば、次の代入では10がxに代入され、20は無視されます。
 
 ```swift
 (x, _) = (10, 20)
-// x is 10, and 20 is ignored
+// xは10で、20は無視されます
 ```
 
-#### Grammar of a wildcard expression
+#### ワイルドカード式の文法
 
 ```
 wildcard-expression → _
 ```
 
-### Macro-Expansion Expression
+### マクロ展開式
 
-A macro-expansion expression consists of a macro name followed by a comma-separated list of the macro’s arguments in parentheses. The macro is expanded at compile time. Macro-expansion expressions have the following form:
+マクロ展開式は、マクロ名の後にカンマで区切られたマクロの引数のリストを括弧内に続けたものです。マクロはコンパイル時に展開されます。マクロ展開式は次の形式を持ちます。
 
 ```
 <#macro name#>(<#macro argument 1#>, <#macro argument 2#>)
 ```
 
-A macro-expansion expression omits the parentheses after the macro’s name if the macro doesn’t take any arguments.
+マクロが引数を取らない場合、マクロ展開式はマクロ名の後の括弧を省略します。
 
-A macro-expansion expression can appear as the default value for a parameter. When used as the default value of a function or method parameter, macros are evaluated using the source code location of the call site, not the location where they appear in a function definition. However, when a default value is a larger expression that contains a macro in addition to other code, those macros are evaluated where they appear in the function definition.
+マクロ展開式は、パラメータのデフォルト値として使用できます。関数やメソッドのパラメータのデフォルト値として使用される場合、マクロは呼び出し元のソースコードの位置を使用して評価され、関数定義内に現れる位置では評価されません。ただし、デフォルト値が他のコードと一緒にマクロを含む大きな式である場合、それらのマクロは関数定義内に現れる位置で評価されます。
 
 ```swift
 func f(a: Int = #line, b: Int = (#line), c: Int = 100 + #line) {
     print(a, b, c)
 }
-f()  // Prints "4 1 101"
+f()  // "4 1 101"と表示されます
 ```
 
-In the function above, the default value for a is a single macro expression, so that macro is evaluated using the source code location where f(a:b:c:) is called. In contrast, the values for b and c are expressions that contain a macro — the macros in those expressions are evaluated using the source code location where f(a:b:c:) is defined.
+上記の関数では、aのデフォルト値は単一のマクロ式であるため、そのマクロはf(a:b:c:)が呼び出されるソースコードの位置を使用して評価されます。対照的に、bとcの値はマクロを含む式であり、それらの式のマクロはf(a:b:c:)が定義されているソースコードの位置を使用して評価されます。
 
-When you use a macro as a default value, it’s type checked without expanding the macro, to check the following requirements:
-- The macro’s access level is the same as or less restrictive than the function that uses it.
-- The macro either takes no arguments, or its arguments are literals without string interpolation.
-- The macro’s return type matches the parameter’s type.
+マクロをデフォルト値として使用する場合、次の要件を確認するためにマクロを展開せずに型チェックが行われます:
+- マクロのアクセスレベルが、それを使用する関数と同じかそれよりも制限が少ないこと。
+- マクロが引数を取らないか、引数が文字列補間を含まないリテラルであること。
+- マクロの戻り値の型がパラメータの型と一致すること。
 
-You use macro expressions to call freestanding macros. To call an attached macro, use the custom attribute syntax described in Attributes. Both freestanding and attached macros expand as follows:
-1. Swift parses the source code to produce an abstract syntax tree (AST).
-2. The macro implementation receives AST nodes as its input and performs the transformations needed by that macro.
-3. The transformed AST nodes that the macro implementation produced are added to the original AST.
+マクロ式を使用してフリースタンディングマクロを呼び出します。アタッチドマクロを呼び出すには、属性で説明されているカスタム属性構文を使用します。フリースタンディングマクロとアタッチドマクロの両方は次のように展開されます:
+1. Swiftはソースコードを解析して抽象構文木（AST）を生成します。
+2. マクロの実装は入力としてASTノードを受け取り、そのマクロに必要な変換を行います。
+3. マクロの実装が生成した変換されたASTノードが元のASTに追加されます。
 
-The expansion of each macro is independent and self-contained. However, as a performance optimization, Swift might start an external process that implements the macro and reuse the same process to expand multiple macros. When you implement a macro, that code must not depend on what macros your code previously expanded, or on any other external state like the current time.
+各マクロの展開は独立しており、自己完結しています。ただし、パフォーマンスの最適化として、Swiftはマクロを実装する外部プロセスを開始し、複数のマクロを展開するために同じプロセスを再利用する場合があります。マクロを実装する際、そのコードは以前に展開されたマクロや現在の時間などの外部状態に依存してはなりません。
 
-For nested macros and attached macros that have multiple roles, the expansion process repeats. Nested macro-expansion expressions expand from the outside in. For example, in the code below outerMacro(_:) expands first and the unexpanded call to innerMacro(_:) appears in the abstract syntax tree that outerMacro(_:) receives as its input.
+ネストされたマクロや複数の役割を持つアタッチドマクロの場合、展開プロセスは繰り返されます。ネストされたマクロ展開式は外側から内側に展開されます。例えば、次のコードではouterMacro(_:)が最初に展開され、innerMacro(_:)への未展開の呼び出しがouterMacro(_:)の入力として抽象構文木に現れます。
 
 ```swift
 #outerMacro(12, #innerMacro(34), "some text")
 ```
 
-An attached macro that has multiple roles expands once for each role. Each expansion receives the same, original, AST as its input. Swift forms the overall expansion by collecting all of the generated AST nodes and putting them in their corresponding places in the AST.
+複数の役割を持つアタッチドマクロは、各役割ごとに一度展開されます。各展開は同じ元のASTを入力として受け取ります。Swiftは生成されたすべてのASTノードを収集し、それらをASTの対応する場所に配置して全体の展開を形成します。
 
-For an overview of macros in Swift, see Macros.
+Swiftのマクロの概要については、マクロを参照してください。
 
-#### Grammar of a macro-expansion expression
+
+#### マクロ展開式の文法
 
 ```
 macro-expansion-expression → # identifier generic-argument-clause? function-call-argument-clause? trailing-closures?
 ```
 
-### Key-Path Expression
 
-A key-path expression refers to a property or subscript of a type. You use key-path expressions in dynamic programming tasks, such as key-value observing. They have the following form:
+### キーパス式
+
+キーパス式は、型のプロパティまたはサブスクリプトを参照します。キーパス式は、キー値監視などの動的プログラミングタスクで使用します。キーパス式は次の形式を持ちます：
 
 ```
-\<#type name#>.<#path#>
+\<#型名#>.<#パス#>
 ```
 
-The type name is the name of a concrete type, including any generic parameters, such as String, [Int], or Set<Int>.
+型名は、String、[Int]、または `Set<Int>` などのジェネリックパラメータを含む具体的な型の名前です。
 
-The path consists of property names, subscripts, optional-chaining expressions, and forced unwrapping expressions. Each of these key-path components can be repeated as many times as needed, in any order.
+パスは、プロパティ名、サブスクリプト、オプショナルチェーン式、および強制アンラップ式で構成されます。これらのキーパスコンポーネントは、必要に応じて何度でも、任意の順序で繰り返すことができます。
 
-At compile time, a key-path expression is replaced by an instance of the KeyPath class.
+コンパイル時に、キーパス式は KeyPath クラスのインスタンスに置き換えられます。
 
-To access a value using a key path, pass the key path to the subscript(keyPath:) subscript, which is available on all types. For example:
+キーパスを使用して値にアクセスするには、すべての型で利用可能な subscript(keyPath:) サブスクリプトにキーパスを渡します。例えば：
 
 ```swift
 struct SomeStructure {
@@ -734,10 +737,11 @@ let s = SomeStructure(someValue: 12)
 let pathToProperty = \SomeStructure.someValue
 
 let value = s[keyPath: pathToProperty]
-// value is 12
+// value は 12
 ```
 
-The type name can be omitted in contexts where type inference can determine the implied type. The following code uses \.someProperty instead of \SomeClass.someProperty:
+
+型推論で暗黙の型を決定できるコンテキストでは、型名を省略できます。次のコードでは、\.someProperty の代わりに \SomeClass.someProperty を使用しています：
 
 ```swift
 class SomeClass: NSObject {
@@ -753,15 +757,15 @@ c.observe(\.someProperty) { object, change in
 }
 ```
 
-The path can refer to self to create the identity key path (\.self). The identity key path refers to a whole instance, so you can use it to access and change all of the data stored in a variable in a single step. For example:
+パスは self を参照して、アイデンティティキーパス (\.self) を作成できます。アイデンティティキーパスはインスタンス全体を参照するため、変数に格納されているすべてのデータに一度にアクセスして変更することができます。例えば：
 
 ```swift
 var compoundValue = (a: 1, b: 2)
-// Equivalent to compoundValue = (a: 10, b: 20)
+// compoundValue = (a: 10, b: 20) と同等
 compoundValue[keyPath: \.self] = (a: 10, b: 20)
 ```
 
-The path can contain multiple property names, separated by periods, to refer to a property of a property’s value. This code uses the key path expression \OuterStructure.outer.someValue to access the someValue property of the OuterStructure type’s outer property:
+パスには複数のプロパティ名を含めることができ、ピリオドで区切ってプロパティの値のプロパティを参照します。このコードでは、OuterStructure 型の outer プロパティの someValue プロパティにアクセスするために、キーパス式 \OuterStructure.outer.someValue を使用しています：
 
 ```swift
 struct OuterStructure {
@@ -775,18 +779,18 @@ let nested = OuterStructure(someValue: 24)
 let nestedKeyPath = \OuterStructure.outer.someValue
 
 let nestedValue = nested[keyPath: nestedKeyPath]
-// nestedValue is 24
+// nestedValue は 24
 ```
 
-The path can include subscripts using brackets, as long as the subscript’s parameter type conforms to the Hashable protocol. This example uses a subscript in a key path to access the second element of an array:
+パスには、サブスクリプトのパラメータ型が Hashable プロトコルに準拠している限り、角括弧を使用してサブスクリプトを含めることができます。この例では、配列の2番目の要素にアクセスするためにキーパス内でサブスクリプトを使用しています：
 
 ```swift
 let greetings = ["hello", "hola", "bonjour", "안녕"]
 let myGreeting = greetings[keyPath: \[String].[1]]
-// myGreeting is 'hola'
+// myGreeting は 'hola'
 ```
 
-The value used in a subscript can be a named value or a literal. Values are captured in key paths using value semantics. The following code uses the variable index in both a key-path expression and in a closure to access the third element of the greetings array. When index is modified, the key-path expression still references the third element, while the closure uses the new index.
+サブスクリプトで使用される値は、名前付き値またはリテラルであることができます。値は値セマンティクスを使用してキーパスにキャプチャされます。次のコードでは、変数 index をキーパス式とクロージャの両方で使用して、greetings 配列の3番目の要素にアクセスしています。index が変更されても、キーパス式は3番目の要素を参照し続けますが、クロージャは新しい index を使用します。
 
 ```swift
 var index = 2
@@ -794,50 +798,50 @@ let path = \[String].[index]
 let fn: ([String]) -> String = { strings in strings[index] }
 
 print(greetings[keyPath: path])
-// Prints "bonjour"
+// "bonjour" を出力
 print(fn(greetings))
-// Prints "bonjour"
+// "bonjour" を出力
 
-// Setting 'index' to a new value doesn't affect 'path'
+// 'index' を新しい値に設定しても 'path' には影響しません
 index += 1
 print(greetings[keyPath: path])
-// Prints "bonjour"
+// "bonjour" を出力
 
-// Because 'fn' closes over 'index', it uses the new value
+// 'fn' は 'index' をクロージャ内でキャプチャしているため、新しい値を使用します
 print(fn(greetings))
-// Prints "안녕"
+// "안녕" を出力
 ```
 
-The path can use optional chaining and forced unwrapping. This code uses optional chaining in a key path to access a property of an optional string:
+パスはオプショナルチェーンと強制アンラップを使用できます。このコードでは、オプショナルチェーンをキーパス内で使用して、オプショナルな文字列のプロパティにアクセスしています：
 
 ```swift
 let firstGreeting: String? = greetings.first
 print(firstGreeting?.count as Any)
-// Prints "Optional(5)"
+// "Optional(5)" を出力
 
-// Do the same thing using a key path.
+// キーパスを使用して同じことを行います。
 let count = greetings[keyPath: \[String].first?.count]
 print(count as Any)
-// Prints "Optional(5)"
+// "Optional(5)" を出力
 ```
 
-You can mix and match components of key paths to access values that are deeply nested within a type. The following code accesses different values and properties of a dictionary of arrays by using key-path expressions that combine these components.
+キーパスのコンポーネントを組み合わせて、型内に深くネストされた値にアクセスすることができます。次のコードでは、これらのコンポーネントを組み合わせたキーパス式を使用して、配列の辞書の異なる値とプロパティにアクセスしています。
 
 ```swift
 let interestingNumbers = ["prime": [2, 3, 5, 7, 11, 13, 17],
                           "triangular": [1, 3, 6, 10, 15, 21, 28],
                           "hexagonal": [1, 6, 15, 28, 45, 66, 91]]
 print(interestingNumbers[keyPath: \[String: [Int]].["prime"]] as Any)
-// Prints "Optional([2, 3, 5, 7, 11, 13, 17])"
+// "Optional([2, 3, 5, 7, 11, 13, 17])" を出力
 print(interestingNumbers[keyPath: \[String: [Int]].["prime"]![0]])
-// Prints "2"
+// "2" を出力
 print(interestingNumbers[keyPath: \[String: [Int]].["hexagonal"]!.count])
-// Prints "7"
+// "7" を出力
 print(interestingNumbers[keyPath: \[String: [Int]].["hexagonal"]!.count.bitWidth])
-// Prints "64"
+// "64" を出力
 ```
 
-You can use a key path expression in contexts where you would normally provide a function or closure. Specifically, you can use a key path expression whose root type is SomeType and whose path produces a value of type Value, instead of a function or closure of type (SomeType) -> Value.
+キーパス式を、通常は関数やクロージャを提供するコンテキストで使用できます。具体的には、ルート型が SomeType であり、パスが Value 型の値を生成するキーパス式を、(SomeType) -> Value 型の関数やクロージャの代わりに使用できます。
 
 ```swift
 struct Task {
@@ -850,29 +854,48 @@ var toDoList = [
     Task(description: "Visit Boston in the Fall.", completed: false),
 ]
 
-// Both approaches below are equivalent.
+// 以下の両方のアプローチは同等です。
 let descriptions = toDoList.filter(\.completed).map(\.description)
 let descriptions2 = toDoList.filter { $0.completed }.map { $0.description }
 ```
 
-Any side effects of a key path expression are evaluated only at the point where the expression is evaluated. For example, if you make a function call inside a subscript in a key path expression, the function is called only once as part of evaluating the expression, not every time the key path is used.
+キーパス式の副作用は、式が評価される時点でのみ評価されます。例えば、キーパス式のサブスクリプト内で関数呼び出しを行う場合、その関数は式の評価の一部として一度だけ呼び出され、キーパスが使用されるたびに呼び出されるわけではありません。
 
 ```swift
 func makeIndex() -> Int {
-    print("Made an index")
+    print("インデックスを作成しました")
     return 0
 }
-// The line below calls makeIndex().
+// 以下の行は makeIndex() を呼び出します。
 let taskKeyPath = \[Task][makeIndex()]
-// Prints "Made an index"
+// "インデックスを作成しました" を出力
 
-// Using taskKeyPath doesn't call makeIndex() again.
+// taskKeyPath を使用しても makeIndex() は再度呼び出されません。
 let someTask = toDoList[keyPath: taskKeyPath]
 ```
 
-For more information about using key paths in code that interacts with Objective-C APIs, see Using Objective-C Runtime Features in Swift. For information about key-value coding and key-value observing, see Key-Value Coding Programming Guide and Key-Value Observing Programming Guide.
+Objective-C API と連携するコードでキーパスを使用する方法の詳細については、「Using Objective-C Runtime Features in Swift」を参照してください。キー値コーディングとキー値監視の詳細については、「Key-Value Coding Programming Guide」および「Key-Value Observing Programming Guide」を参照してください。
 
-#### Grammar of a key-path expression
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### キーパス式の文法
 
 ```
 key-path-expression → \ type? . key-path-components
@@ -882,17 +905,17 @@ key-path-postfixes → key-path-postfix key-path-postfixes?
 key-path-postfix → ? | ! | self | [ function-call-argument-list ]
 ```
 
-### Selector Expression
+### セレクタ式
 
-A selector expression lets you access the selector used to refer to a method or to a property’s getter or setter in Objective-C. It has the following form:
+セレクタ式を使用すると、Objective-Cでメソッドやプロパティのゲッターまたはセッターを参照するために使用されるセレクタにアクセスできます。次の形式を持ちます：
 
 ```
-#selector(<#method name#>)
-#selector(getter: <#property name#>)
-#selector(setter: <#property name#>)
+#selector(<#メソッド名#>)
+#selector(getter: <#プロパティ名#>)
+#selector(setter: <#プロパティ名#>)
 ```
 
-The method name and property name must be a reference to a method or a property that’s available in the Objective-C runtime. The value of a selector expression is an instance of the Selector type. For example:
+メソッド名とプロパティ名は、Objective-Cランタイムで利用可能なメソッドまたはプロパティへの参照でなければなりません。セレクタ式の値はSelector型のインスタンスです。例えば：
 
 ```swift
 class SomeClass: NSObject {
@@ -909,9 +932,9 @@ let selectorForMethod = #selector(SomeClass.doSomething(_:))
 let selectorForPropertyGetter = #selector(getter: SomeClass.property)
 ```
 
-When creating a selector for a property’s getter, the property name can be a reference to a variable or constant property. In contrast, when creating a selector for a property’s setter, the property name must be a reference to a variable property only.
+プロパティのゲッターのセレクタを作成する場合、プロパティ名は変数または定数プロパティへの参照であることができます。対照的に、プロパティのセッターのセレクタを作成する場合、プロパティ名は変数プロパティへの参照でなければなりません。
 
-The method name can contain parentheses for grouping, as well the as operator to disambiguate between methods that share a name but have different type signatures. For example:
+メソッド名には、グループ化のための括弧や、同じ名前を持つが異なる型シグネチャを持つメソッドを区別するためのas演算子を含めることができます。例えば：
 
 ```swift
 extension SomeClass {
@@ -921,13 +944,13 @@ extension SomeClass {
 let anotherSelector = #selector(SomeClass.doSomething(_:) as (SomeClass) -> (String) -> Void)
 ```
 
-Because a selector is created at compile time, not at runtime, the compiler can check that a method or property exists and that they’re exposed to the Objective-C runtime.
+セレクタは実行時ではなくコンパイル時に作成されるため、コンパイラはメソッドやプロパティが存在し、それらがObjective-Cランタイムに公開されていることを確認できます。
 
-> **Note**: Although the method name and the property name are expressions, they’re never evaluated.
+> **注**: メソッド名とプロパティ名は式ですが、評価されることはありません。
 
-For more information about using selectors in Swift code that interacts with Objective-C APIs, see Using Objective-C Runtime Features in Swift.
+Objective-C APIと連携するSwiftコードでセレクタを使用する方法の詳細については、「Using Objective-C Runtime Features in Swift」を参照してください。
 
-#### Grammar of a selector expression
+#### セレクタ式の文法
 
 ```
 selector-expression → #selector ( expression )
@@ -935,15 +958,15 @@ selector-expression → #selector ( getter: expression )
 selector-expression → #selector ( setter: expression )
 ```
 
-### Key-Path String Expression
+### キーパス文字列式
 
-A key-path string expression lets you access the string used to refer to a property in Objective-C, for use in key-value coding and key-value observing APIs. It has the following form:
+キーパス文字列式を使用すると、Objective-Cでプロパティを参照するために使用される文字列にアクセスできます。これはキー値コーディングおよびキー値監視APIで使用されます。次の形式を持ちます：
 
 ```
-#keyPath(<#property name#>)
+#keyPath(<#プロパティ名#>)
 ```
 
-The property name must be a reference to a property that’s available in the Objective-C runtime. At compile time, the key-path string expression is replaced by a string literal. For example:
+プロパティ名は、Objective-Cランタイムで利用可能なプロパティへの参照でなければなりません。コンパイル時に、キーパス文字列式は文字列リテラルに置き換えられます。例えば：
 
 ```swift
 class SomeClass: NSObject {
@@ -959,10 +982,10 @@ let keyPath = #keyPath(SomeClass.someProperty)
 if let value = c.value(forKey: keyPath) {
     print(value)
 }
-// Prints "12"
+// "12"と出力されます
 ```
 
-When you use a key-path string expression within a class, you can refer to a property of that class by writing just the property name, without the class name.
+クラス内でキーパス文字列式を使用する場合、クラス名なしでプロパティ名だけを書くことで、そのクラスのプロパティを参照できます。
 
 ```swift
 extension SomeClass {
@@ -971,28 +994,28 @@ extension SomeClass {
     }
 }
 print(keyPath == c.getSomeKeyPath())
-// Prints "true"
+// "true"と出力されます
 ```
 
-Because the key path string is created at compile time, not at runtime, the compiler can check that the property exists and that the property is exposed to the Objective-C runtime.
+キーパス文字列は実行時ではなくコンパイル時に作成されるため、コンパイラはプロパティが存在し、それがObjective-Cランタイムに公開されていることを確認できます。
 
-For more information about using key paths in Swift code that interacts with Objective-C APIs, see Using Objective-C Runtime Features in Swift. For information about key-value coding and key-value observing, see Key-Value Coding Programming Guide and Key-Value Observing Programming Guide.
+Objective-C APIと連携するSwiftコードでキーパスを使用する方法の詳細については、「Using Objective-C Runtime Features in Swift」を参照してください。キー値コーディングおよびキー値監視の詳細については、「Key-Value Coding Programming Guide」および「Key-Value Observing Programming Guide」を参照してください。
 
-> **Note**: Although the property name is an expression, it’s never evaluated.
+> **注**: プロパティ名は式ですが、評価されることはありません。
 
-#### Grammar of a key-path string expression
+#### キーパス文字列式の文法
 
 ```
 key-path-string-expression → #keyPath ( expression )
 ```
 
-## Postfix Expressions
+## 後置式
 
-Postfix expressions are formed by applying a postfix operator or other postfix syntax to an expression. Syntactically, every primary expression is also a postfix expression.
+後置式は、後置演算子や他の後置構文を式に適用することで形成されます。構文的には、すべての基本式も後置式です。
 
-For information about the behavior of these operators, see Basic Operators and Advanced Operators. For information about the operators provided by the Swift standard library, see Operator Declarations.
+これらの演算子の動作については、基本演算子と高度な演算子を参照してください。Swift標準ライブラリによって提供される演算子については、演算子宣言を参照してください。
 
-### Grammar of a postfix expression
+### 後置式の文法
 
 ```
 postfix-expression → primary-expression
@@ -1006,62 +1029,62 @@ postfix-expression → forced-value-expression
 postfix-expression → optional-chaining-expression
 ```
 
-### Function Call Expression
+### 関数呼び出し式
 
-A function call expression consists of a function name followed by a comma-separated list of the function’s arguments in parentheses. Function call expressions have the following form:
+関数呼び出し式は、関数名の後にカンマで区切られた関数の引数のリストを括弧内に続けたものです。関数呼び出し式は次の形式を持ちます：
 
 ```
 <#function name#>(<#argument value 1#>, <#argument value 2#>)
 ```
 
-The function name can be any expression whose value is of a function type.
+関数名は、値が関数型である任意の式で構いません。
 
-If the function definition includes names for its parameters, the function call must include names before its argument values, separated by a colon (:). This kind of function call expression has the following form:
+関数定義にパラメータの名前が含まれている場合、関数呼び出しには引数値の前に名前を含める必要があり、コロン（:）で区切られます。この種の関数呼び出し式は次の形式を持ちます：
 
 ```
 <#function name#>(<#argument name 1#>: <#argument value 1#>, <#argument name 2#>: <#argument value 2#>)
 ```
 
-A function call expression can include trailing closures in the form of closure expressions immediately after the closing parenthesis. The trailing closures are understood as arguments to the function, added after the last parenthesized argument. The first closure expression is unlabeled; any additional closure expressions are preceded by their argument labels. The example below shows the equivalent version of function calls that do and don’t use trailing closure syntax:
+関数呼び出し式には、閉じ括弧の直後にクロージャ式としてトレーリングクロージャを含めることができます。トレーリングクロージャは、最後の括弧内の引数の後に追加される関数の引数として理解されます。以下の例は、トレーリングクロージャ構文を使用する場合と使用しない場合の関数呼び出しの等価なバージョンを示しています：
 
 ```swift
-// someFunction takes an integer and a closure as its arguments
+// someFunctionは整数とクロージャを引数として取ります
 someFunction(x: x, f: { $0 == 13 })
 someFunction(x: x) { $0 == 13 }
 
-// anotherFunction takes an integer and two closures as its arguments
+// anotherFunctionは整数と2つのクロージャを引数として取ります
 anotherFunction(x: x, f: { $0 == 13 }, g: { print(99) })
 anotherFunction(x: x) { $0 == 13 } g: { print(99) }
 ```
 
-If the trailing closure is the function’s only argument, you can omit the parentheses.
+トレーリングクロージャが関数の唯一の引数である場合、括弧を省略できます。
 
 ```swift
-// someMethod takes a closure as its only argument
+// someMethodはクロージャを唯一の引数として取ります
 myData.someMethod() { $0 == 13 }
 myData.someMethod { $0 == 13 }
 ```
 
-To include the trailing closures in the arguments, the compiler examines the function’s parameters from left to right as follows:
+トレーリングクロージャを引数に含めるために、コンパイラは関数のパラメータを左から右に次のように調べます：
 
-| Trailing Closure | Parameter | Action |
+| トレーリングクロージャ | パラメータ | アクション |
 |------------------|-----------|--------|
-| Labeled          | Labeled   | If the labels are the same, the closure matches the parameter; otherwise, the parameter is skipped. |
-| Labeled          | Unlabeled | The parameter is skipped. |
-| Unlabeled        | Labeled or unlabeled | If the parameter structurally resembles a function type, as defined below, the closure matches the parameter; otherwise, the parameter is skipped. |
+| ラベル付き          | ラベル付き   | ラベルが同じ場合、クロージャはパラメータに一致します。それ以外の場合、パラメータはスキップされます。 |
+| ラベル付き          | ラベルなし | パラメータはスキップされます。 |
+| ラベルなし        | ラベル付きまたはラベルなし | パラメータが以下で定義されるように関数型に構造的に似ている場合、クロージャはパラメータに一致します。それ以外の場合、パラメータはスキップされます。 |
 
-The trailing closure is passed as the argument for the parameter that it matches. Parameters that were skipped during the scanning process don’t have an argument passed to them — for example, they can use a default parameter. After finding a match, scanning continues with the next trailing closure and the next parameter. At the end of the matching process, all trailing closures must have a match.
+トレーリングクロージャは、一致するパラメータの引数として渡されます。スキャンプロセス中にスキップされたパラメータには引数が渡されません。たとえば、デフォルトパラメータを使用できます。一致が見つかった後、スキャンは次のトレーリングクロージャと次のパラメータで続行されます。マッチングプロセスの最後に、すべてのトレーリングクロージャは一致する必要があります。
 
-A parameter structurally resembles a function type if the parameter isn’t an in-out parameter, and the parameter is one of the following:
-- A parameter whose type is a function type, like (Bool) -> Int
-- An autoclosure parameter whose wrapped expression’s type is a function type, like @autoclosure () -> ((Bool) -> Int)
-- A variadic parameter whose array element type is a function type, like ((Bool) -> Int)...
-- A parameter whose type is wrapped in one or more layers of optional, like Optional<(Bool) -> Int>
-- A parameter whose type combines these allowed types, like (Optional<(Bool) -> Int>)...
+パラメータが関数型に構造的に似ている場合、パラメータは次のいずれかです：
+- 型が関数型であるパラメータ、例：(Bool) -> Int
+- ラップされた式の型が関数型である自動クロージャパラメータ、例：@autoclosure () -> ((Bool) -> Int)
+- 配列要素の型が関数型である可変長パラメータ、例：((Bool) -> Int)...
+- 型が1つ以上のオプションでラップされているパラメータ、例：Optional<(Bool) -> Int>
+- これらの許可された型を組み合わせた型を持つパラメータ、例：(Optional<(Bool) -> Int>)...
 
-When a trailing closure is matched to a parameter whose type structurally resembles a function type, but isn’t a function, the closure is wrapped as needed. For example, if the parameter’s type is an optional type, the closure is wrapped in Optional automatically.
+トレーリングクロージャが関数型に構造的に似ているが関数ではないパラメータに一致する場合、必要に応じてクロージャがラップされます。たとえば、パラメータの型がオプション型である場合、クロージャは自動的にOptionalにラップされます。
 
-To ease migration of code from versions of Swift prior to 5.3 — which performed this matching from right to left — the compiler checks both the left-to-right and right-to-left orderings. If the scan directions produce different results, the old right-to-left ordering is used and the compiler generates a warning. A future version of Swift will always use the left-to-right ordering.
+Swift 5.3以前のバージョンからのコードの移行を容易にするために、コンパイラは左から右および右から左の順序の両方をチェックします。スキャン方向が異なる結果を生成する場合、古い右から左の順序が使用され、コンパイラは警告を生成します。将来のバージョンのSwiftでは、常に左から右の順序が使用されます。
 
 ```swift
 typealias Callback = (Int) -> Int
@@ -1072,24 +1095,24 @@ func someFunction(firstClosure: Callback? = nil,
     print(first ?? "-", second ?? "-")
 }
 
-someFunction()  // Prints "- -"
-someFunction { return $0 + 100 }  // Ambiguous
-someFunction { return $0 } secondClosure: { return $0 }  // Prints "10 20"
+someFunction()  // "- -"と表示
+someFunction { return $0 + 100 }  // 曖昧
+someFunction { return $0 } secondClosure: { return $0 }  // "10 20"と表示
 ```
 
-In the example above, the function call marked “Ambiguous” prints “- 120” and produces a compiler warning on Swift 5.3. A future version of Swift will print “110 -”.
+上記の例では、「曖昧」とマークされた関数呼び出しはSwift 5.3では「- 120」と表示され、コンパイラ警告が生成されます。将来のバージョンのSwiftでは「110 -」と表示されます。
 
-A class, structure, or enumeration type can enable syntactic sugar for function call syntax by declaring one of several methods, as described in Methods with Special Names.
+クラス、構造体、または列挙型は、特別な名前を持つメソッドを宣言することで、関数呼び出し構文の糖衣構文を有効にできます。詳細は、特別な名前を持つメソッドを参照してください。
 
-### Implicit Conversion to a Pointer Type
+### ポインタ型への暗黙的な変換
 
-In a function call expression, if the argument and parameter have a different type, the compiler tries to make their types match by applying one of the implicit conversions in the following list:
-- `inout SomeType` can become `UnsafePointer<SomeType>` or `UnsafeMutablePointer<SomeType>`
-- `inout Array<SomeType>` can become `UnsafePointer<SomeType>` or `UnsafeMutablePointer<SomeType>`
-- `Array<SomeType>` can become `UnsafePointer<SomeType>`
-- `String` can become `UnsafePointer<CChar>`
+関数呼び出し式では、引数とパラメータの型が異なる場合、コンパイラは次のリストにある暗黙的な変換のいずれかを適用して型を一致させようとします:
+- `inout SomeType` は `UnsafePointer<SomeType>` または `UnsafeMutablePointer<SomeType>` になることができます
+- `inout Array<SomeType>` は `UnsafePointer<SomeType>` または `UnsafeMutablePointer<SomeType>` になることができます
+- `Array<SomeType>` は `UnsafePointer<SomeType>` になることができます
+- `String` は `UnsafePointer<CChar>` になることができます
 
-The following two function calls are equivalent:
+次の2つの関数呼び出しは同等です:
 
 ```swift
 func unsafeFunction(pointer: UnsafePointer<Int>) {
@@ -1101,13 +1124,13 @@ unsafeFunction(pointer: &myNumber)
 withUnsafePointer(to: myNumber) { unsafeFunction(pointer: $0) }
 ```
 
-A pointer that’s created by these implicit conversions is valid only for the duration of the function call. To avoid undefined behavior, ensure that your code never persists the pointer after the function call ends.
+これらの暗黙的な変換によって作成されたポインタは、関数呼び出しの期間中のみ有効です。未定義の動作を避けるために、関数呼び出しが終了した後にポインタを保持しないようにしてください。
 
-> **Note**: When implicitly converting an array to an unsafe pointer, Swift ensures that the array’s storage is contiguous by converting or copying the array as needed. For example, you can use this syntax with an array that was bridged to Array from an NSArray subclass that makes no API contract about its storage. If you need to guarantee that the array’s storage is already contiguous, so the implicit conversion never needs to do this work, use ContiguousArray instead of Array.
+> **注意**: 配列を暗黙的にunsafeポインタに変換する場合、Swiftは必要に応じて配列を変換またはコピーすることで、配列のストレージが連続していることを保証します。例えば、NSArrayサブクラスからArrayにブリッジされた配列でこの構文を使用することができます。この作業が不要であることを保証するために、配列のストレージが既に連続していることを保証する必要がある場合は、Arrayの代わりにContiguousArrayを使用してください。
 
-Using & instead of an explicit function like withUnsafePointer(to:) can help make calls to low-level C functions more readable, especially when the function takes several pointer arguments. However, when calling functions from other Swift code, avoid using & instead of using the unsafe APIs explicitly.
+&を使用する代わりにwithUnsafePointer(to:)のような明示的な関数を使用することで、特に関数が複数のポインタ引数を取る場合、低レベルのC関数への呼び出しをより読みやすくすることができます。ただし、他のSwiftコードから関数を呼び出す場合、&を使用する代わりにunsafe APIを明示的に使用することを避けてください。
 
-#### Grammar of a function call expression
+#### 関数呼び出し式の文法
 
 ```
 function-call-expression → postfix-expression function-call-argument-clause
@@ -1121,83 +1144,83 @@ labeled-trailing-closures → labeled-trailing-closure labeled-trailing-closures
 labeled-trailing-closure → identifier : closure-expression
 ```
 
-### Initializer Expression
+### イニシャライザ式
 
-An initializer expression provides access to a type’s initializer. It has the following form:
+イニシャライザ式は、型のイニシャライザへのアクセスを提供します。次の形式を持ちます:
 
 ```
 <#expression#>.init(<#initializer arguments#>)
 ```
 
-You use the initializer expression in a function call expression to initialize a new instance of a type. You also use an initializer expression to delegate to the initializer of a superclass.
+イニシャライザ式を関数呼び出し式で使用して、新しいインスタンスを初期化します。また、スーパークラスのイニシャライザに委譲するためにもイニシャライザ式を使用します。
 
 ```swift
 class SomeSubClass: SomeSuperClass {
     override init() {
-        // subclass initialization goes here
+        // サブクラスの初期化はここに記述します
         super.init()
     }
 }
 ```
 
-Like a function, an initializer can be used as a value. For example:
+関数のように、イニシャライザも値として使用できます。例えば:
 
 ```swift
-// Type annotation is required because String has multiple initializers.
+// Stringには複数のイニシャライザがあるため、型注釈が必要です。
 let initializer: (Int) -> String = String.init
 let oneTwoThree = [1, 2, 3].map(initializer).reduce("", +)
 print(oneTwoThree)
-// Prints "123"
+// "123"と表示されます
 ```
 
-If you specify a type by name, you can access the type’s initializer without using an initializer expression. In all other cases, you must use an initializer expression.
+型を名前で指定する場合、イニシャライザ式を使用せずに型のイニシャライザにアクセスできます。それ以外の場合は、イニシャライザ式を使用する必要があります。
 
 ```swift
-let s1 = SomeType.init(data: 3)  // Valid
-let s2 = SomeType(data: 1)       // Also valid
+let s1 = SomeType.init(data: 3)  // 有効
+let s2 = SomeType(data: 1)       // これも有効
 
-let s3 = type(of: someValue).init(data: 7)  // Valid
-let s4 = type(of: someValue)(data: 5)       // Error
+let s3 = type(of: someValue).init(data: 7)  // 有効
+let s4 = type(of: someValue)(data: 5)       // エラー
 ```
 
-#### Grammar of an initializer expression
+#### イニシャライザ式の文法
 
 ```
 initializer-expression → postfix-expression . init
 initializer-expression → postfix-expression . init ( argument-names )
 ```
 
-### Explicit Member Expression
+### 明示的メンバー式
 
-An explicit member expression allows access to the members of a named type, a tuple, or a module. It consists of a period (.) between the item and the identifier of its member.
+明示的メンバー式は、名前付き型、タプル、またはモジュールのメンバーへのアクセスを提供します。これは、項目とそのメンバーの識別子の間にピリオド（.）を置くことで構成されます。
 
 ```
 <#expression#>.<#member name#>
 ```
 
-The members of a named type are named as part of the type’s declaration or extension. For example:
+名前付き型のメンバーは、型の宣言または拡張の一部として名前が付けられます。例えば:
 
 ```swift
 class SomeClass {
     var someProperty = 42
 }
 let c = SomeClass()
-let y = c.someProperty  // Member access
+let y = c.someProperty  // メンバーアクセス
 ```
 
-The members of a tuple are implicitly named using integers in the order they appear, starting from zero. For example:
+タプルのメンバーは、0から始まる整数を使用して暗黙的に名前が付けられます。例えば:
 
 ```swift
 var t = (10, 20, 30)
 t.0 = t.1
-// Now t is (20, 20, 30)
+// tは(20, 20, 30)になります
 ```
 
-The members of a module access the top-level declarations of that module.
+モジュールのメンバーは、そのモジュールのトップレベル宣言にアクセスします。
 
-Types declared with the dynamicMemberLookup attribute include members that are looked up at runtime, as described in Attributes.
+dynamicMemberLookup属性で宣言された型には、実行時に検索されるメンバーが含まれます。詳細はAttributesを参照してください。
 
-To distinguish between methods or initializers whose names differ only by the names of their arguments, include the argument names in parentheses, with each argument name followed by a colon (:). Write an underscore (_) for an argument with no name. To distinguish between overloaded methods, use a type annotation. For example:
+引数の名前だけが異なるメソッドやイニシャライザを区別するために、引数の名前を括弧内に含め、各引数の名前の後にコロン（:）を付けます。名前のない引数にはアンダースコア（_）を書きます。オーバーロードされたメソッドを区別するために、型注釈を使用します。例えば:
 
 ```swift
 class SomeClass {
@@ -1208,15 +1231,15 @@ class SomeClass {
 }
 let instance = SomeClass()
 
-let a = instance.someMethod              // Ambiguous
-let b = instance.someMethod(x:y:)        // Unambiguous
+let a = instance.someMethod              // 曖昧
+let b = instance.someMethod(x:y:)        // 明確
 
-let d = instance.overloadedMethod        // Ambiguous
-let d = instance.overloadedMethod(x:y:)  // Still ambiguous
-let d: (Int, Bool) -> Void  = instance.overloadedMethod(x:y:)  // Unambiguous
+let d = instance.overloadedMethod        // 曖昧
+let d = instance.overloadedMethod(x:y:)  // まだ曖昧
+let d: (Int, Bool) -> Void  = instance.overloadedMethod(x:y:)  // 明確
 ```
 
-If a period appears at the beginning of a line, it’s understood as part of an explicit member expression, not as an implicit member expression. For example, the following listing shows chained method calls split over several lines:
+行の先頭にピリオドがある場合、それは明示的メンバー式の一部として理解され、暗黙的メンバー式としては理解されません。例えば、次のリストは複数行に分割された連鎖メソッド呼び出しを示しています:
 
 ```swift
 let x = [10, 3, 20, 15, 4]
@@ -1225,7 +1248,7 @@ let x = [10, 3, 20, 15, 4]
     .map { $0 * 100 }
 ```
 
-You can combine this multiline chained syntax with compiler control statements to control when each method is called. For example, the following code uses a different filtering rule on iOS:
+この複数行の連鎖構文をコンパイラ制御文と組み合わせて、各メソッドが呼び出されるタイミングを制御できます。例えば、次のコードはiOSで異なるフィルタリングルールを使用します:
 
 ```swift
 let numbers = [10, 20, 33, 43, 50]
@@ -1236,13 +1259,13 @@ let numbers = [10, 20, 33, 43, 50]
 #endif
 ```
 
-Between #if, #endif, and other compilation directives, the conditional compilation block can contain an implicit member expression followed by zero or more postfixes, to form a postfix expression. It can also contain another conditional compilation block, or a combination of these expressions and blocks.
+#if、#endif、および他のコンパイルディレクティブの間で、条件付きコンパイルブロックには、ゼロまたはそれ以上の後置を持つ暗黙的メンバー式を含めることができます。また、別の条件付きコンパイルブロック、またはこれらの式とブロックの組み合わせを含めることもできます。
 
-You can use this syntax anywhere that you can write an explicit member expression, not just in top-level code.
+この構文は、トップレベルコードだけでなく、明示的メンバー式を記述できる場所ならどこでも使用できます。
 
-In the conditional compilation block, the branch for the #if compilation directive must contain at least one expression. The other branches can be empty.
+条件付きコンパイルブロックでは、#ifコンパイルディレクティブのブランチには少なくとも1つの式を含める必要があります。他のブランチは空でもかまいません。
 
-#### Grammar of an explicit member expression
+#### 明示的メンバー式の文法
 
 ```
 explicit-member-expression → postfix-expression . decimal-digits
@@ -1253,91 +1276,93 @@ argument-names → argument-name argument-names?
 argument-name → identifier :
 ```
 
-### Postfix Self Expression
 
-A postfix self expression consists of an expression or the name of a type, immediately followed by .self. It has the following forms:
+
+### 後置Self式
+
+後置Self式は、式または型の名前の直後に.selfが続く形式です。次の形式があります：
 
 ```
 <#expression#>.self
 <#type#>.self
 ```
 
-The first form evaluates to the value of the expression. For example, x.self evaluates to x.
+最初の形式は、式の値を評価します。例えば、x.selfはxを評価します。
 
-The second form evaluates to the value of the type. Use this form to access a type as a value. For example, because SomeClass.self evaluates to the SomeClass type itself, you can pass it to a function or method that accepts a type-level argument.
+2番目の形式は、型の値を評価します。この形式を使用して、型を値としてアクセスします。例えば、SomeClass.selfはSomeClass型自体を評価するため、型レベルの引数を受け取る関数やメソッドに渡すことができます。
 
-#### Grammar of a postfix self expression
+#### 後置Self式の文法
 
 ```
 postfix-self-expression → postfix-expression . self
 ```
 
-### Subscript Expression
+### 添字式
 
-A subscript expression provides subscript access using the getter and setter of the corresponding subscript declaration. It has the following form:
+添字式は、対応する添字宣言のゲッターとセッターを使用して添字アクセスを提供します。次の形式があります：
 
 ```
 <#expression#>[<#index expressions#>]
 ```
 
-To evaluate the value of a subscript expression, the subscript getter for the expression’s type is called with the index expressions passed as the subscript parameters. To set its value, the subscript setter is called in the same way.
+添字式の値を評価するには、式の型の添字ゲッターが添字パラメータとしてインデックス式を渡して呼び出されます。その値を設定するには、同じ方法で添字セッターが呼び出されます。
 
-For information about subscript declarations, see Protocol Subscript Declaration.
+添字宣言の詳細については、「プロトコル添字宣言」を参照してください。
 
-#### Grammar of a subscript expression
+#### 添字式の文法
 
 ```
 subscript-expression → postfix-expression [ function-call-argument-list ]
 ```
 
-### Forced-Value Expression
+### 強制アンラップ式
 
-A forced-value expression unwraps an optional value that you are certain isn’t nil. It has the following form:
+強制アンラップ式は、nilでないことが確実なオプショナル値をアンラップします。次の形式があります：
 
 ```
 <#expression#>!
 ```
 
-If the value of the expression isn’t nil, the optional value is unwrapped and returned with the corresponding non-optional type. Otherwise, a runtime error is raised.
+式の値がnilでない場合、オプショナル値はアンラップされ、対応する非オプショナル型で返されます。そうでない場合、ランタイムエラーが発生します。
 
-The unwrapped value of a forced-value expression can be modified, either by mutating the value itself, or by assigning to one of the value’s members. For example:
+強制アンラップ式のアンラップされた値は、値自体を変更するか、値のメンバーに代入することで変更できます。例えば：
 
 ```swift
 var x: Int? = 0
 x! += 1
-// x is now 1
+// xは現在1です
 
 var someDictionary = ["a": [1, 2, 3], "b": [10, 20]]
 someDictionary["a"]![0] = 100
-// someDictionary is now ["a": [100, 2, 3], "b": [10, 20]]
+// someDictionaryは現在["a": [100, 2, 3], "b": [10, 20]]です
 ```
 
-#### Grammar of a forced-value expression
+#### 強制アンラップ式の文法
 
 ```
 forced-value-expression → postfix-expression !
 ```
 
-### Optional-Chaining Expression
+### オプショナルチェーン式
 
-An optional-chaining expression provides a simplified syntax for using optional values in postfix expressions. It has the following form:
+オプショナルチェーン式は、後置式でオプショナル値を使用するための簡略化された構文を提供します。次の形式があります：
 
 ```
 <#expression#>?
 ```
 
-The postfix ? operator makes an optional-chaining expression from an expression without changing the expression’s value.
+後置?演算子は、式の値を変更せずにオプショナルチェーン式を作成します。
 
-Optional-chaining expressions must appear within a postfix expression, and they cause the postfix expression to be evaluated in a special way. If the value of the optional-chaining expression is nil, all of the other operations in the postfix expression are ignored and the entire postfix expression evaluates to nil. If the value of the optional-chaining expression isn’t nil, the value of the optional-chaining expression is unwrapped and used to evaluate the rest of the postfix expression. In either case, the value of the postfix expression is still of an optional type.
+オプショナルチェーン式は後置式内に現れる必要があり、後置式を特別な方法で評価させます。オプショナルチェーン式の値がnilの場合、後置式の他のすべての操作は無視され、後置式全体がnilと評価されます。オプショナルチェーン式の値がnilでない場合、オプショナルチェーン式の値はアンラップされ、後置式の残りを評価するために使用されます。いずれの場合も、後置式の値は依然としてオプショナル型です。
 
-If a postfix expression that contains an optional-chaining expression is nested inside other postfix expressions, only the outermost expression returns an optional type. In the example below, when c isn’t nil, its value is unwrapped and used to evaluate .property, the value of which is used to evaluate .performAction(). The entire expression c?.property.performAction() has a value of an optional type.
+オプショナルチェーン式を含む後置式が他の後置式内にネストされている場合、最も外側の式のみがオプショナル型を返します。以下の例では、cがnilでない場合、その値はアンラップされ、.propertyを評価するために使用され、その値が.performAction()を評価するために使用されます。式全体c?.property.performAction()はオプショナル型の値を持ちます。
 
 ```swift
 var c: SomeClass?
 var result: Bool? = c?.property.performAction()
 ```
 
-The following example shows the behavior of the example above without using optional chaining.
+以下の例は、オプショナルチェーンを使用せずに上記の例の動作を示しています。
 
 ```swift
 var result: Bool?
@@ -1346,24 +1371,24 @@ if let unwrappedC = c {
 }
 ```
 
-The unwrapped value of an optional-chaining expression can be modified, either by mutating the value itself, or by assigning to one of the value’s members. If the value of the optional-chaining expression is nil, the expression on the right-hand side of the assignment operator isn’t evaluated. For example:
+オプショナルチェーン式のアンラップされた値は、値自体を変更するか、値のメンバーに代入することで変更できます。オプショナルチェーン式の値がnilの場合、代入演算子の右側の式は評価されません。例えば：
 
 ```swift
 func someFunctionWithSideEffects() -> Int {
-    return 42  // No actual side effects.
+    return 42  // 実際の副作用はありません。
 }
 var someDictionary = ["a": [1, 2, 3], "b": [10, 20]]
 
 someDictionary["not here"]?[0] = someFunctionWithSideEffects()
-// someFunctionWithSideEffects isn't evaluated
-// someDictionary is still ["a": [1, 2, 3], "b": [10, 20]]
+// someFunctionWithSideEffectsは評価されません
+// someDictionaryは依然として["a": [1, 2, 3], "b": [10, 20]]です
 
 someDictionary["a"]?[0] = someFunctionWithSideEffects()
-// someFunctionWithSideEffects is evaluated and returns 42
-// someDictionary is now ["a": [42, 2, 3], "b": [10, 20]]
+// someFunctionWithSideEffectsは評価され、42を返します
+// someDictionaryは現在["a": [42, 2, 3], "b": [10, 20]]です
 ```
 
-#### Grammar of an optional-chaining expression
+#### オプショナルチェーン式の文法
 
 ```
 optional-chaining-expression → postfix-expression ?
