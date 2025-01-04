@@ -1,46 +1,46 @@
-# Protocols
+# プロトコル
 
-Define requirements that conforming types must implement.
+準拠する型が実装しなければならない要件を定義します。
 
-A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. The protocol can then be adopted by a class, structure, or enumeration to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to conform to that protocol.
+プロトコルは、特定のタスクや機能に適したメソッド、プロパティ、およびその他の要件の設計図を定義します。プロトコルは、クラス、構造体、または列挙型によって採用され、これらの要件の実際の実装を提供できます。プロトコルの要件を満たす型は、そのプロトコルに準拠していると言います。
 
-In addition to specifying requirements that conforming types must implement, you can extend a protocol to implement some of these requirements or to implement additional functionality that conforming types can take advantage of.
+準拠する型が実装しなければならない要件を指定することに加えて、プロトコルを拡張してこれらの要件の一部を実装したり、準拠する型が利用できる追加の機能を実装したりすることもできます。
 
-## Protocol Syntax
+## プロトコルの構文
 
-You define protocols in a very similar way to classes, structures, and enumerations:
+プロトコルは、クラス、構造体、および列挙型と非常に似た方法で定義します。
 
 ```swift
 protocol SomeProtocol {
-    // protocol definition goes here
+    // プロトコルの定義はここに記述します
 }
 ```
 
-Custom types state that they adopt a particular protocol by placing the protocol’s name after the type’s name, separated by a colon, as part of their definition. Multiple protocols can be listed, and are separated by commas:
+カスタム型は、定義の一部として型名の後にコロンで区切ってプロトコル名を配置することで、特定のプロトコルを採用することを示します。複数のプロトコルをリストすることができ、カンマで区切られます。
 
 ```swift
 struct SomeStructure: FirstProtocol, AnotherProtocol {
-    // structure definition goes here
+    // 構造体の定義はここに記述します
 }
 ```
 
-If a class has a superclass, list the superclass name before any protocols it adopts, followed by a comma:
+クラスにスーパークラスがある場合、採用するプロトコルの前にスーパークラス名をリストし、カンマで区切ります。
 
 ```swift
 class SomeClass: SomeSuperclass, FirstProtocol, AnotherProtocol {
-    // class definition goes here
+    // クラスの定義はここに記述します
 }
 ```
 
-> **Note:** Because protocols are types, begin their names with a capital letter (such as `FullyNamed` and `RandomNumberGenerator`) to match the names of other types in Swift (such as `Int`, `String`, and `Double`).
+> **注:** プロトコルは型であるため、他のSwiftの型（`Int`、`String`、`Double`など）の名前と一致するように、名前を大文字で始めます（例：`FullyNamed`、`RandomNumberGenerator`）。
 
-## Property Requirements
+## プロパティ要件
 
-A protocol can require any conforming type to provide an instance property or type property with a particular name and type. The protocol doesn’t specify whether the property should be a stored property or a computed property — it only specifies the required property name and type. The protocol also specifies whether each property must be gettable or gettable and settable.
+プロトコルは、準拠する型が特定の名前と型のインスタンスプロパティまたはタイププロパティを提供することを要求できます。プロトコルは、プロパティが格納プロパティであるべきか計算プロパティであるべきかを指定しません。プロトコルは、必要なプロパティ名と型のみを指定します。また、各プロパティが取得可能であるべきか、取得および設定可能であるべきかも指定します。
 
-If a protocol requires a property to be gettable and settable, that property requirement can’t be fulfilled by a constant stored property or a read-only computed property. If the protocol only requires a property to be gettable, the requirement can be satisfied by any kind of property, and it’s valid for the property to be also settable if this is useful for your own code.
+プロトコルがプロパティを取得および設定可能であることを要求する場合、そのプロパティ要件は定数格納プロパティや読み取り専用計算プロパティでは満たされません。プロトコルがプロパティを取得可能であることのみを要求する場合、その要件は任意の種類のプロパティで満たすことができ、必要に応じてプロパティを設定可能にすることも有効です。
 
-Property requirements are always declared as variable properties, prefixed with the `var` keyword. Gettable and settable properties are indicated by writing `{ get set }` after their type declaration, and gettable properties are indicated by writing `{ get }`.
+プロパティ要件は常に変数プロパティとして宣言され、`var`キーワードで始まります。取得および設定可能なプロパティは、型宣言の後に`{ get set }`と記述し、取得可能なプロパティは`{ get }`と記述します。
 
 ```swift
 protocol SomeProtocol {
@@ -49,7 +49,7 @@ protocol SomeProtocol {
 }
 ```
 
-Always prefix type property requirements with the `static` keyword when you define them in a protocol. This rule pertains even though type property requirements can be prefixed with the `class` or `static` keyword when implemented by a class:
+プロトコルでタイププロパティ要件を定義する場合は、常に`static`キーワードを使用してプレフィックスを付けます。このルールは、クラスによって実装される場合にタイププロパティ要件が`class`または`static`キーワードでプレフィックスされる場合でも適用されます。
 
 ```swift
 protocol AnotherProtocol {
@@ -57,7 +57,7 @@ protocol AnotherProtocol {
 }
 ```
 
-Here’s an example of a protocol with a single instance property requirement:
+ここに、単一のインスタンスプロパティ要件を持つプロトコルの例があります。
 
 ```swift
 protocol FullyNamed {
@@ -65,23 +65,23 @@ protocol FullyNamed {
 }
 ```
 
-The `FullyNamed` protocol requires a conforming type to provide a fully qualified name. The protocol doesn’t specify anything else about the nature of the conforming type — it only specifies that the type must be able to provide a full name for itself. The protocol states that any `FullyNamed` type must have a gettable instance property called `fullName`, which is of type `String`.
+`FullyNamed`プロトコルは、準拠する型が完全な名前を提供することを要求します。プロトコルは、準拠する型の性質について他に何も指定しません。プロトコルは、`FullyNamed`型が`String`型の取得可能なインスタンスプロパティ`fullName`を持つ必要があることを指定します。
 
-Here’s an example of a simple structure that adopts and conforms to the `FullyNamed` protocol:
+ここに、`FullyNamed`プロトコルを採用し、準拠する単純な構造体の例があります。
 
 ```swift
 struct Person: FullyNamed {
     var fullName: String
 }
 let john = Person(fullName: "John Appleseed")
-// john.fullName is "John Appleseed"
+// john.fullNameは"John Appleseed"です
 ```
 
-This example defines a structure called `Person`, which represents a specific named person. It states that it adopts the `FullyNamed` protocol as part of the first line of its definition.
+この例では、特定の名前を持つ人物を表す`Person`という構造体を定義しています。定義の最初の行で`FullyNamed`プロトコルを採用することを示しています。
 
-Each instance of `Person` has a single stored property called `fullName`, which is of type `String`. This matches the single requirement of the `FullyNamed` protocol, and means that `Person` has correctly conformed to the protocol. (Swift reports an error at compile time if a protocol requirement isn’t fulfilled.)
+各`Person`インスタンスには、`String`型の単一の格納プロパティ`fullName`があります。これは`FullyNamed`プロトコルの単一の要件に一致し、`Person`がプロトコルに正しく準拠していることを意味します（プロトコル要件が満たされていない場合、Swiftはコンパイル時にエラーを報告します）。
 
-Here’s a more complex class, which also adopts and conforms to the `FullyNamed` protocol:
+ここに、`FullyNamed`プロトコルを採用し、準拠するより複雑なクラスの例があります。
 
 ```swift
 class Starship: FullyNamed {
@@ -96,16 +96,16 @@ class Starship: FullyNamed {
     }
 }
 var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
-// ncc1701.fullName is "USS Enterprise"
+// ncc1701.fullNameは"USS Enterprise"です
 ```
 
-This class implements the `fullName` property requirement as a computed read-only property for a starship. Each `Starship` class instance stores a mandatory name and an optional prefix. The `fullName` property uses the prefix value if it exists, and prepends it to the beginning of `name` to create a full name for the starship.
+このクラスは、宇宙船のための読み取り専用の計算プロパティとして`fullName`プロパティ要件を実装しています。各`Starship`クラスインスタンスは、必須の名前とオプションのプレフィックスを格納します。`fullName`プロパティは、プレフィックスの値が存在する場合はそれを使用し、名前の先頭に追加して宇宙船の完全な名前を作成します。
 
-## Method Requirements
+## メソッド要件
 
-Protocols can require specific instance methods and type methods to be implemented by conforming types. These methods are written as part of the protocol’s definition in exactly the same way as for normal instance and type methods, but without curly braces or a method body. Variadic parameters are allowed, subject to the same rules as for normal methods. Default values, however, can’t be specified for method parameters within a protocol’s definition.
+プロトコルは、準拠する型が特定のインスタンスメソッドおよびタイプメソッドを実装することを要求できます。これらのメソッドは、通常のインスタンスメソッドおよびタイプメソッドとまったく同じ方法でプロトコルの定義の一部として記述されますが、中括弧やメソッド本体はありません。可変長引数は通常のメソッドと同じルールに従って許可されます。ただし、プロトコルの定義内でメソッドパラメータのデフォルト値を指定することはできません。
 
-As with type property requirements, you always prefix type method requirements with the `static` keyword when they’re defined in a protocol. This is true even though type method requirements are prefixed with the `class` or `static` keyword when implemented by a class:
+タイププロパティ要件と同様に、プロトコルで定義されるタイプメソッド要件には常に`static`キーワードをプレフィックスします。これは、クラスによって実装される場合にタイプメソッド要件が`class`または`static`キーワードでプレフィックスされる場合でも同様です。
 
 ```swift
 protocol SomeProtocol {
@@ -113,7 +113,7 @@ protocol SomeProtocol {
 }
 ```
 
-The following example defines a protocol with a single instance method requirement:
+次の例は、単一のインスタンスメソッド要件を持つプロトコルを定義しています。
 
 ```swift
 protocol RandomNumberGenerator {
@@ -121,11 +121,11 @@ protocol RandomNumberGenerator {
 }
 ```
 
-This protocol, `RandomNumberGenerator`, requires any conforming type to have an instance method called `random`, which returns a `Double` value whenever it’s called. Although it’s not specified as part of the protocol, it’s assumed that this value will be a number from 0.0 up to (but not including) 1.0.
+この`RandomNumberGenerator`プロトコルは、準拠する型が`random`というインスタンスメソッドを持ち、このメソッドが呼び出されるたびに`Double`値を返すことを要求します。プロトコルの一部として指定されていませんが、この値は0.0から1.0未満の数値であると想定されます。
 
-The `RandomNumberGenerator` protocol doesn’t make any assumptions about how each random number will be generated — it simply requires the generator to provide a standard way to generate a new random number.
+`RandomNumberGenerator`プロトコルは、各ランダム数がどのように生成されるかについては何も仮定しません。単に新しいランダム数を生成する標準的な方法を提供することを要求します。
 
-Here’s an implementation of a class that adopts and conforms to the `RandomNumberGenerator` protocol. This class implements a pseudorandom number generator algorithm known as a linear congruential generator:
+ここに、`RandomNumberGenerator`プロトコルを採用し、準拠するクラスの実装例があります。このクラスは、線形合同法として知られる疑似乱数生成アルゴリズムを実装しています。
 
 ```swift
 class LinearCongruentialGenerator: RandomNumberGenerator {
@@ -141,22 +141,22 @@ class LinearCongruentialGenerator: RandomNumberGenerator {
 }
 let generator = LinearCongruentialGenerator()
 print("Here's a random number: \(generator.random())")
-// Prints "Here's a random number: 0.3746499199817101"
+// "Here's a random number: 0.3746499199817101"と表示されます
 print("And another one: \(generator.random())")
-// Prints "And another one: 0.729023776863283"
+// "And another one: 0.729023776863283"と表示されます
 ```
 
-## Mutating Method Requirements
+## 変更メソッドの要件
 
-It’s sometimes necessary for a method to modify (or mutate) the instance it belongs to. For instance methods on value types (that is, structures and enumerations) you place the `mutating` keyword before a method’s `func` keyword to indicate that the method is allowed to modify the instance it belongs to and any properties of that instance. This process is described in [Modifying Value Types from Within Instance Methods](https://docs.swift.org/swift-book/LanguageGuide/Methods.html#ID239).
+メソッドが所属するインスタンスを変更（またはミューテート）する必要がある場合があります。値型（構造体や列挙型）のインスタンスメソッドの場合、メソッドが所属するインスタンスおよびそのインスタンスのプロパティを変更できることを示すために、メソッドの `func` キーワードの前に `mutating` キーワードを置きます。このプロセスについては[インスタンスメソッドからの値型の変更](https://docs.swift.org/swift-book/LanguageGuide/Methods.html#ID239)で説明されています。
 
-If you define a protocol instance method requirement that’s intended to mutate instances of any type that adopts the protocol, mark the method with the `mutating` keyword as part of the protocol’s definition. This enables structures and enumerations to adopt the protocol and satisfy that method requirement.
+プロトコルのインスタンスメソッド要件を定義する際に、そのメソッドがプロトコルを採用する任意の型のインスタンスを変更することを意図している場合は、プロトコルの定義の一部としてメソッドに `mutating` キーワードを付けます。これにより、構造体や列挙型がプロトコルを採用し、そのメソッド要件を満たすことができます。
 
-> **Note:** If you mark a protocol instance method requirement as `mutating`, you don’t need to write the `mutating` keyword when writing an implementation of that method for a class. The `mutating` keyword is only used by structures and enumerations.
+> **注:** プロトコルのインスタンスメソッド要件に `mutating` キーワードを付けた場合、そのメソッドをクラスで実装する際には `mutating` キーワードを記述する必要はありません。`mutating` キーワードは構造体や列挙型でのみ使用されます。
 
-The example below defines a protocol called `Togglable`, which defines a single instance method requirement called `toggle`. As its name suggests, the `toggle()` method is intended to toggle or invert the state of any conforming type, typically by modifying a property of that type.
+以下の例では、`Togglable` というプロトコルを定義しており、単一のインスタンスメソッド要件 `toggle` を定義しています。その名前が示すように、`toggle()` メソッドは、通常、その型のプロパティを変更することによって、任意の準拠型の状態を切り替えまたは反転させることを意図しています。
 
-The `toggle()` method is marked with the `mutating` keyword as part of the `Togglable` protocol definition, to indicate that the method is expected to mutate the state of a conforming instance when it’s called:
+`toggle()` メソッドは、呼び出されたときに準拠インスタンスの状態を変更することが期待されることを示すために、`Togglable` プロトコルの定義の一部として `mutating` キーワードが付けられています：
 
 ```swift
 protocol Togglable {
@@ -164,9 +164,9 @@ protocol Togglable {
 }
 ```
 
-If you implement the `Togglable` protocol for a structure or enumeration, that structure or enumeration can conform to the protocol by providing an implementation of the `toggle()` method that’s also marked as `mutating`.
+構造体や列挙型に対して `Togglable` プロトコルを実装する場合、その構造体や列挙型は `mutating` とマークされた `toggle()` メソッドの実装を提供することでプロトコルに準拠できます。
 
-The example below defines an enumeration called `OnOffSwitch`. This enumeration toggles between two states, indicated by the enumeration cases `on` and `off`. The enumeration’s `toggle` implementation is marked as `mutating`, to match the `Togglable` protocol’s requirements:
+以下の例では、`OnOffSwitch` という列挙型を定義しています。この列挙型は、`on` と `off` の列挙ケースによって示される2つの状態を切り替えます。列挙型の `toggle` 実装は、`Togglable` プロトコルの要件に一致するように `mutating` とマークされています：
 
 ```swift
 enum OnOffSwitch: Togglable {
@@ -182,12 +182,12 @@ enum OnOffSwitch: Togglable {
 }
 var lightSwitch = OnOffSwitch.off
 lightSwitch.toggle()
-// lightSwitch is now equal to .on
+// lightSwitch は現在 .on と等しい
 ```
 
-## Initializer Requirements
+## イニシャライザの要件
 
-Protocols can require specific initializers to be implemented by conforming types. You write these initializers as part of the protocol’s definition in exactly the same way as for normal initializers, but without curly braces or an initializer body:
+プロトコルは、準拠する型によって実装される特定のイニシャライザを要求することができます。これらのイニシャライザは、通常のイニシャライザと同じ方法でプロトコルの定義の一部として記述しますが、波括弧やイニシャライザ本体は含まれません：
 
 ```swift
 protocol SomeProtocol {
@@ -195,25 +195,25 @@ protocol SomeProtocol {
 }
 ```
 
-### Class Implementations of Protocol Initializer Requirements
+### プロトコルイニシャライザ要件のクラス実装
 
-You can implement a protocol initializer requirement on a conforming class as either a designated initializer or a convenience initializer. In both cases, you must mark the initializer implementation with the `required` modifier:
+プロトコルのイニシャライザ要件を準拠するクラスで実装する場合、それを指定イニシャライザまたはコンビニエンスイニシャライザとして実装できます。いずれの場合も、イニシャライザの実装には `required` 修飾子を付ける必要があります：
 
 ```swift
 class SomeClass: SomeProtocol {
     required init(someParameter: Int) {
-        // initializer implementation goes here
+        // イニシャライザの実装がここに入ります
     }
 }
 ```
 
-The use of the `required` modifier ensures that you provide an explicit or inherited implementation of the initializer requirement on all subclasses of the conforming class, such that they also conform to the protocol.
+`required` 修飾子の使用により、準拠するクラスのすべてのサブクラスでイニシャライザ要件の明示的または継承された実装を提供し、それらもプロトコルに準拠することが保証されます。
 
-For more information on required initializers, see [Required Initializers](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html#ID216).
+`required` イニシャライザについての詳細は、[必須イニシャライザ](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html#ID216)を参照してください。
 
-> **Note:** You don’t need to mark protocol initializer implementations with the `required` modifier on classes that are marked with the `final` modifier, because final classes can’t subclassed. For more about the `final` modifier, see [Preventing Overrides](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html#ID199).
+> **注:** `final` 修飾子が付いたクラスでは、プロトコルのイニシャライザ実装に `required` 修飾子を付ける必要はありません。`final` クラスはサブクラス化できないためです。`final` 修飾子についての詳細は、[オーバーライドの防止](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html#ID199)を参照してください。
 
-If a subclass overrides a designated initializer from a superclass, and also implements a matching initializer requirement from a protocol, mark the initializer implementation with both the `required` and `override` modifiers:
+サブクラスがスーパークラスの指定イニシャライザをオーバーライドし、かつプロトコルの一致するイニシャライザ要件を実装する場合、イニシャライザの実装には `required` と `override` の両方の修飾子を付けます：
 
 ```swift
 protocol SomeProtocol {
@@ -222,41 +222,41 @@ protocol SomeProtocol {
 
 class SomeSuperClass {
     init() {
-        // initializer implementation goes here
+        // イニシャライザの実装がここに入ります
     }
 }
 
 class SomeSubClass: SomeSuperClass, SomeProtocol {
-    // "required" from SomeProtocol conformance; "override" from SomeSuperClass
+    // SomeProtocol 準拠のための "required"; SomeSuperClass からの "override"
     required override init() {
-        // initializer implementation goes here
+        // イニシャライザの実装がここに入ります
     }
 }
 ```
 
-### Failable Initializer Requirements
+### 失敗可能なイニシャライザの要件
 
-Protocols can define failable initializer requirements for conforming types, as defined in [Failable Initializers](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html#ID222).
+プロトコルは、準拠する型に対して失敗可能なイニシャライザ要件を定義することができます。これは[失敗可能なイニシャライザ](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html#ID222)で定義されています。
 
-A failable initializer requirement can be satisfied by a failable or nonfailable initializer on a conforming type. A nonfailable initializer requirement can be satisfied by a nonfailable initializer or an implicitly unwrapped failable initializer.
+失敗可能なイニシャライザ要件は、準拠する型の失敗可能または非失敗可能なイニシャライザによって満たすことができます。非失敗可能なイニシャライザ要件は、非失敗可能なイニシャライザまたは暗黙的にアンラップされた失敗可能なイニシャライザによって満たすことができます。
 
-## Protocols as Types
+## 型としてのプロトコル
 
-Protocols don’t actually implement any functionality themselves. Regardless, you can use a protocol as a type in your code.
+プロトコル自体は実際には機能を実装しません。それにもかかわらず、コード内でプロトコルを型として使用することができます。
 
-The most common way to use a protocol as a type is to use a protocol as a generic constraint. Code with generic constraints can work with any type that conforms to the protocol, and the specific type is chosen by the code that uses the API. For example, when you call a function that takes an argument and that argument’s type is generic, the caller chooses the type.
+プロトコルを型として使用する最も一般的な方法は、プロトコルをジェネリック制約として使用することです。ジェネリック制約を持つコードは、プロトコルに準拠する任意の型で動作し、具体的な型はAPIを使用するコードによって選択されます。たとえば、引数を取り、その引数の型がジェネリックである関数を呼び出すとき、呼び出し側が型を選択します。
 
-Code with an opaque type works with some type that conforms to the protocol. The underlying type is known at compile time, and the API implementation chooses that type, but that type’s identity is hidden from clients of the API. Using an opaque type lets you prevent implementation details of an API from leaking through the layer of abstraction — for example, by hiding the specific return type from a function, and only guaranteeing that the value conforms to a given protocol.
+不透明な型を持つコードは、プロトコルに準拠するある型で動作します。基になる型はコンパイル時に知られており、APIの実装がその型を選択しますが、その型の識別はAPIのクライアントから隠されています。不透明な型を使用すると、関数からの具体的な戻り値の型を隠し、値が特定のプロトコルに準拠していることだけを保証することで、抽象化の層を通じてAPIの実装の詳細が漏れるのを防ぐことができます。
 
-Code with a boxed protocol type works with any type, chosen at runtime, that conforms to the protocol. To support this runtime flexibility, Swift adds a level of indirection when necessary — known as a box, which has a performance cost. Because of this flexibility, Swift doesn’t know the underlying type at compile time, which means you can access only the members that are required by the protocol. Accessing any other APIs on the underlying type requires casting at runtime.
+ボックス化されたプロトコル型を持つコードは、実行時に選択されたプロトコルに準拠する任意の型で動作します。この実行時の柔軟性をサポートするために、Swiftは必要に応じて間接参照のレベルを追加します。これをボックスと呼び、パフォーマンスコストがかかります。この柔軟性のため、Swiftはコンパイル時に基になる型を知ることができず、プロトコルによって要求されるメンバーのみアクセスできます。基になる型の他のAPIにアクセスするには、実行時にキャストが必要です。
 
-For information about using protocols as generic constraints, see [Generics](https://docs.swift.org/swift-book/LanguageGuide/Generics.html). For information about opaque types, and boxed protocol types, see [Opaque and Boxed Protocol Types](https://docs.swift.org/swift-book/LanguageGuide/OpaqueTypes.html).
+ジェネリック制約としてプロトコルを使用する方法については、[ジェネリクス](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)を参照してください。不透明な型とボックス化されたプロトコル型については、[不透明型とボックス化されたプロトコル型](https://docs.swift.org/swift-book/LanguageGuide/OpaqueTypes.html)を参照してください。
 
-## Delegation
+## デリゲーション
 
-Delegation is a design pattern that enables a class or structure to hand off (or delegate) some of its responsibilities to an instance of another type. This design pattern is implemented by defining a protocol that encapsulates the delegated responsibilities, such that a conforming type (known as a delegate) is guaranteed to provide the functionality that has been delegated. Delegation can be used to respond to a particular action, or to retrieve data from an external source without needing to know the underlying type of that source.
+デリゲーションは、クラスや構造体がその責任の一部を別の型のインスタンスに引き渡す（または委任する）ことを可能にするデザインパターンです。このデザインパターンは、委任された責任をカプセル化するプロトコルを定義することによって実装され、準拠する型（デリゲートと呼ばれる）が委任された機能を提供することが保証されます。デリゲーションは、特定のアクションに応答するため、または外部ソースからデータを取得するために使用され、そのソースの基礎となる型を知る必要はありません。
 
-The example below defines a dice game and a nested protocol for a delegate that tracks the game’s progress:
+以下の例では、サイコロゲームを定義し、ゲームの進行を追跡するデリゲートのためのネストされたプロトコルを定義しています：
 
 ```swift
 class DiceGame {
@@ -296,24 +296,24 @@ class DiceGame {
 }
 ```
 
-The `DiceGame` class implements a game where each player takes a turn rolling dice, and the player who rolls the highest number wins the round. It uses a linear congruential generator from the example earlier in the chapter, to generate random numbers for dice rolls.
+`DiceGame`クラスは、各プレイヤーがサイコロを振り、最も高い数字を出したプレイヤーがラウンドに勝つゲームを実装しています。これは、サイコロの目を生成するために、章の前半で紹介した線形合同法ジェネレータを使用しています。
 
-The `DiceGame.Delegate` protocol can be adopted to track the progress of a dice game. Because the `DiceGame.Delegate` protocol is always used in the context of a dice game, it’s nested inside of the `DiceGame` class. Protocols can be nested inside of type declarations like structures and classes, as long as the outer declaration isn’t generic. For information about nesting types, see [Nested Types](https://docs.swift.org/swift-book/LanguageGuide/NestedTypes.html).
+`DiceGame.Delegate`プロトコルは、サイコロゲームの進行を追跡するために採用できます。`DiceGame.Delegate`プロトコルは常にサイコロゲームの文脈で使用されるため、`DiceGame`クラスの内部にネストされています。プロトコルは、外部の宣言がジェネリックでない限り、構造体やクラスのような型宣言の内部にネストできます。型のネストに関する情報は、[ネストされた型](https://docs.swift.org/swift-book/LanguageGuide/NestedTypes.html)を参照してください。
 
-To prevent strong reference cycles, delegates are declared as weak references. For information about weak references, see [Strong Reference Cycles Between Class Instances](https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html#ID51). Marking the protocol as class-only lets the `DiceGame` class declare that its delegate must use a weak reference. A class-only protocol is marked by its inheritance from `AnyObject`, as discussed in [Class-Only Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#ID276).
+強い参照サイクルを防ぐために、デリゲートは弱参照として宣言されます。弱参照に関する情報は、[クラスインスタンス間の強い参照サイクル](https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html#ID51)を参照してください。プロトコルをクラス専用にすることで、`DiceGame`クラスはそのデリゲートが弱参照を使用する必要があることを宣言できます。クラス専用のプロトコルは、[クラス専用プロトコル](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#ID276)で説明されているように、`AnyObject`から継承することでマークされます。
 
-`DiceGame.Delegate` provides three methods for tracking the progress of a game. These three methods are incorporated into the game logic in the `play(rounds:)` method above. The `DiceGame` class calls its delegate methods when a new game starts, a new turn begins, or the game ends.
+`DiceGame.Delegate`は、ゲームの進行を追跡するための3つのメソッドを提供します。これらの3つのメソッドは、上記の`play(rounds:)`メソッドのゲームロジックに組み込まれています。`DiceGame`クラスは、新しいゲームが開始されたとき、新しいターンが始まったとき、またはゲームが終了したときにデリゲートメソッドを呼び出します。
 
-Because the `delegate` property is an optional `DiceGame.Delegate`, the `play(rounds:)` method uses optional chaining each time it calls a method on the delegate, as discussed in [Optional Chaining](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html). If the `delegate` property is `nil`, these delegate calls are ignored. If the `delegate` property is non-`nil`, the delegate methods are called, and are passed the `DiceGame` instance as a parameter.
+`delegate`プロパティはオプショナルな`DiceGame.Delegate`であるため、`play(rounds:)`メソッドはデリゲートのメソッドを呼び出すたびにオプショナルチェーンを使用します。オプショナルチェーンに関する情報は、[オプショナルチェーン](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html)を参照してください。`delegate`プロパティが`nil`の場合、これらのデリゲート呼び出しは無視されます。`delegate`プロパティが`nil`でない場合、デリゲートメソッドが呼び出され、`DiceGame`インスタンスがパラメータとして渡されます。
 
-This next example shows a class called `DiceGameTracker`, which adopts the `DiceGame.Delegate` protocol:
+次の例では、`DiceGame.Delegate`プロトコルを採用する`DiceGameTracker`クラスを示しています：
 
 ```swift
 class DiceGameTracker: DiceGame.Delegate {
     var playerScore1 = 0
     var playerScore2 = 0
     func gameDidStart(_ game: DiceGame) {
-        print("Started a new game")
+        print("新しいゲームが始まりました")
         playerScore1 = 0
         playerScore2 = 0
     }
@@ -321,48 +321,48 @@ class DiceGameTracker: DiceGame.Delegate {
         switch winner {
             case 1:
                 playerScore1 += 1
-                print("Player 1 won round \(round)")
+                print("プレイヤー1がラウンド\(round)に勝ちました")
             case 2: playerScore2 += 1
-                print("Player 2 won round \(round)")
+                print("プレイヤー2がラウンド\(round)に勝ちました")
             default:
-                print("The round was a draw")
+                print("ラウンドは引き分けでした")
         }
     }
     func gameDidEnd(_ game: DiceGame) {
         if playerScore1 == playerScore2 {
-            print("The game ended in a draw.")
+            print("ゲームは引き分けに終わりました。")
         } else if playerScore1 > playerScore2 {
-            print("Player 1 won!")
+            print("プレイヤー1が勝ちました！")
         } else {
-            print("Player 2 won!")
+            print("プレイヤー2が勝ちました！")
         }
     }
 }
 ```
 
-The `DiceGameTracker` class implements all three methods that are required by the `DiceGame.Delegate` protocol. It uses these methods to zero out both players’ scores at the start of a new game, to update their scores at the end of each round, and to announce a winner at the end of the game.
+`DiceGameTracker`クラスは、`DiceGame.Delegate`プロトコルで要求される3つのメソッドすべてを実装しています。これらのメソッドを使用して、新しいゲームの開始時に両方のプレイヤーのスコアをゼロにし、各ラウンドの終了時にスコアを更新し、ゲームの終了時に勝者を発表します。
 
-Here’s how `DiceGame` and `DiceGameTracker` look in action:
+`DiceGame`と`DiceGameTracker`がどのように動作するかを示します：
 
 ```swift
 let tracker = DiceGameTracker()
 let game = DiceGame(sides: 6)
 game.delegate = tracker
 game.play(rounds: 3)
-// Started a new game
-// Player 2 won round 1
-// Player 2 won round 2
-// Player 1 won round 3
-// Player 2 won!
+// 新しいゲームが始まりました
+// プレイヤー2がラウンド1に勝ちました
+// プレイヤー2がラウンド2に勝ちました
+// プレイヤー1がラウンド3に勝ちました
+// プレイヤー2が勝ちました！
 ```
 
-## Adding Protocol Conformance with an Extension
+## 拡張によるプロトコル準拠の追加
 
-You can extend an existing type to adopt and conform to a new protocol, even if you don’t have access to the source code for the existing type. Extensions can add new properties, methods, and subscripts to an existing type, and are therefore able to add any requirements that a protocol may demand. For more about extensions, see [Extensions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html).
+既存の型を拡張して新しいプロトコルを採用し、準拠させることができます。既存の型のソースコードにアクセスできなくても可能です。拡張は、既存の型に新しいプロパティ、メソッド、およびサブスクリプトを追加できるため、プロトコルが要求する要件を追加することができます。拡張に関する詳細は、[拡張](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)を参照してください。
 
-> **Note:** Existing instances of a type automatically adopt and conform to a protocol when that conformance is added to the instance’s type in an extension.
+> **注:** 型の既存のインスタンスは、その型に拡張でプロトコル準拠が追加されると、自動的にそのプロトコルを採用し、準拠します。
 
-For example, this protocol, called `TextRepresentable`, can be implemented by any type that has a way to be represented as text. This might be a description of itself, or a text version of its current state:
+例えば、`TextRepresentable`というプロトコルは、テキストとして表現される方法を持つ任意の型によって実装できます。これは、自身の説明や現在の状態のテキストバージョンかもしれません：
 
 ```swift
 protocol TextRepresentable {
@@ -370,7 +370,7 @@ protocol TextRepresentable {
 }
 ```
 
-The `Dice` class from above can be extended to adopt and conform to `TextRepresentable`:
+上記の`Dice`クラスは、`TextRepresentable`を採用し、準拠するように拡張できます：
 
 ```swift
 extension Dice: TextRepresentable {
@@ -380,17 +380,17 @@ extension Dice: TextRepresentable {
 }
 ```
 
-This extension adopts the new protocol in exactly the same way as if `Dice` had provided it in its original implementation. The protocol name is provided after the type name, separated by a colon, and an implementation of all requirements of the protocol is provided within the extension’s curly braces.
+この拡張は、`Dice`が元の実装で提供したのと同じ方法で新しいプロトコルを採用します。プロトコル名は型名の後にコロンで区切って提供され、プロトコルのすべての要件の実装が拡張の中括弧内に提供されます。
 
-Any `Dice` instance can now be treated as `TextRepresentable`:
+任意の`Dice`インスタンスは、今や`TextRepresentable`として扱うことができます：
 
 ```swift
 let d12 = Dice(sides: 12, generator: LinearCongruentialGenerator())
 print(d12.textualDescription)
-// Prints "A 12-sided dice"
+// "A 12-sided dice"と表示されます
 ```
 
-Similarly, the `SnakesAndLadders` game class can be extended to adopt and conform to the `TextRepresentable` protocol:
+同様に、`SnakesAndLadders`ゲームクラスも`TextRepresentable`プロトコルを採用し、準拠するように拡張できます：
 
 ```swift
 extension SnakesAndLadders: TextRepresentable {
@@ -399,14 +399,14 @@ extension SnakesAndLadders: TextRepresentable {
     }
 }
 print(game.textualDescription)
-// Prints "A game of Snakes and Ladders with 25 squares"
+// "A game of Snakes and Ladders with 25 squares"と表示されます
 ```
 
-## Conditionally Conforming to a Protocol
+## プロトコルへの条件付き準拠
 
-A generic type may be able to satisfy the requirements of a protocol only under certain conditions, such as when the type’s generic parameter conforms to the protocol. You can make a generic type conditionally conform to a protocol by listing constraints when extending the type. Write these constraints after the name of the protocol you’re adopting by writing a generic where clause. For more about generic where clauses, see [Generic Where Clauses](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID184).
+ジェネリック型は、型のジェネリックパラメータがプロトコルに準拠している場合など、特定の条件下でのみプロトコルの要件を満たすことができます。ジェネリック型を条件付きでプロトコルに準拠させるには、型を拡張する際に制約をリストします。これらの制約は、採用するプロトコルの名前の後にジェネリックwhere句を書いて記述します。ジェネリックwhere句の詳細については、[ジェネリックwhere句](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID184)を参照してください。
 
-The following extension makes `Array` instances conform to the `TextRepresentable` protocol whenever they store elements of a type that conforms to `TextRepresentable`.
+次の拡張は、`Array`インスタンスが`TextRepresentable`に準拠する要素を格納している場合に、`TextRepresentable`プロトコルに準拠するようにします。
 
 ```swift
 extension Array: TextRepresentable where Element: TextRepresentable {
@@ -420,12 +420,12 @@ extension Array: TextRepresentable where Element: TextRepresentable {
 ```swift
 let myDice = [d6, d12]
 print(myDice.textualDescription)
-// Prints "[A 6-sided dice, A 12-sided dice]"
+// "[A 6-sided dice, A 12-sided dice]"と表示されます
 ```
 
-## Declaring Protocol Adoption with an Extension
+## 拡張を使用したプロトコルの採用宣言
 
-If a type already conforms to all of the requirements of a protocol, but hasn’t yet stated that it adopts that protocol, you can make it adopt the protocol with an empty extension:
+型がすでにプロトコルのすべての要件を満たしているが、まだそのプロトコルを採用していると宣言していない場合、空の拡張を使用してプロトコルを採用させることができます。
 
 ```swift
 struct Hamster {
@@ -437,30 +437,30 @@ struct Hamster {
 extension Hamster: TextRepresentable {}
 ```
 
-Instances of `Hamster` can now be used wherever `TextRepresentable` is the required type:
+`Hamster`のインスタンスは、`TextRepresentable`が必要な場所で使用できるようになりました。
 
 ```swift
 let simonTheHamster = Hamster(name: "Simon")
 let somethingTextRepresentable: TextRepresentable = simonTheHamster
 print(somethingTextRepresentable.textualDescription)
-// Prints "A hamster named Simon"
+// "A hamster named Simon"と表示されます
 ```
 
-> **Note:** Types don’t automatically adopt a protocol just by satisfying its requirements. They must always explicitly declare their adoption of the protocol.
+> **注:** 型は、その要件を満たしているだけでは自動的にプロトコルを採用しません。常にプロトコルの採用を明示的に宣言する必要があります。
 
-## Adopting a Protocol Using a Synthesized Implementation
+## 合成された実装を使用したプロトコルの採用
 
-Swift can automatically provide the protocol conformance for `Equatable`, `Hashable`, and `Comparable` in many simple cases. Using this synthesized implementation means you don’t have to write repetitive boilerplate code to implement the protocol requirements yourself.
+Swiftは、多くの単純なケースで`Equatable`、`Hashable`、および`Comparable`のプロトコル準拠を自動的に提供できます。この合成された実装を使用すると、プロトコルの要件を自分で実装するための繰り返しのボイラープレートコードを書く必要がなくなります。
 
-Swift provides a synthesized implementation of `Equatable` for the following kinds of custom types:
+Swiftは、次の種類のカスタム型に対して`Equatable`の合成された実装を提供します。
 
-- Structures that have only stored properties that conform to the `Equatable` protocol
-- Enumerations that have only associated types that conform to the `Equatable` protocol
-- Enumerations that have no associated types
+- `Equatable`プロトコルに準拠するストアドプロパティのみを持つ構造体
+- `Equatable`プロトコルに準拠する関連型のみを持つ列挙型
+- 関連型を持たない列挙型
 
-To receive a synthesized implementation of `==`, declare conformance to `Equatable` in the file that contains the original declaration, without implementing an `==` operator yourself. The `Equatable` protocol provides a default implementation of `!=`.
+`==`の合成された実装を受け取るには、元の宣言を含むファイルで`Equatable`に準拠することを宣言し、自分で`==`演算子を実装しないでください。`Equatable`プロトコルは`!=`のデフォルト実装を提供します。
 
-The example below defines a `Vector3D` structure for a three-dimensional position vector (`x`, `y`, `z`), similar to the `Vector2D` structure. Because the `x`, `y`, and `z` properties are all of an `Equatable` type, `Vector3D` receives synthesized implementations of the equivalence operators.
+以下の例は、`Vector2D`構造体に似た三次元位置ベクトル（`x`、`y`、`z`）の`Vector3D`構造体を定義しています。`x`、`y`、および`z`プロパティがすべて`Equatable`型であるため、`Vector3D`は等価演算子の合成された実装を受け取ります。
 
 ```swift
 struct Vector3D: Equatable {
@@ -470,22 +470,22 @@ struct Vector3D: Equatable {
 let twoThreeFour = Vector3D(x: 2.0, y: 3.0, z: 4.0)
 let anotherTwoThreeFour = Vector3D(x: 2.0, y: 3.0, z: 4.0)
 if twoThreeFour == anotherTwoThreeFour {
-    print("These two vectors are also equivalent.")
+    print("これらの2つのベクトルも同等です。")
 }
-// Prints "These two vectors are also equivalent."
+// "これらの2つのベクトルも同等です。"と表示されます
 ```
 
-Swift provides a synthesized implementation of `Hashable` for the following kinds of custom types:
+Swiftは、次の種類のカスタム型に対して`Hashable`の合成された実装を提供します。
 
-- Structures that have only stored properties that conform to the `Hashable` protocol
-- Enumerations that have only associated types that conform to the `Hashable` protocol
-- Enumerations that have no associated types
+- `Hashable`プロトコルに準拠するストアドプロパティのみを持つ構造体
+- `Hashable`プロトコルに準拠する関連型のみを持つ列挙型
+- 関連型を持たない列挙型
 
-To receive a synthesized implementation of `hash(into:)`, declare conformance to `Hashable` in the file that contains the original declaration, without implementing a `hash(into:)` method yourself.
+`hash(into:)`の合成された実装を受け取るには、元の宣言を含むファイルで`Hashable`に準拠することを宣言し、自分で`hash(into:)`メソッドを実装しないでください。
 
-Swift provides a synthesized implementation of `Comparable` for enumerations that don’t have a raw value. If the enumeration has associated types, they must all conform to the `Comparable` protocol. To receive a synthesized implementation of `<`, declare conformance to `Comparable` in the file that contains the original enumeration declaration, without implementing a `<` operator yourself. The `Comparable` protocol’s default implementation of `<=`, `>`, and `>=` provides the remaining comparison operators.
+Swiftは、列挙型が生の値を持たない場合に`Comparable`の合成された実装を提供します。列挙型に関連型がある場合、それらはすべて`Comparable`プロトコルに準拠している必要があります。`<`の合成された実装を受け取るには、元の列挙型宣言を含むファイルで`Comparable`に準拠することを宣言し、自分で`<`演算子を実装しないでください。`Comparable`プロトコルのデフォルト実装である`<=`、`>`、および`>=`は、残りの比較演算子を提供します。
 
-The example below defines a `SkillLevel` enumeration with cases for beginners, intermediates, and experts. Experts are additionally ranked by the number of stars they have.
+以下の例は、初心者、中級者、および専門家のケースを持つ`SkillLevel`列挙型を定義しています。専門家は、持っている星の数によってさらにランク付けされます。
 
 ```swift
 enum SkillLevel: Comparable {
@@ -498,21 +498,21 @@ var levels = [SkillLevel.intermediate, SkillLevel.beginner,
 for level in levels.sorted() {
     print(level)
 }
-// Prints "beginner"
-// Prints "intermediate"
-// Prints "expert(stars: 3)"
-// Prints "expert(stars: 5)"
+// "beginner"と表示されます
+// "intermediate"と表示されます
+// "expert(stars: 3)"と表示されます
+// "expert(stars: 5)"と表示されます
 ```
 
-## Collections of Protocol Types
+## プロトコル型のコレクション
 
-A protocol can be used as the type to be stored in a collection such as an array or a dictionary, as mentioned in [Protocols as Types](#protocols-as-types). This example creates an array of `TextRepresentable` things:
+プロトコルは、[型としてのプロトコル](#protocols-as-types)で述べたように、配列や辞書などのコレクションに格納する型として使用できます。この例では、`TextRepresentable`なものの配列を作成します。
 
 ```swift
 let things: [TextRepresentable] = [game, d12, simonTheHamster]
 ```
 
-It’s now possible to iterate over the items in the array, and print each item’s textual description:
+配列内のアイテムを反復処理し、各アイテムのテキスト記述を印刷することができます。
 
 ```swift
 for thing in things {
@@ -523,19 +523,19 @@ for thing in things {
 // A hamster named Simon
 ```
 
-Note that the `thing` constant is of type `TextRepresentable`. It’s not of type `Dice`, or `DiceGame`, or `Hamster`, even if the actual instance behind the scenes is of one of those types. Nonetheless, because it’s of type `TextRepresentable`, and anything that’s `TextRepresentable` is known to have a `textualDescription` property, it’s safe to access `thing.textualDescription` each time through the loop.
+`thing`定数は`TextRepresentable`型であることに注意してください。実際のインスタンスが`Dice`、`DiceGame`、または`Hamster`のいずれかの型であっても、`TextRepresentable`型です。それにもかかわらず、`TextRepresentable`型であるため、`TextRepresentable`なものはすべて`textualDescription`プロパティを持っていることが知られているため、ループのたびに`thing.textualDescription`に安全にアクセスできます。
 
-## Protocol Inheritance
+## プロトコルの継承
 
-A protocol can inherit one or more other protocols and can add further requirements on top of the requirements it inherits. The syntax for protocol inheritance is similar to the syntax for class inheritance, but with the option to list multiple inherited protocols, separated by commas:
+プロトコルは他のプロトコルを1つ以上継承し、継承した要件にさらに要件を追加することができます。プロトコル継承の構文はクラス継承の構文に似ていますが、カンマで区切って複数の継承プロトコルをリストするオプションがあります。
 
 ```swift
 protocol InheritingProtocol: SomeProtocol, AnotherProtocol {
-    // protocol definition goes here
+    // プロトコルの定義がここに入ります
 }
 ```
 
-Here’s an example of a protocol that inherits the `TextRepresentable` protocol from above:
+以下は、上記の `TextRepresentable` プロトコルを継承するプロトコルの例です。
 
 ```swift
 protocol PrettyTextRepresentable: TextRepresentable {
@@ -543,9 +543,9 @@ protocol PrettyTextRepresentable: TextRepresentable {
 }
 ```
 
-This example defines a new protocol, `PrettyTextRepresentable`, which inherits from `TextRepresentable`. Anything that adopts `PrettyTextRepresentable` must satisfy all of the requirements enforced by `TextRepresentable`, plus the additional requirements enforced by `PrettyTextRepresentable`. In this example, `PrettyTextRepresentable` adds a single requirement to provide a gettable property called `prettyTextualDescription` that returns a `String`.
+この例では、`PrettyTextRepresentable` という新しいプロトコルを定義しており、`TextRepresentable` を継承しています。`PrettyTextRepresentable` を採用するものはすべて、`TextRepresentable` によって強制されるすべての要件を満たす必要があり、さらに `PrettyTextRepresentable` によって強制される追加の要件も満たす必要があります。この例では、`PrettyTextRepresentable` は `prettyTextualDescription` という名前の取得可能なプロパティを提供するという単一の要件を追加しています。このプロパティは `String` を返します。
 
-The `SnakesAndLadders` class can be extended to adopt and conform to `PrettyTextRepresentable`:
+`SnakesAndLadders` クラスは拡張して `PrettyTextRepresentable` を採用し、準拠することができます。
 
 ```swift
 extension SnakesAndLadders: PrettyTextRepresentable {
@@ -566,41 +566,41 @@ extension SnakesAndLadders: PrettyTextRepresentable {
 }
 ```
 
-This extension states that it adopts the `PrettyTextRepresentable` protocol and provides an implementation of the `prettyTextualDescription` property for the `SnakesAndLadders` type. Anything that’s `PrettyTextRepresentable` must also be `TextRepresentable`, and so the implementation of `prettyTextualDescription` starts by accessing the `textualDescription` property from the `TextRepresentable` protocol to begin an output string. It appends a colon and a line break, and uses this as the start of its pretty text representation. It then iterates through the array of board squares, and appends a geometric shape to represent the contents of each square:
+この拡張は `PrettyTextRepresentable` プロトコルを採用し、`SnakesAndLadders` 型の `prettyTextualDescription` プロパティの実装を提供することを示しています。`PrettyTextRepresentable` であるものはすべて `TextRepresentable` でもある必要があるため、`prettyTextualDescription` の実装は `TextRepresentable` プロトコルから `textualDescription` プロパティにアクセスして出力文字列を開始します。コロンと改行を追加し、これをきれいなテキスト表現の開始として使用します。その後、ボードのマス目の配列を反復処理し、各マス目の内容を表す幾何学的な形を追加します。
 
-- If the square’s value is greater than 0, it’s the base of a ladder, and is represented by `▲`.
-- If the square’s value is less than 0, it’s the head of a snake, and is represented by `▼`.
-- Otherwise, the square’s value is 0, and it’s a “free” square, represented by `○`.
+- マス目の値が0より大きい場合、それははしごの基部であり、`▲` で表されます。
+- マス目の値が0より小さい場合、それはヘビの頭であり、`▼` で表されます。
+- それ以外の場合、マス目の値は0であり、それは「自由な」マス目であり、`○` で表されます。
 
-The `prettyTextualDescription` property can now be used to print a pretty text description of any `SnakesAndLadders` instance:
+`prettyTextualDescription` プロパティを使用して、任意の `SnakesAndLadders` インスタンスのきれいなテキスト説明を印刷できます。
 
 ```swift
 print(game.prettyTextualDescription)
-// A game of Snakes and Ladders with 25 squares:
+// 25マスのすごろくゲーム:
 // ○ ○ ▲ ○ ○ ▲ ○ ○ ▲ ▲ ○ ○ ○ ▼ ○ ○ ○ ○ ▼ ○ ○ ▼ ○ ▼ ○
 ```
 
-## Class-Only Protocols
+## クラス専用プロトコル
 
-You can limit protocol adoption to class types (and not structures or enumerations) by adding the `AnyObject` protocol to a protocol’s inheritance list.
+プロトコルの採用をクラス型に限定し（構造体や列挙型ではなく）、プロトコルの継承リストに `AnyObject` プロトコルを追加することができます。
 
 ```swift
 protocol SomeClassOnlyProtocol: AnyObject, SomeInheritedProtocol {
-    // class-only protocol definition goes here
+    // クラス専用プロトコルの定義がここに入ります
 }
 ```
 
-In the example above, `SomeClassOnlyProtocol` can only be adopted by class types. It’s a compile-time error to write a structure or enumeration definition that tries to adopt `SomeClassOnlyProtocol`.
+上記の例では、`SomeClassOnlyProtocol` はクラス型のみが採用できます。`SomeClassOnlyProtocol` を採用しようとする構造体や列挙型の定義を書くと、コンパイル時エラーになります。
 
-> **Note:** Use a class-only protocol when the behavior defined by that protocol’s requirements assumes or requires that a conforming type has reference semantics rather than value semantics. For more about reference and value semantics, see [Structures and Enumerations Are Value Types](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID88) and [Classes Are Reference Types](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID89).
+> **注:** プロトコルの要件によって定義される動作が、準拠する型が値セマンティクスではなく参照セマンティクスを持つことを前提としている場合、クラス専用プロトコルを使用します。参照セマンティクスと値セマンティクスの詳細については、[構造体と列挙型は値型](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID88)および[クラスは参照型](https://docs.swift.org/swift-book/LanguageGuide/ClassesAndStructures.html#ID89)を参照してください。
 
-## Protocol Composition
+## プロトコルの合成
 
-It can be useful to require a type to conform to multiple protocols at the same time. You can combine multiple protocols into a single requirement with a protocol composition. Protocol compositions behave as if you defined a temporary local protocol that has the combined requirements of all protocols in the composition. Protocol compositions don’t define any new protocol types.
+複数のプロトコルに同時に準拠する型を要求することが有用な場合があります。プロトコル合成を使用して、複数のプロトコルを単一の要件に結合できます。プロトコル合成は、合成内のすべてのプロトコルの結合要件を持つ一時的なローカルプロトコルを定義したかのように振る舞います。プロトコル合成は新しいプロトコル型を定義しません。
 
-Protocol compositions have the form `SomeProtocol & AnotherProtocol`. You can list as many protocols as you need, separating them with ampersands (`&`). In addition to its list of protocols, a protocol composition can also contain one class type, which you can use to specify a required superclass.
+プロトコル合成は `SomeProtocol & AnotherProtocol` の形式を持ちます。必要なだけ多くのプロトコルをリストでき、アンパサンド（`&`）で区切ります。プロトコルのリストに加えて、プロトコル合成には1つのクラス型を含めることもでき、これを使用して必要なスーパークラスを指定できます。
 
-Here’s an example that combines two protocols called `Named` and `Aged` into a single protocol composition requirement on a function parameter:
+以下は、`Named` と `Aged` という2つのプロトコルを関数パラメータの単一のプロトコル合成要件に結合する例です。
 
 ```swift
 protocol Named {
@@ -614,20 +614,20 @@ struct Person: Named, Aged {
     var age: Int
 }
 func wishHappyBirthday(to celebrator: Named & Aged) {
-    print("Happy birthday, \(celebrator.name), you're \(celebrator.age)!")
+    print("お誕生日おめでとう、\(celebrator.name)さん、\(celebrator.age)歳ですね！")
 }
 let birthdayPerson = Person(name: "Malcolm", age: 21)
 wishHappyBirthday(to: birthdayPerson)
-// Prints "Happy birthday, Malcolm, you're 21!"
+// "お誕生日おめでとう、Malcolmさん、21歳ですね！"と印刷されます
 ```
 
-In this example, the `Named` protocol has a single requirement for a gettable `String` property called `name`. The `Aged` protocol has a single requirement for a gettable `Int` property called `age`. Both protocols are adopted by a structure called `Person`.
+この例では、`Named` プロトコルには `name` という名前の取得可能な `String` プロパティの単一の要件があります。`Aged` プロトコルには `age` という名前の取得可能な `Int` プロパティの単一の要件があります。両方のプロトコルは `Person` という構造体によって採用されています。
 
-The example also defines a `wishHappyBirthday(to:)` function. The type of the `celebrator` parameter is `Named & Aged`, which means “any type that conforms to both the `Named` and `Aged` protocols.” It doesn’t matter which specific type is passed to the function, as long as it conforms to both of the required protocols.
+この例では、`wishHappyBirthday(to:)` 関数も定義しています。`celebrator` パラメータの型は `Named & Aged` であり、これは「`Named` と `Aged` の両方のプロトコルに準拠する任意の型」を意味します。関数に渡される具体的な型は関係なく、必要なプロトコルの両方に準拠している限り有効です。
 
-The example then creates a new `Person` instance called `birthdayPerson` and passes this new instance to the `wishHappyBirthday(to:)` function. Because `Person` conforms to both protocols, this call is valid, and the `wishHappyBirthday(to:)` function can print its birthday greeting.
+この例では、新しい `Person` インスタンスを作成し、`birthdayPerson` と呼び、この新しいインスタンスを `wishHappyBirthday(to:)` 関数に渡します。`Person` が両方のプロトコルに準拠しているため、この呼び出しは有効であり、`wishHappyBirthday(to:)` 関数は誕生日の挨拶を印刷できます。
 
-Here’s an example that combines the `Named` protocol from the previous example with a `Location` class:
+以下は、前の例の `Named` プロトコルと `Location` クラスを結合する例です。
 
 ```swift
 class Location {
@@ -646,27 +646,27 @@ class City: Location, Named {
     }
 }
 func beginConcert(in location: Location & Named) {
-    print("Hello, \(location.name)!")
+    print("こんにちは、\(location.name)！")
 }
 
 let seattle = City(name: "Seattle", latitude: 47.6, longitude: -122.3)
 beginConcert(in: seattle)
-// Prints "Hello, Seattle!"
+// "こんにちは、Seattle！"と印刷されます
 ```
 
-The `beginConcert(in:)` function takes a parameter of type `Location & Named`, which means “any type that’s a subclass of `Location` and that conforms to the `Named` protocol.” In this case, `City` satisfies both requirements.
+`beginConcert(in:)` 関数は `Location & Named` 型のパラメータを取ります。これは「`Location` のサブクラスであり、`Named` プロトコルに準拠する任意の型」を意味します。この場合、`City` は両方の要件を満たしています。
 
-Passing `birthdayPerson` to the `beginConcert(in:)` function is invalid because `Person` isn’t a subclass of `Location`. Likewise, if you made a subclass of `Location` that didn’t conform to the `Named` protocol, calling `beginConcert(in:)` with an instance of that type is also invalid.
+`birthdayPerson` を `beginConcert(in:)` 関数に渡すことは無効です。なぜなら、`Person` は `Location` のサブクラスではないからです。同様に、`Named` プロトコルに準拠しない `Location` のサブクラスを作成した場合、その型のインスタンスを `beginConcert(in:)` に渡すことも無効です。
 
-## Checking for Protocol Conformance
+## プロトコル準拠の確認
 
-You can use the `is` and `as` operators described in [Type Casting](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html) to check for protocol conformance, and to cast to a specific protocol. Checking for and casting to a protocol follows exactly the same syntax as checking for and casting to a type:
+プロトコル準拠を確認し、特定のプロトコルにキャストするには、[型キャスト](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html)で説明されている `is` および `as` 演算子を使用できます。プロトコルの確認とキャストは、型の確認とキャストとまったく同じ構文に従います。
 
-- The `is` operator returns `true` if an instance conforms to a protocol and returns `false` if it doesn’t.
-- The `as?` version of the downcast operator returns an optional value of the protocol’s type, and this value is `nil` if the instance doesn’t conform to that protocol.
-- The `as!` version of the downcast operator forces the downcast to the protocol type and triggers a runtime error if the downcast doesn’t succeed.
+- `is` 演算子は、インスタンスがプロトコルに準拠している場合は `true` を返し、準拠していない場合は `false` を返します。
+- ダウンキャスト演算子の `as?` バージョンは、プロトコルの型のオプショナル値を返し、この値はインスタンスがそのプロトコルに準拠していない場合は `nil` になります。
+- ダウンキャスト演算子の `as!` バージョンは、プロトコル型へのダウンキャストを強制し、ダウンキャストが成功しない場合はランタイムエラーを引き起こします。
 
-This example defines a protocol called `HasArea`, with a single property requirement of a gettable `Double` property called `area`:
+この例では、`HasArea` というプロトコルを定義し、取得可能な `Double` プロパティである `area` という単一のプロパティ要件を持ちます。
 
 ```swift
 protocol HasArea {
@@ -674,7 +674,7 @@ protocol HasArea {
 }
 ```
 
-Here are two classes, `Circle` and `Country`, both of which conform to the `HasArea` protocol:
+ここに、`HasArea` プロトコルに準拠する `Circle` と `Country` という2つのクラスがあります。
 
 ```swift
 class Circle: HasArea {
@@ -689,9 +689,9 @@ class Country: HasArea {
 }
 ```
 
-The `Circle` class implements the `area` property requirement as a computed property, based on a stored `radius` property. The `Country` class implements the `area` requirement directly as a stored property. Both classes correctly conform to the `HasArea` protocol.
+`Circle` クラスは、格納された `radius` プロパティに基づいて、計算プロパティとして `area` プロパティ要件を実装します。`Country` クラスは、格納プロパティとして `area` 要件を直接実装します。両方のクラスは `HasArea` プロトコルに正しく準拠しています。
 
-Here’s a class called `Animal`, which doesn’t conform to the `HasArea` protocol:
+ここに、`HasArea` プロトコルに準拠していない `Animal` というクラスがあります。
 
 ```swift
 class Animal {
@@ -700,7 +700,7 @@ class Animal {
 }
 ```
 
-The `Circle`, `Country` and `Animal` classes don’t have a shared base class. Nonetheless, they’re all classes, and so instances of all three types can be used to initialize an array that stores values of type `AnyObject`:
+`Circle`、`Country`、および `Animal` クラスは共通の基底クラスを持っていません。それにもかかわらず、これらはすべてクラスであるため、3つのタイプすべてのインスタンスを `AnyObject` 型の値を格納する配列を初期化するために使用できます。
 
 ```swift
 let objects: [AnyObject] = [
@@ -710,9 +710,9 @@ let objects: [AnyObject] = [
 ]
 ```
 
-The `objects` array is initialized with an array literal containing a `Circle` instance with a radius of 2 units; a `Country` instance initialized with the surface area of the United Kingdom in square kilometers; and an `Animal` instance with four legs.
+`objects` 配列は、半径2単位の `Circle` インスタンス、イギリスの面積を平方キロメートルで初期化した `Country` インスタンス、および4本の脚を持つ `Animal` インスタンスを含む配列リテラルで初期化されます。
 
-The `objects` array can now be iterated, and each object in the array can be checked to see if it conforms to the `HasArea` protocol:
+`objects` 配列を反復処理し、配列内の各オブジェクトが `HasArea` プロトコルに準拠しているかどうかを確認できます。
 
 ```swift
 for object in objects {
@@ -727,19 +727,19 @@ for object in objects {
 // Something that doesn't have an area
 ```
 
-Whenever an object in the array conforms to the `HasArea` protocol, the optional value returned by the `as?` operator is unwrapped with optional binding into a constant called `objectWithArea`. The `objectWithArea` constant is known to be of type `HasArea`, and so its `area` property can be accessed and printed in a type-safe way.
+配列内のオブジェクトが `HasArea` プロトコルに準拠している場合、`as?` 演算子によって返されるオプショナル値は、オプショナルバインディングを使用して `objectWithArea` という定数にアンラップされます。`objectWithArea` 定数は `HasArea` 型であることがわかっているため、その `area` プロパティに型安全な方法でアクセスして印刷できます。
 
-Note that the underlying objects aren’t changed by the casting process. They continue to be a `Circle`, a `Country` and an `Animal`. However, at the point that they’re stored in the `objectWithArea` constant, they’re only known to be of type `HasArea`, and so only their `area` property can be accessed.
+キャスティングプロセスによって基になるオブジェクトは変更されないことに注意してください。これらは引き続き `Circle`、`Country`、および `Animal` です。ただし、`objectWithArea` 定数に格納される時点では、`HasArea` 型であることしか知られていないため、その `area` プロパティにのみアクセスできます。
 
-## Optional Protocol Requirements
+## プロトコルのオプション要件
 
-You can define optional requirements for protocols. These requirements don’t have to be implemented by types that conform to the protocol. Optional requirements are prefixed by the `optional` modifier as part of the protocol’s definition. Optional requirements are available so that you can write code that interoperates with Objective-C. Both the protocol and the optional requirement must be marked with the `@objc` attribute. Note that `@objc` protocols can be adopted only by classes, not by structures or enumerations.
+プロトコルにオプションの要件を定義することができます。これらの要件は、プロトコルに準拠する型によって実装される必要はありません。オプションの要件は、プロトコルの定義の一部として `optional` 修飾子を付けて定義されます。オプションの要件は、Objective-Cと相互運用するコードを書くために利用できます。プロトコルとオプションの要件の両方に `@objc` 属性を付ける必要があります。`@objc` プロトコルはクラスによってのみ採用され、構造体や列挙型によっては採用されません。
 
-When you use a method or property in an optional requirement, its type automatically becomes an optional. For example, a method of type `(Int) -> String` becomes `((Int) -> String)?`. Note that the entire function type is wrapped in the optional, not the method’s return value.
+オプションの要件でメソッドやプロパティを使用する場合、その型は自動的にオプションになります。例えば、型 `(Int) -> String` のメソッドは `((Int) -> String)?` になります。メソッドの戻り値ではなく、関数型全体がオプションでラップされることに注意してください。
 
-An optional protocol requirement can be called with optional chaining, to account for the possibility that the requirement was not implemented by a type that conforms to the protocol. You check for an implementation of an optional method by writing a question mark after the name of the method when it’s called, such as `someOptionalMethod?(someArgument)`. For information on optional chaining, see [Optional Chaining](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html).
+オプションのプロトコル要件は、プロトコルに準拠する型が要件を実装していない可能性を考慮して、オプションチェーンを使用して呼び出すことができます。オプションのメソッドの実装を確認するには、呼び出すときにメソッド名の後に疑問符を付けて `someOptionalMethod?(someArgument)` のように書きます。オプションチェーンの詳細については、[オプションチェーン](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html)を参照してください。
 
-The following example defines an integer-counting class called `Counter`, which uses an external data source to provide its increment amount. This data source is defined by the `CounterDataSource` protocol, which has two optional requirements:
+次の例では、`Counter` という整数カウントクラスを定義し、外部データソースを使用してインクリメント量を提供します。このデータソースは、2つのオプション要件を持つ `CounterDataSource` プロトコルによって定義されます。
 
 ```swift
 @objc protocol CounterDataSource {
@@ -748,11 +748,11 @@ The following example defines an integer-counting class called `Counter`, which 
 }
 ```
 
-The `CounterDataSource` protocol defines an optional method requirement called `increment(forCount:)` and an optional property requirement called `fixedIncrement`. These requirements define two different ways for data sources to provide an appropriate increment amount for a `Counter` instance.
+`CounterDataSource` プロトコルは、`increment(forCount:)` というオプションのメソッド要件と `fixedIncrement` というオプションのプロパティ要件を定義しています。これらの要件は、`Counter` インスタンスに適切なインクリメント量を提供するための2つの異なる方法を定義しています。
 
-> **Note:** Strictly speaking, you can write a custom class that conforms to `CounterDataSource` without implementing either protocol requirement. They’re both optional, after all. Although technically allowed, this wouldn’t make for a very good data source.
+> **注:** 厳密に言えば、どちらのプロトコル要件も実装せずに `CounterDataSource` に準拠するカスタムクラスを書くことができます。どちらもオプションだからです。技術的には可能ですが、これではあまり良いデータソースにはなりません。
 
-The `Counter` class, defined below, has an optional `dataSource` property of type `CounterDataSource?`:
+以下に定義された `Counter` クラスには、`CounterDataSource?` 型のオプションの `dataSource` プロパティがあります。
 
 ```swift
 class Counter {
@@ -768,19 +768,19 @@ class Counter {
 }
 ```
 
-The `Counter` class stores its current value in a variable property called `count`. The `Counter` class also defines a method called `increment`, which increments the `count` property every time the method is called.
+`Counter` クラスは、現在の値を `count` という変数プロパティに格納します。`Counter` クラスは、メソッドが呼び出されるたびに `count` プロパティをインクリメントする `increment` というメソッドも定義しています。
 
-The `increment()` method first tries to retrieve an increment amount by looking for an implementation of the `increment(forCount:)` method on its data source. The `increment()` method uses optional chaining to try to call `increment(forCount:)`, and passes the current `count` value as the method’s single argument.
+`increment()` メソッドは最初に、データソースの `increment(forCount:)` メソッドの実装を探してインクリメント量を取得しようとします。`increment()` メソッドはオプションチェーンを使用して `increment(forCount:)` を呼び出し、現在の `count` 値をメソッドの唯一の引数として渡します。
 
-Note that two levels of optional chaining are at play here. First, it’s possible that `dataSource` may be `nil`, and so `dataSource` has a question mark after its name to indicate that `increment(forCount:)` should be called only if `dataSource` isn’t `nil`. Second, even if `dataSource` does exist, there’s no guarantee that it implements `increment(forCount:)`, because it’s an optional requirement. Here, the possibility that `increment(forCount:)` might not be implemented is also handled by optional chaining. The call to `increment(forCount:)` happens only if `increment(forCount:)` exists — that is, if it isn’t `nil`. This is why `increment(forCount:)` is also written with a question mark after its name.
+ここでは、2つのレベルのオプションチェーンが使用されています。まず、`dataSource` が `nil` である可能性があるため、`dataSource` の名前の後に疑問符が付いており、`dataSource` が `nil` でない場合にのみ `increment(forCount:)` が呼び出されることを示しています。次に、`dataSource` が存在しても、`increment(forCount:)` を実装している保証はありません。これはオプションの要件だからです。ここでは、`increment(forCount:)` が実装されていない可能性もオプションチェーンで処理されています。`increment(forCount:)` が存在する場合にのみ呼び出されます。つまり、`increment(forCount:)` が `nil` でない場合にのみ呼び出されます。
 
-Because the call to `increment(forCount:)` can fail for either of these two reasons, the call returns an optional `Int` value. This is true even though `increment(forCount:)` is defined as returning a non-optional `Int` value in the definition of `CounterDataSource`. Even though there are two optional chaining operations, one after another, the result is still wrapped in a single optional. For more information about using multiple optional chaining operations, see [Linking Multiple Levels of Chaining](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html#ID246).
+`increment(forCount:)` の呼び出しは、これらの2つの理由のいずれかで失敗する可能性があるため、呼び出しはオプションの `Int` 値を返します。これは、`increment(forCount:)` が `CounterDataSource` の定義で非オプションの `Int` 値を返すと定義されているにもかかわらずです。2つのオプションチェーン操作が連続して行われても、結果は単一のオプションでラップされます。複数のオプションチェーン操作を使用する方法の詳細については、[複数レベルのチェーンのリンク](https://docs.swift.org/swift-book/LanguageGuide/OptionalChaining.html#ID246)を参照してください。
 
-After calling `increment(forCount:)`, the optional `Int` that it returns is unwrapped into a constant called `amount`, using optional binding. If the optional `Int` does contain a value — that is, if the delegate and method both exist, and the method returned a value — the unwrapped `amount` is added onto the stored `count` property, and incrementation is complete.
+`increment(forCount:)` を呼び出した後、それが返すオプションの `Int` は、オプションバインディングを使用して `amount` という定数にアンラップされます。オプションの `Int` に値が含まれている場合、つまり、デリゲートとメソッドの両方が存在し、メソッドが値を返した場合、アンラップされた `amount` が格納された `count` プロパティに追加され、インクリメントが完了します。
 
-If it’s not possible to retrieve a value from the `increment(forCount:)` method — either because `dataSource` is `nil`, or because the data source doesn’t implement `increment(forCount:)` — then the `increment()` method tries to retrieve a value from the data source’s `fixedIncrement` property instead. The `fixedIncrement` property is also an optional requirement, so its value is an optional `Int` value, even though `fixedIncrement` is defined as a non-optional `Int` property as part of the `CounterDataSource` protocol definition.
+`increment(forCount:)` メソッドから値を取得できない場合、つまり、`dataSource` が `nil` であるか、データソースが `increment(forCount:)` を実装していない場合、`increment()` メソッドは代わりにデータソースの `fixedIncrement` プロパティから値を取得しようとします。`fixedIncrement` プロパティもオプションの要件であるため、その値はオプションの `Int` 値です。これは、`fixedIncrement` が `CounterDataSource` プロトコル定義の一部として非オプションの `Int` プロパティとして定義されているにもかかわらずです。
 
-Here’s a simple `CounterDataSource` implementation where the data source returns a constant value of 3 every time it’s queried. It does this by implementing the optional `fixedIncrement` property requirement:
+ここでは、データソースがクエリされるたびに一定の値3を返すシンプルな `CounterDataSource` 実装を示します。これは、オプションの `fixedIncrement` プロパティ要件を実装することで実現しています。
 
 ```swift
 class ThreeSource: NSObject, CounterDataSource {
@@ -788,7 +788,7 @@ class ThreeSource: NSObject, CounterDataSource {
 }
 ```
 
-You can use an instance of `ThreeSource` as the data source for a new `Counter` instance:
+新しい `Counter` インスタンスのデータソースとして `ThreeSource` のインスタンスを使用できます。
 
 ```swift
 var counter = Counter()
@@ -803,9 +803,9 @@ for _ in 1...4 {
 // 12
 ```
 
-The code above creates a new `Counter` instance; sets its data source to be a new `ThreeSource` instance; and calls the counter’s `increment()` method four times. As expected, the counter’s `count` property increases by three each time `increment()` is called.
+上記のコードは、新しい `Counter` インスタンスを作成し、そのデータソースを新しい `ThreeSource` インスタンスに設定し、カウンターの `increment()` メソッドを4回呼び出します。予想通り、`increment()` が呼び出されるたびにカウンターの `count` プロパティは3ずつ増加します。
 
-Here’s a more complex data source called `TowardsZeroSource`, which makes a `Counter` instance count up or down towards zero from its current count value:
+次に、`TowardsZeroSource` というより複雑なデータソースを示します。これは、現在のカウント値からゼロに向かってカウントアップまたはカウントダウンする `Counter` インスタンスを作成します。
 
 ```swift
 class TowardsZeroSource: NSObject, CounterDataSource {
@@ -821,9 +821,9 @@ class TowardsZeroSource: NSObject, CounterDataSource {
 }
 ```
 
-The `TowardsZeroSource` class implements the optional `increment(forCount:)` method from the `CounterDataSource` protocol and uses the `count` argument value to work out which direction to count in. If `count` is already zero, the method returns 0 to indicate that no further counting should take place.
+`TowardsZeroSource` クラスは、`CounterDataSource` プロトコルのオプションの `increment(forCount:)` メソッドを実装し、`count` 引数の値を使用してどの方向にカウントするかを決定します。`count` がすでにゼロの場合、メソッドは0を返して、これ以上カウントしないことを示します。
 
-You can use an instance of `TowardsZeroSource` with the existing `Counter` instance to count from -4 to zero. Once the counter reaches zero, no more counting takes place:
+既存の `Counter` インスタンスを使用して、-4からゼロまでカウントするために `TowardsZeroSource` のインスタンスを使用できます。カウンターがゼロに達すると、それ以上のカウントは行われません。
 
 ```swift
 counter.count = -4
@@ -839,11 +839,11 @@ for _ in 1...5 {
 // 0
 ```
 
-## Protocol Extensions
+## プロトコル拡張
 
-Protocols can be extended to provide method, initializer, subscript, and computed property implementations to conforming types. This allows you to define behavior on protocols themselves, rather than in each type’s individual conformance or in a global function.
+プロトコルは拡張して、メソッド、イニシャライザ、サブスクリプト、および計算プロパティの実装を準拠する型に提供できます。これにより、各型の個別の準拠やグローバル関数ではなく、プロトコル自体に動作を定義できます。
 
-For example, the `RandomNumberGenerator` protocol can be extended to provide a `randomBool()` method, which uses the result of the required `random()` method to return a random `Bool` value:
+例えば、`RandomNumberGenerator`プロトコルは、必須の`random()`メソッドの結果を使用してランダムな`Bool`値を返す`randomBool()`メソッドを提供するように拡張できます。
 
 ```swift
 extension RandomNumberGenerator {
@@ -853,25 +853,25 @@ extension RandomNumberGenerator {
 }
 ```
 
-By creating an extension on the protocol, all conforming types automatically gain this method implementation without any additional modification.
+プロトコルに拡張を作成することで、すべての準拠する型は追加の修正なしにこのメソッド実装を自動的に取得します。
 
 ```swift
 let generator = LinearCongruentialGenerator()
-print("Here's a random number: \(generator.random())")
-// Prints "Here's a random number: 0.3746499199817101"
-print("And here's a random Boolean: \(generator.randomBool())")
-// Prints "And here's a random Boolean: true"
+print("ランダムな数値: \(generator.random())")
+// "ランダムな数値: 0.3746499199817101"と表示されます
+print("ランダムなブール値: \(generator.randomBool())")
+// "ランダムなブール値: true"と表示されます
 ```
 
-Protocol extensions can add implementations to conforming types but can’t make a protocol extend or inherit from another protocol. Protocol inheritance is always specified in the protocol declaration itself.
+プロトコル拡張は準拠する型に実装を追加できますが、プロトコルを他のプロトコルに拡張または継承させることはできません。プロトコルの継承は常にプロトコル宣言自体で指定されます。
 
-## Providing Default Implementations
+## デフォルト実装の提供
 
-You can use protocol extensions to provide a default implementation to any method or computed property requirement of that protocol. If a conforming type provides its own implementation of a required method or property, that implementation will be used instead of the one provided by the extension.
+プロトコル拡張を使用して、そのプロトコルの任意のメソッドまたは計算プロパティ要件にデフォルト実装を提供できます。準拠する型が必須のメソッドやプロパティの独自の実装を提供する場合、その実装が拡張によって提供されるものの代わりに使用されます。
 
-> **Note:** Protocol requirements with default implementations provided by extensions are distinct from optional protocol requirements. Although conforming types don’t have to provide their own implementation of either, requirements with default implementations can be called without optional chaining.
+> **注:** 拡張によって提供されるデフォルト実装を持つプロトコル要件は、オプションのプロトコル要件とは異なります。準拠する型はどちらの実装も提供する必要はありませんが、デフォルト実装を持つ要件はオプショナルチェーンなしで呼び出すことができます。
 
-For example, the `PrettyTextRepresentable` protocol, which inherits the `TextRepresentable` protocol can provide a default implementation of its required `prettyTextualDescription` property to simply return the result of accessing the `textualDescription` property:
+例えば、`TextRepresentable`プロトコルを継承する`PrettyTextRepresentable`プロトコルは、必須の`prettyTextualDescription`プロパティのデフォルト実装を提供して、単に`textualDescription`プロパティにアクセスする結果を返すことができます。
 
 ```swift
 extension PrettyTextRepresentable  {
@@ -881,11 +881,11 @@ extension PrettyTextRepresentable  {
 }
 ```
 
-## Adding Constraints to Protocol Extensions
+## プロトコル拡張に制約を追加する
 
-When you define a protocol extension, you can specify constraints that conforming types must satisfy before the methods and properties of the extension are available. You write these constraints after the name of the protocol you’re extending by writing a generic where clause. For more about generic where clauses, see [Generic Where Clauses](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID184).
+プロトコル拡張を定義する際に、拡張のメソッドやプロパティが利用可能になる前に準拠する型が満たすべき制約を指定できます。これらの制約は、拡張するプロトコルの名前の後にジェネリックwhere句を書いて指定します。ジェネリックwhere句の詳細については、[ジェネリックwhere句](https://docs.swift.org/swift-book/LanguageGuide/Generics.html#ID184)を参照してください。
 
-For example, you can define an extension to the `Collection` protocol that applies to any collection whose elements conform to the `Equatable` protocol. By constraining a collection’s elements to the `Equatable` protocol, a part of the Swift standard library, you can use the `==` and `!=` operators to check for equality and inequality between two elements.
+例えば、要素が`Equatable`プロトコルに準拠する任意のコレクションに適用される`Collection`プロトコルの拡張を定義できます。コレクションの要素をSwift標準ライブラリの一部である`Equatable`プロトコルに制約することで、`==`および`!=`演算子を使用して2つの要素の等価性と不等価性をチェックできます。
 
 ```swift
 extension Collection where Element: Equatable {
@@ -900,22 +900,22 @@ extension Collection where Element: Equatable {
 }
 ```
 
-The `allEqual()` method returns `true` only if all the elements in the collection are equal.
+`allEqual()`メソッドは、コレクション内のすべての要素が等しい場合にのみ`true`を返します。
 
-Consider two arrays of integers, one where all the elements are the same, and one where they aren’t:
+すべての要素が同じである整数の配列と、そうでない配列を考えてみましょう。
 
 ```swift
 let equalNumbers = [100, 100, 100, 100, 100]
 let differentNumbers = [100, 100, 200, 100, 200]
 ```
 
-Because arrays conform to `Collection` and integers conform to `Equatable`, `equalNumbers` and `differentNumbers` can use the `allEqual()` method:
+配列は`Collection`に準拠し、整数は`Equatable`に準拠しているため、`equalNumbers`と`differentNumbers`は`allEqual()`メソッドを使用できます。
 
 ```swift
 print(equalNumbers.allEqual())
-// Prints "true"
+// "true"と表示されます
 print(differentNumbers.allEqual())
-// Prints "false"
+// "false"と表示されます
 ```
 
-> **Note:** If a conforming type satisfies the requirements for multiple constrained extensions that provide implementations for the same method or property, Swift uses the implementation corresponding to the most specialized constraints.
+> **注:** 準拠する型が同じメソッドやプロパティの実装を提供する複数の制約付き拡張の要件を満たす場合、Swiftは最も専門化された制約に対応する実装を使用します。

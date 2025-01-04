@@ -1,63 +1,63 @@
-# Inheritance
+# 継承
 
-Subclass to add or override functionality.
+サブクラスを使用して機能を追加またはオーバーライドします。
 
-A class can inherit methods, properties, and other characteristics from another class. When one class inherits from another, the inheriting class is known as a subclass, and the class it inherits from is known as its superclass. Inheritance is a fundamental behavior that differentiates classes from other types in Swift.
+クラスは他のクラスからメソッド、プロパティ、およびその他の特性を継承できます。あるクラスが別のクラスから継承する場合、継承するクラスはサブクラスと呼ばれ、継承されるクラスはスーパークラスと呼ばれます。継承は、Swiftのクラスを他の型と区別する基本的な動作です。
 
-Classes in Swift can call and access methods, properties, and subscripts belonging to their superclass and can provide their own overriding versions of those methods, properties, and subscripts to refine or modify their behavior. Swift helps to ensure your overrides are correct by checking that the override definition has a matching superclass definition.
+Swiftのクラスは、スーパークラスに属するメソッド、プロパティ、およびサブスクリプトを呼び出してアクセスでき、これらのメソッド、プロパティ、およびサブスクリプトの独自のオーバーライドバージョンを提供して、その動作を洗練または変更できます。Swiftは、オーバーライドの定義が一致するスーパークラスの定義を持つことを確認することで、オーバーライドが正しいことを保証します。
 
-Classes can also add property observers to inherited properties in order to be notified when the value of a property changes. Property observers can be added to any property, regardless of whether it was originally defined as a stored or computed property.
+クラスは、プロパティの値が変更されたときに通知されるように、継承されたプロパティにプロパティオブザーバを追加することもできます。プロパティオブザーバは、元々格納プロパティとして定義されていたか計算プロパティとして定義されていたかに関係なく、任意のプロパティに追加できます。
 
-## Defining a Base Class
+## 基本クラスの定義
 
-Any class that doesn’t inherit from another class is known as a base class.
+他のクラスから継承しないクラスは、基本クラスと呼ばれます。
 
-> Note: Swift classes don’t inherit from a universal base class. Classes you define without specifying a superclass automatically become base classes for you to build upon.
+> 注: Swiftのクラスは、普遍的な基本クラスから継承しません。スーパークラスを指定せずに定義したクラスは、自動的に基本クラスとなり、その上に構築できます。
 
-The example below defines a base class called `Vehicle`. This base class defines a stored property called `currentSpeed`, with a default value of 0.0 (inferring a property type of `Double`). The `currentSpeed` property’s value is used by a read-only computed `String` property called `description` to create a description of the vehicle.
+以下の例では、`Vehicle`という基本クラスを定義しています。この基本クラスは、デフォルト値が0.0の格納プロパティ`currentSpeed`を定義しています（プロパティの型は`Double`と推測されます）。`currentSpeed`プロパティの値は、読み取り専用の計算プロパティ`description`によって使用され、車両の説明を作成します。
 
-The `Vehicle` base class also defines a method called `makeNoise`. This method doesn’t actually do anything for a base `Vehicle` instance, but will be customized by subclasses of `Vehicle` later on:
+`Vehicle`基本クラスは、`makeNoise`というメソッドも定義しています。このメソッドは、基本`Vehicle`インスタンスでは実際には何もしませんが、後で`Vehicle`のサブクラスによってカスタマイズされます。
 
 ```swift
 class Vehicle {
     var currentSpeed = 0.0
     var description: String {
-        return "traveling at \(currentSpeed) miles per hour"
+        return "時速\(currentSpeed)マイルで走行中"
     }
     func makeNoise() {
-        // do nothing - an arbitrary vehicle doesn't necessarily make a noise
+        // 何もしない - 任意の車両は必ずしも音を出すわけではない
     }
 }
 ```
 
-You create a new instance of `Vehicle` with initializer syntax, which is written as a type name followed by empty parentheses:
+初期化子構文を使用して、新しい`Vehicle`インスタンスを作成します。これは、型名の後に空の括弧を付けて記述します。
 
 ```swift
 let someVehicle = Vehicle()
 ```
 
-Having created a new `Vehicle` instance, you can access its `description` property to print a human-readable description of the vehicle’s current speed:
+新しい`Vehicle`インスタンスを作成した後、その`description`プロパティにアクセスして、車両の現在の速度の人間が読める説明を印刷できます。
 
 ```swift
 print("Vehicle: \(someVehicle.description)")
-// Vehicle: traveling at 0.0 miles per hour
+// Vehicle: 時速0.0マイルで走行中
 ```
 
-The `Vehicle` class defines common characteristics for an arbitrary vehicle, but isn’t much use in itself. To make it more useful, you need to refine it to describe more specific kinds of vehicles.
+`Vehicle`クラスは、任意の車両の共通の特性を定義しますが、それ自体ではあまり役に立ちません。より具体的な種類の車両を記述するために、それを洗練する必要があります。
 
-## Subclassing
+## サブクラス化
 
-Subclassing is the act of basing a new class on an existing class. The subclass inherits characteristics from the existing class, which you can then refine. You can also add new characteristics to the subclass.
+サブクラス化は、既存のクラスに基づいて新しいクラスを作成する行為です。サブクラスは、既存のクラスから特性を継承し、それを洗練することができます。また、サブクラスに新しい特性を追加することもできます。
 
-To indicate that a subclass has a superclass, write the subclass name before the superclass name, separated by a colon:
+サブクラスがスーパークラスを持つことを示すには、サブクラス名の前にスーパークラス名をコロンで区切って記述します。
 
 ```swift
 class SomeSubclass: SomeSuperclass {
-    // subclass definition goes here
+    // サブクラスの定義がここに入ります
 }
 ```
 
-The following example defines a subclass called `Bicycle`, with a superclass of `Vehicle`:
+次の例では、`Vehicle`のスーパークラスを持つ`Bicycle`というサブクラスを定義しています。
 
 ```swift
 class Bicycle: Vehicle {
@@ -65,26 +65,26 @@ class Bicycle: Vehicle {
 }
 ```
 
-The new `Bicycle` class automatically gains all of the characteristics of `Vehicle`, such as its `currentSpeed` and `description` properties and its `makeNoise()` method.
+新しい`Bicycle`クラスは、自動的に`Vehicle`の特性をすべて取得します。例えば、`currentSpeed`および`description`プロパティや`makeNoise()`メソッドなどです。
 
-In addition to the characteristics it inherits, the `Bicycle` class defines a new stored property, `hasBasket`, with a default value of `false` (inferring a type of `Bool` for the property).
+継承した特性に加えて、`Bicycle`クラスは`hasBasket`という新しい格納プロパティを定義しており、デフォルト値は`false`です（プロパティの型は`Bool`と推測されます）。
 
-By default, any new `Bicycle` instance you create will not have a basket. You can set the `hasBasket` property to `true` for a particular `Bicycle` instance after that instance is created:
+デフォルトでは、作成した新しい`Bicycle`インスタンスにはバスケットがありません。インスタンスを作成した後、その`hasBasket`プロパティを`true`に設定できます。
 
 ```swift
 let bicycle = Bicycle()
 bicycle.hasBasket = true
 ```
 
-You can also modify the inherited `currentSpeed` property of a `Bicycle` instance, and query the instance’s inherited `description` property:
+また、`Bicycle`インスタンスの継承した`currentSpeed`プロパティを変更し、インスタンスの継承した`description`プロパティを照会することもできます。
 
 ```swift
 bicycle.currentSpeed = 15.0
 print("Bicycle: \(bicycle.description)")
-// Bicycle: traveling at 15.0 miles per hour
+// Bicycle: 時速15.0マイルで走行中
 ```
 
-Subclasses can themselves be subclassed. The next example creates a subclass of `Bicycle` for a two-seater bicycle known as a “tandem”:
+サブクラスはさらにサブクラス化することができます。次の例では、「タンデム」として知られる二人乗り自転車のための`Bicycle`のサブクラスを作成しています。
 
 ```swift
 class Tandem: Bicycle {
@@ -92,9 +92,9 @@ class Tandem: Bicycle {
 }
 ```
 
-`Tandem` inherits all of the properties and methods from `Bicycle`, which in turn inherits all of the properties and methods from `Vehicle`. The `Tandem` subclass also adds a new stored property called `currentNumberOfPassengers`, with a default value of 0.
+`Tandem`は、`Bicycle`からすべてのプロパティとメソッドを継承し、`Bicycle`は`Vehicle`からすべてのプロパティとメソッドを継承します。`Tandem`サブクラスは、`currentNumberOfPassengers`という新しい格納プロパティも追加しており、デフォルト値は0です。
 
-If you create an instance of `Tandem`, you can work with any of its new and inherited properties, and query the read-only `description` property it inherits from `Vehicle`:
+`Tandem`のインスタンスを作成すると、その新しいプロパティおよび継承したプロパティのいずれかを操作し、`Vehicle`から継承した読み取り専用の`description`プロパティを照会できます。
 
 ```swift
 let tandem = Tandem()
@@ -102,32 +102,32 @@ tandem.hasBasket = true
 tandem.currentNumberOfPassengers = 2
 tandem.currentSpeed = 22.0
 print("Tandem: \(tandem.description)")
-// Tandem: traveling at 22.0 miles per hour
+// Tandem: 時速22.0マイルで走行中
 ```
 
-## Overriding
+## オーバーライド
 
-A subclass can provide its own custom implementation of an instance method, type method, instance property, type property, or subscript that it would otherwise inherit from a superclass. This is known as overriding.
+サブクラスは、スーパークラスから継承するインスタンスメソッド、タイプメソッド、インスタンスプロパティ、タイププロパティ、またはサブスクリプトに対して独自のカスタム実装を提供できます。これをオーバーライドと呼びます。
 
-To override a characteristic that would otherwise be inherited, you prefix your overriding definition with the `override` keyword. Doing so clarifies that you intend to provide an override and haven’t provided a matching definition by mistake. Overriding by accident can cause unexpected behavior, and any overrides without the `override` keyword are diagnosed as an error when your code is compiled.
+継承される特性をオーバーライドするには、オーバーライド定義の前に `override` キーワードを付けます。これにより、オーバーライドを提供する意図があることが明確になり、誤って一致する定義を提供していないことが確認されます。誤ってオーバーライドすると予期しない動作が発生する可能性があり、`override` キーワードなしのオーバーライドはコードのコンパイル時にエラーとして診断されます。
 
-The `override` keyword also prompts the Swift compiler to check that your overriding class’s superclass (or one of its parents) has a declaration that matches the one you provided for the override. This check ensures that your overriding definition is correct.
+`override` キーワードは、オーバーライドするクラスのスーパークラス（またはその親のいずれか）が提供した宣言と一致することを確認するために、Swiftコンパイラにチェックを促します。このチェックにより、オーバーライド定義が正しいことが保証されます。
 
-### Accessing Superclass Methods, Properties, and Subscripts
+### スーパークラスのメソッド、プロパティ、およびサブスクリプトへのアクセス
 
-When you provide a method, property, or subscript override for a subclass, it’s sometimes useful to use the existing superclass implementation as part of your override. For example, you can refine the behavior of that existing implementation, or store a modified value in an existing inherited variable.
+サブクラスのメソッド、プロパティ、またはサブスクリプトのオーバーライドを提供する場合、オーバーライドの一部として既存のスーパークラスの実装を使用することが有用な場合があります。たとえば、その既存の実装の動作を改良したり、既存の継承された変数に修正された値を格納したりすることができます。
 
-Where this is appropriate, you access the superclass version of a method, property, or subscript by using the `super` prefix:
+これが適切な場合、`super` プレフィックスを使用してスーパークラスバージョンのメソッド、プロパティ、またはサブスクリプトにアクセスします：
 
-- An overridden method named `someMethod()` can call the superclass version of `someMethod()` by calling `super.someMethod()` within the overriding method implementation.
-- An overridden property called `someProperty` can access the superclass version of `someProperty` as `super.someProperty` within the overriding getter or setter implementation.
-- An overridden subscript for `someIndex` can access the superclass version of the same subscript as `super[someIndex]` from within the overriding subscript implementation.
+- `someMethod()` という名前のオーバーライドされたメソッドは、オーバーライドメソッドの実装内で `super.someMethod()` を呼び出すことでスーパークラスバージョンの `someMethod()` を呼び出すことができます。
+- `someProperty` という名前のオーバーライドされたプロパティは、オーバーライドされたゲッターまたはセッターの実装内で `super.someProperty` としてスーパークラスバージョンの `someProperty` にアクセスできます。
+- `someIndex` のオーバーライドされたサブスクリプトは、オーバーライドされたサブスクリプトの実装内で同じサブスクリプトのスーパークラスバージョンに `super[someIndex]` としてアクセスできます。
 
-### Overriding Methods
+### メソッドのオーバーライド
 
-You can override an inherited instance or type method to provide a tailored or alternative implementation of the method within your subclass.
+サブクラス内でメソッドのカスタマイズまたは代替実装を提供するために、継承されたインスタンスまたはタイプメソッドをオーバーライドできます。
 
-The following example defines a new subclass of `Vehicle` called `Train`, which overrides the `makeNoise()` method that `Train` inherits from `Vehicle`:
+次の例は、`Vehicle` の新しいサブクラス `Train` を定義し、`Train` が `Vehicle` から継承する `makeNoise()` メソッドをオーバーライドするものです：
 
 ```swift
 class Train: Vehicle {
@@ -137,27 +137,27 @@ class Train: Vehicle {
 }
 ```
 
-If you create a new instance of `Train` and call its `makeNoise()` method, you can see that the `Train` subclass version of the method is called:
+新しい `Train` インスタンスを作成し、その `makeNoise()` メソッドを呼び出すと、`Train` サブクラスバージョンのメソッドが呼び出されることがわかります：
 
 ```swift
 let train = Train()
 train.makeNoise()
-// Prints "Choo Choo"
+// "Choo Choo" と出力されます
 ```
 
-### Overriding Properties
+### プロパティのオーバーライド
 
-You can override an inherited instance or type property to provide your own custom getter and setter for that property, or to add property observers to enable the overriding property to observe when the underlying property value changes.
+継承されたインスタンスまたはタイププロパティをオーバーライドして、そのプロパティのカスタムゲッターおよびセッターを提供したり、プロパティオブザーバーを追加して、オーバーライドされたプロパティが基になるプロパティ値の変更を監視できるようにすることができます。
 
-#### Overriding Property Getters and Setters
+#### プロパティゲッターおよびセッターのオーバーライド
 
-You can provide a custom getter (and setter, if appropriate) to override any inherited property, regardless of whether the inherited property is implemented as a stored or computed property at source. The stored or computed nature of an inherited property isn’t known by a subclass — it only knows that the inherited property has a certain name and type. You must always state both the name and the type of the property you are overriding, to enable the compiler to check that your override matches a superclass property with the same name and type.
+継承されたプロパティがソースでストアドプロパティとして実装されているか計算プロパティとして実装されているかに関係なく、カスタムゲッター（および適切な場合はセッター）を提供してオーバーライドできます。サブクラスは、継承されたプロパティが特定の名前と型を持つことしか知らないため、継承されたプロパティのストアドまたは計算の性質はサブクラスには知られません。オーバーライドするプロパティの名前と型の両方を常に指定して、オーバーライドが同じ名前と型を持つスーパークラスプロパティと一致することをコンパイラが確認できるようにする必要があります。
 
-You can present an inherited read-only property as a read-write property by providing both a getter and a setter in your subclass property override. You can’t, however, present an inherited read-write property as a read-only property.
+サブクラスプロパティのオーバーライドでゲッターとセッターの両方を提供することで、継承された読み取り専用プロパティを読み書き可能なプロパティとして提示できます。ただし、継承された読み書き可能なプロパティを読み取り専用プロパティとして提示することはできません。
 
-> Note: If you provide a setter as part of a property override, you must also provide a getter for that override. If you don’t want to modify the inherited property’s value within the overriding getter, you can simply pass through the inherited value by returning `super.someProperty` from the getter, where `someProperty` is the name of the property you are overriding.
+> 注：プロパティオーバーライドの一部としてセッターを提供する場合、そのオーバーライドのためにゲッターも提供する必要があります。オーバーライドされたゲッター内で継承されたプロパティの値を変更したくない場合は、オーバーライドされたゲッターから `super.someProperty` を返すことで継承された値を単に通過させることができます。ここで、`someProperty` はオーバーライドするプロパティの名前です。
 
-The following example defines a new class called `Car`, which is a subclass of `Vehicle`. The `Car` class introduces a new stored property called `gear`, with a default integer value of 1. The `Car` class also overrides the `description` property it inherits from `Vehicle`, to provide a custom description that includes the current gear:
+次の例は、`Vehicle` のサブクラスである新しいクラス `Car` を定義します。`Car` クラスは、デフォルトの整数値が1の新しいストアドプロパティ `gear` を導入します。`Car` クラスは、現在のギアを含むカスタム説明を提供するために、`Vehicle` から継承する `description` プロパティもオーバーライドします：
 
 ```swift
 class Car: Vehicle {
@@ -168,9 +168,9 @@ class Car: Vehicle {
 }
 ```
 
-The override of the `description` property starts by calling `super.description`, which returns the `Vehicle` class’s `description` property. The `Car` class’s version of `description` then adds some extra text onto the end of this description to provide information about the current gear.
+`description` プロパティのオーバーライドは `super.description` を呼び出すことから始まり、これは `Vehicle` クラスの `description` プロパティを返します。`Car` クラスの `description` バージョンは、この説明の最後にいくつかの追加テキストを追加して、現在のギアに関する情報を提供します。
 
-If you create an instance of the `Car` class and set its `gear` and `currentSpeed` properties, you can see that its `description` property returns the tailored description defined within the `Car` class:
+`Car` クラスのインスタンスを作成し、その `gear` および `currentSpeed` プロパティを設定すると、その `description` プロパティが `Car` クラス内で定義されたカスタム説明を返すことがわかります：
 
 ```swift
 let car = Car()
@@ -180,15 +180,15 @@ print("Car: \(car.description)")
 // Car: traveling at 25.0 miles per hour in gear 3
 ```
 
-#### Overriding Property Observers
+#### プロパティオブザーバーのオーバーライド
 
-You can use property overriding to add property observers to an inherited property. This enables you to be notified when the value of an inherited property changes, regardless of how that property was originally implemented. For more information on property observers, see Property Observers.
+プロパティオーバーライドを使用して、継承されたプロパティにプロパティオブザーバーを追加できます。これにより、継承されたプロパティの値が変更されたときに通知を受け取ることができます。このプロパティが元々どのように実装されていたかに関係なくです。プロパティオブザーバーの詳細については、プロパティオブザーバーを参照してください。
 
-> Note: You can’t add property observers to inherited constant stored properties or inherited read-only computed properties. The value of these properties can’t be set, and so it isn’t appropriate to provide a `willSet` or `didSet` implementation as part of an override.
+> 注：継承された定数ストアドプロパティまたは継承された読み取り専用計算プロパティにプロパティオブザーバーを追加することはできません。これらのプロパティの値は設定できないため、オーバーライドの一部として `willSet` または `didSet` の実装を提供することは適切ではありません。
 
-> Note also that you can’t provide both an overriding setter and an overriding property observer for the same property. If you want to observe changes to a property’s value, and you are already providing a custom setter for that property, you can simply observe any value changes from within the custom setter.
+> また、同じプロパティに対してオーバーライドされたセッターとオーバーライドされたプロパティオブザーバーの両方を提供することもできません。プロパティの値の変更を監視したい場合で、そのプロパティに対して既にカスタムセッターを提供している場合は、カスタムセッター内から値の変更を監視するだけで済みます。
 
-The following example defines a new class called `AutomaticCar`, which is a subclass of `Car`. The `AutomaticCar` class represents a car with an automatic gearbox, which automatically selects an appropriate gear to use based on the current speed:
+次の例は、`Car` のサブクラスである新しいクラス `AutomaticCar` を定義します。`AutomaticCar` クラスは、現在の速度に基づいて適切なギアを自動的に選択する自動変速機を持つ車を表します：
 
 ```swift
 class AutomaticCar: Car {
@@ -200,7 +200,7 @@ class AutomaticCar: Car {
 }
 ```
 
-Whenever you set the `currentSpeed` property of an `AutomaticCar` instance, the property’s `didSet` observer sets the instance’s `gear` property to an appropriate choice of gear for the new speed. Specifically, the property observer chooses a gear that’s the new `currentSpeed` value divided by 10, rounded down to the nearest integer, plus 1. A speed of 35.0 produces a gear of 4:
+`AutomaticCar` インスタンスの `currentSpeed` プロパティを設定するたびに、プロパティの `didSet` オブザーバーがインスタンスの `gear` プロパティを新しい速度に適したギアに設定します。具体的には、プロパティオブザーバーは新しい `currentSpeed` 値を10で割り、最も近い整数に切り捨て、1を加えたギアを選択します。速度が35.0の場合、ギアは4になります：
 
 ```swift
 let automatic = AutomaticCar()
@@ -209,10 +209,10 @@ print("AutomaticCar: \(automatic.description)")
 // AutomaticCar: traveling at 35.0 miles per hour in gear 4
 ```
 
-## Preventing Overrides
+## オーバーライドの防止
 
-You can prevent a method, property, or subscript from being overridden by marking it as `final`. Do this by writing the `final` modifier before the method, property, or subscript’s introducer keyword (such as `final var`, `final func`, `final class func`, and `final subscript`).
+メソッド、プロパティ、またはサブスクリプトを `final` としてマークすることで、オーバーライドを防ぐことができます。これを行うには、メソッド、プロパティ、またはサブスクリプトの導入キーワード（`final var`、`final func`、`final class func`、および `final subscript` など）の前に `final` 修飾子を記述します。
 
-Any attempt to override a `final` method, property, or subscript in a subclass is reported as a compile-time error. Methods, properties, or subscripts that you add to a class in an extension can also be marked as `final` within the extension’s definition. For more information, see Extensions.
+サブクラスで `final` メソッド、プロパティ、またはサブスクリプトをオーバーライドしようとすると、コンパイル時エラーとして報告されます。拡張機能にクラスに追加するメソッド、プロパティ、またはサブスクリプトも、拡張機能の定義内で `final` としてマークできます。詳細については、拡張機能を参照してください。
 
-You can mark an entire class as `final` by writing the `final` modifier before the `class` keyword in its class definition (`final class`). Any attempt to subclass a `final` class is reported as a compile-time error.
+クラス全体を `final` としてマークするには、クラス定義の `class` キーワードの前に `final` 修飾子を記述します（`final class`）。`final` クラスをサブクラス化しようとすると、コンパイル時エラーとして報告されます。

@@ -1,26 +1,26 @@
-# Nested Types
+# ネストされた型
 
-Define types inside the scope of another type.
+別の型のスコープ内に型を定義します。
 
-Enumerations are often created to support a specific class or structure’s functionality. Similarly, it can be convenient to define utility structures purely for use within the context of a more complex type, and protocols that are normally used in conjunction with a specific type. To accomplish this, Swift enables you to define nested types, whereby you nest supporting types like enumerations, structures, and protocols within the definition of the type they support.
+列挙型は特定のクラスや構造体の機能をサポートするために作成されることがよくあります。同様に、より複雑な型の文脈内でのみ使用するユーティリティ構造体や、通常は特定の型と組み合わせて使用されるプロトコルを定義することも便利です。これを実現するために、Swiftではネストされた型を定義することができます。これにより、サポートする型の定義内に列挙型、構造体、プロトコルなどのサポート型をネストすることができます。
 
-To nest a type within another type, write its definition within the outer braces of the type it supports. Types can be nested to as many levels as are required.
+ある型の中に別の型をネストするには、サポートする型の外側の中括弧内にその定義を書きます。型は必要なだけ多くのレベルにネストすることができます。
 
-## Nested Types in Action
+## 実際のネストされた型
 
-The example below defines a structure called `BlackjackCard`, which models a playing card as used in the game of Blackjack. The `BlackjackCard` structure contains two nested enumeration types called `Suit` and `Rank`.
+以下の例では、ブラックジャックで使用されるトランプのカードをモデル化した`BlackjackCard`という構造体を定義しています。`BlackjackCard`構造体には、`Suit`と`Rank`という2つのネストされた列挙型が含まれています。
 
-In Blackjack, the Ace cards have a value of either one or eleven. This feature is represented by a structure called `Values`, which is nested within the `Rank` enumeration:
+ブラックジャックでは、エースカードは1または11の値を持ちます。この機能は、`Rank`列挙型内にネストされた`Values`という構造体によって表現されています。
 
 ```swift
 struct BlackjackCard {
 
-    // nested Suit enumeration
+    // ネストされたSuit列挙型
     enum Suit: Character {
         case spades = "♠", hearts = "♡", diamonds = "♢", clubs = "♣"
     }
 
-    // nested Rank enumeration
+    // ネストされたRank列挙型
     enum Rank: Int {
         case two = 2, three, four, five, six, seven, eight, nine, ten
         case jack, queen, king, ace
@@ -39,7 +39,7 @@ struct BlackjackCard {
         }
     }
 
-    // BlackjackCard properties and methods
+    // BlackjackCardのプロパティとメソッド
     let rank: Rank, suit: Suit
     var description: String {
         var output = "suit is \(suit.rawValue),"
@@ -52,35 +52,35 @@ struct BlackjackCard {
 }
 ```
 
-The `Suit` enumeration describes the four common playing card suits, together with a raw `Character` value to represent their symbol.
+`Suit`列挙型は、4つの一般的なトランプのスートを記述し、それぞれのシンボルを表す生の`Character`値を持ちます。
 
-The `Rank` enumeration describes the thirteen possible playing card ranks, together with a raw `Int` value to represent their face value. (This raw `Int` value isn’t used for the Jack, Queen, King, and Ace cards.)
+`Rank`列挙型は、13の可能なトランプのランクを記述し、それぞれのフェイス値を表す生の`Int`値を持ちます。（この生の`Int`値はジャック、クイーン、キング、エースカードには使用されません。）
 
-As mentioned above, the `Rank` enumeration defines a further nested structure of its own, called `Values`. This structure encapsulates the fact that most cards have one value, but the Ace card has two values. The `Values` structure defines two properties to represent this:
-- `first`, of type `Int`
-- `second`, of type `Int?`, or “optional Int”
+前述のように、`Rank`列挙型はさらに`Values`というネストされた構造体を定義しています。この構造体は、ほとんどのカードが1つの値を持つが、エースカードは2つの値を持つという事実をカプセル化しています。`Values`構造体は、このことを表すために2つのプロパティを定義しています。
+- `first`: `Int`型
+- `second`: `Int?`型、または「オプショナルなInt」
 
-`Rank` also defines a computed property, `values`, which returns an instance of the `Values` structure. This computed property considers the rank of the card and initializes a new `Values` instance with appropriate values based on its rank. It uses special values for jack, queen, king, and ace. For the numeric cards, it uses the rank’s raw `Int` value.
+`Rank`はまた、`values`という計算プロパティを定義しており、これは`Values`構造体のインスタンスを返します。この計算プロパティはカードのランクを考慮し、そのランクに基づいて適切な値を持つ新しい`Values`インスタンスを初期化します。ジャック、クイーン、キング、エースには特別な値を使用します。数値カードにはランクの生の`Int`値を使用します。
 
-The `BlackjackCard` structure itself has two properties — `rank` and `suit`. It also defines a computed property called `description`, which uses the values stored in `rank` and `suit` to build a description of the name and value of the card. The `description` property uses optional binding to check whether there’s a second value to display, and if so, inserts additional description detail for that second value.
+`BlackjackCard`構造体自体には、`rank`と`suit`という2つのプロパティがあります。また、`rank`と`suit`に格納された値を使用してカードの名前と値の説明を構築する`description`という計算プロパティも定義しています。`description`プロパティはオプショナルバインディングを使用して、表示する2番目の値があるかどうかを確認し、ある場合はその2番目の値に関する追加の説明を挿入します。
 
-Because `BlackjackCard` is a structure with no custom initializers, it has an implicit memberwise initializer, as described in Memberwise Initializers for Structure Types. You can use this initializer to initialize a new constant called `theAceOfSpades`:
+`BlackjackCard`はカスタムイニシャライザを持たない構造体であるため、構造体型のメンバーワイズイニシャライザで説明されているように、暗黙のメンバーワイズイニシャライザを持ちます。このイニシャライザを使用して、`theAceOfSpades`という新しい定数を初期化できます。
 
 ```swift
 let theAceOfSpades = BlackjackCard(rank: .ace, suit: .spades)
 print("theAceOfSpades: \(theAceOfSpades.description)")
-// Prints "theAceOfSpades: suit is ♠, value is 1 or 11"
+// "theAceOfSpades: suit is ♠, value is 1 or 11"と出力されます
 ```
 
-Even though `Rank` and `Suit` are nested within `BlackjackCard`, their type can be inferred from context, and so the initialization of this instance is able to refer to the enumeration cases by their case names (`.ace` and `.spades`) alone. In the example above, the `description` property correctly reports that the Ace of Spades has a value of 1 or 11.
+`Rank`と`Suit`は`BlackjackCard`内にネストされていますが、その型は文脈から推測できるため、このインスタンスの初期化では列挙型のケース名（`.ace`と`.spades`）だけで参照することができます。上記の例では、`description`プロパティはスペードのエースが1または11の値を持つことを正しく報告しています。
 
-## Referring to Nested Types
+## ネストされた型の参照
 
-To use a nested type outside of its definition context, prefix its name with the name of the type it’s nested within:
+定義コンテキストの外でネストされた型を使用するには、その名前の前にネストされている型の名前を付けます。
 
 ```swift
 let heartsSymbol = BlackjackCard.Suit.hearts.rawValue
-// heartsSymbol is "♡"
+// heartsSymbolは"♡"です
 ```
 
-For the example above, this enables the names of `Suit`, `Rank`, and `Values` to be kept deliberately short, because their names are naturally qualified by the context in which they’re defined.
+上記の例では、`Suit`、`Rank`、および`Values`の名前を意図的に短く保つことができます。なぜなら、それらの名前は定義されているコンテキストによって自然に修飾されるからです。

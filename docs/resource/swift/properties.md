@@ -1,22 +1,22 @@
-# Properties
+# プロパティ
 
-Access stored and computed values that are part of an instance or type.
+インスタンスまたは型の一部である格納値および計算値にアクセスします。
 
-Properties associate values with a particular class, structure, or enumeration. Stored properties store constant and variable values as part of an instance, whereas computed properties calculate (rather than store) a value. Computed properties are provided by classes, structures, and enumerations. Stored properties are provided only by classes and structures.
+プロパティは特定のクラス、構造体、または列挙体に値を関連付けます。格納プロパティはインスタンスの一部として定数および変数の値を格納し、計算プロパティは値を格納するのではなく計算します。計算プロパティはクラス、構造体、および列挙体によって提供されます。格納プロパティはクラスおよび構造体によってのみ提供されます。
 
-Stored and computed properties are usually associated with instances of a particular type. However, properties can also be associated with the type itself. Such properties are known as type properties.
+格納プロパティと計算プロパティは通常、特定の型のインスタンスに関連付けられます。ただし、プロパティは型自体に関連付けることもできます。このようなプロパティは型プロパティと呼ばれます。
 
-In addition, you can define property observers to monitor changes in a property’s value, which you can respond to with custom actions. Property observers can be added to stored properties you define yourself, and also to properties that a subclass inherits from its superclass.
+さらに、プロパティの値の変更を監視し、カスタムアクションで応答できるプロパティオブザーバを定義することもできます。プロパティオブザーバは、自分で定義した格納プロパティや、サブクラスがスーパークラスから継承したプロパティに追加できます。
 
-You can also use a property wrapper to reuse code in the getter and setter of multiple properties.
+また、プロパティラッパーを使用して、複数のプロパティのゲッターおよびセッターでコードを再利用することもできます。
 
-## Stored Properties
+## 格納プロパティ
 
-In its simplest form, a stored property is a constant or variable that’s stored as part of an instance of a particular class or structure. Stored properties can be either variable stored properties (introduced by the `var` keyword) or constant stored properties (introduced by the `let` keyword).
+最も単純な形式では、格納プロパティは特定のクラスまたは構造体のインスタンスの一部として格納される定数または変数です。格納プロパティは、変数格納プロパティ（`var`キーワードで導入）または定数格納プロパティ（`let`キーワードで導入）のいずれかです。
 
-You can provide a default value for a stored property as part of its definition, as described in Default Property Values. You can also set and modify the initial value for a stored property during initialization. This is true even for constant stored properties, as described in Assigning Constant Properties During Initialization.
+格納プロパティには、定義の一部としてデフォルト値を提供できます（デフォルトプロパティ値で説明）。また、初期化中に格納プロパティの初期値を設定および変更することもできます。これは、定数格納プロパティの場合でも同様です（初期化中の定数プロパティの割り当てで説明）。
 
-The example below defines a structure called `FixedLengthRange`, which describes a range of integers whose range length can’t be changed after it’s created:
+以下の例では、作成後に範囲の長さを変更できない整数の範囲を記述する`FixedLengthRange`という構造体を定義しています：
 
 ```swift
 struct FixedLengthRange {
@@ -24,89 +24,89 @@ struct FixedLengthRange {
     let length: Int
 }
 var rangeOfThreeItems = FixedLengthRange(firstValue: 0, length: 3)
-// the range represents integer values 0, 1, and 2
+// この範囲は整数値0、1、および2を表します
 rangeOfThreeItems.firstValue = 6
-// the range now represents integer values 6, 7, and 8
+// この範囲は現在、整数値6、7、および8を表します
 ```
 
-Instances of `FixedLengthRange` have a variable stored property called `firstValue` and a constant stored property called `length`. In the example above, `length` is initialized when the new range is created and can’t be changed thereafter, because it’s a constant property.
+`FixedLengthRange`のインスタンスには、`firstValue`という変数格納プロパティと、`length`という定数格納プロパティがあります。上記の例では、`length`は新しい範囲が作成されたときに初期化され、その後変更できません。これは定数プロパティであるためです。
 
-### Stored Properties of Constant Structure Instances
+### 定数構造体インスタンスの格納プロパティ
 
-If you create an instance of a structure and assign that instance to a constant, you can’t modify the instance’s properties, even if they were declared as variable properties:
+構造体のインスタンスを作成し、そのインスタンスを定数に割り当てると、そのインスタンスのプロパティを変更することはできません。たとえそれらが変数プロパティとして宣言されていても：
 
 ```swift
 let rangeOfFourItems = FixedLengthRange(firstValue: 0, length: 4)
-// this range represents integer values 0, 1, 2, and 3
+// この範囲は整数値0、1、2、および3を表します
 rangeOfFourItems.firstValue = 6
-// this will report an error, even though firstValue is a variable property
+// これはエラーを報告します。たとえfirstValueが変数プロパティであっても
 ```
 
-Because `rangeOfFourItems` is declared as a constant (with the `let` keyword), it isn’t possible to change its `firstValue` property, even though `firstValue` is a variable property.
+`rangeOfFourItems`が定数（`let`キーワードで）として宣言されているため、`firstValue`プロパティを変更することはできません。たとえ`firstValue`が変数プロパティであってもです。
 
-This behavior is due to structures being value types. When an instance of a value type is marked as a constant, so are all of its properties.
+この動作は、構造体が値型であるためです。値型のインスタンスが定数としてマークされると、そのすべてのプロパティも定数になります。
 
-The same isn’t true for classes, which are reference types. If you assign an instance of a reference type to a constant, you can still change that instance’s variable properties.
+クラスには同じことは当てはまりません。クラスは参照型です。参照型のインスタンスを定数に割り当てても、そのインスタンスの変数プロパティを変更できます。
 
-### Lazy Stored Properties
+### 遅延格納プロパティ
 
-A lazy stored property is a property whose initial value isn’t calculated until the first time it’s used. You indicate a lazy stored property by writing the `lazy` modifier before its declaration.
+遅延格納プロパティは、初めて使用されるまで初期値が計算されないプロパティです。遅延格納プロパティを示すには、宣言の前に`lazy`修飾子を記述します。
 
-> **Note**  
-> You must always declare a lazy property as a variable (with the `var` keyword), because its initial value might not be retrieved until after instance initialization completes. Constant properties must always have a value before initialization completes, and therefore can’t be declared as lazy.
+> **注記**  
+> 遅延プロパティは常に変数（`var`キーワードで）として宣言する必要があります。初期値はインスタンスの初期化が完了するまで取得されない可能性があるためです。定数プロパティは初期化が完了する前に常に値を持っている必要があるため、遅延として宣言することはできません。
 
-Lazy properties are useful when the initial value for a property is dependent on outside factors whose values aren’t known until after an instance’s initialization is complete. Lazy properties are also useful when the initial value for a property requires complex or computationally expensive setup that shouldn’t be performed unless or until it’s needed.
+遅延プロパティは、プロパティの初期値がインスタンスの初期化が完了するまで不明な外部要因に依存する場合に便利です。また、プロパティの初期値が複雑または計算コストの高いセットアップを必要とし、それが必要になるまで実行されるべきでない場合にも便利です。
 
-The example below uses a lazy stored property to avoid unnecessary initialization of a complex class. This example defines two classes called `DataImporter` and `DataManager`, neither of which is shown in full:
+以下の例では、複雑なクラスの不要な初期化を避けるために遅延格納プロパティを使用しています。この例では、`DataImporter`と`DataManager`という2つのクラスを定義していますが、どちらも完全には示されていません：
 
 ```swift
 class DataImporter {
     /*
-    DataImporter is a class to import data from an external file.
-    The class is assumed to take a nontrivial amount of time to initialize.
+    DataImporterは外部ファイルからデータをインポートするクラスです。
+    このクラスは初期化にかなりの時間がかかると想定されています。
     */
     var filename = "data.txt"
-    // the DataImporter class would provide data importing functionality here
+    // DataImporterクラスはここでデータインポート機能を提供します
 }
 
 class DataManager {
     lazy var importer = DataImporter()
     var data: [String] = []
-    // the DataManager class would provide data management functionality here
+    // DataManagerクラスはここでデータ管理機能を提供します
 }
 
 let manager = DataManager()
 manager.data.append("Some data")
 manager.data.append("Some more data")
-// the DataImporter instance for the importer property hasn't yet been created
+// importerプロパティのDataImporterインスタンスはまだ作成されていません
 ```
 
-The `DataManager` class has a stored property called `data`, which is initialized with a new, empty array of `String` values. Although the rest of its functionality isn’t shown, the purpose of this `DataManager` class is to manage and provide access to this array of `String` data.
+`DataManager`クラスには、`data`という格納プロパティがあり、新しい空の`String`値の配列で初期化されます。その機能の残りは示されていませんが、この`DataManager`クラスの目的は、この`String`データの配列を管理し、アクセスを提供することです。
 
-Part of the functionality of the `DataManager` class is the ability to import data from a file. This functionality is provided by the `DataImporter` class, which is assumed to take a nontrivial amount of time to initialize. This might be because a `DataImporter` instance needs to open a file and read its contents into memory when the `DataImporter` instance is initialized.
+`DataManager`クラスの機能の一部は、ファイルからデータをインポートする機能です。この機能は、初期化にかなりの時間がかかると想定される`DataImporter`クラスによって提供されます。これは、`DataImporter`インスタンスが初期化されるときにファイルを開き、その内容をメモリに読み込む必要があるためかもしれません。
 
-Because it’s possible for a `DataManager` instance to manage its data without ever importing data from a file, `DataManager` doesn’t create a new `DataImporter` instance when the `DataManager` itself is created. Instead, it makes more sense to create the `DataImporter` instance if and when it’s first used.
+`DataManager`インスタンスがファイルからデータをインポートせずにデータを管理することが可能であるため、`DataManager`自体が作成されたときに新しい`DataImporter`インスタンスを作成するのは理にかなっていません。代わりに、`importer`プロパティが初めて使用される場合に`DataImporter`インスタンスを作成する方が理にかなっています。
 
-Because it’s marked with the `lazy` modifier, the `DataImporter` instance for the `importer` property is only created when the `importer` property is first accessed, such as when its `filename` property is queried:
+`lazy`修飾子が付いているため、`importer`プロパティの`DataImporter`インスタンスは、`importer`プロパティが初めてアクセスされたときにのみ作成されます。たとえば、その`filename`プロパティがクエリされたときなどです：
 
 ```swift
 print(manager.importer.filename)
-// the DataImporter instance for the importer property has now been created
-// Prints "data.txt"
+// importerプロパティのDataImporterインスタンスが作成されました
+// "data.txt"と表示されます
 ```
 
-> **Note**  
-> If a property marked with the `lazy` modifier is accessed by multiple threads simultaneously and the property hasn’t yet been initialized, there’s no guarantee that the property will be initialized only once.
+> **注記**  
+> `lazy`修飾子が付いたプロパティが複数のスレッドによって同時にアクセスされ、そのプロパティがまだ初期化されていない場合、そのプロパティが一度だけ初期化される保証はありません。
 
-### Stored Properties and Instance Variables
+### 格納プロパティとインスタンス変数
 
-If you have experience with Objective-C, you may know that it provides two ways to store values and references as part of a class instance. In addition to properties, you can use instance variables as a backing store for the values stored in a property.
+Objective-Cの経験がある場合、クラスインスタンスの一部として値や参照を格納するための2つの方法が提供されていることを知っているかもしれません。プロパティに加えて、インスタンス変数を使用してプロパティに格納される値のバックストアとして使用できます。
 
-Swift unifies these concepts into a single property declaration. A Swift property doesn’t have a corresponding instance variable, and the backing store for a property isn’t accessed directly. This approach avoids confusion about how the value is accessed in different contexts and simplifies the property’s declaration into a single, definitive statement. All information about the property — including its name, type, and memory management characteristics — is defined in a single location as part of the type’s definition.
+Swiftはこれらの概念を単一のプロパティ宣言に統合しています。Swiftプロパティには対応するインスタンス変数がなく、プロパティのバックストアに直接アクセスすることはありません。このアプローチは、異なるコンテキストで値がどのようにアクセスされるかについての混乱を避け、プロパティの宣言を単一の決定的なステートメントに簡素化します。プロパティに関するすべての情報（名前、型、メモリ管理特性など）は、型の定義の一部として単一の場所に定義されます。
 
-## Computed Properties
+## 計算プロパティ
 
-In addition to stored properties, classes, structures, and enumerations can define computed properties, which don’t actually store a value. Instead, they provide a getter and an optional setter to retrieve and set other properties and values indirectly.
+格納プロパティに加えて、クラス、構造体、および列挙型は計算プロパティを定義できます。計算プロパティは実際には値を格納しません。代わりに、ゲッターとオプションのセッターを提供して、他のプロパティや値を間接的に取得および設定します。
 
 ```swift
 struct Point {
@@ -133,29 +133,29 @@ struct Rect {
 var square = Rect(origin: Point(x: 0.0, y: 0.0),
     size: Size(width: 10.0, height: 10.0))
 let initialSquareCenter = square.center
-// initialSquareCenter is at (5.0, 5.0)
+// initialSquareCenter は (5.0, 5.0) です
 square.center = Point(x: 15.0, y: 15.0)
-print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
-// Prints "square.origin is now at (10.0, 10.0)"
+print("square.origin は現在 (\(square.origin.x), \(square.origin.y)) にあります")
+// "square.origin は現在 (10.0, 10.0) にあります" と出力されます
 ```
 
-This example defines three structures for working with geometric shapes:
+この例では、幾何学的な形状を扱うための3つの構造体を定義しています：
 
-- `Point` encapsulates the x- and y-coordinate of a point.
-- `Size` encapsulates a width and a height.
-- `Rect` defines a rectangle by an origin point and a size.
+- `Point` は点の x 座標と y 座標をカプセル化します。
+- `Size` は幅と高さをカプセル化します。
+- `Rect` は原点とサイズによって長方形を定義します。
 
-The `Rect` structure also provides a computed property called `center`. The current center position of a `Rect` can always be determined from its origin and size, and so you don’t need to store the center point as an explicit `Point` value. Instead, `Rect` defines a custom getter and setter for a computed variable called `center`, to enable you to work with the rectangle’s center as if it were a real stored property.
+`Rect` 構造体は `center` という計算プロパティも提供します。`Rect` の現在の中心位置は原点とサイズから常に決定できるため、中心点を明示的な `Point` 値として格納する必要はありません。代わりに、`Rect` は計算変数 `center` のカスタムゲッターとセッターを定義して、長方形の中心を実際の格納プロパティであるかのように操作できるようにします。
 
-The example above creates a new `Rect` variable called `square`. The `square` variable is initialized with an origin point of (0, 0), and a width and height of 10. This square is represented by the light green square in the diagram below.
+上記の例では、`square` という新しい `Rect` 変数を作成します。`square` 変数は原点が (0, 0) で、幅と高さが 10 の状態で初期化されます。この四角形は下図の薄緑色の四角形で表されます。
 
-The `square` variable’s `center` property is then accessed through dot syntax (`square.center`), which causes the getter for `center` to be called, to retrieve the current property value. Rather than returning an existing value, the getter actually calculates and returns a new `Point` to represent the center of the square. As can be seen above, the getter correctly returns a center point of (5, 5).
+`square` 変数の `center` プロパティはドット構文 (`square.center`) を通じてアクセスされ、`center` のゲッターが呼び出されて現在のプロパティ値を取得します。既存の値を返すのではなく、ゲッターは実際に新しい `Point` を計算して四角形の中心を表します。上記のように、ゲッターは正しく (5, 5) の中心点を返します。
 
-The `center` property is then set to a new value of (15, 15), which moves the square up and to the right, to the new position shown by the dark green square in the diagram below. Setting the `center` property calls the setter for `center`, which modifies the x and y values of the stored `origin` property, and moves the square to its new position.
+次に、`center` プロパティに (15, 15) の新しい値が設定され、四角形が右上に移動し、下図の濃緑色の四角形で示される新しい位置に移動します。`center` プロパティを設定すると、`center` のセッターが呼び出され、格納されている `origin` プロパティの x 値と y 値が変更され、四角形が新しい位置に移動します。
 
-### Shorthand Setter Declaration
+### セッターの省略形宣言
 
-If a computed property’s setter doesn’t define a name for the new value to be set, a default name of `newValue` is used. Here’s an alternative version of the `Rect` structure that takes advantage of this shorthand notation:
+計算プロパティのセッターが設定される新しい値の名前を定義しない場合、デフォルトの名前 `newValue` が使用されます。以下は、この省略形を利用した `Rect` 構造体の別バージョンです：
 
 ```swift
 struct AlternativeRect {
@@ -175,9 +175,9 @@ struct AlternativeRect {
 }
 ```
 
-### Shorthand Getter Declaration
+### ゲッターの省略形宣言
 
-If the entire body of a getter is a single expression, the getter implicitly returns that expression. Here’s another version of the `Rect` structure that takes advantage of this shorthand notation and the shorthand notation for setters:
+ゲッターの本体全体が単一の式である場合、ゲッターはその式を暗黙的に返します。以下は、この省略形とセッターの省略形を利用した `Rect` 構造体の別バージョンです：
 
 ```swift
 struct CompactRect {
@@ -196,16 +196,16 @@ struct CompactRect {
 }
 ```
 
-Omitting the `return` from a getter follows the same rules as omitting `return` from a function, as described in Functions With an Implicit Return.
+ゲッターから `return` を省略することは、関数から `return` を省略することと同じルールに従います。詳細は「暗黙的な戻り値を持つ関数」を参照してください。
 
-### Read-Only Computed Properties
+### 読み取り専用の計算プロパティ
 
-A computed property with a getter but no setter is known as a read-only computed property. A read-only computed property always returns a value, and can be accessed through dot syntax, but can’t be set to a different value.
+ゲッターのみを持ち、セッターを持たない計算プロパティは、読み取り専用の計算プロパティと呼ばれます。読み取り専用の計算プロパティは常に値を返し、ドット構文を通じてアクセスできますが、異なる値に設定することはできません。
 
-> **Note**  
-> You must declare computed properties — including read-only computed properties — as variable properties with the `var` keyword, because their value isn’t fixed. The `let` keyword is only used for constant properties, to indicate that their values can’t be changed once they’re set as part of instance initialization.
+> **注記**  
+> 計算プロパティ（読み取り専用の計算プロパティを含む）は、`var` キーワードを使用して変数プロパティとして宣言する必要があります。これは、値が固定されていないためです。`let` キーワードは定数プロパティにのみ使用され、その値はインスタンスの初期化の一部として設定された後に変更できないことを示します。
 
-You can simplify the declaration of a read-only computed property by removing the `get` keyword and its braces:
+読み取り専用の計算プロパティの宣言を簡略化するために、`get` キーワードとその中括弧を削除できます：
 
 ```swift
 struct Cuboid {
@@ -215,81 +215,81 @@ struct Cuboid {
     }
 }
 let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
-print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)")
-// Prints "the volume of fourByFiveByTwo is 40.0"
+print("fourByFiveByTwo の体積は \(fourByFiveByTwo.volume) です")
+// "fourByFiveByTwo の体積は 40.0 です" と出力されます
 ```
 
-This example defines a new structure called `Cuboid`, which represents a 3D rectangular box with `width`, `height`, and `depth` properties. This structure also has a read-only computed property called `volume`, which calculates and returns the current volume of the cuboid. It doesn’t make sense for `volume` to be settable, because it would be ambiguous as to which values of `width`, `height`, and `depth` should be used for a particular volume value. Nonetheless, it’s useful for a `Cuboid` to provide a read-only computed property to enable external users to discover its current calculated volume.
+この例では、`Cuboid` という新しい構造体を定義しています。これは `width`、`height`、および `depth` プロパティを持つ3Dの直方体を表します。この構造体には `volume` という読み取り専用の計算プロパティもあり、直方体の現在の体積を計算して返します。`volume` を設定可能にすることは意味がありません。なぜなら、特定の体積値に対してどの `width`、`height`、および `depth` の値を使用すべきかが曖昧になるからです。それにもかかわらず、`Cuboid` が現在の計算された体積を外部のユーザーに提供するために読み取り専用の計算プロパティを提供することは有用です。
 
-## Property Observers
+## プロパティオブザーバ
 
-Property observers observe and respond to changes in a property’s value. Property observers are called every time a property’s value is set, even if the new value is the same as the property’s current value.
+プロパティオブザーバは、プロパティの値の変化を監視し、応答します。プロパティオブザーバは、プロパティの値が設定されるたびに呼び出されます。たとえ新しい値が現在の値と同じであっても呼び出されます。
 
-You can add property observers in the following places:
+プロパティオブザーバを追加できる場所は次のとおりです：
 
-- Stored properties that you define
-- Stored properties that you inherit
-- Computed properties that you inherit
+- 定義したストアドプロパティ
+- 継承したストアドプロパティ
+- 継承した計算プロパティ
 
-For an inherited property, you add a property observer by overriding that property in a subclass. For a computed property that you define, use the property’s setter to observe and respond to value changes, instead of trying to create an observer. Overriding properties is described in Overriding.
+継承したプロパティの場合、サブクラスでそのプロパティをオーバーライドすることでプロパティオブザーバを追加します。定義した計算プロパティの場合、オブザーバを作成しようとするのではなく、プロパティのセッターを使用して値の変化を監視し、応答します。プロパティのオーバーライドについては、オーバーライドの説明を参照してください。
 
-You have the option to define either or both of these observers on a property:
+プロパティには次のいずれか、または両方のオブザーバを定義するオプションがあります：
 
-- `willSet` is called just before the value is stored.
-- `didSet` is called immediately after the new value is stored.
+- `willSet` は値が保存される直前に呼び出されます。
+- `didSet` は新しい値が保存された直後に呼び出されます。
 
-If you implement a `willSet` observer, it’s passed the new property value as a constant parameter. You can specify a name for this parameter as part of your `willSet` implementation. If you don’t write the parameter name and parentheses within your implementation, the parameter is made available with a default parameter name of `newValue`.
+`willSet` オブザーバを実装する場合、新しいプロパティ値が定数パラメータとして渡されます。このパラメータの名前を `willSet` 実装の一部として指定できます。実装内でパラメータ名と括弧を書かない場合、パラメータはデフォルトのパラメータ名 `newValue` で利用可能になります。
 
-Similarly, if you implement a `didSet` observer, it’s passed a constant parameter containing the old property value. You can name the parameter or use the default parameter name of `oldValue`. If you assign a value to a property within its own `didSet` observer, the new value that you assign replaces the one that was just set.
+同様に、`didSet` オブザーバを実装する場合、古いプロパティ値を含む定数パラメータが渡されます。このパラメータに名前を付けることも、デフォルトのパラメータ名 `oldValue` を使用することもできます。`didSet` オブザーバ内でプロパティに値を割り当てると、割り当てた新しい値が設定されたばかりの値を置き換えます。
 
-> **Note**  
-> The `willSet` and `didSet` observers of superclass properties are called when a property is set in a subclass initializer, after the superclass initializer has been called. They aren’t called while a class is setting its own properties, before the superclass initializer has been called.
+> **注記**  
+> スーパークラスのプロパティの `willSet` および `didSet` オブザーバは、スーパークラスのイニシャライザが呼び出された後、サブクラスのイニシャライザでプロパティが設定されたときに呼び出されます。クラスが自分のプロパティを設定している間、スーパークラスのイニシャライザが呼び出される前には呼び出されません。
 
-For more information about initializer delegation, see Initializer Delegation for Value Types and Initializer Delegation for Class Types.
+イニシャライザの委譲に関する詳細は、「値型のイニシャライザの委譲」および「クラス型のイニシャライザの委譲」を参照してください。
 
-Here’s an example of `willSet` and `didSet` in action. The example below defines a new class called `StepCounter`, which tracks the total number of steps that a person takes while walking. This class might be used with input data from a pedometer or other step counter to keep track of a person’s exercise during their daily routine.
+ここに `willSet` と `didSet` の実例があります。以下の例では、歩行中に人が歩いた総歩数を追跡する新しいクラス `StepCounter` を定義しています。このクラスは、歩数計や他のステップカウンターからの入力データを使用して、日常の運動を記録するために使用されるかもしれません。
 
 ```swift
 class StepCounter {
     var totalSteps: Int = 0 {
         willSet(newTotalSteps) {
-            print("About to set totalSteps to \(newTotalSteps)")
+            print("totalSteps を \(newTotalSteps) に設定しようとしています")
         }
         didSet {
             if totalSteps > oldValue  {
-                print("Added \(totalSteps - oldValue) steps")
+                print("\(totalSteps - oldValue) ステップ追加されました")
             }
         }
     }
 }
 let stepCounter = StepCounter()
 stepCounter.totalSteps = 200
-// About to set totalSteps to 200
-// Added 200 steps
+// totalSteps を 200 に設定しようとしています
+// 200 ステップ追加されました
 stepCounter.totalSteps = 360
-// About to set totalSteps to 360
-// Added 160 steps
+// totalSteps を 360 に設定しようとしています
+// 160 ステップ追加されました
 stepCounter.totalSteps = 896
-// About to set totalSteps to 896
-// Added 536 steps
+// totalSteps を 896 に設定しようとしています
+// 536 ステップ追加されました
 ```
 
-The `StepCounter` class declares a `totalSteps` property of type `Int`. This is a stored property with `willSet` and `didSet` observers.
+`StepCounter` クラスは、`Int` 型の `totalSteps` プロパティを宣言しています。これは `willSet` および `didSet` オブザーバを持つストアドプロパティです。
 
-The `willSet` and `didSet` observers for `totalSteps` are called whenever the property is assigned a new value. This is true even if the new value is the same as the current value.
+`totalSteps` の `willSet` および `didSet` オブザーバは、プロパティに新しい値が割り当てられるたびに呼び出されます。これは、新しい値が現在の値と同じであっても当てはまります。
 
-This example’s `willSet` observer uses a custom parameter name of `newTotalSteps` for the upcoming new value. In this example, it simply prints out the value that’s about to be set.
+この例の `willSet` オブザーバは、カスタムパラメータ名 `newTotalSteps` を使用して、設定される予定の値を表示します。
 
-The `didSet` observer is called after the value of `totalSteps` is updated. It compares the new value of `totalSteps` against the old value. If the total number of steps has increased, a message is printed to indicate how many new steps have been taken. The `didSet` observer doesn’t provide a custom parameter name for the old value, and the default name of `oldValue` is used instead.
+`didSet` オブザーバは、`totalSteps` の値が更新された後に呼び出されます。`totalSteps` の新しい値を古い値と比較します。総歩数が増加した場合、追加された新しい歩数を示すメッセージが表示されます。`didSet` オブザーバは古い値のカスタムパラメータ名を提供せず、デフォルトの名前 `oldValue` が使用されます。
 
-> **Note**  
-> If you pass a property that has observers to a function as an in-out parameter, the `willSet` and `didSet` observers are always called. This is because of the copy-in copy-out memory model for in-out parameters: The value is always written back to the property at the end of the function. For a detailed discussion of the behavior of in-out parameters, see In-Out Parameters.
+> **注記**  
+> オブザーバを持つプロパティを in-out パラメータとして関数に渡す場合、`willSet` および `didSet` オブザーバは常に呼び出されます。これは、in-out パラメータのコピーイン・コピーアウトメモリモデルのためです。関数の終わりに値が常にプロパティに書き戻されるためです。in-out パラメータの動作に関する詳細な議論については、in-out パラメータを参照してください。
 
-## Property Wrappers
+## プロパティラッパー
 
-A property wrapper adds a layer of separation between code that manages how a property is stored and the code that defines a property. For example, if you have properties that provide thread-safety checks or store their underlying data in a database, you have to write that code on every property. When you use a property wrapper, you write the management code once when you define the wrapper, and then reuse that management code by applying it to multiple properties.
+プロパティラッパーは、プロパティの保存方法を管理するコードとプロパティを定義するコードの間に分離の層を追加します。たとえば、スレッドセーフチェックを提供するプロパティや、基礎データをデータベースに保存するプロパティがある場合、そのコードをすべてのプロパティに書く必要があります。プロパティラッパーを使用すると、ラッパーを定義するときに管理コードを一度だけ書き、その管理コードを複数のプロパティに適用して再利用できます。
 
-To define a property wrapper, you make a structure, enumeration, or class that defines a `wrappedValue` property. In the code below, the `TwelveOrLess` structure ensures that the value it wraps always contains a number less than or equal to 12. If you ask it to store a larger number, it stores 12 instead.
+プロパティラッパーを定義するには、`wrappedValue` プロパティを定義する構造体、列挙型、またはクラスを作成します。以下のコードでは、`TwelveOrLess` 構造体がラップする値が常に12以下の数値を含むようにします。より大きな数値を保存しようとすると、代わりに12を保存します。
 
 ```swift
 @propertyWrapper
@@ -302,12 +302,12 @@ struct TwelveOrLess {
 }
 ```
 
-The setter ensures that new values are less than or equal to 12, and the getter returns the stored value.
+セッターは新しい値が12以下であることを保証し、ゲッターは保存された値を返します。
 
-> **Note**  
-> The declaration for `number` in the example above marks the variable as `private`, which ensures `number` is used only in the implementation of `TwelveOrLess`. Code that’s written anywhere else accesses the value using the getter and setter for `wrappedValue`, and can’t use `number` directly. For information about `private`, see Access Control.
+> **注記**  
+> 上記の例で `number` の宣言は変数を `private` としてマークしています。これにより、`number` は `TwelveOrLess` の実装でのみ使用されます。他の場所で書かれたコードは、`wrappedValue` のゲッターとセッターを使用して値にアクセスし、直接 `number` を使用することはできません。`private` についての情報は、アクセス制御を参照してください。
 
-You apply a wrapper to a property by writing the wrapper’s name before the property as an attribute. Here’s a structure that stores a rectangle that uses the `TwelveOrLess` property wrapper to ensure its dimensions are always 12 or less:
+プロパティにラッパーを適用するには、プロパティの前にラッパーの名前を属性として書きます。ここに、`TwelveOrLess` プロパティラッパーを使用して、その寸法が常に12以下であることを保証する長方形を保存する構造体があります：
 
 ```swift
 struct SmallRectangle {
@@ -317,20 +317,20 @@ struct SmallRectangle {
 
 var rectangle = SmallRectangle()
 print(rectangle.height)
-// Prints "0"
+// "0" を出力
 
 rectangle.height = 10
 print(rectangle.height)
-// Prints "10"
+// "10" を出力
 
 rectangle.height = 24
 print(rectangle.height)
-// Prints "12"
+// "12" を出力
 ```
 
-The `height` and `width` properties get their initial values from the definition of `TwelveOrLess`, which sets `TwelveOrLess.number` to zero. The setter in `TwelveOrLess` treats 10 as a valid value so storing the number 10 in `rectangle.height` proceeds as written. However, 24 is larger than `TwelveOrLess` allows, so trying to store 24 end up setting `rectangle.height` to 12 instead, the largest allowed value.
+`height` および `width` プロパティは、`TwelveOrLess` の定義から初期値を取得し、`TwelveOrLess.number` をゼロに設定します。`TwelveOrLess` のセッターは10を有効な値として扱うため、`rectangle.height` に10を保存することはそのまま進行します。しかし、24は `TwelveOrLess` が許可する最大値を超えているため、24を保存しようとすると、代わりに `rectangle.height` が許可される最大値の12に設定されます。
 
-When you apply a wrapper to a property, the compiler synthesizes code that provides storage for the wrapper and code that provides access to the property through the wrapper. (The property wrapper is responsible for storing the wrapped value, so there’s no synthesized code for that.) You could write code that uses the behavior of a property wrapper, without taking advantage of the special attribute syntax. For example, here’s a version of `SmallRectangle` from the previous code listing that wraps its properties in the `TwelveOrLess` structure explicitly, instead of writing `@TwelveOrLess` as an attribute:
+プロパティにラッパーを適用すると、コンパイラはラッパーのためのストレージを提供するコードと、ラッパーを通じてプロパティにアクセスするコードを合成します（プロパティラッパーはラップされた値を保存する責任があるため、そのための合成コードはありません）。以下は、`SmallRectangle` のプロパティを `TwelveOrLess` 構造体に明示的にラップし、属性として `@TwelveOrLess` を書かないバージョンです：
 
 ```swift
 struct SmallRectangle {
@@ -347,11 +347,11 @@ struct SmallRectangle {
 }
 ```
 
-The `_height` and `_width` properties store an instance of the property wrapper, `TwelveOrLess`. The getter and setter for `height` and `width` wrap access to the `wrappedValue` property.
+`_height` および `_width` プロパティは、プロパティラッパー `TwelveOrLess` のインスタンスを保存します。`height` および `width` のゲッターとセッターは、`wrappedValue` プロパティへのアクセスをラップします。
 
-### Setting Initial Values for Wrapped Properties
+### ラップされたプロパティの初期値を設定する
 
-The code in the examples above sets the initial value for the wrapped property by giving `number` an initial value in the definition of `TwelveOrLess`. Code that uses this property wrapper can’t specify a different initial value for a property that’s wrapped by `TwelveOrLess` — for example, the definition of `SmallRectangle` can’t give `height` or `width` initial values. To support setting an initial value or other customization, the property wrapper needs to add an initializer. Here’s an expanded version of `TwelveOrLess` called `SmallNumber` that defines initializers that set the wrapped and maximum value:
+上記の例のコードは、`TwelveOrLess` の定義で `number` に初期値を与えることで、ラップされたプロパティの初期値を設定しています。このプロパティラッパーを使用するコードは、`TwelveOrLess` によってラップされたプロパティに対して異なる初期値を指定することはできません。例えば、`SmallRectangle` の定義では `height` や `width` に初期値を与えることはできません。初期値の設定やその他のカスタマイズをサポートするために、プロパティラッパーにイニシャライザを追加する必要があります。以下に、イニシャライザを定義してラップされた値と最大値を設定する `SmallNumber` という `TwelveOrLess` の拡張版を示します。
 
 ```swift
 @propertyWrapper
@@ -379,9 +379,9 @@ struct SmallNumber {
 }
 ```
 
-The definition of `SmallNumber` includes three initializers — `init()`, `init(wrappedValue:)`, and `init(wrappedValue:maximum:)` — which the examples below use to set the wrapped value and the maximum value. For information about initialization and initializer syntax, see Initialization.
+`SmallNumber` の定義には、`init()`, `init(wrappedValue:)`, `init(wrappedValue:maximum:)` の3つのイニシャライザが含まれており、以下の例ではこれらを使用してラップされた値と最大値を設定します。初期化とイニシャライザの構文については、初期化を参照してください。
 
-When you apply a wrapper to a property and you don’t specify an initial value, Swift uses the `init()` initializer to set up the wrapper. For example:
+プロパティにラッパーを適用し、初期値を指定しない場合、Swift は `init()` イニシャライザを使用してラッパーを設定します。例えば：
 
 ```swift
 struct ZeroRectangle {
@@ -394,9 +394,9 @@ print(zeroRectangle.height, zeroRectangle.width)
 // Prints "0 0"
 ```
 
-The instances of `SmallNumber` that wrap `height` and `width` are created by calling `SmallNumber()`. The code inside that initializer sets the initial wrapped value and the initial maximum value, using the default values of zero and 12. The property wrapper still provides all of the initial values, like the earlier example that used `TwelveOrLess` in `SmallRectangle`. Unlike that example, `SmallNumber` also supports writing those initial values as part of declaring the property.
+`height` と `width` をラップする `SmallNumber` のインスタンスは `SmallNumber()` を呼び出すことで作成されます。そのイニシャライザ内のコードは、初期ラップ値と初期最大値をデフォルト値の0と12を使用して設定します。プロパティラッパーは、`SmallRectangle` で `TwelveOrLess` を使用した以前の例と同様に、すべての初期値を提供します。この例とは異なり、`SmallNumber` はプロパティの宣言時にこれらの初期値を記述することもサポートします。
 
-When you specify an initial value for the property, Swift uses the `init(wrappedValue:)` initializer to set up the wrapper. For example:
+プロパティに初期値を指定すると、Swift は `init(wrappedValue:)` イニシャライザを使用してラッパーを設定します。例えば：
 
 ```swift
 struct UnitRectangle {
@@ -409,9 +409,9 @@ print(unitRectangle.height, unitRectangle.width)
 // Prints "1 1"
 ```
 
-When you write `= 1` on a property with a wrapper, that’s translated into a call to the `init(wrappedValue:)` initializer. The instances of `SmallNumber` that wrap `height` and `width` are created by calling `SmallNumber(wrappedValue: 1)`. The initializer uses the wrapped value that’s specified here, and it uses the default maximum value of 12.
+プロパティに `= 1` と記述すると、それは `init(wrappedValue:)` イニシャライザの呼び出しに変換されます。`height` と `width` をラップする `SmallNumber` のインスタンスは `SmallNumber(wrappedValue: 1)` を呼び出すことで作成されます。このイニシャライザはここで指定されたラップ値を使用し、デフォルトの最大値12を使用します。
 
-When you write arguments in parentheses after the custom attribute, Swift uses the initializer that accepts those arguments to set up the wrapper. For example, if you provide an initial value and a maximum value, Swift uses the `init(wrappedValue:maximum:)` initializer:
+カスタム属性の後に括弧内に引数を記述すると、Swift はそれらの引数を受け取るイニシャライザを使用してラッパーを設定します。例えば、初期値と最大値を指定すると、Swift は `init(wrappedValue:maximum:)` イニシャライザを使用します。
 
 ```swift
 struct NarrowRectangle {
@@ -429,11 +429,11 @@ print(narrowRectangle.height, narrowRectangle.width)
 // Prints "5 4"
 ```
 
-The instance of `SmallNumber` that wraps `height` is created by calling `SmallNumber(wrappedValue: 2, maximum: 5)`, and the instance that wraps `width` is created by calling `SmallNumber(wrappedValue: 3, maximum: 4)`.
+`height` をラップする `SmallNumber` のインスタンスは `SmallNumber(wrappedValue: 2, maximum: 5)` を呼び出すことで作成され、`width` をラップするインスタンスは `SmallNumber(wrappedValue: 3, maximum: 4)` を呼び出すことで作成されます。
 
-By including arguments to the property wrapper, you can set up the initial state in the wrapper or pass other options to the wrapper when it’s created. This syntax is the most general way to use a property wrapper. You can provide whatever arguments you need to the attribute, and they’re passed to the initializer.
+プロパティラッパーに引数を含めることで、ラッパーの初期状態を設定したり、作成時に他のオプションをラッパーに渡すことができます。この構文はプロパティラッパーを使用する最も一般的な方法です。必要な引数を属性に提供し、それらはイニシャライザに渡されます。
 
-When you include property wrapper arguments, you can also specify an initial value using assignment. Swift treats the assignment like a `wrappedValue` argument and uses the initializer that accepts the arguments you include. For example:
+プロパティラッパーの引数を含める場合、代入を使用して初期値を指定することもできます。Swift は代入を `wrappedValue` 引数のように扱い、含めた引数を受け取るイニシャライザを使用します。例えば：
 
 ```swift
 struct MixedRectangle {
@@ -450,13 +450,13 @@ print(mixedRectangle.height)
 // Prints "12"
 ```
 
-The instance of `SmallNumber` that wraps `height` is created by calling `SmallNumber(wrappedValue: 1)`, which uses the default maximum value of 12. The instance that wraps `width` is created by calling `SmallNumber(wrappedValue: 2, maximum: 9)`.
+`height` をラップする `SmallNumber` のインスタンスは `SmallNumber(wrappedValue: 1)` を呼び出すことで作成され、デフォルトの最大値12を使用します。`width` をラップするインスタンスは `SmallNumber(wrappedValue: 2, maximum: 9)` を呼び出すことで作成されます。
 
-### Projecting a Value From a Property Wrapper
+### プロパティラッパーから値を投影する
 
-In addition to the wrapped value, a property wrapper can expose additional functionality by defining a projected value — for example, a property wrapper that manages access to a database can expose a `flushDatabaseConnection()` method on its projected value. The name of the projected value is the same as the wrapped value, except it begins with a dollar sign (`$`). Because your code can’t define properties that start with `$` the projected value never interferes with properties you define.
+ラップされた値に加えて、プロパティラッパーは投影された値を定義することで追加の機能を公開できます。例えば、データベースへのアクセスを管理するプロパティラッパーは、その投影された値に `flushDatabaseConnection()` メソッドを公開できます。投影された値の名前はラップされた値と同じですが、ドル記号 (`$`) で始まります。コードで `$` で始まるプロパティを定義することはできないため、投影された値が定義したプロパティと干渉することはありません。
 
-In the `SmallNumber` example above, if you try to set the property to a number that’s too large, the property wrapper adjusts the number before storing it. The code below adds a `projectedValue` property to the `SmallNumber` structure to keep track of whether the property wrapper adjusted the new value for the property before storing that new value.
+上記の `SmallNumber` の例では、プロパティを大きすぎる数値に設定しようとすると、プロパティラッパーが数値を調整してから保存します。以下のコードは、プロパティラッパーが新しい値を保存する前にプロパティの値を調整したかどうかを追跡するために `projectedValue` プロパティを `SmallNumber` 構造体に追加します。
 
 ```swift
 @propertyWrapper
@@ -489,18 +489,18 @@ var someStructure = SomeStructure()
 
 someStructure.someNumber = 4
 print(someStructure.$someNumber)
-// Prints "false"
+// "false" と表示されます
 
 someStructure.someNumber = 55
 print(someStructure.$someNumber)
-// Prints "true"
+// "true" と表示されます
 ```
 
-Writing `someStructure.$someNumber` accesses the wrapper’s projected value. After storing a small number like four, the value of `someStructure.$someNumber` is `false`. However, the projected value is `true` after trying to store a number that’s too large, like 55.
+`someStructure.$someNumber` と書くことで、ラッパーの投影された値にアクセスします。4のような小さな数値を保存した後、`someStructure.$someNumber` の値は `false` です。しかし、55のような大きすぎる数値を保存しようとすると、投影された値は `true` になります。
 
-A property wrapper can return a value of any type as its projected value. In this example, the property wrapper exposes only one piece of information — whether the number was adjusted — so it exposes that Boolean value as its projected value. A wrapper that needs to expose more information can return an instance of some other type, or it can return `self` to expose the instance of the wrapper as its projected value.
+プロパティラッパーは、任意の型の値を投影された値として返すことができます。この例では、プロパティラッパーは数値が調整されたかどうかという1つの情報だけを公開しているため、そのブール値を投影された値として公開しています。より多くの情報を公開する必要があるラッパーは、他の型のインスタンスを返すか、`self` を返してラッパーのインスタンス自体を投影された値として公開することができます。
 
-When you access a projected value from code that’s part of the type, like a property getter or an instance method, you can omit `self.` before the property name, just like accessing other properties. The code in the following example refers to the projected value of the wrapper around `height` and `width` as `$height` and `$width`:
+型の一部であるコード（プロパティのゲッターやインスタンスメソッドなど）から投影された値にアクセスする場合、他のプロパティにアクセスするのと同様に、プロパティ名の前に `self.` を省略できます。次の例のコードでは、`height` と `width` のラッパーの投影された値を `$height` と `$width` として参照しています。
 
 ```swift
 enum Size {
@@ -525,57 +525,57 @@ struct SizedRectangle {
 }
 ```
 
-Because property wrapper syntax is just syntactic sugar for a property with a getter and a setter, accessing `height` and `width` behaves the same as accessing any other property. For example, the code in `resize(to:)` accesses `height` and `width` using their property wrapper. If you call `resize(to: .large)`, the switch case for `.large` sets the rectangle’s `height` and `width` to 100. The wrapper prevents the value of those properties from being larger than 12, and it sets the projected value to `true`, to record the fact that it adjusted their values. At the end of `resize(to:)`, the return statement checks `$height` and `$width` to determine whether the property wrapper adjusted either `height` or `width`.
+プロパティラッパーの構文は、ゲッターとセッターを持つプロパティのためのシンタックスシュガーに過ぎないため、`height` と `width` へのアクセスは他のプロパティへのアクセスと同じように動作します。例えば、`resize(to:)` のコードはプロパティラッパーを使用して `height` と `width` にアクセスします。`resize(to: .large)` を呼び出すと、`.large` のスイッチケースが矩形の `height` と `width` を100に設定します。ラッパーはこれらのプロパティの値が12を超えないようにし、値を調整したことを記録するために投影された値を `true` に設定します。`resize(to:)` の最後で、戻り値のステートメントは `$height` と `$width` をチェックして、プロパティラッパーが `height` または `width` のいずれかを調整したかどうかを判断します。
 
-## Global and Local Variables
+## グローバル変数とローカル変数
 
-The capabilities described above for computing and observing properties are also available to global variables and local variables. Global variables are variables that are defined outside of any function, method, closure, or type context. Local variables are variables that are defined within a function, method, or closure context.
+プロパティの計算と監視のための上記の機能は、グローバル変数とローカル変数にも利用できます。グローバル変数は、関数、メソッド、クロージャ、または型のコンテキスト外で定義された変数です。ローカル変数は、関数、メソッド、またはクロージャのコンテキスト内で定義された変数です。
 
-The global and local variables you have encountered in previous chapters have all been stored variables. Stored variables, like stored properties, provide storage for a value of a certain type and allow that value to be set and retrieved.
+前の章で出てきたグローバル変数とローカル変数はすべてストアド変数でした。ストアド変数は、ストアドプロパティと同様に、特定の型の値を保存し、その値を設定および取得するためのストレージを提供します。
 
-However, you can also define computed variables and define observers for stored variables, in either a global or local scope. Computed variables calculate their value, rather than storing it, and they’re written in the same way as computed properties.
+しかし、グローバルスコープまたはローカルスコープで計算変数を定義し、ストアド変数のオブザーバを定義することもできます。計算変数は値を保存するのではなく計算し、その記述方法は計算プロパティと同じです。
 
-> **Note**  
-> Global constants and variables are always computed lazily, in a similar manner to Lazy Stored Properties. Unlike lazy stored properties, global constants and variables don’t need to be marked with the `lazy` modifier.
+> **注記**  
+> グローバル定数と変数は常に遅延評価され、遅延ストアドプロパティと同様に動作します。遅延ストアドプロパティとは異なり、グローバル定数と変数は `lazy` 修飾子を付ける必要はありません。
 > 
-> Local constants and variables are never computed lazily.
+> ローカル定数と変数は決して遅延評価されません。
 
-You can apply a property wrapper to a local stored variable, but not to a global variable or a computed variable. For example, in the code below, `myNumber` uses `SmallNumber` as a property wrapper.
+プロパティラッパーをローカルストアド変数に適用することはできますが、グローバル変数や計算変数には適用できません。例えば、以下のコードでは、`myNumber` がプロパティラッパーとして `SmallNumber` を使用しています。
 
 ```swift
 func someFunction() {
     @SmallNumber var myNumber: Int = 0
 
     myNumber = 10
-    // now myNumber is 10
+    // 現在、myNumber は 10 です
 
     myNumber = 24
-    // now myNumber is 12
+    // 現在、myNumber は 12 です
 }
 ```
 
-Like when you apply `SmallNumber` to a property, setting the value of `myNumber` to 10 is valid. Because the property wrapper doesn’t allow values higher than 12, it sets `myNumber` to 12 instead of 24.
+プロパティに `SmallNumber` を適用する場合と同様に、`myNumber` の値を10に設定することは有効です。プロパティラッパーが12を超える値を許可しないため、`myNumber` を24ではなく12に設定します。
 
-## Type Properties
+## 型プロパティ
 
-Instance properties are properties that belong to an instance of a particular type. Every time you create a new instance of that type, it has its own set of property values, separate from any other instance.
+インスタンスプロパティは、特定の型のインスタンスに属するプロパティです。その型の新しいインスタンスを作成するたびに、他のインスタンスとは別のプロパティ値のセットを持ちます。
 
-You can also define properties that belong to the type itself, not to any one instance of that type. There will only ever be one copy of these properties, no matter how many instances of that type you create. These kinds of properties are called type properties.
+また、特定の型自体に属するプロパティを定義することもできます。この型のインスタンスをいくつ作成しても、これらのプロパティのコピーは1つだけです。このようなプロパティは型プロパティと呼ばれます。
 
-Type properties are useful for defining values that are universal to all instances of a particular type, such as a constant property that all instances can use (like a static constant in C), or a variable property that stores a value that’s global to all instances of that type (like a static variable in C).
+型プロパティは、特定の型のすべてのインスタンスに共通する値を定義するのに便利です。例えば、すべてのインスタンスが使用できる定数プロパティ（Cの静的定数のようなもの）や、その型のすべてのインスタンスに対してグローバルな値を保存する変数プロパティ（Cの静的変数のようなもの）です。
 
-Stored type properties can be variables or constants. Computed type properties are always declared as variable properties, in the same way as computed instance properties.
+ストアド型プロパティは変数または定数にすることができます。計算型プロパティは常に変数プロパティとして宣言され、計算インスタンスプロパティと同じ方法で記述されます。
 
-> **Note**  
-> Unlike stored instance properties, you must always give stored type properties a default value. This is because the type itself doesn’t have an initializer that can assign a value to a stored type property at initialization time.
+> **注記**  
+> ストアドインスタンスプロパティとは異なり、ストアド型プロパティには常にデフォルト値を与える必要があります。これは、型自体が初期化時にストアド型プロパティに値を割り当てるイニシャライザを持たないためです。
 > 
-> Stored type properties are lazily initialized on their first access. They’re guaranteed to be initialized only once, even when accessed by multiple threads simultaneously, and they don’t need to be marked with the `lazy` modifier.
+> ストアド型プロパティは最初にアクセスされたときに遅延初期化されます。複数のスレッドによって同時にアクセスされても、一度だけ初期化されることが保証されており、`lazy` 修飾子を付ける必要はありません。
 
-### Type Property Syntax
+### 型プロパティの構文
 
-In C and Objective-C, you define static constants and variables associated with a type as global static variables. In Swift, however, type properties are written as part of the type’s definition, within the type’s outer curly braces, and each type property is explicitly scoped to the type it supports.
+CやObjective-Cでは、型に関連付けられた静的定数や変数をグローバル静的変数として定義します。しかし、Swiftでは、型プロパティは型の定義の一部として書かれ、型の外側の中括弧内にあり、各型プロパティはそれがサポートする型に明示的にスコープされます。
 
-You define type properties with the `static` keyword. For computed type properties for class types, you can use the `class` keyword instead to allow subclasses to override the superclass’s implementation. The example below shows the syntax for stored and computed type properties:
+型プロパティは`static`キーワードで定義します。クラス型の計算型プロパティの場合、サブクラスがスーパークラスの実装をオーバーライドできるようにするために`class`キーワードを使用できます。以下の例は、格納型プロパティと計算型プロパティの構文を示しています：
 
 ```swift
 struct SomeStructure {
@@ -601,30 +601,30 @@ class SomeClass {
 }
 ```
 
-> **Note**  
-> The computed type property examples above are for read-only computed type properties, but you can also define read-write computed type properties with the same syntax as for computed instance properties.
+> **注記**  
+> 上記の計算型プロパティの例は読み取り専用の計算型プロパティですが、計算インスタンスプロパティと同じ構文で読み書き可能な計算型プロパティを定義することもできます。
 
-### Querying and Setting Type Properties
+### 型プロパティのクエリと設定
 
-Type properties are queried and set with dot syntax, just like instance properties. However, type properties are queried and set on the type, not on an instance of that type. For example:
+型プロパティはインスタンスプロパティと同様にドット構文でクエリおよび設定されます。ただし、型プロパティはその型のインスタンスではなく、型自体に対してクエリおよび設定されます。例えば：
 
 ```swift
 print(SomeStructure.storedTypeProperty)
-// Prints "Some value."
+// "Some value."と表示されます
 SomeStructure.storedTypeProperty = "Another value."
 print(SomeStructure.storedTypeProperty)
-// Prints "Another value."
+// "Another value."と表示されます
 print(SomeEnumeration.computedTypeProperty)
-// Prints "6"
+// "6"と表示されます
 print(SomeClass.computedTypeProperty)
-// Prints "27"
+// "27"と表示されます
 ```
 
-The examples that follow use two stored type properties as part of a structure that models an audio level meter for a number of audio channels. Each channel has an integer audio level between 0 and 10 inclusive.
+以下の例では、複数のオーディオチャンネルのオーディオレベルメーターをモデル化する構造体の一部として2つの格納型プロパティを使用します。各チャンネルには0から10までの整数のオーディオレベルがあります。
 
-The figure below illustrates how two of these audio channels can be combined to model a stereo audio level meter. When a channel’s audio level is 0, none of the lights for that channel are lit. When the audio level is 10, all of the lights for that channel are lit. In this figure, the left channel has a current level of 9, and the right channel has a current level of 7:
+以下の図は、これらのオーディオチャンネルの2つを組み合わせてステレオオーディオレベルメーターをモデル化する方法を示しています。チャンネルのオーディオレベルが0の場合、そのチャンネルのライトは点灯しません。オーディオレベルが10の場合、そのチャンネルのすべてのライトが点灯します。この図では、左チャンネルの現在のレベルは9で、右チャンネルの現在のレベルは7です：
 
-The audio channels described above are represented by instances of the `AudioChannel` structure:
+上記のオーディオチャンネルは、`AudioChannel`構造体のインスタンスによって表されます：
 
 ```swift
 struct AudioChannel {
@@ -633,11 +633,11 @@ struct AudioChannel {
     var currentLevel: Int = 0 {
         didSet {
             if currentLevel > AudioChannel.thresholdLevel {
-                // cap the new audio level to the threshold level
+                // 新しいオーディオレベルをしきい値レベルに制限する
                 currentLevel = AudioChannel.thresholdLevel
             }
             if currentLevel > AudioChannel.maxInputLevelForAllChannels {
-                // store this as the new overall maximum input level
+                // これを新しい全体の最大入力レベルとして保存する
                 AudioChannel.maxInputLevelForAllChannels = currentLevel
             }
         }
@@ -645,43 +645,43 @@ struct AudioChannel {
 }
 ```
 
-The `AudioChannel` structure defines two stored type properties to support its functionality. The first, `thresholdLevel`, defines the maximum threshold value an audio level can take. This is a constant value of 10 for all `AudioChannel` instances. If an audio signal comes in with a higher value than 10, it will be capped to this threshold value (as described below).
+`AudioChannel`構造体は、その機能をサポートするために2つの格納型プロパティを定義しています。最初の`thresholdLevel`は、オーディオレベルが取ることができる最大しきい値を定義します。これはすべての`AudioChannel`インスタンスに対して10の定数値です。10を超える値のオーディオ信号が入ってきた場合、このしきい値に制限されます（以下で説明します）。
 
-The second type property is a variable stored property called `maxInputLevelForAllChannels`. This keeps track of the maximum input value that has been received by any `AudioChannel` instance. It starts with an initial value of 0.
+2つ目の型プロパティは`maxInputLevelForAllChannels`という変数格納プロパティです。これは、任意の`AudioChannel`インスタンスによって受信された最大入力値を追跡します。初期値は0です。
 
-The `AudioChannel` structure also defines a stored instance property called `currentLevel`, which represents the channel’s current audio level on a scale of 0 to 10.
+`AudioChannel`構造体は、0から10のスケールでチャンネルの現在のオーディオレベルを表す`currentLevel`という格納インスタンスプロパティも定義しています。
 
-The `currentLevel` property has a `didSet` property observer to check the value of `currentLevel` whenever it’s set. This observer performs two checks:
+`currentLevel`プロパティには、設定されるたびに`currentLevel`の値をチェックする`didSet`プロパティオブザーバがあります。このオブザーバは2つのチェックを行います：
 
-- If the new value of `currentLevel` is greater than the allowed `thresholdLevel`, the property observer caps `currentLevel` to `thresholdLevel`.
-- If the new value of `currentLevel` (after any capping) is higher than any value previously received by any `AudioChannel` instance, the property observer stores the new `currentLevel` value in the `maxInputLevelForAllChannels` type property.
+- `currentLevel`の新しい値が許可される`thresholdLevel`を超える場合、プロパティオブザーバは`currentLevel`を`thresholdLevel`に制限します。
+- （制限後の）`currentLevel`の新しい値が、これまでに任意の`AudioChannel`インスタンスによって受信された値よりも高い場合、プロパティオブザーバは新しい`currentLevel`値を`maxInputLevelForAllChannels`型プロパティに保存します。
 
-> **Note**  
-> In the first of these two checks, the `didSet` observer sets `currentLevel` to a different value. This doesn’t, however, cause the observer to be called again.
+> **注記**  
+> これら2つのチェックの最初のチェックでは、`didSet`オブザーバが`currentLevel`を異なる値に設定します。ただし、これによりオブザーバが再度呼び出されることはありません。
 
-You can use the `AudioChannel` structure to create two new audio channels called `leftChannel` and `rightChannel`, to represent the audio levels of a stereo sound system:
+`AudioChannel`構造体を使用して、ステレオサウンドシステムのオーディオレベルを表す2つの新しいオーディオチャンネル`leftChannel`と`rightChannel`を作成できます：
 
 ```swift
 var leftChannel = AudioChannel()
 var rightChannel = AudioChannel()
 ```
 
-If you set the `currentLevel` of the left channel to 7, you can see that the `maxInputLevelForAllChannels` type property is updated to equal 7:
+左チャンネルの`currentLevel`を7に設定すると、`maxInputLevelForAllChannels`型プロパティが7に更新されることがわかります：
 
 ```swift
 leftChannel.currentLevel = 7
 print(leftChannel.currentLevel)
-// Prints "7"
+// "7"と表示されます
 print(AudioChannel.maxInputLevelForAllChannels)
-// Prints "7"
+// "7"と表示されます
 ```
 
-If you try to set the `currentLevel` of the right channel to 11, you can see that the right channel’s `currentLevel` property is capped to the maximum value of 10, and the `maxInputLevelForAllChannels` type property is updated to equal 10:
+右チャンネルの`currentLevel`を11に設定しようとすると、右チャンネルの`currentLevel`プロパティが最大値の10に制限され、`maxInputLevelForAllChannels`型プロパティが10に更新されることがわかります：
 
 ```swift
 rightChannel.currentLevel = 11
 print(rightChannel.currentLevel)
-// Prints "10"
+// "10"と表示されます
 print(AudioChannel.maxInputLevelForAllChannels)
-// Prints "10"
+// "10"と表示されます
 ```

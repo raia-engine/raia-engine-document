@@ -1,16 +1,16 @@
-# Opaque and Boxed Protocol Types
+# 不透明型とボックス化されたプロトコル型
 
-Hide implementation details about a value’s type.
+値の型に関する実装の詳細を隠します。
 
-Swift provides two ways to hide details about a value’s type: opaque types and boxed protocol types. Hiding type information is useful at boundaries between a module and code that calls into the module, because the underlying type of the return value can remain private.
+Swiftは、値の型に関する詳細を隠すための2つの方法を提供します: 不透明型とボックス化されたプロトコル型です。型情報を隠すことは、モジュールとそのモジュールを呼び出すコードの間の境界で有用です。なぜなら、戻り値の基礎となる型を非公開にすることができるからです。
 
-A function or method that returns an opaque type hides its return value’s type information. Instead of providing a concrete type as the function’s return type, the return value is described in terms of the protocols it supports. Opaque types preserve type identity — the compiler has access to the type information, but clients of the module don’t.
+不透明型を返す関数やメソッドは、その戻り値の型情報を隠します。関数の戻り値の型として具体的な型を提供する代わりに、戻り値はサポートするプロトコルの観点から記述されます。不透明型は型の同一性を保持します — コンパイラは型情報にアクセスできますが、モジュールのクライアントはアクセスできません。
 
-A boxed protocol type can store an instance of any type that conforms to the given protocol. Boxed protocol types don’t preserve type identity — the value’s specific type isn’t known until runtime, and it can change over time as different values are stored.
+ボックス化されたプロトコル型は、指定されたプロトコルに準拠する任意の型のインスタンスを格納できます。ボックス化されたプロトコル型は型の同一性を保持しません — 値の具体的な型は実行時までわからず、異なる値が格納されると時間とともに変わる可能性があります。
 
-## The Problem That Opaque Types Solve
+## 不透明型が解決する問題
 
-For example, suppose you’re writing a module that draws ASCII art shapes. The basic characteristic of an ASCII art shape is a `draw()` function that returns the string representation of that shape, which you can use as the requirement for the `Shape` protocol:
+例えば、ASCIIアートの形状を描くモジュールを作成しているとします。ASCIIアートの形状の基本的な特徴は、その形状の文字列表現を返す`draw()`関数であり、これを`Shape`プロトコルの要件として使用できます:
 
 ```swift
 protocol Shape {
@@ -36,7 +36,7 @@ print(smallTriangle.draw())
 // ***
 ```
 
-You could use generics to implement operations like flipping a shape vertically, as shown in the code below. However, there’s an important limitation to this approach: The flipped result exposes the exact generic types that were used to create it.
+以下のコードのように、ジェネリックを使用して形状を垂直に反転させる操作を実装することができます。しかし、このアプローチには重要な制限があります: 反転された結果は、それを作成するために使用された正確なジェネリック型を公開します。
 
 ```swift
 struct FlippedShape<T: Shape>: Shape {
@@ -53,7 +53,7 @@ print(flippedTriangle.draw())
 // *
 ```
 
-This approach to defining a `JoinedShape<T: Shape, U: Shape>` structure that joins two shapes together vertically, like the code below shows, results in types like `JoinedShape<Triangle, FlippedShape<Triangle>>` from joining a triangle with a flipped triangle.
+以下のコードのように、2つの形状を垂直に結合する`JoinedShape<T: Shape, U: Shape>`構造体を定義するこのアプローチは、三角形と反転した三角形を結合することから`JoinedShape<Triangle, FlippedShape<Triangle>>`のような型を生成します。
 
 ```swift
 struct JoinedShape<T: Shape, U: Shape>: Shape {
@@ -73,19 +73,19 @@ print(joinedTriangles.draw())
 // *
 ```
 
-Exposing detailed information about the creation of a shape allows types that aren’t meant to be part of the ASCII art module’s public interface to leak out because of the need to state the full return type. The code inside the module could build up the same shape in a variety of ways, and other code outside the module that uses the shape shouldn’t have to account for the implementation details about the list of transformations. Wrapper types like `JoinedShape` and `FlippedShape` don’t matter to the module’s users, and they shouldn’t be visible. The module’s public interface consists of operations like joining and flipping a shape, and those operations return another `Shape` value.
+形状の作成に関する詳細情報を公開することは、ASCIIアートモジュールの公開インターフェースの一部であるべきではない型が、完全な戻り値の型を記述する必要があるために漏れ出すことを意味します。モジュール内のコードはさまざまな方法で同じ形状を構築できますが、モジュール外の他のコードは変換のリストに関する実装の詳細を考慮する必要はありません。`JoinedShape`や`FlippedShape`のようなラッパー型はモジュールのユーザーにとって重要ではなく、可視化されるべきではありません。モジュールの公開インターフェースは、形状を結合したり反転させたりする操作で構成され、これらの操作は別の`Shape`値を返します。
 
-## Returning an Opaque Type
+## 不透明な型を返す
 
-You can think of an opaque type like being the reverse of a generic type. Generic types let the code that calls a function pick the type for that function’s parameters and return value in a way that’s abstracted away from the function implementation. For example, the function in the following code returns a type that depends on its caller:
+不透明な型は、ジェネリック型の逆のようなものと考えることができます。ジェネリック型は、関数の実装から抽象化された方法で、関数のパラメータと戻り値の型を呼び出し側のコードが選択できるようにします。例えば、次のコードの関数は、呼び出し側に依存する型を返します。
 
 ```swift
 func max<T>(_ x: T, _ y: T) -> T where T: Comparable { ... }
 ```
 
-The code that calls `max(_:_:)` chooses the values for `x` and `y`, and the type of those values determines the concrete type of `T`. The calling code can use any type that conforms to the `Comparable` protocol. The code inside the function is written in a general way so it can handle whatever type the caller provides. The implementation of `max(_:_:)` uses only functionality that all `Comparable` types share.
+`max(_:_:)`を呼び出すコードは、`x`と`y`の値を選択し、その値の型が具体的な`T`の型を決定します。呼び出し側のコードは、`Comparable`プロトコルに準拠する任意の型を使用できます。関数内のコードは、呼び出し側が提供する任意の型を処理できるように一般的な方法で記述されています。`max(_:_:)`の実装は、すべての`Comparable`型が共有する機能のみを使用します。
 
-Those roles are reversed for a function with an opaque return type. An opaque type lets the function implementation pick the type for the value it returns in a way that’s abstracted away from the code that calls the function. For example, the function in the following example returns a trapezoid without exposing the underlying type of that shape.
+不透明な戻り値の型を持つ関数の場合、これらの役割は逆になります。不透明な型は、関数の実装が返す値の型を選択できるようにし、それを呼び出し側のコードから抽象化します。例えば、次の例の関数は、基礎となる型を公開せずに台形を返します。
 
 ```swift
 struct Square: Shape {
@@ -119,11 +119,11 @@ print(trapezoid.draw())
 // *
 ```
 
-The `makeTrapezoid()` function in this example declares its return type as `some Shape`; as a result, the function returns a value of some given type that conforms to the `Shape` protocol, without specifying any particular concrete type. Writing `makeTrapezoid()` this way lets it express the fundamental aspect of its public interface — the value it returns is a shape — without making the specific types that the shape is made from a part of its public interface. This implementation uses two triangles and a square, but the function could be rewritten to draw a trapezoid in a variety of other ways without changing its return type.
+この例の`makeTrapezoid()`関数は、戻り値の型を`some Shape`として宣言しています。その結果、関数は特定の具体的な型を指定せずに、`Shape`プロトコルに準拠するある型の値を返します。このように`makeTrapezoid()`を記述することで、返される値が形状であるという基本的な側面を表現しつつ、形状を構成する具体的な型を公開インターフェースの一部にしないようにします。この実装では2つの三角形と1つの正方形を使用していますが、関数は戻り値の型を変更せずに、さまざまな方法で台形を描くように書き直すことができます。
 
-This example highlights the way that an opaque return type is like the reverse of a generic type. The code inside `makeTrapezoid()` can return any type it needs to, as long as that type conforms to the `Shape` protocol, like the calling code does for a generic function. The code that calls the function needs to be written in a general way, like the implementation of a generic function, so that it can work with any `Shape` value that’s returned by `makeTrapezoid()`.
+この例は、不透明な戻り値の型がジェネリック型の逆のようなものであることを強調しています。`makeTrapezoid()`内のコードは、`Shape`プロトコルに準拠する任意の型を返すことができ、呼び出し側のコードはジェネリック関数の実装のように、返される任意の`Shape`値と連携できるように一般的な方法で記述する必要があります。
 
-You can also combine opaque return types with generics. The functions in the following code both return a value of some type that conforms to the `Shape` protocol.
+不透明な戻り値の型をジェネリックと組み合わせることもできます。次のコードの関数はどちらも、`Shape`プロトコルに準拠するある型の値を返します。
 
 ```swift
 func flip<T: Shape>(_ shape: T) -> some Shape {
@@ -145,20 +145,20 @@ print(opaqueJoinedTriangles.draw())
 // *
 ```
 
-The value of `opaqueJoinedTriangles` in this example is the same as `joinedTriangles` in the generics example in the "The Problem That Opaque Types Solve" section earlier in this chapter. However, unlike the value in that example, `flip(_:)` and `join(_:_:)` wrap the underlying types that the generic shape operations return in an opaque return type, which prevents those types from being visible. Both functions are generic because the types they rely on are generic, and the type parameters to the function pass along the type information needed by `FlippedShape` and `JoinedShape`.
+この例の`opaqueJoinedTriangles`の値は、この章の「不透明な型が解決する問題」セクションのジェネリック例の`joinedTriangles`と同じです。しかし、その例の値とは異なり、`flip(_:)`と`join(_:_:)`は、ジェネリックな形状操作が返す基礎となる型を不透明な戻り値の型でラップし、それらの型が見えないようにします。両方の関数は、それらが依存する型がジェネリックであるため、ジェネリックです。関数への型パラメータは、`FlippedShape`と`JoinedShape`に必要な型情報を渡します。
 
-If a function with an opaque return type returns from multiple places, all of the possible return values must have the same type. For a generic function, that return type can use the function’s generic type parameters, but it must still be a single type. For example, here’s an invalid version of the shape-flipping function that includes a special case for squares:
+不透明な戻り値の型を持つ関数が複数の場所から戻る場合、すべての可能な戻り値は同じ型でなければなりません。ジェネリック関数の場合、その戻り値の型は関数のジェネリック型パラメータを使用できますが、それでも単一の型でなければなりません。例えば、正方形に特別なケースを含む形状反転関数の無効なバージョンを次に示します。
 
 ```swift
 func invalidFlip<T: Shape>(_ shape: T) -> some Shape {
     if shape is Square {
-        return shape // Error: return types don't match
+        return shape // エラー: 戻り値の型が一致しません
     }
-    return FlippedShape(shape: shape) // Error: return types don't match
+    return FlippedShape(shape: shape) // エラー: 戻り値の型が一致しません
 }
 ```
 
-If you call this function with a `Square`, it returns a `Square`; otherwise, it returns a `FlippedShape`. This violates the requirement to return values of only one type and makes `invalidFlip(_:)` invalid code. One way to fix `invalidFlip(_:)` is to move the special case for squares into the implementation of `FlippedShape`, which lets this function always return a `FlippedShape` value:
+この関数を`Square`で呼び出すと、`Square`を返します。それ以外の場合は、`FlippedShape`を返します。これは、単一の型の値のみを返すという要件に違反し、`invalidFlip(_:)`を無効なコードにします。`invalidFlip(_:)`を修正する1つの方法は、正方形の特別なケースを`FlippedShape`の実装に移動することで、この関数が常に`FlippedShape`値を返すようにすることです。
 
 ```swift
 struct FlippedShape<T: Shape>: Shape {
@@ -173,7 +173,7 @@ struct FlippedShape<T: Shape>: Shape {
 }
 ```
 
-The requirement to always return a single type doesn’t prevent you from using generics in an opaque return type. Here’s an example of a function that incorporates its type parameter into the underlying type of the value it returns:
+常に単一の型を返すという要件は、不透明な戻り値の型でジェネリックを使用することを妨げません。次に、戻り値の値の基礎となる型に型パラメータを組み込んだ関数の例を示します。
 
 ```swift
 func `repeat`<T: Shape>(shape: T, count: Int) -> some Collection {
@@ -181,11 +181,11 @@ func `repeat`<T: Shape>(shape: T, count: Int) -> some Collection {
 }
 ```
 
-In this case, the underlying type of the return value varies depending on `T`: Whatever shape is passed it, `repeat(shape:count:)` creates and returns an array of that shape. Nevertheless, the return value always has the same underlying type of `[T]`, so it follows the requirement that functions with opaque return types must return values of only a single type.
+この場合、戻り値の基礎となる型は`T`によって異なります。渡された形状が何であれ、`repeat(shape:count:)`はその形状の配列を作成して返します。それにもかかわらず、戻り値は常に`[T]`という同じ基礎となる型を持つため、不透明な戻り値の型を持つ関数が単一の型の値のみを返すという要件を満たしています。
 
-## Boxed Protocol Types
+## ボックス化されたプロトコル型
 
-A boxed protocol type is also sometimes called an existential type, which comes from the phrase “there exists a type T such that T conforms to the protocol”. To make a boxed protocol type, write `any` before the name of a protocol. Here’s an example:
+ボックス化されたプロトコル型は、存在型と呼ばれることもあります。これは「プロトコルに準拠する型Tが存在する」というフレーズに由来します。ボックス化されたプロトコル型を作成するには、プロトコル名の前に `any` を書きます。以下はその例です：
 
 ```swift
 struct VerticalShapes: Shape {
@@ -203,34 +203,34 @@ let vertical = VerticalShapes(shapes: [largeTriangle, largeSquare])
 print(vertical.draw())
 ```
 
-In the example above, `VerticalShapes` declares the type of `shapes` as `[any Shape]` — an array of boxed `Shape` elements. Each element in the array can be a different type, and each of those types must conform to the `Shape` protocol. To support this runtime flexibility, Swift adds a level of indirection when necessary — this indirection is called a box, and it has a performance cost.
+上記の例では、`VerticalShapes` は `shapes` の型を `[any Shape]` と宣言しています。これはボックス化された `Shape` 要素の配列です。配列の各要素は異なる型であり、それぞれの型は `Shape` プロトコルに準拠している必要があります。このランタイムの柔軟性をサポートするために、Swift は必要に応じて間接参照のレベルを追加します。この間接参照はボックスと呼ばれ、パフォーマンスコストがあります。
 
-Within the `VerticalShapes` type, the code can use methods, properties, and subscripts that are required by the `Shape` protocol. For example, the `draw()` method of `VerticalShapes` calls the `draw()` method on each element of the array. This method is available because `Shape` requires a `draw()` method. In contrast, trying to access the `size` property of the triangle, or any other properties or methods that aren’t required by `Shape`, produces an error.
+`VerticalShapes` 型内では、コードは `Shape` プロトコルで要求されるメソッド、プロパティ、およびサブスクリプトを使用できます。例えば、`VerticalShapes` の `draw()` メソッドは配列の各要素の `draw()` メソッドを呼び出します。このメソッドは `Shape` が `draw()` メソッドを要求するため利用可能です。対照的に、三角形の `size` プロパティや、`Shape` が要求しない他のプロパティやメソッドにアクセスしようとするとエラーが発生します。
 
-Contrast the three types you could use for shapes:
+形状に使用できる3つの型を対比します：
 
-- Using generics, by writing `struct VerticalShapes<S: Shape>` and `var shapes: [S]`, makes an array whose elements are some specific shape type, and where the identity of that specific type is visible to any code that interacts with the array.
-- Using an opaque type, by writing `var shapes: [some Shape]`, makes an array whose elements are some specific shape type, and where that specific type’s identity is hidden.
-- Using a boxed protocol type, by writing `var shapes: [any Shape]`, makes an array that can store elements of different types, and where those types’ identities are hidden.
+- ジェネリクスを使用して `struct VerticalShapes<S: Shape>` と `var shapes: [S]` と書くと、特定の形状型の要素を持つ配列が作成され、その特定の型の識別子は配列とやり取りするコードに見えます。
+- 不透明型を使用して `var shapes: [some Shape]` と書くと、特定の形状型の要素を持つ配列が作成され、その特定の型の識別子は隠されます。
+- ボックス化されたプロトコル型を使用して `var shapes: [any Shape]` と書くと、異なる型の要素を格納できる配列が作成され、それらの型の識別子は隠されます。
 
-In this case, a boxed protocol type is the only approach that lets callers of `VerticalShapes` mix different kinds of shapes together.
+この場合、`VerticalShapes` の呼び出し元が異なる種類の形状を混在させることができる唯一のアプローチはボックス化されたプロトコル型です。
 
-You can use an `as` cast when you know the underlying type of a boxed value. For example:
+ボックス化された値の基になる型を知っている場合は、`as` キャストを使用できます。例えば：
 
 ```swift
 if let downcastTriangle = vertical.shapes[0] as? Triangle {
     print(downcastTriangle.size)
 }
-// Prints "5"
+// "5" と表示されます
 ```
 
-For more information, see [Downcasting](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html#ID342).
+詳細については、[ダウンキャスティング](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html#ID342)を参照してください。
 
-## Differences Between Opaque Types and Boxed Protocol Types
+## 不透明型とボックス化されたプロトコル型の違い
 
-Returning an opaque type looks very similar to using a boxed protocol type as the return type of a function, but these two kinds of return type differ in whether they preserve type identity. An opaque type refers to one specific type, although the caller of the function isn’t able to see which type; a boxed protocol type can refer to any type that conforms to the protocol. Generally speaking, boxed protocol types give you more flexibility about the underlying types of the values they store, and opaque types let you make stronger guarantees about those underlying types.
+不透明型を返すことは、関数の戻り値の型としてボックス化されたプロトコル型を使用することと非常に似ていますが、これら2つの戻り値の型は型の識別子を保持するかどうかが異なります。不透明型は特定の型を指しますが、関数の呼び出し元はその型を確認できません。ボックス化されたプロトコル型はプロトコルに準拠する任意の型を指すことができます。一般的に言えば、ボックス化されたプロトコル型は格納する値の基になる型についてより柔軟性を提供し、不透明型はその基になる型についてより強い保証を提供します。
 
-For example, here’s a version of `flip(_:)` that uses a boxed protocol type as its return type instead of an opaque return type:
+例えば、ボックス化されたプロトコル型を戻り値の型として使用する `flip(_:)` のバージョンは次のとおりです：
 
 ```swift
 func protoFlip<T: Shape>(_ shape: T) -> Shape {
@@ -238,7 +238,7 @@ func protoFlip<T: Shape>(_ shape: T) -> Shape {
 }
 ```
 
-This version of `protoFlip(_:)` has the same body as `flip(_:)`, and it always returns a value of the same type. Unlike `flip(_:)`, the value that `protoFlip(_:)` returns isn’t required to always have the same type — it just has to conform to the `Shape` protocol. Put another way, `protoFlip(_:)` makes a much looser API contract with its caller than `flip(_:)` makes. It reserves the flexibility to return values of multiple types:
+この `protoFlip(_:)` のバージョンは `flip(_:)` と同じ本体を持ち、常に同じ型の値を返します。`flip(_:)` とは異なり、`protoFlip(_:)` が返す値は常に同じ型である必要はありません。それは `Shape` プロトコルに準拠している必要があるだけです。言い換えれば、`protoFlip(_:)` は `flip(_:)` よりも呼び出し元に対してはるかに緩いAPI契約を結びます。複数の型の値を返す柔軟性を保持します：
 
 ```swift
 func protoFlip<T: Shape>(_ shape: T) -> Shape {
@@ -250,21 +250,21 @@ func protoFlip<T: Shape>(_ shape: T) -> Shape {
 }
 ```
 
-The revised version of the code returns an instance of `Square` or an instance of `FlippedShape`, depending on what shape is passed in. Two flipped shapes returned by this function might have completely different types. Other valid versions of this function could return values of different types when flipping multiple instances of the same shape. The less specific return type information from `protoFlip(_:)` means that many operations that depend on type information aren’t available on the returned value. For example, it’s not possible to write an `==` operator comparing results returned by this function.
+コードの改訂版は、渡された形状に応じて `Square` のインスタンスまたは `FlippedShape` のインスタンスを返します。この関数が返す2つの反転形状は完全に異なる型を持つ可能性があります。この関数の他の有効なバージョンは、同じ形状の複数のインスタンスを反転させるときに異なる型の値を返すことができます。`protoFlip(_:)` から返される値の型情報が少ないため、型情報に依存する多くの操作が返された値で利用できません。例えば、この関数が返す結果を比較する `==` 演算子を書くことはできません。
 
 ```swift
 let protoFlippedTriangle = protoFlip(smallTriangle)
 let sameThing = protoFlip(smallTriangle)
-protoFlippedTriangle == sameThing  // Error
+protoFlippedTriangle == sameThing  // エラー
 ```
 
-The error on the last line of the example occurs for several reasons. The immediate issue is that the `Shape` doesn’t include an `==` operator as part of its protocol requirements. If you try adding one, the next issue you’ll encounter is that the `==` operator needs to know the types of its left-hand and right-hand arguments. This sort of operator usually takes arguments of type `Self`, matching whatever concrete type adopts the protocol, but adding a `Self` requirement to the protocol doesn’t allow for the type erasure that happens when you use the protocol as a type.
+例の最後の行でエラーが発生する理由は複数あります。直近の問題は、`Shape` がプロトコル要件の一部として `==` 演算子を含まないことです。追加しようとすると、次の問題は `==` 演算子が左辺と右辺の引数の型を知る必要があることです。この種の演算子は通常、プロトコルを採用する具体的な型に一致する `Self` 型の引数を取りますが、プロトコルに `Self` 要件を追加すると、プロトコルを型として使用する際に発生する型消去を許可しません。
 
-Using a boxed protocol type as the return type for a function gives you the flexibility to return any type that conforms to the protocol. However, the cost of that flexibility is that some operations aren’t possible on the returned values. The example shows how the `==` operator isn’t available — it depends on specific type information that isn’t preserved by using a boxed protocol type.
+関数の戻り値の型としてボックス化されたプロトコル型を使用すると、プロトコルに準拠する任意の型を返す柔軟性が得られます。ただし、その柔軟性の代償として、返された値に対していくつかの操作が不可能になります。例では、`==` 演算子が利用できないことを示しています。これは、ボックス化されたプロトコル型を使用することで特定の型情報が保持されないためです。
 
-Another problem with this approach is that the shape transformations don’t nest. The result of flipping a triangle is a value of type `Shape`, and the `protoFlip(_:)` function takes an argument of some type that conforms to the `Shape` protocol. However, a value of a boxed protocol type doesn’t conform to that protocol; the value returned by `protoFlip(_:)` doesn’t conform to `Shape`. This means code like `protoFlip(protoFlip(smallTriangle))` that applies multiple transformations is invalid because the flipped shape isn’t a valid argument to `protoFlip(_:)`.
+このアプローチのもう一つの問題は、形状変換がネストしないことです。三角形を反転させた結果は `Shape` 型の値であり、`protoFlip(_:)` 関数は `Shape` プロトコルに準拠する型の引数を取ります。ただし、ボックス化されたプロトコル型の値はそのプロトコルに準拠しません。つまり、`protoFlip(protoFlip(smallTriangle))` のように複数の変換を適用するコードは無効です。反転された形状は `protoFlip(_:)` の有効な引数ではありません。
 
-In contrast, opaque types preserve the identity of the underlying type. Swift can infer associated types, which lets you use an opaque return value in places where a boxed protocol type can’t be used as a return value. For example, here’s a version of the `Container` protocol from Generics:
+対照的に、不透明型は基になる型の識別子を保持します。Swift は関連型を推論できるため、不透明な戻り値を使用することで、ボックス化されたプロトコル型を戻り値として使用できない場所でも使用できます。例えば、ジェネリクスからの `Container` プロトコルのバージョンは次のとおりです：
 
 ```swift
 protocol Container {
@@ -275,21 +275,21 @@ protocol Container {
 extension Array: Container { }
 ```
 
-You can’t use `Container` as the return type of a function because that protocol has an associated type. You also can’t use it as constraint in a generic return type because there isn’t enough information outside the function body to infer what the generic type needs to be.
+このプロトコルには関連型があるため、関数の戻り値の型として `Container` を使用することはできません。また、関数本体の外部に必要な情報がないため、ジェネリックな戻り値の型としても使用できません。
 
 ```swift
-// Error: Protocol with associated types can't be used as a return type.
+// エラー: 関連型を持つプロトコルは戻り値の型として使用できません。
 func makeProtocolContainer<T>(item: T) -> Container {
     return [item]
 }
 
-// Error: Not enough information to infer C.
+// エラー: C を推論するための情報が不足しています。
 func makeProtocolContainer<T, C: Container>(item: T) -> C {
     return [item]
 }
 ```
 
-Using the opaque type `some Container` as a return type expresses the desired API contract — the function returns a container, but declines to specify the container’s type:
+戻り値の型として不透明型 `some Container` を使用すると、望ましいAPI契約を表現できます。関数はコンテナを返しますが、そのコンテナの型を指定しません：
 
 ```swift
 func makeOpaqueContainer<T>(item: T) -> some Container {
@@ -298,7 +298,7 @@ func makeOpaqueContainer<T>(item: T) -> some Container {
 let opaqueContainer = makeOpaqueContainer(item: 12)
 let twelve = opaqueContainer[0]
 print(type(of: twelve))
-// Prints "Int"
+// "Int" と表示されます
 ```
 
-The type of `twelve` is inferred to be `Int`, which illustrates the fact that type inference works with opaque types. In the implementation of `makeOpaqueContainer(item:)`, the underlying type of the opaque container is `[T]`. In this case, `T` is `Int`, so the return value is an array of integers and the `Item` associated type is inferred to be `Int`. The subscript on `Container` returns `Item`, which means that the type of `twelve` is also inferred to be `Int`.
+`twelve` の型は `Int` と推論されます。これは型推論が不透明型で機能することを示しています。`makeOpaqueContainer(item:)` の実装では、不透明コンテナの基になる型は `[T]` です。この場合、`T` は `Int` であるため、戻り値は整数の配列であり、`Item` 関連型は `Int` と推論されます。`Container` のサブスクリプトは `Item` を返すため、`twelve` の型も `Int` と推論されます。

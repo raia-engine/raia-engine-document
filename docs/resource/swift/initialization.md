@@ -1,32 +1,32 @@
-# Initialization
+# 初期化
 
-Set the initial values for a type’s stored properties and perform one-time setup.
+型の格納プロパティに初期値を設定し、一度だけのセットアップを行います。
 
-Initialization is the process of preparing an instance of a class, structure, or enumeration for use. This process involves setting an initial value for each stored property on that instance and performing any other setup or initialization that’s required before the new instance is ready for use.
+初期化は、クラス、構造体、または列挙型のインスタンスを使用できるように準備するプロセスです。このプロセスには、そのインスタンスの各格納プロパティに初期値を設定し、新しいインスタンスが使用可能になる前に必要な他のセットアップや初期化を行うことが含まれます。
 
-You implement this initialization process by defining initializers, which are like special methods that can be called to create a new instance of a particular type. Unlike Objective-C initializers, Swift initializers don’t return a value. Their primary role is to ensure that new instances of a type are correctly initialized before they’re used for the first time.
+この初期化プロセスは、特定の型の新しいインスタンスを作成するために呼び出すことができる特別なメソッドのような初期化子を定義することで実装します。Objective-Cの初期化子とは異なり、Swiftの初期化子は値を返しません。初期化子の主な役割は、新しい型のインスタンスが初めて使用される前に正しく初期化されることを保証することです。
 
-Instances of class types can also implement a deinitializer, which performs any custom cleanup just before an instance of that class is deallocated. For more information about deinitializers, see [Deinitialization](#deinitialization).
+クラス型のインスタンスは、クラスのインスタンスが解放される直前にカスタムクリーンアップを実行するデイニシャライザを実装することもできます。デイニシャライザの詳細については、[デイニシャライザ](#deinitialization)を参照してください。
 
-## Setting Initial Values for Stored Properties
+## 格納プロパティの初期値設定
 
-Classes and structures must set all of their stored properties to an appropriate initial value by the time an instance of that class or structure is created. Stored properties can’t be left in an indeterminate state.
+クラスと構造体は、そのクラスまたは構造体のインスタンスが作成されるまでに、すべての格納プロパティに適切な初期値を設定する必要があります。格納プロパティを不確定な状態のままにすることはできません。
 
-You can set an initial value for a stored property within an initializer, or by assigning a default property value as part of the property’s definition. These actions are described in the following sections.
+格納プロパティの初期値は、初期化子内で設定するか、プロパティの定義の一部としてデフォルトのプロパティ値を割り当てることで設定できます。これらのアクションは、以下のセクションで説明します。
 
-> **Note:** When you assign a default value to a stored property, or set its initial value within an initializer, the value of that property is set directly, without calling any property observers.
+> **注:** 格納プロパティにデフォルト値を割り当てるか、初期化子内で初期値を設定する場合、そのプロパティの値はプロパティオブザーバを呼び出さずに直接設定されます。
 
-## Initializers
+## 初期化子
 
-Initializers are called to create a new instance of a particular type. In its simplest form, an initializer is like an instance method with no parameters, written using the `init` keyword:
+初期化子は、特定の型の新しいインスタンスを作成するために呼び出されます。最も単純な形式では、初期化子はパラメータのないインスタンスメソッドのようなもので、`init`キーワードを使用して記述されます：
 
 ```swift
 init() {
-    // perform some initialization here
+    // ここで初期化を行う
 }
 ```
 
-The example below defines a new structure called `Fahrenheit` to store temperatures expressed in the Fahrenheit scale. The `Fahrenheit` structure has one stored property, `temperature`, which is of type `Double`:
+以下の例では、華氏温度を表す温度を格納するために新しい構造体`Fahrenheit`を定義しています。`Fahrenheit`構造体には、`Double`型の1つの格納プロパティ`temperature`があります：
 
 ```swift
 struct Fahrenheit {
@@ -36,19 +36,19 @@ struct Fahrenheit {
     }
 }
 var f = Fahrenheit()
-print("The default temperature is \(f.temperature)° Fahrenheit")
-// Prints "The default temperature is 32.0° Fahrenheit"
+print("デフォルトの温度は\(f.temperature)° Fahrenheitです")
+// "デフォルトの温度は32.0° Fahrenheitです"と出力されます
 ```
 
-The structure defines a single initializer, `init`, with no parameters, which initializes the stored `temperature` with a value of 32.0 (the freezing point of water in degrees Fahrenheit).
+この構造体は、パラメータのない単一の初期化子`init`を定義しており、格納プロパティ`temperature`を32.0（華氏での水の凍結点）の値で初期化します。
 
-## Default Property Values
+## デフォルトプロパティ値
 
-You can set the initial value of a stored property from within an initializer, as shown above. Alternatively, specify a default property value as part of the property’s declaration. You specify a default property value by assigning an initial value to the property when it’s defined.
+上記のように、初期化子内で格納プロパティの初期値を設定できます。あるいは、プロパティの宣言時にデフォルトのプロパティ値を指定することもできます。プロパティが定義されるときに初期値を割り当てることで、デフォルトプロパティ値を指定します。
 
-> **Note:** If a property always takes the same initial value, provide a default value rather than setting a value within an initializer. The end result is the same, but the default value ties the property’s initialization more closely to its declaration. It makes for shorter, clearer initializers and enables you to infer the type of the property from its default value. The default value also makes it easier for you to take advantage of default initializers and initializer inheritance, as described later in this chapter.
+> **注:** プロパティが常に同じ初期値を取る場合、初期化子内で値を設定するのではなく、デフォルト値を提供してください。最終結果は同じですが、デフォルト値はプロパティの初期化をその宣言により密接に結びつけます。これにより、短くて明確な初期化子が作成され、プロパティの型をそのデフォルト値から推論することができます。また、デフォルト値は、後述するデフォルト初期化子や初期化子の継承を利用しやすくします。
 
-You can write the `Fahrenheit` structure from above in a simpler form by providing a default value for its `temperature` property at the point that the property is declared:
+上記の`Fahrenheit`構造体を、プロパティ`temperature`にデフォルト値を提供することで、より簡単な形式で記述できます：
 
 ```swift
 struct Fahrenheit {
@@ -56,15 +56,15 @@ struct Fahrenheit {
 }
 ```
 
-## Customizing Initialization
+## 初期化のカスタマイズ
 
-You can customize the initialization process with input parameters and optional property types, or by assigning constant properties during initialization, as described in the following sections.
+入力パラメータやオプションのプロパティ型を使用して初期化プロセスをカスタマイズしたり、初期化中に定数プロパティを割り当てたりすることができます。これらの方法については、以下のセクションで説明します。
 
-### Initialization Parameters
+### 初期化パラメータ
 
-You can provide initialization parameters as part of an initializer’s definition, to define the types and names of values that customize the initialization process. Initialization parameters have the same capabilities and syntax as function and method parameters.
+初期化子の定義の一部として初期化パラメータを提供し、初期化プロセスをカスタマイズする値の型と名前を定義できます。初期化パラメータは、関数やメソッドのパラメータと同じ機能と構文を持ちます。
 
-The following example defines a structure called `Celsius`, which stores temperatures expressed in degrees Celsius. The `Celsius` structure implements two custom initializers called `init(fromFahrenheit:)` and `init(fromKelvin:)`, which initialize a new instance of the structure with a value from a different temperature scale:
+次の例では、摂氏温度を表す温度を格納するために`Celsius`という構造体を定義しています。`Celsius`構造体は、異なる温度スケールからの値で新しいインスタンスを初期化するための2つのカスタム初期化子`init(fromFahrenheit:)`と`init(fromKelvin:)`を実装しています：
 
 ```swift
 struct Celsius {
@@ -77,22 +77,22 @@ struct Celsius {
     }
 }
 let boilingPointOfWater = Celsius(fromFahrenheit: 212.0)
-// boilingPointOfWater.temperatureInCelsius is 100.0
+// boilingPointOfWater.temperatureInCelsiusは100.0です
 let freezingPointOfWater = Celsius(fromKelvin: 273.15)
-// freezingPointOfWater.temperatureInCelsius is 0.0
+// freezingPointOfWater.temperatureInCelsiusは0.0です
 ```
 
-The first initializer has a single initialization parameter with an argument label of `fromFahrenheit` and a parameter name of `fahrenheit`. The second initializer has a single initialization parameter with an argument label of `fromKelvin` and a parameter name of `kelvin`. Both initializers convert their single argument into the corresponding Celsius value and store this value in a property called `temperatureInCelsius`.
+最初の初期化子は、引数ラベル`fromFahrenheit`とパラメータ名`fahrenheit`を持つ単一の初期化パラメータを持ちます。2番目の初期化子は、引数ラベル`fromKelvin`とパラメータ名`kelvin`を持つ単一の初期化パラメータを持ちます。両方の初期化子は、単一の引数を対応する摂氏値に変換し、この値を`temperatureInCelsius`というプロパティに格納します。
 
-### Parameter Names and Argument Labels
+### パラメータ名と引数ラベル
 
-As with function and method parameters, initialization parameters can have both a parameter name for use within the initializer’s body and an argument label for use when calling the initializer.
+関数やメソッドのパラメータと同様に、初期化パラメータには、初期化子の本体内で使用するパラメータ名と、初期化子を呼び出すときに使用する引数ラベルの両方を持つことができます。
 
-However, initializers don’t have an identifying function name before their parentheses in the way that functions and methods do. Therefore, the names and types of an initializer’s parameters play a particularly important role in identifying which initializer should be called. Because of this, Swift provides an automatic argument label for every parameter in an initializer if you don’t provide one.
+ただし、初期化子は関数やメソッドのように括弧の前に識別関数名を持たないため、初期化子のパラメータの名前と型は、どの初期化子を呼び出すべきかを特定する上で特に重要な役割を果たします。このため、Swiftは、引数ラベルを提供しない場合、初期化子のすべてのパラメータに自動的に引数ラベルを提供します。
 
-The following example defines a structure called `Color`, with three constant properties called `red`, `green`, and `blue`. These properties store a value between 0.0 and 1.0 to indicate the amount of red, green, and blue in the color.
+次の例では、`Color`という構造体を定義し、`red`、`green`、`blue`という3つの定数プロパティを持ちます。これらのプロパティは、色の赤、緑、青の量を示すために0.0から1.0の値を格納します。
 
-`Color` provides an initializer with three appropriately named parameters of type `Double` for its `red`, `green`, and `blue` components. `Color` also provides a second initializer with a single `white` parameter, which is used to provide the same value for all three color components.
+`Color`は、`red`、`green`、`blue`コンポーネントのために`Double`型の適切に名前付けられた3つのパラメータを持つ初期化子を提供します。`Color`は、すべての3つの色成分に同じ値を提供するために使用される単一の`white`パラメータを持つ2番目の初期化子も提供します。
 
 ```swift
 struct Color {
@@ -110,25 +110,25 @@ struct Color {
 }
 ```
 
-Both initializers can be used to create a new `Color` instance, by providing named values for each initializer parameter:
+両方の初期化子は、各初期化パラメータに名前付きの値を提供することで、新しい`Color`インスタンスを作成するために使用できます：
 
 ```swift
 let magenta = Color(red: 1.0, green: 0.0, blue: 1.0)
 let halfGray = Color(white: 0.5)
 ```
 
-Note that it isn’t possible to call these initializers without using argument labels. Argument labels must always be used in an initializer if they’re defined, and omitting them is a compile-time error:
+これらの初期化子を引数ラベルなしで呼び出すことはできないことに注意してください。引数ラベルが定義されている場合、初期化子で常に引数ラベルを使用する必要があり、省略するとコンパイル時エラーになります：
 
 ```swift
 let veryGreen = Color(0.0, 1.0, 0.0)
-// this reports a compile-time error - argument labels are required
+// これはコンパイル時エラーを報告します - 引数ラベルが必要です
 ```
 
-### Initializer Parameters Without Argument Labels
+### 引数ラベルのないイニシャライザパラメータ
 
-If you don’t want to use an argument label for an initializer parameter, write an underscore (`_`) instead of an explicit argument label for that parameter to override the default behavior.
+イニシャライザパラメータに引数ラベルを使用したくない場合、そのパラメータの明示的な引数ラベルの代わりにアンダースコア（`_`）を書いて、デフォルトの動作をオーバーライドします。
 
-Here’s an expanded version of the `Celsius` example from [Initialization Parameters](#initialization-parameters) above, with an additional initializer to create a new `Celsius` instance from a `Double` value that’s already in the Celsius scale:
+以下は、上記の[イニシャライザパラメータ](#initialization-parameters)の`Celsius`の例を拡張したもので、摂氏スケールですでに`Double`値を持つ新しい`Celsius`インスタンスを作成するための追加のイニシャライザを含んでいます：
 
 ```swift
 struct Celsius {
@@ -144,16 +144,16 @@ struct Celsius {
     }
 }
 let bodyTemperature = Celsius(37.0)
-// bodyTemperature.temperatureInCelsius is 37.0
+// bodyTemperature.temperatureInCelsius は 37.0 です
 ```
 
-The initializer call `Celsius(37.0)` is clear in its intent without the need for an argument label. It’s therefore appropriate to write this initializer as `init(_ celsius: Double)` so that it can be called by providing an unnamed `Double` value.
+イニシャライザ呼び出し`Celsius(37.0)`は、引数ラベルがなくてもその意図が明確です。したがって、このイニシャライザを`init(_ celsius: Double)`として書くのが適切です。これにより、名前のない`Double`値を提供して呼び出すことができます。
 
-### Optional Property Types
+### オプショナルプロパティ型
 
-If your custom type has a stored property that’s logically allowed to have “no value” — perhaps because its value can’t be set during initialization, or because it’s allowed to have “no value” at some later point — declare the property with an optional type. Properties of optional type are automatically initialized with a value of `nil`, indicating that the property is deliberately intended to have “no value yet” during initialization.
+カスタム型に「値がない」ことが論理的に許される格納プロパティがある場合 — 例えば、初期化中にその値を設定できない場合や、後で「値がない」ことが許される場合 — プロパティをオプショナル型で宣言します。オプショナル型のプロパティは自動的に`nil`の値で初期化され、初期化中に「まだ値がない」ことを示します。
 
-The following example defines a class called `SurveyQuestion`, with an optional `String` property called `response`:
+次の例では、`SurveyQuestion`というクラスを定義し、オプショナルな`String`プロパティ`response`を持っています：
 
 ```swift
 class SurveyQuestion {
@@ -166,21 +166,21 @@ class SurveyQuestion {
         print(text)
     }
 }
-let cheeseQuestion = SurveyQuestion(text: "Do you like cheese?")
+let cheeseQuestion = SurveyQuestion(text: "チーズは好きですか？")
 cheeseQuestion.ask()
-// Prints "Do you like cheese?"
-cheeseQuestion.response = "Yes, I do like cheese."
+// "チーズは好きですか？"と出力されます
+cheeseQuestion.response = "はい、チーズが好きです。"
 ```
 
-The response to a survey question can’t be known until it’s asked, and so the `response` property is declared with a type of `String?`, or “optional String”. It’s automatically assigned a default value of `nil`, meaning “no string yet”, when a new instance of `SurveyQuestion` is initialized.
+アンケートの質問に対する回答は、質問がされるまでわからないため、`response`プロパティは`String?`、つまり「オプショナルなString」として宣言されています。新しい`SurveyQuestion`インスタンスが初期化されると、自動的にデフォルト値の`nil`が割り当てられ、「まだ文字列がない」ことを意味します。
 
-### Assigning Constant Properties During Initialization
+### 初期化中の定数プロパティの割り当て
 
-You can assign a value to a constant property at any point during initialization, as long as it’s set to a definite value by the time initialization finishes. Once a constant property is assigned a value, it can’t be further modified.
+定数プロパティには、初期化が完了するまでに確定した値を設定する限り、初期化中の任意の時点で値を割り当てることができます。一度定数プロパティに値が割り当てられると、それ以上変更することはできません。
 
-> **Note:** For class instances, a constant property can be modified during initialization only by the class that introduces it. It can’t be modified by a subclass.
+> **注:** クラスインスタンスの場合、定数プロパティはそれを導入するクラスによってのみ初期化中に変更できます。サブクラスによって変更することはできません。
 
-You can revise the `SurveyQuestion` example from above to use a constant property rather than a variable property for the `text` property of the question, to indicate that the question doesn’t change once an instance of `SurveyQuestion` is created. Even though the `text` property is now a constant, it can still be set within the class’s initializer:
+上記の`SurveyQuestion`の例を修正して、質問の`text`プロパティを定数プロパティにすることで、`SurveyQuestion`インスタンスが作成された後に質問が変更されないことを示すことができます。`text`プロパティは定数になりましたが、クラスのイニシャライザ内で設定することは可能です：
 
 ```swift
 class SurveyQuestion {
@@ -193,17 +193,17 @@ class SurveyQuestion {
         print(text)
     }
 }
-let beetsQuestion = SurveyQuestion(text: "How about beets?")
+let beetsQuestion = SurveyQuestion(text: "ビーツはどうですか？")
 beetsQuestion.ask()
-// Prints "How about beets?"
-beetsQuestion.response = "I also like beets. (But not with cheese.)"
+// "ビーツはどうですか？"と出力されます
+beetsQuestion.response = "私もビーツが好きです。（でもチーズとは一緒にしません。）"
 ```
 
-### Default Initializers
+### デフォルトイニシャライザ
 
-Swift provides a default initializer for any structure or class that provides default values for all of its properties and doesn’t provide at least one initializer itself. The default initializer simply creates a new instance with all of its properties set to their default values.
+Swiftは、すべてのプロパティにデフォルト値を提供し、少なくとも1つのイニシャライザを提供しない構造体またはクラスに対してデフォルトイニシャライザを提供します。デフォルトイニシャライザは、すべてのプロパティがデフォルト値に設定された新しいインスタンスを単に作成します。
 
-This example defines a class called `ShoppingListItem`, which encapsulates the name, quantity, and purchase state of an item in a shopping list:
+次の例では、買い物リストのアイテムの名前、数量、および購入状態をカプセル化する`ShoppingListItem`というクラスを定義しています：
 
 ```swift
 class ShoppingListItem {
@@ -214,17 +214,17 @@ class ShoppingListItem {
 var item = ShoppingListItem()
 ```
 
-Because all properties of the `ShoppingListItem` class have default values, and because it’s a base class with no superclass, `ShoppingListItem` automatically gains a default initializer implementation that creates a new instance with all of its properties set to their default values. (The `name` property is an optional `String` property, and so it automatically receives a default value of `nil`, even though this value isn’t written in the code.) The example above uses the default initializer for the `ShoppingListItem` class to create a new instance of the class with initializer syntax, written as `ShoppingListItem()`, and assigns this new instance to a variable called `item`.
+`ShoppingListItem`クラスのすべてのプロパティにデフォルト値があり、スーパークラスを持たない基本クラスであるため、`ShoppingListItem`は自動的にデフォルトイニシャライザの実装を取得し、すべてのプロパティがデフォルト値に設定された新しいインスタンスを作成します。（`name`プロパティはオプショナルな`String`プロパティであるため、この値がコードに書かれていなくても自動的にデフォルト値の`nil`を受け取ります。）上記の例では、`ShoppingListItem`クラスのデフォルトイニシャライザを使用して、イニシャライザ構文で新しいインスタンスを作成し、この新しいインスタンスを`item`という変数に割り当てています。
 
-### Memberwise Initializers for Structure Types
+### 構造体型のメンバーワイズイニシャライザ
 
-Structure types automatically receive a memberwise initializer if they don’t define any of their own custom initializers. Unlike a default initializer, the structure receives a memberwise initializer even if it has stored properties that don’t have default values.
+構造体型は、独自のカスタムイニシャライザを定義しない場合、自動的にメンバーワイズイニシャライザを受け取ります。デフォルトイニシャライザとは異なり、構造体は格納プロパティにデフォルト値がない場合でもメンバーワイズイニシャライザを受け取ります。
 
-The memberwise initializer is a shorthand way to initialize the member properties of new structure instances. Initial values for the properties of the new instance can be passed to the memberwise initializer by name.
+メンバーワイズイニシャライザは、新しい構造体インスタンスのメンバープロパティを初期化するための簡略化された方法です。新しいインスタンスのプロパティの初期値は、名前でメンバーワイズイニシャライザに渡すことができます。
 
-The example below defines a structure called `Size` with two properties called `width` and `height`. Both properties are inferred to be of type `Double` by assigning a default value of 0.0.
+次の例では、`width`と`height`という2つのプロパティを持つ`Size`という構造体を定義しています。両方のプロパティは、デフォルト値の0.0を割り当てることで`Double`型と推論されます。
 
-The `Size` structure automatically receives an `init(width:height:)` memberwise initializer, which you can use to initialize a new `Size` instance:
+`Size`構造体は自動的に`init(width:height:)`メンバーワイズイニシャライザを受け取り、これを使用して新しい`Size`インスタンスを初期化できます：
 
 ```swift
 struct Size {
@@ -233,31 +233,31 @@ struct Size {
 let twoByTwo = Size(width: 2.0, height: 2.0)
 ```
 
-When you call a memberwise initializer, you can omit values for any properties that have default values. In the example above, the `Size` structure has a default value for both its `height` and `width` properties. You can omit either property or both properties, and the initializer uses the default value for anything you omit. For example:
+メンバーワイズイニシャライザを呼び出すとき、デフォルト値を持つプロパティの値を省略することができます。上記の例では、`Size`構造体の`height`および`width`プロパティにはデフォルト値があります。どちらか一方または両方のプロパティを省略することができ、省略したものにはデフォルト値が使用されます。例えば：
 
 ```swift
 let zeroByTwo = Size(height: 2.0)
 print(zeroByTwo.width, zeroByTwo.height)
-// Prints "0.0 2.0"
+// "0.0 2.0"と出力されます
 
 let zeroByZero = Size()
 print(zeroByZero.width, zeroByZero.height)
-// Prints "0.0 0.0"
+// "0.0 0.0"と出力されます
 ```
 
-### Initializer Delegation for Value Types
+### 値型のイニシャライザ委譲
 
-Initializers can call other initializers to perform part of an instance’s initialization. This process, known as initializer delegation, avoids duplicating code across multiple initializers.
+イニシャライザは、インスタンスの初期化の一部を実行するために他のイニシャライザを呼び出すことができます。このプロセスはイニシャライザ委譲と呼ばれ、複数のイニシャライザ間でコードを重複させることを避けます。
 
-The rules for how initializer delegation works, and for what forms of delegation are allowed, are different for value types and class types. Value types (structures and enumerations) don’t support inheritance, and so their initializer delegation process is relatively simple, because they can only delegate to another initializer that they provide themselves. Classes, however, can inherit from other classes, as described in [Inheritance](#inheritance). This means that classes have additional responsibilities for ensuring that all stored properties they inherit are assigned a suitable value during initialization. These responsibilities are described in [Class Inheritance and Initialization](#class-inheritance-and-initialization) below.
+イニシャライザ委譲の動作方法と許可される委譲の形式に関するルールは、値型とクラス型で異なります。値型（構造体と列挙型）は継承をサポートしていないため、彼らのイニシャライザ委譲プロセスは比較的簡単です。なぜなら、彼らは自分自身が提供する他のイニシャライザにのみ委譲できるからです。しかし、クラスは他のクラスから継承できるため、初期化中に継承するすべての格納プロパティに適切な値が割り当てられるようにする追加の責任があります。これらの責任については、以下の[クラスの継承と初期化](#class-inheritance-and-initialization)で説明します。
 
-For value types, you use `self.init` to refer to other initializers from the same value type when writing your own custom initializers. You can call `self.init` only from within an initializer.
+値型の場合、カスタムイニシャライザを書くときに、同じ値型の他のイニシャライザを参照するために`self.init`を使用します。`self.init`はイニシャライザ内からのみ呼び出すことができます。
 
-Note that if you define a custom initializer for a value type, you will no longer have access to the default initializer (or the memberwise initializer, if it’s a structure) for that type. This constraint prevents a situation in which additional essential setup provided in a more complex initializer is accidentally circumvented by someone using one of the automatic initializers.
+値型にカスタムイニシャライザを定義すると、その型のデフォルトイニシャライザ（または構造体の場合はメンバワイズイニシャライザ）にアクセスできなくなることに注意してください。この制約は、より複雑なイニシャライザで提供される追加の重要なセットアップが、自動イニシャライザの1つを使用することで誤って回避される状況を防ぎます。
 
-> **Note:** If you want your custom value type to be initializable with the default initializer and memberwise initializer, and also with your own custom initializers, write your custom initializers in an extension rather than as part of the value type’s original implementation. For more information, see [Extensions](#extensions).
+> **注意:** カスタム値型をデフォルトイニシャライザおよびメンバワイズイニシャライザで初期化可能にし、かつカスタムイニシャライザでも初期化可能にしたい場合は、カスタムイニシャライザを値型の元の実装の一部としてではなく、拡張として書いてください。詳細については、[拡張](#extensions)を参照してください。
 
-The following example defines a custom `Rect` structure to represent a geometric rectangle. The example requires two supporting structures called `Size` and `Point`, both of which provide default values of 0.0 for all of their properties:
+次の例では、幾何学的な長方形を表すカスタム`Rect`構造体を定義します。この例では、すべてのプロパティに0.0のデフォルト値を提供する2つのサポート構造体`Size`と`Point`が必要です：
 
 ```swift
 struct Size {
@@ -268,7 +268,7 @@ struct Point {
 }
 ```
 
-You can initialize the `Rect` structure below in one of three ways — by using its default zero-initialized `origin` and `size` property values, by providing a specific origin point and size, or by providing a specific center point and size. These initialization options are represented by three custom initializers that are part of the `Rect` structure’s definition:
+以下の`Rect`構造体は、デフォルトのゼロ初期化された`origin`および`size`プロパティ値を使用して初期化するか、特定の原点ポイントとサイズを提供して初期化するか、特定の中心ポイントとサイズを提供して初期化するかの3つの方法で初期化できます。これらの初期化オプションは、`Rect`構造体の定義の一部である3つのカスタムイニシャライザによって表されます：
 
 ```swift
 struct Rect {
@@ -287,54 +287,54 @@ struct Rect {
 }
 ```
 
-The first `Rect` initializer, `init()`, is functionally the same as the default initializer that the structure would have received if it didn’t have its own custom initializers. This initializer has an empty body, represented by an empty pair of curly braces `{}`. Calling this initializer returns a `Rect` instance whose `origin` and `size` properties are both initialized with the default values of `Point(x: 0.0, y: 0.0)` and `Size(width: 0.0, height: 0.0)` from their property definitions:
+最初の`Rect`イニシャライザ`init()`は、構造体が独自のカスタムイニシャライザを持たない場合に受け取るデフォルトイニシャライザと機能的に同じです。このイニシャライザは空の中括弧`{}`で表される空の本体を持っています。このイニシャライザを呼び出すと、`origin`および`size`プロパティがそれぞれのプロパティ定義から`Point(x: 0.0, y: 0.0)`および`Size(width: 0.0, height: 0.0)`のデフォルト値で初期化された`Rect`インスタンスが返されます：
 
 ```swift
 let basicRect = Rect()
-// basicRect's origin is (0.0, 0.0) and its size is (0.0, 0.0)
+// basicRectのoriginは(0.0, 0.0)で、sizeは(0.0, 0.0)です
 ```
 
-The second `Rect` initializer, `init(origin:size:)`, is functionally the same as the memberwise initializer that the structure would have received if it didn’t have its own custom initializers. This initializer simply assigns the `origin` and `size` argument values to the appropriate stored properties:
+2番目の`Rect`イニシャライザ`init(origin:size:)`は、構造体が独自のカスタムイニシャライザを持たない場合に受け取るメンバワイズイニシャライザと機能的に同じです。このイニシャライザは、`origin`および`size`引数の値を適切な格納プロパティに単純に割り当てます：
 
 ```swift
 let originRect = Rect(origin: Point(x: 2.0, y: 2.0),
     size: Size(width: 5.0, height: 5.0))
-// originRect's origin is (2.0, 2.0) and its size is (5.0, 5.0)
+// originRectのoriginは(2.0, 2.0)で、sizeは(5.0, 5.0)です
 ```
 
-The third `Rect` initializer, `init(center:size:)`, is slightly more complex. It starts by calculating an appropriate origin point based on a center point and a size value. It then calls (or delegates) to the `init(origin:size:)` initializer, which stores the new origin and size values in the appropriate properties:
+3番目の`Rect`イニシャライザ`init(center:size:)`は少し複雑です。これは、中心点とサイズ値に基づいて適切な原点を計算することから始まります。その後、`init(origin:size:)`イニシャライザを呼び出し（または委譲し）、新しい原点とサイズの値を適切なプロパティに格納します：
 
 ```swift
 let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
     size: Size(width: 3.0, height: 3.0))
-// centerRect's origin is (2.5, 2.5) and its size is (3.0, 3.0)
+// centerRectのoriginは(2.5, 2.5)で、sizeは(3.0, 3.0)です
 ```
 
-The `init(center:size:)` initializer could have assigned the new values of `origin` and `size` to the appropriate properties itself. However, it’s more convenient (and clearer in intent) for the `init(center:size:)` initializer to take advantage of an existing initializer that already provides exactly that functionality.
+`init(center:size:)`イニシャライザは、新しい`origin`および`size`の値を適切なプロパティに自分で割り当てることもできました。しかし、`init(center:size:)`イニシャライザが既存のイニシャライザを利用する方が便利で（意図が明確で）あるため、既存のイニシャライザを利用することにしました。
 
-> **Note:** For an alternative way to write this example without defining the `init()` and `init(origin:size:)` initializers yourself, see [Extensions](#extensions).
+> **注意:** `init()`および`init(origin:size:)`イニシャライザを自分で定義せずにこの例を書く別の方法については、[拡張](#extensions)を参照してください。
 
-## Class Inheritance and Initialization
+## クラスの継承と初期化
 
-All of a class’s stored properties — including any properties the class inherits from its superclass — must be assigned an initial value during initialization.
+クラスのすべての格納プロパティ（スーパークラスから継承するプロパティを含む）は、初期化中に初期値を割り当てられる必要があります。
 
-Swift defines two kinds of initializers for class types to help ensure all stored properties receive an initial value. These are known as designated initializers and convenience initializers.
+Swiftは、すべての格納プロパティが初期値を受け取ることを保証するために、クラス型に2種類のイニシャライザを定義しています。これらは指定イニシャライザとコンビニエンスイニシャライザとして知られています。
 
-### Designated Initializers and Convenience Initializers
+### 指定イニシャライザとコンビニエンスイニシャライザ
 
-Designated initializers are the primary initializers for a class. A designated initializer fully initializes all properties introduced by that class and calls an appropriate superclass initializer to continue the initialization process up the superclass chain.
+指定イニシャライザはクラスの主要なイニシャライザです。指定イニシャライザは、そのクラスによって導入されたすべてのプロパティを完全に初期化し、初期化プロセスをスーパークラスチェーンに沿って続行するために適切なスーパークラスのイニシャライザを呼び出します。
 
-Classes tend to have very few designated initializers, and it’s quite common for a class to have only one. Designated initializers are “funnel” points through which initialization takes place, and through which the initialization process continues up the superclass chain.
+クラスは非常に少数の指定イニシャライザを持つ傾向があり、クラスが1つだけ持つことも非常に一般的です。指定イニシャライザは、初期化が行われる「ファネル」ポイントであり、初期化プロセスがスーパークラスチェーンに沿って続行されるポイントです。
 
-Every class must have at least one designated initializer. In some cases, this requirement is satisfied by inheriting one or more designated initializers from a superclass, as described in [Automatic Initializer Inheritance](#automatic-initializer-inheritance) below.
+すべてのクラスは少なくとも1つの指定イニシャライザを持っている必要があります。この要件は、以下の[自動イニシャライザ継承](#automatic-initializer-inheritance)で説明するように、スーパークラスから1つ以上の指定イニシャライザを継承することで満たされる場合があります。
 
-Convenience initializers are secondary, supporting initializers for a class. You can define a convenience initializer to call a designated initializer from the same class as the convenience initializer with some of the designated initializer’s parameters set to default values. You can also define a convenience initializer to create an instance of that class for a specific use case or input value type.
+コンビニエンスイニシャライザは、クラスの二次的なサポートイニシャライザです。コンビニエンスイニシャライザを定義して、指定イニシャライザの一部のパラメータをデフォルト値に設定して同じクラスの指定イニシャライザを呼び出すことができます。また、特定の使用ケースや入力値タイプのためにそのクラスのインスタンスを作成するためにコンビニエンスイニシャライザを定義することもできます。
 
-You don’t have to provide convenience initializers if your class doesn’t require them. Create convenience initializers whenever a shortcut to a common initialization pattern will save time or make initialization of the class clearer in intent.
+クラスがコンビニエンスイニシャライザを必要としない場合は、提供する必要はありません。一般的な初期化パターンへのショートカットが時間を節約したり、クラスの初期化の意図を明確にしたりする場合に、コンビニエンスイニシャライザを作成します。
 
-### Syntax for Designated and Convenience Initializers
+### 指定イニシャライザとコンビニエンスイニシャライザの構文
 
-Designated initializers for classes are written in the same way as simple initializers for value types:
+クラスの指定イニシャライザは、値型の単純なイニシャライザと同じ方法で書かれます：
 
 ```swift
 init(<#parameters#>) {
@@ -342,7 +342,7 @@ init(<#parameters#>) {
 }
 ```
 
-Convenience initializers are written in the same style, but with the `convenience` modifier placed before the `init` keyword, separated by a space:
+コンビニエンスイニシャライザは同じスタイルで書かれますが、`convenience`修飾子が`init`キーワードの前にスペースで区切って配置されます：
 
 ```swift
 convenience init(<#parameters#>) {
@@ -350,118 +350,118 @@ convenience init(<#parameters#>) {
 }
 ```
 
-### Initializer Delegation for Class Types
+### クラスタイプのイニシャライザ委任
 
-To simplify the relationships between designated and convenience initializers, Swift applies the following three rules for delegation calls between initializers:
+指定イニシャライザとコンビニエンスイニシャライザの関係を簡素化するために、Swiftはイニシャライザ間の委任呼び出しに対して次の3つのルールを適用します。
 
-**Rule 1**
+**ルール1**
 
-A designated initializer must call a designated initializer from its immediate superclass.
+指定イニシャライザは、直接のスーパークラスの指定イニシャライザを呼び出さなければなりません。
 
-**Rule 2**
+**ルール2**
 
-A convenience initializer must call another initializer from the same class.
+コンビニエンスイニシャライザは、同じクラスの別のイニシャライザを呼び出さなければなりません。
 
-**Rule 3**
+**ルール3**
 
-A convenience initializer must ultimately call a designated initializer.
+コンビニエンスイニシャライザは、最終的に指定イニシャライザを呼び出さなければなりません。
 
-A simple way to remember this is:
+これを簡単に覚える方法は次の通りです：
 
-- Designated initializers must always delegate up.
-- Convenience initializers must always delegate across.
+- 指定イニシャライザは常に上に委任しなければなりません。
+- コンビニエンスイニシャライザは常に横に委任しなければなりません。
 
-These rules are illustrated in the figure below:
+これらのルールは以下の図で説明されています：
 
-Here, the superclass has a single designated initializer and two convenience initializers. One convenience initializer calls another convenience initializer, which in turn calls the single designated initializer. This satisfies rules 2 and 3 from above. The superclass doesn’t itself have a further superclass, and so rule 1 doesn’t apply.
+ここで、スーパークラスには1つの指定イニシャライザと2つのコンビニエンスイニシャライザがあります。1つのコンビニエンスイニシャライザが別のコンビニエンスイニシャライザを呼び出し、それが最終的に1つの指定イニシャライザを呼び出します。これにより、上記のルール2と3が満たされます。スーパークラス自体にはさらに上位のスーパークラスがないため、ルール1は適用されません。
 
-The subclass in this figure has two designated initializers and one convenience initializer. The convenience initializer must call one of the two designated initializers, because it can only call another initializer from the same class. This satisfies rules 2 and 3 from above. Both designated initializers must call the single designated initializer from the superclass, to satisfy rule 1 from above.
+この図のサブクラスには2つの指定イニシャライザと1つのコンビニエンスイニシャライザがあります。コンビニエンスイニシャライザは同じクラスの2つの指定イニシャライザのいずれかを呼び出さなければなりません。これは上記のルール2と3を満たします。両方の指定イニシャライザは、スーパークラスの1つの指定イニシャライザを呼び出さなければならず、これにより上記のルール1が満たされます。
 
-> **Note:** These rules don’t affect how users of your classes create instances of each class. Any initializer in the diagram above can be used to create a fully initialized instance of the class they belong to. The rules only affect how you write the implementation of the class’s initializers.
+> **注:** これらのルールは、クラスのユーザーが各クラスのインスタンスを作成する方法には影響しません。上記の図のどのイニシャライザも、所属するクラスの完全に初期化されたインスタンスを作成するために使用できます。これらのルールは、クラスのイニシャライザの実装方法にのみ影響します。
 
-The figure below shows a more complex class hierarchy for four classes. It illustrates how the designated initializers in this hierarchy act as “funnel” points for class initialization, simplifying the interrelationships among classes in the chain:
+以下の図は、4つのクラスのより複雑なクラス階層を示しています。この図は、この階層の指定イニシャライザがクラス初期化の「ファンネル」ポイントとして機能し、クラスチェーン間の相互関係を簡素化する様子を示しています。
 
-### Two-Phase Initialization
+### 二段階初期化
 
-Class initialization in Swift is a two-phase process. In the first phase, each stored property is assigned an initial value by the class that introduced it. Once the initial state for every stored property has been determined, the second phase begins, and each class is given the opportunity to customize its stored properties further before the new instance is considered ready for use.
+Swiftのクラス初期化は二段階のプロセスです。最初の段階では、各ストアドプロパティがそれを導入したクラスによって初期値を割り当てられます。すべてのストアドプロパティの初期状態が決定されると、第二段階が始まり、新しいインスタンスが使用可能と見なされる前に、各クラスがストアドプロパティをさらにカスタマイズする機会が与えられます。
 
-The use of a two-phase initialization process makes initialization safe, while still giving complete flexibility to each class in a class hierarchy. Two-phase initialization prevents property values from being accessed before they’re initialized, and prevents property values from being set to a different value by another initializer unexpectedly.
+二段階初期化プロセスの使用により、初期化が安全になり、クラス階層内の各クラスに完全な柔軟性を提供します。二段階初期化は、プロパティ値が初期化される前にアクセスされるのを防ぎ、別のイニシャライザによってプロパティ値が予期せず設定されるのを防ぎます。
 
-> **Note:** Swift’s two-phase initialization process is similar to initialization in Objective-C. The main difference is that during phase 1, Objective-C assigns zero or null values (such as 0 or nil) to every property. Swift’s initialization flow is more flexible in that it lets you set custom initial values, and can cope with types for which 0 or nil isn’t a valid default value.
+> **注:** Swiftの二段階初期化プロセスは、Objective-Cの初期化に似ています。主な違いは、第一段階中にObjective-Cはすべてのプロパティにゼロまたはヌル値（0やnilなど）を割り当てることです。Swiftの初期化フローは、カスタム初期値を設定でき、0やnilが有効なデフォルト値ではない型にも対応できるため、より柔軟です。
 
-Swift’s compiler performs four helpful safety-checks to make sure that two-phase initialization is completed without error:
+Swiftのコンパイラは、二段階初期化がエラーなく完了することを確認するために、4つの安全チェックを実行します：
 
-**Safety check 1**
+**安全チェック1**
 
-A designated initializer must ensure that all of the properties introduced by its class are initialized before it delegates up to a superclass initializer.
+指定イニシャライザは、スーパークラスのイニシャライザに委任する前に、そのクラスによって導入されたすべてのプロパティが初期化されていることを確認しなければなりません。
 
-As mentioned above, the memory for an object is only considered fully initialized once the initial state of all of its stored properties is known. In order for this rule to be satisfied, a designated initializer must make sure that all of its own properties are initialized before it hands off up the chain.
+前述のように、オブジェクトのメモリは、すべてのストアドプロパティの初期状態が知られるまで完全に初期化されたと見なされません。このルールを満たすために、指定イニシャライザは自分のプロパティがすべて初期化されていることを確認しなければなりません。
 
-**Safety check 2**
+**安全チェック2**
 
-A designated initializer must delegate up to a superclass initializer before assigning a value to an inherited property. If it doesn’t, the new value the designated initializer assigns will be overwritten by the superclass as part of its own initialization.
+指定イニシャライザは、継承されたプロパティに値を割り当てる前に、スーパークラスのイニシャライザに委任しなければなりません。そうしないと、指定イニシャライザが割り当てた新しい値が、スーパークラスの初期化の一部として上書きされます。
 
-**Safety check 3**
+**安全チェック3**
 
-A convenience initializer must delegate to another initializer before assigning a value to any property (including properties defined by the same class). If it doesn’t, the new value the convenience initializer assigns will be overwritten by its own class’s designated initializer.
+コンビニエンスイニシャライザは、任意のプロパティ（同じクラスによって定義されたプロパティを含む）に値を割り当てる前に、別のイニシャライザに委任しなければなりません。そうしないと、コンビニエンスイニシャライザが割り当てた新しい値が、自分のクラスの指定イニシャライザによって上書きされます。
 
-**Safety check 4**
+**安全チェック4**
 
-An initializer can’t call any instance methods, read the values of any instance properties, or refer to `self` as a value until after the first phase of initialization is complete.
+イニシャライザは、初期化の第一段階が完了するまで、インスタンスメソッドを呼び出したり、インスタンスプロパティの値を読み取ったり、`self`を値として参照したりすることはできません。
 
-The class instance isn’t fully valid until the first phase ends. Properties can only be accessed, and methods can only be called, once the class instance is known to be valid at the end of the first phase.
+クラスインスタンスは、第一段階が終了するまで完全に有効ではありません。プロパティはアクセスできるようになり、メソッドはクラスインスタンスが第一段階の終了時に有効であると見なされた後にのみ呼び出すことができます。
 
-Here’s how two-phase initialization plays out, based on the four safety checks above:
+以下は、上記の4つの安全チェックに基づいて、二段階初期化がどのように進行するかを示しています：
 
-**Phase 1**
+**第一段階**
 
-1. A designated or convenience initializer is called on a class.
-2. Memory for a new instance of that class is allocated. The memory isn’t yet initialized.
-3. A designated initializer for that class confirms that all stored properties introduced by that class have a value. The memory for these stored properties is now initialized.
-4. The designated initializer hands off to a superclass initializer to perform the same task for its own stored properties.
-5. This continues up the class inheritance chain until the top of the chain is reached.
-6. Once the top of the chain is reached, and the final class in the chain has ensured that all of its stored properties have a value, the instance’s memory is considered to be fully initialized, and phase 1 is complete.
+1. クラスの指定イニシャライザまたはコンビニエンスイニシャライザが呼び出されます。
+2. そのクラスの新しいインスタンスのメモリが割り当てられます。メモリはまだ初期化されていません。
+3. そのクラスの指定イニシャライザが、そのクラスによって導入されたすべてのストアドプロパティに値があることを確認します。これらのストアドプロパティのメモリは初期化されました。
+4. 指定イニシャライザは、スーパークラスのイニシャライザに引き継いで、同じタスクを実行します。
+5. これがクラス継承チェーンの最上位に達するまで続きます。
+6. チェーンの最上位に達し、チェーンの最後のクラスがすべてのストアドプロパティに値があることを確認すると、インスタンスのメモリは完全に初期化されたと見なされ、第一段階が完了します。
 
-**Phase 2**
+**第二段階**
 
-1. Working back down from the top of the chain, each designated initializer in the chain has the option to customize the instance further. Initializers are now able to access `self` and can modify its properties, call its instance methods, and so on.
-2. Finally, any convenience initializers in the chain have the option to customize the instance and to work with `self`.
+1. チェーンの最上位から下に向かって、チェーン内の各指定イニシャライザはインスタンスをさらにカスタマイズするオプションがあります。イニシャライザは`self`にアクセスでき、プロパティを変更したり、インスタンスメソッドを呼び出したりすることができます。
+2. 最後に、チェーン内の任意のコンビニエンスイニシャライザがインスタンスをカスタマイズし、`self`を操作するオプションがあります。
 
-Here’s how phase 1 looks for an initialization call for a hypothetical subclass and superclass:
+以下は、仮想のサブクラスとスーパークラスの初期化呼び出しに対する第一段階の様子です：
 
-In this example, initialization begins with a call to a convenience initializer on the subclass. This convenience initializer can’t yet modify any properties. It delegates across to a designated initializer from the same class.
+この例では、初期化はサブクラスのコンビニエンスイニシャライザの呼び出しから始まります。このコンビニエンスイニシャライザはまだプロパティを変更できません。同じクラスの指定イニシャライザに委任します。
 
-The designated initializer makes sure that all of the subclass’s properties have a value, as per safety check 1. It then calls a designated initializer on its superclass to continue the initialization up the chain.
+指定イニシャライザは、安全チェック1に従って、サブクラスのすべてのプロパティに値があることを確認します。次に、初期化をチェーンの上に引き継ぐために、スーパークラスの指定イニシャライザを呼び出します。
 
-The superclass’s designated initializer makes sure that all of the superclass properties have a value. There are no further superclasses to initialize, and so no further delegation is needed.
+スーパークラスの指定イニシャライザは、スーパークラスのすべてのプロパティに値があることを確認します。初期化するためのさらに上位のスーパークラスはなく、これ以上の委任は必要ありません。
 
-As soon as all properties of the superclass have an initial value, its memory is considered fully initialized, and phase 1 is complete.
+スーパークラスのすべてのプロパティに初期値があるとすぐに、そのメモリは完全に初期化されたと見なされ、第一段階が完了します。
 
-Here’s how phase 2 looks for the same initialization call:
+以下は、同じ初期化呼び出しに対する第二段階の様子です：
 
-The superclass’s designated initializer now has an opportunity to customize the instance further (although it doesn’t have to).
+スーパークラスの指定イニシャライザは、インスタンスをさらにカスタマイズする機会があります（ただし、必須ではありません）。
 
-Once the superclass’s designated initializer is finished, the subclass’s designated initializer can perform additional customization (although again, it doesn’t have to).
+スーパークラスの指定イニシャライザが終了すると、サブクラスの指定イニシャライザが追加のカスタマイズを行うことができます（ただし、これも必須ではありません）。
 
-Finally, once the subclass’s designated initializer is finished, the convenience initializer that was originally called can perform additional customization.
+最後に、サブクラスの指定イニシャライザが終了すると、最初に呼び出されたコンビニエンスイニシャライザが追加のカスタマイズを行うことができます。
 
-### Initializer Inheritance and Overriding
+### イニシャライザの継承とオーバーライド
 
-Unlike subclasses in Objective-C, Swift subclasses don’t inherit their superclass initializers by default. Swift’s approach prevents a situation in which a simple initializer from a superclass is inherited by a more specialized subclass and is used to create a new instance of the subclass that isn’t fully or correctly initialized.
+Objective-Cのサブクラスとは異なり、Swiftのサブクラスはデフォルトでスーパークラスのイニシャライザを継承しません。Swiftのアプローチは、スーパークラスの単純なイニシャライザがより専門的なサブクラスによって継承され、そのサブクラスの新しいインスタンスが完全または正しく初期化されていない状態で作成される状況を防ぎます。
 
-> **Note:** Superclass initializers are inherited in certain circumstances, but only when it’s safe and appropriate to do so. For more information, see [Automatic Initializer Inheritance](#automatic-initializer-inheritance) below.
+> **注:** スーパークラスのイニシャライザは特定の状況下で継承されますが、それは安全で適切な場合に限ります。詳細については、以下の[自動イニシャライザ継承](#automatic-initializer-inheritance)を参照してください。
 
-If you want a custom subclass to present one or more of the same initializers as its superclass, you can provide a custom implementation of those initializers within the subclass.
+カスタムサブクラスがスーパークラスと同じイニシャライザを1つ以上提供したい場合は、そのイニシャライザのカスタム実装をサブクラス内に提供できます。
 
-When you write a subclass initializer that matches a superclass designated initializer, you are effectively providing an override of that designated initializer. Therefore, you must write the `override` modifier before the subclass’s initializer definition. This is true even if you are overriding an automatically provided default initializer, as described in [Default Initializers](#default-initializers).
+スーパークラスの指定イニシャライザと一致するサブクラスのイニシャライザを書くと、その指定イニシャライザのオーバーライドを提供していることになります。したがって、サブクラスのイニシャライザ定義の前に`override`修飾子を書かなければなりません。これは、[デフォルトイニシャライザ](#default-initializers)で説明されているように、自動的に提供されるデフォルトイニシャライザをオーバーライドする場合でも同様です。
 
-As with an overridden property, method or subscript, the presence of the `override` modifier prompts Swift to check that the superclass has a matching designated initializer to be overridden, and validates that the parameters for your overriding initializer have been specified as intended.
+オーバーライドされたプロパティ、メソッド、またはサブスクリプトと同様に、`override`修飾子の存在は、スーパークラスに一致する指定イニシャライザが存在することをSwiftに確認させ、オーバーライドするイニシャライザのパラメータが意図した通りに指定されていることを検証します。
 
-> **Note:** You always write the `override` modifier when overriding a superclass designated initializer, even if your subclass’s implementation of the initializer is a convenience initializer.
+> **注:** スーパークラスの指定イニシャライザをオーバーライドする場合は常に`override`修飾子を書きます。たとえサブクラスのイニシャライザの実装がコンビニエンスイニシャライザであっても同様です。
 
-Conversely, if you write a subclass initializer that matches a superclass convenience initializer, that superclass convenience initializer can never be called directly by your subclass, as per the rules described above in [Initializer Delegation for Class Types](#initializer-delegation-for-class-types). Therefore, your subclass is not (strictly speaking) providing an override of the superclass initializer. As a result, you don’t write the `override` modifier when providing a matching implementation of a superclass convenience initializer.
+逆に、スーパークラスのコンビニエンスイニシャライザと一致するサブクラスのイニシャライザを書く場合、そのスーパークラスのコンビニエンスイニシャライザは上記の[クラス型のイニシャライザ委譲](#initializer-delegation-for-class-types)で説明されているルールに従ってサブクラスから直接呼び出すことはできません。したがって、サブクラスは（厳密には）スーパークラスのイニシャライザのオーバーライドを提供しているわけではありません。その結果、スーパークラスのコンビニエンスイニシャライザと一致する実装を提供する場合は`override`修飾子を書きません。
 
-The example below defines a base class called `Vehicle`. This base class declares a stored property called `numberOfWheels`, with a default `Int` value of 0. The `numberOfWheels` property is used by a computed property called `description` to create a `String` description of the vehicle’s characteristics:
+以下の例では、`Vehicle`という基本クラスを定義しています。この基本クラスは、デフォルトの`Int`値が0の`numberOfWheels`という格納プロパティを宣言しています。`numberOfWheels`プロパティは、車両の特性を説明する`String`を作成するために使用される計算プロパティ`description`によって使用されます：
 
 ```swift
 class Vehicle {
@@ -472,7 +472,7 @@ class Vehicle {
 }
 ```
 
-The `Vehicle` class provides a default value for its only stored property, and doesn’t provide any custom initializers itself. As a result, it automatically receives a default initializer, as described in [Default Initializers](#default-initializers). The default initializer (when available) is always a designated initializer for a class, and can be used to create a new `Vehicle` instance with a `numberOfWheels` of 0:
+`Vehicle`クラスは唯一の格納プロパティにデフォルト値を提供し、カスタムイニシャライザを提供していません。その結果、[デフォルトイニシャライザ](#default-initializers)で説明されているように、自動的にデフォルトイニシャライザを受け取ります。デフォルトイニシャライザ（利用可能な場合）は常にクラスの指定イニシャライザであり、`numberOfWheels`が0の新しい`Vehicle`インスタンスを作成するために使用できます：
 
 ```swift
 let vehicle = Vehicle()
@@ -480,7 +480,7 @@ print("Vehicle: \(vehicle.description)")
 // Vehicle: 0 wheel(s)
 ```
 
-The next example defines a subclass of `Vehicle` called `Bicycle`:
+次の例では、`Vehicle`のサブクラスである`Bicycle`を定義しています：
 
 ```swift
 class Bicycle: Vehicle {
@@ -491,11 +491,11 @@ class Bicycle: Vehicle {
 }
 ```
 
-The `Bicycle` subclass defines a custom designated initializer, `init()`. This designated initializer matches a designated initializer from the superclass of `Bicycle`, and so the `Bicycle` version of this initializer is marked with the `override` modifier.
+`Bicycle`サブクラスはカスタム指定イニシャライザ`init()`を定義しています。この指定イニシャライザは`Bicycle`のスーパークラスの指定イニシャライザと一致するため、このイニシャライザは`override`修飾子でマークされています。
 
-The `init()` initializer for `Bicycle` starts by calling `super.init()`, which calls the default initializer for the `Bicycle` class’s superclass, `Vehicle`. This ensures that the `numberOfWheels` inherited property is initialized by `Vehicle` before `Bicycle` has the opportunity to modify the property. After calling `super.init()`, the original value of `numberOfWheels` is replaced with a new value of 2.
+`Bicycle`の`init()`イニシャライザは`super.init()`を呼び出すことから始まり、`Bicycle`クラスのスーパークラスである`Vehicle`のデフォルトイニシャライザを呼び出します。これにより、`Vehicle`によって継承された`numberOfWheels`プロパティが初期化され、`Bicycle`がプロパティを変更する機会を得る前に初期化されます。`super.init()`を呼び出した後、`numberOfWheels`の元の値は2に置き換えられます。
 
-If you create an instance of `Bicycle`, you can call its inherited `description` computed property to see how its `numberOfWheels` property has been updated:
+`Bicycle`のインスタンスを作成すると、継承された`description`計算プロパティを呼び出して、`numberOfWheels`プロパティがどのように更新されたかを確認できます：
 
 ```swift
 let bicycle = Bicycle()
@@ -503,16 +503,16 @@ print("Bicycle: \(bicycle.description)")
 // Bicycle: 2 wheel(s)
 ```
 
-If a subclass initializer performs no customization in phase 2 of the initialization process, and the superclass has a synchronous, zero-argument designated initializer, you can omit a call to `super.init()` after assigning values to all of the subclass’s stored properties. If the superclass’s initializer is asynchronous, you need to write `await super.init()` explicitly.
+サブクラスのイニシャライザが初期化プロセスのフェーズ2でカスタマイズを行わず、スーパークラスに同期的な引数なしの指定イニシャライザがある場合、サブクラスのすべての格納プロパティに値を割り当てた後に`super.init()`の呼び出しを省略できます。スーパークラスのイニシャライザが非同期の場合は、明示的に`await super.init()`と書く必要があります。
 
-This example defines another subclass of `Vehicle`, called `Hoverboard`. In its initializer, the `Hoverboard` class sets only its `color` property. Instead of making an explicit call to `super.init()`, this initializer relies on an implicit call to its superclass’s initializer to complete the process.
+この例では、`Vehicle`の別のサブクラスである`Hoverboard`を定義しています。`Hoverboard`クラスのイニシャライザでは、`color`プロパティのみを設定します。明示的に`super.init()`を呼び出す代わりに、このイニシャライザはスーパークラスのイニシャライザの暗黙的な呼び出しに依存してプロセスを完了します。
 
 ```swift
 class Hoverboard: Vehicle {
     var color: String
     init(color: String) {
         self.color = color
-        // super.init() implicitly called here
+        // ここでsuper.init()が暗黙的に呼び出されます
     }
     override var description: String {
         return "\(super.description) in a beautiful \(color)"
@@ -520,7 +520,7 @@ class Hoverboard: Vehicle {
 }
 ```
 
-An instance of `Hoverboard` uses the default number of wheels supplied by the `Vehicle` initializer.
+`Hoverboard`のインスタンスは、`Vehicle`のイニシャライザによって提供されるデフォルトの車輪数を使用します。
 
 ```swift
 let hoverboard = Hoverboard(color: "silver")
@@ -528,31 +528,31 @@ print("Hoverboard: \(hoverboard.description)")
 // Hoverboard: 0 wheel(s) in a beautiful silver
 ```
 
-> **Note:** Subclasses can modify inherited variable properties during initialization, but can’t modify inherited constant properties.
+> **注:** サブクラスは初期化中に継承された変数プロパティを変更できますが、継承された定数プロパティを変更することはできません。
 
-### Automatic Initializer Inheritance
+### 自動イニシャライザ継承
 
-As mentioned above, subclasses don’t inherit their superclass initializers by default. However, superclass initializers are automatically inherited if certain conditions are met. In practice, this means that you don’t need to write initializer overrides in many common scenarios, and can inherit your superclass initializers with minimal effort whenever it’s safe to do so.
+前述のように、サブクラスはデフォルトでスーパークラスのイニシャライザを継承しません。しかし、特定の条件が満たされた場合、スーパークラスのイニシャライザは自動的に継承されます。実際には、多くの一般的なシナリオでイニシャライザのオーバーライドを書く必要がなく、安全にスーパークラスのイニシャライザを最小限の労力で継承できます。
 
-Assuming that you provide default values for any new properties you introduce in a subclass, the following two rules apply:
+サブクラスで導入する新しいプロパティにデフォルト値を提供する場合、次の2つのルールが適用されます：
 
-**Rule 1**
+**ルール1**
 
-If your subclass doesn’t define any designated initializers, it automatically inherits all of its superclass designated initializers.
+サブクラスが指定イニシャライザを定義していない場合、スーパークラスのすべての指定イニシャライザを自動的に継承します。
 
-**Rule 2**
+**ルール2**
 
-If your subclass provides an implementation of all of its superclass designated initializers — either by inheriting them as per rule 1, or by providing a custom implementation as part of its definition — then it automatically inherits all of the superclass convenience initializers.
+サブクラスがスーパークラスのすべての指定イニシャライザの実装を提供する場合 — ルール1に従ってそれらを継承するか、定義の一部としてカスタム実装を提供するかのいずれか — スーパークラスのすべてのコンビニエンスイニシャライザを自動的に継承します。
 
-These rules apply even if your subclass adds further convenience initializers.
+これらのルールは、サブクラスがさらにコンビニエンスイニシャライザを追加する場合でも適用されます。
 
-> **Note:** A subclass can implement a superclass designated initializer as a subclass convenience initializer as part of satisfying rule 2.
+> **注:** サブクラスは、ルール2を満たす一環として、スーパークラスの指定イニシャライザをサブクラスのコンビニエンスイニシャライザとして実装できます。
 
-### Designated and Convenience Initializers in Action
+### 指定イニシャライザとコンビニエンスイニシャライザの実際
 
-The following example shows designated initializers, convenience initializers, and automatic initializer inheritance in action. This example defines a hierarchy of three classes called `Food`, `RecipeIngredient`, and `ShoppingListItem`, and demonstrates how their initializers interact.
+次の例は、指定イニシャライザ、コンビニエンスイニシャライザ、および自動イニシャライザ継承の実際を示しています。この例では、`Food`、`RecipeIngredient`、および `ShoppingListItem` という3つのクラスの階層を定義し、それらのイニシャライザがどのように相互作用するかを示します。
 
-The base class in the hierarchy is called `Food`, which is a simple class to encapsulate the name of a foodstuff. The `Food` class introduces a single `String` property called `name` and provides two initializers for creating `Food` instances:
+階層の基本クラスは `Food` と呼ばれ、食品の名前をカプセル化するシンプルなクラスです。`Food` クラスは `name` という単一の `String` プロパティを導入し、`Food` インスタンスを作成するための2つのイニシャライザを提供します：
 
 ```swift
 class Food {
@@ -566,25 +566,25 @@ class Food {
 }
 ```
 
-The figure below shows the initializer chain for the `Food` class:
+以下の図は `Food` クラスのイニシャライザチェーンを示しています：
 
-Classes don’t have a default memberwise initializer, and so the `Food` class provides a designated initializer that takes a single argument called `name`. This initializer can be used to create a new `Food` instance with a specific name:
+クラスにはデフォルトのメンバワイズイニシャライザがないため、`Food` クラスは `name` という単一の引数を取る指定イニシャライザを提供します。このイニシャライザは、特定の名前を持つ新しい `Food` インスタンスを作成するために使用できます：
 
 ```swift
 let namedMeat = Food(name: "Bacon")
-// namedMeat's name is "Bacon"
+// namedMeatの名前は "Bacon"
 ```
 
-The `init(name: String)` initializer from the `Food` class is provided as a designated initializer, because it ensures that all stored properties of a new `Food` instance are fully initialized. The `Food` class doesn’t have a superclass, and so the `init(name: String)` initializer doesn’t need to call `super.init()` to complete its initialization.
+`Food` クラスの `init(name: String)` イニシャライザは指定イニシャライザとして提供されており、新しい `Food` インスタンスのすべての保存プロパティが完全に初期化されることを保証します。`Food` クラスにはスーパークラスがないため、`init(name: String)` イニシャライザは初期化を完了するために `super.init()` を呼び出す必要はありません。
 
-The `Food` class also provides a convenience initializer, `init()`, with no arguments. The `init()` initializer provides a default placeholder name for a new food by delegating across to the `Food` class’s `init(name: String)` with a name value of `[Unnamed]`:
+`Food` クラスは引数なしのコンビニエンスイニシャライザ `init()` も提供します。`init()` イニシャライザは、`Food` クラスの `init(name: String)` に名前の値 `[Unnamed]` を渡して委譲することで、新しい食品にデフォルトのプレースホルダー名を提供します：
 
 ```swift
 let mysteryMeat = Food()
-// mysteryMeat's name is "[Unnamed]"
+// mysteryMeatの名前は "[Unnamed]"
 ```
 
-The second class in the hierarchy is a subclass of `Food` called `RecipeIngredient`. The `RecipeIngredient` class models an ingredient in a cooking recipe. It introduces an `Int` property called `quantity` (in addition to the `name` property it inherits from `Food`) and defines two initializers for creating `RecipeIngredient` instances:
+階層の2番目のクラスは `Food` のサブクラスである `RecipeIngredient` です。`RecipeIngredient` クラスは料理のレシピの材料をモデル化します。`RecipeIngredient` は `quantity` という `Int` プロパティを導入し（`Food` から継承した `name` プロパティに加えて）、`RecipeIngredient` インスタンスを作成するための2つのイニシャライザを定義します：
 
 ```swift
 class RecipeIngredient: Food {
@@ -599,19 +599,19 @@ class RecipeIngredient: Food {
 }
 ```
 
-The figure below shows the initializer chain for the `RecipeIngredient` class:
+以下の図は `RecipeIngredient` クラスのイニシャライザチェーンを示しています：
 
-The `RecipeIngredient` class has a single designated initializer, `init(name: String, quantity: Int)`, which can be used to populate all of the properties of a new `RecipeIngredient` instance. This initializer starts by assigning the passed `quantity` argument to the `quantity` property, which is the only new property introduced by `RecipeIngredient`. After doing so, the initializer delegates up to the `init(name: String)` initializer of the `Food` class. This process satisfies safety check 1 from [Two-Phase Initialization](#two-phase-initialization) above.
+`RecipeIngredient` クラスには、`RecipeIngredient` インスタンスのすべてのプロパティを設定するために使用できる単一の指定イニシャライザ `init(name: String, quantity: Int)` があります。このイニシャライザは、渡された `quantity` 引数を `quantity` プロパティに割り当てることから始めます。これは `RecipeIngredient` によって導入された唯一の新しいプロパティです。その後、イニシャライザは `Food` クラスの `init(name: String)` イニシャライザに委譲します。このプロセスは、上記の[二段階初期化](#two-phase-initialization)の安全チェック1を満たします。
 
-`RecipeIngredient` also defines a convenience initializer, `init(name: String)`, which is used to create a `RecipeIngredient` instance by name alone. This convenience initializer assumes a quantity of 1 for any `RecipeIngredient` instance that’s created without an explicit quantity. The definition of this convenience initializer makes `RecipeIngredient` instances quicker and more convenient to create, and avoids code duplication when creating several single-quantity `RecipeIngredient` instances. This convenience initializer simply delegates across to the class’s designated initializer, passing in a quantity value of 1.
+`RecipeIngredient` は、名前だけで `RecipeIngredient` インスタンスを作成するためのコンビニエンスイニシャライザ `init(name: String)` も定義しています。このコンビニエンスイニシャライザは、明示的な数量なしで作成された `RecipeIngredient` インスタンスに対して数量1を仮定します。このコンビニエンスイニシャライザの定義により、`RecipeIngredient` インスタンスの作成が迅速かつ便利になり、複数の単一数量の `RecipeIngredient` インスタンスを作成する際のコードの重複を避けることができます。このコンビニエンスイニシャライザは、数量値1を渡してクラスの指定イニシャライザに単に委譲します。
 
-The `init(name: String)` convenience initializer provided by `RecipeIngredient` takes the same parameters as the `init(name: String)` designated initializer from `Food`. Because this convenience initializer overrides a designated initializer from its superclass, it must be marked with the `override` modifier (as described in [Initializer Inheritance and Overriding](#initializer-inheritance-and-overriding)).
+`RecipeIngredient` によって提供される `init(name: String)` コンビニエンスイニシャライザは、スーパークラスの指定イニシャライザ `init(name: String)` と同じパラメータを取ります。このコンビニエンスイニシャライザはスーパークラスの指定イニシャライザをオーバーライドするため、`override` 修飾子を付ける必要があります（[イニシャライザの継承とオーバーライド](#initializer-inheritance-and-overriding)で説明されています）。
 
-Even though `RecipeIngredient` provides the `init(name: String)` initializer as a convenience initializer, `RecipeIngredient` has nonetheless provided an implementation of all of its superclass’s designated initializers. Therefore, `RecipeIngredient` automatically inherits all of its superclass’s convenience initializers too.
+`RecipeIngredient` は `init(name: String)` イニシャライザをコンビニエンスイニシャライザとして提供していますが、それでもスーパークラスのすべての指定イニシャライザの実装を提供しています。したがって、`RecipeIngredient` はスーパークラスのすべてのコンビニエンスイニシャライザも自動的に継承します。
 
-In this example, the superclass for `RecipeIngredient` is `Food`, which has a single convenience initializer called `init()`. This initializer is therefore inherited by `RecipeIngredient`. The inherited version of `init()` functions in exactly the same way as the `Food` version, except that it delegates to the `RecipeIngredient` version of `init(name: String)` rather than the `Food` version.
+この例では、`RecipeIngredient` のスーパークラスは `Food` であり、`init()` という単一のコンビニエンスイニシャライザを持っています。このイニシャライザは `RecipeIngredient` によって継承されます。継承された `init()` のバージョンは `Food` バージョンとまったく同じ方法で機能しますが、`Food` バージョンではなく `RecipeIngredient` バージョンの `init(name: String)` に委譲します。
 
-All three of these initializers can be used to create new `RecipeIngredient` instances:
+これら3つのイニシャライザすべてを使用して、新しい `RecipeIngredient` インスタンスを作成できます：
 
 ```swift
 let oneMysteryItem = RecipeIngredient()
@@ -619,9 +619,9 @@ let oneBacon = RecipeIngredient(name: "Bacon")
 let sixEggs = RecipeIngredient(name: "Eggs", quantity: 6)
 ```
 
-The third and final class in the hierarchy is a subclass of `RecipeIngredient` called `ShoppingListItem`. The `ShoppingListItem` class models a recipe ingredient as it appears in a shopping list.
+階層の3番目で最後のクラスは `RecipeIngredient` のサブクラスである `ShoppingListItem` です。`ShoppingListItem` クラスは、買い物リストに表示されるレシピの材料をモデル化します。
 
-Every item in the shopping list starts out as “unpurchased”. To represent this fact, `ShoppingListItem` introduces a Boolean property called `purchased`, with a default value of `false`. `ShoppingListItem` also adds a computed `description` property, which provides a textual description of a `ShoppingListItem` instance:
+買い物リストのすべてのアイテムは「未購入」として開始されます。この事実を表すために、`ShoppingListItem` はデフォルト値が `false` の `purchased` というブールプロパティを導入します。`ShoppingListItem` はまた、`ShoppingListItem` インスタンスのテキスト記述を提供する計算プロパティ `description` を追加します：
 
 ```swift
 class ShoppingListItem: RecipeIngredient {
@@ -634,13 +634,13 @@ class ShoppingListItem: RecipeIngredient {
 }
 ```
 
-> **Note:** `ShoppingListItem` doesn’t define an initializer to provide an initial value for `purchased`, because items in a shopping list (as modeled here) always start out unpurchased.
+> **注:** `ShoppingListItem` は `purchased` の初期値を提供するためのイニシャライザを定義していません。なぜなら、ここでモデル化されているように、買い物リストのアイテムは常に未購入の状態で開始されるからです。
 
-Because it provides a default value for all of the properties it introduces and doesn’t define any initializers itself, `ShoppingListItem` automatically inherits all of the designated and convenience initializers from its superclass.
+導入されたすべてのプロパティにデフォルト値を提供し、独自のイニシャライザを定義していないため、`ShoppingListItem` はスーパークラスのすべての指定イニシャライザとコンビニエンスイニシャライザを自動的に継承します。
 
-The figure below shows the overall initializer chain for all three classes:
+以下の図は、3つのクラスすべての全体的なイニシャライザチェーンを示しています：
 
-You can use all three of the inherited initializers to create a new `ShoppingListItem` instance:
+継承されたすべてのイニシャライザを使用して、新しい `ShoppingListItem` インスタンスを作成できます：
 
 ```swift
 var breakfastList = [
@@ -658,41 +658,41 @@ for item in breakfastList {
 // 6 x Eggs ✘
 ```
 
-Here, a new array called `breakfastList` is created from an array literal containing three new `ShoppingListItem` instances. The type of the array is inferred to be `[ShoppingListItem]`. After the array is created, the name of the `ShoppingListItem` at the start of the array is changed from "[Unnamed]" to "Orange juice" and it’s marked as having been purchased. Printing the description of each item in the array shows that their default states have been set as expected.
+ここでは、3つの新しい `ShoppingListItem` インスタンスを含む配列リテラルから新しい配列 `breakfastList` が作成されます。配列の型は `[ShoppingListItem]` と推論されます。配列が作成された後、配列の先頭にある `ShoppingListItem` の名前が "[Unnamed]" から "Orange juice" に変更され、購入済みとしてマークされます。配列内の各アイテムの説明を印刷すると、デフォルトの状態が期待どおりに設定されていることがわかります。
 
-## Failable Initializers
+## 失敗可能イニシャライザ
 
-It’s sometimes useful to define a class, structure, or enumeration for which initialization can fail. This failure might be triggered by invalid initialization parameter values, the absence of a required external resource, or some other condition that prevents initialization from succeeding.
+クラス、構造体、または列挙型の初期化が失敗する可能性がある場合があります。この失敗は、無効な初期化パラメータ値、必要な外部リソースの欠如、または初期化の成功を妨げる他の条件によって引き起こされることがあります。
 
-To cope with initialization conditions that can fail, define one or more failable initializers as part of a class, structure, or enumeration definition. You write a failable initializer by placing a question mark after the `init` keyword (`init?`).
+失敗する可能性のある初期化条件に対処するために、クラス、構造体、または列挙型の定義の一部として1つ以上の失敗可能イニシャライザを定義します。失敗可能イニシャライザは、`init`キーワードの後に疑問符を付けて記述します（`init?`）。
 
-> **Note:** You can’t define a failable and a nonfailable initializer with the same parameter types and names.
+> **注:** 同じパラメータ型と名前を持つ失敗可能イニシャライザと非失敗可能イニシャライザを定義することはできません。
 
-A failable initializer creates an optional value of the type it initializes. You write `return nil` within a failable initializer to indicate a point at which initialization failure can be triggered.
+失敗可能イニシャライザは、初期化する型のオプショナル値を作成します。失敗可能イニシャライザ内で`return nil`と記述して、初期化失敗を引き起こすポイントを示します。
 
-> **Note:** Strictly speaking, initializers don’t return a value. Rather, their role is to ensure that `self` is fully and correctly initialized by the time that initialization ends. Although you write `return nil` to trigger an initialization failure, you don’t use the `return` keyword to indicate initialization success.
+> **注:** 厳密に言えば、イニシャライザは値を返しません。むしろ、その役割は、初期化が終了するまでに`self`が完全かつ正しく初期化されることを保証することです。初期化失敗を引き起こすために`return nil`と記述しますが、初期化成功を示すために`return`キーワードを使用しません。
 
-For instance, failable initializers are implemented for numeric type conversions. To ensure conversion between numeric types maintains the value exactly, use the `init(exactly:)` initializer. If the type conversion can’t maintain the value, the initializer fails.
+例えば、数値型の変換には失敗可能イニシャライザが実装されています。数値型間の変換が値を正確に維持することを保証するために、`init(exactly:)`イニシャライザを使用します。型変換が値を維持できない場合、イニシャライザは失敗します。
 
 ```swift
 let wholeNumber: Double = 12345.0
 let pi = 3.14159
 
 if let valueMaintained = Int(exactly: wholeNumber) {
-    print("\(wholeNumber) conversion to Int maintains value of \(valueMaintained)")
+    print("\(wholeNumber)のIntへの変換は値を維持します: \(valueMaintained)")
 }
-// Prints "12345.0 conversion to Int maintains value of 12345"
+// "12345.0のIntへの変換は値を維持します: 12345"と出力されます
 
 let valueChanged = Int(exactly: pi)
-// valueChanged is of type Int?, not Int
+// valueChangedはInt?型であり、Int型ではありません
 
 if valueChanged == nil {
-    print("\(pi) conversion to Int doesn't maintain value")
+    print("\(pi)のIntへの変換は値を維持しません")
 }
-// Prints "3.14159 conversion to Int doesn't maintain value"
+// "3.14159のIntへの変換は値を維持しません"と出力されます
 ```
 
-The example below defines a structure called `Animal`, with a constant `String` property called `species`. The `Animal` structure also defines a failable initializer with a single parameter called `species`. This initializer checks if the `species` value passed to the initializer is an empty string. If an empty string is found, an initialization failure is triggered. Otherwise, the `species` property’s value is set, and initialization succeeds:
+以下の例では、`Animal`という構造体を定義し、`species`という定数の`String`プロパティを持ちます。`Animal`構造体は、`species`という1つのパラメータを持つ失敗可能イニシャライザも定義します。このイニシャライザは、初期化パラメータとして渡された`species`値が空文字列であるかどうかを確認します。空文字列が見つかった場合、初期化失敗が引き起こされます。それ以外の場合、`species`プロパティの値が設定され、初期化が成功します。
 
 ```swift
 struct Animal {
@@ -704,37 +704,37 @@ struct Animal {
 }
 ```
 
-You can use this failable initializer to try to initialize a new `Animal` instance and to check if initialization succeeded:
+この失敗可能イニシャライザを使用して、新しい`Animal`インスタンスを初期化し、初期化が成功したかどうかを確認できます。
 
 ```swift
 let someCreature = Animal(species: "Giraffe")
-// someCreature is of type Animal?, not Animal
+// someCreatureはAnimal?型であり、Animal型ではありません
 
 if let giraffe = someCreature {
-    print("An animal was initialized with a species of \(giraffe.species)")
+    print("種が\(giraffe.species)の動物が初期化されました")
 }
-// Prints "An animal was initialized with a species of Giraffe"
+// "種がGiraffeの動物が初期化されました"と出力されます
 ```
 
-If you pass an empty string value to the failable initializer’s `species` parameter, the initializer triggers an initialization failure:
+失敗可能イニシャライザの`species`パラメータに空文字列を渡すと、イニシャライザは初期化失敗を引き起こします。
 
 ```swift
 let anonymousCreature = Animal(species: "")
-// anonymousCreature is of type Animal?, not Animal
+// anonymousCreatureはAnimal?型であり、Animal型ではありません
 
 if anonymousCreature == nil {
-    print("The anonymous creature couldn't be initialized")
+    print("匿名の生物は初期化できませんでした")
 }
-// Prints "The anonymous creature couldn't be initialized"
+// "匿名の生物は初期化できませんでした"と出力されます
 ```
 
-> **Note:** Checking for an empty string value (such as `""` rather than `"Giraffe"`) isn’t the same as checking for `nil` to indicate the absence of an optional `String` value. In the example above, an empty string (`""`) is a valid, non-optional `String`. However, it’s not appropriate for an animal to have an empty string as the value of its `species` property. To model this restriction, the failable initializer triggers an initialization failure if an empty string is found.
+> **注:** 空文字列（`""`）を確認すること（`"Giraffe"`ではなく）は、オプショナルな`String`値の欠如を示す`nil`を確認することと同じではありません。上記の例では、空文字列（`""`）は有効な非オプショナルな`String`です。しかし、動物の`species`プロパティの値として空文字列を持つことは適切ではありません。この制限をモデル化するために、失敗可能イニシャライザは空文字列が見つかった場合に初期化失敗を引き起こします。
 
-### Failable Initializers for Enumerations
+### 列挙型の失敗可能イニシャライザ
 
-You can use a failable initializer to select an appropriate enumeration case based on one or more parameters. The initializer can then fail if the provided parameters don’t match an appropriate enumeration case.
+失敗可能イニシャライザを使用して、1つ以上のパラメータに基づいて適切な列挙型ケースを選択できます。提供されたパラメータが適切な列挙型ケースと一致しない場合、イニシャライザは失敗することがあります。
 
-The example below defines an enumeration called `TemperatureUnit`, with three possible states (`kelvin`, `celsius`, and `fahrenheit`). A failable initializer is used to find an appropriate enumeration case for a `Character` value representing a temperature symbol:
+以下の例では、`TemperatureUnit`という列挙型を定義し、3つの可能な状態（`kelvin`、`celsius`、`fahrenheit`）を持ちます。失敗可能イニシャライザを使用して、温度記号を表す`Character`値に対して適切な列挙型ケースを見つけます。
 
 ```swift
 enum TemperatureUnit {
@@ -754,27 +754,27 @@ enum TemperatureUnit {
 }
 ```
 
-You can use this failable initializer to choose an appropriate enumeration case for the three possible states and to cause initialization to fail if the parameter doesn’t match one of these states:
+この失敗可能イニシャライザを使用して、3つの可能な状態に対して適切な列挙型ケースを選択し、パラメータがこれらの状態のいずれかと一致しない場合に初期化を失敗させることができます。
 
 ```swift
 let fahrenheitUnit = TemperatureUnit(symbol: "F")
 if fahrenheitUnit != nil {
-    print("This is a defined temperature unit, so initialization succeeded.")
+    print("これは定義された温度単位なので、初期化に成功しました。")
 }
-// Prints "This is a defined temperature unit, so initialization succeeded."
+// "これは定義された温度単位なので、初期化に成功しました。"と出力されます
 
 let unknownUnit = TemperatureUnit(symbol: "X")
 if unknownUnit == nil {
-    print("This isn't a defined temperature unit, so initialization failed.")
+    print("これは定義されていない温度単位なので、初期化に失敗しました。")
 }
-// Prints "This isn't a defined temperature unit, so initialization failed."
+// "これは定義されていない温度単位なので、初期化に失敗しました。"と出力されます
 ```
 
-### Failable Initializers for Enumerations with Raw Values
+### 生の値を持つ列挙型の失敗可能イニシャライザ
 
-Enumerations with raw values automatically receive a failable initializer, `init?(rawValue:)`, that takes a parameter called `rawValue` of the appropriate raw-value type and selects a matching enumeration case if one is found, or triggers an initialization failure if no matching value exists.
+生の値を持つ列挙型は、自動的に失敗可能イニシャライザ`init?(rawValue:)`を受け取ります。このイニシャライザは、適切な生の値型の`rawValue`というパラメータを取り、一致する列挙型ケースが見つかった場合はそれを選択し、一致する値が存在しない場合は初期化失敗を引き起こします。
 
-You can rewrite the `TemperatureUnit` example from above to use raw values of type `Character` and to take advantage of the `init?(rawValue:)` initializer:
+上記の`TemperatureUnit`の例を、`Character`型の生の値を使用するように書き直し、`init?(rawValue:)`イニシャライザを利用します。
 
 ```swift
 enum TemperatureUnit: Character {
@@ -783,26 +783,26 @@ enum TemperatureUnit: Character {
 
 let fahrenheitUnit = TemperatureUnit(rawValue: "F")
 if fahrenheitUnit != nil {
-    print("This is a defined temperature unit, so initialization succeeded.")
+    print("これは定義された温度単位なので、初期化に成功しました。")
 }
-// Prints "This is a defined temperature unit, so initialization succeeded."
+// "これは定義された温度単位なので、初期化に成功しました。"と出力されます
 
 let unknownUnit = TemperatureUnit(rawValue: "X")
 if unknownUnit == nil {
-    print("This isn't a defined temperature unit, so initialization failed.")
+    print("これは定義されていない温度単位なので、初期化に失敗しました。")
 }
-// Prints "This isn't a defined temperature unit, so initialization failed."
+// "これは定義されていない温度単位なので、初期化に失敗しました。"と出力されます
 ```
 
-### Propagation of Initialization Failure
+### 初期化失敗の伝播
 
-A failable initializer of a class, structure, or enumeration can delegate across to another failable initializer from the same class, structure, or enumeration. Similarly, a subclass failable initializer can delegate up to a superclass failable initializer.
+クラス、構造体、または列挙型の失敗可能イニシャライザは、同じクラス、構造体、または列挙型の別の失敗可能イニシャライザに委譲することができます。同様に、サブクラスの失敗可能イニシャライザは、スーパークラスの失敗可能イニシャライザに委譲することができます。
 
-In either case, if you delegate to another initializer that causes initialization to fail, the entire initialization process fails immediately, and no further initialization code is executed.
+いずれの場合も、初期化が失敗する原因となる別のイニシャライザに委譲すると、初期化プロセス全体が直ちに失敗し、それ以上の初期化コードは実行されません。
 
-> **Note:** A failable initializer can also delegate to a nonfailable initializer. Use this approach if you need to add a potential failure state to an existing initialization process that doesn’t otherwise fail.
+> **注意:** 失敗可能イニシャライザは、失敗しないイニシャライザに委譲することもできます。このアプローチを使用すると、通常は失敗しない既存の初期化プロセスに潜在的な失敗状態を追加することができます。
 
-The example below defines a subclass of `Product` called `CartItem`. The `CartItem` class models an item in an online shopping cart. `CartItem` introduces a stored constant property called `quantity` and ensures that this property always has a value of at least 1:
+以下の例では、`Product`のサブクラスである`CartItem`を定義しています。`CartItem`クラスはオンラインショッピングカート内のアイテムをモデル化しています。`CartItem`は`quantity`という格納定数プロパティを導入し、このプロパティが常に少なくとも1の値を持つことを保証します。
 
 ```swift
 class Product {
@@ -823,18 +823,18 @@ class CartItem: Product {
 }
 ```
 
-The failable initializer for `CartItem` starts by validating that it has received a quantity value of 1 or more. If the quantity is invalid, the entire initialization process fails immediately and no further initialization code is executed. Likewise, the failable initializer for `Product` checks the name value, and the initializer process fails immediately if `name` is the empty string.
+`CartItem`の失敗可能イニシャライザは、受け取った数量が1以上であることを確認することから始まります。数量が無効な場合、初期化プロセス全体が直ちに失敗し、それ以上の初期化コードは実行されません。同様に、`Product`の失敗可能イニシャライザは名前の値をチェックし、名前が空文字列の場合、初期化プロセスは直ちに失敗します。
 
-If you create a `CartItem` instance with a nonempty name and a quantity of 1 or more, initialization succeeds:
+非空の名前と1以上の数量で`CartItem`インスタンスを作成すると、初期化は成功します。
 
 ```swift
 if let twoSocks = CartItem(name: "sock", quantity: 2) {
     print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
 }
-// Prints "Item: sock, quantity: 2"
+// "Item: sock, quantity: 2"と出力されます
 ```
 
-If you try to create a `CartItem` instance with a quantity value of 0, the `CartItem` initializer causes initialization to fail:
+数量が0の値で`CartItem`インスタンスを作成しようとすると、`CartItem`イニシャライザが初期化を失敗させます。
 
 ```swift
 if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
@@ -842,10 +842,10 @@ if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
 } else {
     print("Unable to initialize zero shirts")
 }
-// Prints "Unable to initialize zero shirts"
+// "Unable to initialize zero shirts"と出力されます
 ```
 
-Similarly, if you try to create a `CartItem` instance with an empty name value, the superclass `Product` initializer causes initialization to fail:
+同様に、空の名前の値で`CartItem`インスタンスを作成しようとすると、スーパークラスの`Product`イニシャライザが初期化を失敗させます。
 
 ```swift
 if let oneUnnamed = CartItem(name: "", quantity: 1) {
@@ -853,25 +853,25 @@ if let oneUnnamed = CartItem(name: "", quantity: 1) {
 } else {
     print("Unable to initialize one unnamed product")
 }
-// Prints "Unable to initialize one unnamed product"
+// "Unable to initialize one unnamed product"と出力されます
 ```
 
-### Overriding a Failable Initializer
+### 失敗可能イニシャライザのオーバーライド
 
-You can override a superclass failable initializer in a subclass, just like any other initializer. Alternatively, you can override a superclass failable initializer with a subclass nonfailable initializer. This enables you to define a subclass for which initialization can’t fail, even though initialization of the superclass is allowed to fail.
+他のイニシャライザと同様に、サブクラスでスーパークラスの失敗可能イニシャライザをオーバーライドすることができます。あるいは、サブクラスの失敗しないイニシャライザでスーパークラスの失敗可能イニシャライザをオーバーライドすることもできます。これにより、スーパークラスの初期化が失敗する可能性がある場合でも、サブクラスの初期化が失敗しないように定義することができます。
 
-Note that if you override a failable superclass initializer with a nonfailable subclass initializer, the only way to delegate up to the superclass initializer is to force-unwrap the result of the failable superclass initializer.
+スーパークラスの失敗可能イニシャライザをサブクラスの失敗しないイニシャライザでオーバーライドする場合、スーパークラスのイニシャライザの結果を強制アンラップして委譲する必要があります。
 
-> **Note:** You can override a failable initializer with a nonfailable initializer but not the other way around.
+> **注意:** 失敗可能イニシャライザを失敗しないイニシャライザでオーバーライドすることはできますが、その逆はできません。
 
-The example below defines a class called `Document`. This class models a document that can be initialized with a `name` property that’s either a nonempty string value or `nil`, but can’t be an empty string:
+以下の例では、`Document`というクラスを定義しています。このクラスは、非空の文字列値または`nil`の`name`プロパティで初期化できるドキュメントをモデル化していますが、空文字列は許可されません。
 
 ```swift
 class Document {
     var name: String?
-    // this initializer creates a document with a nil name value
+    // このイニシャライザはnilのname値でドキュメントを作成します
     init() {}
-    // this initializer creates a document with a nonempty name value
+    // このイニシャライザは非空のname値でドキュメントを作成します
     init?(name: String) {
         if name.isEmpty { return nil }
         self.name = name
@@ -879,7 +879,7 @@ class Document {
 }
 ```
 
-The next example defines a subclass of `Document` called `AutomaticallyNamedDocument`. The `AutomaticallyNamedDocument` subclass overrides both of the designated initializers introduced by `Document`. These overrides ensure that an `AutomaticallyNamedDocument` instance has an initial name value of "[Untitled]" if the instance is initialized without a name, or if an empty string is passed to the `init(name:)` initializer:
+次の例では、`Document`のサブクラスである`AutomaticallyNamedDocument`を定義しています。`AutomaticallyNamedDocument`サブクラスは、`Document`によって導入された指定イニシャライザの両方をオーバーライドします。これらのオーバーライドにより、`AutomaticallyNamedDocument`インスタンスは、名前なしで初期化された場合、または`init(name:)`イニシャライザに空文字列が渡された場合に、初期の名前値として"[Untitled]"を持つことが保証されます。
 
 ```swift
 class AutomaticallyNamedDocument: Document {
@@ -898,9 +898,9 @@ class AutomaticallyNamedDocument: Document {
 }
 ```
 
-The `AutomaticallyNamedDocument` overrides its superclass’s failable `init?(name:)` initializer with a nonfailable `init(name:)` initializer. Because `AutomaticallyNamedDocument` copes with the empty string case in a different way than its superclass, its initializer doesn’t need to fail, and so it provides a nonfailable version of the initializer instead.
+`AutomaticallyNamedDocument`は、スーパークラスの失敗可能な`init?(name:)`イニシャライザを失敗しない`init(name:)`イニシャライザでオーバーライドしています。`AutomaticallyNamedDocument`は、スーパークラスとは異なる方法で空文字列のケースに対処するため、そのイニシャライザが失敗する必要はなく、代わりに失敗しないバージョンのイニシャライザを提供します。
 
-You can use forced unwrapping in an initializer to call a failable initializer from the superclass as part of the implementation of a subclass’s nonfailable initializer. For example, the `UntitledDocument` subclass below is always named "[Untitled]", and it uses the failable `init(name:)` initializer from its superclass during initialization.
+サブクラスの失敗しないイニシャライザの実装の一部として、スーパークラスの失敗可能イニシャライザを呼び出すために強制アンラップを使用することができます。例えば、以下の`UntitledDocument`サブクラスは常に"[Untitled]"という名前を持ち、初期化中にスーパークラスの失敗可能な`init(name:)`イニシャライザを使用します。
 
 ```swift
 class UntitledDocument: Document {
@@ -910,65 +910,65 @@ class UntitledDocument: Document {
 }
 ```
 
-In this case, if the `init(name:)` initializer of the superclass were ever called with an empty string as the name, the forced unwrapping operation would result in a runtime error. However, because it’s called with a string constant, you can see that the initializer won’t fail, so no runtime error can occur in this case.
+この場合、スーパークラスの`init(name:)`イニシャライザが空文字列として名前を渡された場合、強制アンラップ操作はランタイムエラーを引き起こします。しかし、文字列定数で呼び出されるため、このイニシャライザが失敗しないことがわかり、この場合ランタイムエラーは発生しません。
 
-### The `init!` Failable Initializer
+### `init!` 失敗可能イニシャライザ
 
-You typically define a failable initializer that creates an optional instance of the appropriate type by placing a question mark after the `init` keyword (`init?`). Alternatively, you can define a failable initializer that creates an implicitly unwrapped optional instance of the appropriate type. Do this by placing an exclamation point after the `init` keyword (`init!`) instead of a question mark.
+通常、`init` キーワードの後に疑問符 (`init?`) を付けることで、適切な型のオプショナルインスタンスを作成する失敗可能イニシャライザを定義します。代わりに、`init` キーワードの後に疑問符の代わりに感嘆符 (`init!`) を付けることで、暗黙的にアンラップされたオプショナルインスタンスを作成する失敗可能イニシャライザを定義することもできます。
 
-You can delegate from `init?` to `init!` and vice versa, and you can override `init?` with `init!` and vice versa. You can also delegate from `init` to `init!`, although doing so will trigger an assertion if the `init!` initializer causes initialization to fail.
+`init?` から `init!` へ、またはその逆に委譲することができ、`init?` を `init!` でオーバーライドすることも、その逆も可能です。また、`init` から `init!` へ委譲することもできますが、`init!` イニシャライザが初期化に失敗するとアサーションが発生します。
 
-### Required Initializers
+### 必須イニシャライザ
 
-Write the `required` modifier before the definition of a class initializer to indicate that every subclass of the class must implement that initializer:
+クラスのイニシャライザの定義の前に `required` 修飾子を記述して、そのクラスのすべてのサブクラスがそのイニシャライザを実装しなければならないことを示します：
 
 ```swift
 class SomeClass {
     required init() {
-        // initializer implementation goes here
+        // イニシャライザの実装がここに入ります
     }
 }
 ```
 
-You must also write the `required` modifier before every subclass implementation of a required initializer, to indicate that the initializer requirement applies to further subclasses in the chain. You don’t write the `override` modifier when overriding a required designated initializer:
+また、必須イニシャライザのサブクラス実装の前にも `required` 修飾子を記述して、チェーン内のさらに下位のサブクラスにもイニシャライザの要件が適用されることを示します。必須の指定イニシャライザをオーバーライドする場合、`override` 修飾子は記述しません：
 
 ```swift
 class SomeSubclass: SomeClass {
     required init() {
-        // subclass implementation of the required initializer goes here
+        // 必須イニシャライザのサブクラス実装がここに入ります
     }
 }
 ```
 
-> **Note:** You don’t have to provide an explicit implementation of a required initializer if you can satisfy the requirement with an inherited initializer.
+> **注:** 継承されたイニシャライザで要件を満たすことができる場合、必須イニシャライザの明示的な実装を提供する必要はありません。
 
-### Setting a Default Property Value with a Closure or Function
+### クロージャまたは関数を使用してデフォルトプロパティ値を設定する
 
-If a stored property’s default value requires some customization or setup, you can use a closure or global function to provide a customized default value for that property. Whenever a new instance of the type that the property belongs to is initialized, the closure or function is called, and its return value is assigned as the property’s default value.
+格納プロパティのデフォルト値にカスタマイズやセットアップが必要な場合、クロージャやグローバル関数を使用してそのプロパティのカスタマイズされたデフォルト値を提供できます。そのプロパティが属する型の新しいインスタンスが初期化されるたびに、クロージャや関数が呼び出され、その戻り値がプロパティのデフォルト値として割り当てられます。
 
-These kinds of closures or functions typically create a temporary value of the same type as the property, tailor that value to represent the desired initial state, and then return that temporary value to be used as the property’s default value.
+この種のクロージャや関数は通常、プロパティと同じ型の一時的な値を作成し、その値を望ましい初期状態を表すように調整し、その一時的な値をプロパティのデフォルト値として使用するために返します。
 
-Here’s a skeleton outline of how a closure can be used to provide a default property value:
+以下は、クロージャを使用してデフォルトプロパティ値を提供する方法の骨組みです：
 
 ```swift
 class SomeClass {
     let someProperty: SomeType = {
-        // create a default value for someProperty inside this closure
-        // someValue must be of the same type as SomeType
+        // このクロージャ内で someProperty のデフォルト値を作成します
+        // someValue は SomeType と同じ型でなければなりません
         return someValue
     }()
 }
 ```
 
-Note that the closure’s end curly brace is followed by an empty pair of parentheses. This tells Swift to execute the closure immediately. If you omit these parentheses, you are trying to assign the closure itself to the property, and not the return value of the closure.
+クロージャの終了中括弧の後に空の括弧のペアが続くことに注意してください。これは Swift にクロージャを即座に実行するように指示します。これらの括弧を省略すると、クロージャ自体をプロパティに割り当てようとしていることになり、クロージャの戻り値ではありません。
 
-> **Note:** If you use a closure to initialize a property, remember that the rest of the instance hasn’t yet been initialized at the point that the closure is executed. This means that you can’t access any other property values from within your closure, even if those properties have default values. You also can’t use the implicit `self` property, or call any of the instance’s methods.
+> **注:** プロパティを初期化するためにクロージャを使用する場合、そのクロージャが実行される時点ではインスタンスの残りの部分はまだ初期化されていないことを覚えておいてください。これは、クロージャ内から他のプロパティ値にアクセスできないことを意味します。たとえそれらのプロパティにデフォルト値が設定されていても同様です。また、暗黙の `self` プロパティを使用したり、インスタンスのメソッドを呼び出したりすることもできません。
 
-The example below defines a structure called `Chessboard`, which models a board for the game of chess. Chess is played on an 8 x 8 board, with alternating black and white squares.
+以下の例では、チェスゲームのボードをモデル化する `Chessboard` 構造体を定義しています。チェスは、黒と白のマスが交互に並ぶ 8 x 8 のボードでプレイされます。
 
-To represent this game board, the `Chessboard` structure has a single property called `boardColors`, which is an array of 64 `Bool` values. A value of `true` in the array represents a black square and a value of `false` represents a white square. The first item in the array represents the top left square on the board and the last item in the array represents the bottom right square on the board.
+このゲームボードを表すために、`Chessboard` 構造体には `boardColors` という単一のプロパティがあり、これは 64 個の `Bool` 値の配列です。配列内の `true` の値は黒のマスを表し、`false` の値は白のマスを表します。配列の最初の項目はボードの左上のマスを表し、最後の項目はボードの右下のマスを表します。
 
-The `boardColors` array is initialized with a closure to set up its color values:
+`boardColors` 配列は、その色値を設定するためにクロージャで初期化されます：
 
 ```swift
 struct Chessboard {
@@ -990,12 +990,12 @@ struct Chessboard {
 }
 ```
 
-Whenever a new `Chessboard` instance is created, the closure is executed, and the default value of `boardColors` is calculated and returned. The closure in the example above calculates and sets the appropriate color for each square on the board in a temporary array called `temporaryBoard`, and returns this temporary array as the closure’s return value once its setup is complete. The returned array value is stored in `boardColors` and can be queried with the `squareIsBlackAt(row:column:)` utility function:
+新しい `Chessboard` インスタンスが作成されるたびに、クロージャが実行され、`boardColors` のデフォルト値が計算されて返されます。上記の例のクロージャは、一時的な配列 `temporaryBoard` にボード上の各マスの適切な色を計算して設定し、この一時的な配列をクロージャの戻り値として返します。返された配列値は `boardColors` に格納され、`squareIsBlackAt(row:column:)` ユーティリティ関数でクエリできます：
 
 ```swift
 let board = Chessboard()
 print(board.squareIsBlackAt(row: 0, column: 1))
-// Prints "true"
+// "true" を出力
 print(board.squareIsBlackAt(row: 7, column: 7))
-// Prints "false"
+// "false" を出力
 ```

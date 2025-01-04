@@ -1,28 +1,28 @@
-# Generic Parameters and Arguments
+# ジェネリックパラメータと引数
 
-Generalize declarations to abstract away concrete types.
+具体的な型を抽象化するために宣言を一般化します。
 
-This chapter describes parameters and arguments for generic types, functions, and initializers. When you declare a generic type, function, subscript, or initializer, you specify the type parameters that the generic type, function, or initializer can work with. These type parameters act as placeholders that are replaced by actual concrete type arguments when an instance of a generic type is created or a generic function or initializer is called.
+この章では、ジェネリック型、関数、およびイニシャライザのパラメータと引数について説明します。ジェネリック型、関数、サブスクリプト、またはイニシャライザを宣言する場合、ジェネリック型、関数、またはイニシャライザが操作できる型パラメータを指定します。これらの型パラメータは、ジェネリック型のインスタンスが作成されるか、ジェネリック関数またはイニシャライザが呼び出されるときに、実際の具体的な型引数に置き換えられるプレースホルダーとして機能します。
 
-For an overview of generics in Swift, see [Generics](link-to-generics).
+Swiftのジェネリクスの概要については、[ジェネリクス](link-to-generics)を参照してください。
 
-## Generic Parameter Clause
+## ジェネリックパラメータ句
 
-A generic parameter clause specifies the type parameters of a generic type or function, along with any associated constraints and requirements on those parameters. A generic parameter clause is enclosed in angle brackets (`<>`) and has the following form:
-
-```
-<<#generic parameter list#>>
-```
-
-The generic parameter list is a comma-separated list of generic parameters, each of which has the following form:
+ジェネリックパラメータ句は、ジェネリック型または関数の型パラメータと、それらのパラメータに対する関連する制約および要件を指定します。ジェネリックパラメータ句は山括弧（`<>`）で囲まれ、次の形式を持ちます：
 
 ```
-<#type parameter#>: <#constraint#>
+<<#ジェネリックパラメータリスト#>>
 ```
 
-A generic parameter consists of a type parameter followed by an optional constraint. A type parameter is simply the name of a placeholder type (for example, `T`, `U`, `V`, `Key`, `Value`, and so on). You have access to the type parameters (and any of their associated types) in the rest of the type, function, or initializer declaration, including in the signature of the function or initializer.
+ジェネリックパラメータリストは、ジェネリックパラメータのカンマ区切りのリストであり、それぞれが次の形式を持ちます：
 
-The constraint specifies that a type parameter inherits from a specific class or conforms to a protocol or protocol composition. For example, in the generic function below, the generic parameter `T: Comparable` indicates that any type argument substituted for the type parameter `T` must conform to the `Comparable` protocol.
+```
+<#型パラメータ#>: <#制約#>
+```
+
+ジェネリックパラメータは、型パラメータに続いてオプションの制約が付いたものです。型パラメータは単にプレースホルダー型の名前です（例えば、`T`、`U`、`V`、`Key`、`Value`など）。型、関数、またはイニシャライザの宣言の残りの部分で、型パラメータ（およびそれらの関連型）にアクセスできます。
+
+制約は、型パラメータが特定のクラスを継承するか、プロトコルまたはプロトコルの組み合わせに準拠することを指定します。例えば、以下のジェネリック関数では、ジェネリックパラメータ `T: Comparable` は、型パラメータ `T` に代入される任意の型引数が `Comparable` プロトコルに準拠する必要があることを示しています。
 
 ```swift
 func simpleMax<T: Comparable>(_ x: T, _ y: T) -> T {
@@ -33,30 +33,30 @@ func simpleMax<T: Comparable>(_ x: T, _ y: T) -> T {
 }
 ```
 
-Because `Int` and `Double`, for example, both conform to the `Comparable` protocol, this function accepts arguments of either type. In contrast with generic types, you don’t specify a generic argument clause when you use a generic function or initializer. The type arguments are instead inferred from the type of the arguments passed to the function or initializer.
+例えば、`Int` や `Double` はどちらも `Comparable` プロトコルに準拠しているため、この関数はどちらの型の引数も受け入れます。ジェネリック型とは対照的に、ジェネリック関数やイニシャライザを使用する場合、ジェネリック引数句を指定しません。型引数は、関数やイニシャライザに渡される引数の型から推論されます。
 
 ```swift
-simpleMax(17, 42) // T is inferred to be Int
-simpleMax(3.14159, 2.71828) // T is inferred to be Double
+simpleMax(17, 42) // T は Int と推論される
+simpleMax(3.14159, 2.71828) // T は Double と推論される
 ```
 
-## Generic Where Clauses
+## ジェネリックwhere句
 
-You can specify additional requirements on type parameters and their associated types by including a generic where clause right before the opening curly brace of a type or function’s body. A generic where clause consists of the `where` keyword, followed by a comma-separated list of one or more requirements.
+型パラメータおよびその関連型に追加の要件を指定するために、型または関数の本体の開き中括弧の直前にジェネリックwhere句を含めることができます。ジェネリックwhere句は `where` キーワードで始まり、カンマ区切りの1つ以上の要件のリストが続きます。
 
 ```
-where <#requirements#>
+where <#要件#>
 ```
 
-The requirements in a generic where clause specify that a type parameter inherits from a class or conforms to a protocol or protocol composition. Although the generic where clause provides syntactic sugar for expressing simple constraints on type parameters (for example, `<T: Comparable>` is equivalent to `<T> where T: Comparable` and so on), you can use it to provide more complex constraints on type parameters and their associated types. For example, you can constrain the associated types of type parameters to conform to protocols. For example, `<S: Sequence> where S.Iterator.Element: Equatable` specifies that `S` conforms to the `Sequence` protocol and that the associated type `S.Iterator.Element` conforms to the `Equatable` protocol. This constraint ensures that each element of the sequence is equatable.
+ジェネリックwhere句の要件は、型パラメータがクラスを継承するか、プロトコルまたはプロトコルの組み合わせに準拠することを指定します。ジェネリックwhere句は、型パラメータに対する単純な制約を表現するための構文糖衣を提供します（例えば、`<T: Comparable>` は `<T> where T: Comparable` と等価です）が、型パラメータおよびその関連型に対するより複雑な制約を提供するために使用できます。例えば、型パラメータの関連型がプロトコルに準拠するように制約することができます。例えば、`<S: Sequence> where S.Iterator.Element: Equatable` は、`S` が `Sequence` プロトコルに準拠し、関連型 `S.Iterator.Element` が `Equatable` プロトコルに準拠することを指定します。この制約は、シーケンスの各要素が等価であることを保証します。
 
-You can also specify the requirement that two types be identical, using the `==` operator. For example, `<S1: Sequence, S2: Sequence> where S1.Iterator.Element == S2.Iterator.Element` expresses the constraints that `S1` and `S2` conform to the `Sequence` protocol and that the elements of both sequences must be of the same type.
+また、`==` 演算子を使用して2つの型が同一であることを指定することもできます。例えば、`<S1: Sequence, S2: Sequence> where S1.Iterator.Element == S2.Iterator.Element` は、`S1` と `S2` が `Sequence` プロトコルに準拠し、両方のシーケンスの要素が同じ型である必要があることを表現します。
 
-Any type argument substituted for a type parameter must meet all the constraints and requirements placed on the type parameter.
+型パラメータに代入される任意の型引数は、その型パラメータに課されたすべての制約および要件を満たす必要があります。
 
-A generic where clause can appear as part of a declaration that includes type parameters, or as part of a declaration that’s nested inside of a declaration that includes type parameters. The generic where clause for a nested declaration can still refer to the type parameters of the enclosing declaration; however, the requirements from that where clause apply only to the declaration where it’s written.
+ジェネリックwhere句は、型パラメータを含む宣言の一部として、または型パラメータを含む宣言の内部にネストされた宣言の一部として現れることができます。ネストされた宣言のジェネリックwhere句は、囲む宣言の型パラメータを参照することができますが、そのwhere句の要件はそれが書かれた宣言にのみ適用されます。
 
-If the enclosing declaration also has a where clause, the requirements from both clauses are combined. In the example below, `startsWithZero()` is available only if `Element` conforms to both `SomeProtocol` and `Numeric`.
+囲む宣言にもwhere句がある場合、両方の句の要件が組み合わされます。以下の例では、`startsWithZero()` は `Element` が `SomeProtocol` と `Numeric` の両方に準拠している場合にのみ利用可能です。
 
 ```swift
 extension Collection where Element: SomeProtocol {
@@ -66,11 +66,11 @@ extension Collection where Element: SomeProtocol {
 }
 ```
 
-You can overload a generic function or initializer by providing different constraints, requirements, or both on the type parameters. When you call an overloaded generic function or initializer, the compiler uses these constraints to resolve which overloaded function or initializer to invoke.
+ジェネリック関数やイニシャライザをオーバーロードする際に、型パラメータに対する異なる制約、要件、またはその両方を提供することができます。オーバーロードされたジェネリック関数やイニシャライザを呼び出すとき、コンパイラはこれらの制約を使用して、どのオーバーロードされた関数やイニシャライザを呼び出すかを解決します。
 
-For more information about generic where clauses and to see an example of one in a generic function declaration, see [Generic Where Clauses](link-to-generic-where-clauses).
+ジェネリックwhere句についての詳細およびジェネリック関数宣言の例については、[ジェネリックwhere句](link-to-generic-where-clauses)を参照してください。
 
-## Grammar of a Generic Parameter Clause
+## ジェネリックパラメータ句の文法
 
 ```
 generic-parameter-clause → < generic-parameter-list >
@@ -86,15 +86,15 @@ conformance-requirement → type-identifier : protocol-composition-type
 same-type-requirement → type-identifier == type
 ```
 
-## Generic Argument Clause
+## ジェネリック引数句
 
-A generic argument clause specifies the type arguments of a generic type. A generic argument clause is enclosed in angle brackets (`<>`) and has the following form:
+ジェネリック引数句は、ジェネリック型の型引数を指定します。ジェネリック引数句は山括弧（`<>`）で囲まれ、次の形式を持ちます：
 
 ```
-<<#generic argument list#>>
+<<#ジェネリック引数リスト#>>
 ```
 
-The generic argument list is a comma-separated list of type arguments. A type argument is the name of an actual concrete type that replaces a corresponding type parameter in the generic parameter clause of a generic type. The result is a specialized version of that generic type. The example below shows a simplified version of the Swift standard library’s generic dictionary type.
+ジェネリック引数リストは、型引数のカンマ区切りのリストです。型引数は、ジェネリック型のジェネリックパラメータ句の対応する型パラメータを置き換える実際の具体的な型の名前です。その結果、ジェネリック型の特殊化バージョンが得られます。以下の例は、Swift標準ライブラリのジェネリック辞書型の簡略化バージョンを示しています。
 
 ```swift
 struct Dictionary<Key: Hashable, Value>: Collection, ExpressibleByDictionaryLiteral {
@@ -102,17 +102,17 @@ struct Dictionary<Key: Hashable, Value>: Collection, ExpressibleByDictionaryLite
 }
 ```
 
-The specialized version of the generic `Dictionary` type, `Dictionary<String, Int>` is formed by replacing the generic parameters `Key: Hashable` and `Value` with the concrete type arguments `String` and `Int`. Each type argument must satisfy all the constraints of the generic parameter it replaces, including any additional requirements specified in a generic where clause. In the example above, the `Key` type parameter is constrained to conform to the `Hashable` protocol and therefore `String` must also conform to the `Hashable` protocol.
+ジェネリック `Dictionary` 型の特殊化バージョン `Dictionary<String, Int>` は、ジェネリックパラメータ `Key: Hashable` と `Value` を具体的な型引数 `String` と `Int` に置き換えることで形成されます。各型引数は、それが置き換えるジェネリックパラメータのすべての制約を満たす必要があります。上記の例では、`Key` 型パラメータは `Hashable` プロトコルに準拠するように制約されているため、`String` も `Hashable` プロトコルに準拠する必要があります。
 
-You can also replace a type parameter with a type argument that’s itself a specialized version of a generic type (provided it satisfies the appropriate constraints and requirements). For example, you can replace the type parameter `Element` in `Array<Element>` with a specialized version of an array, `Array<Int>`, to form an array whose elements are themselves arrays of integers.
+また、型パラメータを、それ自体がジェネリック型の特殊化バージョンである型引数に置き換えることもできます（適切な制約および要件を満たしている場合）。例えば、`Array<Element>` の型パラメータ `Element` を、整数の配列自体が要素である配列 `Array<Int>` の特殊化バージョンに置き換えて、要素が整数の配列である配列を形成することができます。
 
 ```swift
 let arrayOfArrays: Array<Array<Int>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 ```
 
-As mentioned in [Generic Parameter Clause](#generic-parameter-clause), you don’t use a generic argument clause to specify the type arguments of a generic function or initializer.
+[ジェネリックパラメータ句](#generic-parameter-clause)で述べたように、ジェネリック関数やイニシャライザの型引数を指定するためにジェネリック引数句を使用しません。
 
-## Grammar of a Generic Argument Clause
+## ジェネリック引数句の文法
 
 ```
 generic-argument-clause → < generic-argument-list >

@@ -1,22 +1,22 @@
-# Optional Chaining
+# オプショナルチェーン
 
-Access members of an optional value without unwrapping.
+オプショナル値をアンラップせずにメンバーにアクセスする。
 
-Optional chaining is a process for querying and calling properties, methods, and subscripts on an optional that might currently be nil. If the optional contains a value, the property, method, or subscript call succeeds; if the optional is nil, the property, method, or subscript call returns nil. Multiple queries can be chained together, and the entire chain fails gracefully if any link in the chain is nil.
+オプショナルチェーンは、現在nilである可能性のあるオプショナルのプロパティ、メソッド、およびサブスクリプトを照会および呼び出すプロセスです。オプショナルに値が含まれている場合、プロパティ、メソッド、またはサブスクリプトの呼び出しは成功します。オプショナルがnilの場合、プロパティ、メソッド、またはサブスクリプトの呼び出しはnilを返します。複数のクエリをチェーンでつなげることができ、チェーン内のどのリンクがnilであっても、チェーン全体が優雅に失敗します。
 
-> **Note**: Optional chaining in Swift is similar to messaging nil in Objective-C, but in a way that works for any type, and that can be checked for success or failure.
+> **注**: Swiftのオプショナルチェーンは、Objective-Cでnilにメッセージを送るのと似ていますが、任意の型に対して機能し、成功または失敗をチェックできる点が異なります。
 
-## Optional Chaining as an Alternative to Forced Unwrapping
+## 強制アンラップの代替としてのオプショナルチェーン
 
-You specify optional chaining by placing a question mark (`?`) after the optional value on which you wish to call a property, method or subscript if the optional is non-nil. This is very similar to placing an exclamation point (`!`) after an optional value to force the unwrapping of its value. The main difference is that optional chaining fails gracefully when the optional is nil, whereas forced unwrapping triggers a runtime error when the optional is nil.
+オプショナルチェーンを指定するには、プロパティ、メソッド、またはサブスクリプトを呼び出したいオプショナル値の後に疑問符（`?`）を置きます。これは、オプショナル値の後に感嘆符（`!`）を置いてその値のアンラップを強制するのと非常に似ています。主な違いは、オプショナルがnilの場合、オプショナルチェーンは優雅に失敗するのに対し、強制アンラップはオプショナルがnilの場合にランタイムエラーを引き起こすことです。
 
-To reflect the fact that optional chaining can be called on a nil value, the result of an optional chaining call is always an optional value, even if the property, method, or subscript you are querying returns a non-optional value. You can use this optional return value to check whether the optional chaining call was successful (the returned optional contains a value), or didn’t succeed due to a nil value in the chain (the returned optional value is nil).
+オプショナルチェーンがnil値で呼び出される可能性があることを反映して、オプショナルチェーン呼び出しの結果は常にオプショナル値になります。プロパティ、メソッド、またはサブスクリプトが非オプショナル値を返す場合でも、オプショナルチェーン呼び出しの結果は常にオプショナル値になります。このオプショナルの戻り値を使用して、オプショナルチェーン呼び出しが成功したかどうか（返されたオプショナルに値が含まれているか）、またはチェーン内のnil値のために成功しなかったか（返されたオプショナル値がnilであるか）を確認できます。
 
-Specifically, the result of an optional chaining call is of the same type as the expected return value, but wrapped in an optional. A property that normally returns an `Int` will return an `Int?` when accessed through optional chaining.
+具体的には、オプショナルチェーン呼び出しの結果は、期待される戻り値の型と同じですが、オプショナルでラップされています。通常`Int`を返すプロパティは、オプショナルチェーンを介してアクセスされると`Int?`を返します。
 
-The next several code snippets demonstrate how optional chaining differs from forced unwrapping and enables you to check for success.
+次のいくつかのコードスニペットは、オプショナルチェーンが強制アンラップとどのように異なり、成功を確認できるかを示しています。
 
-First, two classes called `Person` and `Residence` are defined:
+まず、`Person`と`Residence`という2つのクラスを定義します：
 
 ```swift
 class Person {
@@ -28,64 +28,64 @@ class Residence {
 }
 ```
 
-`Residence` instances have a single `Int` property called `numberOfRooms`, with a default value of 1. `Person` instances have an optional `residence` property of type `Residence?`.
+`Residence`インスタンスには、デフォルト値が1の`numberOfRooms`という単一の`Int`プロパティがあります。`Person`インスタンスには、`Residence?`型のオプショナルな`residence`プロパティがあります。
 
-If you create a new `Person` instance, its `residence` property is default initialized to nil, by virtue of being optional. In the code below, `john` has a `residence` property value of nil:
+新しい`Person`インスタンスを作成すると、その`residence`プロパティはオプショナルであるため、デフォルトでnilに初期化されます。以下のコードでは、`john`の`residence`プロパティ値はnilです：
 
 ```swift
 let john = Person()
 ```
 
-If you try to access the `numberOfRooms` property of this person’s residence, by placing an exclamation point after `residence` to force the unwrapping of its value, you trigger a runtime error, because there’s no residence value to unwrap:
+この人の`residence`の`numberOfRooms`プロパティにアクセスしようとして、感嘆符を`residence`の後に置いてその値のアンラップを強制すると、アンラップする`residence`の値がないため、ランタイムエラーが発生します：
 
 ```swift
 let roomCount = john.residence!.numberOfRooms
-// this triggers a runtime error
+// これはランタイムエラーを引き起こします
 ```
 
-The code above succeeds when `john.residence` has a non-nil value and will set `roomCount` to an `Int` value containing the appropriate number of rooms. However, this code always triggers a runtime error when `residence` is nil, as illustrated above.
+上記のコードは、`john.residence`が非nil値を持つ場合に成功し、適切な部屋数を含む`Int`値に`roomCount`を設定します。しかし、上記のように`residence`がnilの場合、このコードは常にランタイムエラーを引き起こします。
 
-Optional chaining provides an alternative way to access the value of `numberOfRooms`. To use optional chaining, use a question mark in place of the exclamation point:
+オプショナルチェーンは、`numberOfRooms`の値にアクセスする別の方法を提供します。オプショナルチェーンを使用するには、感嘆符の代わりに疑問符を使用します：
 
 ```swift
 if let roomCount = john.residence?.numberOfRooms {
     print("John's residence has \(roomCount) room(s).")
 } else {
-    print("Unable to retrieve the number of rooms.")
+    print("部屋数を取得できませんでした。")
 }
-// Prints "Unable to retrieve the number of rooms."
+// "部屋数を取得できませんでした。"と出力されます。
 ```
 
-This tells Swift to “chain” on the optional `residence` property and to retrieve the value of `numberOfRooms` if `residence` exists.
+これは、Swiftにオプショナルな`residence`プロパティに「チェーン」し、`residence`が存在する場合に`numberOfRooms`の値を取得するように指示します。
 
-Because the attempt to access `numberOfRooms` has the potential to fail, the optional chaining attempt returns a value of type `Int?`, or “optional Int”. When `residence` is nil, as in the example above, this optional `Int` will also be nil, to reflect the fact that it was not possible to access `numberOfRooms`. The optional `Int` is accessed through optional binding to unwrap the integer and assign the non-optional value to the `roomCount` constant.
+`numberOfRooms`にアクセスしようとする試みが失敗する可能性があるため、オプショナルチェーンの試みは`Int?`型、つまり「オプショナルなInt」の値を返します。上記の例のように、`residence`がnilの場合、このオプショナルな`Int`もnilになり、`numberOfRooms`にアクセスできなかったことを反映します。オプショナルな`Int`は、オプショナルバインディングを通じて整数をアンラップし、非オプショナルな値を`roomCount`定数に割り当てます。
 
-Note that this is true even though `numberOfRooms` is a non-optional `Int`. The fact that it’s queried through an optional chain means that the call to `numberOfRooms` will always return an `Int?` instead of an `Int`.
+これは、`numberOfRooms`が非オプショナルな`Int`である場合でも同様です。オプショナルチェーンを介してクエリされるという事実は、`numberOfRooms`の呼び出しが常に`Int?`を返すことを意味します。
 
-You can assign a `Residence` instance to `john.residence`, so that it no longer has a nil value:
+`john.residence`に`Residence`インスタンスを割り当てることができ、これによりnil値ではなくなります：
 
 ```swift
 john.residence = Residence()
 ```
 
-`john.residence` now contains an actual `Residence` instance, rather than nil. If you try to access `numberOfRooms` with the same optional chaining as before, it will now return an `Int?` that contains the default `numberOfRooms` value of 1:
+`john.residence`は現在、nilではなく実際の`Residence`インスタンスを含んでいます。以前と同じオプショナルチェーンを使用して`numberOfRooms`にアクセスしようとすると、デフォルトの`numberOfRooms`値1を含む`Int?`を返します：
 
 ```swift
 if let roomCount = john.residence?.numberOfRooms {
     print("John's residence has \(roomCount) room(s).")
 } else {
-    print("Unable to retrieve the number of rooms.")
+    print("部屋数を取得できませんでした。")
 }
-// Prints "John's residence has 1 room(s)."
+// "John's residence has 1 room(s)."と出力されます。
 ```
 
-## Defining Model Classes for Optional Chaining
+## オプショナルチェーンのためのモデルクラスの定義
 
-You can use optional chaining with calls to properties, methods, and subscripts that are more than one level deep. This enables you to drill down into subproperties within complex models of interrelated types, and to check whether it’s possible to access properties, methods, and subscripts on those subproperties.
+オプショナルチェーンを使用すると、プロパティ、メソッド、およびサブスクリプトへの呼び出しが複数レベル深くても使用できます。これにより、複雑な相互関連タイプのモデル内のサブプロパティにドリルダウンし、それらのサブプロパティのプロパティ、メソッド、およびサブスクリプトにアクセスできるかどうかを確認できます。
 
-The code snippets below define four model classes for use in several subsequent examples, including examples of multilevel optional chaining. These classes expand upon the `Person` and `Residence` model from above by adding a `Room` and `Address` class, with associated properties, methods, and subscripts.
+以下のコードスニペットは、いくつかの後続の例で使用するための4つのモデルクラスを定義しており、マルチレベルのオプショナルチェーンの例も含まれています。これらのクラスは、上記の `Person` と `Residence` モデルを拡張し、関連するプロパティ、メソッド、およびサブスクリプトを持つ `Room` と `Address` クラスを追加しています。
 
-The `Person` class is defined in the same way as before:
+`Person` クラスは以前と同じ方法で定義されています：
 
 ```swift
 class Person {
@@ -93,7 +93,7 @@ class Person {
 }
 ```
 
-The `Residence` class is more complex than before. This time, the `Residence` class defines a variable property called `rooms`, which is initialized with an empty array of type `[Room]`:
+`Residence` クラスは以前よりも複雑です。今回は、`Residence` クラスは `rooms` という変数プロパティを定義しており、これは `[Room]` 型の空の配列で初期化されています：
 
 ```swift
 class Residence {
@@ -116,15 +116,15 @@ class Residence {
 }
 ```
 
-Because this version of `Residence` stores an array of `Room` instances, its `numberOfRooms` property is implemented as a computed property, not a stored property. The computed `numberOfRooms` property simply returns the value of the `count` property from the `rooms` array.
+このバージョンの `Residence` は `Room` インスタンスの配列を格納しているため、その `numberOfRooms` プロパティは格納プロパティではなく計算プロパティとして実装されています。計算プロパティ `numberOfRooms` は単に `rooms` 配列の `count` プロパティの値を返します。
 
-As a shortcut to accessing its `rooms` array, this version of `Residence` provides a read-write subscript that provides access to the room at the requested index in the `rooms` array.
+`rooms` 配列にアクセスするためのショートカットとして、このバージョンの `Residence` は、`rooms` 配列の要求されたインデックスにある部屋にアクセスするための読み書き可能なサブスクリプトを提供します。
 
-This version of `Residence` also provides a method called `printNumberOfRooms`, which simply prints the number of rooms in the residence.
+このバージョンの `Residence` は、単にレジデンスの部屋の数を印刷する `printNumberOfRooms` というメソッドも提供します。
 
-Finally, `Residence` defines an optional property called `address`, with a type of `Address?`. The `Address` class type for this property is defined below.
+最後に、`Residence` は `Address?` 型のオプショナルプロパティ `address` を定義しています。このプロパティの `Address` クラスタイプは以下で定義されています。
 
-The `Room` class used for the `rooms` array is a simple class with one property called `name`, and an initializer to set that property to a suitable room name:
+`rooms` 配列に使用される `Room` クラスは、`name` という1つのプロパティを持ち、そのプロパティを適切な部屋の名前に設定するためのイニシャライザを持つシンプルなクラスです：
 
 ```swift
 class Room {
@@ -133,7 +133,7 @@ class Room {
 }
 ```
 
-The final class in this model is called `Address`. This class has three optional properties of type `String?`. The first two properties, `buildingName` and `buildingNumber`, are alternative ways to identify a particular building as part of an address. The third property, `street`, is used to name the street for that address:
+このモデルの最後のクラスは `Address` と呼ばれます。このクラスには `String?` 型の3つのオプショナルプロパティがあります。最初の2つのプロパティ、`buildingName` と `buildingNumber` は、住所の一部として特定の建物を識別するための代替方法です。3つ目のプロパティ、`street` はその住所の通りの名前を指定するために使用されます：
 
 ```swift
 class Address {
@@ -152,13 +152,13 @@ class Address {
 }
 ```
 
-The `Address` class also provides a method called `buildingIdentifier()`, which has a return type of `String?`. This method checks the properties of the address and returns `buildingName` if it has a value, or `buildingNumber` concatenated with `street` if both have values, or nil otherwise.
+`Address` クラスは `String?` 型の戻り値を持つ `buildingIdentifier()` というメソッドも提供します。このメソッドは住所のプロパティをチェックし、`buildingName` に値がある場合はそれを返し、`buildingNumber` と `street` の両方に値がある場合はそれらを連結して返し、そうでない場合は nil を返します。
 
-## Accessing Properties Through Optional Chaining
+## オプショナルチェーンを通じたプロパティへのアクセス
 
-As demonstrated in [Optional Chaining as an Alternative to Forced Unwrapping](#optional-chaining-as-an-alternative-to-forced-unwrapping), you can use optional chaining to access a property on an optional value, and to check if that property access is successful.
+[強制アンラップの代替としてのオプショナルチェーン](#optional-chaining-as-an-alternative-to-forced-unwrapping)で示したように、オプショナルチェーンを使用してオプショナル値のプロパティにアクセスし、そのプロパティアクセスが成功するかどうかを確認できます。
 
-Use the classes defined above to create a new `Person` instance, and try to access its `numberOfRooms` property as before:
+上記で定義されたクラスを使用して新しい `Person` インスタンスを作成し、以前と同じようにその `numberOfRooms` プロパティにアクセスしてみてください：
 
 ```swift
 let john = Person()
@@ -170,9 +170,9 @@ if let roomCount = john.residence?.numberOfRooms {
 // Prints "Unable to retrieve the number of rooms."
 ```
 
-Because `john.residence` is nil, this optional chaining call fails in the same way as before.
+`john.residence` が nil であるため、このオプショナルチェーンの呼び出しは以前と同じように失敗します。
 
-You can also attempt to set a property’s value through optional chaining:
+プロパティの値をオプショナルチェーンを通じて設定しようとすることもできます：
 
 ```swift
 let someAddress = Address()
@@ -181,9 +181,9 @@ someAddress.street = "Acacia Road"
 john.residence?.address = someAddress
 ```
 
-In this example, the attempt to set the `address` property of `john.residence` will fail, because `john.residence` is currently nil.
+この例では、`john.residence` が現在 nil であるため、`john.residence` の `address` プロパティを設定しようとする試みは失敗します。
 
-The assignment is part of the optional chaining, which means none of the code on the right-hand side of the `=` operator is evaluated. In the previous example, it’s not easy to see that `someAddress` is never evaluated, because accessing a constant doesn’t have any side effects. The listing below does the same assignment, but it uses a function to create the address. The function prints “Function was called” before returning a value, which lets you see whether the right-hand side of the `=` operator was evaluated.
+この代入はオプショナルチェーンの一部であり、`=` 演算子の右側のコードは評価されません。前の例では、定数にアクセスすることに副作用がないため、`someAddress` が評価されないことは簡単にはわかりません。以下のリストは同じ代入を行いますが、アドレスを作成するために関数を使用します。この関数は値を返す前に「Function was called」と印刷するため、`=` 演算子の右側が評価されたかどうかを確認できます。
 
 ```swift
 func createAddress() -> Address {
@@ -198,13 +198,13 @@ func createAddress() -> Address {
 john.residence?.address = createAddress()
 ```
 
-You can tell that the `createAddress()` function isn’t called, because nothing is printed.
+`createAddress()` 関数が呼び出されていないことがわかります。なぜなら、何も印刷されないからです。
 
-## Calling Methods Through Optional Chaining
+## オプショナルチェーンを使ったメソッドの呼び出し
 
-You can use optional chaining to call a method on an optional value, and to check whether that method call is successful. You can do this even if that method doesn’t define a return value.
+オプショナルチェーンを使用して、オプショナル値のメソッドを呼び出し、そのメソッド呼び出しが成功したかどうかを確認できます。この方法は、そのメソッドが戻り値を定義していない場合でも使用できます。
 
-The `printNumberOfRooms()` method on the `Residence` class prints the current value of `numberOfRooms`. Here’s how the method looks:
+`Residence`クラスの`printNumberOfRooms()`メソッドは、`numberOfRooms`の現在の値を出力します。メソッドは次のようになります：
 
 ```swift
 func printNumberOfRooms() {
@@ -212,58 +212,58 @@ func printNumberOfRooms() {
 }
 ```
 
-This method doesn’t specify a return type. However, functions and methods with no return type have an implicit return type of `Void`, as described in [Functions Without Return Values](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID174). This means that they return a value of `()`, or an empty tuple.
+このメソッドは戻り値の型を指定していません。しかし、戻り値のない関数やメソッドには、[戻り値のない関数](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID174)で説明されているように、暗黙の戻り値の型として`Void`が設定されています。これは、`()`または空のタプルの値を返すことを意味します。
 
-If you call this method on an optional value with optional chaining, the method’s return type will be `Void?`, not `Void`, because return values are always of an optional type when called through optional chaining. This enables you to use an `if` statement to check whether it was possible to call the `printNumberOfRooms()` method, even though the method doesn’t itself define a return value. Compare the return value from the `printNumberOfRooms` call against nil to see if the method call was successful:
+オプショナル値に対してオプショナルチェーンを使用してこのメソッドを呼び出すと、メソッドの戻り値の型は`Void`ではなく`Void?`になります。これは、オプショナルチェーンを通じて呼び出された場合、戻り値は常にオプショナル型になるためです。これにより、`printNumberOfRooms()`メソッドを呼び出すことが可能かどうかを確認するために、`if`文を使用できます。メソッド呼び出しが成功したかどうかを確認するために、`printNumberOfRooms`呼び出しの戻り値をnilと比較します：
 
 ```swift
 if john.residence?.printNumberOfRooms() != nil {
-    print("It was possible to print the number of rooms.")
+    print("部屋の数を出力することができました。")
 } else {
-    print("It was not possible to print the number of rooms.")
+    print("部屋の数を出力することができませんでした。")
 }
-// Prints "It was not possible to print the number of rooms."
+// "部屋の数を出力することができませんでした。"と出力されます。
 ```
 
-The same is true if you attempt to set a property through optional chaining. The example above in [Accessing Properties Through Optional Chaining](#accessing-properties-through-optional-chaining) attempts to set an address value for `john.residence`, even though the `residence` property is nil. Any attempt to set a property through optional chaining returns a value of type `Void?`, which enables you to compare against nil to see if the property was set successfully:
+オプショナルチェーンを使用してプロパティを設定しようとする場合も同様です。[オプショナルチェーンを使ったプロパティのアクセス](#accessing-properties-through-optional-chaining)の上記の例では、`residence`プロパティがnilであるにもかかわらず、`john.residence`のアドレス値を設定しようとしています。オプショナルチェーンを通じてプロパティを設定しようとすると、`Void?`型の値が返され、プロパティが正常に設定されたかどうかを確認するためにnilと比較できます：
 
 ```swift
 if (john.residence?.address = someAddress) != nil {
-    print("It was possible to set the address.")
+    print("アドレスを設定することができました。")
 } else {
-    print("It was not possible to set the address.")
+    print("アドレスを設定することができませんでした。")
 }
-// Prints "It was not possible to set the address."
+// "アドレスを設定することができませんでした。"と出力されます。
 ```
 
-## Accessing Subscripts Through Optional Chaining
+## オプショナルチェーンを使ったサブスクリプトのアクセス
 
-You can use optional chaining to try to retrieve and set a value from a subscript on an optional value, and to check whether that subscript call is successful.
+オプショナルチェーンを使用して、オプショナル値のサブスクリプトから値を取得および設定し、そのサブスクリプト呼び出しが成功したかどうかを確認できます。
 
-> **Note**: When you access a subscript on an optional value through optional chaining, you place the question mark before the subscript’s brackets, not after. The optional chaining question mark always follows immediately after the part of the expression that’s optional.
+> **注意**: オプショナル値のサブスクリプトにオプショナルチェーンを使用する場合、サブスクリプトの角括弧の後ではなく、前に疑問符を置きます。オプショナルチェーンの疑問符は、常にオプショナルである式の部分の直後に続きます。
 
-The example below tries to retrieve the name of the first room in the `rooms` array of the `john.residence` property using the subscript defined on the `Residence` class. Because `john.residence` is currently nil, the subscript call fails:
+次の例では、`john.residence`プロパティの`rooms`配列の最初の部屋の名前を、`Residence`クラスで定義されたサブスクリプトを使用して取得しようとしています。`john.residence`は現在nilであるため、サブスクリプト呼び出しは失敗します：
 
 ```swift
 if let firstRoomName = john.residence?[0].name {
-    print("The first room name is \(firstRoomName).")
+    print("最初の部屋の名前は\(firstRoomName)です。")
 } else {
-    print("Unable to retrieve the first room name.")
+    print("最初の部屋の名前を取得できませんでした。")
 }
-// Prints "Unable to retrieve the first room name."
+// "最初の部屋の名前を取得できませんでした。"と出力されます。
 ```
 
-The optional chaining question mark in this subscript call is placed immediately after `john.residence`, before the subscript brackets, because `john.residence` is the optional value on which optional chaining is being attempted.
+このサブスクリプト呼び出しのオプショナルチェーンの疑問符は、サブスクリプトの角括弧の前に置かれています。これは、`john.residence`がオプショナル値であり、オプショナルチェーンが試みられているためです。
 
-Similarly, you can try to set a new value through a subscript with optional chaining:
+同様に、オプショナルチェーンを使用してサブスクリプトを介して新しい値を設定しようとすることもできます：
 
 ```swift
 john.residence?[0] = Room(name: "Bathroom")
 ```
 
-This subscript setting attempt also fails, because `residence` is currently nil.
+このサブスクリプト設定の試みも失敗します。なぜなら、`residence`は現在nilだからです。
 
-If you create and assign an actual `Residence` instance to `john.residence`, with one or more `Room` instances in its `rooms` array, you can use the `Residence` subscript to access the actual items in the `rooms` array through optional chaining:
+`john.residence`に1つ以上の`Room`インスタンスを持つ実際の`Residence`インスタンスを作成して割り当てると、オプショナルチェーンを使用して`Residence`サブスクリプトを介して`rooms`配列の実際のアイテムにアクセスできます：
 
 ```swift
 let johnsHouse = Residence()
@@ -272,42 +272,42 @@ johnsHouse.rooms.append(Room(name: "Kitchen"))
 john.residence = johnsHouse
 
 if let firstRoomName = john.residence?[0].name {
-    print("The first room name is \(firstRoomName).")
+    print("最初の部屋の名前は\(firstRoomName)です。")
 } else {
-    print("Unable to retrieve the first room name.")
+    print("最初の部屋の名前を取得できませんでした。")
 }
-// Prints "The first room name is Living Room."
+// "最初の部屋の名前はLiving Roomです。"と出力されます。
 ```
 
-## Accessing Subscripts of Optional Type
+## オプショナル型のサブスクリプトへのアクセス
 
-If a subscript returns a value of optional type — such as the key subscript of Swift’s `Dictionary` type — place a question mark after the subscript’s closing bracket to chain on its optional return value:
+サブスクリプトがオプショナル型の値を返す場合（Swiftの`Dictionary`型のキーサブスクリプトなど）、オプショナルの戻り値にチェーンするためにサブスクリプトの閉じ括弧の後に疑問符を置きます：
 
 ```swift
 var testScores = ["Dave": [86, 82, 84], "Bev": [79, 94, 81]]
 testScores["Dave"]?[0] = 91
 testScores["Bev"]?[0] += 1
 testScores["Brian"]?[0] = 72
-// the "Dave" array is now [91, 82, 84] and the "Bev" array is now [80, 94, 81]
+// "Dave"の配列は現在[91, 82, 84]であり、"Bev"の配列は現在[80, 94, 81]です
 ```
 
-The example above defines a dictionary called `testScores`, which contains two key-value pairs that map a `String` key to an array of `Int` values. The example uses optional chaining to set the first item in the "Dave" array to 91; to increment the first item in the "Bev" array by 1; and to try to set the first item in an array for a key of "Brian". The first two calls succeed, because the `testScores` dictionary contains keys for "Dave" and "Bev". The third call fails, because the `testScores` dictionary doesn’t contain a key for "Brian".
+上記の例では、`testScores`という辞書を定義しています。この辞書には、`String`キーを`Int`値の配列にマッピングする2つのキーと値のペアが含まれています。この例では、オプショナルチェーンを使用して、"Dave"配列の最初のアイテムを91に設定し、"Bev"配列の最初のアイテムを1増やし、"Brian"キーの配列の最初のアイテムを設定しようとしています。最初の2つの呼び出しは成功します。なぜなら、`testScores`辞書には"Dave"と"Bev"のキーが含まれているからです。3番目の呼び出しは失敗します。なぜなら、`testScores`辞書には"Brian"のキーが含まれていないからです。
 
-## Linking Multiple Levels of Chaining
+## 複数レベルのチェーンのリンク
 
-You can link together multiple levels of optional chaining to drill down to properties, methods, and subscripts deeper within a model. However, multiple levels of optional chaining don’t add more levels of optionality to the returned value.
+オプショナルチェーンを複数レベルでリンクして、モデル内のプロパティ、メソッド、およびサブスクリプトを深く掘り下げることができます。ただし、複数レベルのオプショナルチェーンは、返される値にオプショナリティのレベルを追加しません。
 
-To put it another way:
+別の言い方をすると：
 
-- If the type you are trying to retrieve isn’t optional, it will become optional because of the optional chaining.
-- If the type you are trying to retrieve is already optional, it will not become more optional because of the chaining.
+- 取得しようとしている型がオプショナルでない場合、オプショナルチェーンのためにオプショナルになります。
+- 取得しようとしている型がすでにオプショナルである場合、チェーンのためにさらにオプショナルにはなりません。
 
-Therefore:
+したがって：
 
-- If you try to retrieve an `Int` value through optional chaining, an `Int?` is always returned, no matter how many levels of chaining are used.
-- Similarly, if you try to retrieve an `Int?` value through optional chaining, an `Int?` is always returned, no matter how many levels of chaining are used.
+- オプショナルチェーンを通じて `Int` 値を取得しようとすると、使用されるチェーンのレベルに関係なく、常に `Int?` が返されます。
+- 同様に、オプショナルチェーンを通じて `Int?` 値を取得しようとすると、使用されるチェーンのレベルに関係なく、常に `Int?` が返されます。
 
-The example below tries to access the `street` property of the `address` property of the `residence` property of `john`. There are two levels of optional chaining in use here, to chain through the `residence` and `address` properties, both of which are of optional type:
+以下の例では、`john` の `residence` プロパティの `address` プロパティの `street` プロパティにアクセスしようとしています。ここでは、オプショナル型の `residence` および `address` プロパティをチェーンするために、2 レベルのオプショナルチェーンが使用されています：
 
 ```swift
 if let johnsStreet = john.residence?.address?.street {
@@ -315,14 +315,14 @@ if let johnsStreet = john.residence?.address?.street {
 } else {
     print("Unable to retrieve the address.")
 }
-// Prints "Unable to retrieve the address."
+// "Unable to retrieve the address." と出力されます。
 ```
 
-The value of `john.residence` currently contains a valid `Residence` instance. However, the value of `john.residence.address` is currently nil. Because of this, the call to `john.residence?.address?.street` fails.
+`john.residence` の値には現在、有効な `Residence` インスタンスが含まれています。ただし、`john.residence.address` の値は現在 nil です。このため、`john.residence?.address?.street` の呼び出しは失敗します。
 
-Note that in the example above, you are trying to retrieve the value of the `street` property. The type of this property is `String?`. The return value of `john.residence?.address?.street` is therefore also `String?`, even though two levels of optional chaining are applied in addition to the underlying optional type of the property.
+上記の例では、`street` プロパティの値を取得しようとしています。このプロパティの型は `String?` です。したがって、`john.residence?.address?.street` の戻り値も `String?` です。これは、プロパティの基礎となるオプショナル型に加えて、2 レベルのオプショナルチェーンが適用されているためです。
 
-If you set an actual `Address` instance as the value for `john.residence.address`, and set an actual value for the address’s `street` property, you can access the value of the `street` property through multilevel optional chaining:
+`john.residence.address` の値として実際の `Address` インスタンスを設定し、アドレスの `street` プロパティに実際の値を設定すると、複数レベルのオプショナルチェーンを通じて `street` プロパティの値にアクセスできます：
 
 ```swift
 let johnsAddress = Address()
@@ -335,25 +335,25 @@ if let johnsStreet = john.residence?.address?.street {
 } else {
     print("Unable to retrieve the address.")
 }
-// Prints "John's street name is Laurel Street."
+// "John's street name is Laurel Street." と出力されます。
 ```
 
-In this example, the attempt to set the address property of `john.residence` will succeed, because the value of `john.residence` currently contains a valid `Residence` instance.
+この例では、`john.residence` の値には現在、有効な `Residence` インスタンスが含まれているため、`john.residence` の `address` プロパティを設定する試みは成功します。
 
-## Chaining on Methods with Optional Return Values
+## オプショナルな戻り値を持つメソッドのチェーン
 
-The previous example shows how to retrieve the value of a property of optional type through optional chaining. You can also use optional chaining to call a method that returns a value of optional type, and to chain on that method’s return value if needed.
+前の例では、オプショナル型のプロパティの値をオプショナルチェーンを通じて取得する方法を示しました。オプショナルチェーンを使用して、オプショナル型の値を返すメソッドを呼び出し、そのメソッドの戻り値にチェーンすることもできます。
 
-The example below calls the `Address` class’s `buildingIdentifier()` method through optional chaining. This method returns a value of type `String?`. As described above, the ultimate return type of this method call after optional chaining is also `String?`:
+以下の例では、オプショナルチェーンを通じて `Address` クラスの `buildingIdentifier()` メソッドを呼び出しています。このメソッドは `String?` 型の値を返します。前述のように、オプショナルチェーンの後のこのメソッド呼び出しの最終的な戻り値の型も `String?` です：
 
 ```swift
 if let buildingIdentifier = john.residence?.address?.buildingIdentifier() {
     print("John's building identifier is \(buildingIdentifier).")
 }
-// Prints "John's building identifier is The Larches."
+// "John's building identifier is The Larches." と出力されます。
 ```
 
-If you want to perform further optional chaining on this method’s return value, place the optional chaining question mark after the method’s parentheses:
+このメソッドの戻り値にさらにオプショナルチェーンを実行したい場合は、メソッドの括弧の後にオプショナルチェーンの疑問符を配置します：
 
 ```swift
 if let beginsWithThe =
@@ -364,7 +364,7 @@ if let beginsWithThe =
         print("John's building identifier doesn't begin with \"The\".")
     }
 }
-// Prints "John's building identifier begins with "The"."
+// "John's building identifier begins with "The"." と出力されます。
 ```
 
-> **Note**: In the example above, you place the optional chaining question mark after the parentheses, because the optional value you are chaining on is the `buildingIdentifier()` method’s return value, and not the `buildingIdentifier()` method itself.
+> **注**: 上記の例では、オプショナルチェーンの疑問符を括弧の後に配置しています。これは、チェーンしているオプショナル値が `buildingIdentifier()` メソッド自体ではなく、その戻り値であるためです。

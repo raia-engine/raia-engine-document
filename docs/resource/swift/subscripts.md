@@ -1,37 +1,37 @@
-# Subscripts
+# サブスクリプト
 
-Access the elements of a collection.
+コレクションの要素にアクセスします。
 
-Classes, structures, and enumerations can define subscripts, which are shortcuts for accessing the member elements of a collection, list, or sequence. You use subscripts to set and retrieve values by index without needing separate methods for setting and retrieval. For example, you access elements in an `Array` instance as `someArray[index]` and elements in a `Dictionary` instance as `someDictionary[key]`.
+クラス、構造体、および列挙型はサブスクリプトを定義できます。サブスクリプトは、コレクション、リスト、またはシーケンスのメンバー要素にアクセスするためのショートカットです。サブスクリプトを使用すると、設定と取得のための別々のメソッドを必要とせずに、インデックスで値を設定および取得できます。たとえば、`Array` インスタンスの要素には `someArray[index]` としてアクセスし、`Dictionary` インスタンスの要素には `someDictionary[key]` としてアクセスします。
 
-You can define multiple subscripts for a single type, and the appropriate subscript overload to use is selected based on the type of index value you pass to the subscript. Subscripts aren’t limited to a single dimension, and you can define subscripts with multiple input parameters to suit your custom type’s needs.
+1つの型に対して複数のサブスクリプトを定義でき、渡すインデックス値の型に基づいて適切なサブスクリプトのオーバーロードが選択されます。サブスクリプトは1次元に限定されず、カスタム型のニーズに合わせて複数の入力パラメータを持つサブスクリプトを定義できます。
 
-## Subscript Syntax
+## サブスクリプトの構文
 
-Subscripts enable you to query instances of a type by writing one or more values in square brackets after the instance name. Their syntax is similar to both instance method syntax and computed property syntax. You write subscript definitions with the `subscript` keyword, and specify one or more input parameters and a return type, in the same way as instance methods. Unlike instance methods, subscripts can be read-write or read-only. This behavior is communicated by a getter and setter in the same way as for computed properties:
+サブスクリプトを使用すると、インスタンス名の後に角括弧で1つ以上の値を書いて型のインスタンスをクエリできます。その構文は、インスタンスメソッドの構文と計算プロパティの構文の両方に似ています。`subscript` キーワードを使用してサブスクリプト定義を書き、インスタンスメソッドと同じように1つ以上の入力パラメータと戻り値の型を指定します。インスタンスメソッドとは異なり、サブスクリプトは読み書き可能または読み取り専用にすることができます。この動作は、計算プロパティと同様にゲッターとセッターによって伝えられます：
 
 ```swift
 subscript(index: Int) -> Int {
     get {
-        // Return an appropriate subscript value here.
+        // 適切なサブスクリプト値をここで返します。
     }
     set(newValue) {
-        // Perform a suitable setting action here.
+        // 適切な設定アクションをここで実行します。
     }
 }
 ```
 
-The type of `newValue` is the same as the return value of the subscript. As with computed properties, you can choose not to specify the setter’s (`newValue`) parameter. A default parameter called `newValue` is provided to your setter if you don’t provide one yourself.
+`newValue` の型はサブスクリプトの戻り値の型と同じです。計算プロパティと同様に、セッターの (`newValue`) パラメータを指定しないこともできます。セッターにパラメータを指定しない場合、デフォルトのパラメータ `newValue` が提供されます。
 
-As with read-only computed properties, you can simplify the declaration of a read-only subscript by removing the `get` keyword and its braces:
+読み取り専用の計算プロパティと同様に、`get` キーワードとその中括弧を削除して読み取り専用のサブスクリプトの宣言を簡略化できます：
 
 ```swift
 subscript(index: Int) -> Int {
-    // Return an appropriate subscript value here.
+    // 適切なサブスクリプト値をここで返します。
 }
 ```
 
-Here’s an example of a read-only subscript implementation, which defines a `TimesTable` structure to represent an n-times-table of integers:
+ここに、整数のn倍表を表す `TimesTable` 構造体を定義する読み取り専用のサブスクリプト実装の例があります：
 
 ```swift
 struct TimesTable {
@@ -42,41 +42,41 @@ struct TimesTable {
 }
 let threeTimesTable = TimesTable(multiplier: 3)
 print("six times three is \(threeTimesTable[6])")
-// Prints "six times three is 18"
+// "six times three is 18" と出力されます
 ```
 
-In this example, a new instance of `TimesTable` is created to represent the three-times-table. This is indicated by passing a value of 3 to the structure’s initializer as the value to use for the instance’s `multiplier` parameter.
+この例では、3倍表を表す `TimesTable` の新しいインスタンスが作成されます。これは、構造体のイニシャライザに `multiplier` パラメータの値として3を渡すことで示されます。
 
-You can query the `threeTimesTable` instance by calling its subscript, as shown in the call to `threeTimesTable[6]`. This requests the sixth entry in the three-times-table, which returns a value of 18, or 3 times 6.
+`threeTimesTable` インスタンスを `threeTimesTable[6]` のようにサブスクリプトを呼び出してクエリできます。これは3倍表の6番目のエントリを要求し、18、つまり3×6の値を返します。
 
-> **Note**: An n-times-table is based on a fixed mathematical rule. It isn’t appropriate to set `threeTimesTable[someIndex]` to a new value, and so the subscript for `TimesTable` is defined as a read-only subscript.
+> **注**: n倍表は固定された数学的ルールに基づいています。したがって、`threeTimesTable[someIndex]` に新しい値を設定するのは適切ではありません。そのため、`TimesTable` のサブスクリプトは読み取り専用のサブスクリプトとして定義されています。
 
-## Subscript Usage
+## サブスクリプトの使用
 
-The exact meaning of “subscript” depends on the context in which it’s used. Subscripts are typically used as a shortcut for accessing the member elements in a collection, list, or sequence. You are free to implement subscripts in the most appropriate way for your particular class or structure’s functionality.
+「サブスクリプト」の正確な意味は、それが使用される文脈によって異なります。サブスクリプトは通常、コレクション、リスト、またはシーケンスのメンバー要素にアクセスするためのショートカットとして使用されます。特定のクラスや構造体の機能に最も適した方法でサブスクリプトを実装することができます。
 
-For example, Swift’s `Dictionary` type implements a subscript to set and retrieve the values stored in a `Dictionary` instance. You can set a value in a dictionary by providing a key of the dictionary’s key type within subscript brackets, and assigning a value of the dictionary’s value type to the subscript:
+たとえば、Swiftの `Dictionary` 型は、`Dictionary` インスタンスに格納されている値を設定および取得するためのサブスクリプトを実装しています。サブスクリプトの角括弧内に辞書のキー型のキーを提供し、サブスクリプトに辞書の値型の値を割り当てることで、辞書に値を設定できます：
 
 ```swift
 var numberOfLegs = ["spider": 8, "ant": 6, "cat": 4]
 numberOfLegs["bird"] = 2
 ```
 
-The example above defines a variable called `numberOfLegs` and initializes it with a dictionary literal containing three key-value pairs. The type of the `numberOfLegs` dictionary is inferred to be `[String: Int]`. After creating the dictionary, this example uses subscript assignment to add a `String` key of `"bird"` and an `Int` value of `2` to the dictionary.
+上記の例では、`numberOfLegs` という変数を定義し、3つのキーと値のペアを含む辞書リテラルで初期化します。`numberOfLegs` 辞書の型は `[String: Int]` と推論されます。辞書を作成した後、この例ではサブスクリプトの代入を使用して、`"bird"` という `String` キーと `2` という `Int` 値を辞書に追加します。
 
-For more information about Dictionary subscripting, see [Accessing and Modifying a Dictionary](https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html#ID113).
+辞書のサブスクリプトの詳細については、[辞書のアクセスと変更](https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html#ID113)を参照してください。
 
-> **Note**: Swift’s `Dictionary` type implements its key-value subscripting as a subscript that takes and returns an optional type. For the `numberOfLegs` dictionary above, the key-value subscript takes and returns a value of type `Int?`, or “optional int”. The `Dictionary` type uses an optional subscript type to model the fact that not every key will have a value, and to give a way to delete a value for a key by assigning a `nil` value for that key.
+> **注**: Swiftの `Dictionary` 型は、オプショナル型を取るおよび返すサブスクリプトとしてキーと値のサブスクリプトを実装しています。上記の `numberOfLegs` 辞書の場合、キーと値のサブスクリプトは `Int?` 型、つまり「オプショナルなint」の値を取るおよび返します。`Dictionary` 型は、すべてのキーに値があるわけではないことをモデル化し、キーに `nil` 値を割り当てることでキーの値を削除する方法を提供するために、オプショナルなサブスクリプト型を使用しています。
 
-## Subscript Options
+## サブスクリプトのオプション
 
-Subscripts can take any number of input parameters, and these input parameters can be of any type. Subscripts can also return a value of any type.
+サブスクリプトは任意の数の入力パラメータを取ることができ、これらの入力パラメータは任意の型にすることができます。サブスクリプトは任意の型の値を返すこともできます。
 
-Like functions, subscripts can take a varying number of parameters and provide default values for their parameters, as discussed in [Variadic Parameters](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID166) and [Default Parameter Values](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID166). However, unlike functions, subscripts can’t use in-out parameters.
+関数と同様に、サブスクリプトは可変個引数を取り、パラメータにデフォルト値を提供することができます。詳細は[可変個引数](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID166)および[デフォルトパラメータ値](https://docs.swift.org/swift-book/LanguageGuide/Functions.html#ID166)を参照してください。ただし、関数とは異なり、サブスクリプトはin-outパラメータを使用することはできません。
 
-A class or structure can provide as many subscript implementations as it needs, and the appropriate subscript to be used will be inferred based on the types of the value or values that are contained within the subscript brackets at the point that the subscript is used. This definition of multiple subscripts is known as subscript overloading.
+クラスや構造体は必要に応じて複数のサブスクリプト実装を提供することができ、使用される適切なサブスクリプトは、サブスクリプトが使用される時点でサブスクリプト括弧内に含まれる値の型に基づいて推測されます。この複数のサブスクリプトの定義は、サブスクリプトのオーバーロードと呼ばれます。
 
-While it’s most common for a subscript to take a single parameter, you can also define a subscript with multiple parameters if it’s appropriate for your type. The following example defines a `Matrix` structure, which represents a two-dimensional matrix of `Double` values. The `Matrix` structure’s subscript takes two integer parameters:
+サブスクリプトが単一のパラメータを取ることが最も一般的ですが、型に適している場合は複数のパラメータを持つサブスクリプトを定義することもできます。次の例では、`Matrix`構造体を定義しており、これは`Double`値の2次元行列を表しています。`Matrix`構造体のサブスクリプトは2つの整数パラメータを取ります：
 
 ```swift
 struct Matrix {
@@ -103,26 +103,26 @@ struct Matrix {
 }
 ```
 
-`Matrix` provides an initializer that takes two parameters called `rows` and `columns`, and creates an array that’s large enough to store `rows * columns` values of type `Double`. Each position in the matrix is given an initial value of `0.0`. To achieve this, the array’s size, and an initial cell value of `0.0`, are passed to an array initializer that creates and initializes a new array of the correct size. This initializer is described in more detail in [Creating an Array with a Default Value](https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html#ID108).
+`Matrix`は`rows`と`columns`という2つのパラメータを取るイニシャライザを提供し、`rows * columns`の`Double`型の値を格納するのに十分な大きさの配列を作成します。行列の各位置には初期値として`0.0`が与えられます。これを実現するために、配列のサイズと初期セル値`0.0`が配列イニシャライザに渡され、正しいサイズの新しい配列が作成および初期化されます。このイニシャライザの詳細は[デフォルト値を持つ配列の作成](https://docs.swift.org/swift-book/LanguageGuide/CollectionTypes.html#ID108)で説明されています。
 
-You can construct a new `Matrix` instance by passing an appropriate row and column count to its initializer:
+適切な行数と列数をイニシャライザに渡すことで、新しい`Matrix`インスタンスを構築できます：
 
 ```swift
 var matrix = Matrix(rows: 2, columns: 2)
 ```
 
-The example above creates a new `Matrix` instance with two rows and two columns. The grid array for this `Matrix` instance is effectively a flattened version of the matrix, as read from top left to bottom right:
+上記の例では、2行2列の新しい`Matrix`インスタンスを作成しています。この`Matrix`インスタンスのグリッド配列は、実質的に行列のフラット化バージョンであり、左上から右下まで読み取られます：
 
-Values in the matrix can be set by passing row and column values into the subscript, separated by a comma:
+行列内の値は、行と列の値をカンマで区切ってサブスクリプトに渡すことで設定できます：
 
 ```swift
 matrix[0, 1] = 1.5
 matrix[1, 0] = 3.2
 ```
 
-These two statements call the subscript’s setter to set a value of `1.5` in the top right position of the matrix (where row is `0` and column is `1`), and `3.2` in the bottom left position (where row is `1` and column is `0`):
+これらの2つの文は、サブスクリプトのセッタを呼び出して、行が`0`で列が`1`の位置に`1.5`の値を設定し、行が`1`で列が`0`の位置に`3.2`の値を設定します：
 
-The `Matrix` subscript’s getter and setter both contain an assertion to check that the subscript’s row and column values are valid. To assist with these assertions, `Matrix` includes a convenience method called `indexIsValid(row:column:)`, which checks whether the requested row and column are inside the bounds of the matrix:
+`Matrix`サブスクリプトのゲッタとセッタの両方に、サブスクリプトの行と列の値が有効であることを確認するアサーションが含まれています。これらのアサーションを支援するために、`Matrix`には`indexIsValid(row:column:)`という便利なメソッドが含まれており、要求された行と列が行列の範囲内にあるかどうかを確認します：
 
 ```swift
 func indexIsValid(row: Int, column: Int) -> Bool {
@@ -130,16 +130,16 @@ func indexIsValid(row: Int, column: Int) -> Bool {
 }
 ```
 
-An assertion is triggered if you try to access a subscript that’s outside of the matrix bounds:
+行列の範囲外のサブスクリプトにアクセスしようとすると、アサーションがトリガーされます：
 
 ```swift
 let someValue = matrix[2, 2]
-// This triggers an assert, because [2, 2] is outside of the matrix bounds.
+// これはアサートをトリガーします。なぜなら[2, 2]は行列の範囲外だからです。
 ```
 
-## Type Subscripts
+## 型サブスクリプト
 
-Instance subscripts, as described above, are subscripts that you call on an instance of a particular type. You can also define subscripts that are called on the type itself. This kind of subscript is called a type subscript. You indicate a type subscript by writing the `static` keyword before the `subscript` keyword. Classes can use the `class` keyword instead, to allow subclasses to override the superclass’s implementation of that subscript. The example below shows how you define and call a type subscript:
+上記で説明したインスタンスサブスクリプトは、特定の型のインスタンスに対して呼び出すサブスクリプトです。型自体に対して呼び出されるサブスクリプトを定義することもできます。この種のサブスクリプトは型サブスクリプトと呼ばれます。型サブスクリプトを示すには、`subscript`キーワードの前に`static`キーワードを書きます。クラスは代わりに`class`キーワードを使用して、サブクラスがスーパークラスのサブスクリプトの実装をオーバーライドできるようにすることができます。以下の例は、型サブスクリプトを定義し、呼び出す方法を示しています：
 
 ```swift
 enum Planet: Int {

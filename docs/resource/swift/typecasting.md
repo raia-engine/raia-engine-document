@@ -1,18 +1,18 @@
-# Type Casting
+# 型キャスト
 
-Determine a value’s runtime type and give it more specific type information.
+値の実行時の型を判定し、より具体的な型情報を提供します。
 
-Type casting is a way to check the type of an instance, or to treat that instance as a different superclass or subclass from somewhere else in its own class hierarchy.
+型キャストは、インスタンスの型をチェックしたり、そのインスタンスをクラス階層内の別のスーパークラスやサブクラスとして扱ったりする方法です。
 
-Type casting in Swift is implemented with the `is` and `as` operators. These two operators provide a simple and expressive way to check the type of a value or cast a value to a different type.
+Swiftの型キャストは、`is`および`as`演算子で実装されています。これらの2つの演算子は、値の型をチェックしたり、値を別の型にキャストしたりするためのシンプルで表現力豊かな方法を提供します。
 
-You can also use type casting to check whether a type conforms to a protocol, as described in [Checking for Protocol Conformance](#checking-for-protocol-conformance).
+また、[プロトコル準拠の確認](#checking-for-protocol-conformance)で説明されているように、型キャストを使用して型がプロトコルに準拠しているかどうかを確認することもできます。
 
-## Defining a Class Hierarchy for Type Casting
+## 型キャストのためのクラス階層の定義
 
-You can use type casting with a hierarchy of classes and subclasses to check the type of a particular class instance and to cast that instance to another class within the same hierarchy. The three code snippets below define a hierarchy of classes and an array containing instances of those classes, for use in an example of type casting.
+クラスとサブクラスの階層を使用して、特定のクラスインスタンスの型をチェックし、そのインスタンスを同じ階層内の別のクラスにキャストすることができます。以下の3つのコードスニペットは、型キャストの例で使用するためのクラス階層と、これらのクラスのインスタンスを含む配列を定義しています。
 
-The first snippet defines a new base class called `MediaItem`. This class provides basic functionality for any kind of item that appears in a digital media library. Specifically, it declares a `name` property of type `String`, and an `init(name:)` initializer. (It’s assumed that all media items, including all movies and songs, will have a name.)
+最初のスニペットは、`MediaItem`という新しい基本クラスを定義します。このクラスは、デジタルメディアライブラリに表示されるあらゆる種類のアイテムに基本的な機能を提供します。具体的には、`String`型の`name`プロパティと、`init(name:)`イニシャライザを宣言しています。（すべてのメディアアイテム、映画や曲を含む、には名前があると仮定します。）
 
 ```swift
 class MediaItem {
@@ -23,7 +23,7 @@ class MediaItem {
 }
 ```
 
-The next snippet defines two subclasses of `MediaItem`. The first subclass, `Movie`, encapsulates additional information about a movie or film. It adds a `director` property on top of the base `MediaItem` class, with a corresponding initializer. The second subclass, `Song`, adds an `artist` property and initializer on top of the base class:
+次のスニペットは、`MediaItem`の2つのサブクラスを定義します。最初のサブクラスである`Movie`は、映画やフィルムに関する追加情報をカプセル化します。これは、基本クラス`MediaItem`の上に`director`プロパティを追加し、対応するイニシャライザを持ちます。2番目のサブクラスである`Song`は、基本クラスの上に`artist`プロパティとイニシャライザを追加します。
 
 ```swift
 class Movie: MediaItem {
@@ -43,7 +43,7 @@ class Song: MediaItem {
 }
 ```
 
-The final snippet creates a constant array called `library`, which contains two `Movie` instances and three `Song` instances. The type of the `library` array is inferred by initializing it with the contents of an array literal. Swift’s type checker is able to deduce that `Movie` and `Song` have a common superclass of `MediaItem`, and so it infers a type of `[MediaItem]` for the `library` array:
+最後のスニペットは、`library`という定数配列を作成します。この配列には、2つの`Movie`インスタンスと3つの`Song`インスタンスが含まれています。`library`配列の型は、配列リテラルの内容で初期化することで推論されます。Swiftの型チェッカーは、`Movie`と`Song`が共通のスーパークラス`MediaItem`を持っていることを推論し、`library`配列の型を`[MediaItem]`と推論します。
 
 ```swift
 let library = [
@@ -53,16 +53,16 @@ let library = [
     Song(name: "The One And Only", artist: "Chesney Hawkes"),
     Song(name: "Never Gonna Give You Up", artist: "Rick Astley")
 ]
-// the type of "library" is inferred to be [MediaItem]
+// "library"の型は[MediaItem]と推論されます
 ```
 
-The items stored in `library` are still `Movie` and `Song` instances behind the scenes. However, if you iterate over the contents of this array, the items you receive back are typed as `MediaItem`, and not as `Movie` or `Song`. In order to work with them as their native type, you need to check their type, or downcast them to a different type, as described below.
+`library`に格納されているアイテムは、内部的には依然として`Movie`および`Song`インスタンスです。しかし、この配列の内容を反復処理すると、受け取るアイテムは`MediaItem`として型付けされ、`Movie`や`Song`としては型付けされません。これらをネイティブな型として扱うためには、型をチェックするか、別の型にダウンキャストする必要があります。以下で説明します。
 
-## Checking Type
+## 型のチェック
 
-Use the type check operator (`is`) to check whether an instance is of a certain subclass type. The type check operator returns `true` if the instance is of that subclass type and `false` if it’s not.
+型チェック演算子（`is`）を使用して、インスタンスが特定のサブクラス型であるかどうかを確認します。型チェック演算子は、インスタンスがそのサブクラス型である場合に`true`を返し、そうでない場合に`false`を返します。
 
-The example below defines two variables, `movieCount` and `songCount`, which count the number of `Movie` and `Song` instances in the `library` array:
+以下の例では、`library`配列内の`Movie`および`Song`インスタンスの数をカウントする2つの変数、`movieCount`と`songCount`を定義します。
 
 ```swift
 var movieCount = 0
@@ -76,27 +76,27 @@ for item in library {
     }
 }
 
-print("Media library contains \(movieCount) movies and \(songCount) songs")
-// Prints "Media library contains 2 movies and 3 songs"
+print("メディアライブラリには\(movieCount)本の映画と\(songCount)曲の歌があります")
+// "メディアライブラリには2本の映画と3曲の歌があります"と出力されます
 ```
 
-This example iterates through all items in the `library` array. On each pass, the `for-in` loop sets the `item` constant to the next `MediaItem` in the array.
+この例では、`library`配列内のすべてのアイテムを反復処理します。各パスで、`for-in`ループは`item`定数を配列内の次の`MediaItem`に設定します。
 
-`item is Movie` returns `true` if the current `MediaItem` is a `Movie` instance and `false` if it’s not. Similarly, `item is Song` checks whether the `item` is a `Song` instance. At the end of the `for-in` loop, the values of `movieCount` and `songCount` contain a count of how many `MediaItem` instances were found of each type.
+`item is Movie`は、現在の`MediaItem`が`Movie`インスタンスである場合に`true`を返し、そうでない場合に`false`を返します。同様に、`item is Song`は、`item`が`Song`インスタンスであるかどうかをチェックします。`for-in`ループの最後に、`movieCount`と`songCount`の値には、それぞれの型の`MediaItem`インスタンスの数が含まれます。
 
-## Downcasting
+## ダウンキャスト
 
-A constant or variable of a certain class type may actually refer to an instance of a subclass behind the scenes. Where you believe this is the case, you can try to downcast to the subclass type with a type cast operator (`as?` or `as!`).
+あるクラス型の定数や変数が、実際にはその背後でサブクラスのインスタンスを参照している場合があります。このような場合には、型キャスト演算子（`as?` または `as!`）を使用してサブクラス型にダウンキャストを試みることができます。
 
-Because downcasting can fail, the type cast operator comes in two different forms. The conditional form, `as?`, returns an optional value of the type you are trying to downcast to. The forced form, `as!`, attempts the downcast and force-unwraps the result as a single compound action.
+ダウンキャストは失敗する可能性があるため、型キャスト演算子には2つの異なる形式があります。条件付き形式の `as?` は、ダウンキャストしようとしている型のオプショナル値を返します。強制形式の `as!` は、ダウンキャストを試みて結果を強制的にアンラップする単一の複合アクションです。
 
-Use the conditional form of the type cast operator (`as?`) when you aren’t sure if the downcast will succeed. This form of the operator will always return an optional value, and the value will be `nil` if the downcast was not possible. This enables you to check for a successful downcast.
+ダウンキャストが成功するかどうかわからない場合は、型キャスト演算子の条件付き形式（`as?`）を使用します。この形式の演算子は常にオプショナル値を返し、ダウンキャストが不可能だった場合は値が `nil` になります。これにより、ダウンキャストが成功したかどうかを確認できます。
 
-Use the forced form of the type cast operator (`as!`) only when you are sure that the downcast will always succeed. This form of the operator will trigger a runtime error if you try to downcast to an incorrect class type.
+ダウンキャストが常に成功することが確実な場合のみ、型キャスト演算子の強制形式（`as!`）を使用します。この形式の演算子は、誤ったクラス型にダウンキャストしようとするとランタイムエラーを引き起こします。
 
-The example below iterates over each `MediaItem` in `library`, and prints an appropriate description for each item. To do this, it needs to access each item as a true `Movie` or `Song`, and not just as a `MediaItem`. This is necessary in order for it to be able to access the `director` or `artist` property of a `Movie` or `Song` for use in the description.
+以下の例では、`library` 内の各 `MediaItem` を反復処理し、各アイテムに適切な説明を印刷します。これを行うためには、各アイテムを真の `Movie` または `Song` としてアクセスする必要があります。これは、説明に使用するために `Movie` または `Song` の `director` または `artist` プロパティにアクセスするために必要です。
 
-In this example, each item in the array might be a `Movie`, or it might be a `Song`. You don’t know in advance which actual class to use for each item, and so it’s appropriate to use the conditional form of the type cast operator (`as?`) to check the downcast each time through the loop:
+この例では、配列内の各アイテムが `Movie` であるか、`Song` であるかもしれません。各アイテムに対してどのクラスを使用するか事前にはわからないため、ループごとにダウンキャストを確認するために型キャスト演算子の条件付き形式（`as?`）を使用するのが適切です：
 
 ```swift
 for item in library {
@@ -114,28 +114,28 @@ for item in library {
 // Song: Never Gonna Give You Up, by Rick Astley
 ```
 
-The example starts by trying to downcast the current `item` as a `Movie`. Because `item` is a `MediaItem` instance, it’s possible that it might be a `Movie`; equally, it’s also possible that it might be a `Song`, or even just a base `MediaItem`. Because of this uncertainty, the `as?` form of the type cast operator returns an optional value when attempting to downcast to a subclass type. The result of `item as? Movie` is of type `Movie?`, or “optional Movie”.
+この例は、現在の `item` を `Movie` としてダウンキャストしようとすることから始まります。`item` は `MediaItem` インスタンスであるため、それが `Movie` である可能性もあれば、`Song` である可能性もあり、単なる基本の `MediaItem` である可能性もあります。この不確実性のため、型キャスト演算子の `as?` 形式は、サブクラス型にダウンキャストを試みる際にオプショナル値を返します。`item as? Movie` の結果は `Movie?` 型、つまり「オプショナルな Movie」です。
 
-Downcasting to `Movie` fails when applied to the `Song` instances in the `library` array. To cope with this, the example above uses optional binding to check whether the optional `Movie` actually contains a value (that is, to find out whether the downcast succeeded.) This optional binding is written “if let movie = item as? Movie”, which can be read as:
+`Movie` へのダウンキャストは、`library` 配列内の `Song` インスタンスに適用されると失敗します。これに対処するために、上記の例ではオプショナルバインディングを使用して、オプショナルな `Movie` が実際に値を含んでいるかどうかを確認します（つまり、ダウンキャストが成功したかどうかを確認します）。このオプショナルバインディングは「if let movie = item as? Movie」と書かれ、次のように読むことができます：
 
-“Try to access `item` as a `Movie`. If this is successful, set a new temporary constant called `movie` to the value stored in the returned optional `Movie`.”
+「`item` を `Movie` としてアクセスしようとします。これが成功した場合、返されたオプショナルな `Movie` に格納されている値を新しい一時的な定数 `movie` に設定します。」
 
-If the downcasting succeeds, the properties of `movie` are then used to print a description for that `Movie` instance, including the name of its director. A similar principle is used to check for `Song` instances, and to print an appropriate description (including artist name) whenever a `Song` is found in the `library`.
+ダウンキャストが成功すると、`movie` のプロパティを使用して、その `Movie` インスタンスの説明を印刷します（監督の名前を含む）。同様の原則が `Song` インスタンスを確認するために使用され、`library` 内で `Song` が見つかった場合には適切な説明（アーティスト名を含む）を印刷します。
 
-> **Note**
+> **注記**
 > 
-> Casting doesn’t actually modify the instance or change its values. The underlying instance remains the same; it’s simply treated and accessed as an instance of the type to which it has been cast.
+> キャストは実際にはインスタンスを変更したり、その値を変更したりしません。基になるインスタンスは同じままであり、キャストされた型のインスタンスとして単に扱われ、アクセスされます。
 
-## Type Casting for Any and AnyObject
+## Any と AnyObject の型キャスト
 
-Swift provides two special types for working with nonspecific types:
+Swift は、特定の型を扱うための2つの特別な型を提供します：
 
-- `Any` can represent an instance of any type at all, including function types.
-- `AnyObject` can represent an instance of any class type.
+- `Any` は、関数型を含む任意の型のインスタンスを表すことができます。
+- `AnyObject` は、任意のクラス型のインスタンスを表すことができます。
 
-Use `Any` and `AnyObject` only when you explicitly need the behavior and capabilities they provide. It’s always better to be specific about the types you expect to work with in your code.
+`Any` と `AnyObject` は、それらが提供する動作や機能が明示的に必要な場合にのみ使用してください。コードで扱う型については、できるだけ具体的にする方が常に良いです。
 
-Here’s an example of using `Any` to work with a mix of different types, including function types and nonclass types. The example creates an array called `things`, which can store values of type `Any`:
+以下は、`Any` を使用して関数型や非クラス型を含むさまざまな型の混在を扱う例です。この例では、`things` という配列を作成し、`Any` 型の値を格納できるようにしています：
 
 ```swift
 var things: [Any] = []
@@ -150,9 +150,9 @@ things.append(Movie(name: "Ghostbusters", director: "Ivan Reitman"))
 things.append({ (name: String) -> String in "Hello, \(name)" })
 ```
 
-The `things` array contains two `Int` values, two `Double` values, a `String` value, a tuple of type `(Double, Double)`, the movie “Ghostbusters”, and a closure expression that takes a `String` value and returns another `String` value.
+`things` 配列には、2つの `Int` 値、2つの `Double` 値、1つの `String` 値、`(Double, Double)` 型のタプル、映画「ゴーストバスターズ」、および `String` 値を取り別の `String` 値を返すクロージャ式が含まれています。
 
-To discover the specific type of a constant or variable that’s known only to be of type `Any` or `AnyObject`, you can use an `is` or `as` pattern in a `switch` statement’s cases. The example below iterates over the items in the `things` array and queries the type of each item with a `switch` statement. Several of the `switch` statement’s cases bind their matched value to a constant of the specified type to enable its value to be printed:
+`Any` または `AnyObject` 型でしか知られていない定数や変数の具体的な型を調べるには、`switch` 文のケースで `is` または `as` パターンを使用できます。以下の例では、`things` 配列内のアイテムを反復処理し、`switch` 文を使用して各アイテムの型を照会します。いくつかの `switch` 文のケースでは、指定された型の定数に一致する値をバインドして、その値を印刷できるようにしています：
 
 ```swift
 for thing in things {
@@ -190,12 +190,12 @@ for thing in things {
 // Hello, Michael
 ```
 
-> **Note**
+> **注記**
 > 
-> The `Any` type represents values of any type, including optional types. Swift gives you a warning if you use an optional value where a value of type `Any` is expected. If you really do need to use an optional value as an `Any` value, you can use the `as` operator to explicitly cast the optional to `Any`, as shown below.
+> `Any` 型はオプショナル型を含む任意の型の値を表します。Swift は、`Any` 型の値が期待される場所でオプショナル値を使用すると警告を出します。本当にオプショナル値を `Any` 値として使用する必要がある場合は、以下のように `as` 演算子を使用してオプショナルを明示的に `Any` にキャストできます。
 
 ```swift
 let optionalNumber: Int? = 3
-things.append(optionalNumber)        // Warning
-things.append(optionalNumber as Any) // No warning
+things.append(optionalNumber)        // 警告
+things.append(optionalNumber as Any) // 警告なし
 ```

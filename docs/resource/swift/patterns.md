@@ -1,16 +1,16 @@
-# Patterns
+# パターン
 
-Match and destructure values.
+値をマッチさせて分解します。
 
-A pattern represents the structure of a single value or a composite value. For example, the structure of a tuple `(1, 2)` is a comma-separated list of two elements. Because patterns represent the structure of a value rather than any one particular value, you can match them with a variety of values. For instance, the pattern `(x, y)` matches the tuple `(1, 2)` and any other two-element tuple. In addition to matching a pattern with a value, you can extract part or all of a composite value and bind each part to a constant or variable name.
+パターンは単一の値または複合値の構造を表します。例えば、タプル `(1, 2)` の構造は2つの要素のカンマ区切りリストです。パターンは特定の値ではなく値の構造を表すため、さまざまな値とマッチさせることができます。例えば、パターン `(x, y)` はタプル `(1, 2)` と他の任意の2要素のタプルにマッチします。パターンを値とマッチさせるだけでなく、複合値の一部または全部を抽出し、それぞれの部分を定数または変数名にバインドすることもできます。
 
-In Swift, there are two basic kinds of patterns: those that successfully match any kind of value, and those that may fail to match a specified value at runtime.
+Swiftには、任意の種類の値に成功裏にマッチするパターンと、実行時に指定された値にマッチしない可能性のあるパターンの2つの基本的な種類のパターンがあります。
 
-The first kind of pattern is used for destructuring values in simple variable, constant, and optional bindings. These include wildcard patterns, identifier patterns, and any value binding or tuple patterns containing them. You can specify a type annotation for these patterns to constrain them to match only values of a certain type.
+最初の種類のパターンは、単純な変数、定数、およびオプションのバインディングで値を分解するために使用されます。これにはワイルドカードパターン、識別子パターン、およびそれらを含む任意の値バインディングまたはタプルパターンが含まれます。これらのパターンに型注釈を指定して、特定の型の値にのみマッチさせることができます。
 
-The second kind of pattern is used for full pattern matching, where the values you’re trying to match against may not be there at runtime. These include enumeration case patterns, optional patterns, expression patterns, and type-casting patterns. You use these patterns in a `case` label of a `switch` statement, a `catch` clause of a `do` statement, or in the `case` condition of an `if`, `while`, `guard`, or `for-in` statement.
+2番目の種類のパターンは、マッチさせようとしている値が実行時に存在しない可能性がある場合に使用されます。これには列挙ケースパターン、オプションパターン、式パターン、および型キャストパターンが含まれます。これらのパターンは、`switch`文の`case`ラベル、`do`文の`catch`句、または`if`、`while`、`guard`、`for-in`文の`case`条件で使用します。
 
-## Grammar of a pattern
+## パターンの文法
 
 ```
 pattern → wildcard-pattern type-annotation?
@@ -23,81 +23,81 @@ pattern → type-casting-pattern
 pattern → expression-pattern
 ```
 
-### Wildcard Pattern
+### ワイルドカードパターン
 
-A wildcard pattern matches and ignores any value and consists of an underscore (`_`). Use a wildcard pattern when you don’t care about the values being matched against. For example, the following code iterates through the closed range `1...3`, ignoring the current value of the range on each iteration of the loop:
+ワイルドカードパターンは任意の値にマッチし、その値を無視します。アンダースコア (`_`) で構成されます。マッチする値を気にしない場合にワイルドカードパターンを使用します。例えば、次のコードは閉区間 `1...3` を反復処理し、ループの各反復で現在の範囲の値を無視します。
 
 ```swift
 for _ in 1...3 {
-    // Do something three times.
+    // 何かを3回行います。
 }
 ```
 
-#### Grammar of a wildcard pattern
+#### ワイルドカードパターンの文法
 
 ```
 wildcard-pattern → _
 ```
 
-### Identifier Pattern
+### 識別子パターン
 
-An identifier pattern matches any value and binds the matched value to a variable or constant name. For example, in the following constant declaration, `someValue` is an identifier pattern that matches the value `42` of type `Int`:
+識別子パターンは任意の値にマッチし、マッチした値を変数または定数名にバインドします。例えば、次の定数宣言では、`someValue` は `Int` 型の値 `42` にマッチする識別子パターンです。
 
 ```swift
 let someValue = 42
 ```
 
-When the match succeeds, the value `42` is bound (assigned) to the constant name `someValue`.
+マッチが成功すると、値 `42` は定数名 `someValue` にバインド（割り当て）されます。
 
-When the pattern on the left-hand side of a variable or constant declaration is an identifier pattern, the identifier pattern is implicitly a subpattern of a value-binding pattern.
+変数または定数宣言の左側のパターンが識別子パターンである場合、識別子パターンは暗黙的に値バインディングパターンのサブパターンとなります。
 
-#### Grammar of an identifier pattern
+#### 識別子パターンの文法
 
 ```
 identifier-pattern → identifier
 ```
 
-### Value-Binding Pattern
+### 値バインディングパターン
 
-A value-binding pattern binds matched values to variable or constant names. Value-binding patterns that bind a matched value to the name of a constant begin with the `let` keyword; those that bind to the name of variable begin with the `var` keyword.
+値バインディングパターンは、マッチした値を変数または定数名にバインドします。マッチした値を定数名にバインドする値バインディングパターンは `let` キーワードで始まり、変数名にバインドするものは `var` キーワードで始まります。
 
-Identifiers patterns within a value-binding pattern bind new named variables or constants to their matching values. For example, you can decompose the elements of a tuple and bind the value of each element to a corresponding identifier pattern.
+値バインディングパターン内の識別子パターンは、マッチした値に新しい名前の変数または定数をバインドします。例えば、タプルの要素を分解し、各要素の値を対応する識別子パターンにバインドできます。
 
 ```swift
 let point = (3, 2)
 switch point {
-    // Bind x and y to the elements of point.
+    // x と y を point の要素にバインドします。
     case let (x, y):
-        print("The point is at (\(x), \(y)).")
+        print("ポイントは (\(x), \(y)) にあります。")
 }
-// Prints "The point is at (3, 2)."
+// "ポイントは (3, 2) にあります。" と出力されます。
 ```
 
-In the example above, `let` distributes to each identifier pattern in the tuple pattern `(x, y)`. Because of this behavior, the switch cases `case let (x, y):` and `case (let x, let y):` match the same values.
+上記の例では、`let` はタプルパターン `(x, y)` の各識別子パターンに分配されます。この動作のため、`case let (x, y):` と `case (let x, let y):` の switch ケースは同じ値にマッチします。
 
-#### Grammar of a value-binding pattern
+#### 値バインディングパターンの文法
 
 ```
 value-binding-pattern → var pattern | let pattern
 ```
 
-### Tuple Pattern
+### タプルパターン
 
-A tuple pattern is a comma-separated list of zero or more patterns, enclosed in parentheses. Tuple patterns match values of corresponding tuple types.
+タプルパターンは、カンマ区切りのゼロ個以上のパターンのリストを括弧で囲んだものです。タプルパターンは対応するタプル型の値にマッチします。
 
-You can constrain a tuple pattern to match certain kinds of tuple types by using type annotations. For example, the tuple pattern `(x, y): (Int, Int)` in the constant declaration `let (x, y): (Int, Int) = (1, 2)` matches only tuple types in which both elements are of type `Int`.
+型注釈を使用して、特定の種類のタプル型にマッチするようにタプルパターンを制約することができます。例えば、定数宣言 `let (x, y): (Int, Int) = (1, 2)` のタプルパターン `(x, y): (Int, Int)` は、両方の要素が `Int` 型であるタプル型にのみマッチします。
 
-When a tuple pattern is used as the pattern in a `for-in` statement or in a variable or constant declaration, it can contain only wildcard patterns, identifier patterns, optional patterns, or other tuple patterns that contain those. For example, the following code isn’t valid because the element `0` in the tuple pattern `(x, 0)` is an expression pattern:
+タプルパターンが `for-in` 文や変数または定数宣言のパターンとして使用される場合、それはワイルドカードパターン、識別子パターン、オプションパターン、またはそれらを含む他のタプルパターンのみを含むことができます。例えば、次のコードは無効です。なぜなら、タプルパターン `(x, 0)` の要素 `0` が式パターンだからです。
 
 ```swift
 let points = [(0, 0), (1, 0), (1, 1), (2, 0), (2, 1)]
-// This code isn't valid.
+// このコードは無効です。
 for (x, 0) in points {
     /* ... */
 }
 ```
 
-The parentheses around a tuple pattern that contains a single element have no effect. The pattern matches values of that single element’s type. For example, the following are equivalent:
+単一の要素を含むタプルパターンの括弧は効果がありません。パターンはその単一要素の型の値にマッチします。例えば、次のコードは同等です。
 
 ```swift
 let a = 2        // a: Int = 2
@@ -105,7 +105,7 @@ let (a) = 2      // a: Int = 2
 let (a): Int = 2 // a: Int = 2
 ```
 
-#### Grammar of a tuple pattern
+#### タプルパターンの文法
 
 ```
 tuple-pattern → ( tuple-pattern-element-list? )
@@ -113,88 +113,88 @@ tuple-pattern-element-list → tuple-pattern-element | tuple-pattern-element , t
 tuple-pattern-element → pattern | identifier : pattern
 ```
 
-### Enumeration Case Pattern
+### 列挙ケースパターン
 
-An enumeration case pattern matches a case of an existing enumeration type. Enumeration case patterns appear in `switch` statement case labels and in the case conditions of `if`, `while`, `guard`, and `for-in` statements.
+列挙ケースパターンは、既存の列挙型のケースにマッチします。列挙ケースパターンは、`switch`文のケースラベルや、`if`、`while`、`guard`、`for-in`文のケース条件に現れます。
 
-If the enumeration case you’re trying to match has any associated values, the corresponding enumeration case pattern must specify a tuple pattern that contains one element for each associated value. For an example that uses a `switch` statement to match enumeration cases containing associated values, see Associated Values.
+マッチしようとしている列挙ケースに関連値がある場合、対応する列挙ケースパターンは、各関連値に対して1つの要素を含むタプルパターンを指定する必要があります。関連値を含む列挙ケースにマッチするために`switch`文を使用する例については、関連値を参照してください。
 
-An enumeration case pattern also matches values of that case wrapped in an optional. This simplified syntax lets you omit an optional pattern. Note that, because `Optional` is implemented as an enumeration, `.none` and `.some` can appear in the same switch as the cases of the enumeration type.
+列挙ケースパターンは、オプションでラップされたそのケースの値にもマッチします。この簡略化された構文により、オプションパターンを省略できます。`Optional`が列挙型として実装されているため、`.none`と`.some`は列挙型のケースと同じ`switch`に現れることができます。
 
 ```swift
 enum SomeEnum { case left, right }
 let x: SomeEnum? = .left
 switch x {
     case .left:
-        print("Turn left")
+        print("左に曲がる")
     case .right:
-        print("Turn right")
+        print("右に曲がる")
     case nil:
-        print("Keep going straight")
+        print("まっすぐ進む")
 }
-// Prints "Turn left"
+// "左に曲がる" と出力されます。
 ```
 
-#### Grammar of an enumeration case pattern
+#### 列挙ケースパターンの文法
 
 ```
 enum-case-pattern → type-identifier? . enum-case-name tuple-pattern?
 ```
 
-### Optional Pattern
+### オプションパターン
 
-An optional pattern matches values wrapped in a `some(Wrapped)` case of an `Optional<Wrapped>` enumeration. Optional patterns consist of an identifier pattern followed immediately by a question mark and appear in the same places as enumeration case patterns.
+オプションパターンは、`Optional<Wrapped>`列挙の`some(Wrapped)`ケースでラップされた値にマッチします。オプションパターンは、識別子パターンの直後に疑問符が続き、列挙ケースパターンと同じ場所に現れます。
 
-Because optional patterns are syntactic sugar for `Optional` enumeration case patterns, the following are equivalent:
+オプションパターンは`Optional`列挙ケースパターンの構文糖衣構文であるため、次のコードは同等です。
 
 ```swift
 let someOptional: Int? = 42
-// Match using an enumeration case pattern.
+// 列挙ケースパターンを使用してマッチします。
 if case .some(let x) = someOptional {
     print(x)
 }
 
-// Match using an optional pattern.
+// オプションパターンを使用してマッチします。
 if case let x? = someOptional {
     print(x)
 }
 ```
 
-The optional pattern provides a convenient way to iterate over an array of optional values in a `for-in` statement, executing the body of the loop only for non-nil elements.
+オプションパターンは、`for-in`文でオプション値の配列を反復処理し、nilでない要素に対してのみループの本体を実行する便利な方法を提供します。
 
 ```swift
 let arrayOfOptionalInts: [Int?] = [nil, 2, 3, nil, 5]
-// Match only non-nil values.
+// nilでない値のみをマッチします。
 for case let number? in arrayOfOptionalInts {
-    print("Found a \(number)")
+    print("見つかった \(number)")
 }
-// Found a 2
-// Found a 3
-// Found a 5
+// 見つかった 2
+// 見つかった 3
+// 見つかった 5
 ```
 
-#### Grammar of an optional pattern
+#### オプションパターンの文法
 
 ```
 optional-pattern → identifier-pattern ?
 ```
 
-### Type-Casting Patterns
+### 型キャストパターン
 
-There are two type-casting patterns, the `is` pattern and the `as` pattern. The `is` pattern appears only in `switch` statement case labels. The `is` and `as` patterns have the following form:
+型キャストパターンには、`is`パターンと`as`パターンの2つがあります。`is`パターンは`switch`文のケースラベルにのみ現れます。`is`パターンと`as`パターンは次の形式を持ちます。
 
 ```
 is <#type#>
 <#pattern#> as <#type#>
 ```
 
-The `is` pattern matches a value if the type of that value at runtime is the same as the type specified in the right-hand side of the `is` pattern — or a subclass of that type. The `is` pattern behaves like the `is` operator in that they both perform a type cast but discard the returned type.
+`is`パターンは、実行時にその値の型が`is`パターンの右側に指定された型と同じである場合、またはその型のサブクラスである場合に値にマッチします。`is`パターンは`is`演算子のように動作し、両方とも型キャストを行いますが、返された型を破棄します。
 
-The `as` pattern matches a value if the type of that value at runtime is the same as the type specified in the right-hand side of the `as` pattern — or a subclass of that type. If the match succeeds, the type of the matched value is cast to the pattern specified in the right-hand side of the `as` pattern.
+`as`パターンは、実行時にその値の型が`as`パターンの右側に指定された型と同じである場合、またはその型のサブクラスである場合に値にマッチします。マッチが成功すると、マッチした値の型は`as`パターンの右側に指定された型にキャストされます。
 
-For an example that uses a `switch` statement to match values with `is` and `as` patterns, see Type Casting for Any and AnyObject.
+`switch`文を使用して`is`および`as`パターンで値にマッチする例については、AnyおよびAnyObjectの型キャストを参照してください。
 
-#### Grammar of a type casting pattern
+#### 型キャストパターンの文法
 
 ```
 type-casting-pattern → is-pattern | as-pattern
@@ -202,42 +202,42 @@ is-pattern → is type
 as-pattern → pattern as type
 ```
 
-### Expression Pattern
+### 式パターン
 
-An expression pattern represents the value of an expression. Expression patterns appear only in `switch` statement case labels.
+式パターンは式の値を表します。式パターンは`switch`文のケースラベルにのみ現れます。
 
-The expression represented by the expression pattern is compared with the value of an input expression using the pattern-matching operator (`~=`) from the Swift standard library. The matches succeeds if the `~=` operator returns `true`. By default, the `~=` operator compares two values of the same type using the `==` operator. It can also match a value with a range of values, by checking whether the value is contained within the range, as the following example shows.
+式パターンで表される式は、Swift標準ライブラリのパターンマッチング演算子（`~=`）を使用して入力式の値と比較されます。マッチが成功するのは、`~=`演算子が`true`を返す場合です。デフォルトでは、`~=`演算子は2つの同じ型の値を`==`演算子を使用して比較します。また、次の例に示すように、値が範囲内に含まれているかどうかを確認することで、値を範囲の値とマッチさせることもできます。
 
 ```swift
 let point = (1, 2)
 switch point {
     case (0, 0):
-        print("(0, 0) is at the origin.")
+        print("(0, 0) は原点にあります。")
     case (-2...2, -2...2):
-        print("(\(point.0), \(point.1)) is near the origin.")
+        print("(\(point.0), \(point.1)) は原点の近くにあります。")
     default:
-        print("The point is at (\(point.0), \(point.1)).")
+        print("ポイントは (\(point.0), \(point.1)) にあります。")
 }
-// Prints "(1, 2) is near the origin."
+// "(1, 2) は原点の近くにあります。" と出力されます。
 ```
 
-You can overload the `~=` operator to provide custom expression matching behavior. For example, you can rewrite the above example to compare the point expression with a string representations of points.
+`~=`演算子をオーバーロードしてカスタムの式マッチング動作を提供することができます。例えば、上記の例を再記述して、ポイント式をポイントの文字列表現と比較することができます。
 
 ```swift
-// Overload the ~= operator to match a string with an integer.
+// 文字列と整数をマッチさせるために ~= 演算子をオーバーロードします。
 func ~= (pattern: String, value: Int) -> Bool {
     return pattern == "\(value)"
 }
 switch point {
     case ("0", "0"):
-        print("(0, 0) is at the origin.")
+        print("(0, 0) は原点にあります。")
     default:
-        print("The point is at (\(point.0), \(point.1)).")
+        print("ポイントは (\(point.0), \(point.1)) にあります。")
 }
-// Prints "The point is at (1, 2)."
+// "ポイントは (1, 2) にあります。" と出力されます。
 ```
 
-#### Grammar of an expression pattern
+#### 式パターンの文法
 
 ```
 expression-pattern → expression

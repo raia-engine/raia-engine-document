@@ -1,14 +1,14 @@
-# Generics
+# ジェネリクス
 
-Write code that works for multiple types and specify requirements for those types.
+複数の型に対して機能するコードを書き、その型に対する要件を指定します。
 
-Generic code enables you to write flexible, reusable functions and types that can work with any type, subject to requirements that you define. You can write code that avoids duplication and expresses its intent in a clear, abstracted manner.
+ジェネリックコードを使用すると、柔軟で再利用可能な関数や型を作成でき、定義した要件に従って任意の型で動作させることができます。コードの重複を避け、意図を明確に抽象化して表現することができます。
 
-Generics are one of the most powerful features of Swift, and much of the Swift standard library is built with generic code. In fact, you’ve been using generics throughout the Language Guide, even if you didn’t realize it. For example, Swift’s `Array` and `Dictionary` types are both generic collections. You can create an array that holds `Int` values, or an array that holds `String` values, or indeed an array for any other type that can be created in Swift. Similarly, you can create a dictionary to store values of any specified type, and there are no limitations on what that type can be.
+ジェネリクスはSwiftの最も強力な機能の一つであり、Swift標準ライブラリの多くはジェネリックコードで構築されています。実際、言語ガイド全体でジェネリクスを使用してきましたが、それに気づいていなかったかもしれません。例えば、Swiftの`Array`や`Dictionary`型はどちらもジェネリックコレクションです。`Int`値を保持する配列や、`String`値を保持する配列、あるいはSwiftで作成できる他の任意の型の配列を作成できます。同様に、指定された任意の型の値を格納する辞書を作成することもでき、その型に制限はありません。
 
-## The Problem That Generics Solve
+## ジェネリクスが解決する問題
 
-Here’s a standard, nongeneric function called `swapTwoInts(_:_:),` which swaps two `Int` values:
+ここに、2つの`Int`値を交換する標準的な非ジェネリック関数`swapTwoInts(_:_:),`があります：
 
 ```swift
 func swapTwoInts(_ a: inout Int, _ b: inout Int) {
@@ -18,19 +18,19 @@ func swapTwoInts(_ a: inout Int, _ b: inout Int) {
 }
 ```
 
-This function makes use of in-out parameters to swap the values of `a` and `b`, as described in In-Out Parameters.
+この関数は、インアウトパラメータを使用して`a`と`b`の値を交換します。
 
-The `swapTwoInts(_:_:)` function swaps the original value of `b` into `a`, and the original value of `a` into `b`. You can call this function to swap the values in two `Int` variables:
+`swapTwoInts(_:_:)`関数は、元の`b`の値を`a`に、元の`a`の値を`b`に交換します。この関数を呼び出して、2つの`Int`変数の値を交換できます：
 
 ```swift
 var someInt = 3
 var anotherInt = 107
 swapTwoInts(&someInt, &anotherInt)
 print("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
-// Prints "someInt is now 107, and anotherInt is now 3"
+// "someInt is now 107, and anotherInt is now 3"と表示されます
 ```
 
-The `swapTwoInts(_:_:)` function is useful, but it can only be used with `Int` values. If you want to swap two `String` values, or two `Double` values, you have to write more functions, such as the `swapTwoStrings(_:_:)` and `swapTwoDoubles(_:_:)` functions shown below:
+`swapTwoInts(_:_:)`関数は便利ですが、`Int`値にしか使用できません。2つの`String`値や2つの`Double`値を交換したい場合は、以下のように`swapTwoStrings(_:_:)`や`swapTwoDoubles(_:_:)`関数を作成する必要があります：
 
 ```swift
 func swapTwoStrings(_ a: inout String, _ b: inout String) {
@@ -46,16 +46,16 @@ func swapTwoDoubles(_ a: inout Double, _ b: inout Double) {
 }
 ```
 
-You may have noticed that the bodies of the `swapTwoInts(_:_:),` `swapTwoStrings(_:_:),` and `swapTwoDoubles(_:_:)` functions are identical. The only difference is the type of the values that they accept (`Int`, `String`, and `Double`).
+`swapTwoInts(_:_:),` `swapTwoStrings(_:_:),`および`swapTwoDoubles(_:_:)`関数の本体が同一であることに気づいたかもしれません。唯一の違いは、受け入れる値の型（`Int`、`String`、および`Double`）です。
 
-It’s more useful, and considerably more flexible, to write a single function that swaps two values of any type. Generic code enables you to write such a function. (A generic version of these functions is defined below.)
+より便利で柔軟なのは、任意の型の2つの値を交換する単一の関数を書くことです。ジェネリックコードを使用すると、そのような関数を書くことができます。（これらの関数のジェネリックバージョンは以下で定義されています。）
 
-> **Note:**  
-> In all three functions, the types of `a` and `b` must be the same. If `a` and `b` aren’t of the same type, it isn’t possible to swap their values. Swift is a type-safe language, and doesn’t allow (for example) a variable of type `String` and a variable of type `Double` to swap values with each other. Attempting to do so results in a compile-time error.
+> **注:**  
+> 3つの関数すべてで、`a`と`b`の型は同じでなければなりません。`a`と`b`が同じ型でない場合、その値を交換することはできません。Swiftは型安全な言語であり、（例えば）`String`型の変数と`Double`型の変数が互いに値を交換することを許可しません。これを試みると、コンパイル時エラーが発生します。
 
-## Generic Functions
+## ジェネリック関数
 
-Generic functions can work with any type. Here’s a generic version of the `swapTwoInts(_:_:)` function from above, called `swapTwoValues(_:_:):`
+ジェネリック関数は任意の型で動作できます。以下は、上記の`swapTwoInts(_:_:)`関数のジェネリックバージョンで、`swapTwoValues(_:_:):`と呼ばれます：
 
 ```swift
 func swapTwoValues<T>(_ a: inout T, _ b: inout T) {
@@ -65,69 +65,69 @@ func swapTwoValues<T>(_ a: inout T, _ b: inout T) {
 }
 ```
 
-The body of the `swapTwoValues(_:_:)` function is identical to the body of the `swapTwoInts(_:_:)` function. However, the first line of `swapTwoValues(_:_:)` is slightly different from `swapTwoInts(_:_:).` Here’s how the first lines compare:
+`swapTwoValues(_:_:)`関数の本体は`swapTwoInts(_:_:)`関数の本体と同一です。ただし、`swapTwoValues(_:_:)`の最初の行は`swapTwoInts(_:_:)`の最初の行とは少し異なります。以下は最初の行の比較です：
 
 ```swift
 func swapTwoInts(_ a: inout Int, _ b: inout Int)
 func swapTwoValues<T>(_ a: inout T, _ b: inout T)
 ```
 
-The generic version of the function uses a placeholder type name (called `T`, in this case) instead of an actual type name (such as `Int`, `String`, or `Double`). The placeholder type name doesn’t say anything about what `T` must be, but it does say that both `a` and `b` must be of the same type `T`, whatever `T` represents. The actual type to use in place of `T` is determined each time the `swapTwoValues(_:_:)` function is called.
+関数のジェネリックバージョンは、実際の型名（`Int`、`String`、`Double`など）の代わりにプレースホルダー型名（この場合は`T`）を使用します。プレースホルダー型名は`T`が何であるかを示していませんが、`a`と`b`の両方が同じ型`T`でなければならないことを示しています。`T`の実際の型は、`swapTwoValues(_:_:)`関数が呼び出されるたびに決定されます。
 
-The other difference between a generic function and a nongeneric function is that the generic function’s name (`swapTwoValues(_:_:))` is followed by the placeholder type name (`T`) inside angle brackets (`<T>`). The brackets tell Swift that `T` is a placeholder type name within the `swapTwoValues(_:_:)` function definition. Because `T` is a placeholder, Swift doesn’t look for an actual type called `T`.
+ジェネリック関数と非ジェネリック関数のもう一つの違いは、ジェネリック関数の名前（`swapTwoValues(_:_:))`の後に角括弧（`<T>`）内にプレースホルダー型名（`T`）が続くことです。角括弧は、`T`が`swapTwoValues(_:_:)`関数定義内のプレースホルダー型名であることをSwiftに伝えます。`T`がプレースホルダーであるため、Swiftは実際の型`T`を探しません。
 
-The `swapTwoValues(_:_:)` function can now be called in the same way as `swapTwoInts,` except that it can be passed two values of any type, as long as both of those values are of the same type as each other. Each time `swapTwoValues(_:_:)` is called, the type to use for `T` is inferred from the types of values passed to the function.
+`swapTwoValues(_:_:)`関数は、`swapTwoInts`と同じ方法で呼び出すことができますが、両方の値が同じ型である限り、任意の型の2つの値を渡すことができます。`swapTwoValues(_:_:)`が呼び出されるたびに、`T`に使用する型は渡された値の型から推論されます。
 
-In the two examples below, `T` is inferred to be `Int` and `String` respectively:
+以下の2つの例では、`T`はそれぞれ`Int`と`String`と推論されます：
 
 ```swift
 var someInt = 3
 var anotherInt = 107
 swapTwoValues(&someInt, &anotherInt)
-// someInt is now 107, and anotherInt is now 3
+// someIntは現在107で、anotherIntは現在3です
 
 var someString = "hello"
 var anotherString = "world"
 swapTwoValues(&someString, &anotherString)
-// someString is now "world", and anotherString is now "hello"
+// someStringは現在"world"で、anotherStringは現在"hello"です
 ```
 
-> **Note:**  
-> The `swapTwoValues(_:_:)` function defined above is inspired by a generic function called `swap,` which is part of the Swift standard library, and is automatically made available for you to use in your apps. If you need the behavior of the `swapTwoValues(_:_:)` function in your own code, you can use Swift’s existing `swap(_:_:)` function rather than providing your own implementation.
+> **注:**  
+> 上記の`swapTwoValues(_:_:)`関数は、Swift標準ライブラリの一部であり、アプリで自動的に使用できるジェネリック関数`swap`に触発されています。独自のコードで`swapTwoValues(_:_:)`関数の動作が必要な場合は、独自の実装を提供する代わりにSwiftの既存の`swap(_:_:)`関数を使用できます。
 
-## Type Parameters
+## 型パラメータ
 
-In the `swapTwoValues(_:_:)` example above, the placeholder type `T` is an example of a type parameter. Type parameters specify and name a placeholder type, and are written immediately after the function’s name, between a pair of matching angle brackets (such as `<T>`).
+上記の`swapTwoValues(_:_:)`の例では、プレースホルダー型`T`は型パラメータの一例です。型パラメータはプレースホルダー型を指定して名前を付け、関数名の直後に一致する角括弧のペア（`<T>`など）の間に書かれます。
 
-Once you specify a type parameter, you can use it to define the type of a function’s parameters (such as the `a` and `b` parameters of the `swapTwoValues(_:_:)` function), or as the function’s return type, or as a type annotation within the body of the function. In each case, the type parameter is replaced with an actual type whenever the function is called. (In the `swapTwoValues(_:_:)` example above, `T` was replaced with `Int` the first time the function was called, and was replaced with `String` the second time it was called.)
+型パラメータを指定すると、それを使用して関数のパラメータの型（`swapTwoValues(_:_:)`関数の`a`および`b`パラメータなど）を定義したり、関数の戻り値の型として使用したり、関数本体内の型注釈として使用したりできます。いずれの場合も、関数が呼び出されるたびに型パラメータは実際の型に置き換えられます。（上記の`swapTwoValues(_:_:)`の例では、最初に関数が呼び出されたときに`T`は`Int`に置き換えられ、2回目に呼び出されたときには`String`に置き換えられました。）
 
-You can provide more than one type parameter by writing multiple type parameter names within the angle brackets, separated by commas.
+角括弧内に複数の型パラメータ名をカンマで区切って記述することで、複数の型パラメータを指定できます。
 
-## Naming Type Parameters
+## 型パラメータの命名
 
-In most cases, type parameters have descriptive names, such as `Key` and `Value` in `Dictionary<Key, Value>` and `Element` in `Array<Element>,` which tells the reader about the relationship between the type parameter and the generic type or function it’s used in. However, when there isn’t a meaningful relationship between them, it’s traditional to name them using single letters such as `T,` `U,` and `V,` such as `T` in the `swapTwoValues(_:_:)` function above.
+ほとんどの場合、型パラメータには`Dictionary<Key, Value>`の`Key`や`Value`、`Array<Element>`の`Element`のように、型パラメータとそれが使用されるジェネリック型や関数との関係を読者に伝える説明的な名前が付けられます。しかし、それらの間に意味のある関係がない場合は、`swapTwoValues(_:_:)`関数の`T`のように、`T`、`U`、`V`などの単一の文字を使用して命名するのが伝統的です。
 
-> **Note:**  
-> Always give type parameters upper camel case names (such as `T` and `MyTypeParameter`) to indicate that they’re a placeholder for a type, not a value.
+> **注:**  
+> 型パラメータが値ではなく型のプレースホルダーであることを示すために、常に型パラメータにはアッパーキャメルケースの名前（`T`や`MyTypeParameter`など）を付けてください。
 
-## Generic Types
+## ジェネリック型
 
-In addition to generic functions, Swift enables you to define your own generic types. These are custom classes, structures, and enumerations that can work with any type, in a similar way to `Array` and `Dictionary.`
+ジェネリック関数に加えて、Swiftでは独自のジェネリック型を定義することもできます。これらは、`Array`や`Dictionary`と同様に、任意の型で動作するカスタムクラス、構造体、および列挙型です。
 
-This section shows you how to write a generic collection type called `Stack.` A stack is an ordered set of values, similar to an array, but with a more restricted set of operations than Swift’s `Array` type. An array allows new items to be inserted and removed at any location in the array. A stack, however, allows new items to be appended only to the end of the collection (known as pushing a new value on to the stack). Similarly, a stack allows items to be removed only from the end of the collection (known as popping a value off the stack).
+このセクションでは、`Stack`と呼ばれるジェネリックコレクション型の書き方を紹介します。スタックは配列に似た値の順序付きセットですが、Swiftの`Array`型よりも操作が制限されています。配列は新しい項目を配列の任意の場所に挿入および削除できますが、スタックは新しい項目をコレクションの末尾にのみ追加できます（スタックに新しい値をプッシュすることとして知られています）。同様に、スタックはコレクションの末尾からのみ項目を削除できます（スタックから値をポップすることとして知られています）。
 
-> **Note:**  
-> The concept of a stack is used by the `UINavigationController` class to model the view controllers in its navigation hierarchy. You call the `UINavigationController` class `pushViewController(_:animated:)` method to add (or push) a view controller on to the navigation stack, and its `popViewControllerAnimated(_:)` method to remove (or pop) a view controller from the navigation stack. A stack is a useful collection model whenever you need a strict “last in, first out” approach to managing a collection.
+> **注:**  
+> スタックの概念は、`UINavigationController`クラスによって、そのナビゲーション階層内のビューコントローラをモデル化するために使用されます。`UINavigationController`クラスの`pushViewController(_:animated:)`メソッドを呼び出してビューコントローラをナビゲーションスタックに追加（またはプッシュ）し、`popViewControllerAnimated(_:)`メソッドを使用してビューコントローラをナビゲーションスタックから削除（またはポップ）します。スタックは、コレクションを管理する際に厳密な「後入れ先出し」アプローチが必要な場合に便利なコレクションモデルです。
 
-The illustration below shows the push and pop behavior for a stack:
+以下の図は、スタックのプッシュおよびポップの動作を示しています：
 
-- There are currently three values on the stack.
-- A fourth value is pushed onto the top of the stack.
-- The stack now holds four values, with the most recent one at the top.
-- The top item in the stack is popped.
-- After popping a value, the stack once again holds three values.
+- 現在、スタックには3つの値があります。
+- 4番目の値がスタックの上にプッシュされます。
+- スタックには現在4つの値があり、最新のものが一番上にあります。
+- スタックの一番上の項目がポップされます。
+- 値をポップした後、スタックには再び3つの値が残ります。
 
-Here’s how to write a nongeneric version of a stack, in this case for a stack of `Int` values:
+ここでは、`Int`値のスタックの場合の非ジェネリックバージョンのスタックの書き方を示します：
 
 ```swift
 struct IntStack {
@@ -141,11 +141,11 @@ struct IntStack {
 }
 ```
 
-This structure uses an `Array` property called `items` to store the values in the stack. `Stack` provides two methods, `push` and `pop,` to push and pop values on and off the stack. These methods are marked as mutating, because they need to modify (or mutate) the structure’s `items` array.
+この構造体は、スタック内の値を格納するために`items`と呼ばれる`Array`プロパティを使用しています。`Stack`は、スタックに値をプッシュおよびポップするための2つのメソッド、`push`と`pop`を提供します。これらのメソッドは、構造体の`items`配列を変更（または変異）する必要があるため、mutatingとしてマークされています。
 
-The `IntStack` type shown above can only be used with `Int` values, however. It would be much more useful to define a generic `Stack` structure, that can manage a stack of any type of value.
+上記の`IntStack`型は`Int`値にのみ使用できますが、任意の型の値を管理できるジェネリックな`Stack`構造体を定義する方がはるかに便利です。
 
-Here’s a generic version of the same code:
+以下は、同じコードのジェネリックバージョンです：
 
 ```swift
 struct Stack<Element> {
@@ -159,17 +159,17 @@ struct Stack<Element> {
 }
 ```
 
-Note how the generic version of `Stack` is essentially the same as the nongeneric version, but with a type parameter called `Element` instead of an actual type of `Int.` This type parameter is written within a pair of angle brackets (`<Element>`) immediately after the structure’s name.
+ジェネリックバージョンの`Stack`は、実際の`Int`型の代わりに`Element`と呼ばれる型パラメータを使用している点を除いて、本質的に非ジェネリックバージョンと同じです。この型パラメータは、構造体の名前の直後に角括弧（`<Element>`）で囲んで記述されます。
 
-`Element` defines a placeholder name for a type to be provided later. This future type can be referred to as `Element` anywhere within the structure’s definition. In this case, `Element` is used as a placeholder in three places:
+`Element`は、後で提供される型のプレースホルダー名を定義します。この将来の型は、構造体の定義内の任意の場所で`Element`として参照できます。この場合、`Element`は次の3つの場所でプレースホルダーとして使用されます：
 
-- To create a property called `items,` which is initialized with an empty array of values of type `Element`
-- To specify that the `push(_:)` method has a single parameter called `item,` which must be of type `Element`
-- To specify that the value returned by the `pop()` method will be a value of type `Element`
+- `Element`型の値の空の配列で初期化される`items`というプロパティを作成するため
+- `Element`型でなければならない`item`という単一のパラメータを持つ`push(_:)`メソッドを指定するため
+- `pop()`メソッドによって返される値が`Element`型の値であることを指定するため
 
-Because it’s a generic type, `Stack` can be used to create a stack of any valid type in Swift, in a similar manner to `Array` and `Dictionary.`
+ジェネリック型であるため、`Stack`は`Array`や`Dictionary`と同様に、Swiftの任意の有効な型のスタックを作成するために使用できます。
 
-You create a new `Stack` instance by writing the type to be stored in the stack within angle brackets. For example, to create a new stack of strings, you write `Stack<String>()`:
+スタックに格納する型を角括弧内に記述することで、新しい`Stack`インスタンスを作成します。たとえば、文字列の新しいスタックを作成するには、`Stack<String>()`と記述します：
 
 ```swift
 var stackOfStrings = Stack<String>()
@@ -177,25 +177,25 @@ stackOfStrings.push("uno")
 stackOfStrings.push("dos")
 stackOfStrings.push("tres")
 stackOfStrings.push("cuatro")
-// the stack now contains 4 strings
+// スタックには現在4つの文字列が含まれています
 ```
 
-Here’s how `stackOfStrings` looks after pushing these four values on to the stack:
+これらの4つの値をスタックにプッシュした後の`stackOfStrings`の様子は次のとおりです：
 
-Popping a value from the stack removes and returns the top value, `"cuatro":`
+スタックから値をポップすると、トップの値`"cuatro"`が削除されて返されます：
 
 ```swift
 let fromTheTop = stackOfStrings.pop()
-// fromTheTop is equal to "cuatro", and the stack now contains 3 strings
+// fromTheTopは"cuatro"と等しく、スタックには現在3つの文字列が含まれています
 ```
 
-Here’s how the stack looks after popping its top value:
+トップの値をポップした後のスタックの様子は次のとおりです：
 
-## Extending a Generic Type
+## ジェネリック型の拡張
 
-When you extend a generic type, you don’t provide a type parameter list as part of the extension’s definition. Instead, the type parameter list from the original type definition is available within the body of the extension, and the original type parameter names are used to refer to the type parameters from the original definition.
+ジェネリック型を拡張する場合、拡張の定義の一部として型パラメータリストを提供しません。代わりに、元の型定義からの型パラメータリストが拡張の本体内で利用可能であり、元の型パラメータ名を使用して元の定義からの型パラメータを参照します。
 
-The following example extends the generic `Stack` type to add a read-only computed property called `topItem,` which returns the top item on the stack without popping it from the stack:
+次の例では、ジェネリックな`Stack`型を拡張して、スタックのトップ項目をポップせずに返す読み取り専用の計算プロパティ`topItem`を追加しています：
 
 ```swift
 extension Stack {
@@ -205,46 +205,46 @@ extension Stack {
 }
 ```
 
-The `topItem` property returns an optional value of type `Element.` If the stack is empty, `topItem` returns `nil;` if the stack isn’t empty, `topItem` returns the final item in the `items` array.
+`topItem`プロパティは、`Element`型のオプショナル値を返します。スタックが空の場合、`topItem`は`nil`を返し、スタックが空でない場合、`topItem`は`items`配列の最後の項目を返します。
 
-Note that this extension doesn’t define a type parameter list. Instead, the `Stack` type’s existing type parameter name, `Element,` is used within the extension to indicate the optional type of the `topItem` computed property.
+この拡張は型パラメータリストを定義していないことに注意してください。代わりに、`Stack`型の既存の型パラメータ名`Element`が拡張内で使用され、`topItem`計算プロパティのオプショナル型を示しています。
 
-The `topItem` computed property can now be used with any `Stack` instance to access and query its top item without removing it.
+`topItem`計算プロパティは、任意の`Stack`インスタンスで使用して、項目を削除せずにそのトップ項目にアクセスしてクエリを実行できます。
 
 ```swift
 if let topItem = stackOfStrings.topItem {
-    print("The top item on the stack is \(topItem).")
+    print("スタックのトップ項目は\(topItem)です。")
 }
-// Prints "The top item on the stack is tres."
+// "スタックのトップ項目はtresです。"と表示されます。
 ```
 
-Extensions of a generic type can also include requirements that instances of the extended type must satisfy in order to gain the new functionality, as discussed in Extensions with a Generic Where Clause below.
+ジェネリック型の拡張には、拡張された型のインスタンスが新しい機能を得るために満たさなければならない要件を含めることもできます。詳細は、以下の「ジェネリックWhere句を使用した拡張」で説明します。
 
-## Type Constraints
+## 型制約
 
-The `swapTwoValues(_:_:)` function and the `Stack` type can work with any type. However, it’s sometimes useful to enforce certain type constraints on the types that can be used with generic functions and generic types. Type constraints specify that a type parameter must inherit from a specific class, or conform to a particular protocol or protocol composition.
+`swapTwoValues(_:_:)` 関数と `Stack` 型は任意の型で動作します。しかし、ジェネリック関数やジェネリック型で使用できる型に特定の型制約を課すことが有用な場合があります。型制約は、型パラメータが特定のクラスを継承するか、特定のプロトコルまたはプロトコルの組み合わせに準拠する必要があることを指定します。
 
-For example, Swift’s `Dictionary` type places a limitation on the types that can be used as keys for a dictionary. As described in Dictionaries, the type of a dictionary’s keys must be hashable. That is, it must provide a way to make itself uniquely representable. `Dictionary` needs its keys to be hashable so that it can check whether it already contains a value for a particular key. Without this requirement, `Dictionary` couldn’t tell whether it should insert or replace a value for a particular key, nor would it be able to find a value for a given key that’s already in the dictionary.
+例えば、Swift の `Dictionary` 型は、辞書のキーとして使用できる型に制限を設けています。辞書について説明したように、辞書のキーの型はハッシュ可能でなければなりません。つまり、自分自身を一意に表現する方法を提供する必要があります。`Dictionary` はキーがハッシュ可能である必要があるため、特定のキーに対して既に値が含まれているかどうかを確認できます。この要件がなければ、`Dictionary` は特定のキーに対して値を挿入するか置き換えるかを判断できず、既に辞書に含まれている特定のキーの値を見つけることもできません。
 
-This requirement is enforced by a type constraint on the key type for `Dictionary,` which specifies that the key type must conform to the `Hashable` protocol, a special protocol defined in the Swift standard library. All of Swift’s basic types (such as `String,` `Int,` `Double,` and `Bool`) are hashable by default. For information about making your own custom types conform to the `Hashable` protocol, see Conforming to the `Hashable` Protocol.
+この要件は、`Dictionary` のキー型に対する型制約によって強制されており、キー型が Swift 標準ライブラリで定義された特別なプロトコルである `Hashable` プロトコルに準拠する必要があることを指定しています。Swift の基本型（`String`、`Int`、`Double`、`Bool` など）はすべてデフォルトでハッシュ可能です。独自のカスタム型を `Hashable` プロトコルに準拠させる方法については、`Hashable` プロトコルへの準拠を参照してください。
 
-You can define your own type constraints when creating custom generic types, and these constraints provide much of the power of generic programming. Abstract concepts like `Hashable` characterize types in terms of their conceptual characteristics, rather than their concrete type.
+カスタムジェネリック型を作成する際に独自の型制約を定義することができ、これらの制約がジェネリックプログラミングの多くの力を提供します。`Hashable` のような抽象的な概念は、具体的な型ではなく、概念的な特性に基づいて型を特徴付けます。
 
-### Type Constraint Syntax
+### 型制約の構文
 
-You write type constraints by placing a single class or protocol constraint after a type parameter’s name, separated by a colon, as part of the type parameter list. The basic syntax for type constraints on a generic function is shown below (although the syntax is the same for generic types):
+型パラメータリストの一部として、型パラメータの名前の後にコロンで区切って単一のクラスまたはプロトコル制約を配置することで、型制約を記述します。ジェネリック関数の型制約の基本構文は以下の通りです（ジェネリック型の場合も同じ構文です）：
 
 ```swift
 func someFunction<T: SomeClass, U: SomeProtocol>(someT: T, someU: U) {
-    // function body goes here
+    // 関数の本体がここに入ります
 }
 ```
 
-The hypothetical function above has two type parameters. The first type parameter, `T,` has a type constraint that requires `T` to be a subclass of `SomeClass.` The second type parameter, `U,` has a type constraint that requires `U` to conform to the protocol `SomeProtocol.`
+上記の仮想関数には2つの型パラメータがあります。最初の型パラメータ `T` には `T` が `SomeClass` のサブクラスであることを要求する型制約があります。2番目の型パラメータ `U` には `U` が `SomeProtocol` プロトコルに準拠することを要求する型制約があります。
 
-### Type Constraints in Action
+### 型制約の実際の使用例
 
-Here’s a nongeneric function called `findIndex(ofString:in:),` which is given a `String` value to find and an array of `String` values within which to find it. The `findIndex(ofString:in:)` function returns an optional `Int` value, which will be the index of the first matching string in the array if it’s found, or `nil` if the string can’t be found:
+ここに `findIndex(ofString:in:)` という非ジェネリック関数があります。この関数は、見つけるべき `String` 値と、その中で見つけるべき `String` 値の配列を受け取ります。`findIndex(ofString:in:)` 関数はオプショナルな `Int` 値を返します。これは、配列内で最初に一致する文字列のインデックスが見つかった場合、そのインデックスを返し、見つからなかった場合は `nil` を返します：
 
 ```swift
 func findIndex(ofString valueToFind: String, in array: [String]) -> Int? {
@@ -257,19 +257,19 @@ func findIndex(ofString valueToFind: String, in array: [String]) -> Int? {
 }
 ```
 
-The `findIndex(ofString:in:)` function can be used to find a string value in an array of strings:
+`findIndex(ofString:in:)` 関数は、文字列の配列内で文字列値を見つけるために使用できます：
 
 ```swift
 let strings = ["cat", "dog", "llama", "parakeet", "terrapin"]
 if let foundIndex = findIndex(ofString: "llama", in: strings) {
-    print("The index of llama is \(foundIndex)")
+    print("llama のインデックスは \(foundIndex) です")
 }
-// Prints "The index of llama is 2"
+// "llama のインデックスは 2 です" と出力されます
 ```
 
-The principle of finding the index of a value in an array isn’t useful only for strings, however. You can write the same functionality as a generic function by replacing any mention of strings with values of some type `T` instead.
+配列内の値のインデックスを見つけるという原則は、文字列に限らず有用です。文字列の代わりに任意の型 `T` の値を使用することで、同じ機能をジェネリック関数として記述できます。
 
-Here’s how you might expect a generic version of `findIndex(ofString:in:),` called `findIndex(of:in:),` to be written. Note that the return type of this function is still `Int?,` because the function returns an optional index number, not an optional value from the array. Be warned, though — this function doesn’t compile, for reasons explained after the example:
+次に、`findIndex(ofString:in:)` のジェネリックバージョンである `findIndex(of:in:)` がどのように記述されるかを示します。この関数の戻り値の型は依然として `Int?` です。これは、関数が配列からのオプショナルな値ではなく、オプショナルなインデックス番号を返すためです。ただし、この関数は以下の例で説明する理由によりコンパイルされません：
 
 ```swift
 func findIndex<T>(of valueToFind: T, in array:[T]) -> Int? {
@@ -282,11 +282,11 @@ func findIndex<T>(of valueToFind: T, in array:[T]) -> Int? {
 }
 ```
 
-This function doesn’t compile as written above. The problem lies with the equality check, “if value == valueToFind”. Not every type in Swift can be compared with the equal to operator (==). If you create your own class or structure to represent a complex data model, for example, then the meaning of “equal to” for that class or structure isn’t something that Swift can guess for you. Because of this, it isn’t possible to guarantee that this code will work for every possible type `T,` and an appropriate error is reported when you try to compile the code.
+この関数は上記のように記述するとコンパイルされません。問題は等価性チェック「if value == valueToFind」にあります。Swift のすべての型が等価演算子（==）で比較できるわけではありません。例えば、複雑なデータモデルを表す独自のクラスや構造体を作成する場合、そのクラスや構造体に対する「等しい」の意味は Swift が推測できるものではありません。このため、このコードがすべての可能な型 `T` に対して動作することを保証することはできず、コードをコンパイルしようとすると適切なエラーが報告されます。
 
-All is not lost, however. The Swift standard library defines a protocol called `Equatable,` which requires any conforming type to implement the equal to operator (==) and the not equal to operator (!=) to compare any two values of that type. All of Swift’s standard types automatically support the `Equatable` protocol.
+しかし、すべてが失われたわけではありません。Swift 標準ライブラリには `Equatable` というプロトコルが定義されており、このプロトコルに準拠する任意の型は、等価演算子（==）および非等価演算子（!=）を実装してその型の任意の2つの値を比較する必要があります。Swift の標準型はすべて自動的に `Equatable` プロトコルをサポートしています。
 
-Any type that’s `Equatable` can be used safely with the `findIndex(of:in:)` function, because it’s guaranteed to support the equal to operator. To express this fact, you write a type constraint of `Equatable` as part of the type parameter’s definition when you define the function:
+`Equatable` である任意の型は、等価演算子をサポートすることが保証されているため、`findIndex(of:in:)` 関数で安全に使用できます。この事実を表現するために、関数を定義する際に型パラメータの定義の一部として `Equatable` の型制約を記述します：
 
 ```swift
 func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
@@ -299,24 +299,24 @@ func findIndex<T: Equatable>(of valueToFind: T, in array:[T]) -> Int? {
 }
 ```
 
-The single type parameter for `findIndex(of:in:)` is written as `T: Equatable,` which means “any type `T` that conforms to the `Equatable` protocol.”
+`findIndex(of:in:)` の単一の型パラメータは `T: Equatable` として記述されており、これは「`Equatable` プロトコルに準拠する任意の型 `T`」を意味します。
 
-The `findIndex(of:in:)` function now compiles successfully and can be used with any type that’s `Equatable,` such as `Double` or `String:`
+`findIndex(of:in:)` 関数は現在正常にコンパイルされ、`Equatable` である任意の型（例えば `Double` や `String`）で使用できます：
 
 ```swift
 let doubleIndex = findIndex(of: 9.3, in: [3.14159, 0.1, 0.25])
-// doubleIndex is an optional Int with no value, because 9.3 isn't in the array
+// doubleIndex はオプショナルな Int で、値はありません。なぜなら 9.3 は配列に含まれていないからです
 let stringIndex = findIndex(of: "Andrea", in: ["Mike", "Malcolm", "Andrea"])
-// stringIndex is an optional Int containing a value of 2
+// stringIndex はオプショナルな Int で、値は 2 です
 ```
 
-## Associated Types
+## 関連型
 
-When defining a protocol, it’s sometimes useful to declare one or more associated types as part of the protocol’s definition. An associated type gives a placeholder name to a type that’s used as part of the protocol. The actual type to use for that associated type isn’t specified until the protocol is adopted. Associated types are specified with the `associatedtype` keyword.
+プロトコルを定義する際に、プロトコルの定義の一部として1つ以上の関連型を宣言することが有用な場合があります。関連型は、プロトコルの一部として使用される型にプレースホルダー名を与えます。その関連型に使用する実際の型は、プロトコルが採用されるまで指定されません。関連型は `associatedtype` キーワードで指定されます。
 
-### Associated Types in Action
+### 実際の関連型
 
-Here’s an example of a protocol called `Container,` which declares an associated type called `Item:`
+ここに `Container` というプロトコルの例があります。このプロトコルは `Item` という関連型を宣言しています：
 
 ```swift
 protocol Container {
@@ -327,25 +327,25 @@ protocol Container {
 }
 ```
 
-The `Container` protocol defines three required capabilities that any container must provide:
+`Container` プロトコルは、任意のコンテナが提供しなければならない3つの必須機能を定義しています：
 
-- It must be possible to add a new item to the container with an `append(_:)` method.
-- It must be possible to access a count of the items in the container through a `count` property that returns an `Int` value.
-- It must be possible to retrieve each item in the container with a subscript that takes an `Int` index value.
+- `append(_:)` メソッドで新しいアイテムをコンテナに追加できる必要があります。
+- `count` プロパティを通じてコンテナ内のアイテムの数を `Int` 値として取得できる必要があります。
+- `Int` インデックス値を取るサブスクリプトでコンテナ内の各アイテムを取得できる必要があります。
 
-This protocol doesn’t specify how the items in the container should be stored or what type they’re allowed to be. The protocol only specifies the three bits of functionality that any type must provide in order to be considered a `Container.` A conforming type can provide additional functionality, as long as it satisfies these three requirements.
+このプロトコルは、コンテナ内のアイテムがどのように保存されるべきか、またはどの型が許可されるべきかを指定していません。プロトコルは、任意の型が `Container` と見なされるために提供しなければならない3つの機能のみを指定しています。準拠する型は、これら3つの要件を満たす限り、追加の機能を提供することができます。
 
-Any type that conforms to the `Container` protocol must be able to specify the type of values it stores. Specifically, it must ensure that only items of the right type are added to the container, and it must be clear about the type of the items returned by its subscript.
+`Container` プロトコルに準拠する任意の型は、格納する値の型を指定できる必要があります。具体的には、コンテナに追加されるアイテムが正しい型であることを保証し、サブスクリプトによって返されるアイテムの型が明確である必要があります。
 
-To define these requirements, the `Container` protocol needs a way to refer to the type of the elements that a container will hold, without knowing what that type is for a specific container. The `Container` protocol needs to specify that any value passed to the `append(_:)` method must have the same type as the container’s element type, and that the value returned by the container’s subscript will be of the same type as the container’s element type.
+これらの要件を定義するために、`Container` プロトコルは、特定のコンテナの型が何であるかを知らなくても、コンテナが保持する要素の型を参照する方法を必要とします。`Container` プロトコルは、`append(_:)` メソッドに渡される任意の値がコンテナの要素型と同じ型である必要があり、サブスクリプトによって返される値がコンテナの要素型と同じ型であることを指定する必要があります。
 
-To achieve this, the `Container` protocol declares an associated type called `Item,` written as `associatedtype Item.` The protocol doesn’t define what `Item` is — that information is left for any conforming type to provide. Nonetheless, the `Item` alias provides a way to refer to the type of the items in a `Container,` and to define a type for use with the `append(_:)` method and subscript, to ensure that the expected behavior of any `Container` is enforced.
+これを実現するために、`Container` プロトコルは `Item` という関連型を宣言します。これは `associatedtype Item` として書かれます。プロトコルは `Item` が何であるかを定義していません。その情報は準拠する任意の型に任されています。それにもかかわらず、`Item` エイリアスは `Container` 内のアイテムの型を参照する方法を提供し、`append(_:)` メソッドおよびサブスクリプトで使用する型を定義して、任意の `Container` の期待される動作を保証します。
 
-Here’s a version of the nongeneric `IntStack` type from Generic Types above, adapted to conform to the `Container` protocol:
+ここに、上記のジェネリック型からの非ジェネリックな `IntStack` 型のバージョンがあります。これは `Container` プロトコルに準拠するように適応されています：
 
 ```swift
 struct IntStack: Container {
-    // original IntStack implementation
+    // 元の IntStack 実装
     var items: [Int] = []
     mutating func push(_ item: Int) {
         items.append(item)
@@ -353,7 +353,7 @@ struct IntStack: Container {
     mutating func pop() -> Int {
         return items.removeLast()
     }
-    // conformance to the Container protocol
+    // Container プロトコルへの準拠
     typealias Item = Int
     mutating func append(_ item: Int) {
         self.push(item)
@@ -367,17 +367,17 @@ struct IntStack: Container {
 }
 ```
 
-The `IntStack` type implements all three of the `Container` protocol’s requirements, and in each case wraps part of the `IntStack` type’s existing functionality to satisfy these requirements.
+`IntStack` 型は `Container` プロトコルの3つの要件すべてを実装しており、各ケースで `IntStack` 型の既存の機能の一部をラップしてこれらの要件を満たしています。
 
-Moreover, `IntStack` specifies that for this implementation of `Container,` the appropriate `Item` to use is a type of `Int.` The definition of `typealias Item = Int` turns the abstract type of `Item` into a concrete type of `Int` for this implementation of the `Container` protocol.
+さらに、`IntStack` は、この `Container` の実装に適した `Item` が `Int` 型であることを指定しています。`typealias Item = Int` の定義は、抽象的な `Item` 型をこの `Container` プロトコルの実装に対して具体的な `Int` 型に変えます。
 
-Thanks to Swift’s type inference, you don’t actually need to declare a concrete `Item` of `Int` as part of the definition of `IntStack.` Because `IntStack` conforms to all of the requirements of the `Container` protocol, Swift can infer the appropriate `Item` to use, simply by looking at the type of the `append(_:)` method’s `item` parameter and the return type of the subscript. Indeed, if you delete the `typealias Item = Int` line from the code above, everything still works, because it’s clear what type should be used for `Item.`
+Swift の型推論のおかげで、実際には `IntStack` の定義の一部として具体的な `Item` を `Int` として宣言する必要はありません。`IntStack` が `Container` プロトコルのすべての要件を満たしているため、Swift は `append(_:)` メソッドの `item` パラメータの型とサブスクリプトの戻り値の型を見て、適切な `Item` を推論できます。実際、上記のコードから `typealias Item = Int` 行を削除しても、すべてが機能します。なぜなら、`Item` に使用すべき型が明確だからです。
 
-You can also make the generic `Stack` type conform to the `Container` protocol:
+ジェネリックな `Stack` 型も `Container` プロトコルに準拠させることができます：
 
 ```swift
 struct Stack<Element>: Container {
-    // original Stack<Element> implementation
+    // 元の Stack<Element> 実装
     var items: [Element] = []
     mutating func push(_ item: Element) {
         items.append(item)
@@ -385,7 +385,7 @@ struct Stack<Element>: Container {
     mutating func pop() -> Element {
         return items.removeLast()
     }
-    // conformance to the Container protocol
+    // Container プロトコルへの準拠
     mutating func append(_ item: Element) {
         self.push(item)
     }
@@ -398,23 +398,23 @@ struct Stack<Element>: Container {
 }
 ```
 
-This time, the type parameter `Element` is used as the type of the `append(_:)` method’s `item` parameter and the return type of the subscript. Swift can therefore infer that `Element` is the appropriate type to use as the `Item` for this particular container.
+この場合、型パラメータ `Element` が `append(_:)` メソッドの `item` パラメータの型およびサブスクリプトの戻り値の型として使用されます。したがって、Swift は `Element` がこの特定のコンテナに対して使用すべき適切な `Item` であると推論できます。
 
-### Extending an Existing Type to Specify an Associated Type
+### 既存の型を拡張して関連型を指定する
 
-You can extend an existing type to add conformance to a protocol, as described in Adding Protocol Conformance with an Extension. This includes a protocol with an associated type.
+既存の型を拡張してプロトコルに準拠させることができます。これは、拡張によるプロトコル準拠の追加で説明されています。これには、関連型を持つプロトコルも含まれます。
 
-Swift’s `Array` type already provides an `append(_:)` method, a `count` property, and a subscript with an `Int` index to retrieve its elements. These three capabilities match the requirements of the `Container` protocol. This means that you can extend `Array` to conform to the `Container` protocol simply by declaring that `Array` adopts the protocol. You do this with an empty extension, as described in Declaring Protocol Adoption with an Extension:
+Swift の `Array` 型はすでに `append(_:)` メソッド、`count` プロパティ、およびその要素を取得するための `Int` インデックスを持つサブスクリプトを提供しています。これらの3つの機能は `Container` プロトコルの要件と一致しています。つまり、`Array` がプロトコルを採用することを宣言するだけで `Container` プロトコルに準拠させることができます。これは、拡張によるプロトコル採用の宣言で説明されているように、空の拡張で行います：
 
 ```swift
 extension Array: Container {}
 ```
 
-`Array’s` existing `append(_:)` method and subscript enable Swift to infer the appropriate type to use for `Item,` just as for the generic `Stack` type above. After defining this extension, you can use any `Array` as a `Container.`
+`Array` の既存の `append(_:)` メソッドとサブスクリプトにより、Swift は `Item` に使用すべき適切な型を推論できます。これは、上記のジェネリックな `Stack` 型と同様です。この拡張を定義した後、任意の `Array` を `Container` として使用できます。
 
-### Adding Constraints to an Associated Type
+### 関連型に制約を追加する
 
-You can add type constraints to an associated type in a protocol to require that conforming types satisfy those constraints. For example, the following code defines a version of `Container` that requires the items in the container to be equatable.
+プロトコルの関連型に型制約を追加して、準拠する型がその制約を満たすように要求することができます。例えば、次のコードは、コンテナ内のアイテムが等価であることを要求する `Container` のバージョンを定義しています。
 
 ```swift
 protocol Container {
@@ -425,11 +425,11 @@ protocol Container {
 }
 ```
 
-To conform to this version of `Container,` the container’s `Item` type has to conform to the `Equatable` protocol.
+このバージョンの `Container` に準拠するには、コンテナの `Item` 型が `Equatable` プロトコルに準拠している必要があります。
 
-### Using a Protocol in Its Associated Type’s Constraints
+### 関連型の制約にプロトコルを使用する
 
-A protocol can appear as part of its own requirements. For example, here’s a protocol that refines the `Container` protocol, adding the requirement of a `suffix(_:)` method. The `suffix(_:)` method returns a given number of elements from the end of the container, storing them in an instance of the `Suffix` type.
+プロトコルは、その要件の一部として現れることがあります。例えば、`Container` プロトコルを拡張し、`suffix(_:)` メソッドの要件を追加するプロトコルがあります。`suffix(_:)` メソッドは、コンテナの末尾から指定された数の要素を返し、それらを `Suffix` 型のインスタンスに格納します。
 
 ```swift
 protocol SuffixableContainer: Container {
@@ -438,9 +438,9 @@ protocol SuffixableContainer: Container {
 }
 ```
 
-In this protocol, `Suffix` is an associated type, like the `Item` type in the `Container` example above. `Suffix` has two constraints: It must conform to the `SuffixableContainer` protocol (the protocol currently being defined), and its `Item` type must be the same as the container’s `Item` type. The constraint on `Item` is a generic where clause, which is discussed in Associated Types with a Generic Where Clause below.
+このプロトコルでは、`Suffix` は `Container` の例の `Item` 型のように関連型です。`Suffix` には2つの制約があります。`SuffixableContainer` プロトコル（現在定義されているプロトコル）に準拠していることと、その `Item` 型がコンテナの `Item` 型と同じであることです。`Item` の制約は、以下で説明するジェネリック where 句を使用した関連型の制約です。
 
-Here’s an extension of the `Stack` type from Generic Types above that adds conformance to the `SuffixableContainer` protocol:
+以下は、ジェネリック型の上記の `Stack` 型に `SuffixableContainer` プロトコルへの準拠を追加する拡張です。
 
 ```swift
 extension Stack: SuffixableContainer {
@@ -451,17 +451,17 @@ extension Stack: SuffixableContainer {
         }
         return result
     }
-    // Inferred that Suffix is Stack.
+    // Suffix が Stack であると推論されます。
 }
 var stackOfInts = Stack<Int>()
 stackOfInts.append(10)
 stackOfInts.append(20)
 stackOfInts.append(30)
 let suffix = stackOfInts.suffix(2)
-// suffix contains 20 and 30
+// suffix には 20 と 30 が含まれます
 ```
 
-In the example above, the `Suffix` associated type for `Stack` is also `Stack,` so the `suffix` operation on `Stack` returns another `Stack.` Alternatively, a type that conforms to `SuffixableContainer` can have a `Suffix` type that’s different from itself — meaning the `suffix` operation can return a different type. For example, here’s an extension to the nongeneric `IntStack` type that adds `SuffixableContainer` conformance, using `Stack<Int>` as its `suffix` type instead of `IntStack:`
+上記の例では、`Stack` の `Suffix` 関連型も `Stack` であるため、`Stack` 上の `suffix` 操作は別の `Stack` を返します。代わりに、`SuffixableContainer` に準拠する型は、自身とは異なる `Suffix` 型を持つことができ、つまり `suffix` 操作が異なる型を返すことができます。例えば、`IntStack` 型に `SuffixableContainer` 準拠を追加し、`IntStack` の代わりに `Stack<Int>` を `suffix` 型として使用する拡張があります。
 
 ```swift
 extension IntStack: SuffixableContainer {
@@ -472,71 +472,71 @@ extension IntStack: SuffixableContainer {
         }
         return result
     }
-    // Inferred that Suffix is Stack<Int>.
+    // Suffix が Stack<Int> であると推論されます。
 }
 ```
 
-## Generic Where Clauses
+## ジェネリック where 句
 
-Type constraints, as described in Type Constraints, enable you to define requirements on the type parameters associated with a generic function, subscript, or type.
+型制約は、型制約で説明されているように、ジェネリック関数、サブスクリプト、または型に関連する型パラメータに対する要件を定義することを可能にします。
 
-It can also be useful to define requirements for associated types. You do this by defining a generic where clause. A generic where clause enables you to require that an associated type must conform to a certain protocol, or that certain type parameters and associated types must be the same. A generic where clause starts with the `where` keyword, followed by constraints for associated types or equality relationships between types and associated types. You write a generic where clause right before the opening curly brace of a type or function’s body.
+関連型に対する要件を定義することも有用です。これを行うには、ジェネリック where 句を定義します。ジェネリック where 句を使用すると、関連型が特定のプロトコルに準拠する必要があることや、特定の型パラメータと関連型が同じである必要があることを要求できます。ジェネリック where 句は `where` キーワードで始まり、関連型や型と関連型の間の等価関係の制約が続きます。ジェネリック where 句は、型や関数の本体の開き中括弧の直前に書きます。
 
-The example below defines a generic function called `allItemsMatch,` which checks to see if two `Container` instances contain the same items in the same order. The function returns a Boolean value of `true` if all items match and a value of `false` if they don’t.
+以下の例は、`allItemsMatch` というジェネリック関数を定義しています。この関数は、2つの `Container` インスタンスが同じ順序で同じアイテムを含んでいるかどうかを確認します。この関数は、すべてのアイテムが一致する場合は `true` を返し、一致しない場合は `false` を返します。
 
-The two containers to be checked don’t have to be the same type of container (although they can be), but they do have to hold the same type of items. This requirement is expressed through a combination of type constraints and a generic where clause:
+チェックされる2つのコンテナは、同じ種類のコンテナである必要はありません（ただし、同じ種類であっても構いません）が、同じ種類のアイテムを保持している必要があります。この要件は、型制約とジェネリック where 句の組み合わせによって表現されます。
 
 ```swift
 func allItemsMatch<C1: Container, C2: Container>
         (_ someContainer: C1, _ anotherContainer: C2) -> Bool
         where C1.Item == C2.Item, C1.Item: Equatable {
 
-    // Check that both containers contain the same number of items.
+    // 両方のコンテナが同じ数のアイテムを含んでいることを確認します。
     if someContainer.count != anotherContainer.count {
         return false
     }
 
-    // Check each pair of items to see if they're equivalent.
+    // 各アイテムのペアが等価であるかどうかを確認します。
     for i in 0..<someContainer.count {
         if someContainer[i] != anotherContainer[i] {
             return false
         }
     }
 
-    // All items match, so return true.
+    // すべてのアイテムが一致するため、true を返します。
     return true
 }
 ```
 
-This function takes two arguments called `someContainer` and `anotherContainer.` The `someContainer` argument is of type `C1,` and the `anotherContainer` argument is of type `C2.` Both `C1` and `C2` are type parameters for two container types to be determined when the function is called.
+この関数は、`someContainer` と `anotherContainer` という2つの引数を取ります。`someContainer` 引数は `C1` 型であり、`anotherContainer` 引数は `C2` 型です。`C1` と `C2` は、関数が呼び出されたときに決定される2つのコンテナ型の型パラメータです。
 
-The following requirements are placed on the function’s two type parameters:
+関数の2つの型パラメータには、次の要件が課されています。
 
-- `C1` must conform to the `Container` protocol (written as `C1: Container`).
-- `C2` must also conform to the `Container` protocol (written as `C2: Container`).
-- The `Item` for `C1` must be the same as the `Item` for `C2` (written as `C1.Item == C2.Item`).
-- The `Item` for `C1` must conform to the `Equatable` protocol (written as `C1.Item: Equatable`).
+- `C1` は `Container` プロトコルに準拠している必要があります（`C1: Container` と書かれています）。
+- `C2` も `Container` プロトコルに準拠している必要があります（`C2: Container` と書かれています）。
+- `C1` の `Item` は `C2` の `Item` と同じである必要があります（`C1.Item == C2.Item` と書かれています）。
+- `C1` の `Item` は `Equatable` プロトコルに準拠している必要があります（`C1.Item: Equatable` と書かれています）。
 
-The first and second requirements are defined in the function’s type parameter list, and the third and fourth requirements are defined in the function’s generic where clause.
+最初と2番目の要件は関数の型パラメータリストで定義されており、3番目と4番目の要件は関数のジェネリック where 句で定義されています。
 
-These requirements mean:
+これらの要件は次のことを意味します：
 
-- `someContainer` is a container of type `C1.`
-- `anotherContainer` is a container of type `C2.`
-- `someContainer` and `anotherContainer` contain the same type of items.
-- The items in `someContainer` can be checked with the not equal operator (!=) to see if they’re different from each other.
+- `someContainer` は `C1` 型のコンテナです。
+- `anotherContainer` は `C2` 型のコンテナです。
+- `someContainer` と `anotherContainer` は同じ種類のアイテムを含んでいます。
+- `someContainer` のアイテムは、等しくない演算子（!=）を使用して互いに異なるかどうかを確認できます。
 
-The third and fourth requirements combine to mean that the items in `anotherContainer` can also be checked with the != operator, because they’re exactly the same type as the items in `someContainer.`
+3番目と4番目の要件は組み合わさって、`anotherContainer` のアイテムも != 演算子を使用して確認できることを意味します。なぜなら、それらは `someContainer` のアイテムとまったく同じ種類だからです。
 
-These requirements enable the `allItemsMatch(_:_:)` function to compare the two containers, even if they’re of a different container type.
+これらの要件により、`allItemsMatch(_:_:)` 関数は、異なる種類のコンテナであっても、2つのコンテナを比較することができます。
 
-The `allItemsMatch(_:_:)` function starts by checking that both containers contain the same number of items. If they contain a different number of items, there’s no way that they can match, and the function returns `false.`
+`allItemsMatch(_:_:)` 関数は、まず両方のコンテナが同じ数のアイテムを含んでいることを確認します。異なる数のアイテムを含んでいる場合、それらが一致することはないため、関数は `false` を返します。
 
-After making this check, the function iterates over all of the items in `someContainer` with a `for-in` loop and the half-open range operator (`..<`). For each item, the function checks whether the item from `someContainer` isn’t equal to the corresponding item in `anotherContainer.` If the two items aren’t equal, then the two containers don’t match, and the function returns `false.`
+このチェックを行った後、関数は `for-in` ループと半開範囲演算子（`..<`）を使用して `someContainer` のすべてのアイテムを反復処理します。各アイテムについて、`someContainer` のアイテムが `anotherContainer` の対応するアイテムと等しくないかどうかを確認します。2つのアイテムが等しくない場合、2つのコンテナは一致しないため、関数は `false` を返します。
 
-If the loop finishes without finding a mismatch, the two containers match, and the function returns `true.`
+ループが不一致を見つけずに終了した場合、2つのコンテナは一致し、関数は `true` を返します。
 
-Here’s how the `allItemsMatch(_:_:)` function looks in action:
+以下は、`allItemsMatch(_:_:)` 関数の動作例です。
 
 ```swift
 var stackOfStrings = Stack<String>()
@@ -547,18 +547,18 @@ stackOfStrings.push("tres")
 var arrayOfStrings = ["uno", "dos", "tres"]
 
 if allItemsMatch(stackOfStrings, arrayOfStrings) {
-    print("All items match.")
+    print("すべてのアイテムが一致します。")
 } else {
-    print("Not all items match.")
+    print("すべてのアイテムが一致しません。")
 }
-// Prints "All items match."
+// "すべてのアイテムが一致します。" と表示されます。
 ```
 
-The example above creates a `Stack` instance to store `String` values, and pushes three strings onto the stack. The example also creates an `Array` instance initialized with an array literal containing the same three strings as the stack. Even though the stack and the array are of a different type, they both conform to the `Container` protocol, and both contain the same type of values. You can therefore call the `allItemsMatch(_:_:)` function with these two containers as its arguments. In the example above, the `allItemsMatch(_:_:)` function correctly reports that all of the items in the two containers match.
+上記の例では、`Stack` インスタンスを作成して `String` 値を格納し、スタックに3つの文字列をプッシュします。また、同じ3つの文字列を含む配列リテラルで初期化された `Array` インスタンスも作成します。スタックと配列は異なる型ですが、どちらも `Container` プロトコルに準拠しており、同じ種類の値を含んでいます。したがって、これら2つのコンテナを引数として `allItemsMatch(_:_:)` 関数を呼び出すことができます。上記の例では、`allItemsMatch(_:_:)` 関数は、2つのコンテナ内のすべてのアイテムが一致することを正しく報告します。
 
-## Extensions with a Generic Where Clause
+## ジェネリックWhere句を使用した拡張
 
-You can also use a generic where clause as part of an extension. The example below extends the generic `Stack` structure from the previous examples to add an `isTop(_:)` method.
+拡張の一部としてジェネリックWhere句を使用することもできます。以下の例では、前の例からジェネリック`Stack`構造体を拡張して`isTop(_:)`メソッドを追加しています。
 
 ```swift
 extension Stack where Element: Equatable {
@@ -571,9 +571,9 @@ extension Stack where Element: Equatable {
 }
 ```
 
-This new `isTop(_:)` method first checks that the stack isn’t empty, and then compares the given item against the stack’s topmost item. If you tried to do this without a generic where clause, you would have a problem: The implementation of `isTop(_:)` uses the == operator, but the definition of `Stack` doesn’t require its items to be equatable, so using the == operator results in a compile-time error. Using a generic where clause lets you add a new requirement to the extension, so that the extension adds the `isTop(_:)` method only when the items in the stack are equatable.
+この新しい`isTop(_:)`メソッドは、まずスタックが空でないことを確認し、次に与えられたアイテムをスタックの最上部のアイテムと比較します。ジェネリックWhere句を使用せずにこれを行おうとすると問題が発生します。`isTop(_:)`の実装では`==`演算子を使用しますが、`Stack`の定義ではアイテムが等価であることを要求していないため、`==`演算子を使用するとコンパイル時エラーが発生します。ジェネリックWhere句を使用すると、拡張に新しい要件を追加できるため、アイテムが等価である場合にのみ`isTop(_:)`メソッドを追加できます。
 
-Here’s how the `isTop(_:)` method looks in action:
+以下は、`isTop(_:)`メソッドの使用例です。
 
 ```swift
 if stackOfStrings.isTop("tres") {
@@ -581,20 +581,20 @@ if stackOfStrings.isTop("tres") {
 } else {
     print("Top element is something else.")
 }
-// Prints "Top element is tres."
+// "Top element is tres."と表示されます。
 ```
 
-If you try to call the `isTop(_:)` method on a stack whose elements aren’t equatable, you’ll get a compile-time error.
+アイテムが等価でないスタックで`isTop(_:)`メソッドを呼び出そうとすると、コンパイル時エラーが発生します。
 
 ```swift
 struct NotEquatable { }
 var notEquatableStack = Stack<NotEquatable>()
 let notEquatableValue = NotEquatable()
 notEquatableStack.push(notEquatableValue)
-notEquatableStack.isTop(notEquatableValue)  // Error
+notEquatableStack.isTop(notEquatableValue)  // エラー
 ```
 
-You can use a generic where clause with extensions to a protocol. The example below extends the `Container` protocol from the previous examples to add a `startsWith(_:)` method.
+ジェネリックWhere句を使用してプロトコルの拡張を行うこともできます。以下の例では、前の例から`Container`プロトコルを拡張して`startsWith(_:)`メソッドを追加しています。
 
 ```swift
 extension Container where Item: Equatable {
@@ -604,7 +604,7 @@ extension Container where Item: Equatable {
 }
 ```
 
-The `startsWith(_:)` method first makes sure that the container has at least one item, and then it checks whether the first item in the container matches the given item. This new `startsWith(_:)` method can be used with any type that conforms to the `Container` protocol, including the stacks and arrays used above, as long as the container’s items are equatable.
+`startsWith(_:)`メソッドは、まずコンテナに少なくとも1つのアイテムがあることを確認し、次にコンテナの最初のアイテムが与えられたアイテムと一致するかどうかを確認します。この新しい`startsWith(_:)`メソッドは、コンテナのアイテムが等価である限り、上記のスタックや配列を含む`Container`プロトコルに準拠する任意の型で使用できます。
 
 ```swift
 if [9, 9, 9].startsWith(42) {
@@ -612,10 +612,10 @@ if [9, 9, 9].startsWith(42) {
 } else {
     print("Starts with something else.")
 }
-// Prints "Starts with something else."
+// "Starts with something else."と表示されます。
 ```
 
-The generic where clause in the example above requires `Item` to conform to a protocol, but you can also write a generic where clauses that require `Item` to be a specific type. For example:
+上記の例のジェネリックWhere句は、`Item`がプロトコルに準拠することを要求していますが、`Item`が特定の型であることを要求するジェネリックWhere句を書くこともできます。例えば：
 
 ```swift
 extension Container where Item == Double {
@@ -628,16 +628,16 @@ extension Container where Item == Double {
     }
 }
 print([1260.0, 1200.0, 98.6, 37.0].average())
-// Prints "648.9"
+// "648.9"と表示されます。
 ```
 
-This example adds an `average()` method to containers whose `Item` type is `Double.` It iterates over the items in the container to add them up, and divides by the container’s count to compute the average. It explicitly converts the count from `Int` to `Double` to be able to do floating-point division.
+この例では、`Item`型が`Double`であるコンテナに`average()`メソッドを追加しています。コンテナ内のアイテムを合計し、コンテナの数で割って平均を計算します。浮動小数点除算を行うために、カウントを`Int`から`Double`に明示的に変換しています。
 
-You can include multiple requirements in a generic where clause that’s part of an extension, just like you can for a generic where clause that you write elsewhere. Separate each requirement in the list with a comma.
+拡張の一部としてのジェネリックWhere句には、他の場所で書くジェネリックWhere句と同様に、複数の要件を含めることができます。リスト内の各要件をカンマで区切ります。
 
-## Contextual Where Clauses
+## コンテキストWhere句
 
-You can write a generic where clause as part of a declaration that doesn’t have its own generic type constraints, when you’re already working in the context of generic types. For example, you can write a generic where clause on a subscript of a generic type or on a method in an extension to a generic type. The `Container` structure is generic, and the where clauses in the example below specify what type constraints have to be satisfied to make these new methods available on a container.
+ジェネリック型制約を持たない宣言の一部としてジェネリックWhere句を書くことができます。例えば、ジェネリック型の拡張におけるメソッドやジェネリック型のサブスクリプトにジェネリックWhere句を書くことができます。以下の例では、`Container`構造体がジェネリックであり、これらの新しいメソッドをコンテナで利用可能にするために満たすべき型制約を指定しています。
 
 ```swift
 extension Container {
@@ -654,14 +654,14 @@ extension Container {
 }
 let numbers = [1260, 1200, 98, 37]
 print(numbers.average())
-// Prints "648.75"
+// "648.75"と表示されます。
 print(numbers.endsWith(37))
-// Prints "true"
+// "true"と表示されます。
 ```
 
-This example adds an `average()` method to `Container` when the items are integers, and it adds an `endsWith(_:)` method when the items are equatable. Both functions include a generic where clause that adds type constraints to the generic `Item` type parameter from the original declaration of `Container.`
+この例では、アイテムが整数である場合に`Container`に`average()`メソッドを追加し、アイテムが等価である場合に`endsWith(_:)`メソッドを追加しています。両方の関数には、元の`Container`宣言のジェネリック`Item`型パラメータに型制約を追加するジェネリックWhere句が含まれています。
 
-If you want to write this code without using contextual where clauses, you write two extensions, one for each generic where clause. The example above and the example below have the same behavior.
+コンテキストWhere句を使用せずにこのコードを書きたい場合は、各ジェネリックWhere句に対して1つの拡張を作成します。上記の例と以下の例は同じ動作をします。
 
 ```swift
 extension Container where Item == Int {
@@ -680,11 +680,11 @@ extension Container where Item: Equatable {
 }
 ```
 
-In the version of this example that uses contextual where clauses, the implementation of `average()` and `endsWith(_:)` are both in the same extension because each method’s generic where clause states the requirements that need to be satisfied to make that method available. Moving those requirements to the extensions’ generic where clauses makes the methods available in the same situations, but requires one extension per requirement.
+コンテキストWhere句を使用したこの例では、`average()`と`endsWith(_:)`の実装は同じ拡張内にあります。各メソッドのジェネリックWhere句が、そのメソッドを利用可能にするために満たすべき要件を示しているためです。これらの要件を拡張のジェネリックWhere句に移動すると、メソッドが同じ状況で利用可能になりますが、要件ごとに1つの拡張が必要になります。
 
-## Associated Types with a Generic Where Clause
+## ジェネリックWhere句を使用した関連型
 
-You can include a generic where clause on an associated type. For example, suppose you want to make a version of `Container` that includes an iterator, like what the `Sequence` protocol uses in the Swift standard library. Here’s how you write that:
+関連型にジェネリックWhere句を含めることができます。例えば、Swift標準ライブラリの`Sequence`プロトコルのようにイテレータを含む`Container`のバージョンを作成したいとします。以下のように書きます：
 
 ```swift
 protocol Container {
@@ -698,17 +698,17 @@ protocol Container {
 }
 ```
 
-The generic where clause on `Iterator` requires that the iterator must traverse over elements of the same item type as the container’s items, regardless of the iterator’s type. The `makeIterator()` function provides access to a container’s iterator.
+`Iterator`のジェネリックWhere句は、イテレータがコンテナのアイテムと同じアイテム型を持つ要素を巡回する必要があることを要求しています。`makeIterator()`関数は、コンテナのイテレータへのアクセスを提供します。
 
-For a protocol that inherits from another protocol, you add a constraint to an inherited associated type by including the generic where clause in the protocol declaration. For example, the following code declares a `ComparableContainer` protocol that requires `Item` to conform to `Comparable:`
+他のプロトコルを継承するプロトコルの場合、プロトコル宣言にジェネリックWhere句を含めることで、継承された関連型に制約を追加します。例えば、以下のコードは`Item`が`Comparable`に準拠することを要求する`ComparableContainer`プロトコルを宣言しています：
 
 ```swift
 protocol ComparableContainer: Container where Item: Comparable { }
 ```
 
-## Generic Subscripts
+## ジェネリックサブスクリプト
 
-Subscripts can be generic, and they can include generic where clauses. You write the placeholder type name inside angle brackets after subscript, and you write a generic where clause right before the opening curly brace of the subscript’s body. For example:
+サブスクリプトはジェネリックにすることができ、ジェネリックWhere句を含めることができます。サブスクリプトの後に山括弧内にプレースホルダー型名を書き、サブスクリプトの本体の開き中括弧の直前にジェネリックWhere句を書きます。例えば：
 
 ```swift
 extension Container {
@@ -723,10 +723,10 @@ extension Container {
 }
 ```
 
-This extension to the `Container` protocol adds a subscript that takes a sequence of indices and returns an array containing the items at each given index. This generic subscript is constrained as follows:
+この`Container`プロトコルへの拡張は、一連のインデックスを取り、各指定されたインデックスのアイテムを含む配列を返すサブスクリプトを追加します。このジェネリックサブスクリプトには以下の制約があります：
 
-- The generic parameter `Indices` in angle brackets has to be a type that conforms to the `Sequence` protocol from the Swift standard library.
-- The subscript takes a single parameter, `indices,` which is an instance of that `Indices` type.
-- The generic where clause requires that the iterator for the sequence must traverse over elements of type `Int.` This ensures that the indices in the sequence are the same type as the indices used for a container.
+- 山括弧内のジェネリックパラメータ`Indices`は、Swift標準ライブラリの`Sequence`プロトコルに準拠する型でなければなりません。
+- サブスクリプトは、`Indices`型のインスタンスである単一のパラメータ`indices`を取ります。
+- ジェネリックWhere句は、シーケンスのイテレータが`Int`型の要素を巡回する必要があることを要求しています。これにより、シーケンス内のインデックスがコンテナで使用されるインデックスと同じ型であることが保証されます。
 
-Taken together, these constraints mean that the value passed for the `indices` parameter is a sequence of integers.
+これらの制約を総合すると、`indices`パラメータに渡される値は整数のシーケンスであることを意味します。
