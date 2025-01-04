@@ -1,18 +1,18 @@
-# Types
+# 型
 
-Use built-in named and compound types.
+組み込みの名前付き型と複合型を使用します。
 
-In Swift, there are two kinds of types: named types and compound types. A named type is a type that can be given a particular name when it’s defined. Named types include classes, structures, enumerations, and protocols. For example, instances of a user-defined class named `MyClass` have the type `MyClass`. In addition to user-defined named types, the Swift standard library defines many commonly used named types, including those that represent arrays, dictionaries, and optional values.
+Swiftには、名前付き型と複合型の2種類の型があります。名前付き型は、定義時に特定の名前を付けることができる型です。名前付き型には、クラス、構造体、列挙型、およびプロトコルが含まれます。例えば、`MyClass`という名前のユーザー定義クラスのインスタンスは、`MyClass`型を持ちます。ユーザー定義の名前付き型に加えて、Swift標準ライブラリには、配列、辞書、およびオプショナル値を表す多くの一般的に使用される名前付き型が定義されています。
 
-Data types that are normally considered basic or primitive in other languages — such as types that represent numbers, characters, and strings — are actually named types, defined and implemented in the Swift standard library using structures. Because they’re named types, you can extend their behavior to suit the needs of your program, using an extension declaration, discussed in [Extensions and Extension Declaration](#).
+他の言語で通常基本またはプリミティブと見なされるデータ型（数値、文字、および文字列を表す型など）は、実際には構造体を使用してSwift標準ライブラリで定義および実装された名前付き型です。名前付き型であるため、拡張宣言を使用してプログラムのニーズに合わせてその動作を拡張できます。詳細は[拡張と拡張宣言](#)を参照してください。
 
-A compound type is a type without a name, defined in the Swift language itself. There are two compound types: function types and tuple types. A compound type may contain named types and other compound types. For example, the tuple type `(Int, (Int, Int))` contains two elements: The first is the named type `Int`, and the second is another compound type `(Int, Int)`.
+複合型は名前のない型で、Swift言語自体で定義されています。複合型には、関数型とタプル型の2つがあります。複合型には名前付き型や他の複合型を含めることができます。例えば、タプル型`(Int, (Int, Int))`は2つの要素を含みます。最初の要素は名前付き型`Int`で、2番目の要素は別の複合型`(Int, Int)`です。
 
-You can put parentheses around a named type or a compound type. However, adding parentheses around a type doesn’t have any effect. For example, `(Int)` is equivalent to `Int`.
+名前付き型または複合型の周りに括弧を付けることができます。ただし、型の周りに括弧を付けても何の効果もありません。例えば、`(Int)`は`Int`と同じです。
 
-This chapter discusses the types defined in the Swift language itself and describes the type inference behavior of Swift.
+この章では、Swift言語自体で定義された型について説明し、Swiftの型推論の動作について説明します。
 
-## Grammar of a type
+## 型の文法
 
 ```
 type → function-type
@@ -31,69 +31,69 @@ type → self-type
 type → ( type )
 ```
 
-## Type Annotation
+## 型注釈
 
-A type annotation explicitly specifies the type of a variable or expression. Type annotations begin with a colon (`:`) and end with a type, as the following examples show:
+型注釈は、変数や式の型を明示的に指定します。型注釈はコロン（`:`）で始まり、型で終わります。以下の例を参照してください。
 
 ```swift
 let someTuple: (Double, Double) = (3.14159, 2.71828)
 func someFunction(a: Int) { /* ... */ }
 ```
 
-In the first example, the expression `someTuple` is specified to have the tuple type `(Double, Double)`. In the second example, the parameter `a` to the function `someFunction` is specified to have the type `Int`.
+最初の例では、式`someTuple`がタプル型`(Double, Double)`を持つことが指定されています。2番目の例では、関数`someFunction`のパラメータ`a`が`Int`型を持つことが指定されています。
 
-Type annotations can contain an optional list of type attributes before the type.
+型注釈には、型の前にオプションで型属性のリストを含めることができます。
 
-### Grammar of a type annotation
+### 型注釈の文法
 
 ```
 type-annotation → : attributes? type
 ```
 
-## Type Identifier
+## 型識別子
 
-A type identifier refers to either a named type or a type alias of a named or compound type.
+型識別子は、名前付き型または名前付き型や複合型の型エイリアスを指します。
 
-Most of the time, a type identifier directly refers to a named type with the same name as the identifier. For example, `Int` is a type identifier that directly refers to the named type `Int`, and the type identifier `Dictionary<String, Int>` directly refers to the named type `Dictionary<String, Int>`.
+ほとんどの場合、型識別子は識別子と同じ名前の名前付き型を直接指します。例えば、`Int`は名前付き型`Int`を直接指す型識別子であり、型識別子`Dictionary<String, Int>`は名前付き型`Dictionary<String, Int>`を直接指します。
 
-There are two cases in which a type identifier doesn’t refer to a type with the same name. In the first case, a type identifier refers to a type alias of a named or compound type. For instance, in the example below, the use of `Point` in the type annotation refers to the tuple type `(Int, Int)`.
+型識別子が同じ名前の型を指さない場合が2つあります。最初の場合、型識別子は名前付き型や複合型の型エイリアスを指します。例えば、以下の例では、型注釈で使用されている`Point`はタプル型`(Int, Int)`を指します。
 
 ```swift
 typealias Point = (Int, Int)
 let origin: Point = (0, 0)
 ```
 
-In the second case, a type identifier uses dot (`.`) syntax to refer to named types declared in other modules or nested within other types. For example, the type identifier in the following code references the named type `MyType` that’s declared in the `ExampleModule` module.
+2番目の場合、型識別子はドット（`.`）構文を使用して、他のモジュールで宣言された名前付き型や他の型内にネストされた名前付き型を指します。例えば、以下のコードでは、型識別子は`ExampleModule`モジュールで宣言された名前付き型`MyType`を参照しています。
 
 ```swift
 var someValue: ExampleModule.MyType
 ```
 
-### Grammar of a type identifier
+### 型識別子の文法
 
 ```
 type-identifier → type-name generic-argument-clause? | type-name generic-argument-clause? . type-identifier
 type-name → identifier
 ```
 
-## Tuple Type
+## タプル型
 
-A tuple type is a comma-separated list of types, enclosed in parentheses.
+タプル型は、括弧で囲まれたカンマ区切りの型のリストです。
 
-You can use a tuple type as the return type of a function to enable the function to return a single tuple containing multiple values. You can also name the elements of a tuple type and use those names to refer to the values of the individual elements. An element name consists of an identifier followed immediately by a colon (`:`). For an example that demonstrates both of these features, see [Functions with Multiple Return Values](#).
+タプル型を関数の戻り値の型として使用して、関数が複数の値を含む単一のタプルを返すようにすることができます。また、タプル型の要素に名前を付け、その名前を使用して個々の要素の値を参照することもできます。要素名は識別子とコロン（`:`）で構成されます。これらの機能の両方を示す例については、[複数の戻り値を持つ関数](#)を参照してください。
 
-When an element of a tuple type has a name, that name is part of the type.
+タプル型の要素に名前がある場合、その名前は型の一部です。
 
 ```swift
-var someTuple = (top: 10, bottom: 12)  // someTuple is of type (top: Int, bottom: Int)
-someTuple = (top: 4, bottom: 42) // OK: names match
-someTuple = (9, 99)              // OK: names are inferred
-someTuple = (left: 5, right: 5)  // Error: names don't match
+var someTuple = (top: 10, bottom: 12)  // someTupleは(top: Int, bottom: Int)型です
+someTuple = (top: 4, bottom: 42) // OK: 名前が一致します
+someTuple = (9, 99)              // OK: 名前が推測されます
+someTuple = (left: 5, right: 5)  // エラー: 名前が一致しません
 ```
 
-All tuple types contain two or more types, except for `Void` which is a type alias for the empty tuple type, `()`.
+すべてのタプル型は2つ以上の型を含みますが、空のタプル型`()`の型エイリアスである`Void`は例外です。
 
-### Grammar of a tuple type
+### タプル型の文法
 
 ```
 tuple-type → ( ) | ( tuple-type-element , tuple-type-element-list )
@@ -102,99 +102,99 @@ tuple-type-element → element-name type-annotation | type
 element-name → identifier
 ```
 
-## Function Type
+## 関数型
 
-A function type represents the type of a function, method, or closure and consists of a parameter and return type separated by an arrow (`->`):
+関数型は関数、メソッド、またはクロージャの型を表し、パラメータ型と戻り値型が矢印（`->`）で区切られています：
 
 ```
 (<#parameter type#>) -> <#return type#>
 ```
 
-The parameter type is a comma-separated list of types. Because the return type can be a tuple type, function types support functions and methods that return multiple values.
+パラメータ型はカンマで区切られた型のリストです。戻り値型がタプル型である可能性があるため、関数型は複数の値を返す関数やメソッドをサポートします。
 
-A parameter of the function type `() -> T` (where `T` is any type) can apply the `autoclosure` attribute to implicitly create a closure at its call sites. This provides a syntactically convenient way to defer the evaluation of an expression without needing to write an explicit closure when you call the function. For an example of an autoclosure function type parameter, see [Autoclosures](#).
+関数型のパラメータ `() -> T`（ここで `T` は任意の型）は、`autoclosure` 属性を適用して呼び出しサイトで暗黙的にクロージャを作成できます。これにより、関数を呼び出すときに明示的なクロージャを書く必要なく、式の評価を遅延させるための構文上の便利な方法が提供されます。autoclosure 関数型パラメータの例については、[Autoclosures](#) を参照してください。
 
-A function type can have variadic parameters in its parameter type. Syntactically, a variadic parameter consists of a base type name followed immediately by three dots (`...`), as in `Int...`. A variadic parameter is treated as an array that contains elements of the base type name. For instance, the variadic parameter `Int...` is treated as `[Int]`. For an example that uses a variadic parameter, see [Variadic Parameters](#).
+関数型のパラメータ型には可変長パラメータを含めることができます。構文的には、可変長パラメータは基本型名の直後に三点リーダー（`...`）が続く形で構成されます。例えば、`Int...` のように。可変長パラメータは基本型名の要素を含む配列として扱われます。例えば、可変長パラメータ `Int...` は `[Int]` として扱われます。可変長パラメータを使用する例については、[Variadic Parameters](#) を参照してください。
 
-To specify an in-out parameter, prefix the parameter type with the `inout` keyword. You can’t mark a variadic parameter or a return type with the `inout` keyword. In-out parameters are discussed in [In-Out Parameters](#).
+in-out パラメータを指定するには、パラメータ型の前に `inout` キーワードを付けます。可変長パラメータや戻り値型に `inout` キーワードを付けることはできません。in-out パラメータについては、[In-Out Parameters](#) で説明されています。
 
-If a function type has only one parameter and that parameter’s type is a tuple type, then the tuple type must be parenthesized when writing the function’s type. For example, `((Int, Int)) -> Void` is the type of a function that takes a single parameter of the tuple type `(Int, Int)` and doesn’t return any value. In contrast, without parentheses, `(Int, Int) -> Void` is the type of a function that takes two `Int` parameters and doesn’t return any value. Likewise, because `Void` is a type alias for `()`, the function type `(Void) -> Void` is the same as `(()) -> ()` — a function that takes a single argument that’s an empty tuple. These types aren’t the same as `() -> ()` — a function that takes no arguments.
+関数型が1つのパラメータしか持たず、そのパラメータの型がタプル型である場合、関数の型を書くときにタプル型を括弧で囲む必要があります。例えば、`((Int, Int)) -> Void` は、タプル型 `(Int, Int)` の単一のパラメータを取り、値を返さない関数の型です。対照的に、括弧がない場合、`(Int, Int) -> Void` は2つの `Int` パラメータを取り、値を返さない関数の型です。同様に、`Void` は `()` の型エイリアスであるため、関数型 `(Void) -> Void` は `(()) -> ()` と同じです。これは、空のタプルを引数として取る関数の型です。これらの型は、引数を取らない関数の型 `() -> ()` とは異なります。
 
-Argument names in functions and methods aren’t part of the corresponding function type. For example:
+関数やメソッドの引数名は対応する関数型の一部ではありません。例えば：
 
 ```swift
 func someFunction(left: Int, right: Int) {}
 func anotherFunction(left: Int, right: Int) {}
 func functionWithDifferentLabels(top: Int, bottom: Int) {}
 
-var f = someFunction // The type of f is (Int, Int) -> Void, not (left: Int, right: Int) -> Void.
+var f = someFunction // f の型は (Int, Int) -> Void であり、(left: Int, right: Int) -> Void ではありません。
 f = anotherFunction              // OK
 f = functionWithDifferentLabels  // OK
 
 func functionWithDifferentArgumentTypes(left: Int, right: String) {}
-f = functionWithDifferentArgumentTypes     // Error
+f = functionWithDifferentArgumentTypes     // エラー
 
 func functionWithDifferentNumberOfArguments(left: Int, right: Int, top: Int) {}
-f = functionWithDifferentNumberOfArguments // Error
+f = functionWithDifferentNumberOfArguments // エラー
 ```
 
-Because argument labels aren’t part of a function’s type, you omit them when writing a function type.
+引数ラベルは関数の型の一部ではないため、関数型を書くときには省略します。
 
 ```swift
-var operation: (lhs: Int, rhs: Int) -> Int     // Error
+var operation: (lhs: Int, rhs: Int) -> Int     // エラー
 var operation: (_ lhs: Int, _ rhs: Int) -> Int // OK
 var operation: (Int, Int) -> Int               // OK
 ```
 
-If a function type includes more than a single arrow (`->`), the function types are grouped from right to left. For example, the function type `(Int) -> (Int) -> Int` is understood as `(Int) -> ((Int) -> Int)` — that is, a function that takes an `Int` and returns another function that takes and returns an `Int`.
+関数型に複数の矢印（`->`）が含まれる場合、関数型は右から左にグループ化されます。例えば、関数型 `(Int) -> (Int) -> Int` は `(Int) -> ((Int) -> Int)` として理解されます。つまり、`Int` を取り、`Int` を取り `Int` を返す別の関数を返す関数です。
 
-Function types for functions that can throw or rethrow an error must include the `throws` keyword. You can include a type after `throws` in parentheses to specify the type of error that the function throws. The throw error type must conform to the `Error` protocol. Writing `throws` without specifying a type is the same as writing `throws(any Error)`. Omitting `throws` is the same as writing `throws(Never)`. The error type that a function throws can be any type that conforms to `Error`, including generic types, boxed protocol types, and opaque types.
+エラーをスローまたはリスローできる関数の関数型には `throws` キーワードを含める必要があります。`throws` の後に型を括弧で囲んで含めることで、関数がスローするエラーの型を指定できます。スローするエラーの型は `Error` プロトコルに準拠している必要があります。型を指定せずに `throws` と書くことは、`throws(any Error)` と書くのと同じです。`throws` を省略することは、`throws(Never)` と書くのと同じです。関数がスローするエラーの型は、`Error` に準拠している任意の型であり、ジェネリック型、プロトコル型、オペーク型を含むことができます。
 
-The type of error that a function throws is part of that function’s type, and a subtype relationship between error types means the corresponding function types are also subtypes. For example, if you declare a custom `MyError` type, the relationship between some function types is as follows, from supertype to subtype:
+関数がスローするエラーの型はその関数の型の一部であり、エラー型間のサブタイプ関係は対応する関数型もサブタイプであることを意味します。例えば、カスタムの `MyError` 型を宣言した場合、いくつかの関数型の関係は次のようになります（スーパータイプからサブタイプへ）：
 
-- Functions that throw any error, marked `throws(any Error)`
-- Functions that throw a specific error, marked `throws(MyError)`
-- Functions that don’t throw, marked `throws(Never)`
+- 任意のエラーをスローする関数、`throws(any Error)` とマークされる
+- 特定のエラーをスローする関数、`throws(MyError)` とマークされる
+- エラーをスローしない関数、`throws(Never)` とマークされる
 
-As a result of these subtype relationships:
+これらのサブタイプ関係の結果として：
 
-- You can use a nonthrowing function in the same places as a throwing function.
-- You can use a function that throws a concrete error type in the same places as a throwing function.
-- You can use a function that throws a more specific error type in the same places as a function that throws a more general error type.
+- 非スロー関数をスロー関数と同じ場所で使用できます。
+- 具体的なエラー型をスローする関数をスロー関数と同じ場所で使用できます。
+- より具体的なエラー型をスローする関数を、より一般的なエラー型をスローする関数と同じ場所で使用できます。
 
-If you use an associated type or a generic type parameter as the thrown error type in a function type, then that associated type or generic type parameter is implicitly required to conform to the `Error` protocol.
+関数型でスローされるエラー型として関連型やジェネリック型パラメータを使用する場合、その関連型やジェネリック型パラメータは暗黙的に `Error` プロトコルに準拠する必要があります。
 
-Throwing and rethrowing functions are described in [Throwing Functions and Methods](#) and [Rethrowing Functions and Methods](#).
+スローおよびリスロー関数については、[Throwing Functions and Methods](#) および [Rethrowing Functions and Methods](#) で説明されています。
 
-Function types for asynchronous functions must be marked with the `async` keyword. The `async` keyword is part of a function’s type, and synchronous functions are subtypes of asynchronous functions. As a result, you can use a synchronous function in the same places as an asynchronous one. For information about asynchronous functions, see [Asynchronous Functions and Methods](#).
+非同期関数の関数型には `async` キーワードを含める必要があります。`async` キーワードは関数の型の一部であり、同期関数は非同期関数のサブタイプです。その結果、同期関数を非同期関数と同じ場所で使用できます。非同期関数についての情報は、[Asynchronous Functions and Methods](#) を参照してください。
 
-### Restrictions for Nonescaping Closures
+### 非エスケープクロージャの制限
 
-A parameter that’s a nonescaping function can’t be stored in a property, variable, or constant of type `Any`, because that might allow the value to escape.
+非エスケープ関数であるパラメータは、その値がエスケープする可能性があるため、`Any` 型のプロパティ、変数、または定数に格納することはできません。
 
-A parameter that’s a nonescaping function can’t be passed as an argument to another nonescaping function parameter. This restriction helps Swift perform more of its checks for conflicting access to memory at compile time instead of at runtime. For example:
+非エスケープ関数であるパラメータは、別の非エスケープ関数パラメータへの引数として渡すことはできません。この制限により、Swift はメモリへの競合アクセスのチェックをランタイムではなくコンパイル時に行うことができます。例えば：
 
 ```swift
 let external: (() -> Void) -> Void = { _ in () }
 func takesTwoFunctions(first: (() -> Void) -> Void, second: (() -> Void) -> Void) {
-    first { first {} }       // Error
-    second { second {}  }    // Error
+    first { first {} }       // エラー
+    second { second {}  }    // エラー
 
-    first { second {} }      // Error
-    second { first {} }      // Error
+    first { second {} }      // エラー
+    second { first {} }      // エラー
 
     first { external {} }    // OK
     external { first {} }    // OK
 }
 ```
 
-In the code above, both of the parameters to `takesTwoFunctions(first:second:)` are functions. Neither parameter is marked `@escaping`, so they’re both nonescaping as a result.
+上記のコードでは、`takesTwoFunctions(first:second:)` の2つのパラメータは関数です。どちらのパラメータも `@escaping` とマークされていないため、結果としてどちらも非エスケープです。
 
-The four function calls marked “Error” in the example above cause compiler errors. Because the `first` and `second` parameters are nonescaping functions, they can’t be passed as arguments to another nonescaping function parameter. In contrast, the two function calls marked “OK” don’t cause a compiler error. These function calls don’t violate the restriction because `external` isn’t one of the parameters of `takesTwoFunctions(first:second:)`.
+上記の例で「エラー」とマークされた4つの関数呼び出しはコンパイラエラーを引き起こします。`first` および `second` パラメータは非エスケープ関数であるため、別の非エスケープ関数パラメータへの引数として渡すことはできません。対照的に、「OK」とマークされた2つの関数呼び出しはコンパイラエラーを引き起こしません。これらの関数呼び出しは制限に違反していないためです。`external` は `takesTwoFunctions(first:second:)` のパラメータの1つではないためです。
 
-If you need to avoid this restriction, mark one of the parameters as escaping, or temporarily convert one of the nonescaping function parameters to an escaping function by using the `withoutActuallyEscaping(_:do:)` function. For information about avoiding conflicting access to memory, see [Memory Safety](#).
+この制限を回避する必要がある場合は、パラメータの1つをエスケープとしてマークするか、`withoutActuallyEscaping(_:do:)` 関数を使用して一時的に非エスケープ関数パラメータの1つをエスケープ関数に変換します。メモリへの競合アクセスを回避する方法については、[Memory Safety](#) を参照してください。
 
-### Grammar of a function type
+### 関数型の文法
 
 ```
 function-type → attributes? function-type-argument-clause async? throws-clause? -> type
@@ -206,221 +206,221 @@ argument-label → identifier
 throws-clause → throws | throws ( type )
 ```
 
-## Array Type
+## 配列型
 
-The Swift language provides the following syntactic sugar for the Swift standard library `Array<Element>` type:
+Swift言語は、Swift標準ライブラリの`Array<Element>`型に対して以下の糖衣構文を提供します：
 
 ```
 [<#type#>]
 ```
 
-In other words, the following two declarations are equivalent:
+言い換えると、次の2つの宣言は同等です：
 
 ```swift
 let someArray: Array<String> = ["Alex", "Brian", "Dave"]
 let someArray: [String] = ["Alex", "Brian", "Dave"]
 ```
 
-In both cases, the constant `someArray` is declared as an array of strings. The elements of an array can be accessed through subscripting by specifying a valid index value in square brackets: `someArray[0]` refers to the element at index 0, `"Alex"`.
+どちらの場合も、定数`someArray`は文字列の配列として宣言されています。配列の要素は、有効なインデックス値を角括弧で指定することでサブスクリプトを通じてアクセスできます：`someArray[0]`はインデックス0の要素、つまり`"Alex"`を指します。
 
-You can create multidimensional arrays by nesting pairs of square brackets, where the name of the base type of the elements is contained in the innermost pair of square brackets. For example, you can create a three-dimensional array of integers using three sets of square brackets:
+複数次元の配列を作成するには、角括弧のペアをネストします。要素の基本型の名前は最も内側の角括弧のペアに含まれます。例えば、3次元の整数配列を作成するには、3組の角括弧を使用します：
 
 ```swift
 var array3D: [[[Int]]] = [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
 ```
 
-When accessing the elements in a multidimensional array, the left-most subscript index refers to the element at that index in the outermost array. The next subscript index to the right refers to the element at that index in the array that’s nested one level in. And so on. This means that in the example above, `array3D[0]` refers to `[[1, 2], [3, 4]]`, `array3D[0][1]` refers to `[3, 4]`, and `array3D[0][1][1]` refers to the value `4`.
+多次元配列の要素にアクセスする場合、最も左のサブスクリプトインデックスは最も外側の配列のそのインデックスの要素を指します。右にある次のサブスクリプトインデックスは、1レベル内側にネストされた配列のそのインデックスの要素を指します。以下同様です。つまり、上記の例では、`array3D[0]`は`[[1, 2], [3, 4]]`を指し、`array3D[0][1]`は`[3, 4]`を指し、`array3D[0][1][1]`は値`4`を指します。
 
-For a detailed discussion of the Swift standard library `Array` type, see [Arrays](#).
+Swift標準ライブラリの`Array`型の詳細な議論については、[配列](#)を参照してください。
 
-### Grammar of an array type
+### 配列型の文法
 
 ```
 array-type → [ type ]
 ```
 
-## Dictionary Type
+## 辞書型
 
-The Swift language provides the following syntactic sugar for the Swift standard library `Dictionary<Key, Value>` type:
+Swift言語は、Swift標準ライブラリの`Dictionary<Key, Value>`型に対して以下の糖衣構文を提供します：
 
 ```
 [<#key type#>: <#value type#>]
 ```
 
-In other words, the following two declarations are equivalent:
+言い換えると、次の2つの宣言は同等です：
 
 ```swift
 let someDictionary: [String: Int] = ["Alex": 31, "Paul": 39]
 let someDictionary: Dictionary<String, Int> = ["Alex": 31, "Paul": 39]
 ```
 
-In both cases, the constant `someDictionary` is declared as a dictionary with strings as keys and integers as values.
+どちらの場合も、定数`someDictionary`はキーが文字列で値が整数の辞書として宣言されています。
 
-The values of a dictionary can be accessed through subscripting by specifying the corresponding key in square brackets: `someDictionary["Alex"]` refers to the value associated with the key `"Alex"`. The subscript returns an optional value of the dictionary’s value type. If the specified key isn’t contained in the dictionary, the subscript returns `nil`.
+辞書の値は、対応するキーを角括弧で指定することでサブスクリプトを通じてアクセスできます：`someDictionary["Alex"]`はキー`"Alex"`に関連付けられた値を指します。サブスクリプトは辞書の値型のオプショナル値を返します。指定されたキーが辞書に含まれていない場合、サブスクリプトは`nil`を返します。
 
-The key type of a dictionary must conform to the Swift standard library `Hashable` protocol.
+辞書のキー型は、Swift標準ライブラリの`Hashable`プロトコルに準拠している必要があります。
 
-For a detailed discussion of the Swift standard library `Dictionary` type, see [Dictionaries](#).
+Swift標準ライブラリの`Dictionary`型の詳細な議論については、[辞書](#)を参照してください。
 
-### Grammar of a dictionary type
+### 辞書型の文法
 
 ```
 dictionary-type → [ type : type ]
 ```
 
-## Optional Type
+## オプショナル型
 
-The Swift language defines the postfix `?` as syntactic sugar for the named type `Optional<Wrapped>`, which is defined in the Swift standard library. In other words, the following two declarations are equivalent:
+Swift言語は、Swift標準ライブラリで定義されている名前付き型`Optional<Wrapped>`の糖衣構文として後置`?`を定義しています。言い換えると、次の2つの宣言は同等です：
 
 ```swift
 var optionalInteger: Int?
 var optionalInteger: Optional<Int>
 ```
 
-In both cases, the variable `optionalInteger` is declared to have the type of an optional integer. Note that no whitespace may appear between the type and the `?`.
+どちらの場合も、変数`optionalInteger`はオプショナルな整数型として宣言されています。型と`?`の間に空白を入れることはできません。
 
-The type `Optional<Wrapped>` is an enumeration with two cases, `none` and `some(Wrapped)`, which are used to represent values that may or may not be present. Any type can be explicitly declared to be (or implicitly converted to) an optional type. If you don’t provide an initial value when you declare an optional variable or property, its value automatically defaults to `nil`.
+型`Optional<Wrapped>`は、値が存在するかどうかを表すために使用される2つのケース、`none`と`some(Wrapped)`を持つ列挙型です。任意の型は明示的に（または暗黙的に）オプショナル型として宣言できます。オプショナル変数やプロパティを宣言する際に初期値を提供しない場合、その値は自動的に`nil`にデフォルト設定されます。
 
-If an instance of an optional type contains a value, you can access that value using the postfix operator `!`, as shown below:
+オプショナル型のインスタンスに値が含まれている場合、後置演算子`!`を使用してその値にアクセスできます。以下の例を参照してください：
 
 ```swift
 optionalInteger = 42
 optionalInteger! // 42
 ```
 
-Using the `!` operator to unwrap an optional that has a value of `nil` results in a runtime error.
+値が`nil`のオプショナルをアンラップするために`!`演算子を使用すると、ランタイムエラーが発生します。
 
-You can also use optional chaining and optional binding to conditionally perform an operation on an optional expression. If the value is `nil`, no operation is performed and therefore no runtime error is produced.
+オプショナルチェーンやオプショナルバインディングを使用して、オプショナル式に対して条件付きで操作を実行することもできます。値が`nil`の場合、操作は実行されず、したがってランタイムエラーは発生しません。
 
-For more information and to see examples that show how to use optional types, see [Optionals](#).
+オプショナル型の使用方法についての詳細と例については、[オプショナル](#)を参照してください。
 
-### Grammar of an optional type
+### オプショナル型の文法
 
 ```
 optional-type → type ?
 ```
 
-## Implicitly Unwrapped Optional Type
+## 暗黙的にアンラップされたオプショナル型
 
-The Swift language defines the postfix `!` as syntactic sugar for the named type `Optional<Wrapped>`, which is defined in the Swift standard library, with the additional behavior that it’s automatically unwrapped when it’s accessed. If you try to use an implicitly unwrapped optional that has a value of `nil`, you’ll get a runtime error. With the exception of the implicit unwrapping behavior, the following two declarations are equivalent:
+Swift言語は、Swift標準ライブラリで定義されている名前付き型`Optional<Wrapped>`の糖衣構文として後置`!`を定義しており、アクセス時に自動的にアンラップされる追加の動作を持ちます。値が`nil`の暗黙的にアンラップされたオプショナルを使用しようとすると、ランタイムエラーが発生します。暗黙的なアンラップ動作を除けば、次の2つの宣言は同等です：
 
 ```swift
 var implicitlyUnwrappedString: String!
 var explicitlyUnwrappedString: Optional<String>
 ```
 
-Note that no whitespace may appear between the type and the `!`.
+型と`!`の間に空白を入れることはできません。
 
-Because implicit unwrapping changes the meaning of the declaration that contains that type, optional types that are nested inside a tuple type or a generic type — such as the element types of a dictionary or array — can’t be marked as implicitly unwrapped. For example:
+暗黙的なアンラップはその型を含む宣言の意味を変更するため、タプル型やジェネリック型の内部にネストされたオプショナル型（例えば辞書や配列の要素型）は暗黙的にアンラップすることはできません。例えば：
 
 ```swift
-let tupleOfImplicitlyUnwrappedElements: (Int!, Int!)  // Error
+let tupleOfImplicitlyUnwrappedElements: (Int!, Int!)  // エラー
 let implicitlyUnwrappedTuple: (Int, Int)!             // OK
 
-let arrayOfImplicitlyUnwrappedElements: [Int!]        // Error
+let arrayOfImplicitlyUnwrappedElements: [Int!]        // エラー
 let implicitlyUnwrappedArray: [Int]!                  // OK
 ```
 
-Because implicitly unwrapped optionals have the same `Optional<Wrapped>` type as optional values, you can use implicitly unwrapped optionals in all the same places in your code that you can use optionals. For example, you can assign values of implicitly unwrapped optionals to variables, constants, and properties of optionals, and vice versa.
+暗黙的にアンラップされたオプショナルは、オプショナル値と同じ`Optional<Wrapped>`型を持つため、コード内のオプショナルを使用できるすべての場所で暗黙的にアンラップされたオプショナルを使用できます。例えば、暗黙的にアンラップされたオプショナルの値をオプショナルの変数、定数、プロパティに割り当てたり、その逆も可能です。
 
-As with optionals, if you don’t provide an initial value when you declare an implicitly unwrapped optional variable or property, its value automatically defaults to `nil`.
+オプショナルと同様に、暗黙的にアンラップされたオプショナル変数やプロパティを宣言する際に初期値を提供しない場合、その値は自動的に`nil`にデフォルト設定されます。
 
-Use optional chaining to conditionally perform an operation on an implicitly unwrapped optional expression. If the value is `nil`, no operation is performed and therefore no runtime error is produced.
+暗黙的にアンラップされたオプショナル式に対して条件付きで操作を実行するためにオプショナルチェーンを使用します。値が`nil`の場合、操作は実行されず、したがってランタイムエラーは発生しません。
 
-For more information about implicitly unwrapped optional types, see [Implicitly Unwrapped Optionals](https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334).
+暗黙的にアンラップされたオプショナル型についての詳細は、[暗黙的にアンラップされたオプショナル](https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html#ID334)を参照してください。
 
-### Grammar of an implicitly unwrapped optional type
+### 暗黙的にアンラップされたオプショナル型の文法
 
 ```ebnf
 implicitly-unwrapped-optional-type → type !
 ```
 
-## Protocol Composition Type
+## プロトコル合成型
 
-A protocol composition type defines a type that conforms to each protocol in a list of specified protocols, or a type that’s a subclass of a given class and conforms to each protocol in a list of specified protocols. Protocol composition types may be used only when specifying a type in type annotations, in generic parameter clauses, and in generic where clauses.
+プロトコル合成型は、指定されたプロトコルのリストの各プロトコルに準拠する型、または指定されたクラスのサブクラスであり、指定されたプロトコルのリストの各プロトコルに準拠する型を定義します。プロトコル合成型は、型注釈、ジェネリックパラメータ句、およびジェネリックwhere句で型を指定する場合にのみ使用できます。
 
-Protocol composition types have the following form:
+プロトコル合成型は次の形式を持ちます：
 
 ```swift
 <#Protocol 1#> & <#Protocol 2#>
 ```
 
-A protocol composition type allows you to specify a value whose type conforms to the requirements of multiple protocols without explicitly defining a new, named protocol that inherits from each protocol you want the type to conform to. For example, you can use the protocol composition type `ProtocolA & ProtocolB & ProtocolC` instead of declaring a new protocol that inherits from `ProtocolA`, `ProtocolB`, and `ProtocolC`. Likewise, you can use `SuperClass & ProtocolA` instead of declaring a new protocol that’s a subclass of `SuperClass` and conforms to `ProtocolA`.
+プロトコル合成型を使用すると、明示的に新しい名前付きプロトコルを定義せずに、複数のプロトコルの要件を満たす値を指定できます。たとえば、`ProtocolA & ProtocolB & ProtocolC`というプロトコル合成型を使用して、`ProtocolA`、`ProtocolB`、および`ProtocolC`を継承する新しいプロトコルを宣言する代わりに使用できます。同様に、`SuperClass & ProtocolA`を使用して、`SuperClass`のサブクラスであり、`ProtocolA`に準拠する新しいプロトコルを宣言する代わりに使用できます。
 
-Each item in a protocol composition list is one of the following; the list can contain at most one class:
-- The name of a class
-- The name of a protocol
-- A type alias whose underlying type is a protocol composition type, a protocol, or a class.
+プロトコル合成リストの各項目は次のいずれかです。リストにはクラスを1つだけ含めることができます：
+- クラスの名前
+- プロトコルの名前
+- 基本型がプロトコル合成型、プロトコル、またはクラスである型エイリアス
 
-When a protocol composition type contains type aliases, it’s possible for the same protocol to appear more than once in the definitions — duplicates are ignored. For example, the definition of `PQR` in the code below is equivalent to `P & Q & R`.
+プロトコル合成型に型エイリアスが含まれている場合、定義に同じプロトコルが複数回出現することがありますが、重複は無視されます。たとえば、以下のコードの`PQR`の定義は`P & Q & R`と同等です。
 
 ```swift
 typealias PQ = P & Q
 typealias PQR = PQ & Q & R
 ```
 
-### Grammar of a protocol composition type
+### プロトコル合成型の文法
 
 ```ebnf
 protocol-composition-type → type-identifier & protocol-composition-continuation
 protocol-composition-continuation → type-identifier | protocol-composition-type
 ```
 
-## Opaque Type
+## 不透明型
 
-An opaque type defines a type that conforms to a protocol or protocol composition, without specifying the underlying concrete type.
+不透明型は、基になる具体的な型を指定せずに、プロトコルまたはプロトコル合成に準拠する型を定義します。
 
-Opaque types appear as the return type of a function or subscript, or the type of a property. Opaque types can’t appear as part of a tuple type or a generic type, such as the element type of an array or the wrapped type of an optional.
+不透明型は、関数またはサブスクリプトの戻り値の型、またはプロパティの型として現れます。不透明型は、タプル型やジェネリック型の一部として現れることはできません（たとえば、配列の要素型やオプショナルのラップ型など）。
 
-Opaque types have the following form:
+不透明型は次の形式を持ちます：
 
 ```swift
 some <#constraint#>
 ```
 
-The constraint is a class type, protocol type, protocol composition type, or `Any`. A value can be used as an instance of the opaque type only if it’s an instance of a type that conforms to the listed protocol or protocol composition, or inherits from the listed class. Code that interacts with an opaque value can use the value only in ways that are part of the interface defined by the constraint.
+制約はクラス型、プロトコル型、プロトコル合成型、または`Any`です。値は、リストされたプロトコルまたはプロトコル合成に準拠するか、リストされたクラスを継承する型のインスタンスである場合にのみ、不透明型のインスタンスとして使用できます。不透明な値とやり取りするコードは、その制約によって定義されたインターフェースの一部としてのみ値を使用できます。
 
-At compile time, a value whose type is opaque has a specific concrete type, and Swift can use that underlying type for optimizations. However, the opaque type forms a boundary that information about that underlying type can’t cross.
+コンパイル時に、不透明型の値は特定の具体的な型を持ち、Swiftはその基になる型を最適化に使用できます。ただし、不透明型はその基になる型に関する情報が越えられない境界を形成します。
 
-Protocol declarations can’t include opaque types. Classes can’t use an opaque type as the return type of a nonfinal method.
+プロトコル宣言には不透明型を含めることはできません。クラスは非finalメソッドの戻り値の型として不透明型を使用することはできません。
 
-A function that uses an opaque type as its return type must return values that share a single underlying type. The return type can include types that are part of the function’s generic type parameters. For example, a function `someFunction<T>()` could return a value of type `T` or `Dictionary<String, T>`.
+不透明型を戻り値の型として使用する関数は、単一の基になる型を共有する値を返す必要があります。戻り値の型には、関数のジェネリック型パラメータの一部である型を含めることができます。たとえば、`someFunction<T>()`という関数は、型`T`または`Dictionary<String, T>`の値を返すことができます。
 
-### Grammar of an opaque type
+### 不透明型の文法
 
 ```ebnf
 opaque-type → some type
 ```
 
-## Boxed Protocol Type
+## ボックス化プロトコル型
 
-A boxed protocol type defines a type that conforms to a protocol or protocol composition, with the ability for that conforming type to vary while the program is running.
+ボックス化プロトコル型は、プログラムの実行中に準拠する型が変わる可能性があるプロトコルまたはプロトコル合成に準拠する型を定義します。
 
-Boxed protocol types have the following form:
+ボックス化プロトコル型は次の形式を持ちます：
 
 ```swift
 any <#constraint#>
 ```
 
-The constraint is a protocol type, protocol composition type, a metatype of a protocol type, or a metatype of a protocol composition type.
+制約はプロトコル型、プロトコル合成型、プロトコル型のメタタイプ、またはプロトコル合成型のメタタイプです。
 
-At runtime, an instance of a boxed protocol type can contain a value of any type that satisfies the constraint. This behavior contrasts with how an opaque types work, where there is some specific conforming type known at compile time. The additional level of indirection that’s used when working with a boxed protocol type is called boxing. Boxing typically requires a separate memory allocation for storage and an additional level of indirection for access, which incurs a performance cost at runtime.
+実行時に、ボックス化プロトコル型のインスタンスには、制約を満たす任意の型の値を含めることができます。この動作は、不透明型の動作とは対照的であり、不透明型ではコンパイル時に特定の準拠する型が知られています。ボックス化プロトコル型を使用する場合の追加の間接レベルはボクシングと呼ばれます。ボクシングには通常、ストレージのための別のメモリアロケーションとアクセスのための追加の間接レベルが必要であり、実行時にパフォーマンスコストが発生します。
 
-Applying `any` to the `Any` or `AnyObject` types has no effect, because those types are already boxed protocol types.
+`Any`または`AnyObject`型に`any`を適用しても効果はありません。これらの型はすでにボックス化プロトコル型だからです。
 
-### Grammar of a boxed protocol type
+### ボックス化プロトコル型の文法
 
 ```ebnf
 boxed-protocol-type → any type
 ```
 
-## Metatype Type
+## メタタイプ型
 
-A metatype type refers to the type of any type, including class types, structure types, enumeration types, and protocol types.
+メタタイプ型は、クラス型、構造体型、列挙型、およびプロトコル型を含む任意の型の型を指します。
 
-The metatype of a class, structure, or enumeration type is the name of that type followed by `.Type`. The metatype of a protocol type — not the concrete type that conforms to the protocol at runtime — is the name of that protocol followed by `.Protocol`. For example, the metatype of the class type `SomeClass` is `SomeClass.Type` and the metatype of the protocol `SomeProtocol` is `SomeProtocol.Protocol`.
+クラス、構造体、または列挙型のメタタイプは、その型の名前に`.Type`を付けたものです。プロトコル型のメタタイプ（実行時にプロトコルに準拠する具体的な型ではない）は、そのプロトコルの名前に`.Protocol`を付けたものです。たとえば、クラス型`SomeClass`のメタタイプは`SomeClass.Type`であり、プロトコル`SomeProtocol`のメタタイプは`SomeProtocol.Protocol`です。
 
-You can use the postfix `self` expression to access a type as a value. For example, `SomeClass.self` returns `SomeClass` itself, not an instance of `SomeClass`. And `SomeProtocol.self` returns `SomeProtocol` itself, not an instance of a type that conforms to `SomeProtocol` at runtime. You can call the `type(of:)` function with an instance of a type to access that instance’s dynamic, runtime type as a value, as the following example shows:
+後置`self`式を使用して、型を値としてアクセスできます。たとえば、`SomeClass.self`は`SomeClass`自体を返し、`SomeClass`のインスタンスではありません。同様に、`SomeProtocol.self`は`SomeProtocol`自体を返し、実行時に`SomeProtocol`に準拠する型のインスタンスではありません。次の例に示すように、`type(of:)`関数をインスタンスに対して呼び出して、そのインスタンスの動的な実行時型を値としてアクセスできます：
 
 ```swift
 class SomeBaseClass {
@@ -434,15 +434,15 @@ class SomeSubClass: SomeBaseClass {
     }
 }
 let someInstance: SomeBaseClass = SomeSubClass()
-// The compile-time type of someInstance is SomeBaseClass,
-// and the runtime type of someInstance is SomeSubClass
+// someInstanceのコンパイル時の型はSomeBaseClassであり、
+// someInstanceの実行時の型はSomeSubClassです
 type(of: someInstance).printClassName()
-// Prints "SomeSubClass"
+// "SomeSubClass"と表示されます
 ```
 
-For more information, see `type(of:)` in the Swift standard library.
+詳細については、Swift標準ライブラリの`type(of:)`を参照してください。
 
-Use an initializer expression to construct an instance of a type from that type’s metatype value. For class instances, the initializer that’s called must be marked with the `required` keyword or the entire class marked with the `final` keyword.
+初期化式を使用して、その型のメタタイプ値から型のインスタンスを構築します。クラスインスタンスの場合、呼び出される初期化子は`required`キーワードでマークされているか、クラス全体が`final`キーワードでマークされている必要があります。
 
 ```swift
 class AnotherSubClass: SomeBaseClass {
@@ -458,56 +458,56 @@ let metatype: AnotherSubClass.Type = AnotherSubClass.self
 let anotherInstance = metatype.init(string: "some string")
 ```
 
-### Grammar of a metatype type
+### メタタイプ型の文法
 
 ```ebnf
 metatype-type → type . Type | type . Protocol
 ```
 
-## Any Type
+## Any型
 
-The `Any` type can contain values from all other types. `Any` can be used as the concrete type for an instance of any of the following types:
-- A class, structure, or enumeration
-- A metatype, such as `Int.self`
-- A tuple with any types of components
-- A closure or function type
+`Any`型は他のすべての型の値を含むことができます。`Any`は次のいずれかの型のインスタンスの具体的な型として使用できます。
+- クラス、構造体、または列挙型
+- メタタイプ、例えば `Int.self`
+- 任意の型のコンポーネントを持つタプル
+- クロージャまたは関数型
 
 ```swift
 let mixed: [Any] = ["one", 2, true, (4, 5.3), { () -> Int in return 6 }]
 ```
 
-When you use `Any` as a concrete type for an instance, you need to cast the instance to a known type before you can access its properties or methods. Instances with a concrete type of `Any` maintain their original dynamic type and can be cast to that type using one of the type-cast operators — `as`, `as?`, or `as!`. For example, use `as?` to conditionally downcast the first object in a heterogeneous array to a `String` as follows:
+インスタンスの具体的な型として `Any` を使用する場合、プロパティやメソッドにアクセスする前にインスタンスを既知の型にキャストする必要があります。具体的な型が `Any` のインスタンスは元の動的型を保持し、`as`、`as?`、または `as!` のいずれかの型キャスト演算子を使用してその型にキャストできます。例えば、次のように `as?` を使用して異種配列の最初のオブジェクトを `String` に条件付きダウンキャストします。
 
 ```swift
 if let first = mixed.first as? String {
-    print("The first item, '\(first)', is a string.")
+    print("最初のアイテム '\(first)' は文字列です。")
 }
-// Prints "The first item, 'one', is a string."
+// "最初のアイテム 'one' は文字列です。" と出力されます。
 ```
 
-For more information about casting, see [Type Casting](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html).
+キャストの詳細については、[型キャスト](https://docs.swift.org/swift-book/LanguageGuide/TypeCasting.html)を参照してください。
 
-The `AnyObject` protocol is similar to the `Any` type. All classes implicitly conform to `AnyObject`. Unlike `Any`, which is defined by the language, `AnyObject` is defined by the Swift standard library. For more information, see [Class-Only Protocols and AnyObject](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#ID276).
+`AnyObject` プロトコルは `Any` 型に似ています。すべてのクラスは暗黙的に `AnyObject` に準拠します。言語によって定義される `Any` とは異なり、`AnyObject` は Swift 標準ライブラリによって定義されています。詳細については、[クラス専用プロトコルと AnyObject](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#ID276)を参照してください。
 
-### Grammar of an Any type
+### Any型の文法
 
 ```ebnf
 any-type → Any
 ```
 
-## Self Type
+## Self型
 
-The `Self` type isn’t a specific type, but rather lets you conveniently refer to the current type without repeating or knowing that type’s name.
+`Self` 型は特定の型ではなく、現在の型を繰り返したりその型の名前を知ることなく便利に参照するためのものです。
 
-In a protocol declaration or a protocol member declaration, the `Self` type refers to the eventual type that conforms to the protocol.
+プロトコル宣言またはプロトコルメンバー宣言では、`Self` 型はプロトコルに準拠する最終的な型を指します。
 
-In a structure, class, or enumeration declaration, the `Self` type refers to the type introduced by the declaration. Inside the declaration for a member of a type, the `Self` type refers to that type. In the members of a class declaration, `Self` can appear only as follows:
-- As the return type of a method
-- As the return type of a read-only subscript
-- As the type of a read-only computed property
-- In the body of a method
+構造体、クラス、または列挙型の宣言では、`Self` 型は宣言によって導入された型を指します。型のメンバーの宣言内では、`Self` 型はその型を指します。クラス宣言のメンバー内では、`Self` は次のようにのみ現れることができます。
+- メソッドの戻り値の型として
+- 読み取り専用サブスクリプトの戻り値の型として
+- 読み取り専用計算プロパティの型として
+- メソッドの本体内で
 
-For example, the code below shows an instance method `f` whose return type is `Self`.
+例えば、以下のコードは戻り値の型が `Self` であるインスタンスメソッド `f` を示しています。
 
 ```swift
 class Superclass {
@@ -515,58 +515,58 @@ class Superclass {
 }
 let x = Superclass()
 print(type(of: x.f()))
-// Prints "Superclass"
+// "Superclass" と出力されます。
 
 class Subclass: Superclass { }
 let y = Subclass()
 print(type(of: y.f()))
-// Prints "Subclass"
+// "Subclass" と出力されます。
 
 let z: Superclass = Subclass()
 print(type(of: z.f()))
-// Prints "Subclass"
+// "Subclass" と出力されます。
 ```
 
-The last part of the example above shows that `Self` refers to the runtime type `Subclass` of the value of `z`, not the compile-time type `Superclass` of the variable itself.
+上記の例の最後の部分は、`Self` が変数自体のコンパイル時の型 `Superclass` ではなく、`z` の値の実行時の型 `Subclass` を指していることを示しています。
 
-Inside a nested type declaration, the `Self` type refers to the type introduced by the innermost type declaration.
+ネストされた型宣言の内部では、`Self` 型は最も内側の型宣言によって導入された型を指します。
 
-The `Self` type refers to the same type as the `type(of:)` function in the Swift standard library. Writing `Self.someStaticMember` to access a member of the current type is the same as writing `type(of: self).someStaticMember`.
+`Self` 型は Swift 標準ライブラリの `type(of:)` 関数と同じ型を指します。現在の型のメンバーにアクセスするために `Self.someStaticMember` と書くことは、`type(of: self).someStaticMember` と書くことと同じです。
 
-### Grammar of a Self type
+### Self型の文法
 
 ```ebnf
 self-type → Self
 ```
 
-## Type Inheritance Clause
+## 型継承句
 
-A type inheritance clause is used to specify which class a named type inherits from and which protocols a named type conforms to. A type inheritance clause begins with a colon (`:`), followed by a list of type identifiers.
+型継承句は、名前付き型が継承するクラスと、名前付き型が準拠するプロトコルを指定するために使用されます。型継承句はコロン（`:`）で始まり、その後に型識別子のリストが続きます。
 
-Class types can inherit from a single superclass and conform to any number of protocols. When defining a class, the name of the superclass must appear first in the list of type identifiers, followed by any number of protocols the class must conform to. If the class doesn’t inherit from another class, the list can begin with a protocol instead. For an extended discussion and several examples of class inheritance, see [Inheritance](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html).
+クラス型は単一のスーパークラスから継承し、任意の数のプロトコルに準拠することができます。クラスを定義する場合、スーパークラスの名前は型識別子のリストの最初に表示され、その後にクラスが準拠する必要がある任意の数のプロトコルが続きます。クラスが他のクラスから継承しない場合、リストはプロトコルから始めることができます。クラス継承の詳細な説明といくつかの例については、[継承](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html)を参照してください。
 
-Other named types can only inherit from or conform to a list of protocols. Protocol types can inherit from any number of other protocols. When a protocol type inherits from other protocols, the set of requirements from those other protocols are aggregated together, and any type that inherits from the current protocol must conform to all of those requirements.
+他の名前付き型は、プロトコルのリストからのみ継承または準拠することができます。プロトコル型は他のプロトコルから任意の数だけ継承することができます。プロトコル型が他のプロトコルから継承する場合、それらの他のプロトコルからの要件のセットが集約され、現在のプロトコルから継承する任意の型はそれらのすべての要件に準拠する必要があります。
 
-A type inheritance clause in an enumeration definition can be either a list of protocols, or in the case of an enumeration that assigns raw values to its cases, a single, named type that specifies the type of those raw values. For an example of an enumeration definition that uses a type inheritance clause to specify the type of its raw values, see [Raw Values](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html#ID149).
+列挙型定義の型継承句は、プロトコルのリストか、列挙型のケースに生の値を割り当てる場合は、それらの生の値の型を指定する単一の名前付き型のいずれかです。生の値の型を指定するために型継承句を使用する列挙型定義の例については、[生の値](https://docs.swift.org/swift-book/LanguageGuide/Enumerations.html#ID149)を参照してください。
 
-### Grammar of a type inheritance clause
+### 型継承句の文法
 
 ```ebnf
 type-inheritance-clause → : type-inheritance-list
 type-inheritance-list → attributes? type-identifier | attributes? type-identifier , type-inheritance-list
 ```
 
-## Type Inference
+## 型推論
 
-Swift uses type inference extensively, allowing you to omit the type or part of the type of many variables and expressions in your code. For example, instead of writing `var x: Int = 0`, you can write `var x = 0`, omitting the type completely — the compiler correctly infers that `x` names a value of type `Int`. Similarly, you can omit part of a type when the full type can be inferred from context. For example, if you write `let dict: Dictionary = ["A": 1]`, the compiler infers that `dict` has the type `Dictionary<String, Int>`.
+Swiftは型推論を広範に使用しており、コード内の多くの変数や式の型や型の一部を省略することができます。例えば、`var x: Int = 0` と書く代わりに、`var x = 0` と書くことができ、型を完全に省略できます。コンパイラは `x` が `Int` 型の値を指すことを正しく推論します。同様に、完全な型が文脈から推論できる場合、型の一部を省略することができます。例えば、`let dict: Dictionary = ["A": 1]` と書くと、コンパイラは `dict` が `Dictionary<String, Int>` 型であることを推論します。
 
-In both of the examples above, the type information is passed up from the leaves of the expression tree to its root. That is, the type of `x` in `var x: Int = 0` is inferred by first checking the type of `0` and then passing this type information up to the root (the variable `x`).
+上記の例では、型情報は式ツリーの葉からその根に向かって伝播されます。つまり、`var x: Int = 0` の `x` の型は、まず `0` の型をチェックし、その後この型情報を根（変数 `x`）に伝播することで推論されます。
 
-In Swift, type information can also flow in the opposite direction — from the root down to the leaves. In the following example, for instance, the explicit type annotation (`: Float`) on the constant `eFloat` causes the numeric literal `2.71828` to have an inferred type of `Float` instead of `Double`.
+Swiftでは、型情報は逆方向、つまり根から葉に向かっても伝播することができます。例えば、次の例では、定数 `eFloat` に対する明示的な型注釈（`: Float`）が数値リテラル `2.71828` の型を `Double` ではなく `Float` に推論させます。
 
 ```swift
-let e = 2.71828 // The type of e is inferred to be Double.
-let eFloat: Float = 2.71828 // The type of eFloat is Float.
+let e = 2.71828 // eの型はDoubleと推論されます。
+let eFloat: Float = 2.71828 // eFloatの型はFloatです。
 ```
 
-Type inference in Swift operates at the level of a single expression or statement. This means that all of the information needed to infer an omitted type or part of a type in an expression must be accessible from type-checking the expression or one of its subexpressions.
+Swiftの型推論は単一の式または文のレベルで動作します。これは、式内の省略された型や型の一部を推論するために必要なすべての情報が、式またはその部分式の型チェックからアクセス可能でなければならないことを意味します。

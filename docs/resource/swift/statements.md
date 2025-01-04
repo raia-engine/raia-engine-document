@@ -1,12 +1,12 @@
-# Statements
+# ステートメント
 
-Group expressions and control the flow of execution. In Swift, there are three kinds of statements: simple statements, compiler control statements, and control flow statements. Simple statements are the most common and consist of either an expression or a declaration. Compiler control statements allow the program to change aspects of the compiler’s behavior and include a conditional compilation block and a line control statement.
+式をグループ化し、実行の流れを制御します。Swiftには、単純ステートメント、コンパイラ制御ステートメント、および制御フローステートメントの3種類のステートメントがあります。単純ステートメントは最も一般的で、式または宣言のいずれかで構成されます。コンパイラ制御ステートメントは、プログラムがコンパイラの動作の側面を変更できるようにし、条件付きコンパイルブロックと行制御ステートメントを含みます。
 
-Control flow statements are used to control the flow of execution in a program. There are several types of control flow statements in Swift, including loop statements, branch statements, and control transfer statements. Loop statements allow a block of code to be executed repeatedly, branch statements allow a certain block of code to be executed only when certain conditions are met, and control transfer statements provide a way to alter the order in which code is executed. In addition, Swift provides a do statement to introduce scope, and catch and handle errors, and a defer statement for running cleanup actions just before the current scope exits.
+制御フローステートメントは、プログラム内の実行の流れを制御するために使用されます。Swiftには、ループステートメント、分岐ステートメント、および制御転送ステートメントなど、いくつかの種類の制御フローステートメントがあります。ループステートメントは、指定された条件に応じてコードのブロックを繰り返し実行することを可能にし、分岐ステートメントは、特定の条件が満たされた場合にのみコードのブロックを実行することを可能にし、制御転送ステートメントは、コードの実行順序を変更する方法を提供します。さらに、Swiftはスコープを導入し、エラーをキャッチして処理するためのdoステートメントと、現在のスコープが終了する直前にクリーンアップアクションを実行するためのdeferステートメントを提供します。
 
-A semicolon (;) can optionally appear after any statement and is used to separate multiple statements if they appear on the same line.
+ステートメントの後にはオプションでセミコロン（;）を付けることができ、同じ行に複数のステートメントがある場合はそれらを区切るために使用されます。
 
-## Grammar of a statement
+## ステートメントの文法
 
 ```
 statement → expression ;?
@@ -21,13 +21,13 @@ statement → compiler-control-statement
 statements → statement statements?
 ```
 
-## Loop Statements
+## ループステートメント
 
-Loop statements allow a block of code to be executed repeatedly, depending on the conditions specified in the loop. Swift has three loop statements: a for-in statement, a while statement, and a repeat-while statement.
+ループステートメントは、ループ内で指定された条件に応じてコードのブロックを繰り返し実行することを可能にします。Swiftには、for-inステートメント、whileステートメント、およびrepeat-whileステートメントの3つのループステートメントがあります。
 
-Control flow in a loop statement can be changed by a break statement and a continue statement and is discussed in Break Statement and Continue Statement below.
+ループステートメント内の制御フローは、breakステートメントおよびcontinueステートメントによって変更されることがあり、以下のBreak StatementおよびContinue Statementで説明されています。
 
-### Grammar of a loop statement
+### ループステートメントの文法
 
 ```
 loop-statement → for-in-statement
@@ -35,11 +35,11 @@ loop-statement → while-statement
 loop-statement → repeat-while-statement
 ```
 
-### For-In Statement
+### For-Inステートメント
 
-A for-in statement allows a block of code to be executed once for each item in a collection (or any type) that conforms to the Sequence protocol.
+for-inステートメントは、コレクション（またはSequenceプロトコルに準拠する任意の型）の各アイテムに対して一度だけコードのブロックを実行することを可能にします。
 
-A for-in statement has the following form:
+for-inステートメントは次の形式を持ちます：
 
 ```
 for <#item#> in <#collection#> {
@@ -47,19 +47,19 @@ for <#item#> in <#collection#> {
 }
 ```
 
-The `makeIterator()` method is called on the collection expression to obtain a value of an iterator type — that is, a type that conforms to the `IteratorProtocol` protocol. The program begins executing a loop by calling the `next()` method on the iterator. If the value returned isn’t nil, it’s assigned to the item pattern, the program executes the statements, and then continues execution at the beginning of the loop. Otherwise, the program doesn’t perform assignment or execute the statements, and it’s finished executing the for-in statement.
+`makeIterator()`メソッドは、コレクション式で呼び出され、イテレータ型の値を取得します。プログラムは、イテレータの`next()`メソッドを呼び出すことでループの実行を開始します。返された値がnilでない場合、それはアイテムパターンに割り当てられ、プログラムはステートメントを実行し、ループの先頭に戻ります。そうでない場合、プログラムは割り当てやステートメントの実行を行わず、for-inステートメントの実行を終了します。
 
-#### Grammar of a for-in statement
+#### For-Inステートメントの文法
 
 ```
 for-in-statement → for case? pattern in expression where-clause? code-block
 ```
 
-### While Statement
+### Whileステートメント
 
-A while statement allows a block of code to be executed repeatedly, as long as a condition remains true.
+whileステートメントは、条件が真である限り、コードのブロックを繰り返し実行することを可能にします。
 
-A while statement has the following form:
+whileステートメントは次の形式を持ちます：
 
 ```
 while <#condition#> {
@@ -67,16 +67,16 @@ while <#condition#> {
 }
 ```
 
-A while statement is executed as follows:
-1. The condition is evaluated.
-2. If true, execution continues to step 2. If false, the program is finished executing the while statement.
-3. The program executes the statements, and execution returns to step 1.
+whileステートメントは次のように実行されます：
+1. 条件が評価されます。
+2. 真であれば、実行はステップ2に進みます。偽であれば、プログラムはwhileステートメントの実行を終了します。
+3. プログラムはステートメントを実行し、実行はステップ1に戻ります。
 
-Because the value of the condition is evaluated before the statements are executed, the statements in a while statement can be executed zero or more times.
+条件の値は、ステートメントが実行される前に評価されるため、whileステートメント内のステートメントは0回以上実行される可能性があります。
 
-The value of the condition must be of type `Bool` or a type bridged to `Bool`. The condition can also be an optional binding declaration, as discussed in Optional Binding.
+条件の値は`Bool`型または`Bool`にブリッジされた型でなければなりません。条件は、Optional Bindingで説明されているように、オプショナルバインディング宣言であることもできます。
 
-#### Grammar of a while statement
+#### Whileステートメントの文法
 
 ```
 while-statement → while condition-list code-block
@@ -86,11 +86,11 @@ case-condition → case pattern initializer
 optional-binding-condition → let pattern initializer? | var pattern initializer?
 ```
 
-### Repeat-While Statement
+### Repeat-Whileステートメント
 
-A repeat-while statement allows a block of code to be executed one or more times, as long as a condition remains true.
+repeat-whileステートメントは、条件が真である限り、1回以上コードのブロックを実行することを可能にします。
 
-A repeat-while statement has the following form:
+repeat-whileステートメントは次の形式を持ちます：
 
 ```
 repeat {
@@ -98,28 +98,28 @@ repeat {
 } while <#condition#>
 ```
 
-A repeat-while statement is executed as follows:
-1. The program executes the statements, and execution continues to step 2.
-2. The condition is evaluated.
-3. If true, execution returns to step 1. If false, the program is finished executing the repeat-while statement.
+repeat-whileステートメントは次のように実行されます：
+1. プログラムはステートメントを実行し、実行はステップ2に進みます。
+2. 条件が評価されます。
+3. 真であれば、実行はステップ1に戻ります。偽であれば、プログラムはrepeat-whileステートメントの実行を終了します。
 
-Because the value of the condition is evaluated after the statements are executed, the statements in a repeat-while statement are executed at least once.
+条件の値は、ステートメントが実行された後に評価されるため、repeat-whileステートメント内のステートメントは少なくとも1回は実行されます。
 
-The value of the condition must be of type `Bool` or a type bridged to `Bool`.
+条件の値は`Bool`型または`Bool`にブリッジされた型でなければなりません。
 
-#### Grammar of a repeat-while statement
+#### Repeat-Whileステートメントの文法
 
 ```
 repeat-while-statement → repeat code-block while expression
 ```
 
-## Branch Statements
+## 分岐ステートメント
 
-Branch statements allow the program to execute certain parts of code depending on the value of one or more conditions. The values of the conditions specified in a branch statement control how the program branches and, therefore, what block of code is executed. Swift has three branch statements: an if statement, a guard statement, and a switch statement.
+分岐ステートメントは、1つ以上の条件の値に応じて、特定のコード部分を実行することをプログラムに許可します。分岐ステートメントで指定された条件の値は、プログラムがどのように分岐するか、したがってどのコードブロックが実行されるかを制御します。Swiftには、ifステートメント、guardステートメント、およびswitchステートメントの3つの分岐ステートメントがあります。
 
-Control flow in an if statement or a switch statement can be changed by a break statement and is discussed in Break Statement below.
+ifステートメントまたはswitchステートメント内の制御フローは、breakステートメントによって変更されることがあり、以下のBreak Statementで説明されています。
 
-### Grammar of a branch statement
+### 分岐ステートメントの文法
 
 ```
 branch-statement → if-statement
@@ -127,13 +127,13 @@ branch-statement → guard-statement
 branch-statement → switch-statement
 ```
 
-### If Statement
+### If文
 
-An if statement is used for executing code based on the evaluation of one or more conditions.
+if文は、1つ以上の条件の評価に基づいてコードを実行するために使用されます。
 
-There are two basic forms of an if statement. In each form, the opening and closing braces are required.
+if文には2つの基本的な形式があります。どちらの形式でも、開き中括弧と閉じ中括弧が必要です。
 
-The first form allows code to be executed only when a condition is true and has the following form:
+最初の形式では、条件が真の場合にのみコードを実行することができ、次の形式を持ちます。
 
 ```
 if <#condition#> {
@@ -141,7 +141,7 @@ if <#condition#> {
 }
 ```
 
-The second form of an if statement provides an additional else clause (introduced by the else keyword) and is used for executing one part of code when the condition is true and another part of code when the same condition is false. When a single else clause is present, an if statement has the following form:
+if文の2番目の形式では、追加のelse句（elseキーワードで導入される）を提供し、条件が真の場合に1つのコード部分を実行し、同じ条件が偽の場合に別のコード部分を実行するために使用されます。単一のelse句が存在する場合、if文は次の形式を持ちます。
 
 ```
 if <#condition#> {
@@ -151,7 +151,7 @@ if <#condition#> {
 }
 ```
 
-The else clause of an if statement can contain another if statement to test more than one condition. An if statement chained together in this way has the following form:
+if文のelse句には、複数の条件をテストするために別のif文を含めることができます。このように連鎖したif文は次の形式を持ちます。
 
 ```
 if <#condition 1#> {
@@ -163,20 +163,20 @@ if <#condition 1#> {
 }
 ```
 
-The value of any condition in an if statement must be of type `Bool` or a type bridged to `Bool`. The condition can also be an optional binding declaration, as discussed in Optional Binding.
+if文の条件の値は、`Bool`型または`Bool`にブリッジされた型でなければなりません。条件は、オプショナルバインディング宣言であることもできます。オプショナルバインディングについては、オプショナルバインディングで説明します。
 
-#### Grammar of an if statement
+#### if文の文法
 
 ```
 if-statement → if condition-list code-block else-clause?
 else-clause → else code-block | else if-statement
 ```
 
-### Guard Statement
+### Guard文
 
-A guard statement is used to transfer program control out of a scope if one or more conditions aren’t met.
+guard文は、1つ以上の条件が満たされない場合にプログラムの制御をスコープ外に移すために使用されます。
 
-A guard statement has the following form:
+guard文は次の形式を持ちます。
 
 ```
 guard <#condition#> else {
@@ -184,29 +184,29 @@ guard <#condition#> else {
 }
 ```
 
-The value of any condition in a guard statement must be of type `Bool` or a type bridged to `Bool`. The condition can also be an optional binding declaration, as discussed in Optional Binding.
+guard文の条件の値は、`Bool`型または`Bool`にブリッジされた型でなければなりません。条件は、オプショナルバインディング宣言であることもできます。オプショナルバインディングについては、オプショナルバインディングで説明します。
 
-Any constants or variables assigned a value from an optional binding declaration in a guard statement condition can be used for the rest of the guard statement’s enclosing scope.
+guard文の条件でオプショナルバインディング宣言から値を割り当てられた定数または変数は、guard文の囲むスコープの残りの部分で使用できます。
 
-The else clause of a guard statement is required, and must either call a function with the `Never` return type or transfer program control outside the guard statement’s enclosing scope using one of the following statements:
+guard文のelse句は必須であり、`Never`戻り型の関数を呼び出すか、次のいずれかの文を使用してguard文の囲むスコープの外にプログラム制御を移さなければなりません。
 - `return`
 - `break`
 - `continue`
 - `throw`
 
-Control transfer statements are discussed in Control Transfer Statements below. For more information on functions with the `Never` return type, see Functions that Never Return.
+制御転送文については、以下の制御転送文で説明します。`Never`戻り型の関数についての詳細は、戻らない関数を参照してください。
 
-#### Grammar of a guard statement
+#### guard文の文法
 
 ```
 guard-statement → guard condition-list else code-block
 ```
 
-### Switch Statement
+### Switch文
 
-A switch statement allows certain blocks of code to be executed depending on the value of a control expression.
+switch文は、制御式の値に応じて特定のコードブロックを実行することを可能にします。
 
-A switch statement has the following form:
+switch文は次の形式を持ちます。
 
 ```
 switch <#control expression#> {
@@ -222,54 +222,54 @@ default:
 }
 ```
 
-The control expression of the switch statement is evaluated and then compared with the patterns specified in each case. If a match is found, the program executes the statements listed within the scope of that case. The scope of each case can’t be empty. As a result, you must include at least one statement following the colon (:) of each case label. Use a single break statement if you don’t intend to execute any code in the body of a matched case.
+switch文の制御式は評価され、各ケースで指定されたパターンと比較されます。一致が見つかると、プログラムはそのケースのスコープ内にリストされた文を実行します。各ケースのスコープは空であってはなりません。その結果、各ケースラベルのコロン（:）の後に少なくとも1つの文を含める必要があります。マッチしたケースの本体でコードを実行する意図がない場合は、単一のbreak文を使用してください。
 
-The values of expressions your code can branch on are very flexible. For example, in addition to the values of scalar types, such as integers and characters, your code can branch on the values of any type, including floating-point numbers, strings, tuples, instances of custom classes, and optionals. The value of the control expression can even be matched to the value of a case in an enumeration and checked for inclusion in a specified range of values. For examples of how to use these various types of values in switch statements, see Switch in Control Flow.
+コードが分岐できる式の値は非常に柔軟です。たとえば、整数や文字などのスカラー型の値に加えて、浮動小数点数、文字列、タプル、カスタムクラスのインスタンス、およびオプショナルの値にも分岐できます。制御式の値は、列挙型のケースの値に一致させたり、指定された範囲の値に含まれているかどうかを確認したりすることもできます。これらのさまざまな型の値をswitch文で使用する方法の例については、制御フローのswitchを参照してください。
 
-A switch case can optionally contain a where clause after each pattern. A where clause is introduced by the where keyword followed by an expression, and is used to provide an additional condition before a pattern in a case is considered matched to the control expression. If a where clause is present, the statements within the relevant case are executed only if the value of the control expression matches one of the patterns of the case and the expression of the where clause evaluates to true. For example, a control expression matches the case in the example below only if it’s a tuple that contains two elements of the same value, such as (1, 1).
+switchケースには、各パターンの後にwhere句を含めることができます。where句はwhereキーワードに続く式で導入され、パターンが制御式に一致する前に追加の条件を提供するために使用されます。where句が存在する場合、関連するケース内の文は、制御式の値がケースのパターンの1つに一致し、where句の式が真と評価された場合にのみ実行されます。たとえば、次の例では、制御式が2つの同じ値を含むタプル（例：(1, 1)）である場合にのみ、ケースが一致します。
 
 ```
 case let (x, y) where x == y:
 ```
 
-As the above example shows, patterns in a case can also bind constants using the let keyword (they can also bind variables using the var keyword). These constants (or variables) can then be referenced in a corresponding where clause and throughout the rest of the code within the scope of the case. If the case contains multiple patterns that match the control expression, all of the patterns must contain the same constant or variable bindings, and each bound variable or constant must have the same type in all of the case’s patterns.
+上記の例が示すように、ケース内のパターンはletキーワードを使用して定数をバインドすることもできます（varキーワードを使用して変数をバインドすることもできます）。これらの定数（または変数）は、対応するwhere句およびケースのスコープ内の残りのコードで参照できます。ケースに制御式と一致する複数のパターンが含まれている場合、すべてのパターンは同じ定数または変数バインディングを含む必要があり、各バインドされた変数または定数はすべてのケースのパターンで同じ型でなければなりません。
 
-A switch statement can also include a default case, introduced by the default keyword. The code within a default case is executed only if no other cases match the control expression. A switch statement can include only one default case, which must appear at the end of the switch statement.
+switch文には、defaultキーワードで導入されるデフォルトケースを含めることもできます。デフォルトケース内のコードは、他のケースが制御式と一致しない場合にのみ実行されます。switch文には1つのデフォルトケースしか含めることができず、それはswitch文の最後に表示されなければなりません。
 
-Although the actual execution order of pattern-matching operations, and in particular the evaluation order of patterns in cases, is unspecified, pattern matching in a switch statement behaves as if the evaluation is performed in source order — that is, the order in which they appear in source code. As a result, if multiple cases contain patterns that evaluate to the same value, and thus can match the value of the control expression, the program executes only the code within the first matching case in source order.
+パターンマッチング操作の実際の実行順序、特にケース内のパターンの評価順序は指定されていませんが、switch文のパターンマッチングはソース順で評価されるかのように動作します。つまり、ソースコードに表示される順序です。その結果、複数のケースに同じ値に評価されるパターンが含まれている場合、プログラムはソース順で最初に一致するケース内のコードのみを実行します。
 
-#### Switch Statements Must Be Exhaustive
+#### スイッチ文は網羅的でなければならない
 
-In Swift, every possible value of the control expression’s type must match the value of at least one pattern of a case. When this simply isn’t feasible (for example, when the control expression’s type is `Int`), you can include a default case to satisfy the requirement.
+Swiftでは、制御式の型のすべての可能な値が少なくとも1つのケースのパターンに一致する必要があります。これが単に実現不可能な場合（例えば、制御式の型が`Int`の場合）、要件を満たすためにデフォルトケースを含めることができます。
 
-#### Switching Over Future Enumeration Cases
+#### 将来の列挙ケースに対するスイッチ
 
-A nonfrozen enumeration is a special kind of enumeration that may gain new enumeration cases in the future — even after you compile and ship an app. Switching over a nonfrozen enumeration requires extra consideration. When a library’s authors mark an enumeration as nonfrozen, they reserve the right to add new enumeration cases, and any code that interacts with that enumeration must be able to handle those future cases without being recompiled. Code that’s compiled in library evolution mode, code in the Swift standard library, Swift overlays for Apple frameworks, and C and Objective-C code can declare nonfrozen enumerations. For information about frozen and nonfrozen enumerations, see frozen.
+非フローズン列挙は、アプリをコンパイルして出荷した後でも、新しい列挙ケースを追加できる特別な種類の列挙です。非フローズン列挙に対するスイッチは追加の考慮が必要です。ライブラリの作者が列挙を非フローズンとしてマークすると、新しい列挙ケースを追加する権利を留保し、その列挙とやり取りするコードは再コンパイルせずに将来のケースを処理できる必要があります。ライブラリ進化モードでコンパイルされたコード、Swift標準ライブラリのコード、AppleフレームワークのSwiftオーバーレイ、およびCやObjective-Cのコードは、非フローズン列挙を宣言できます。フローズンと非フローズンの列挙についての情報は、フローズンを参照してください。
 
-When switching over a nonfrozen enumeration value, you always need to include a default case, even if every case of the enumeration already has a corresponding switch case. You can apply the `@unknown` attribute to the default case, which indicates that the default case should match only enumeration cases that are added in the future. Swift produces a warning if the default case matches any enumeration case that’s known at compiler time. This future warning informs you that the library author added a new case to the enumeration that doesn’t have a corresponding switch case.
+非フローズン列挙値に対するスイッチでは、すべての列挙ケースに対応するスイッチケースがある場合でも、常にデフォルトケースを含める必要があります。デフォルトケースに`@unknown`属性を適用することができ、これはデフォルトケースが将来追加される列挙ケースのみに一致するべきであることを示します。Swiftは、デフォルトケースがコンパイラ時に既知の列挙ケースに一致する場合、警告を生成します。この将来の警告は、ライブラリの作者がスイッチケースに対応する新しいケースを列挙に追加したことを通知します。
 
-The following example switches over all three existing cases of the Swift standard library’s `Mirror.AncestorRepresentation` enumeration. If you add additional cases in the future, the compiler generates a warning to indicate that you need to update the switch statement to take the new cases into account.
+次の例は、Swift標準ライブラリの`Mirror.AncestorRepresentation`列挙の既存の3つのケースすべてに対してスイッチを行います。将来追加のケースを追加した場合、コンパイラはスイッチ文を更新して新しいケースを考慮する必要があることを示す警告を生成します。
 
 ```swift
 let representation: Mirror.AncestorRepresentation = .generated
 switch representation {
 case .customized:
-    print("Use the nearest ancestor’s implementation.")
+    print("最も近い祖先の実装を使用します。")
 case .generated:
-    print("Generate a default mirror for all ancestor classes.")
+    print("すべての祖先クラスのデフォルトミラーを生成します。")
 case .suppressed:
-    print("Suppress the representation of all ancestor classes.")
+    print("すべての祖先クラスの表現を抑制します。")
 @unknown default:
-    print("Use a representation that was unknown when this code was compiled.")
+    print("このコードがコンパイルされたときに未知だった表現を使用します。")
 }
-// Prints "Generate a default mirror for all ancestor classes."
+// "すべての祖先クラスのデフォルトミラーを生成します。"と表示されます。
 ```
 
-#### Execution Does Not Fall Through Cases Implicitly
+#### 実行は暗黙的にケースを通過しない
 
-After the code within a matched case has finished executing, the program exits from the switch statement. Program execution doesn’t continue or “fall through” to the next case or default case. That said, if you want execution to continue from one case to the next, explicitly include a fallthrough statement, which simply consists of the `fallthrough` keyword, in the case from which you want execution to continue. For more information about the fallthrough statement, see Fallthrough Statement below.
+一致したケース内のコードの実行が終了すると、プログラムはスイッチ文から退出します。プログラムの実行は次のケースやデフォルトケースに続行しません。とはいえ、あるケースから次のケースに実行を続行したい場合は、`fallthrough`キーワードからなるfallthrough文をそのケースに明示的に含めます。fallthrough文の詳細については、以下のFallthrough Statementを参照してください。
 
-#### Grammar of a switch statement
+#### スイッチ文の文法
 
 ```
 switch-statement → switch expression { switch-cases? }
@@ -289,15 +289,15 @@ switch-elseif-directive-clause → elseif-directive compilation-condition switch
 switch-else-directive-clause → else-directive switch-cases?
 ```
 
-## Labeled Statement
+## ラベル付き文
 
-You can prefix a loop statement, an if statement, a switch statement, or a do statement with a statement label, which consists of the name of the label followed immediately by a colon (:). Use statement labels with break and continue statements to be explicit about how you want to change control flow in a loop statement or a switch statement, as discussed in Break Statement and Continue Statement below.
+ループ文、if文、スイッチ文、またはdo文の前に、ラベル名の後にコロン（:）を続けた文ラベルを付けることができます。文ラベルをbreak文やcontinue文と一緒に使用して、ループ文やスイッチ文で制御フローをどのように変更するかを明示的に示します。詳細は、以下のBreak StatementおよびContinue Statementを参照してください。
 
-The scope of a labeled statement is the entire statement following the statement label. You can nest labeled statements, but the name of each statement label must be unique.
+ラベル付き文のスコープは、文ラベルに続く文全体です。ラベル付き文をネストすることができますが、各文ラベルの名前は一意でなければなりません。
 
-For more information and to see examples of how to use statement labels, see Labeled Statements in Control Flow.
+文ラベルの使用方法と例については、Control Flowのラベル付き文を参照してください。
 
-### Grammar of a labeled statement
+### ラベル付き文の文法
 
 ```
 labeled-statement → statement-label loop-statement
@@ -308,11 +308,11 @@ statement-label → label-name :
 label-name → identifier
 ```
 
-## Control Transfer Statements
+## 制御転送文
 
-Control transfer statements can change the order in which code in your program is executed by unconditionally transferring program control from one piece of code to another. Swift has five control transfer statements: a break statement, a continue statement, a fallthrough statement, a return statement, and a throw statement.
+制御転送文は、プログラム内のコードの実行順序を無条件に別のコードに転送することで変更できます。Swiftには5つの制御転送文があります：break文、continue文、fallthrough文、return文、およびthrow文です。
 
-### Grammar of a control transfer statement
+### 制御転送文の文法
 
 ```
 control-transfer-statement → break-statement
@@ -322,118 +322,118 @@ control-transfer-statement → return-statement
 control-transfer-statement → throw-statement
 ```
 
-### Break Statement
+### Break文
 
-A break statement ends program execution of a loop, an if statement, or a switch statement. A break statement can consist of only the break keyword, or it can consist of the break keyword followed by the name of a statement label, as shown below.
+break文は、ループ、if文、またはスイッチ文の実行を終了します。break文はbreakキーワードのみで構成される場合もあれば、以下のようにbreakキーワードの後に文ラベルの名前が続く場合もあります。
 
 ```
 break
 break <#label name#>
 ```
 
-When a break statement is followed by the name of a statement label, it ends program execution of the loop, if statement, or switch statement named by that label.
+break文の後に文ラベルの名前が続く場合、そのラベルが付けられたループ、if文、またはスイッチ文の実行を終了します。
 
-When a break statement isn’t followed by the name of a statement label, it ends program execution of the switch statement or the innermost enclosing loop statement in which it occurs. You can’t use an unlabeled break statement to break out of an if statement.
+break文の後に文ラベルの名前が続かない場合、そのbreak文が含まれるスイッチ文または最も内側のループ文の実行を終了します。ラベルのないbreak文を使用してif文から抜け出すことはできません。
 
-In both cases, program control is then transferred to the first line of code following the enclosing loop or switch statement, if any.
+いずれの場合も、プログラムの制御は、囲むループまたはスイッチ文の後の最初の行に転送されます（存在する場合）。
 
-For examples of how to use a break statement, see Break and Labeled Statements in Control Flow.
+break文の使用例については、Control FlowのBreak and Labeled Statementsを参照してください。
 
-#### Grammar of a break statement
+#### Break文の文法
 
 ```
 break-statement → break label-name?
 ```
 
-### Continue Statement
+### continue文
 
-A continue statement ends program execution of the current iteration of a loop statement but doesn’t stop execution of the loop statement. A continue statement can consist of only the continue keyword, or it can consist of the continue keyword followed by the name of a statement label, as shown below.
+continue文は、ループ文の現在の反復処理を終了しますが、ループ文の実行を停止しません。continue文は、continueキーワードのみで構成される場合と、以下のようにcontinueキーワードの後に文ラベルの名前が続く場合があります。
 
 ```
 continue
 continue <#label name#>
 ```
 
-When a continue statement is followed by the name of a statement label, it ends program execution of the current iteration of the loop statement named by that label.
+continue文の後に文ラベルの名前が続く場合、そのラベルで指定されたループ文の現在の反復処理を終了します。
 
-When a continue statement isn’t followed by the name of a statement label, it ends program execution of the current iteration of the innermost enclosing loop statement in which it occurs.
+continue文の後に文ラベルの名前が続かない場合、それが発生した最も内側の囲んでいるループ文の現在の反復処理を終了します。
 
-In both cases, program control is then transferred to the condition of the enclosing loop statement.
+いずれの場合も、プログラム制御は囲んでいるループ文の条件に移ります。
 
-In a for statement, the increment expression is still evaluated after the continue statement is executed, because the increment expression is evaluated after the execution of the loop’s body.
+for文では、continue文が実行された後でもインクリメント式は評価されます。これは、ループの本体の実行後にインクリメント式が評価されるためです。
 
-For examples of how to use a continue statement, see Continue and Labeled Statements in Control Flow.
+continue文の使用例については、制御フローのContinueおよびLabeled Statementsを参照してください。
 
-#### Grammar of a continue statement
+#### continue文の文法
 
 ```
 continue-statement → continue label-name?
 ```
 
-### Fallthrough Statement
+### fallthrough文
 
-A fallthrough statement consists of the fallthrough keyword and occurs only in a case block of a switch statement. A fallthrough statement causes program execution to continue from one case in a switch statement to the next case. Program execution continues to the next case even if the patterns of the case label don’t match the value of the switch statement’s control expression.
+fallthrough文はfallthroughキーワードで構成され、switch文のcaseブロック内でのみ発生します。fallthrough文は、switch文のあるcaseから次のcaseへのプログラム実行を継続させます。switch文の制御式の値とcaseラベルのパターンが一致しなくても、プログラム実行は次のcaseに進みます。
 
-A fallthrough statement can appear anywhere inside a switch statement, not just as the last statement of a case block, but it can’t be used in the final case block. It also can’t transfer control into a case block whose pattern contains value binding patterns.
+fallthrough文は、caseブロックの最後の文としてだけでなく、switch文の任意の場所に現れることができますが、最後のcaseブロックでは使用できません。また、値バインディングパターンを含むパターンのcaseブロックに制御を移すこともできません。
 
-For an example of how to use a fallthrough statement in a switch statement, see Control Transfer Statements in Control Flow.
+switch文でfallthrough文を使用する例については、制御フローのControl Transfer Statementsを参照してください。
 
-#### Grammar of a fallthrough statement
+#### fallthrough文の文法
 
 ```
 fallthrough-statement → fallthrough
 ```
 
-### Return Statement
+### return文
 
-A return statement occurs in the body of a function or method definition and causes program execution to return to the calling function or method. Program execution continues at the point immediately following the function or method call.
+return文は関数またはメソッド定義の本体内で発生し、プログラム実行を呼び出し元の関数またはメソッドに戻します。プログラム実行は、関数またはメソッド呼び出しの直後のポイントで続行されます。
 
-A return statement can consist of only the return keyword, or it can consist of the return keyword followed by an expression, as shown below.
+return文は、returnキーワードのみで構成される場合と、以下のようにreturnキーワードの後に式が続く場合があります。
 
 ```
 return
 return <#expression#>
 ```
 
-When a return statement is followed by an expression, the value of the expression is returned to the calling function or method. If the value of the expression doesn’t match the value of the return type declared in the function or method declaration, the expression’s value is converted to the return type before it’s returned to the calling function or method.
+return文の後に式が続く場合、その式の値が呼び出し元の関数またはメソッドに返されます。式の値が関数またはメソッド宣言で宣言された戻り値の型と一致しない場合、式の値は戻り値の型に変換されてから呼び出し元の関数またはメソッドに返されます。
 
-> Note: As described in Failable Initializers, a special form of the return statement (return nil) can be used in a failable initializer to indicate initialization failure.
+> 注: Failable Initializersで説明されているように、return文の特別な形式（return nil）は、初期化の失敗を示すために失敗可能なイニシャライザで使用できます。
 
-When a return statement isn’t followed by an expression, it can be used only to return from a function or method that doesn’t return a value (that is, when the return type of the function or method is Void or ()).
+return文の後に式が続かない場合、それは値を返さない関数またはメソッドからのみ戻るために使用できます（つまり、関数またはメソッドの戻り値の型がVoidまたは()の場合）。
 
-#### Grammar of a return statement
+#### return文の文法
 
 ```
 return-statement → return expression?
 ```
 
-### Throw Statement
+### throw文
 
-A throw statement occurs in the body of a throwing function or method, or in the body of a closure expression whose type is marked with the throws keyword.
+throw文は、throwing関数またはメソッドの本体内、またはthrowsキーワードでマークされたクロージャ式の本体内で発生します。
 
-A throw statement causes a program to end execution of the current scope and begin error propagation to its enclosing scope. The error that’s thrown continues to propagate until it’s handled by a catch clause of a do statement.
+throw文は、現在のスコープのプログラム実行を終了し、その囲んでいるスコープにエラー伝播を開始させます。スローされたエラーは、do文のcatch句で処理されるまで伝播し続けます。
 
-A throw statement consists of the throw keyword followed by an expression, as shown below.
+throw文は、以下のようにthrowキーワードの後に式が続く形で構成されます。
 
 ```
 throw <#expression#>
 ```
 
-The value of the expression must have a type that conforms to the Error protocol. If the do statement or function that contains the throw statement declares the type of errors it throws, the value of the expression must be an instance of that type.
+式の値はErrorプロトコルに準拠する型でなければなりません。throw文を含むdo文または関数がスローするエラーの型を宣言している場合、式の値はその型のインスタンスでなければなりません。
 
-For an example of how to use a throw statement, see Propagating Errors Using Throwing Functions in Error Handling.
+throw文の使用例については、エラーハンドリングのThrowing Functionsを参照してください。
 
-#### Grammar of a throw statement
+#### throw文の文法
 
 ```
 throw-statement → throw expression
 ```
 
-### Defer Statement
+### defer文
 
-A defer statement is used for executing code just before transferring program control outside of the scope that the defer statement appears in.
+defer文は、defer文が現れるスコープの外にプログラム制御を移す直前にコードを実行するために使用されます。
 
-A defer statement has the following form:
+defer文は次の形式を持ちます：
 
 ```
 defer {
@@ -441,15 +441,15 @@ defer {
 }
 ```
 
-The statements within the defer statement are executed no matter how program control is transferred. This means that a defer statement can be used, for example, to perform manual resource management such as closing file descriptors, and to perform actions that need to happen even if an error is thrown.
+defer文内の文は、プログラム制御がどのように移されても実行されます。これは、たとえばファイルディスクリプタを閉じるなどの手動リソース管理や、エラーがスローされた場合でも実行する必要があるアクションを実行するためにdefer文を使用できることを意味します。
 
-The statements in the defer statement are executed at the end of the scope that encloses the defer statement.
+defer文内の文は、defer文を囲むスコープの終わりに実行されます。
 
 ```
 func f(x: Int) {
   defer { print("First defer") }
 
-  if x < 10 {
+  if (x < 10) {
     defer { print("Second defer") }
     print("End of if")
   }
@@ -463,9 +463,9 @@ f(x: 5)
 // Prints "First defer"
 ```
 
-In the code above, the defer in the if statement executes before the defer declared in the function f because the scope of the if statement ends before the scope of the function.
+上記のコードでは、if文内のdeferは関数f内で宣言されたdeferよりも先に実行されます。これは、if文のスコープが関数のスコープよりも先に終了するためです。
 
-If multiple defer statements appear in the same scope, the order they appear is the reverse of the order they’re executed. Executing the last defer statement in a given scope first means that statements inside that last defer statement can refer to resources that will be cleaned up by other defer statements.
+同じスコープ内に複数のdefer文が現れる場合、それらが現れる順序は実行される順序の逆になります。特定のスコープ内で最後のdefer文を最初に実行することは、その最後のdefer文内の文が他のdefer文によってクリーンアップされるリソースを参照できることを意味します。
 
 ```
 func f() {
@@ -479,21 +479,21 @@ f()
 // Prints "First defer"
 ```
 
-The statements in the defer statement can’t transfer program control outside of the defer statement.
+defer文内の文は、defer文の外にプログラム制御を移すことはできません。
 
-#### Grammar of a defer statement
+#### defer文の文法
 
 ```
 defer-statement → defer code-block
 ```
 
-### Do Statement
+### Do文
 
-The do statement is used to introduce a new scope and can optionally contain one or more catch clauses, which contain patterns that match against defined error conditions. Variables and constants declared in the scope of a do statement can be accessed only within that scope.
+do文は新しいスコープを導入するために使用され、オプションで1つ以上のcatch節を含むことができます。catch節には定義されたエラー条件に一致するパターンが含まれます。do文のスコープ内で宣言された変数や定数は、そのスコープ内でのみアクセスできます。
 
-A do statement in Swift is similar to curly braces ({}) in C used to delimit a code block, and doesn’t incur a performance cost at runtime.
+Swiftのdo文は、C言語でコードブロックを区切るために使用される中括弧({})に似ており、実行時にパフォーマンスコストは発生しません。
 
-A do statement has the following form:
+do文の形式は次の通りです：
 
 ```
 do {
@@ -510,7 +510,7 @@ do {
 }
 ```
 
-A do statement can optionally specify the type of error it throws, which has the following form:
+do文は、スローするエラーの型をオプションで指定することができ、その形式は次の通りです：
 
 ```
 do throws(<#type#>) {
@@ -522,24 +522,24 @@ do throws(<#type#>) {
 }
 ```
 
-If the do statement includes a throws clause, the do block can throw errors of only the specified type. The type must be a concrete type that conforms to the Error protocol, an opaque type that conforms to the Error protocol, or the boxed protocol type any Error. If the do statement doesn’t specify the type of error it throws, Swift infers the error type as follows:
-- If every throws statement and try expression in the do code block is nested inside of an exhaustive error-handling mechanism, then Swift infers that the do statement is nonthrowing.
-- If the do code block contains code that throws errors of only a single type outside of exhaustive error handling, other than throwing Never, then Swift infers that the do statement throws that concrete error type.
-- If the do code block contains code that throws errors of more than a single type outside of exhaustive error handling, then Swift infers that the do statement throws any Error.
+do文にthrows句が含まれている場合、doブロックは指定された型のエラーのみをスローできます。型はErrorプロトコルに準拠する具体的な型、Errorプロトコルに準拠する不透明な型、またはボックス化されたプロトコル型any Errorでなければなりません。do文がスローするエラーの型を指定しない場合、Swiftは次のようにエラーの型を推論します：
+- doコードブロック内のすべてのthrows文とtry式が網羅的なエラーハンドリングメカニズム内にネストされている場合、Swiftはdo文がエラーをスローしないと推論します。
+- doコードブロックが網羅的なエラーハンドリングの外で単一の型のエラーのみをスローするコードを含む場合、Swiftはdo文がその具体的なエラー型をスローすると推論します。
+- doコードブロックが網羅的なエラーハンドリングの外で複数の型のエラーをスローするコードを含む場合、Swiftはdo文がany Errorをスローすると推論します。
 
-For more information about working with errors that have explicit types, see Specifying the Error Type.
+明示的な型を持つエラーの取り扱いについての詳細は、「エラーの型を指定する」を参照してください。
 
-If any statement in the do code block throws an error, program control is transferred to the first catch clause whose pattern matches the error. If none of the clauses match, the error propagates to the surrounding scope. If an error is unhandled at the top level, program execution stops with a runtime error.
+doコードブロック内の任意の文がエラーをスローした場合、プログラムの制御はそのエラーに一致する最初のcatch節に移ります。どの節も一致しない場合、エラーは周囲のスコープに伝播します。トップレベルでエラーが処理されない場合、プログラムの実行はランタイムエラーで停止します。
 
-Like a switch statement, the compiler attempts to infer whether catch clauses are exhaustive. If such a determination can be made, the error is considered handled. Otherwise, the error can propagate out of the containing scope, which means the error must be handled by an enclosing catch clause or the containing function must be declared with throws.
+switch文のように、コンパイラはcatch節が網羅的かどうかを推論しようとします。そのような判断ができる場合、エラーは処理されたと見なされます。そうでない場合、エラーは含まれるスコープの外に伝播する可能性があり、その場合、エラーは囲むcatch節で処理されるか、含まれる関数がthrowsで宣言されている必要があります。
 
-A catch clause that has multiple patterns matches the error if any of its patterns match the error. If a catch clause contains multiple patterns, all of the patterns must contain the same constant or variable bindings, and each bound variable or constant must have the same type in all of the catch clause’s patterns.
+複数のパターンを持つcatch節は、そのパターンのいずれかがエラーに一致する場合、エラーに一致します。catch節に複数のパターンが含まれている場合、すべてのパターンは同じ定数または変数バインディングを含む必要があり、各バインドされた変数または定数はcatch節のすべてのパターンで同じ型を持つ必要があります。
 
-To ensure that an error is handled, use a catch clause with a pattern that matches all errors, such as a wildcard pattern (_). If a catch clause doesn’t specify a pattern, the catch clause matches and binds any error to a local constant named error. For more information about the patterns you can use in a catch clause, see Patterns.
+エラーが処理されることを保証するために、ワイルドカードパターン(_)のようにすべてのエラーに一致するパターンを持つcatch節を使用します。catch節がパターンを指定しない場合、catch節は任意のエラーに一致し、エラーをerrorという名前のローカル定数にバインドします。catch節で使用できるパターンの詳細については、「パターン」を参照してください。
 
-To see an example of how to use a do statement with several catch clauses, see Handling Errors.
+複数のcatch節を持つdo文の使用例については、「エラーの処理」を参照してください。
 
-#### Grammar of a do statement
+#### do文の文法
 
 ```
 do-statement → do throws-clause? code-block catch-clauses?
@@ -549,11 +549,11 @@ catch-pattern-list → catch-pattern | catch-pattern , catch-pattern-list
 catch-pattern → pattern where-clause?
 ```
 
-## Compiler Control Statements
+## コンパイラ制御文
 
-Compiler control statements allow the program to change aspects of the compiler’s behavior. Swift has three compiler control statements: a conditional compilation block a line control statement, and a compile-time diagnostic statement.
+コンパイラ制御文は、プログラムがコンパイラの動作の側面を変更できるようにします。Swiftには3つのコンパイラ制御文があります：条件付きコンパイルブロック、行制御文、およびコンパイル時診断文です。
 
-### Grammar of a compiler control statement
+### コンパイラ制御文の文法
 
 ```
 compiler-control-statement → conditional-compilation-block
@@ -561,73 +561,73 @@ compiler-control-statement → line-control-statement
 compiler-control-statement → diagnostic-statement
 ```
 
-### Conditional Compilation Block
+### 条件付きコンパイルブロック
 
-A conditional compilation block allows code to be conditionally compiled depending on the value of one or more compilation conditions.
+条件付きコンパイルブロックは、1つ以上のコンパイル条件の値に応じてコードを条件付きでコンパイルすることを可能にします。
 
-Every conditional compilation block begins with the #if compilation directive and ends with the #endif compilation directive. A simple conditional compilation block has the following form:
+すべての条件付きコンパイルブロックは、#if コンパイルディレクティブで始まり、#endif コンパイルディレクティブで終わります。単純な条件付きコンパイルブロックは次の形式を持ちます：
 
 ```
-#if <#compilation condition#>
-    <#statements#>
+#if <#コンパイル条件#>
+    <#ステートメント#>
 #endif
 ```
 
-Unlike the condition of an if statement, the compilation condition is evaluated at compile time. As a result, the statements are compiled and executed only if the compilation condition evaluates to true at compile time.
+if 文の条件とは異なり、コンパイル条件はコンパイル時に評価されます。その結果、ステートメントはコンパイル条件がコンパイル時に true と評価された場合にのみコンパイルおよび実行されます。
 
-The compilation condition can include the true and false Boolean literals, an identifier used with the -D command line flag, or any of the platform conditions listed in the table below.
+コンパイル条件には、true および false のブールリテラル、-D コマンドラインフラグと共に使用される識別子、または以下の表に示すプラットフォーム条件のいずれかを含めることができます。
 
-| Platform condition | Valid arguments |
+| プラットフォーム条件 | 有効な引数 |
 |--------------------|-----------------|
 | os()               | macOS, iOS, watchOS, tvOS, visionOS, Linux, Windows |
 | arch()             | i386, x86_64, arm, arm64 |
-| swift()            | >= or < followed by a version number |
-| compiler()         | >= or < followed by a version number |
-| canImport()        | A module name |
+| swift()            | >= または < の後にバージョン番号 |
+| compiler()         | >= または < の後にバージョン番号 |
+| canImport()        | モジュール名 |
 | targetEnvironment()| simulator, macCatalyst |
 
-The version number for the swift() and compiler() platform conditions consists of a major number, optional minor number, optional patch number, and so on, with a dot (.) separating each part of the version number. There must not be whitespace between the comparison operator and the version number. The version for compiler() is the compiler version, regardless of the Swift version setting passed to the compiler. The version for swift() is the language version currently being compiled. For example, if you compile your code using the Swift 5 compiler in Swift 4.2 mode, the compiler version is 5 and the language version is 4.2. With those settings, the following code prints all three messages:
+swift() および compiler() プラットフォーム条件のバージョン番号は、メジャー番号、オプションのマイナー番号、オプションのパッチ番号などで構成され、各部分はドット (.) で区切られます。比較演算子とバージョン番号の間に空白を入れてはいけません。compiler() のバージョンは、コンパイラのバージョンであり、コンパイラに渡される Swift バージョン設定に関係なくなります。swift() のバージョンは、現在コンパイルされている言語バージョンです。例えば、Swift 5 コンパイラを使用して Swift 4.2 モードでコードをコンパイルする場合、コンパイラのバージョンは 5 で、言語バージョンは 4.2 です。この設定で、次のコードはすべてのメッセージを出力します：
 
 ```
 #if compiler(>=5)
-print("Compiled with the Swift 5 compiler or later")
+print("Swift 5 コンパイラ以降でコンパイルされました")
 #endif
 #if swift(>=4.2)
-print("Compiled in Swift 4.2 mode or later")
+print("Swift 4.2 モード以降でコンパイルされました")
 #endif
 #if compiler(>=5) && swift(<5)
-print("Compiled with the Swift 5 compiler or later in a Swift mode earlier than 5")
+print("Swift 5 コンパイラ以降で、Swift 5 より前のモードでコンパイルされました")
 #endif
-// Prints "Compiled with the Swift 5 compiler or later"
-// Prints "Compiled in Swift 4.2 mode or later"
-// Prints "Compiled with the Swift 5 compiler or later in a Swift mode earlier than 5"
+// "Swift 5 コンパイラ以降でコンパイルされました" を出力
+// "Swift 4.2 モード以降でコンパイルされました" を出力
+// "Swift 5 コンパイラ以降で、Swift 5 より前のモードでコンパイルされました" を出力
 ```
 
-The argument for the canImport() platform condition is the name of a module that may not be present on all platforms. The module can include periods (.) in its name. This condition tests whether it’s possible to import the module, but doesn’t actually import it. If the module is present, the platform condition returns true; otherwise, it returns false.
+canImport() プラットフォーム条件の引数は、すべてのプラットフォームに存在しない可能性のあるモジュールの名前です。モジュール名にはピリオド (.) を含めることができます。この条件はモジュールをインポートできるかどうかをテストしますが、実際にインポートはしません。モジュールが存在する場合、プラットフォーム条件は true を返し、存在しない場合は false を返します。
 
-The targetEnvironment() platform condition returns true when code is being compiled for the specified environment; otherwise, it returns false.
+targetEnvironment() プラットフォーム条件は、指定された環境用にコードがコンパイルされている場合に true を返し、それ以外の場合は false を返します。
 
-> Note: The arch(arm) platform condition doesn’t return true for ARM 64 devices. The arch(i386) platform condition returns true when code is compiled for the 32–bit iOS simulator.
+> 注: arch(arm) プラットフォーム条件は ARM 64 デバイスでは true を返しません。arch(i386) プラットフォーム条件は、コードが 32 ビット iOS シミュレータ用にコンパイルされる場合に true を返します。
 
-You can combine and negate compilation conditions using the logical operators &&, ||, and ! and use parentheses for grouping. These operators have the same associativity and precedence as the logical operators that are used to combine ordinary Boolean expressions.
+論理演算子 &&、||、および ! を使用してコンパイル条件を組み合わせたり否定したりし、グループ化のために括弧を使用することができます。これらの演算子は、通常のブール式を組み合わせるために使用される論理演算子と同じ結合性と優先順位を持ちます。
 
-Similar to an if statement, you can add multiple conditional branches to test for different compilation conditions. You can add any number of additional branches using #elseif clauses. You can also add a final additional branch using an #else clause. Conditional compilation blocks that contain multiple branches have the following form:
+if 文と同様に、異なるコンパイル条件をテストするために複数の条件分岐を追加することができます。#elseif 節を使用して任意の数の追加分岐を追加できます。また、#else 節を使用して最後の追加分岐を追加することもできます。複数の分岐を含む条件付きコンパイルブロックは次の形式を持ちます：
 
 ```
-#if <#compilation condition 1#>
-    <#statements to compile if compilation condition 1 is true#>
-#elseif <#compilation condition 2#>
-    <#statements to compile if compilation condition 2 is true#>
+#if <#コンパイル条件 1#>
+    <#コンパイル条件 1 が true の場合にコンパイルされるステートメント#>
+#elseif <#コンパイル条件 2#>
+    <#コンパイル条件 2 が true の場合にコンパイルされるステートメント#>
 #else
-    <#statements to compile if both compilation conditions are false#>
+    <#両方のコンパイル条件が false の場合にコンパイルされるステートメント#>
 #endif
 ```
 
-> Note: Each statement in the body of a conditional compilation block is parsed even if it’s not compiled. However, there’s an exception if the compilation condition includes a swift() or compiler() platform condition: The statements are parsed only if the language or compiler version matches what is specified in the platform condition. This exception ensures that an older compiler doesn’t attempt to parse syntax introduced in a newer version of Swift.
+> 注: 条件付きコンパイルブロックの本体内の各ステートメントは、コンパイルされない場合でも解析されます。ただし、コンパイル条件に swift() または compiler() プラットフォーム条件が含まれている場合は例外です：ステートメントは、プラットフォーム条件で指定された言語またはコンパイラのバージョンと一致する場合にのみ解析されます。この例外は、古いコンパイラが新しいバージョンの Swift で導入された構文を解析しようとしないようにするためのものです。
 
-For information about how you can wrap explicit member expressions in conditional compilation blocks, see Explicit Member Expression.
+明示的メンバー式を条件付きコンパイルブロックでラップする方法については、明示的メンバー式を参照してください。
 
-#### Grammar of a conditional compilation block
+#### 条件付きコンパイルブロックの文法
 
 ```
 conditional-compilation-block → if-directive-clause elseif-directive-clauses? else-directive-clause? endif-directive
@@ -659,22 +659,22 @@ swift-version-continuation → . decimal-digits swift-version-continuation?
 environment → simulator | macCatalyst
 ```
 
-### Line Control Statement
+### 行制御文
 
-A line control statement is used to specify a line number and filename that can be different from the line number and filename of the source code being compiled. Use a line control statement to change the source code location used by Swift for diagnostic and debugging purposes.
+行制御文は、コンパイルされているソースコードの行番号やファイル名とは異なる行番号やファイル名を指定するために使用されます。行制御文を使用して、Swiftが診断およびデバッグの目的で使用するソースコードの場所を変更します。
 
-A line control statement has the following forms:
+行制御文には次の形式があります：
 
 ```
 #sourceLocation(file: <#file path#>, line: <#line number#>)
 #sourceLocation()
 ```
 
-The first form of a line control statement changes the values of the #line, #file, #fileID, and #filePath literal expressions, beginning with the line of code following the line control statement. The line number changes the value of #line, and is any integer literal greater than zero. The file path changes the value of #file, #fileID, and #filePath, and is a string literal. The specified string becomes the value of #filePath, and the last path component of the string is used by the value of #fileID. For information about #file, #fileID, and #filePath, see Literal Expression.
+行制御文の最初の形式は、行制御文に続くコード行から、#line、#file、#fileID、および#filePathリテラル式の値を変更します。行番号は#lineの値を変更し、ゼロより大きい任意の整数リテラルです。ファイルパスは#file、#fileID、および#filePathの値を変更し、文字列リテラルです。指定された文字列は#filePathの値になり、文字列の最後のパスコンポーネントが#fileIDの値として使用されます。#file、#fileID、および#filePathの詳細については、リテラル式を参照してください。
 
-The second form of a line control statement, #sourceLocation(), resets the source code location back to the default line numbering and file path.
+行制御文の2番目の形式である#sourceLocation()は、ソースコードの場所をデフォルトの行番号とファイルパスにリセットします。
 
-#### Grammar of a line control statement
+#### 行制御文の文法
 
 ```
 line-control-statement → #sourceLocation ( file: file-path , line: line-number )
@@ -683,15 +683,15 @@ line-number → A decimal integer greater than zero
 file-path → static-string-literal
 ```
 
-### Compile-Time Diagnostic Statement
+### コンパイル時診断文
 
-Prior to Swift 5.9, the #warning and #error statements emit a diagnostic during compilation. This behavior is now provided by the warning(_:) and error(_:) macros in the Swift standard library.
+Swift 5.9以前では、#warningおよび#error文はコンパイル中に診断を発行します。この動作は現在、Swift標準ライブラリのwarning(_:)およびerror(_:)マクロによって提供されています。
 
-## Availability Condition
+## 利用可能条件
 
-An availability condition is used as a condition of an if, while, and guard statement to query the availability of APIs at runtime, based on specified platforms arguments.
+利用可能条件は、指定されたプラットフォーム引数に基づいて、ランタイムでAPIの利用可能性を照会するために、if、while、およびguard文の条件として使用されます。
 
-An availability condition has the following form:
+利用可能条件には次の形式があります：
 
 ```
 if #available(<#platform name#> <#version#>, <#...#>, *) {
@@ -701,11 +701,11 @@ if #available(<#platform name#> <#version#>, <#...#>, *) {
 }
 ```
 
-You use an availability condition to execute a block of code, depending on whether the APIs you want to use are available at runtime. The compiler uses the information from the availability condition when it verifies that the APIs in that block of code are available.
+利用可能条件を使用して、使用したいAPIがランタイムで利用可能かどうかに応じてコードブロックを実行します。コンパイラは、利用可能条件の情報を使用して、そのコードブロック内のAPIが利用可能であることを確認します。
 
-The availability condition takes a comma-separated list of platform names and versions. Use iOS, macOS, watchOS, tvOS and visionOS for the platform names, and include the corresponding version numbers. The * argument is required and specifies that, on any other platform, the body of the code block guarded by the availability condition executes on the minimum deployment target specified by your target.
+利用可能条件は、プラットフォーム名とバージョンのカンマ区切りリストを取ります。プラットフォーム名にはiOS、macOS、watchOS、tvOS、およびvisionOSを使用し、対応するバージョン番号を含めます。*引数は必須であり、他のプラットフォームでは、利用可能条件によってガードされたコードブロックの本体がターゲットによって指定された最小デプロイメントターゲットで実行されることを指定します。
 
-Unlike Boolean conditions, you can’t combine availability conditions using logical operators like && and ||. Instead of using ! to negate an availability condition, use an unavailability condition, which has the following form:
+ブール条件とは異なり、&&や||のような論理演算子を使用して利用可能条件を組み合わせることはできません。!を使用して利用可能条件を否定する代わりに、次の形式の非利用可能条件を使用します：
 
 ```
 if #unavailable(<#platform name#> <#version#>, <#...#>) {
@@ -715,9 +715,9 @@ if #unavailable(<#platform name#> <#version#>, <#...#>) {
 }
 ```
 
-The #unavailable form is syntactic sugar that negates the condition. In an unavailability condition, the * argument is implicit and must not be included. It has the same meaning as the * argument in an availability condition.
+#unavailable形式は条件を否定するための構文糖です。非利用可能条件では、*引数は暗黙的であり、含めてはなりません。これは、利用可能条件の*引数と同じ意味を持ちます。
 
-#### Grammar of an availability condition
+#### 利用可能条件の文法
 
 ```
 availability-condition → #available ( availability-arguments )
